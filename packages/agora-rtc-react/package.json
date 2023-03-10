@@ -33,7 +33,7 @@
   },
   "peerDependencies": {
     "agora-rtc-sdk-ng": "4",
-    "react": ">=16"
+    "react": ">=16.8"
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
