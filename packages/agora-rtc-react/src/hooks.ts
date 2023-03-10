@@ -18,10 +18,10 @@ import type {
   RemoteVideoTrackEventMap,
 } from "./listen";
 import type { Fn } from "./utils";
-import { useIsomorphicLayoutEffect } from "./utils";
 
 import { useEffect, useRef } from "react";
 import { listen } from "./listen";
+import { useIsomorphicLayoutEffect } from "./utils";
 
 export type Nullable<T> = T | null | undefined;
 
