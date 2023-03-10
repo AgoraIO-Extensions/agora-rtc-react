@@ -21,7 +21,7 @@ export function MicrophoneAudioTrack({
   const trackData = useAwaited(track);
 
   useEffect(() => {
-    if (trackData && deviceId) {
+    if (trackData && deviceId != null) {
       trackData.setDevice(deviceId).catch(console.error);
     }
   }, [deviceId, trackData]);
