@@ -17,6 +17,7 @@ import type {
   RemoteStreamType,
   UID,
 } from "agora-rtc-sdk-ng";
+import type { Fn } from "./utils";
 
 // The following `declare` types are not exported well, so copy them here
 declare class AgoraRTCError extends Error {
@@ -223,7 +224,7 @@ export function listen<E extends keyof RemoteVideoTrackEventMap>(
   event: E,
   callback: RemoteVideoTrackEventMap[E],
 ): () => void;
-export function listen(client_or_track: any, event: string, callback: (...args: any[]) => void) {
+export function listen(client_or_track: any, event: string, callback: Fn) {
   client_or_track.on(event, callback);
   return () => client_or_track.off(event, callback);
 }

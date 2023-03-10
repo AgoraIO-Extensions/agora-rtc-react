@@ -1,6 +1,8 @@
-import type { RefObject } from "react";
+import type { Ref, RefObject } from "react";
 
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
+
+export type Fn = (...args: any[]) => void;
 
 export const useIsomorphicLayoutEffect =
   typeof document !== "undefined" ? useLayoutEffect : useEffect;
@@ -63,4 +65,12 @@ export function useSafePromise() {
   }
 
   return useCallback(safePromise, [isUnmountRef]);
+}
+
+export function applyRef<T>(ref: Ref<T>, value: T) {
+  if (typeof ref === "function") {
+    ref(value);
+  } else if (typeof ref === "object" && ref) {
+    (ref as any).current = value;
+  }
 }
