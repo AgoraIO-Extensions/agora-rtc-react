@@ -1,11 +1,18 @@
-import type { Ref, RefObject } from "react";
+import type { CSSProperties, MutableRefObject, Ref, RefObject } from "react";
 
-import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
 export type Fn = (...args: any[]) => void;
+export type Nullable<T> = T | null | undefined;
+export type MaybePromise<T> = T | PromiseLike<T>;
+export type MaybePromiseOrNull<T> = MaybePromise<Nullable<T>>;
 
 export const useIsomorphicLayoutEffect =
   typeof document !== "undefined" ? useLayoutEffect : useEffect;
+
+export function isPromise<T>(value: MaybePromise<T>): value is PromiseLike<T> {
+  return typeof value === "object" && value !== null && typeof (value as any).then === "function";
+}
 
 export function useIsUnmounted(): RefObject<boolean> {
   const isUnmountRef = useRef(false);
@@ -71,6 +78,44 @@ export function applyRef<T>(ref: Ref<T>, value: T) {
   if (typeof ref === "function") {
     ref(value);
   } else if (typeof ref === "object" && ref) {
-    (ref as any).current = value;
+    (ref as MutableRefObject<T>).current = value;
   }
+}
+
+export function useMergedRef<T>(ref: Ref<T>, setDiv: (div: T | null) => void) {
+  return useCallback((div: T | null) => (applyRef(ref, div), setDiv(div)), [ref, setDiv]);
+}
+
+export function useMergedStyle(
+  style: CSSProperties | undefined,
+  width: CSSProperties["width"] | undefined,
+  height: CSSProperties["height"] | undefined,
+) {
+  return useMemo(() => {
+    if (width != null || height != null || style != null) {
+      const mergedStyle: CSSProperties = { ...style };
+      if (width != null) {
+        mergedStyle.width = width;
+      }
+      if (height != null) {
+        mergedStyle.height = height;
+      }
+      return mergedStyle;
+    }
+  }, [width, height, style]);
+}
+
+export function useAwaited<T>(promise: MaybePromise<T>): T | undefined {
+  const sp = useSafePromise();
+  const [value, setValue] = useState<T | undefined>();
+
+  useIsomorphicLayoutEffect(() => {
+    if (isPromise(promise)) {
+      sp(promise).then(setValue);
+    } else {
+      setValue(promise);
+    }
+  }, [promise, sp]);
+
+  return value;
 }

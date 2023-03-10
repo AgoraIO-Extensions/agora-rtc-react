@@ -9,6 +9,7 @@ import type {
   ConnectionState,
   IAgoraRTCClient,
   IAgoraRTCRemoteUser,
+  IBufferSourceAudioTrack,
   ILocalAudioTrack,
   ILocalVideoTrack,
   IRemoteAudioTrack,
@@ -208,6 +209,11 @@ export function listen<E extends keyof LocalAudioTrackEventMap>(
   client: ILocalAudioTrack,
   event: E,
   callback: LocalAudioTrackEventMap[E],
+): () => void;
+export function listen<E extends keyof BufferSourceAudioTrackEventMap>(
+  client: IBufferSourceAudioTrack,
+  event: E,
+  callback: BufferSourceAudioTrackEventMap[E],
 ): () => void;
 export function listen<E extends keyof LocalVideoTrackEventMap>(
   client: ILocalVideoTrack,
