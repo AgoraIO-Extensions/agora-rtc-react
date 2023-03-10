@@ -3,7 +3,7 @@ import type { CSSProperties, HTMLProps } from "react";
 import type { MaybePromiseOrNull } from "../utils";
 
 import { forwardRef, useEffect } from "react";
-import { useCloseLocalTrackOnUnmount } from "../hooks";
+import { useReleaseTrackOnUmount } from "../hooks";
 import { useAwaited, useForwardRef, useMergedStyle } from "../utils";
 
 export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
@@ -20,7 +20,7 @@ export const LocalVideoTrack = /* @__PURE__ */ forwardRef<HTMLDivElement, LocalV
     const mergedStyle = useMergedStyle(style, width, height);
 
     const trackData = useAwaited(track);
-    useCloseLocalTrackOnUnmount(trackData);
+    useReleaseTrackOnUmount(trackData);
 
     useEffect(() => {
       if (div && trackData && play) {

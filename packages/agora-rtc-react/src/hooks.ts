@@ -5,8 +5,8 @@ import type {
   ILocalTrack,
   ILocalVideoTrack,
   IRemoteAudioTrack,
-  IRemoteTrack,
   IRemoteVideoTrack,
+  ITrack,
 } from "agora-rtc-sdk-ng";
 import type {
   BufferSourceAudioTrackEventMap,
@@ -17,13 +17,11 @@ import type {
   RemoteAudioTrackEventMap,
   RemoteVideoTrackEventMap,
 } from "./listen";
-import type { Fn } from "./utils";
+import type { Fn, Nullable } from "./utils";
 
 import { useEffect, useRef } from "react";
 import { listen } from "./listen";
 import { useIsomorphicLayoutEffect } from "./utils";
-
-export type Nullable<T> = T | null | undefined;
 
 export function useClientEvent<E extends keyof ClientEventMap>(
   client: Nullable<IAgoraRTCClient>,
@@ -90,22 +88,17 @@ export function useTrackEvent(track: any, event: any, listener: Nullable<Fn>) {
   }, [event, track]);
 }
 
-export function useCloseLocalTrackOnUnmount(track: Nullable<ILocalTrack>) {
+/**
+ * Release local or remote track when the component unmounts.
+ */
+export function useReleaseTrackOnUmount(track: Nullable<ITrack>) {
   useEffect(() => {
     if (track) {
       return () => {
         track.stop();
-        track.close();
-      };
-    }
-  }, [track]);
-}
-
-export function useStopRemoteTrackOnUnmount(track: Nullable<IRemoteTrack>) {
-  useEffect(() => {
-    if (track) {
-      return () => {
-        track.stop();
+        if ((track as ILocalTrack).close) {
+          (track as ILocalTrack).close();
+        }
       };
     }
   }, [track]);

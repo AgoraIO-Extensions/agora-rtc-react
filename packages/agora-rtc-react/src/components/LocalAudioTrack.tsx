@@ -2,7 +2,7 @@ import type { ILocalAudioTrack } from "agora-rtc-sdk-ng";
 import type { MaybePromiseOrNull } from "../utils";
 
 import { useEffect } from "react";
-import { useCloseLocalTrackOnUnmount } from "../hooks";
+import { useReleaseTrackOnUmount } from "../hooks";
 import { useAwaited } from "../utils";
 
 export interface LocalAudioTrackProps {
@@ -13,7 +13,7 @@ export interface LocalAudioTrackProps {
 
 export function LocalAudioTrack({ track, play, publish }: LocalAudioTrackProps) {
   const trackData = useAwaited(track);
-  useCloseLocalTrackOnUnmount(trackData);
+  useReleaseTrackOnUmount(trackData);
 
   useEffect(() => {
     if (trackData && play) {
