@@ -18,7 +18,7 @@ import type {
   RemoteStreamType,
   UID,
 } from "agora-rtc-sdk-ng";
-import type { Fn } from "./utils";
+import type { Disposer, Fn } from "./utils";
 
 // The following `declare` types are not exported well, so copy them here
 declare class AgoraRTCError extends Error {
@@ -132,41 +132,41 @@ declare enum InspectState {
 
 // prettier-ignore
 export interface ClientEventMap {
-  "connection-state-change": (curState: ConnectionState, revState: ConnectionState, reason?: ConnectionDisconnectedReason) => void;
-  "user-joined": (user: IAgoraRTCRemoteUser) => void;
-  "user-left": (user: IAgoraRTCRemoteUser, reason: "Quit" | "ServerTimeOut" | "BecomeAudience") => void;
-  "user-published": (user: IAgoraRTCRemoteUser, mediaType: "audio" | "video") => void;
-  "user-unpublished": (user: IAgoraRTCRemoteUser, mediaType: "audio" | "video") => void;
-  "user-info-updated": (uid: UID, msg: `${"mute" | "unmute"}-${"audio" | "video"}` | `${"enable" | "disable"}-local-video`) => void;
-  "media-reconnect-start": (uid: UID) => void;
-  "media-reconnect-end": (uid: UID) => void;
-  "stream-type-changed": (uid: UID, streamType: RemoteStreamType) => void;
-  "stream-fallback": (uid: UID, isFallbackOrRecover: "fallback" | "recover") => void;
-  "channel-media-relay-state": (state: ChannelMediaRelayState, code: ChannelMediaRelayError) => void;
-  "channel-media-relay-event": (event: ChannelMediaRelayEvent) => void;
-  "volume-indicator": (result: { uid: UID; level: number }[]) => void;
-  "crypt-error": () => void;
-  "token-privilege-will-expire": () => void;
-  "token-privilege-did-expire": () => void;
-  "network-quality": (stats: NetworkQuality) => void;
-  "live-streaming-error": (url: string, err: AgoraRTCError) => void;
-  "live-streaming-warning": (url: string, err: AgoraRTCError) => void;
-  "exception": (event: { code: number, msg: string, uid: UID }) => void;
-  "is-using-cloud-proxy": (isUsingProxy: boolean) => void;
-  "join-fallback-to-proxy": (proxyServer: string) => void;
-  "published-user-list": (user: IAgoraRTCRemoteUser) => void;
-  "content-inspect-connection-state-change": (preState: `${InspectState}`, newState: `${InspectState}`) => void;
-  "content-inspect-error": (error?: AgoraRTCError) => void;
+  "connection-state-change": [curState: ConnectionState, revState: ConnectionState, reason?: ConnectionDisconnectedReason];
+  "user-joined": [user: IAgoraRTCRemoteUser]
+  "user-left": [user: IAgoraRTCRemoteUser, reason: "Quit" | "ServerTimeOut" | "BecomeAudience"]
+  "user-published": [user: IAgoraRTCRemoteUser, mediaType: "audio" | "video"]
+  "user-unpublished": [user: IAgoraRTCRemoteUser, mediaType: "audio" | "video"]
+  "user-info-updated": [uid: UID, msg: `${"mute" | "unmute"}-${"audio" | "video"}` | `${"enable" | "disable"}-local-video`]
+  "media-reconnect-start": [uid: UID]
+  "media-reconnect-end": [uid: UID]
+  "stream-type-changed": [uid: UID, streamType: RemoteStreamType]
+  "stream-fallback": [uid: UID, isFallbackOrRecover: "fallback" | "recover"]
+  "channel-media-relay-state": [state: ChannelMediaRelayState, code: ChannelMediaRelayError]
+  "channel-media-relay-event": [event: ChannelMediaRelayEvent]
+  "volume-indicator": [result: { uid: UID; level: number }[]]
+  "crypt-error": []
+  "token-privilege-will-expire": []
+  "token-privilege-did-expire": []
+  "network-quality": [stats: NetworkQuality]
+  "live-streaming-error": [url: string, err: AgoraRTCError]
+  "live-streaming-warning": [url: string, err: AgoraRTCError]
+  "exception": [event: { code: number, msg: string, uid: UID }]
+  "is-using-cloud-proxy": [isUsingProxy: boolean]
+  "join-fallback-to-proxy": [proxyServer: string]
+  "published-user-list": [user: IAgoraRTCRemoteUser]
+  "content-inspect-connection-state-change": [preState: `${InspectState}`, newState: `${InspectState}`]
+  "content-inspect-error": [error?: AgoraRTCError]
 }
 
 export interface LocalTrackEventMap {
-  "track-ended": () => void;
+  "track-ended": [];
 }
 
 export interface LocalAudioTrackEventMap extends LocalTrackEventMap {}
 
 export interface BufferSourceAudioTrackEventMap extends LocalAudioTrackEventMap {
-  "source-state-change": (currentState: AudioSourceState) => void;
+  "source-state-change": [currentState: AudioSourceState];
 }
 
 declare type CheckVideoVisibleResult =
@@ -184,21 +184,28 @@ declare enum VisibleHiddenReason {
 }
 
 export interface LocalVideoTrackEventMap extends LocalTrackEventMap {
-  "beauty-effect-overload": () => void;
-  "track-ended": () => void;
-  "video-element-visible-status": (data?: CheckVideoVisibleResult) => void;
+  "beauty-effect-overload": [];
+  "track-ended": [];
+  "video-element-visible-status": [data?: CheckVideoVisibleResult];
 }
 
 export interface RemoteTrackEventMap {
-  "first-frame-decoded": () => void;
+  "first-frame-decoded": [];
 }
 
 export interface RemoteAudioTrackEventMap extends RemoteTrackEventMap {}
 
 export interface RemoteVideoTrackEventMap extends RemoteTrackEventMap {
-  "first-frame-decoded": () => void;
-  "video-element-visible-status": (data?: CheckVideoVisibleResult) => void;
+  "first-frame-decoded": [];
+  "video-element-visible-status": [data?: CheckVideoVisibleResult];
 }
+
+export interface Listenable {
+  on: (event: any, listener: Fn) => void;
+  off: (event: any, listener: Fn) => void;
+}
+
+export type Listener<T extends any[] = any> = (...args: T) => void;
 
 /**
  * Listen to client or track events
@@ -206,34 +213,35 @@ export interface RemoteVideoTrackEventMap extends RemoteTrackEventMap {
 export function listen<E extends keyof ClientEventMap>(
   client: IAgoraRTCClient,
   event: E,
-  callback: ClientEventMap[E],
-): () => void;
+  listener: Listener<ClientEventMap[E]>,
+): Disposer;
 export function listen<E extends keyof LocalAudioTrackEventMap>(
   track: ILocalAudioTrack,
   event: E,
-  callback: LocalAudioTrackEventMap[E],
-): () => void;
+  listener: Listener<LocalAudioTrackEventMap[E]>,
+): Disposer;
 export function listen<E extends keyof BufferSourceAudioTrackEventMap>(
   track: IBufferSourceAudioTrack,
   event: E,
-  callback: BufferSourceAudioTrackEventMap[E],
-): () => void;
+  listener: Listener<BufferSourceAudioTrackEventMap[E]>,
+): Disposer;
 export function listen<E extends keyof LocalVideoTrackEventMap>(
   track: ILocalVideoTrack,
   event: E,
-  callback: LocalVideoTrackEventMap[E],
-): () => void;
+  listener: Listener<LocalVideoTrackEventMap[E]>,
+): Disposer;
 export function listen<E extends keyof RemoteAudioTrackEventMap>(
   track: IRemoteAudioTrack,
   event: E,
-  callback: RemoteAudioTrackEventMap[E],
-): () => void;
+  listener: Listener<RemoteAudioTrackEventMap[E]>,
+): Disposer;
 export function listen<E extends keyof RemoteVideoTrackEventMap>(
   track: IRemoteVideoTrack,
   event: E,
-  callback: RemoteVideoTrackEventMap[E],
-): () => void;
-export function listen(client_or_track: any, event: string, callback: Fn) {
-  client_or_track.on(event, callback);
-  return () => client_or_track.off(event, callback);
+  listener: Listener<RemoteVideoTrackEventMap[E]>,
+): Disposer;
+export function listen(listenable: Listenable, event: string, listener: Fn): Disposer;
+export function listen(listenable: Listenable, event: string, listener: Fn) {
+  listenable.on(event, listener);
+  return () => listenable.off(event, listener);
 }

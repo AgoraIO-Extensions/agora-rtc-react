@@ -11,6 +11,7 @@ import type {
 import type {
   BufferSourceAudioTrackEventMap,
   ClientEventMap,
+  Listener,
   LocalAudioTrackEventMap,
   LocalVideoTrackEventMap,
   RemoteAudioTrackEventMap,
@@ -27,20 +28,19 @@ export type Nullable<T> = T | null | undefined;
 export function useClientEvent<E extends keyof ClientEventMap>(
   client: Nullable<IAgoraRTCClient>,
   event: E,
-  callback: Nullable<ClientEventMap[E]>,
-): void;
-export function useClientEvent(client: any, event: any, callback: Fn): void {
-  const callbackRef = useRef(callback);
+  listener: Nullable<Listener<ClientEventMap[E]>>,
+): void {
+  const listenerRef = useRef<Nullable<Fn>>(listener);
 
   useIsomorphicLayoutEffect(() => {
-    callbackRef.current = callback;
-  }, [callback]);
+    listenerRef.current = listener;
+  }, [listener]);
 
   useEffect(() => {
     if (client) {
       return listen(client, event, (...args: unknown[]) => {
-        if (callbackRef.current) {
-          callbackRef.current(...args);
+        if (listenerRef.current) {
+          listenerRef.current(...args);
         }
       });
     }
@@ -50,40 +50,40 @@ export function useClientEvent(client: any, event: any, callback: Fn): void {
 export function useTrackEvent<E extends keyof LocalAudioTrackEventMap>(
   track: Nullable<ILocalAudioTrack>,
   event: E,
-  callback: Nullable<LocalAudioTrackEventMap[E]>,
+  listener: Nullable<Listener<LocalAudioTrackEventMap[E]>>,
 ): void;
 export function useTrackEvent<E extends keyof BufferSourceAudioTrackEventMap>(
   track: Nullable<IBufferSourceAudioTrack>,
   event: E,
-  callback: Nullable<BufferSourceAudioTrackEventMap[E]>,
+  listener: Nullable<Listener<BufferSourceAudioTrackEventMap[E]>>,
 ): void;
 export function useTrackEvent<E extends keyof LocalVideoTrackEventMap>(
   track: Nullable<ILocalVideoTrack>,
   event: E,
-  callback: Nullable<LocalVideoTrackEventMap[E]>,
+  listener: Nullable<Listener<LocalVideoTrackEventMap[E]>>,
 ): void;
 export function useTrackEvent<E extends keyof RemoteAudioTrackEventMap>(
   track: Nullable<IRemoteAudioTrack>,
   event: E,
-  callback: Nullable<RemoteAudioTrackEventMap[E]>,
+  listener: Nullable<Listener<RemoteAudioTrackEventMap[E]>>,
 ): void;
 export function useTrackEvent<E extends keyof RemoteVideoTrackEventMap>(
   track: Nullable<IRemoteVideoTrack>,
   event: E,
-  callback: Nullable<RemoteVideoTrackEventMap[E]>,
+  listener: Nullable<Listener<RemoteVideoTrackEventMap[E]>>,
 ): void;
-export function useTrackEvent(track: any, event: any, callback: Nullable<Fn>) {
-  const callbackRef = useRef(callback);
+export function useTrackEvent(track: any, event: any, listener: Nullable<Fn>) {
+  const listenerRef = useRef(listener);
 
   useIsomorphicLayoutEffect(() => {
-    callbackRef.current = callback;
-  }, [callback]);
+    listenerRef.current = listener;
+  }, [listener]);
 
   useEffect(() => {
     if (track) {
       return listen(track, event, (...args: unknown[]) => {
-        if (callbackRef.current) {
-          callbackRef.current(...args);
+        if (listenerRef.current) {
+          listenerRef.current(...args);
         }
       });
     }

@@ -2,7 +2,8 @@ import type { CSSProperties, MutableRefObject, Ref, RefObject } from "react";
 
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
-export type Fn = (...args: any[]) => void;
+export type Disposer = () => void;
+export type Fn = (...args: any[]) => any;
 export type Nullable<T> = T | null | undefined;
 export type MaybePromise<T> = T | PromiseLike<T>;
 export type MaybePromiseOrNull<T> = MaybePromise<Nullable<T>>;
