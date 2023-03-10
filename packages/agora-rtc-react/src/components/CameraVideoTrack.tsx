@@ -7,27 +7,38 @@ import { useAwaited } from "../utils";
 import { LocalVideoTrack } from "./LocalVideoTrack";
 
 export interface CameraVideoTrackProps extends LocalVideoTrackProps {
+  /**
+   * A camera video track which can be created by `createCameraVideoTrack()`.
+   */
   readonly track?: MaybePromiseOrNull<ICameraVideoTrack>;
+  /**
+   * Device ID, which can be retrieved by calling `getDevices()`.
+   */
   readonly deviceId?: string;
+  /**
+   * Enable or disable the track.
+   *
+   * If a track is disabled, the SDK stops playing and publishing the track.
+   */
   readonly enabled?: boolean;
 }
 
 export const CameraVideoTrack = /* @__PURE__ */ forwardRef<HTMLDivElement, CameraVideoTrackProps>(
-  function CameraVideoTrack({ track, deviceId, enabled, ...props }, ref) {
-    const trackData = useAwaited(track);
+  function CameraVideoTrack({ track: maybeTrack, deviceId, enabled, ...props }, ref) {
+    const track = useAwaited(maybeTrack);
 
     useEffect(() => {
-      if (trackData && deviceId != null) {
-        trackData.setDevice(deviceId).catch(console.error);
+      if (track && deviceId != null) {
+        track.setDevice(deviceId).catch(console.warn);
       }
-    }, [deviceId, trackData]);
+    }, [deviceId, track]);
 
     useEffect(() => {
-      if (trackData && enabled != null) {
-        trackData.setEnabled(enabled).catch(console.error);
+      if (track && enabled != null) {
+        track.setEnabled(enabled).catch(console.warn);
       }
-    }, [enabled, trackData]);
+    }, [enabled, track]);
 
-    return <LocalVideoTrack track={track} {...props} ref={ref} />;
+    return <LocalVideoTrack track={maybeTrack} {...props} ref={ref} />;
   },
 );

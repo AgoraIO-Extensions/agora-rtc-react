@@ -7,10 +7,22 @@ import { useReleaseTrackOnUmount } from "../hooks";
 import { useAwaited, useForwardRef, useMergedStyle } from "../utils";
 
 export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
+  /**
+   * A local video track which can be created by `createCameraVideoTrack()` or `createScreenVideoTrack()`.
+   */
   readonly track?: MaybePromiseOrNull<ILocalVideoTrack>;
+  /**
+   * Whether to play the track.
+   */
   readonly play?: boolean;
   readonly publish?: boolean;
+  /**
+   * Set the style.width of the underlying div element.
+   */
   readonly width?: CSSProperties["width"];
+  /**
+   * Set the style.height of the underlying div element.
+   */
   readonly height?: CSSProperties["height"];
 }
 
@@ -34,7 +46,7 @@ export const LocalVideoTrack = /* @__PURE__ */ forwardRef<HTMLDivElement, LocalV
     }, [div, play, track]);
 
     useEffect(() => {
-      console.log("TODO: publish", { trackData: track, publish });
+      console.log("TODO: publish", { track, publish });
     }, [publish, track]);
 
     return <div ref={setDiv} style={mergedStyle} {...props} />;

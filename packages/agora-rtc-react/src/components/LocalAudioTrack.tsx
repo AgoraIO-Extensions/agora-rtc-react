@@ -7,7 +7,7 @@ import { useAwaited } from "../utils";
 
 export interface LocalAudioTrackProps {
   /**
-   * A remote audio track.
+   * A local audio track which can be created by `createMicrophoneAudioTrack()`.
    */
   readonly track?: MaybePromiseOrNull<ILocalAudioTrack>;
   /**
@@ -37,7 +37,7 @@ export function LocalAudioTrack({
   }, [play, track]);
 
   useEffect(() => {
-    console.log("TODO: publish", { trackData: track, publish });
+    console.log("TODO: publish", { track, publish });
   }, [publish, track]);
 
   useEffect(() => {
