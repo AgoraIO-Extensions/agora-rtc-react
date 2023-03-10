@@ -1,5 +1,6 @@
 import type {
   IAgoraRTCClient,
+  IAgoraRTCRemoteUser,
   IBufferSourceAudioTrack,
   ILocalAudioTrack,
   ILocalTrack,
@@ -19,9 +20,9 @@ import type {
 } from "./listen";
 import type { Fn, Nullable } from "./utils";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { listen } from "./listen";
-import { useIsomorphicLayoutEffect } from "./utils";
+import { joinDisposers, useIsomorphicLayoutEffect } from "./utils";
 
 export function useClientEvent<E extends keyof ClientEventMap>(
   client: Nullable<IAgoraRTCClient>,
@@ -102,4 +103,22 @@ export function useReleaseTrackOnUmount(track: Nullable<ITrack>) {
       };
     }
   }, [track]);
+}
+
+/**
+ * Get interactive remote users in react components.
+ */
+export function useRemoteUsers(client: IAgoraRTCClient): readonly IAgoraRTCRemoteUser[] {
+  const [users, setUsers] = useState(client.remoteUsers);
+
+  useEffect(() => {
+    // .slice(): make sure to update the array reference
+    const update = () => setUsers(client.remoteUsers.slice());
+    return joinDisposers([
+      listen(client, "user-joined", update),
+      listen(client, "user-left", update),
+    ]);
+  }, [client]);
+
+  return users;
 }
