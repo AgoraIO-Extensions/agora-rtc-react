@@ -32,6 +32,7 @@ export const App = () => {
   );
 
   const [camera, setCamera] = useState(false);
+  const [cameraEnabled, setCameraEnabled] = useState(true);
   const videoTrack = useMemo(() => (camera ? AgoraRTC.createCameraVideoTrack() : null), [camera]);
 
   return (
@@ -63,6 +64,16 @@ export const App = () => {
             </select>
           </span>
         </label>
+        {camera && (
+          <label>
+            <input
+              type="checkbox"
+              checked={cameraEnabled}
+              onChange={e => setCameraEnabled(e.target.checked)}
+            />
+            <span>CameraEnabled</span>
+          </label>
+        )}
       </div>
       <div className="tracks">
         {mic && <MicrophoneAudioTrack track={audioTrack} deviceId={micDeviceId} />}
@@ -73,6 +84,7 @@ export const App = () => {
             height={180}
             play
             deviceId={cameraDeviceId}
+            enabled={cameraEnabled}
           />
         )}
       </div>
