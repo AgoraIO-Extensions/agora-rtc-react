@@ -1,6 +1,7 @@
 // TypeScript cannot infer union from overloaded function types
 // So duplicate the event types here
 import type {
+  AudioSourceState,
   ChannelMediaRelayError,
   ChannelMediaRelayEvent,
   ChannelMediaRelayState,
@@ -8,6 +9,10 @@ import type {
   ConnectionState,
   IAgoraRTCClient,
   IAgoraRTCRemoteUser,
+  ILocalAudioTrack,
+  ILocalVideoTrack,
+  IRemoteAudioTrack,
+  IRemoteVideoTrack,
   NetworkQuality,
   RemoteStreamType,
   UID,
@@ -152,11 +157,73 @@ export interface ClientEventMap {
   "content-inspect-error": (error?: AgoraRTCError) => void;
 }
 
+export interface LocalTrackEventMap {
+  "track-ended": () => void;
+}
+
+export interface LocalAudioTrackEventMap extends LocalTrackEventMap {}
+
+export interface BufferSourceAudioTrackEventMap extends LocalAudioTrackEventMap {
+  "source-state-change": (currentState: AudioSourceState) => void;
+}
+
+declare type CheckVideoVisibleResult =
+  | { visible: true }
+  | {
+      visible: false;
+      reason: `${VisibleHiddenReason}`;
+    };
+
+declare enum VisibleHiddenReason {
+  COVERED = "COVERED",
+  POSITION = "POSITION",
+  SIZE = "SIZE",
+  STYLE = "STYLE",
+}
+
+export interface LocalVideoTrackEventMap extends LocalTrackEventMap {
+  "beauty-effect-overload": () => void;
+  "track-ended": () => void;
+  "video-element-visible-status": (data?: CheckVideoVisibleResult) => void;
+}
+
+export interface RemoteTrackEventMap {
+  "first-frame-decoded": () => void;
+}
+
+export interface RemoteAudioTrackEventMap extends RemoteTrackEventMap {}
+
+export interface RemoteVideoTrackEventMap extends RemoteTrackEventMap {
+  "first-frame-decoded": () => void;
+  "video-element-visible-status": (data?: CheckVideoVisibleResult) => void;
+}
+
 export function listen<E extends keyof ClientEventMap>(
   client: IAgoraRTCClient,
   event: E,
   callback: ClientEventMap[E],
-) {
-  client.on(event, callback);
-  return () => client.off(event, callback);
+): () => void;
+export function listen<E extends keyof LocalAudioTrackEventMap>(
+  client: ILocalAudioTrack,
+  event: E,
+  callback: LocalAudioTrackEventMap[E],
+): () => void;
+export function listen<E extends keyof LocalVideoTrackEventMap>(
+  client: ILocalVideoTrack,
+  event: E,
+  callback: LocalVideoTrackEventMap[E],
+): () => void;
+export function listen<E extends keyof RemoteAudioTrackEventMap>(
+  client: IRemoteAudioTrack,
+  event: E,
+  callback: RemoteAudioTrackEventMap[E],
+): () => void;
+export function listen<E extends keyof RemoteVideoTrackEventMap>(
+  client: IRemoteVideoTrack,
+  event: E,
+  callback: RemoteVideoTrackEventMap[E],
+): () => void;
+export function listen(client_or_track: any, event: string, callback: (...args: any[]) => void) {
+  client_or_track.on(event, callback);
+  return () => client_or_track.off(event, callback);
 }
