@@ -200,33 +200,36 @@ export interface RemoteVideoTrackEventMap extends RemoteTrackEventMap {
   "video-element-visible-status": (data?: CheckVideoVisibleResult) => void;
 }
 
+/**
+ * Listen to client or track events
+ */
 export function listen<E extends keyof ClientEventMap>(
   client: IAgoraRTCClient,
   event: E,
   callback: ClientEventMap[E],
 ): () => void;
 export function listen<E extends keyof LocalAudioTrackEventMap>(
-  client: ILocalAudioTrack,
+  track: ILocalAudioTrack,
   event: E,
   callback: LocalAudioTrackEventMap[E],
 ): () => void;
 export function listen<E extends keyof BufferSourceAudioTrackEventMap>(
-  client: IBufferSourceAudioTrack,
+  track: IBufferSourceAudioTrack,
   event: E,
   callback: BufferSourceAudioTrackEventMap[E],
 ): () => void;
 export function listen<E extends keyof LocalVideoTrackEventMap>(
-  client: ILocalVideoTrack,
+  track: ILocalVideoTrack,
   event: E,
   callback: LocalVideoTrackEventMap[E],
 ): () => void;
 export function listen<E extends keyof RemoteAudioTrackEventMap>(
-  client: IRemoteAudioTrack,
+  track: IRemoteAudioTrack,
   event: E,
   callback: RemoteAudioTrackEventMap[E],
 ): () => void;
 export function listen<E extends keyof RemoteVideoTrackEventMap>(
-  client: IRemoteVideoTrack,
+  track: IRemoteVideoTrack,
   event: E,
   callback: RemoteVideoTrackEventMap[E],
 ): () => void;

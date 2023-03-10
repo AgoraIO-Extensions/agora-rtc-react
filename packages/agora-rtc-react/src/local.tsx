@@ -2,9 +2,9 @@ import type { ILocalAudioTrack, ILocalVideoTrack } from "agora-rtc-sdk-ng";
 import type { CSSProperties, HTMLProps } from "react";
 import type { MaybePromiseOrNull } from "./utils";
 
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef, useEffect } from "react";
 import { useCloseLocalTrackOnUnmount, useTrackEvent } from "./hooks";
-import { useAwaited, useMergedRef, useMergedStyle } from "./utils";
+import { useAwaited, useForwardRef, useMergedStyle } from "./utils";
 
 export interface LocalAudioTrackProps {
   readonly track?: MaybePromiseOrNull<ILocalAudioTrack>;
@@ -61,9 +61,7 @@ export const LocalVideoTrack = /* @__PURE__ */ forwardRef<HTMLDivElement, LocalV
     },
     ref,
   ) {
-    const [div, setDiv] = useState<HTMLDivElement | null>(null);
-
-    const mergedRef = useMergedRef(ref, setDiv);
+    const [div, setDiv] = useForwardRef(ref);
     const mergedStyle = useMergedStyle(style, width, height);
 
     const trackData = useAwaited(track);
@@ -85,6 +83,6 @@ export const LocalVideoTrack = /* @__PURE__ */ forwardRef<HTMLDivElement, LocalV
       console.log("TODO: publish", { trackData, publish });
     }, [publish, trackData]);
 
-    return <div ref={mergedRef} style={mergedStyle} {...props} />;
+    return <div ref={setDiv} style={mergedStyle} {...props} />;
   },
 );

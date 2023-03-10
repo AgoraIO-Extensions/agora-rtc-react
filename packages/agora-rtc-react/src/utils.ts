@@ -11,7 +11,7 @@ export const useIsomorphicLayoutEffect =
   typeof document !== "undefined" ? useLayoutEffect : useEffect;
 
 export function isPromise<T>(value: MaybePromise<T>): value is PromiseLike<T> {
-  return typeof value === "object" && value !== null && typeof (value as any).then === "function";
+  return value != null && typeof (value as PromiseLike<T>).then === "function";
 }
 
 export function useIsUnmounted(): RefObject<boolean> {
@@ -82,15 +82,29 @@ export function applyRef<T>(ref: Ref<T>, value: T) {
   }
 }
 
-export function useMergedRef<T>(ref: Ref<T>, setDiv: (div: T | null) => void) {
-  return useCallback((div: T | null) => (applyRef(ref, div), setDiv(div)), [ref, setDiv]);
+/**
+ * Sugar to merge ref and setDiv.
+ */
+export function useForwardRef<T>(ref: Ref<T>): [T | null, (value: T | null) => void] {
+  const [current, setCurrent] = useState<T | null>(null);
+  const forwardedRef = useCallback(
+    (value: T | null) => {
+      setCurrent(value);
+      applyRef(ref, value);
+    },
+    [ref, setCurrent],
+  );
+  return [current, forwardedRef];
 }
 
+/**
+ * Sugar to merge style and width/height props.
+ */
 export function useMergedStyle(
   style: CSSProperties | undefined,
   width: CSSProperties["width"] | undefined,
   height: CSSProperties["height"] | undefined,
-) {
+): CSSProperties | undefined {
   return useMemo(() => {
     if (width != null || height != null || style != null) {
       const mergedStyle: CSSProperties = { ...style };
@@ -105,6 +119,9 @@ export function useMergedStyle(
   }, [width, height, style]);
 }
 
+/**
+ * Await a promise or return the value directly.
+ */
 export function useAwaited<T>(promise: MaybePromise<T>): T | undefined {
   const sp = useSafePromise();
   const [value, setValue] = useState<T | undefined>();

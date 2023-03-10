@@ -17,8 +17,9 @@ import type {
   RemoteVideoTrackEventMap,
 } from "./listen";
 import type { Fn } from "./utils";
+import { useIsomorphicLayoutEffect } from "./utils";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { listen } from "./listen";
 
 export type Nullable<T> = T | null | undefined;
@@ -27,12 +28,23 @@ export function useClientEvent<E extends keyof ClientEventMap>(
   client: Nullable<IAgoraRTCClient>,
   event: E,
   callback: Nullable<ClientEventMap[E]>,
-): void {
+): void;
+export function useClientEvent(client: any, event: any, callback: Fn): void {
+  const callbackRef = useRef(callback);
+
+  useIsomorphicLayoutEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
+
   useEffect(() => {
-    if (client && callback) {
-      return listen(client, event, callback);
+    if (client) {
+      return listen(client, event, (...args: unknown[]) => {
+        if (callbackRef.current) {
+          callbackRef.current(...args);
+        }
+      });
     }
-  }, [callback, event, client]);
+  }, [event, client]);
 }
 
 export function useTrackEvent<E extends keyof LocalAudioTrackEventMap>(
@@ -61,17 +73,30 @@ export function useTrackEvent<E extends keyof RemoteVideoTrackEventMap>(
   callback: Nullable<RemoteVideoTrackEventMap[E]>,
 ): void;
 export function useTrackEvent(track: any, event: any, callback: Nullable<Fn>) {
+  const callbackRef = useRef(callback);
+
+  useIsomorphicLayoutEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
+
   useEffect(() => {
-    if (track && callback) {
-      return listen(track, event, callback);
+    if (track) {
+      return listen(track, event, (...args: unknown[]) => {
+        if (callbackRef.current) {
+          callbackRef.current(...args);
+        }
+      });
     }
-  }, [callback, event, track]);
+  }, [event, track]);
 }
 
 export function useCloseLocalTrackOnUnmount(track: Nullable<ILocalTrack>) {
   useEffect(() => {
     if (track) {
-      return () => (track.stop(), track.close());
+      return () => {
+        track.stop();
+        track.close();
+      };
     }
   }, [track]);
 }
@@ -79,7 +104,9 @@ export function useCloseLocalTrackOnUnmount(track: Nullable<ILocalTrack>) {
 export function useStopRemoteTrackOnUnmount(track: Nullable<IRemoteTrack>) {
   useEffect(() => {
     if (track) {
-      return () => track.stop();
+      return () => {
+        track.stop();
+      };
     }
   }, [track]);
 }
