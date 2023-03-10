@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
+    "noEmit": true,
     "strict": true,
-    "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "noUnusedParameters": true,
