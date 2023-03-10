@@ -32,7 +32,7 @@
     "lint": "eslint --ext .ts,.tsx . && prettier --check ."
   },
   "peerDependencies": {
-    "agora-rtc-sdk-ng": "4",
+    "agora-rtc-sdk-ng": "^4.1.0",
     "react": ">=16.8"
   },
   "devDependencies": {
