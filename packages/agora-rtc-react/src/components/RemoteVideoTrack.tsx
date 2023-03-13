@@ -1,23 +1,25 @@
 import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
-import type { CSSProperties, HTMLProps } from "react";
+import type { HTMLProps } from "react";
 import type { Nullable } from "../utils";
 
 import { forwardRef, useEffect } from "react";
 import { useReleaseTrackOnUmount } from "../hooks";
-import { useForwardRef, useMergedStyle } from "../utils";
+import { useForwardRef } from "../utils";
 
 export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
+  /**
+   * A remote video track.
+   */
   readonly track?: Nullable<IRemoteVideoTrack>;
+  /**
+   * Whether to play the track.
+   */
   readonly play?: boolean;
-  readonly publish?: boolean;
-  readonly width?: CSSProperties["width"];
-  readonly height?: CSSProperties["height"];
 }
 
 export const RemoteVideoTrack = /* @__PURE__ */ forwardRef<HTMLDivElement, RemoteVideoTrackProps>(
-  function RemoteVideoTrack({ track, play, width, height, style, ...props }, ref) {
+  function RemoteVideoTrack({ track, play, ...props }, ref) {
     const [div, setDiv] = useForwardRef(ref);
-    const mergedStyle = useMergedStyle(style, width, height);
 
     useReleaseTrackOnUmount(track);
 
@@ -29,6 +31,6 @@ export const RemoteVideoTrack = /* @__PURE__ */ forwardRef<HTMLDivElement, Remot
       }
     }, [div, play, track]);
 
-    return <div ref={setDiv} style={mergedStyle} {...props} />;
+    return <div ref={setDiv} {...props} />;
   },
 );

@@ -1,10 +1,10 @@
 import type { ILocalVideoTrack } from "agora-rtc-sdk-ng";
-import type { CSSProperties, HTMLProps } from "react";
+import type { HTMLProps } from "react";
 import type { MaybePromiseOrNull } from "../utils";
 
 import { forwardRef, useEffect } from "react";
 import { useReleaseTrackOnUmount } from "../hooks";
-import { useAwaited, useForwardRef, useMergedStyle } from "../utils";
+import { useAwaited, useForwardRef } from "../utils";
 
 export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**
@@ -16,23 +16,11 @@ export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
    */
   readonly play?: boolean;
   readonly publish?: boolean;
-  /**
-   * Set the style.width of the underlying div element.
-   */
-  readonly width?: CSSProperties["width"];
-  /**
-   * Set the style.height of the underlying div element.
-   */
-  readonly height?: CSSProperties["height"];
 }
 
 export const LocalVideoTrack = /* @__PURE__ */ forwardRef<HTMLDivElement, LocalVideoTrackProps>(
-  function LocalVideoTrack(
-    { track: maybeTrack, play, publish, width, height, style, ...props },
-    ref,
-  ) {
+  function LocalVideoTrack({ track: maybeTrack, play, publish, ...props }, ref) {
     const [div, setDiv] = useForwardRef(ref);
-    const mergedStyle = useMergedStyle(style, width, height);
 
     const track = useAwaited(maybeTrack);
     useReleaseTrackOnUmount(track);
@@ -49,6 +37,6 @@ export const LocalVideoTrack = /* @__PURE__ */ forwardRef<HTMLDivElement, LocalV
       console.log("TODO: publish", { track, publish });
     }, [publish, track]);
 
-    return <div ref={setDiv} style={mergedStyle} {...props} />;
+    return <div ref={setDiv} {...props} />;
   },
 );
