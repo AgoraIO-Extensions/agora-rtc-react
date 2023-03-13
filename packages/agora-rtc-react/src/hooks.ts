@@ -112,11 +112,17 @@ export function useRemoteUsers(client: IAgoraRTCClient): readonly IAgoraRTCRemot
   const [users, setUsers] = useState(client.remoteUsers);
 
   useEffect(() => {
-    // .slice(): make sure to update the array reference
+    // .slice(): make sure the array reference is updated
     const update = () => setUsers(client.remoteUsers.slice());
     return joinDisposers([
       listen(client, "user-joined", update),
       listen(client, "user-left", update),
+      listen(client, "user-published", (user, mediaType) => {
+        // don't use React.memo(({ remoteUser }) => ...) as the user reference may NOT change
+        client.subscribe(user, mediaType).then(update);
+      }),
+      // don't need to call unsubscribe()
+      listen(client, "user-unpublished", update),
     ]);
   }, [client]);
 
