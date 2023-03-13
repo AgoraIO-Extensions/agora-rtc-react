@@ -23,6 +23,14 @@ export interface CameraVideoTrackProps extends LocalVideoTrackProps {
   readonly enabled?: boolean;
 }
 
+/**
+ * A component which renders a camera video track.
+ *
+ * ```jsx
+ * const track = useMemo(() => AgoraRTC.createCameraVideoTrack(), [])
+ * return <CameraVideoTrack track={track} play />
+ * ```
+ */
 export const CameraVideoTrack = /* @__PURE__ */ forwardRef<HTMLDivElement, CameraVideoTrackProps>(
   function CameraVideoTrack({ track: maybeTrack, deviceId, enabled, ...props }, ref) {
     const track = useAwaited(maybeTrack);

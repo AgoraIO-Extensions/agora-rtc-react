@@ -1,6 +1,6 @@
-import type { CSSProperties, MutableRefObject, Ref, RefObject } from "react";
+import type { MutableRefObject, Ref, RefObject } from "react";
 
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export type Disposer = () => void;
 export type Fn = (...args: any[]) => any;
@@ -96,28 +96,6 @@ export function useForwardRef<T>(ref: Ref<T>): [T | null, (value: T | null) => v
     [ref, setCurrent],
   );
   return [current, forwardedRef];
-}
-
-/**
- * Sugar to merge style and width/height props.
- */
-export function useMergedStyle(
-  style: CSSProperties | undefined,
-  width: CSSProperties["width"] | undefined,
-  height: CSSProperties["height"] | undefined,
-): CSSProperties | undefined {
-  return useMemo(() => {
-    if (width != null || height != null || style != null) {
-      const mergedStyle: CSSProperties = { ...style };
-      if (width != null) {
-        mergedStyle.width = width;
-      }
-      if (height != null) {
-        mergedStyle.height = height;
-      }
-      return mergedStyle;
-    }
-  }, [width, height, style]);
 }
 
 /**

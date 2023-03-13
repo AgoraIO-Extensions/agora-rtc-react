@@ -2,8 +2,8 @@ import type { ILocalAudioTrack } from "agora-rtc-sdk-ng";
 import type { MaybePromiseOrNull } from "../utils";
 
 import { useEffect } from "react";
-import { useReleaseTrackOnUmount } from "../hooks";
 import { useAwaited } from "../utils";
+import { useReleaseTrackOnUmount } from "../hooks/internal";
 
 export interface LocalAudioTrackProps {
   /**

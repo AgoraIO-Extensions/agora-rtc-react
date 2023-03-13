@@ -3,8 +3,8 @@ import type { HTMLProps } from "react";
 import type { Nullable } from "../utils";
 
 import { forwardRef, useEffect } from "react";
-import { useReleaseTrackOnUmount } from "../hooks";
 import { useForwardRef } from "../utils";
+import { useReleaseTrackOnUmount } from "../hooks/internal";
 
 export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**

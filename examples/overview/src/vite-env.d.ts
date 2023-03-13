@@ -2,8 +2,6 @@
 
 interface ImportMetaEnv {
   readonly AGORA_APPID: string;
-}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
+  readonly AGORA_CHANNEL: string;
+  readonly AGORA_TOKEN: string;
 }
