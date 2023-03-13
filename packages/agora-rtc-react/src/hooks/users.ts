@@ -52,12 +52,12 @@ export function usePublishedRemoteUsers(client: IAgoraRTCClient): readonly IAgor
       joinDisposers([
         listen(client, "user-published", (user, mediaType) => {
           if (user.uid === client.uid) return;
-          publishedMap.current[user.uid] |= mediaType === "audio" ? 1 : 2;
+          publishedMap.current[user.uid] |= mediaType === "audio" ? 0b01 : 0b10;
           setUsers(users => replaceOrPush(users.slice(), user));
         }),
         listen(client, "user-unpublished", (user, mediaType) => {
           if (user.uid === client.uid) return;
-          if ((publishedMap.current[user.uid] &= mediaType === "audio" ? 2 : 1))
+          if ((publishedMap.current[user.uid] &= mediaType === "audio" ? 0b10 : 0b01))
             setUsers(users => replaceOrPush(users.slice(), user));
           else {
             delete publishedMap.current[user.uid];
