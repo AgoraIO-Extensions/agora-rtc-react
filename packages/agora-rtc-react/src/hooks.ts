@@ -107,6 +107,12 @@ export function useReleaseTrackOnUmount(track: Nullable<ITrack>) {
 
 /**
  * Get interactive remote users in react components.
+ *
+ * ```jsx
+ * useRemoteUsers(client).map(user => (
+ *   <li key={user.uid}>{getUserName(user.uid)}</li>
+ * ))
+ * ```
  */
 export function useRemoteUsers(client: IAgoraRTCClient): readonly IAgoraRTCRemoteUser[] {
   const [users, setUsers] = useState(client.remoteUsers);
@@ -117,6 +123,27 @@ export function useRemoteUsers(client: IAgoraRTCClient): readonly IAgoraRTCRemot
     return joinDisposers([
       listen(client, "user-joined", update),
       listen(client, "user-left", update),
+    ]);
+  }, [client]);
+
+  return users;
+}
+
+/**
+ * Get published remote users, which have audio or video tracks.
+ *
+ * ```jsx
+ * usePublishedRemoteUsers(client).map(user => (
+ *   <RemoteUser key={user.uid} user={user} audio video />
+ * ))
+ * ```
+ */
+export function usePublishedRemoteUsers(client: IAgoraRTCClient): readonly IAgoraRTCRemoteUser[] {
+  const [users, setUsers] = useState(client.remoteUsers);
+
+  useEffect(() => {
+    const update = () => setUsers(client.remoteUsers.filter(e => e.hasAudio || e.hasVideo));
+    return joinDisposers([
       listen(client, "user-published", (user, mediaType) => {
         // don't use React.memo(({ remoteUser }) => ...) as the user reference may NOT change
         client.subscribe(user, mediaType).then(update);
