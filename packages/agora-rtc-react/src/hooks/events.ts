@@ -17,7 +17,7 @@ import type {
 } from "../listen";
 import type { Fn, Nullable } from "../utils";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { listen } from "../listen";
 import { useIsomorphicLayoutEffect } from "./tools";
 
@@ -84,4 +84,10 @@ export function useTrackEvent(track: any, event: any, listener: Nullable<Fn>) {
       });
     }
   }, [event, track]);
+}
+
+export function useConnectionState(client: IAgoraRTCClient) {
+  const [connectionState, setConnectionState] = useState(client.connectionState);
+  useClientEvent(client, "connection-state-change", setConnectionState);
+  return connectionState;
 }

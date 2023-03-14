@@ -1,4 +1,4 @@
-.agora-rtc-remote-user {
+:where(.agora-rtc-remote-user) {
   width: 288px;
   height: 216px;
   position: relative;

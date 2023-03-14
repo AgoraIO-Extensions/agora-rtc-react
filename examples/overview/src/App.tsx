@@ -1,16 +1,17 @@
 import "./App.css";
 
-import type { UID } from "agora-rtc-sdk-ng";
+import type { IAgoraRTCRemoteUser, UID } from "agora-rtc-sdk-ng";
+
 import AgoraRTC from "agora-rtc-sdk-ng";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   AgoraRTCProvider,
   CameraVideoTrack,
   MicrophoneAudioTrack,
   RemoteUser,
-  useAwaited,
-  useClientEvent,
+  useCamera,
+  useMicrophone,
   usePublishedRemoteUsers,
   useRemoteUsers,
   useSafePromise,
@@ -25,89 +26,70 @@ const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 export const App = () => {
   const sp = useSafePromise();
 
-  const [connectionState, setConnectionState] = useState(client.connectionState);
-  useClientEvent(client, "connection-state-change", setConnectionState);
-
   const [uid, setUID] = useState<UID>(0);
-  const users = useRemoteUsers(client);
-  const published = usePublishedRemoteUsers(client);
+  const remoteUsers = useRemoteUsers(client);
+  const [firstRemoteUser] = usePublishedRemoteUsers(client) as [IAgoraRTCRemoteUser | undefined];
 
-  const [mic, setMic] = useState(false);
-  const pAudioTrack = useMemo(() => (mic ? AgoraRTC.createMicrophoneAudioTrack() : null), [mic]);
-  const audioTrack = useAwaited(pAudioTrack);
+  const { audioTrack, micOn, setMic } = useMicrophone(client, false, { ANS: true, AEC: true });
+  const { videoTrack, cameraOn, setCamera } = useCamera(client, false);
+
+  // join channel on init
   useEffect(() => {
-    if (audioTrack && connectionState === "CONNECTED") {
-      client.publish(audioTrack).catch(console.error);
-      return () => void client.unpublish(audioTrack);
-    }
-  }, [audioTrack, connectionState]);
-
-  const [camera, setCamera] = useState(false);
-  const pVideoTrack = useMemo(() => (camera ? AgoraRTC.createCameraVideoTrack() : null), [camera]);
-  const videoTrack = useAwaited(pVideoTrack);
-  useEffect(() => {
-    if (videoTrack && connectionState === "CONNECTED") {
-      client.publish(videoTrack).catch(console.error);
-      return () => void client.unpublish(videoTrack);
-    }
-  }, [videoTrack, connectionState]);
-
-  const joinChannel = async () => {
-    const uid = await sp(
-      client.join(
-        import.meta.env.AGORA_APPID,
-        import.meta.env.AGORA_CHANNEL,
-        import.meta.env.AGORA_TOKEN,
-        null, // use random uid assigned by Agora server
-      ),
-    );
-    console.log("join channel ok, uid =", uid);
-    setUID(uid);
-  };
-
-  const leaveChannel = async () => {
-    await sp(client.leave());
-    setUID(0);
-  };
+    const [appId, channel, token] = [
+      import.meta.env.AGORA_APPID,
+      import.meta.env.AGORA_CHANNEL,
+      import.meta.env.AGORA_TOKEN,
+    ];
+    // uid=null: use random uid assigned by Agora server
+    sp(client.join(appId, channel, token, null)).then(setUID);
+    return () => void sp(client.leave()).then(() => setUID(0));
+  }, [sp]);
 
   return (
-    <>
-      <div className="row local-tracks">
-        {mic && <MicrophoneAudioTrack track={pAudioTrack} />}
-        {camera && <CameraVideoTrack className="local-video-track" track={pVideoTrack} play />}
-        <div className="local-tracks-controls">
-          <label>
-            <input type="checkbox" checked={mic} onChange={e => setMic(e.target.checked)} />
-            <span>Microphone</span>
-          </label>
-          <label>
-            <input type="checkbox" checked={camera} onChange={e => setCamera(e.target.checked)} />
-            <span>Camera</span>
-          </label>
+    <AgoraRTCProvider client={client}>
+      <div className="h-screen flex flex-col bg-coolgray-9 c-coolgray-3">
+        <div className="flex items-center p-4">
+          <span className="inline-flex">
+            <i className="i-mdi-user" />
+          </span>
+          {uid && <span className="c-green">&nbsp;{uid}</span>}
+          {remoteUsers.map(user => (
+            <span className={user.uid === firstRemoteUser?.uid ? "c-red" : ""} key={user.uid}>
+              &nbsp;{user.uid}
+            </span>
+          ))}
+        </div>
+        <div className="flex-1 p-10 p-t-4 grid grid-cols-2 gap-5">
+          <div className="local b-1 b-solid b-coolgray-6 rd of-hidden relative">
+            {micOn && <MicrophoneAudioTrack track={audioTrack} />}
+            {cameraOn && <CameraVideoTrack className="h-full" track={videoTrack} play />}
+            <div className="label inline-flex items-center gap-1 absolute bottom-0 bg-black c-white p-x-2">
+              <span>{uid}</span>
+              {micOn && <i className="i-mdi-volume" />}
+            </div>
+          </div>
+          <div className="remote b-1 b-solid b-coolgray-6 rd of-hidden relative">
+            <RemoteUser className="w-full h-full" user={firstRemoteUser} audioOn videoOn />
+            {firstRemoteUser && (
+              <div className="label inline-flex items-center gap-1 absolute bottom-0 bg-black c-white p-x-2">
+                <span>{firstRemoteUser.uid}</span>
+                {firstRemoteUser.hasAudio && <i className="i-mdi-volume" />}
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="flex gap-3 px-6 py-3 bg-coolgray-8 c-coolgray-3">
+          <button className="btn" onClick={() => setMic(a => !a)}>
+            {micOn ? <i className="i-mdi-microphone" /> : <i className="i-mdi-microphone-off" />}
+            <span>Mute</span>
+          </button>
+          <button className="btn" onClick={() => setCamera(a => !a)}>
+            {cameraOn ? <i className="i-mdi-camera" /> : <i className="i-mdi-camera-off" />}
+            <span>Stop Video</span>
+          </button>
         </div>
       </div>
-      <div className="row">
-        <span>Channel: '{import.meta.env.AGORA_CHANNEL}'</span>&emsp;
-        <button onClick={joinChannel} disabled={connectionState !== "DISCONNECTED"}>
-          JOIN
-        </button>
-        &nbsp;
-        <button onClick={leaveChannel} disabled={connectionState === "DISCONNECTED"}>
-          LEAVE
-        </button>
-        &emsp;
-        <span className={"state-" + connectionState.toLowerCase()}>({connectionState})</span>&emsp;
-        <span>UID: {uid}</span>
-      </div>
-      <div className="row">Remote Users: [{users.map(e => e.uid).join(",")}]</div>
-      <div className="row users">
-        <AgoraRTCProvider client={client}>
-          {published.map(user => (
-            <RemoteUser key={user.uid} user={user} videoOn audioOn />
-          ))}
-        </AgoraRTCProvider>
-      </div>
-    </>
+    </AgoraRTCProvider>
   );
 };
 

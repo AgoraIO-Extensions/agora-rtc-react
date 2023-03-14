@@ -1,3 +1,5 @@
+import "sanitize.css";
+import "uno.css";
 import ReactDOM from "react-dom/client";
 import { App } from "./App";
 

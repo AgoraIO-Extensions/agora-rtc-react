@@ -3,7 +3,7 @@ import "./RemoteUser.css";
 import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import type { HTMLProps, PropsWithChildren } from "react";
 
-import { forwardRef, useEffect, useRef } from "react";
+import { forwardRef, useEffect } from "react";
 import { useForceUpdate, useRTCClient, useSafePromise } from "../hooks";
 import { RemoteAudioTrack } from "./RemoteAudioTrack";
 import { RemoteVideoTrack } from "./RemoteVideoTrack";
@@ -43,28 +43,26 @@ export const RemoteUser = /* @__PURE__ */ forwardRef<
   ref,
 ) {
   const client = useRTCClient();
-  const subscribedRef = useRef(0b00); // 0b01: audio, 0b10: video, 0b11: both, 0: none
   const forceUpdate = useForceUpdate();
   const sp = useSafePromise();
+  const hasAudio = user?.hasAudio;
+  const hasVideo = user?.hasVideo;
 
   useEffect(() => {
-    if (user && user.hasAudio && audioOn && !(subscribedRef.current & 0b01)) {
-      subscribedRef.current |= 0b01;
+    if (user && hasAudio && audioOn && !user.audioTrack) {
       sp(client.subscribe(user, "audio")).then(forceUpdate).catch(console.error);
     }
-  }, [client, user, audioOn, sp, forceUpdate]);
+  }, [client, user, hasAudio, audioOn, sp, forceUpdate]);
 
   useEffect(() => {
-    if (user && user.hasVideo && videoOn && !(subscribedRef.current & 0b10)) {
-      subscribedRef.current |= 0b10;
+    if (user && hasVideo && videoOn && !user.videoTrack) {
       sp(client.subscribe(user, "video")).then(forceUpdate).catch(console.error);
     }
-  }, [client, user, videoOn, sp, forceUpdate]);
+  }, [client, user, hasVideo, videoOn, sp, forceUpdate]);
 
   useEffect(
     () => () => {
-      if (user && (user.hasAudio || user.hasVideo) && subscribedRef.current) {
-        subscribedRef.current = 0b00;
+      if (user && (user.audioTrack || user.videoTrack)) {
         client.unsubscribe(user).catch(console.error);
       }
     },
