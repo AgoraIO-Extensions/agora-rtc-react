@@ -73,6 +73,7 @@ importers:
       '@vitejs/plugin-react': ^3.0.0
       '@vitest/coverage-c8': ^0.29.2
       agora-rtc-sdk-ng: ^4.16.1
+      fake-agora-rtc: workspace:*
       jsdom: ^21.1.0
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -99,6 +100,7 @@ importers:
       '@vitejs/plugin-react': 3.1.0_vite@4.1.4
       '@vitest/coverage-c8': 0.29.2_vitest@0.29.2
       agora-rtc-sdk-ng: 4.16.1
+      fake-agora-rtc: link:../fake-agora-rtc
       jsdom: 21.1.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -108,6 +110,18 @@ importers:
       typescript: 4.9.5
       vite: 4.1.4
       vitest: 0.29.2_jsdom@21.1.0
+
+  packages/fake-agora-rtc:
+    specifiers:
+      '@faker-js/faker': ^7.6.0
+      agora-rtc-sdk-ng: ^4.16.1
+      typescript: ^4.9.5
+      vite: ^4.1.4
+    devDependencies:
+      '@faker-js/faker': 7.6.0
+      agora-rtc-sdk-ng: 4.16.1
+      typescript: 4.9.5
+      vite: 4.1.4
 
 packages:
 
@@ -1860,6 +1874,11 @@ packages:
   /@eslint/js/8.35.0:
     resolution: {integrity: sha512-JXdzbRiWclLVoD8sNUjR443VVlYqiYmDVT6rGUEIEHU5YJW0gaVZwV2xgM7D4arkvASqD0IlLUVjHiFuxaftRw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: true
+
+  /@faker-js/faker/7.6.0:
+    resolution: {integrity: sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
     dev: true
 
   /@fal-works/esbuild-plugin-global-externals/2.1.2:
