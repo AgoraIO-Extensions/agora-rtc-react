@@ -58,13 +58,14 @@ importers:
   packages/agora-rtc-react:
     specifiers:
       '@storybook/addon-actions': 7.0.0-beta.43
-      '@storybook/addon-essentials': ^7.0.0-beta.36
-      '@storybook/addon-interactions': ^7.0.0-beta.36
-      '@storybook/addon-links': ^7.0.0-beta.36
-      '@storybook/blocks': ^7.0.0-beta.36
+      '@storybook/addon-essentials': ^7.0.0-rc.3
+      '@storybook/addon-interactions': ^7.0.0-rc.3
+      '@storybook/addon-links': ^7.0.0-rc.3
+      '@storybook/blocks': ^7.0.0-rc.3
+      '@storybook/builder-vite': ^7.0.0-rc.3
       '@storybook/preview-api': 7.0.0-beta.40
-      '@storybook/react': ^7.0.0-beta.36
-      '@storybook/react-vite': ^7.0.0-beta.36
+      '@storybook/react': ^7.0.0-rc.3
+      '@storybook/react-vite': ^7.0.0-rc.3
       '@testing-library/react': ^14.0.0
       '@types/jest': ^29.4.0
       '@types/react': ^18.0.28
@@ -76,7 +77,7 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
       react-test-renderer: ^18.2.0
-      storybook: ^7.0.0-beta.36
+      storybook: ^7.0.0-rc.3
       tsup: ^6.6.3
       typescript: ^4.9.5
       vite: ^4.1.4
@@ -87,6 +88,7 @@ importers:
       '@storybook/addon-interactions': 7.0.0-rc.3_biqbaboplfbrettd7655fr4n2y
       '@storybook/addon-links': 7.0.0-rc.3_biqbaboplfbrettd7655fr4n2y
       '@storybook/blocks': 7.0.0-rc.3_biqbaboplfbrettd7655fr4n2y
+      '@storybook/builder-vite': 7.0.0-rc.3_vwvfc4ezh6jlf6pa67auy3eulu
       '@storybook/preview-api': 7.0.0-beta.40
       '@storybook/react': 7.0.0-rc.3_ygqkwb4gg3aean7xjfdauovyqq
       '@storybook/react-vite': 7.0.0-rc.3_ndsstb2ob2rgr4m75wxvpqsrpi
@@ -4352,7 +4354,7 @@ packages:
     dev: true
 
   /bytes/3.0.0:
-    resolution: {integrity: sha512-pMhOfFDPiv9t5jjIXkHosWmkSyQbvsgEVNkz0ERHbuLh2T/7j4Mqqpz523Fe8MVY89KC6Sh/QfS2sM+SjgFDcw==}
+    resolution: {integrity: sha1-0ygVQE1olpn4Wk6k+odV3ROpYEg=}
     engines: {node: '>= 0.8'}
     dev: true
 
