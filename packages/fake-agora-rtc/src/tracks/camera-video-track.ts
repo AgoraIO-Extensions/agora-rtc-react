@@ -1,13 +1,13 @@
 import type { ICameraVideoTrack } from "agora-rtc-sdk-ng";
 import type { FakeLocalVideoTrackProps } from "./local-video-track";
 
-import { FakeLocalVideoTrackImpl } from "./local-video-track";
+import { FakeLocalVideoTrack } from "./local-video-track";
 
 export interface FakeCameraVideoTrackProps extends FakeLocalVideoTrackProps {}
 
-export class FakeCameraVideoTrackImpl extends FakeLocalVideoTrackImpl {
-  public constructor(props: FakeCameraVideoTrackProps = {}) {
-    super(props);
+export class FakeCameraVideoTrack extends FakeLocalVideoTrack {
+  public static override create(props?: FakeCameraVideoTrackProps): ICameraVideoTrack {
+    return new FakeCameraVideoTrack(props) as unknown as ICameraVideoTrack;
   }
   /**
    * Sets the device for capturing video.
@@ -20,5 +20,3 @@ export class FakeCameraVideoTrackImpl extends FakeLocalVideoTrackImpl {
     console.log("[FakeCameraVideoTrack]: setDevice", deviceId);
   }
 }
-
-export const FakeCameraVideoTrack = FakeCameraVideoTrackImpl as unknown as ICameraVideoTrack;

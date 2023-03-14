@@ -1,17 +1,21 @@
 import type { IRemoteVideoTrack, VideoPlayerConfig } from "agora-rtc-sdk-ng";
 import type { FakeRemoteTrackProps } from "./remote-track";
 
-import ipadMp4 from "../../videos/ipad-1988.mp4";
-import { FakeRemoteTrackImpl } from "./remote-track";
+import ipadMp4 from "../../videos/ipad-2988.mp4";
+import { FakeRemoteTrack } from "./remote-track";
 
 export interface FakeRemoteVideoTrackProps extends Omit<FakeRemoteTrackProps, "trackMediaType"> {
   videoURI?: string;
 }
 
-export class FakeRemoteVideoTrackImpl extends FakeRemoteTrackImpl {
+export class FakeRemoteVideoTrack extends FakeRemoteTrack {
+  public static override create(props?: FakeRemoteVideoTrackProps): IRemoteVideoTrack {
+    return new FakeRemoteVideoTrack(props) as unknown as IRemoteVideoTrack;
+  }
+
   private readonly videoURI: string;
 
-  public constructor({ videoURI = ipadMp4, ...props }: FakeRemoteVideoTrackProps) {
+  protected constructor({ videoURI = ipadMp4, ...props }: FakeRemoteVideoTrackProps = {}) {
     super({ ...props, trackMediaType: "video" });
 
     this.videoURI = videoURI;
@@ -31,6 +35,9 @@ export class FakeRemoteVideoTrackImpl extends FakeRemoteTrackImpl {
 
     if (!this._videoEl) {
       this._videoEl = document.createElement("video");
+      this._videoEl.style.width = "100%";
+      this._videoEl.style.height = "100%";
+      this._videoEl.style.objectFit = "cover";
       this._videoEl.loop = true;
       this._videoEl.muted = true;
     }
@@ -43,7 +50,7 @@ export class FakeRemoteVideoTrackImpl extends FakeRemoteTrackImpl {
 
     if (this._videoEl) {
       this.isPlaying = true;
-      this._videoEl.play();
+      this._videoEl.play().catch(console.log);
     }
   }
 
@@ -60,5 +67,3 @@ export class FakeRemoteVideoTrackImpl extends FakeRemoteTrackImpl {
   protected _config?: VideoPlayerConfig;
   protected _videoEl?: HTMLVideoElement;
 }
-
-export const FakeRemoteVideoTrack = FakeRemoteVideoTrackImpl as unknown as IRemoteVideoTrack;

@@ -2,7 +2,7 @@ import type { ILocalTrack, LocalAudioTrackStats, LocalVideoTrackStats } from "ag
 import type { FakeTrackProps } from "./track";
 
 import { faker } from "@faker-js/faker";
-import { FakeTrackImpl } from "./track";
+import { FakeTrack } from "./track";
 
 export interface FakeLocalTrackProps extends FakeTrackProps {
   /** track label */
@@ -11,15 +11,19 @@ export interface FakeLocalTrackProps extends FakeTrackProps {
   muted?: boolean;
 }
 
-export class FakeLocalTrackImpl extends FakeTrackImpl {
+export class FakeLocalTrack extends FakeTrack {
+  public static override create(props?: FakeLocalTrackProps): ILocalTrack {
+    return new FakeLocalTrack(props) as unknown as ILocalTrack;
+  }
+
   protected _label: string;
 
-  public constructor({
+  protected constructor({
     label = faker.commerce.productDescription(),
     enabled = true,
     muted = false,
     ...trackProps
-  }: FakeLocalTrackProps) {
+  }: FakeLocalTrackProps = {}) {
     super(trackProps);
     this._label = label;
     this.enabled = enabled;
@@ -103,5 +107,3 @@ export class FakeLocalTrackImpl extends FakeTrackImpl {
 
   public enabled: boolean;
 }
-
-export const FakeLocalTrack = FakeLocalTrackImpl as unknown as ILocalTrack;

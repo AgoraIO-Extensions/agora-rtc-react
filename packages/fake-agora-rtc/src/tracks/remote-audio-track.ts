@@ -1,8 +1,8 @@
 import type { IRemoteAudioTrack } from "agora-rtc-sdk-ng";
 import type { FakeRemoteTrackProps } from "./remote-track";
 
-import keyboardMp3 from "../../audios/quick-mechanical-keyboard-14391.mp3";
-import { FakeRemoteTrackImpl } from "./remote-track";
+import keyboardMp3 from "../../videos/quick-mechanical-keyboard-14391.mp3";
+import { FakeRemoteTrack } from "./remote-track";
 
 export interface FakeRemoteAudioTrackProps extends Omit<FakeRemoteTrackProps, "trackMediaType"> {
   audioURI?: string;
@@ -10,10 +10,14 @@ export interface FakeRemoteAudioTrackProps extends Omit<FakeRemoteTrackProps, "t
   volume?: number;
 }
 
-export class FakeRemoteAudioTrackImpl extends FakeRemoteTrackImpl {
+export class FakeRemoteAudioTrack extends FakeRemoteTrack {
+  public static override create(props?: FakeRemoteAudioTrackProps): IRemoteAudioTrack {
+    return new FakeRemoteAudioTrack(props) as unknown as IRemoteAudioTrack;
+  }
+
   private readonly audioURI: string;
 
-  public constructor({
+  protected constructor({
     audioURI = keyboardMp3,
     volume = 100,
     ...props
@@ -39,7 +43,7 @@ export class FakeRemoteAudioTrackImpl extends FakeRemoteTrackImpl {
 
     if (this._audioEl) {
       this.isPlaying = true;
-      this._audioEl.play();
+      this._audioEl.play().catch(console.log);
     }
   }
   /**
@@ -91,5 +95,3 @@ export class FakeRemoteAudioTrackImpl extends FakeRemoteTrackImpl {
   private _audioEl?: HTMLAudioElement;
   private _volume: number;
 }
-
-export const FakeRemoteAudioTrack = FakeRemoteAudioTrackImpl as unknown as IRemoteAudioTrack;

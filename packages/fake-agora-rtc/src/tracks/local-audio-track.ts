@@ -1,8 +1,8 @@
 import type { ILocalAudioTrack } from "agora-rtc-sdk-ng";
 import type { FakeLocalTrackProps } from "./local-track";
 
-import keyboardMp3 from "../../audios/quick-mechanical-keyboard-14391.mp3";
-import { FakeLocalTrackImpl } from "./local-track";
+import keyboardMp3 from "../../videos/quick-mechanical-keyboard-14391.mp3";
+import { FakeLocalTrack } from "./local-track";
 
 export interface FakeLocalAudioTrackProps extends Omit<FakeLocalTrackProps, "trackMediaType"> {
   audioURI?: string;
@@ -10,10 +10,14 @@ export interface FakeLocalAudioTrackProps extends Omit<FakeLocalTrackProps, "tra
   volume?: number;
 }
 
-export class FakeLocalAudioTrackImpl extends FakeLocalTrackImpl {
+export class FakeLocalAudioTrack extends FakeLocalTrack {
+  public static override create(props?: FakeLocalAudioTrackProps): ILocalAudioTrack {
+    return new FakeLocalAudioTrack(props) as unknown as ILocalAudioTrack;
+  }
+
   private readonly audioURI: string;
 
-  public constructor({
+  protected constructor({
     audioURI = keyboardMp3,
     volume = 100,
     ...props
@@ -43,7 +47,7 @@ export class FakeLocalAudioTrackImpl extends FakeLocalTrackImpl {
 
     if (this.enabled && this._audioEl) {
       this.isPlaying = true;
-      this._audioEl.play();
+      this._audioEl.play().catch(console.log);
     }
   }
   /**
@@ -119,5 +123,3 @@ export class FakeLocalAudioTrackImpl extends FakeLocalTrackImpl {
   private _audioEl?: HTMLAudioElement;
   private _volume: number;
 }
-
-export const FakeLocalAudioTrack = FakeLocalAudioTrackImpl as unknown as ILocalAudioTrack;

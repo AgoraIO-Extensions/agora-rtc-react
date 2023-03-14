@@ -1,7 +1,7 @@
 type Fn = (...args: any[]) => any;
 
 /** Fake Agora internal Eventemitter */
-export class EventEmitter {
+export class FakeAgoraEventEmitter {
   private _events = new Map<string, Fn[]>();
   private _once = new WeakMap<Fn, Fn>();
 
@@ -72,5 +72,11 @@ export class EventEmitter {
 
   public dispatch(event: string, ...payload: unknown[]): void {
     this._events.get(event)?.forEach(listener => listener(...payload));
+  }
+}
+
+export function dispatchEvent(emitter: unknown, event: string, ...payload: unknown[]): void {
+  if (emitter && (emitter as FakeAgoraEventEmitter).dispatch) {
+    (emitter as FakeAgoraEventEmitter).dispatch(event, ...payload);
   }
 }

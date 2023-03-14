@@ -1,17 +1,21 @@
 import type { ITrack } from "agora-rtc-sdk-ng";
 
 import { faker } from "@faker-js/faker";
-import { EventEmitter } from "../eventemitter";
+import { FakeAgoraEventEmitter } from "../eventemitter";
 
 export interface FakeTrackProps {
   trackMediaType?: "audio" | "video";
   trackId?: string;
 }
 
-export class FakeTrackImpl extends EventEmitter {
+export class FakeTrack extends FakeAgoraEventEmitter {
+  public static create(props?: FakeTrackProps): ITrack {
+    return new FakeTrack(props) as unknown as ITrack;
+  }
+
   private readonly trackId: string;
 
-  public constructor({
+  protected constructor({
     trackMediaType = "video",
     trackId = faker.datatype.uuid(),
   }: FakeTrackProps = {}) {
@@ -68,6 +72,3 @@ export class FakeTrackImpl extends EventEmitter {
     this.isPlaying = false;
   }
 }
-
-// impossible to extends Agora RTC SDK's Internal EventEmitter
-export const FakeTrack = FakeTrackImpl as unknown as ITrack;

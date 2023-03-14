@@ -1,13 +1,13 @@
 import type { IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
 import type { FakeLocalAudioTrackProps } from "./local-audio-track";
 
-import { FakeLocalAudioTrackImpl } from "./local-audio-track";
+import { FakeLocalAudioTrack } from "./local-audio-track";
 
 export interface FakeMicrophoneAudioTrackProps extends FakeLocalAudioTrackProps {}
 
-export class FakeMicrophoneAudioTrackImpl extends FakeLocalAudioTrackImpl {
-  public constructor(props: FakeMicrophoneAudioTrackProps = {}) {
-    super(props);
+export class FakeMicrophoneAudioTrack extends FakeLocalAudioTrack {
+  public static override create(props?: FakeMicrophoneAudioTrackProps): IMicrophoneAudioTrack {
+    return new FakeMicrophoneAudioTrack(props) as unknown as IMicrophoneAudioTrack;
   }
   /**
    * Sets the device for sampling audio.
@@ -20,6 +20,3 @@ export class FakeMicrophoneAudioTrackImpl extends FakeLocalAudioTrackImpl {
     console.log("[FakeMicrophoneAudioTrack]: setDevice", deviceId);
   }
 }
-
-export const FakeMicrophoneAudioTrack =
-  FakeMicrophoneAudioTrackImpl as unknown as IMicrophoneAudioTrack;

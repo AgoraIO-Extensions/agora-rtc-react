@@ -1,17 +1,21 @@
 import type { ILocalVideoTrack, VideoPlayerConfig } from "agora-rtc-sdk-ng";
 import type { FakeLocalTrackProps } from "./local-track";
 
-import ipadMp4 from "../../videos/ipad-1988.mp4";
-import { FakeLocalTrackImpl } from "./local-track";
+import ipadMp4 from "../../videos/ipad-2988.mp4";
+import { FakeLocalTrack } from "./local-track";
 
 export interface FakeLocalVideoTrackProps extends Omit<FakeLocalTrackProps, "trackMediaType"> {
   videoURI?: string;
 }
 
-export class FakeLocalVideoTrackImpl extends FakeLocalTrackImpl {
+export class FakeLocalVideoTrack extends FakeLocalTrack {
+  public static override create(props?: FakeLocalVideoTrackProps): ILocalVideoTrack {
+    return new FakeLocalVideoTrack(props) as unknown as ILocalVideoTrack;
+  }
+
   private readonly videoURI: string;
 
-  public constructor({ videoURI = ipadMp4, ...props }: FakeLocalVideoTrackProps = {}) {
+  protected constructor({ videoURI = ipadMp4, ...props }: FakeLocalVideoTrackProps = {}) {
     super({ ...props, trackMediaType: "video" });
 
     this.videoURI = videoURI;
@@ -31,11 +35,14 @@ export class FakeLocalVideoTrackImpl extends FakeLocalTrackImpl {
 
     if (!this._videoEl) {
       this._videoEl = document.createElement("video");
+      this._videoEl.style.width = "100%";
+      this._videoEl.style.height = "100%";
       this._videoEl.loop = true;
       this._videoEl.muted = true;
     }
 
     this._videoEl.src = this.videoURI;
+    this._videoEl.style.objectFit = this._config?.fit || "cover";
 
     if (container) {
       container.appendChild(this._videoEl);
@@ -43,7 +50,7 @@ export class FakeLocalVideoTrackImpl extends FakeLocalTrackImpl {
 
     if (this.enabled && this._videoEl) {
       this.isPlaying = true;
-      this._videoEl.play();
+      this._videoEl.play().catch(console.log);
     }
   }
   /**
@@ -59,5 +66,3 @@ export class FakeLocalVideoTrackImpl extends FakeLocalTrackImpl {
   protected _config?: VideoPlayerConfig;
   protected _videoEl?: HTMLVideoElement;
 }
-
-export const FakeLocalVideoTrack = FakeLocalVideoTrackImpl as unknown as ILocalVideoTrack;

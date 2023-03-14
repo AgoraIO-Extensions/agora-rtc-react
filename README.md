@@ -27,6 +27,7 @@ npm add agora-rtc-sdk-ng agora-rtc-react
 2. `pnpm i` to install dependencies.
 
 - `pnpm start` to start the overview example.
+- `pnpm storybook` to start the storybook.
 - `pnpm build` to build the library.
 
 ## License

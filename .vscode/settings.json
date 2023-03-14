@@ -19,7 +19,8 @@
     "tools",
     "project",
     "readme",
-    "version"
+    "version",
+    "storybook"
   ],
   "[html]": {
     "editor.formatOnSave": true,

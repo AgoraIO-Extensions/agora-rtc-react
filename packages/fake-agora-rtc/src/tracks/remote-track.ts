@@ -7,17 +7,21 @@ import type {
 import type { FakeTrackProps } from "./track";
 
 import { faker } from "@faker-js/faker";
-import { FakeTrackImpl } from "./track";
+import { FakeTrack } from "./track";
 
 export interface FakeRemoteTrackProps extends FakeTrackProps {
   /** track label */
   uid?: UID;
 }
 
-export class FakeRemoteTrackImpl extends FakeTrackImpl {
+export class FakeRemoteTrack extends FakeTrack {
+  public static override create(props?: FakeRemoteTrackProps): IRemoteTrack {
+    return new FakeRemoteTrack(props) as unknown as IRemoteTrack;
+  }
+
   protected _uid: UID;
 
-  public constructor({ uid = faker.datatype.uuid(), ...trackProps }: FakeRemoteTrackProps) {
+  protected constructor({ uid = faker.datatype.uuid(), ...trackProps }: FakeRemoteTrackProps = {}) {
     super(trackProps);
     this._uid = uid;
   }
@@ -39,5 +43,3 @@ export class FakeRemoteTrackImpl extends FakeTrackImpl {
     throw new Error("Method not implemented.");
   }
 }
-
-export const FakeRemoteTrack = FakeRemoteTrackImpl as unknown as IRemoteTrack;
