@@ -12,10 +12,21 @@ export function AgoraRTCProvider({ client, children }: PropsWithChildren<AgoraRT
   return <AgoraRTCContext.Provider value={client}>{children}</AgoraRTCContext.Provider>;
 }
 
-export function useRTCClient() {
+/**
+ * Get a Agora RTC client from context
+ */
+export function useRTCClient(optional?: false): IAgoraRTCClient;
+/**
+ * Get a Agora RTC client from context
+ * @param optional do not throw error if client is not found
+ */
+export function useRTCClient(optional: true): IAgoraRTCClient | null;
+export function useRTCClient(optional?: boolean) {
   const client = useContext(AgoraRTCContext);
   if (!client) {
-    throw new Error("should be wrapped in <AgoraRTCProvider value={client} />");
+    if (!optional) {
+      throw new Error("should be wrapped in <AgoraRTCProvider value={client} />");
+    }
   }
   return client;
 }
