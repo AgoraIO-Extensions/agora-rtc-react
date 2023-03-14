@@ -3,7 +3,7 @@ import type { MaybePromiseOrNull } from "../utils";
 import type { LocalAudioTrackProps } from "./LocalAudioTrack";
 
 import { useEffect } from "react";
-import { useAwaited } from "../utils";
+import { useAwaited } from "../hooks";
 import { LocalAudioTrack } from "./LocalAudioTrack";
 
 export interface MicrophoneAudioTrackProps extends LocalAudioTrackProps {

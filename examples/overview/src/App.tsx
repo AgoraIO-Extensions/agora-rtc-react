@@ -2,18 +2,19 @@ import "./App.css";
 
 import type { UID } from "agora-rtc-sdk-ng";
 import AgoraRTC from "agora-rtc-sdk-ng";
+import { useEffect, useMemo, useState } from "react";
+
 import {
+  AgoraRTCProvider,
   CameraVideoTrack,
   MicrophoneAudioTrack,
-  RemoteAudioTrack,
-  RemoteVideoTrack,
+  RemoteUser,
   useAwaited,
   useClientEvent,
   usePublishedRemoteUsers,
   useRemoteUsers,
   useSafePromise,
 } from "agora-rtc-react";
-import { useEffect, useMemo, useState } from "react";
 
 AgoraRTC.setLogLevel(/* warning */ 2);
 const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
@@ -30,16 +31,6 @@ export const App = () => {
   const [uid, setUID] = useState<UID>(0);
   const users = useRemoteUsers(client);
   const published = usePublishedRemoteUsers(client);
-  const [_, forceUpdate] = useState(0);
-
-  useClientEvent(client, "user-published", async (user, mediaType) => {
-    // don't subscribe to self
-    if (user.uid !== client.uid) {
-      await sp(client.subscribe(user, mediaType));
-      // refresh published users to render new tracks
-      forceUpdate(e => (e + 1) | 0);
-    }
-  });
 
   const [mic, setMic] = useState(false);
   const pAudioTrack = useMemo(() => (mic ? AgoraRTC.createMicrophoneAudioTrack() : null), [mic]);
@@ -109,14 +100,12 @@ export const App = () => {
         <span>UID: {uid}</span>
       </div>
       <div className="row">Remote Users: [{users.map(e => e.uid).join(",")}]</div>
-      <div className="row">Published Users: [{published.map(e => e.uid).join(",")}]</div>
-      <div className="row remote-users">
-        {published.map(user => (
-          <div key={user.uid} className="remote-user">
-            <RemoteAudioTrack track={user.audioTrack} play />
-            <RemoteVideoTrack className="remote-video-track" track={user.videoTrack} play />
-          </div>
-        ))}
+      <div className="row users">
+        <AgoraRTCProvider client={client}>
+          {published.map(user => (
+            <RemoteUser key={user.uid} user={user} videoOn audioOn />
+          ))}
+        </AgoraRTCProvider>
       </div>
     </>
   );

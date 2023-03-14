@@ -1,18 +1,14 @@
 import "./RemoteUser.css";
 
-import type { IAgoraRTCClient, IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
+import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import type { HTMLProps, PropsWithChildren } from "react";
-import { useEffect } from "react";
 
-import { forwardRef, useRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
+import { useForceUpdate, useRTCClient, useSafePromise } from "../hooks";
 import { RemoteAudioTrack } from "./RemoteAudioTrack";
 import { RemoteVideoTrack } from "./RemoteVideoTrack";
-import { useRTCClient } from "../hooks";
-import { useForceUpdate } from "../hooks/tools";
-import { useSafePromise } from "../utils";
 
 export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
-  readonly client?: IAgoraRTCClient;
   /**
    * A remote user
    */
@@ -52,22 +48,22 @@ export const RemoteUser = /* @__PURE__ */ forwardRef<
   const sp = useSafePromise();
 
   useEffect(() => {
-    if (user && videoOn && !(subscribedRef.current & 0b10)) {
-      subscribedRef.current |= 0b10;
-      sp(client.subscribe(user, "video")).then(forceUpdate).catch(console.error);
-    }
-  }, [client, user, videoOn, sp, forceUpdate]);
-
-  useEffect(() => {
-    if (user && audioOn && !(subscribedRef.current & 0b01)) {
+    if (user && user.hasAudio && audioOn && !(subscribedRef.current & 0b01)) {
       subscribedRef.current |= 0b01;
       sp(client.subscribe(user, "audio")).then(forceUpdate).catch(console.error);
     }
   }, [client, user, audioOn, sp, forceUpdate]);
 
+  useEffect(() => {
+    if (user && user.hasVideo && videoOn && !(subscribedRef.current & 0b10)) {
+      subscribedRef.current |= 0b10;
+      sp(client.subscribe(user, "video")).then(forceUpdate).catch(console.error);
+    }
+  }, [client, user, videoOn, sp, forceUpdate]);
+
   useEffect(
     () => () => {
-      if (user && subscribedRef.current) {
+      if (user && (user.hasAudio || user.hasVideo) && subscribedRef.current) {
         subscribedRef.current = 0b00;
         client.unsubscribe(user).catch(console.error);
       }

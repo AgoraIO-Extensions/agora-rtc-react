@@ -3,7 +3,7 @@ import type { HTMLProps } from "react";
 import type { MaybePromiseOrNull } from "../utils";
 
 import { forwardRef, useEffect } from "react";
-import { useAwaited, useForwardRef } from "../utils";
+import { useAwaited, useForwardRef } from "../hooks";
 import { useReleaseTrackOnUmount } from "../hooks/internal";
 
 export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {

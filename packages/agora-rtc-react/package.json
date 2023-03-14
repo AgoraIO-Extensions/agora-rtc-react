@@ -16,6 +16,9 @@
     "module": "dist/main.mjs",
     "types": "dist/main.d.ts"
   },
+  "sideEffects": [
+    "*.css"
+  ],
   "source": "src/main.ts",
   "files": [
     "dist"

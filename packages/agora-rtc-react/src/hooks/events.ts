@@ -19,7 +19,7 @@ import type { Fn, Nullable } from "../utils";
 
 import { useEffect, useRef } from "react";
 import { listen } from "../listen";
-import { useIsomorphicLayoutEffect } from "../utils";
+import { useIsomorphicLayoutEffect } from "./tools";
 
 export function useClientEvent<E extends keyof ClientEventMap>(
   client: Nullable<IAgoraRTCClient>,

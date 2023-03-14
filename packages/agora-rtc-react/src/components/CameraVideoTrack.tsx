@@ -3,7 +3,7 @@ import type { MaybePromiseOrNull } from "../utils";
 import type { LocalVideoTrackProps } from "./LocalVideoTrack";
 
 import { forwardRef, useEffect } from "react";
-import { useAwaited } from "../utils";
+import { useAwaited } from "../hooks";
 import { LocalVideoTrack } from "./LocalVideoTrack";
 
 export interface CameraVideoTrackProps extends LocalVideoTrackProps {
