@@ -1,3 +1,7 @@
+html {
+  background: #000;
+}
+
 .agora-rtc-icon-stroke-color {
   stroke: #d1d5db;
 }
@@ -10,9 +14,9 @@
   display: inline-flex;
   flex-direction: column;
   background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, .1);
-  border-radius: .25rem;
-  padding: .25rem .5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
   appearance: none;
   cursor: pointer;
   align-items: center;
@@ -20,13 +24,13 @@
   color: inherit;
 }
 .btn:hover {
-  background-color: rgba(255, 255, 255, .05);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 .btn > i {
   font-size: 2rem;
 }
 .btn > span {
-  font-size: .75rem;
+  font-size: 0.75rem;
 }
 .remote > .label > i {
   font-size: 1rem;

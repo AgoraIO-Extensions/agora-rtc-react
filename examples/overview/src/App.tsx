@@ -39,8 +39,8 @@ export const App = () => {
   const sp = useSafePromise();
 
   const [uid, setUID] = useState<UID>(0);
-  const users = useRemoteUsers(client);
-  const published = usePublishedRemoteUsers(client);
+  const remoteUsers = useRemoteUsers(client);
+  const publishedUsers = usePublishedRemoteUsers(client);
 
   const { audioTrack, micOn, setMic } = useMicrophone(client, false, { ANS: true, AEC: true });
   const { videoTrack, cameraOn, setCamera } = useCamera(client, false);
@@ -57,22 +57,26 @@ export const App = () => {
   return (
     <AgoraRTCProvider client={client}>
       <Container>
-        <UsersInfo value={published.length + (selfPublished ? 1 : 0)} max={users.length + 1} />
+        <UsersInfo
+          published={publishedUsers.length + (selfPublished ? 1 : 0)}
+          total={remoteUsers.length + 1}
+        />
         <AutoLayout>
           {selfPublished && (
             <AutoLayout.Item>
-              {micOn && <MicrophoneAudioTrack track={audioTrack} />}
-              {cameraOn && <CameraVideoTrack className="w-full h-full" track={videoTrack} play />}
+              <CameraVideoTrack className="w-full h-full" track={videoTrack} play={cameraOn} />
+              <MicrophoneAudioTrack track={audioTrack} play={micOn} />
               <Label>{uid}</Label>
             </AutoLayout.Item>
           )}
-          {published.map(user => (
+          {publishedUsers.map(user => (
             <AutoLayout.Item key={user.uid}>
               <RemoteUser className="w-full h-full" user={user} playAudio playVideo />
               <Label>{user.uid}</Label>
             </AutoLayout.Item>
           ))}
         </AutoLayout>
+        {/* Camera and Microphone Controls */}
         <div className="flex gap-3 px-6 py-3 bg-#21242c c-coolgray-3">
           <button className="btn" onClick={() => setMic(a => !a)}>
             {micOn ? <SVGMicrophone /> : <SVGMicrophoneMute />}
