@@ -1,14 +1,12 @@
 import "./RemoteUser.css";
 
-import type { IAgoraRTCRemoteUser, IRemoteAudioTrack, IRemoteVideoTrack } from "agora-rtc-sdk-ng";
+import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import type { HTMLProps, PropsWithChildren } from "react";
-import { useState } from "react";
 
-import { memo, useEffect } from "react";
-import { useRemoteUserTrack, useRTCClient } from "../hooks";
+import { memo } from "react";
+import { useRemoteUserTrack } from "../hooks";
 import { RemoteAudioTrack } from "./RemoteAudioTrack";
 import { RemoteVideoTrack } from "./RemoteVideoTrack";
-import { listen } from "../listen";
 
 export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
   /**

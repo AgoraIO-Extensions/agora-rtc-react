@@ -14,19 +14,13 @@ export interface LocalAudioTrackProps {
    * Whether to play the track.
    */
   readonly play?: boolean;
-  readonly publish?: boolean;
   /**
    * The volume. The value ranges from 0 (mute) to 100 (maximum). A value of 100 is the current volume.
    */
   readonly volume?: number;
 }
 
-export function LocalAudioTrack({
-  track: maybeTrack,
-  play,
-  publish,
-  volume,
-}: LocalAudioTrackProps) {
+export function LocalAudioTrack({ track: maybeTrack, play, volume }: LocalAudioTrackProps) {
   const track = useAwaited(maybeTrack);
   useReleaseTrackOnUmount(track);
 
@@ -35,10 +29,6 @@ export function LocalAudioTrack({
       play ? track.play() : track.stop();
     }
   }, [play, track]);
-
-  useEffect(() => {
-    console.log("TODO: publish", { track, publish });
-  }, [publish, track]);
 
   useEffect(() => {
     if (track && volume != null) {

@@ -1,9 +1,8 @@
 import type { ILocalVideoTrack } from "agora-rtc-sdk-ng";
 import type { HTMLProps } from "react";
-import { useState } from "react";
 import type { MaybePromiseOrNull } from "../utils";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAwaited } from "../hooks";
 import { useReleaseTrackOnUmount } from "../hooks/internal";
 
@@ -16,15 +15,9 @@ export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
    * Whether to play the track.
    */
   readonly play?: boolean;
-  readonly publish?: boolean;
 }
 
-export function LocalVideoTrack({
-  track: maybeTrack,
-  play,
-  publish,
-  ...props
-}: LocalVideoTrackProps) {
+export function LocalVideoTrack({ track: maybeTrack, play, ...props }: LocalVideoTrackProps) {
   const [div, setDiv] = useState<HTMLDivElement | null>(null);
 
   const track = useAwaited(maybeTrack);
@@ -37,10 +30,6 @@ export function LocalVideoTrack({
       track.stop();
     }
   }, [div, play, track]);
-
-  useEffect(() => {
-    console.log("TODO: publish", { track, publish });
-  }, [publish, track]);
 
   return <div ref={setDiv} {...props} />;
 }
