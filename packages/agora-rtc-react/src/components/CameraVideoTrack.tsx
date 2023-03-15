@@ -2,7 +2,7 @@ import type { ICameraVideoTrack } from "agora-rtc-sdk-ng";
 import type { MaybePromiseOrNull } from "../utils";
 import type { LocalVideoTrackProps } from "./LocalVideoTrack";
 
-import { forwardRef, useEffect } from "react";
+import { useEffect } from "react";
 import { useAwaited } from "../hooks";
 import { LocalVideoTrack } from "./LocalVideoTrack";
 
@@ -31,22 +31,25 @@ export interface CameraVideoTrackProps extends LocalVideoTrackProps {
  * return <CameraVideoTrack track={track} play />
  * ```
  */
-export const CameraVideoTrack = /* @__PURE__ */ forwardRef<HTMLDivElement, CameraVideoTrackProps>(
-  function CameraVideoTrack({ track: maybeTrack, deviceId, enabled, ...props }, ref) {
-    const track = useAwaited(maybeTrack);
+export function CameraVideoTrack({
+  track: maybeTrack,
+  deviceId,
+  enabled,
+  ...props
+}: CameraVideoTrackProps) {
+  const track = useAwaited(maybeTrack);
 
-    useEffect(() => {
-      if (track && deviceId != null) {
-        track.setDevice(deviceId).catch(console.warn);
-      }
-    }, [deviceId, track]);
+  useEffect(() => {
+    if (track && deviceId != null) {
+      track.setDevice(deviceId).catch(console.warn);
+    }
+  }, [deviceId, track]);
 
-    useEffect(() => {
-      if (track && enabled != null) {
-        track.setEnabled(enabled).catch(console.warn);
-      }
-    }, [enabled, track]);
+  useEffect(() => {
+    if (track && enabled != null) {
+      track.setEnabled(enabled).catch(console.warn);
+    }
+  }, [enabled, track]);
 
-    return <LocalVideoTrack track={maybeTrack} {...props} ref={ref} />;
-  },
-);
+  return <LocalVideoTrack track={maybeTrack} {...props} />;
+}
