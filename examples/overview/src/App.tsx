@@ -68,7 +68,7 @@ export const App = () => {
           )}
           {published.map(user => (
             <AutoLayout.Item key={user.uid}>
-              <RemoteUser className="w-full h-full" user={user} audioOn videoOn />
+              <RemoteUser className="w-full h-full" user={user} playAudio playVideo />
               <Label>{user.uid}</Label>
             </AutoLayout.Item>
           ))}

@@ -18,11 +18,11 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
   /**
    * Whether to play the remote user's video track. Default true.
    */
-  readonly videoOn?: boolean;
+  readonly playVideo?: boolean;
   /**
    * Whether to play the remote user's audio track. Default true.
    */
-  readonly audioOn?: boolean;
+  readonly playAudio?: boolean;
   /**
    * Device ID, which can be retrieved by calling `getPlaybackDevices`.
    *
@@ -49,8 +49,8 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
 export const RemoteUser = /* @__PURE__ */ memo<PropsWithChildren<RemoteUserProps>>(
   function RemoteUser({
     user,
-    videoOn = true,
-    audioOn = true,
+    playVideo = true,
+    playAudio = true,
     playbackDeviceId,
     volume,
     darkenOnHover,
@@ -66,12 +66,12 @@ export const RemoteUser = /* @__PURE__ */ memo<PropsWithChildren<RemoteUserProps
         className={`arr-remote-user ${className} ${darkenOnHover ? "darken-on-hover" : ""}`}
         {...props}
       >
-        <RemoteVideoTrack className="arr-remote-user-video" track={videoTrack} play={videoOn} />
+        <RemoteVideoTrack className="arr-remote-user-video" track={videoTrack} play={playVideo} />
         <RemoteAudioTrack
           playbackDeviceId={playbackDeviceId}
           volume={volume}
           track={audioTrack}
-          play={audioOn}
+          play={playAudio}
         />
         <div className="arr-remote-user-body">{children}</div>
       </div>

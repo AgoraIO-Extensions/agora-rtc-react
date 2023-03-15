@@ -65,8 +65,8 @@ export const Overview: StoryObj<RemoteUserProps> = {
       hasVideo: true,
       hasAudio: true,
     },
-    videoOn: true,
-    audioOn: false,
+    playVideo: true,
+    playAudio: false,
   },
 };
 
@@ -80,8 +80,8 @@ export const WithControls: StoryObj<RemoteUserProps> = {
       hasVideo: true,
       hasAudio: true,
     },
-    videoOn: true,
-    audioOn: false,
+    playVideo: true,
+    playAudio: false,
     style: { borderRadius: 8 },
   },
   render(args) {
@@ -89,14 +89,14 @@ export const WithControls: StoryObj<RemoteUserProps> = {
     const [userName] = useState(faker.name.firstName());
     const [, updateArgs] = useArgs();
     const setVideo = useCallback(
-      (videoOn: boolean): void => {
-        updateArgs({ videoOn });
+      (playVideo: boolean): void => {
+        updateArgs({ playVideo });
       },
       [updateArgs],
     );
     const setAudio = useCallback(
-      (audioOn: boolean): void => {
-        updateArgs({ audioOn });
+      (playAudio: boolean): void => {
+        updateArgs({ playAudio });
       },
       [updateArgs],
     );
@@ -120,10 +120,10 @@ export const WithControls: StoryObj<RemoteUserProps> = {
           <span style={{ userSelect: "none" }}>{userName}</span>
           <CameraControl
             style={{ margin: "0 10px 0 auto" }}
-            cameraOn={args.videoOn}
+            cameraOn={args.playVideo}
             onCameraChange={setVideo}
           />
-          <MicControl uid={args.user?.uid} micOn={args.audioOn} onMicChange={setAudio} />
+          <MicControl uid={args.user?.uid} micOn={args.playAudio} onMicChange={setAudio} />
         </div>
       </RemoteUser>
     );
