@@ -10,12 +10,9 @@
     "LichKing-2234",
     "CRIMX"
   ],
-  "main": "src/main.ts",
-  "publishConfig": {
-    "main": "dist/main.js",
-    "module": "dist/main.mjs",
-    "types": "dist/main.d.ts"
-  },
+  "main": "dist/agora-rtc-react.js",
+  "module": "dist/agora-rtc-react.mjs",
+  "types": "dist/agora-rtc-react.d.ts",
   "sideEffects": [
     "*.css"
   ],

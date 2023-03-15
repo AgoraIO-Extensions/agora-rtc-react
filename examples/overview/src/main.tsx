@@ -1,3 +1,4 @@
+import "agora-rtc-react/dist/agora-rtc-react.css";
 import "sanitize.css";
 import "uno.css";
 import ReactDOM from "react-dom/client";

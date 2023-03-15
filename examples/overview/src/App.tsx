@@ -1,6 +1,6 @@
 import "./App.css";
 
-import type { UID } from "agora-rtc-sdk-ng";
+import type { IAgoraRTCClient, UID } from "agora-rtc-sdk-ng";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { useEffect, useState } from "react";
 
@@ -24,11 +24,16 @@ import { UsersInfo } from "./UsersInfo";
 import { AutoLayout } from "./AutoLayout";
 import { Label } from "./Label";
 
+const [appId, channel, token] = [
+  import.meta.env.AGORA_APPID,
+  import.meta.env.AGORA_CHANNEL,
+  import.meta.env.AGORA_TOKEN,
+];
+
 AgoraRTC.setLogLevel(/* warning */ 2);
 const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 
-(window as any).AgoraRTC = AgoraRTC;
-(window as any).client = client;
+setupEasyTesting(client);
 
 export const App = () => {
   const sp = useSafePromise();
@@ -44,11 +49,6 @@ export const App = () => {
 
   // join channel on init
   useEffect(() => {
-    const [appId, channel, token] = [
-      import.meta.env.AGORA_APPID,
-      import.meta.env.AGORA_CHANNEL,
-      import.meta.env.AGORA_TOKEN,
-    ];
     // uid = null: use random uid assigned by Agora server
     sp(client.join(appId, channel, token, null)).then(setUID);
     return () => void sp(client.leave()).then(() => setUID(0));
@@ -87,3 +87,16 @@ export const App = () => {
 };
 
 export default App;
+
+declare global {
+  interface Window {
+    AgoraRTC: typeof AgoraRTC;
+    client: IAgoraRTCClient;
+  }
+}
+
+/** Expose client to window for easy playing with */
+function setupEasyTesting(client: IAgoraRTCClient): void {
+  window.AgoraRTC = AgoraRTC;
+  window.client = client;
+}

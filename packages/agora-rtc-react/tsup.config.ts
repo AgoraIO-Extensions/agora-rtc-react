@@ -1,7 +1,9 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/main.ts"],
+  entryPoints: {
+    "agora-rtc-react": "src/main.ts",
+  },
   format: ["cjs", "esm"],
   splitting: false,
   sourcemap: false,
