@@ -12,7 +12,10 @@
   ],
   "main": "dist/agora-rtc-react.js",
   "module": "dist/agora-rtc-react.mjs",
-  "types": "dist/agora-rtc-react.d.ts",
+  "types": "src/main.ts",
+  "publishConfig": {
+    "types": "dist/agora-rtc-react.d.ts"
+  },
   "sideEffects": [
     "*.css"
   ],
