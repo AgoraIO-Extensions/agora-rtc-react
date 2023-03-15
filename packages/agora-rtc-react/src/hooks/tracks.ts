@@ -3,6 +3,9 @@ import type {
   CameraVideoTrackInitConfig,
   IAgoraRTCClient,
   UID,
+  IAgoraRTCRemoteUser,
+  IRemoteAudioTrack,
+  IRemoteVideoTrack,
 } from "agora-rtc-sdk-ng";
 
 import AgoraRTC from "agora-rtc-sdk-ng";
@@ -56,6 +59,74 @@ export function useCamera(
     }
   }, [videoTrack, client, connectionState]);
   return { videoTrack, cameraOn, setCamera };
+}
+
+/**
+ * Subscribe and get remote user video track.
+ * Unsubscribe track on unmount.
+ */
+export function useRemoteUserTrack(
+  user: IAgoraRTCRemoteUser | undefined,
+  mediaType: "video",
+): IRemoteVideoTrack | undefined;
+/**
+ * Subscribe and get remote user audio track.
+ * Unsubscribe track on unmount.
+ */
+export function useRemoteUserTrack(
+  user: IAgoraRTCRemoteUser | undefined,
+  mediaType: "audio",
+): IRemoteAudioTrack | undefined;
+export function useRemoteUserTrack(
+  user: IAgoraRTCRemoteUser | undefined,
+  mediaType: "video" | "audio",
+): IRemoteVideoTrack | IRemoteAudioTrack | undefined {
+  const client = useRTCClient();
+  const trackName = mediaType === "audio" ? "audioTrack" : "videoTrack";
+  const [track, setTrack] = useState(user && user[trackName]);
+
+  useEffect(() => {
+    if (user) {
+      const hasTrack = mediaType === "audio" ? "hasAudio" : "hasVideo";
+      let isUnmounted = false;
+      setTrack(user[trackName]);
+      if (!user[trackName]) {
+        const subscribe = async (user: IAgoraRTCRemoteUser, mediaType: "audio" | "video") => {
+          try {
+            await client.subscribe(user, mediaType);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            if (isUnmounted) {
+              if (user[hasTrack]) {
+                client.unsubscribe(user, mediaType);
+              }
+              return;
+            }
+            setTrack(user[trackName]);
+          } catch (error) {
+            console.error(error);
+          }
+        };
+        if (user[hasTrack]) {
+          subscribe(user, mediaType);
+        } else {
+          const uid = user.uid;
+          return listen(client, "user-published", (pubUser, pubMediaType) => {
+            if (pubUser.uid === uid && pubMediaType === mediaType) {
+              subscribe(pubUser, pubMediaType);
+            }
+          });
+        }
+      }
+      return () => {
+        isUnmounted = true;
+        if (user[trackName]) {
+          client.unsubscribe(user, mediaType).catch(console.error);
+        }
+      };
+    }
+  }, [client, user, mediaType, trackName]);
+
+  return track;
 }
 
 /**

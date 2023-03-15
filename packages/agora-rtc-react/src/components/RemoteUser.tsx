@@ -1,12 +1,14 @@
 import "./RemoteUser.css";
 
-import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
+import type { IAgoraRTCRemoteUser, IRemoteAudioTrack, IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import type { HTMLProps, PropsWithChildren } from "react";
+import { useState } from "react";
 
 import { memo, useEffect } from "react";
-import { useForceUpdate, useRTCClient, useSafePromise } from "../hooks";
+import { useRemoteUserTrack, useRTCClient } from "../hooks";
 import { RemoteAudioTrack } from "./RemoteAudioTrack";
 import { RemoteVideoTrack } from "./RemoteVideoTrack";
+import { listen } from "../listen";
 
 export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
   /**
@@ -39,6 +41,11 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
   readonly darkenOnHover?: boolean;
 }
 
+/**
+ * Subscribe and play remote user video and audio track.
+ * High-level Component for rendering a remote user video and audio track.
+ * An `IAgoraRTCRemoteUser` can only be own by one `RemoteUser`.
+ */
 export const RemoteUser = /* @__PURE__ */ memo<PropsWithChildren<RemoteUserProps>>(
   function RemoteUser({
     user,
@@ -51,47 +58,19 @@ export const RemoteUser = /* @__PURE__ */ memo<PropsWithChildren<RemoteUserProps
     className = "",
     ...props
   }) {
-    const client = useRTCClient();
-    const forceUpdate = useForceUpdate();
-    const sp = useSafePromise();
-    const hasAudio = user?.hasAudio;
-    const hasVideo = user?.hasVideo;
-
-    useEffect(() => {
-      if (user && hasAudio && audioOn && !user.audioTrack) {
-        sp(client.subscribe(user, "audio")).then(forceUpdate).catch(console.error);
-      }
-    }, [client, user, hasAudio, audioOn, sp, forceUpdate]);
-
-    useEffect(() => {
-      if (user && hasVideo && videoOn && !user.videoTrack) {
-        sp(client.subscribe(user, "video")).then(forceUpdate).catch(console.error);
-      }
-    }, [client, user, hasVideo, videoOn, sp, forceUpdate]);
-
-    useEffect(
-      () => () => {
-        if (user && (user.audioTrack || user.videoTrack)) {
-          client.unsubscribe(user).catch(console.error);
-        }
-      },
-      [user, client],
-    );
+    const videoTrack = useRemoteUserTrack(user, "video");
+    const audioTrack = useRemoteUserTrack(user, "audio");
 
     return (
       <div
         className={`arr-remote-user ${className} ${darkenOnHover ? "darken-on-hover" : ""}`}
         {...props}
       >
-        <RemoteVideoTrack
-          className="arr-remote-user-video"
-          track={user?.videoTrack}
-          play={videoOn}
-        />
+        <RemoteVideoTrack className="arr-remote-user-video" track={videoTrack} play={videoOn} />
         <RemoteAudioTrack
           playbackDeviceId={playbackDeviceId}
           volume={volume}
-          track={user?.audioTrack}
+          track={audioTrack}
           play={audioOn}
         />
         <div className="arr-remote-user-body">{children}</div>
