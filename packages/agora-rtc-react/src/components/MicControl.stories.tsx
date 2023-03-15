@@ -8,7 +8,7 @@ import { AgoraRTCProvider } from "../hooks/context";
 import { MicControl } from "./MicControl";
 
 const meta: Meta<MicControlProps> = {
-  title: "MicControl",
+  title: "Prebuilt/MicControl",
   component: MicControl,
   parameters: {
     backgrounds: { default: "light" },

@@ -9,7 +9,7 @@ import { AgoraRTCProvider } from "../hooks/context";
 import { RemoteUser } from "./RemoteUser";
 
 const meta: Meta<RemoteUserProps> = {
-  title: "RemoteUser",
+  title: "Prebuilt/RemoteUser",
   component: RemoteUser as FC<RemoteUserProps>,
   argTypes: {
     user: { table: { disable: true } },
