@@ -7,6 +7,7 @@ import presetIcons from "unocss/preset-icons";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    // https://uno.antfu.me/
     uno({
       presets: [presetUno(), presetIcons({ cdn: "https://esm.sh/" })],
     }),

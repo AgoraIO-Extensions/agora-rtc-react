@@ -15,3 +15,8 @@ export function invoke<T>(fn: () => T): T | void {
 export function joinDisposers(disposers: Disposer[]): Disposer {
   return () => disposers.forEach(invoke);
 }
+
+export function interval(fn: Fn, interval: number): Disposer {
+  const id = setInterval(fn, interval);
+  return () => clearInterval(id);
+}

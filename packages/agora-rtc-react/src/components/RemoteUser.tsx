@@ -3,7 +3,7 @@ import "./RemoteUser.css";
 import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import type { HTMLProps, PropsWithChildren } from "react";
 
-import { forwardRef, memo, useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useForceUpdate, useRTCClient, useSafePromise } from "../hooks";
 import { RemoteAudioTrack } from "./RemoteAudioTrack";
 import { RemoteVideoTrack } from "./RemoteVideoTrack";
@@ -39,69 +39,63 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
   readonly darkenOnHover?: boolean;
 }
 
-export const RemoteUser = /* @__PURE__ */ memo(
-  /* @__PURE__ */ forwardRef<HTMLDivElement, PropsWithChildren<RemoteUserProps>>(
-    function RemoteUser(
-      {
-        user,
-        videoOn = true,
-        audioOn = true,
-        playbackDeviceId,
-        volume,
-        darkenOnHover,
-        children,
-        className = "",
-        ...props
+export const RemoteUser = /* @__PURE__ */ memo<PropsWithChildren<RemoteUserProps>>(
+  function RemoteUser({
+    user,
+    videoOn = true,
+    audioOn = true,
+    playbackDeviceId,
+    volume,
+    darkenOnHover,
+    children,
+    className = "",
+    ...props
+  }) {
+    const client = useRTCClient();
+    const forceUpdate = useForceUpdate();
+    const sp = useSafePromise();
+    const hasAudio = user?.hasAudio;
+    const hasVideo = user?.hasVideo;
+
+    useEffect(() => {
+      if (user && hasAudio && audioOn && !user.audioTrack) {
+        sp(client.subscribe(user, "audio")).then(forceUpdate).catch(console.error);
+      }
+    }, [client, user, hasAudio, audioOn, sp, forceUpdate]);
+
+    useEffect(() => {
+      if (user && hasVideo && videoOn && !user.videoTrack) {
+        sp(client.subscribe(user, "video")).then(forceUpdate).catch(console.error);
+      }
+    }, [client, user, hasVideo, videoOn, sp, forceUpdate]);
+
+    useEffect(
+      () => () => {
+        if (user && (user.audioTrack || user.videoTrack)) {
+          client.unsubscribe(user).catch(console.error);
+        }
       },
-      ref,
-    ) {
-      const client = useRTCClient();
-      const forceUpdate = useForceUpdate();
-      const sp = useSafePromise();
-      const hasAudio = user?.hasAudio;
-      const hasVideo = user?.hasVideo;
+      [user, client],
+    );
 
-      useEffect(() => {
-        if (user && hasAudio && audioOn && !user.audioTrack) {
-          sp(client.subscribe(user, "audio")).then(forceUpdate).catch(console.error);
-        }
-      }, [client, user, hasAudio, audioOn, sp, forceUpdate]);
-
-      useEffect(() => {
-        if (user && hasVideo && videoOn && !user.videoTrack) {
-          sp(client.subscribe(user, "video")).then(forceUpdate).catch(console.error);
-        }
-      }, [client, user, hasVideo, videoOn, sp, forceUpdate]);
-
-      useEffect(
-        () => () => {
-          if (user && (user.audioTrack || user.videoTrack)) {
-            client.unsubscribe(user).catch(console.error);
-          }
-        },
-        [user, client],
-      );
-
-      return (
-        <div
-          className={`arr-remote-user ${className} ${darkenOnHover ? "darken-on-hover" : ""}`}
-          {...props}
-          ref={ref}
-        >
-          <RemoteVideoTrack
-            className="arr-remote-user-video"
-            track={user?.videoTrack}
-            play={videoOn}
-          />
-          <RemoteAudioTrack
-            playbackDeviceId={playbackDeviceId}
-            volume={volume}
-            track={user?.audioTrack}
-            play={audioOn}
-          />
-          <div className="arr-remote-user-body">{children}</div>
-        </div>
-      );
-    },
-  ),
+    return (
+      <div
+        className={`arr-remote-user ${className} ${darkenOnHover ? "darken-on-hover" : ""}`}
+        {...props}
+      >
+        <RemoteVideoTrack
+          className="arr-remote-user-video"
+          track={user?.videoTrack}
+          play={videoOn}
+        />
+        <RemoteAudioTrack
+          playbackDeviceId={playbackDeviceId}
+          volume={volume}
+          track={user?.audioTrack}
+          play={audioOn}
+        />
+        <div className="arr-remote-user-body">{children}</div>
+      </div>
+    );
+  },
 );

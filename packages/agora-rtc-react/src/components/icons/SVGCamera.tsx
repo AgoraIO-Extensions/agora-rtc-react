@@ -18,7 +18,7 @@ export const SVGCamera = /* @__PURE__ */ memo<SVGCameraProps>(function SVGCamera
         cx="12"
         cy="11"
         r="7"
-        stroke="rgb(225, 225, 225, 0.35)"
+        stroke="#fff"
         strokeLinejoin="round"
         strokeWidth="1.25"
       ></circle>
@@ -26,14 +26,14 @@ export const SVGCamera = /* @__PURE__ */ memo<SVGCameraProps>(function SVGCamera
         cx="12"
         cy="11"
         r="3"
-        stroke="rgb(225, 225, 225, 0.35)"
+        stroke="#fff"
         strokeLinejoin="round"
         strokeWidth="1.25"
       ></circle>
-      <circle cx="14.625" cy="6.625" fill="rgb(225, 225, 225, 0.35)" r=".625"></circle>
+      <circle cx="14.625" cy="6.625" fill="#fff" r=".625"></circle>
       <path
         d="M7 18.25a8.004 8.004 0 0 0 10 0"
-        stroke="rgb(225, 225, 225, 0.35)"
+        stroke="#fff"
         strokeLinejoin="round"
         strokeWidth="1.25"
       ></path>

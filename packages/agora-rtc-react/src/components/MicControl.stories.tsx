@@ -2,10 +2,11 @@ import type { MicControlProps } from "./MicControl";
 import type { StoryObj, Meta } from "@storybook/react";
 
 import { faker } from "@faker-js/faker";
-import { createFakeRtcClient, dispatchEvent } from "fake-agora-rtc";
+import { createFakeRtcClient, dispatchRTCEvent } from "fake-agora-rtc";
 import { useEffect, useState } from "react";
 import { AgoraRTCProvider } from "../hooks/context";
 import { MicControl } from "./MicControl";
+import { interval } from "../utils";
 
 const meta: Meta<MicControlProps> = {
   title: "Prebuilt/MicControl",
@@ -18,12 +19,11 @@ const meta: Meta<MicControlProps> = {
       const uid = context.args.uid || "123";
       const [client] = useState(createFakeRtcClient);
       useEffect(() => {
-        const ticket = setInterval(() => {
-          dispatchEvent(client, "volume-indicator", [
+        return interval(() => {
+          dispatchRTCEvent(client, "volume-indicator", [
             { uid, level: faker.datatype.number({ min: 0, max: 100 }) },
           ]);
         }, 2000);
-        return () => clearInterval(ticket);
       }, [client, uid]);
       return (
         <AgoraRTCProvider client={client}>

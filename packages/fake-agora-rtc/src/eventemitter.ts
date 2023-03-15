@@ -75,7 +75,7 @@ export class FakeAgoraEventEmitter {
   }
 }
 
-export function dispatchEvent(emitter: unknown, event: string, ...payload: unknown[]): void {
+export function dispatchRTCEvent(emitter: unknown, event: string, ...payload: unknown[]): void {
   if (emitter && (emitter as FakeAgoraEventEmitter).dispatch) {
     (emitter as FakeAgoraEventEmitter).dispatch(event, ...payload);
   }

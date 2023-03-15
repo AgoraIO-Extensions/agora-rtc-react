@@ -21,7 +21,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.arr-remote-user-content {
+.arr-remote-user-body {
   position: absolute;
   top: 0;
   left: 0;
@@ -33,9 +33,4 @@
 .arr-remote-user-video {
   width: 100%;
   height: 100%;
-}
-
-.arr-remote-user-bar {
-  position: relative;
-  z-index: 2;
 }

@@ -9,8 +9,8 @@ import { useVolumeLevel } from "../hooks";
 
 export interface MicControlProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   uid?: string | number;
-  micOn: boolean;
-  onMicChange: (micOn: boolean) => void;
+  micOn?: boolean;
+  onMicChange?: (micOn: boolean) => void;
   /** 0~1 */
   noise?: number;
 }
@@ -28,7 +28,7 @@ export function MicControl({
 
   const handleClick = useCallback(
     (evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-      onMicChange(!micOn);
+      onMicChange?.(!micOn);
       onClick?.(evt);
     },
     [onMicChange, onClick, micOn],

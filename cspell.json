@@ -2,6 +2,7 @@
   "language": "en",
   "words": [
     "autodocs",
+    "clsx",
     "coverallsapp",
     "CRIMX",
     "emsp",
@@ -18,6 +19,7 @@
     "tsup",
     "typedoc",
     "UNILBS",
+    "unocss",
     "unpublish",
     "Vals",
     "vite",

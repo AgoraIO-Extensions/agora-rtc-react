@@ -43,6 +43,7 @@ export class FakeLocalVideoTrack extends FakeLocalTrack {
 
     this._videoEl.src = this.videoURI;
     this._videoEl.style.objectFit = this._config?.fit || "cover";
+    this._videoEl.style.opacity = "1";
 
     if (container) {
       container.appendChild(this._videoEl);
@@ -59,6 +60,7 @@ export class FakeLocalVideoTrack extends FakeLocalTrack {
   public override stop(): void {
     if (this.isPlaying && this._videoEl) {
       this.isPlaying = false;
+      this._videoEl.style.opacity = "0";
       this._videoEl.pause();
     }
   }
