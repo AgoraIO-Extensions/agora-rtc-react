@@ -1,10 +1,11 @@
-import type { ButtonHTMLAttributes } from "react";
+import "./UserControl.css";
 
-import { useEffect, useState } from "react";
-import { useRTCClient } from "../hooks";
-import { listen } from "../listen";
+import type { ButtonHTMLAttributes, MouseEvent } from "react";
+
+import { useCallback } from "react";
 import { SVGMicrophone } from "./icons/SVGMicrophone";
 import { SVGMicrophoneMute } from "./icons/SVGMicrophoneMute";
+import { useVolumeLevel } from "../hooks";
 
 export interface MicControlProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   uid?: string | number;
@@ -19,28 +20,22 @@ export function MicControl({
   uid,
   micOn,
   onMicChange,
+  onClick,
   className = "",
   ...props
 }: MicControlProps) {
-  const [volumeLevel, setVolumeLevel] = useState(0);
+  const volumeLevel = useVolumeLevel(uid);
 
-  const client = useRTCClient(true);
-
-  useEffect(() => {
-    if (uid != null && client) {
-      return listen(client, "volume-indicator", results => {
-        for (const volume of results) {
-          if (volume.uid === uid) {
-            setVolumeLevel(volume.level);
-            break;
-          }
-        }
-      });
-    }
-  }, [uid, client]);
+  const handleClick = useCallback(
+    (evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+      onMicChange(!micOn);
+      onClick?.(evt);
+    },
+    [onMicChange, onClick, micOn],
+  );
 
   return (
-    <button {...props} className={`agora-rtc-mic-control ${className}`}>
+    <button {...props} className={`arr-user-control ${className}`} onClick={handleClick}>
       {micOn ? <SVGMicrophone volumeLevel={volumeLevel} noise={noise} /> : <SVGMicrophoneMute />}
     </button>
   );

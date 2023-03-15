@@ -1,5 +1,6 @@
+import type { StoryObj, Meta } from "@storybook/react";
+import type { FC } from "react";
 import type { RemoteUserProps } from "./RemoteUser";
-import type { StoryObj } from "@storybook/react";
 
 import { faker } from "@faker-js/faker";
 import { FakeRemoteVideoTrack, FakeRemoteAudioTrack, createFakeRtcClient } from "fake-agora-rtc";
@@ -7,23 +8,14 @@ import { useState } from "react";
 import { AgoraRTCProvider } from "../hooks/context";
 import { RemoteUser } from "./RemoteUser";
 
-export default {
+const meta: Meta<RemoteUserProps> = {
   title: "RemoteUser",
-  component: RemoteUser,
-};
-
-export const Overview: StoryObj<RemoteUserProps> = {
-  args: {
-    user: {
-      uid: faker.datatype.uuid(),
-      hasVideo: true,
-      hasAudio: true,
-    },
-    videoOn: true,
-    audioOn: false,
-  },
+  component: RemoteUser as FC<RemoteUserProps>,
   argTypes: {
-    user: { table: { read: true } },
+    user: { table: { disable: true } },
+  },
+  render: ({ ref, ...args }) => {
+    return <RemoteUser {...args} />;
   },
   decorators: [
     Story => {
@@ -43,4 +35,18 @@ export const Overview: StoryObj<RemoteUserProps> = {
       );
     },
   ],
+};
+
+export default meta;
+
+export const Overview: StoryObj<RemoteUserProps> = {
+  args: {
+    user: {
+      uid: faker.datatype.uuid(),
+      hasVideo: true,
+      hasAudio: true,
+    },
+    videoOn: true,
+    audioOn: false,
+  },
 };

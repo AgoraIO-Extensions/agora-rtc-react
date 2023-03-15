@@ -18,6 +18,7 @@ export function SVGMicrophone({
   noise = 0.075,
   ...props
 }: SVGMicrophoneProps) {
+  // 0~1
   const [volumeLevel, setVolumeLevel] = useState(0);
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export function SVGMicrophone({
       const safeNoise = Math.max(0, Math.min(1, noise));
       const ticket = setInterval(() => {
         setVolumeLevel(
-          baseVolumeLevel + Math.random() * safeNoise * (Math.random() > 0.5 ? 1 : -1),
+          baseVolumeLevel / 100 + Math.random() * safeNoise * (Math.random() > 0.5 ? 1 : -1),
         );
       }, 50);
       return () => clearInterval(ticket);

@@ -1,11 +1,41 @@
-:where(.agora-rtc-remote-user) {
+.arr-remote-user {
   width: 288px;
   height: 216px;
   position: relative;
   overflow: hidden;
+  background: #000;
 }
 
-.agora-rtc-remote-user-video {
+.arr-remote-user.darken-on-hover::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  transition: background-color 0.4s;
+  z-index: 1;
+}
+
+.arr-remote-user.darken-on-hover:hover::after {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.arr-remote-user-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.arr-remote-user-video {
+  width: 100%;
+  height: 100%;
+}
+
+.arr-remote-user-bar {
+  position: relative;
+  z-index: 2;
 }
