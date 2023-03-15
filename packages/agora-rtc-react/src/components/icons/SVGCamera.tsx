@@ -15,7 +15,7 @@ export const SVGCamera = /* @__PURE__ */ memo<SVGCameraProps>(function SVGCamera
       {...props}
     >
       <circle
-        className="flat-icon-stroke-color"
+        className="agora-rtc-icon-stroke-color"
         cx="12"
         cy="11"
         r="7"
@@ -24,7 +24,7 @@ export const SVGCamera = /* @__PURE__ */ memo<SVGCameraProps>(function SVGCamera
         strokeWidth="1.25"
       ></circle>
       <circle
-        className="flat-icon-stroke-color"
+        className="agora-rtc-icon-stroke-color"
         cx="12"
         cy="11"
         r="3"
@@ -33,14 +33,14 @@ export const SVGCamera = /* @__PURE__ */ memo<SVGCameraProps>(function SVGCamera
         strokeWidth="1.25"
       ></circle>
       <circle
-        className="flat-icon-fill-color"
+        className="agora-rtc-icon-fill-color"
         cx="14.625"
         cy="6.625"
         fill="#5D6066"
         r=".625"
       ></circle>
       <path
-        className="flat-icon-stroke-color"
+        className="agora-rtc-icon-stroke-color"
         d="M7 18.25a8.004 8.004 0 0 0 10 0"
         stroke="#5D6066"
         strokeLinejoin="round"

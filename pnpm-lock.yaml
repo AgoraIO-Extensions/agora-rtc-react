@@ -35,6 +35,7 @@ importers:
       '@vitejs/plugin-react': ^3.1.0
       agora-rtc-react: workspace:*
       agora-rtc-sdk-ng: ^4.16.1
+      clsx: ^1.2.1
       react: ^18.2.0
       react-dom: ^18.2.0
       sanitize.css: ^13.0.0
@@ -44,6 +45,7 @@ importers:
     dependencies:
       agora-rtc-react: link:../../packages/agora-rtc-react
       agora-rtc-sdk-ng: 4.16.1
+      clsx: 1.2.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       sanitize.css: 13.0.0
@@ -4540,6 +4542,11 @@ packages:
       kind-of: 6.0.3
       shallow-clone: 3.0.1
     dev: true
+
+  /clsx/1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
+    dev: false
 
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}

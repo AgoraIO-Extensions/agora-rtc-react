@@ -10,6 +10,7 @@
   "dependencies": {
     "agora-rtc-react": "workspace:*",
     "agora-rtc-sdk-ng": "^4.16.1",
+    "clsx": "^1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sanitize.css": "^13.0.0"

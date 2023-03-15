@@ -1,3 +1,4 @@
+export * from "./icons";
 export * from "./LocalAudioTrack";
 export * from "./LocalVideoTrack";
 export * from "./MicrophoneAudioTrack";
