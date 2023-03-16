@@ -30,6 +30,8 @@ importers:
 
   examples/overview:
     specifiers:
+      '@iconify-json/lucide': ^1.1.70
+      '@iconify-json/mdi': ^1.1.50
       '@types/react': ^18.0.28
       '@types/react-dom': ^18.0.11
       '@vitejs/plugin-react': ^3.1.0
@@ -50,6 +52,8 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       sanitize.css: 13.0.0
     devDependencies:
+      '@iconify-json/lucide': 1.1.70
+      '@iconify-json/mdi': 1.1.50
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
       '@vitejs/plugin-react': 3.1.0_vite@4.1.4
@@ -1907,6 +1911,18 @@ packages:
 
   /@humanwhocodes/object-schema/1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
+    dev: true
+
+  /@iconify-json/lucide/1.1.70:
+    resolution: {integrity: sha512-shQS8+oemvMGO4w7NXFnVepnMNf4i45ENRDmYqXFyZsKpB2cOiwxGF6cv7LHF12Y6Lgnsduix6g5X+ag5q230A==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/mdi/1.1.50:
+    resolution: {integrity: sha512-SgbT5w5eHCdOG74ZWPz7HlTGk6VsifIJhNi6lAsxj/5Nlqt6Cz4LlQmSa9eecU9p075Jub2aAx/o7YI+GCahRQ==}
+    dependencies:
+      '@iconify/types': 2.0.0
     dev: true
 
   /@iconify/types/2.0.0:

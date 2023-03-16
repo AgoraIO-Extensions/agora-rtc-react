@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [
     // https://uno.antfu.me/
     uno({
-      presets: [presetUno(), presetIcons({ cdn: "https://esm.sh/" })],
+      presets: [presetUno(), presetIcons()],
     }),
     react(),
   ],
