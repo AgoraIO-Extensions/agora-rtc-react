@@ -20,11 +20,9 @@ const fakeName = (uid: UID): string => {
   return faker.name.firstName();
 };
 
-const [appId, channel, token] = [
-  import.meta.env.AGORA_APPID,
-  import.meta.env.AGORA_CHANNEL,
-  import.meta.env.AGORA_TOKEN,
-];
+const appId = import.meta.env.AGORA_APPID;
+const channel = import.meta.env.AGORA_CHANNEL;
+const token = import.meta.env.AGORA_TOKEN;
 
 export const App = observer(function App() {
   return (
@@ -103,7 +101,7 @@ const Room = observer(function Room({ client }: { client: IAgoraRTCClient }) {
             cameraOn={video}
             onCameraChange={setVideo}
           />
-          <MicControl uid={appStore.uid} micOn={audio} onMicChange={setAudio} />
+          <MicControl audioTrack={appStore.localMicTrack} micOn={audio} onMicChange={setAudio} />
         </div>
       </div>
       <br />
@@ -131,7 +129,7 @@ const Room = observer(function Room({ client }: { client: IAgoraRTCClient }) {
           >
             <span style={{ userSelect: "none" }}>{fakeName(user.uid)}</span>
             <CameraControl style={{ margin: "0 10px 0 auto" }} cameraOn={user.hasVideo} />
-            <MicControl uid={user.uid} micOn={user.hasAudio} />
+            <MicControl audioTrack={user.audioTrack} micOn={user.hasAudio} />
           </div>
         </RemoteUser>
       ))}

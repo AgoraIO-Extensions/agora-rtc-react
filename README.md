@@ -25,10 +25,16 @@ npm add agora-rtc-sdk-ng agora-rtc-react
 
 1. Clone this project.
 2. `pnpm i` to install dependencies.
+3. `pnpm build` to build the library.
+
+- `pnpm storybook` to start the storybook.
+
+## Examples
+
+To start examples, add a `.env.local` file to monorepo root and fill in the Agora account info following the format of `.env.example`.
 
 - `pnpm start` to start the overview example.
-- `pnpm storybook` to start the storybook.
-- `pnpm build` to build the library.
+- `pnpm -F [package-name] run start` to start other examples.
 
 ## License
 

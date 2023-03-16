@@ -24,11 +24,9 @@ import { UsersInfo } from "./UsersInfo";
 import { AutoLayout } from "./AutoLayout";
 import { Label } from "./Label";
 
-const [appId, channel, token] = [
-  import.meta.env.AGORA_APPID,
-  import.meta.env.AGORA_CHANNEL,
-  import.meta.env.AGORA_TOKEN,
-];
+const appId = import.meta.env.AGORA_APPID;
+const channel = import.meta.env.AGORA_CHANNEL;
+const token = import.meta.env.AGORA_TOKEN;
 
 AgoraRTC.setLogLevel(/* warning */ 2);
 const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
