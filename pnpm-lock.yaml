@@ -28,6 +28,41 @@ importers:
       prettier: 2.8.4
       typescript: 4.9.5
 
+  examples/mobx:
+    specifiers:
+      '@faker-js/faker': ^7.6.0
+      '@types/react': ^18.0.28
+      '@types/react-dom': ^18.0.11
+      '@vitejs/plugin-react': ^3.1.0
+      agora-rtc-react: workspace:*
+      agora-rtc-sdk-ng: ^4.16.1
+      clsx: ^1.2.1
+      mobx: ^6.8.0
+      mobx-react-lite: ^3.4.3
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      sanitize.css: ^13.0.0
+      side-effect-manager: ^1.2.2
+      typescript: ^4.9.5
+      vite: ^4.1.4
+    dependencies:
+      '@faker-js/faker': 7.6.0
+      agora-rtc-react: link:../../packages/agora-rtc-react
+      agora-rtc-sdk-ng: 4.16.1
+      clsx: 1.2.1
+      mobx: 6.8.0
+      mobx-react-lite: 3.4.3_woojb62cqeyk443mbl7msrwu2e
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      sanitize.css: 13.0.0
+      side-effect-manager: 1.2.2
+    devDependencies:
+      '@types/react': 18.0.28
+      '@types/react-dom': 18.0.11
+      '@vitejs/plugin-react': 3.1.0_vite@4.1.4
+      typescript: 4.9.5
+      vite: 4.1.4
+
   examples/overview:
     specifiers:
       '@iconify-json/lucide': ^1.1.70
@@ -1887,7 +1922,6 @@ packages:
   /@faker-js/faker/7.6.0:
     resolution: {integrity: sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==}
     engines: {node: '>=14.0.0', npm: '>=6.0.0'}
-    dev: true
 
   /@fal-works/esbuild-plugin-global-externals/2.1.2:
     resolution: {integrity: sha512-cEee/Z+I12mZcFJshKcCqC8tuX5hG3s+d+9nZ3LabqKF1vKdF41B92pJVCBggjAGORAeOzyyDDKrZwIkLffeOQ==}
@@ -7059,6 +7093,28 @@ packages:
       ufo: 1.1.1
     dev: true
 
+  /mobx-react-lite/3.4.3_woojb62cqeyk443mbl7msrwu2e:
+    resolution: {integrity: sha512-NkJREyFTSUXR772Qaai51BnE1voWx56LOL80xG7qkZr6vo8vEaLF3sz1JNUVh+rxmUzxYaqOhfuxTfqUh0FXUg==}
+    peerDependencies:
+      mobx: ^6.1.0
+      react: ^16.8.0 || ^17 || ^18
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      mobx: 6.8.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /mobx/6.8.0:
+    resolution: {integrity: sha512-+o/DrHa4zykFMSKfS8Z+CPSEg5LW9tSNGTuN8o6MF1GKxlfkSHSeJn5UtgxvPkGgaouplnrLXCF+duAsmm6FHQ==}
+    dev: false
+
   /mri/1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -8214,6 +8270,10 @@ packages:
       get-intrinsic: 1.2.0
       object-inspect: 1.12.3
     dev: true
+
+  /side-effect-manager/1.2.2:
+    resolution: {integrity: sha512-luMB5SOIKdkMfWaFkPWFkv+OYk93SBeHE+xLkNxqDGW5j+V1MWSEfeT5Jo0vQ+boV2oRdgWRPNT4M+zR5QcLcg==}
+    dev: false
 
   /siginfo/2.0.0:
     resolution: {integrity: sha512-ybx0WO1/8bSBLEWXZvEd7gMW3Sn3JFlW3TvX1nREbDLRNQNaeNN8WK0meBwPdAaOI7TtRRRJn/Es1zhrrCHu7g==}

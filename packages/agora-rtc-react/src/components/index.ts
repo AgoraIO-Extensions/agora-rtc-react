@@ -6,3 +6,5 @@ export * from "./CameraVideoTrack";
 export * from "./RemoteAudioTrack";
 export * from "./RemoteVideoTrack";
 export * from "./RemoteUser";
+export * from "./MicControl";
+export * from "./CameraControl";
