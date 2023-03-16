@@ -2,7 +2,7 @@ import type { IRemoteAudioTrack } from "agora-rtc-sdk-ng";
 import type { Nullable } from "../utils";
 
 import { useEffect } from "react";
-import { useReleaseTrackOnUmount } from "../hooks/internal";
+import { useStopTrackOnUmount } from "../hooks/internal";
 
 export interface RemoteAudioTrackProps {
   /**
@@ -28,7 +28,7 @@ export interface RemoteAudioTrackProps {
 }
 
 export function RemoteAudioTrack({ track, play, playbackDeviceId, volume }: RemoteAudioTrackProps) {
-  useReleaseTrackOnUmount(track);
+  useStopTrackOnUmount(track);
 
   useEffect(() => {
     if (track) {

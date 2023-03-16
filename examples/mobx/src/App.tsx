@@ -84,10 +84,20 @@ const Room = observer(function Room({ client }: { client: IAgoraRTCClient }) {
           track={appStore.localCameraTrack}
           play
         />
-        <div style={{ position: "absolute", bottom: 4, left: 8, color: "#fff" }}>
-          {fakeName(appStore.uid!)}
-        </div>
-        <div style={{ position: "absolute", bottom: 0, right: 8 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            boxSizing: "border-box",
+            position: "absolute",
+            left: 0,
+            bottom: 0,
+            width: "100%",
+            padding: "4px 4px 4px 8px",
+            color: "#fff",
+          }}
+        >
+          <span style={{ userSelect: "none" }}>{fakeName(appStore.uid!)}</span>
           <CameraControl
             style={{ margin: "0 10px 0 auto" }}
             cameraOn={video}
@@ -99,9 +109,9 @@ const Room = observer(function Room({ client }: { client: IAgoraRTCClient }) {
       <br />
       <span>Users:</span>
       {[appStore, ...appStore.remoteUsersAsArray].map(({ uid }) => (
-        <samp key={uid} style={{ marginLeft: ".25rem" }}>
-          {uid}
-        </samp>
+        <span key={uid} style={{ marginLeft: ".25rem" }}>
+          {fakeName(uid!)}
+        </span>
       ))}
       <br />
       {[...appStore.publishedRemoteUsers.values()].map(user => (
