@@ -3,10 +3,10 @@ import "./RemoteUser.css";
 import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import type { HTMLProps, PropsWithChildren } from "react";
 
-import { memo } from "react";
 import { useRemoteUserTrack } from "../hooks";
 import { RemoteAudioTrack } from "./RemoteAudioTrack";
 import { RemoteVideoTrack } from "./RemoteVideoTrack";
+import { UserCover } from "./UserCover";
 
 export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
   /**
@@ -48,45 +48,35 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
  * High-level Component for rendering a remote user video and audio track.
  * An `IAgoraRTCRemoteUser` can only be own by one `RemoteUser`.
  */
-export const RemoteUser = /* @__PURE__ */ memo<PropsWithChildren<RemoteUserProps>>(
-  function RemoteUser({
-    user,
-    playVideo = true,
-    playAudio = true,
-    playbackDeviceId,
-    volume,
-    darkenOnHover,
-    cover,
-    children,
-    className = "",
-    ...props
-  }) {
-    const videoTrack = useRemoteUserTrack(user, "video");
-    const audioTrack = useRemoteUserTrack(user, "audio");
+export function RemoteUser({
+  user,
+  playVideo = true,
+  playAudio = true,
+  playbackDeviceId,
+  volume,
+  darkenOnHover,
+  cover,
+  children,
+  className = "",
+  ...props
+}: PropsWithChildren<RemoteUserProps>) {
+  const videoTrack = useRemoteUserTrack(user, "video");
+  const audioTrack = useRemoteUserTrack(user, "audio");
 
-    return (
-      <div
-        className={`arr-remote-user ${className} ${darkenOnHover ? "darken-on-hover" : ""}`}
-        {...props}
-      >
-        <RemoteVideoTrack className="arr-remote-user-video" track={videoTrack} play={playVideo} />
-        <RemoteAudioTrack
-          playbackDeviceId={playbackDeviceId}
-          volume={volume}
-          track={audioTrack}
-          play={playAudio}
-        />
-        {!playVideo && cover && (
-          <div className="arr-remote-user-cover">
-            <div
-              className="arr-remote-user-cover-blur"
-              style={{ backgroundImage: `url(${cover})` }}
-            />
-            <img className="arr-remote-user-cover-img" src={cover} />
-          </div>
-        )}
-        <div className="arr-remote-user-body">{children}</div>
-      </div>
-    );
-  },
-);
+  return (
+    <div
+      className={`arr-remote-user ${className} ${darkenOnHover ? "darken-on-hover" : ""}`}
+      {...props}
+    >
+      <RemoteVideoTrack className="arr-remote-user-video" track={videoTrack} play={playVideo} />
+      <RemoteAudioTrack
+        playbackDeviceId={playbackDeviceId}
+        volume={volume}
+        track={audioTrack}
+        play={playAudio}
+      />
+      {cover && !playVideo && <UserCover className="arr-remote-user-cover" cover={cover} />}
+      <div className="arr-remote-user-body">{children}</div>
+    </div>
+  );
+}

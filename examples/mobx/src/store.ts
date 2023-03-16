@@ -5,38 +5,60 @@ import type {
   IAgoraRTCRemoteUser,
   ICameraVideoTrack,
   IMicrophoneAudioTrack,
+  IRemoteAudioTrack,
+  IRemoteVideoTrack,
   UID,
 } from "agora-rtc-sdk-ng";
 
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { makeAutoObservable, observable } from "mobx";
-import { SideEffectManager } from "side-effect-manager";
+import { Disposable } from "side-effect-manager";
+import { fakeAvatar, fakeName } from "./utils";
 
 AgoraRTC.setLogLevel(/* warning */ 2);
 
-class AppStore {
-  readonly sideEffect = new SideEffectManager();
+interface MyRemoteUser {
+  uid: UID;
+  name: string;
+  avatar: string;
+  rtcUser: IAgoraRTCRemoteUser;
+  cameraOn: boolean;
+  micOn: boolean;
+  videoTrack?: IRemoteVideoTrack;
+  audioTrack?: IRemoteAudioTrack;
+}
 
-  connectionState: ConnectionState = "DISCONNECTED";
-  uid?: UID = void 0;
+class AppStore {
+  private readonly remoteUsersMap = observable.map<UID, MyRemoteUser>();
+  private readonly disposable = new Disposable();
+
   client?: IAgoraRTCClient = void 0;
+  connectionState: ConnectionState = "DISCONNECTED";
+
+  uid?: UID = void 0;
   localMicTrack?: IMicrophoneAudioTrack = void 0;
   localCameraTrack?: ICameraVideoTrack = void 0;
-  remoteUsers = observable.map<UID, IAgoraRTCRemoteUser>();
-  publishedRemoteUsers = observable.map<UID, IAgoraRTCRemoteUser>();
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  get remoteUsersAsArray() {
-    return Array.from(this.remoteUsers.values());
+  get remoteUsers() {
+    return [...this.remoteUsersMap.values()];
+  }
+
+  get avatar(): string {
+    return fakeAvatar(this.uid || 0);
+  }
+
+  get name(): string {
+    return fakeName(this.uid || 0);
   }
 
   async join(appid: string, channel: string, token: string | null): Promise<void> {
     const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 
-    this.sideEffect.push([
+    this.disposable.push([
       // listen(client, "token-privilege-will-expire", () => renewToken()),
 
       listen(client, "connection-state-change", state => {
@@ -46,22 +68,22 @@ class AppStore {
       // listen(client, "exception", console.warn),
 
       listen(client, "user-joined", user => {
-        this.updateRemoteUser(user);
+        this.updateRemoteUser(user, true);
       }),
 
       listen(client, "user-left", user => {
-        this.deleteRemoteUser(user);
+        this.deleteRemoteUser(user.uid);
       }),
 
       listen(client, "user-published", async (user, mediaType) => {
         // ignore self
         if (user.uid === this.uid) return;
         await client.subscribe(user, mediaType);
-        this.updatePublishedRemoteUsers();
+        this.updateRemoteUser(user);
       }),
 
-      listen(client, "user-unpublished", () => {
-        this.updatePublishedRemoteUsers();
+      listen(client, "user-unpublished", user => {
+        this.updateRemoteUser(user);
       }),
 
       // listen(client, "network-quality", ({ uplinkNetworkQuality, downlinkNetworkQuality }) => {})
@@ -72,7 +94,7 @@ class AppStore {
   }
 
   async leave(): Promise<void> {
-    this.sideEffect.flushAll();
+    this.disposable.flushAll();
     if (this.localMicTrack) {
       this.localMicTrack.stop();
       this.localMicTrack.close();
@@ -84,43 +106,16 @@ class AppStore {
       this.localCameraTrack = void 0;
     }
     if (this.client) {
-      this.remoteUsers.forEach(user => {
-        user.audioTrack?.stop();
-        user.videoTrack?.stop();
+      this.remoteUsers.forEach(({ rtcUser }) => {
+        rtcUser.audioTrack?.stop();
+        rtcUser.videoTrack?.stop();
       });
-      this.remoteUsers.clear();
+      this.remoteUsersMap.clear();
 
       await this.client.leave();
       this.updateClient(void 0, void 0);
       this.updateConnectionState("DISCONNECTED");
     }
-  }
-
-  updateConnectionState(state: ConnectionState) {
-    this.connectionState = state;
-  }
-
-  updateClient(client?: IAgoraRTCClient, uid?: UID): void {
-    this.client = client;
-    this.uid = uid;
-  }
-
-  updateRemoteUser(user: IAgoraRTCRemoteUser): void {
-    this.remoteUsers.set(user.uid, user);
-  }
-
-  updatePublishedRemoteUsers() {
-    const publishedRemoteUsers = new Map();
-    for (const user of this.remoteUsers.values()) {
-      if (user.hasAudio || user.hasVideo) {
-        publishedRemoteUsers.set(user.uid, user);
-      }
-    }
-    this.publishedRemoteUsers.replace(publishedRemoteUsers);
-  }
-
-  deleteRemoteUser(user: IAgoraRTCRemoteUser): void {
-    this.remoteUsers.delete(user.uid);
   }
 
   async createLocalMicTrack(): Promise<void> {
@@ -142,11 +137,50 @@ class AppStore {
     }
   }
 
-  updateLocalMicTrack(track: IMicrophoneAudioTrack): void {
+  private updateConnectionState(state: ConnectionState) {
+    this.connectionState = state;
+  }
+
+  private updateClient(client?: IAgoraRTCClient, uid?: UID): void {
+    this.client = client;
+    this.uid = uid;
+  }
+
+  private updateRemoteUser(rtcUser: IAgoraRTCRemoteUser, createIfNotExist?: boolean): void {
+    const user = this.remoteUsersMap.get(rtcUser.uid);
+    // trigger MobX updates
+    if (user) {
+      user.rtcUser = rtcUser;
+      user.cameraOn = rtcUser.hasVideo;
+      user.micOn = rtcUser.hasAudio;
+      user.audioTrack = rtcUser.audioTrack;
+      user.videoTrack = rtcUser.videoTrack;
+    } else if (createIfNotExist) {
+      this.remoteUsersMap.set(
+        rtcUser.uid,
+        observable.object<MyRemoteUser>({
+          uid: rtcUser.uid,
+          name: fakeName(rtcUser.uid),
+          avatar: fakeAvatar(rtcUser.uid),
+          rtcUser,
+          cameraOn: rtcUser.hasVideo,
+          micOn: rtcUser.hasAudio,
+          audioTrack: rtcUser.audioTrack,
+          videoTrack: rtcUser.videoTrack,
+        }),
+      );
+    }
+  }
+
+  private deleteRemoteUser(uid: UID): void {
+    this.remoteUsersMap.delete(uid);
+  }
+
+  private updateLocalMicTrack(track: IMicrophoneAudioTrack): void {
     this.localMicTrack = track;
   }
 
-  updateLocalCameraTrack(track: ICameraVideoTrack): void {
+  private updateLocalCameraTrack(track: ICameraVideoTrack): void {
     this.localCameraTrack = track;
   }
 }
