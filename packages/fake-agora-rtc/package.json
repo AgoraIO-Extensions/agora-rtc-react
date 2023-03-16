@@ -5,14 +5,6 @@
   "description": "Fake Agora RTC for testing",
   "license": "MIT",
   "main": "src/main.ts",
-  "scripts": {
-    "prepublishOnly": "pnpm run build",
-    "build": "tsup",
-    "start": "pnpm run -F example-overview start",
-    "test": "vitest run --coverage",
-    "test:watch": "vitest",
-    "lint": "eslint --ext .ts,.tsx . && prettier --check ."
-  },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
     "agora-rtc-sdk-ng": "^4.16.1",

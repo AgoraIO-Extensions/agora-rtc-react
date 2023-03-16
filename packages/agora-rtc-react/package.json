@@ -32,8 +32,7 @@
     "start": "pnpm run -F example-overview start",
     "storybook": "storybook dev -p 6006",
     "test": "vitest run --coverage",
-    "test:watch": "vitest",
-    "lint": "eslint --ext .ts,.tsx . && prettier --check ."
+    "test:watch": "vitest"
   },
   "peerDependencies": {
     "agora-rtc-sdk-ng": "^4.1.0",
