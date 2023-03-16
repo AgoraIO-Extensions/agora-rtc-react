@@ -17,7 +17,11 @@ const meta: Meta<MicControlProps> = {
   decorators: [
     (Story, context) => {
       const uid = context.args.uid || "123";
-      const [client] = useState(createFakeRtcClient);
+      const [client] = useState(() =>
+        createFakeRtcClient({
+          enableAudioVolumeIndicator: () => void 0,
+        }),
+      );
       useEffect(() => {
         return interval(() => {
           dispatchRTCEvent(client, "volume-indicator", [
