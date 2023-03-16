@@ -11,7 +11,7 @@ import type {
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { useState, useMemo, useEffect } from "react";
 import { listen } from "../listen";
-import { interval } from "../utils";
+import { interval, joinDisposers } from "../utils";
 import { useConnectionState } from "./client";
 import { useRTCClient } from "./context";
 import { useAwaited } from "./tools";
@@ -97,44 +97,56 @@ export function useRemoteUserTrack(
   const [track, setTrack] = useState(user && user[trackName]);
 
   useEffect(() => {
-    if (user) {
-      const hasTrack = mediaType === "audio" ? "hasAudio" : "hasVideo";
-      let isUnmounted = false;
-      setTrack(user[trackName]);
-      if (!user[trackName]) {
-        const subscribe = async (user: IAgoraRTCRemoteUser, mediaType: "audio" | "video") => {
-          try {
-            await client.subscribe(user, mediaType);
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            if (isUnmounted) {
-              if (user[hasTrack]) {
-                client.unsubscribe(user, mediaType);
-              }
-              return;
-            }
-            setTrack(user[trackName]);
-          } catch (error) {
-            console.error(error);
+    if (!user) return;
+
+    let isUnmounted = false;
+
+    const hasTrack = mediaType === "audio" ? "hasAudio" : "hasVideo";
+    const uid = user.uid;
+
+    setTrack(user[trackName]);
+
+    const subscribe = async (user: IAgoraRTCRemoteUser, mediaType: "audio" | "video") => {
+      try {
+        await client.subscribe(user, mediaType);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        if (isUnmounted) {
+          if (user[hasTrack]) {
+            client.unsubscribe(user, mediaType);
           }
-        };
-        if (user[hasTrack]) {
-          subscribe(user, mediaType);
-        } else {
-          const uid = user.uid;
-          return listen(client, "user-published", (pubUser, pubMediaType) => {
-            if (pubUser.uid === uid && pubMediaType === mediaType) {
-              subscribe(pubUser, pubMediaType);
-            }
-          });
+          return;
         }
+        setTrack(user[trackName]);
+      } catch (error) {
+        console.error(error);
       }
-      return () => {
+    };
+
+    const unsubscribe = (user: IAgoraRTCRemoteUser, mediaType: "audio" | "video") =>
+      client.unsubscribe(user, mediaType).catch(console.error);
+
+    if (!user[trackName] && user[hasTrack]) {
+      subscribe(user, mediaType);
+    }
+
+    return joinDisposers([
+      () => {
         isUnmounted = true;
         if (user[trackName]) {
-          client.unsubscribe(user, mediaType).catch(console.error);
+          unsubscribe(user, mediaType);
         }
-      };
-    }
+      },
+      listen(client, "user-published", (pubUser, pubMediaType) => {
+        if (pubUser.uid === uid && pubMediaType === mediaType) {
+          subscribe(pubUser, pubMediaType);
+        }
+      }),
+      listen(client, "user-unpublished", (pubUser, pubMediaType) => {
+        if (pubUser.uid === uid && pubMediaType === mediaType && pubUser[trackName]) {
+          unsubscribe(pubUser, mediaType);
+        }
+      }),
+    ]);
   }, [client, user, mediaType, trackName]);
 
   return track;
