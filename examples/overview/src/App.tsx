@@ -2,7 +2,7 @@ import "./App.css";
 
 import type { IAgoraRTCClient, UID } from "agora-rtc-sdk-ng";
 import AgoraRTC from "agora-rtc-sdk-ng";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
   AgoraRTCProvider,
@@ -16,6 +16,7 @@ import {
   useCamera,
   useMicrophone,
   usePublishedRemoteUsers,
+  UserCover,
   useRemoteUsers,
   useSafePromise,
 } from "agora-rtc-react";
@@ -23,6 +24,7 @@ import { Container } from "./Container";
 import { UsersInfo } from "./UsersInfo";
 import { AutoLayout } from "./AutoLayout";
 import { Label } from "./Label";
+import { fakeAvatar, fakeName } from "./utils";
 
 const appId = import.meta.env.AGORA_APPID;
 const channel = import.meta.env.AGORA_CHANNEL;
@@ -37,6 +39,8 @@ export const App = () => {
   const sp = useSafePromise();
 
   const [uid, setUID] = useState<UID>(0);
+  const userName = useMemo(() => fakeName(uid), [uid]);
+  const userAvatar = useMemo(() => fakeAvatar(uid), [uid]);
   const remoteUsers = useRemoteUsers(client);
   const publishedUsers = usePublishedRemoteUsers(client);
 
@@ -60,17 +64,24 @@ export const App = () => {
           total={remoteUsers.length + 1}
         />
         <AutoLayout>
-          {selfPublished && (
-            <AutoLayout.Item>
-              <CameraVideoTrack className="w-full h-full" track={videoTrack} play={cameraOn} />
-              <MicrophoneAudioTrack track={audioTrack} play={micOn} />
-              <Label>{uid}</Label>
-            </AutoLayout.Item>
-          )}
-          {publishedUsers.map(user => (
+          <AutoLayout.Item>
+            <CameraVideoTrack className="w-full h-full" track={videoTrack} play={cameraOn} />
+            <MicrophoneAudioTrack track={audioTrack} play={micOn} />
+            {!cameraOn && (
+              <UserCover cover={userAvatar} className="w-full h-full absolute top-0 left-0" />
+            )}
+            <Label>{`${userName}{${uid}}`}</Label>
+          </AutoLayout.Item>
+          {remoteUsers.map(user => (
             <AutoLayout.Item key={user.uid}>
-              <RemoteUser className="w-full h-full" user={user} playAudio playVideo />
-              <Label>{user.uid}</Label>
+              <RemoteUser
+                className="w-full h-full"
+                user={user}
+                cover={fakeAvatar(user.uid)}
+                playAudio={user.hasAudio}
+                playVideo={user.hasVideo}
+              />
+              <Label>{`${fakeName(user.uid)}{${user.uid}}}`}</Label>
             </AutoLayout.Item>
           ))}
         </AutoLayout>

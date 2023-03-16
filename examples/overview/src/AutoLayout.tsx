@@ -7,7 +7,8 @@ const Item = forwardRef<HTMLDivElement, PropsWithChildren<{ className?: string }
   ({ className, children }, ref) => (
     <div
       ref={ref}
-      className={clsx(className, "flex-1 b-1 b-solid b-coolgray-6 rd of-hidden relative")}
+      style={{ width: 288, height: 216 }}
+      className={clsx(className, "b-1 b-solid b-coolgray-6 rd of-hidden relative")}
     >
       {children}
     </div>

@@ -65,6 +65,7 @@ importers:
 
   examples/overview:
     specifiers:
+      '@faker-js/faker': ^7.6.0
       '@iconify-json/lucide': ^1.1.70
       '@iconify-json/mdi': ^1.1.50
       '@types/react': ^18.0.28
@@ -87,6 +88,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       sanitize.css: 13.0.0
     devDependencies:
+      '@faker-js/faker': 7.6.0
       '@iconify-json/lucide': 1.1.70
       '@iconify-json/mdi': 1.1.50
       '@types/react': 18.0.28
