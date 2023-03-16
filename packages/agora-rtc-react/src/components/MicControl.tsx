@@ -1,6 +1,7 @@
 import "./UserControl.css";
 
 import type { ButtonHTMLAttributes, MouseEvent } from "react";
+import type { ILocalAudioTrack, IRemoteAudioTrack } from "agora-rtc-sdk-ng";
 
 import { useCallback } from "react";
 import { SVGMicrophone } from "./icons/SVGMicrophone";
@@ -8,7 +9,7 @@ import { SVGMicrophoneMute } from "./icons/SVGMicrophoneMute";
 import { useVolumeLevel } from "../hooks";
 
 export interface MicControlProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  uid?: string | number;
+  audioTrack?: ILocalAudioTrack | IRemoteAudioTrack;
   micOn?: boolean;
   onMicChange?: (micOn: boolean) => void;
   /** 0~1 */
@@ -17,14 +18,14 @@ export interface MicControlProps extends ButtonHTMLAttributes<HTMLButtonElement>
 
 export function MicControl({
   noise,
-  uid,
+  audioTrack,
   micOn,
   onMicChange,
   onClick,
   className = "",
   ...props
 }: MicControlProps) {
-  const volumeLevel = useVolumeLevel(uid);
+  const volumeLevel = useVolumeLevel(audioTrack);
 
   const handleClick = useCallback(
     (evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {

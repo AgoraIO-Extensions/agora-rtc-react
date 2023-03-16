@@ -2,15 +2,16 @@ import type {
   MicrophoneAudioTrackInitConfig,
   CameraVideoTrackInitConfig,
   IAgoraRTCClient,
-  UID,
   IAgoraRTCRemoteUser,
   IRemoteAudioTrack,
   IRemoteVideoTrack,
+  ILocalAudioTrack,
 } from "agora-rtc-sdk-ng";
 
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { useState, useMemo, useEffect } from "react";
 import { listen } from "../listen";
+import { interval } from "../utils";
 import { useConnectionState } from "./client";
 import { useRTCClient } from "./context";
 import { useAwaited } from "./tools";
@@ -140,31 +141,21 @@ export function useRemoteUserTrack(
 }
 
 /**
- * Reports volume of a remote speaking user every two seconds via listening to "volume-indicator".
+ * Reports volume of a videoTrack every second.
  *
- * It also enables `enableAudioVolumeIndicator`.
- *
- * @param uid The ID of the speaking user. `volumeLevel` is 0 if undefined.
- * @returns The volume of the user, ranging from 0 to 100
+ * @param audioTrack Local/Remote audio track. `volumeLevel` is 0 if undefined.
+ * @returns The volume of the track, ranging from 0 to 1
  */
-export function useVolumeLevel(uid?: UID): number {
+export function useVolumeLevel(audioTrack?: IRemoteAudioTrack | ILocalAudioTrack): number {
   const [volumeLevel, setVolumeLevel] = useState(0);
 
-  const client = useRTCClient(true);
-
   useEffect(() => {
-    if (uid != null && client) {
-      client.enableAudioVolumeIndicator();
-      return listen(client, "volume-indicator", results => {
-        for (const volume of results) {
-          if (volume.uid === uid) {
-            setVolumeLevel(volume.level);
-            break;
-          }
-        }
-      });
+    if (audioTrack) {
+      return interval(() => {
+        setVolumeLevel(audioTrack.getVolumeLevel());
+      }, 1000);
     }
-  }, [uid, client]);
+  }, [audioTrack]);
 
   return volumeLevel;
 }

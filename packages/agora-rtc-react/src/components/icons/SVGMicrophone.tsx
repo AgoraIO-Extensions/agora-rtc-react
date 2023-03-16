@@ -9,7 +9,7 @@ const vBaseX = 8;
 const vBaseY = 4;
 
 export interface SVGMicrophoneProps extends SVGProps<SVGSVGElement> {
-  /** 0~100 */
+  /** 0~1 */
   volumeLevel?: number;
   /** 0~1 */
   noise?: number;
@@ -28,7 +28,7 @@ export function SVGMicrophone({
       const safeNoise = Math.max(0, Math.min(1, noise));
       return interval(() => {
         setVolumeLevel(
-          baseVolumeLevel / 100 + Math.random() * safeNoise * (Math.random() > 0.5 ? 1 : -1),
+          baseVolumeLevel + Math.random() * safeNoise * (Math.random() > 0.5 ? 1 : -1),
         );
       }, 50);
     }

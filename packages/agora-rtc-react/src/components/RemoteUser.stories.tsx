@@ -29,10 +29,17 @@ const meta: Meta<RemoteUserProps> = {
   },
   decorators: [
     (Story, context) => {
-      const uid = context.args.user?.uid || "123";
+      const audioTrack = context.args.user?.audioTrack;
+      useEffect(() => {
+        if (audioTrack) {
+          return interval(() => {
+            audioTrack.setVolume(faker.datatype.number({ min: 0, max: 100 }));
+          }, 2000);
+        }
+      }, [audioTrack]);
+
       const [client] = useState(() =>
         createFakeRtcClient({
-          enableAudioVolumeIndicator: () => void 0,
           subscribe: async (user, mediaType): Promise<any> =>
             mediaType === "audio"
               ? (user.audioTrack = FakeRemoteAudioTrack.create())
@@ -40,13 +47,6 @@ const meta: Meta<RemoteUserProps> = {
           unsubscribe: async () => void 0,
         }),
       );
-      useEffect(() => {
-        return interval(() => {
-          dispatchRTCEvent(client, "volume-indicator", [
-            { uid, level: faker.datatype.number({ min: 0, max: 100 }) },
-          ]);
-        }, 2000);
-      }, [client, uid]);
       return (
         <AgoraRTCProvider client={client}>
           <Story />
@@ -123,7 +123,11 @@ export const WithControls: StoryObj<RemoteUserProps> = {
             cameraOn={args.playVideo}
             onCameraChange={setVideo}
           />
-          <MicControl uid={args.user?.uid} micOn={args.playAudio} onMicChange={setAudio} />
+          <MicControl
+            audioTrack={args.user?.audioTrack}
+            micOn={args.playAudio}
+            onMicChange={setAudio}
+          />
         </div>
       </RemoteUser>
     );

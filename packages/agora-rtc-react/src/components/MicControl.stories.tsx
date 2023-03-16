@@ -1,10 +1,9 @@
 import type { MicControlProps } from "./MicControl";
 import type { StoryObj, Meta } from "@storybook/react";
 
+import { FakeLocalAudioTrack, FakeRemoteAudioTrack } from "fake-agora-rtc";
 import { faker } from "@faker-js/faker";
-import { createFakeRtcClient, dispatchRTCEvent } from "fake-agora-rtc";
-import { useEffect, useState } from "react";
-import { AgoraRTCProvider } from "../hooks/context";
+import { useEffect } from "react";
 import { MicControl } from "./MicControl";
 import { interval } from "../utils";
 
@@ -16,24 +15,15 @@ const meta: Meta<MicControlProps> = {
   },
   decorators: [
     (Story, context) => {
-      const uid = context.args.uid || "123";
-      const [client] = useState(() =>
-        createFakeRtcClient({
-          enableAudioVolumeIndicator: () => void 0,
-        }),
-      );
+      const audioTrack = context.args.audioTrack;
       useEffect(() => {
-        return interval(() => {
-          dispatchRTCEvent(client, "volume-indicator", [
-            { uid, level: faker.datatype.number({ min: 0, max: 100 }) },
-          ]);
-        }, 2000);
-      }, [client, uid]);
-      return (
-        <AgoraRTCProvider client={client}>
-          <Story />
-        </AgoraRTCProvider>
-      );
+        if (audioTrack) {
+          return interval(() => {
+            audioTrack.setVolume(faker.datatype.number({ min: 0, max: 100 }));
+          }, 2000);
+        }
+      }, [audioTrack]);
+      return <Story />;
     },
   ],
 };
@@ -42,20 +32,20 @@ export default meta;
 
 export const MicOn: StoryObj<MicControlProps> = {
   args: {
-    uid: "123",
+    audioTrack: FakeLocalAudioTrack.create(),
     micOn: true,
   },
 };
 
 export const MicOff: StoryObj<MicControlProps> = {
   args: {
-    uid: "123",
+    audioTrack: FakeLocalAudioTrack.create(),
   },
 };
 
 export const RemoteMicOn: StoryObj<MicControlProps> = {
   args: {
-    uid: "123",
+    audioTrack: FakeRemoteAudioTrack.create(),
     micOn: true,
     disabled: true,
   },
