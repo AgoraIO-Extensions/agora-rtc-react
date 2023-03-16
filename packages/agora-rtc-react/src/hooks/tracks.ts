@@ -15,8 +15,13 @@ import { useRTCClient } from "./context";
 import { useConnectionState } from "./events";
 import { useAwaited } from "./tools";
 
+/**
+ * Create and publish microphone audio track.
+ *
+ * If `client` is null, it will not publish the track.
+ */
 export function useMicrophone(
-  client: IAgoraRTCClient,
+  client: IAgoraRTCClient | null,
   defaultMicOn: boolean,
   config?: MicrophoneAudioTrackInitConfig,
 ) {
@@ -30,7 +35,7 @@ export function useMicrophone(
   const audioTrack = useAwaited(pAudioTrack);
   const connectionState = useConnectionState(client);
   useEffect(() => {
-    if (audioTrack && connectionState === "CONNECTED") {
+    if (client && audioTrack && connectionState === "CONNECTED") {
       client.publish(audioTrack).catch(console.error);
       return () => void client.unpublish(audioTrack);
     }
@@ -38,8 +43,13 @@ export function useMicrophone(
   return { audioTrack, micOn, setMic };
 }
 
+/**
+ * Create and publish camera video track.
+ *
+ * If `client` is null, it will not publish the track.
+ */
 export function useCamera(
-  client: IAgoraRTCClient,
+  client: IAgoraRTCClient | null,
   defaultCameraOn: boolean,
   config?: CameraVideoTrackInitConfig,
 ) {
@@ -53,7 +63,7 @@ export function useCamera(
   const videoTrack = useAwaited(pVideoTrack);
   const connectionState = useConnectionState(client);
   useEffect(() => {
-    if (videoTrack && connectionState === "CONNECTED") {
+    if (client && videoTrack && connectionState === "CONNECTED") {
       client.publish(videoTrack).catch(console.error);
       return () => void client.unpublish(videoTrack);
     }
