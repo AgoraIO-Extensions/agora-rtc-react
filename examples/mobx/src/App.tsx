@@ -26,19 +26,44 @@ const token = import.meta.env.AGORA_TOKEN;
 
 export const App = observer(function App() {
   return (
-    <>
-      <button
-        disabled={appStore.connectionState !== "DISCONNECTED"}
-        onClick={() => appStore.join(appId, channel, token)}
-      >
-        JOIN
-      </button>
-      &nbsp;
-      <button disabled={appStore.connectionState !== "CONNECTED"} onClick={() => appStore.leave()}>
-        LEAVE
-      </button>
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100vh",
+        padding: 8,
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <div>
+        <button
+          disabled={appStore.connectionState !== "DISCONNECTED"}
+          onClick={() => appStore.join(appId, channel, token)}
+        >
+          JOIN
+        </button>
+        &nbsp;
+        <button
+          disabled={appStore.connectionState !== "CONNECTED"}
+          onClick={() => appStore.leave()}
+        >
+          LEAVE
+        </button>
+        &nbsp;
+        {appStore.uid && <samp>[UID={appStore.uid}]</samp>}
+        &nbsp;
+        {appStore.client && (
+          <>
+            <span>Users: </span>
+            {[appStore, ...appStore.remoteUsersAsArray].map(({ uid }) => fakeName(uid!)).join(", ")}
+          </>
+        )}
+      </div>
       {appStore.client && <Room client={appStore.client} />}
-    </>
+    </div>
   );
 });
 
@@ -65,55 +90,23 @@ const Room = observer(function Room({ client }: { client: IAgoraRTCClient }) {
 
   return (
     <AgoraRTCProvider client={client}>
-      <samp>&nbsp;[UID={appStore.uid}]</samp>
-      <div
-        style={{
-          display: "inline-block",
-          float: "right",
-          width: 320,
-          height: 240,
-          background: "#000",
-          position: "relative",
-        }}
-      >
-        <MicrophoneAudioTrack track={appStore.localMicTrack} />
-        <CameraVideoTrack
-          style={{ width: "100%", height: "100%" }}
-          track={appStore.localCameraTrack}
-          play
-        />
+      <div style={{ padding: "8px 0", flex: 1, display: "flex", gap: 8 }}>
         <div
           style={{
-            display: "flex",
-            alignItems: "flex-end",
-            boxSizing: "border-box",
-            position: "absolute",
-            left: 0,
-            bottom: 0,
-            width: "100%",
-            padding: "4px 4px 4px 8px",
-            color: "#fff",
+            width: 288,
+            height: 216,
+            background: "#000",
+            position: "relative",
+            borderRadius: 8,
+            overflow: "hidden",
           }}
         >
-          <span style={{ userSelect: "none" }}>{fakeName(appStore.uid!)}</span>
-          <CameraControl
-            style={{ margin: "0 10px 0 auto" }}
-            cameraOn={video}
-            onCameraChange={setVideo}
+          <MicrophoneAudioTrack track={appStore.localMicTrack} />
+          <CameraVideoTrack
+            style={{ width: "100%", height: "100%" }}
+            track={appStore.localCameraTrack}
+            play
           />
-          <MicControl audioTrack={appStore.localMicTrack} micOn={audio} onMicChange={setAudio} />
-        </div>
-      </div>
-      <br />
-      <span>Users:</span>
-      {[appStore, ...appStore.remoteUsersAsArray].map(({ uid }) => (
-        <span key={uid} style={{ marginLeft: ".25rem" }}>
-          {fakeName(uid!)}
-        </span>
-      ))}
-      <br />
-      {[...appStore.publishedRemoteUsers.values()].map(user => (
-        <RemoteUser key={user.uid} user={user}>
           <div
             style={{
               display: "flex",
@@ -127,12 +120,37 @@ const Room = observer(function Room({ client }: { client: IAgoraRTCClient }) {
               color: "#fff",
             }}
           >
-            <span style={{ userSelect: "none" }}>{fakeName(user.uid)}</span>
-            <CameraControl style={{ margin: "0 10px 0 auto" }} cameraOn={user.hasVideo} />
-            <MicControl audioTrack={user.audioTrack} micOn={user.hasAudio} />
+            <span style={{ userSelect: "none" }}>{fakeName(appStore.uid!)}</span>
+            <CameraControl
+              style={{ margin: "0 10px 0 auto" }}
+              cameraOn={video}
+              onCameraChange={setVideo}
+            />
+            <MicControl audioTrack={appStore.localMicTrack} micOn={audio} onMicChange={setAudio} />
           </div>
-        </RemoteUser>
-      ))}
+        </div>
+        {[...appStore.publishedRemoteUsers.values()].map(user => (
+          <RemoteUser key={user.uid} user={user} style={{ borderRadius: 8, overflow: "hidden" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-end",
+                boxSizing: "border-box",
+                position: "absolute",
+                left: 0,
+                bottom: 0,
+                width: "100%",
+                padding: "4px 4px 4px 8px",
+                color: "#fff",
+              }}
+            >
+              <span style={{ userSelect: "none" }}>{fakeName(user.uid)}</span>
+              <CameraControl style={{ margin: "0 10px 0 auto" }} cameraOn={user.hasVideo} />
+              <MicControl audioTrack={user.audioTrack} micOn={user.hasAudio} />
+            </div>
+          </RemoteUser>
+        ))}
+      </div>
     </AgoraRTCProvider>
   );
 });
