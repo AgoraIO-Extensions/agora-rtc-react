@@ -4,12 +4,7 @@ import { useCallback } from "react";
 import type { RemoteUserProps } from "./RemoteUser";
 
 import { faker } from "@faker-js/faker";
-import {
-  createFakeRtcClient,
-  dispatchRTCEvent,
-  FakeRemoteAudioTrack,
-  FakeRemoteVideoTrack,
-} from "fake-agora-rtc";
+import { createFakeRtcClient, FakeRemoteAudioTrack, FakeRemoteVideoTrack } from "fake-agora-rtc";
 import { useArgs } from "@storybook/preview-api";
 import { useEffect, useState } from "react";
 import { AgoraRTCProvider } from "../hooks/context";
@@ -80,9 +75,10 @@ export const WithControls: StoryObj<RemoteUserProps> = {
       hasVideo: true,
       hasAudio: true,
     },
-    playVideo: true,
+    playVideo: false,
     playAudio: false,
     style: { borderRadius: 8 },
+    cover: "http://placekitten.com/200/200",
   },
   render(args) {
     /* eslint-disable react-hooks/rules-of-hooks */

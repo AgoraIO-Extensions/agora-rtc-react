@@ -37,6 +37,10 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
    * Whether to darken the video canvas when the mouse hovers over it. Default false.
    */
   readonly darkenOnHover?: boolean;
+  /**
+   * Render cover image if playVideo is off.
+   */
+  readonly cover?: string;
 }
 
 /**
@@ -52,6 +56,7 @@ export const RemoteUser = /* @__PURE__ */ memo<PropsWithChildren<RemoteUserProps
     playbackDeviceId,
     volume,
     darkenOnHover,
+    cover,
     children,
     className = "",
     ...props
@@ -71,6 +76,15 @@ export const RemoteUser = /* @__PURE__ */ memo<PropsWithChildren<RemoteUserProps
           track={audioTrack}
           play={playAudio}
         />
+        {!playVideo && cover && (
+          <div className="arr-remote-user-cover">
+            <div
+              className="arr-remote-user-cover-blur"
+              style={{ backgroundImage: `url(${cover})` }}
+            />
+            <img className="arr-remote-user-cover-img" src={cover} />
+          </div>
+        )}
         <div className="arr-remote-user-body">{children}</div>
       </div>
     );
