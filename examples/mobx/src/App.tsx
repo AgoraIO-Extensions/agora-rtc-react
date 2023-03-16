@@ -58,7 +58,8 @@ export const App = observer(function App() {
         {appStore.client && (
           <>
             <span>Users: </span>
-            {[appStore, ...appStore.remoteUsersAsArray].map(({ uid }) => fakeName(uid!)).join(", ")}
+            <span>{fakeName(appStore.uid!)} (Me)</span>
+            {appStore.remoteUsersAsArray.map(({ uid }) => ", " + fakeName(uid!)).join("")}
           </>
         )}
       </div>
