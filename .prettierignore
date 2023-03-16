@@ -3,3 +3,5 @@
 docs/*
 CHANGELOG.md
 pnpm-lock.yaml
+packages/agora-rtc-react/src/listen.ts
+packages/agora-rtc-react/src/hooks/events.ts

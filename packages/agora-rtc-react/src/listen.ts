@@ -152,7 +152,6 @@ export interface Listenable {
 /**
  * Listen to client or track events
  */
-/* eslint-disable prettier/prettier */
 export function listen(client: IAgoraRTCClient, event: "connection-state-change", listener: (curState: ConnectionState, revState: ConnectionState, reason?: ConnectionDisconnectedReason) => void): Disposer;
 export function listen(client: IAgoraRTCClient, event: "user-joined", listener: (user: IAgoraRTCRemoteUser) => void): Disposer;
 export function listen(client: IAgoraRTCClient, event: "user-left", listener: (user: IAgoraRTCRemoteUser, reason: "Quit" | "ServerTimeOut" | "BecomeAudience") => void): Disposer;
@@ -184,9 +183,7 @@ export function listen(client: ILocalVideoTrack, event: "beauty-effect-overload"
 export function listen(client: ILocalVideoTrack, event: "track-ended", listener: () => void): Disposer;
 export function listen(client: ILocalVideoTrack, event: "video-element-visible-status", listener: () => void): Disposer;
 export function listen(client: IRemoteTrack, event: "first-frame-decoded", listener: () => void): Disposer;
-export function listen(client: IRemoteVideoTrack, event: "video-element-visible-status", listener: (data?: CheckVideoVisibleResult) => void): Disposer;
-/* eslint-enable prettier/prettier */
-
+export function listen(client: IRemoteVideoTrack, event: "video-element-visible-status", listener: (data?: CheckVideoVisibleResult) => void): Disposer
 export function listen(listenable: Listenable, event: string, listener: Fn): Disposer;
 export function listen(listenable: Listenable, event: string, listener: Fn) {
   listenable.on(event, listener);

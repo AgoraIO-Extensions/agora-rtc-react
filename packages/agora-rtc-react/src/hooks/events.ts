@@ -20,11 +20,10 @@ import type {
 import type { AgoraRTCError, CheckVideoVisibleResult, InspectState } from "../listen";
 import type { Fn, Nullable } from "../utils";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { listen } from "../listen";
 import { useIsomorphicLayoutEffect } from "./tools";
 
-/* eslint-disable prettier/prettier */
 export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "connection-state-change", listener: Nullable<(curState: ConnectionState, revState: ConnectionState, reason?: ConnectionDisconnectedReason) => void>): void
 export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "user-joined", listener: Nullable<(user: IAgoraRTCRemoteUser) => void>): void
 export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "user-left", listener: Nullable<(user: IAgoraRTCRemoteUser, reason: "Quit" | "ServerTimeOut" | "BecomeAudience") => void>): void
@@ -67,9 +66,7 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: string,
     }
   }, [event, client]);
 }
-/* eslint-disable prettier/prettier */
 
-/* eslint-disable prettier/prettier */
 export function useTrackEvent(track: Nullable<ILocalTrack>, event: "track-ended", listener: Nullable<() => void>): void;
 export function useTrackEvent(track: Nullable<IBufferSourceAudioTrack>, event: "source-state-change", listener: Nullable<(currentState: AudioSourceState) => void>): void;
 export function useTrackEvent(track: Nullable<ILocalVideoTrack>, event: "beauty-effect-overload", listener: Nullable<() => void>): void;
@@ -93,11 +90,4 @@ export function useTrackEvent(track: Nullable<ITrack>, event: string, listener: 
       });
     }
   }, [event, track]);
-}
-/* eslint-disable prettier/prettier */
-
-export function useConnectionState(client?: IAgoraRTCClient | null) {
-  const [connectionState, setConnectionState] = useState(client ? client.connectionState : "DISCONNECTED");
-  useClientEvent(client, "connection-state-change", setConnectionState);
-  return connectionState;
 }

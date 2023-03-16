@@ -11,8 +11,8 @@ import type {
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { useState, useMemo, useEffect } from "react";
 import { listen } from "../listen";
+import { useConnectionState } from "./client";
 import { useRTCClient } from "./context";
-import { useConnectionState } from "./events";
 import { useAwaited } from "./tools";
 
 /**
