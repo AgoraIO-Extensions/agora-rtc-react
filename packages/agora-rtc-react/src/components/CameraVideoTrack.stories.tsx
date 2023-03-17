@@ -3,6 +3,7 @@ import type { StoryObj, Meta } from "@storybook/react";
 
 import { CameraVideoTrack } from "./CameraVideoTrack";
 import { FakeCameraVideoTrack } from "fake-agora-rtc";
+import { useState } from "react";
 
 const meta: Meta<CameraVideoTrackProps> = {
   title: "Core/CameraVideoTrack",
@@ -10,6 +11,17 @@ const meta: Meta<CameraVideoTrackProps> = {
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
+  },
+  argTypes: {
+    track: {
+      control: {
+        type: null,
+      },
+    },
+  },
+  render: function RenderCameraVideoTrack(args) {
+    const [track] = useState(() => (args.track ? FakeCameraVideoTrack.create() : undefined));
+    return <CameraVideoTrack {...args} track={track} />;
   },
 };
 
@@ -25,6 +37,7 @@ export const Enabled: StoryObj<CameraVideoTrackProps> = {
 export const EmptyTrack: StoryObj<CameraVideoTrackProps> = {
   args: {
     play: true,
+    children: <p>An Empty Track</p>,
   },
 };
 

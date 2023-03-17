@@ -30,4 +30,9 @@ export const parameters = {
   options: {
     showPanel: true,
   },
+  docs: {
+    canvas: {
+      sourceState: "shown",
+    },
+  },
 };
