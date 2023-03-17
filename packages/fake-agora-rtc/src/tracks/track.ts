@@ -2,6 +2,7 @@ import type { ITrack } from "agora-rtc-sdk-ng";
 
 import { faker } from "@faker-js/faker";
 import { FakeAgoraEventEmitter } from "../eventemitter";
+import { hideProperties } from "../utils";
 
 export interface FakeTrackProps {
   trackMediaType?: "audio" | "video";
@@ -13,7 +14,7 @@ export class FakeTrack extends FakeAgoraEventEmitter {
     return new FakeTrack(props) as unknown as ITrack;
   }
 
-  private readonly trackId: string;
+  private readonly _trackId: string;
 
   protected constructor({
     trackMediaType = "video",
@@ -22,7 +23,9 @@ export class FakeTrack extends FakeAgoraEventEmitter {
     super();
 
     this.trackMediaType = trackMediaType;
-    this.trackId = trackId;
+    this._trackId = trackId;
+
+    hideProperties(this, "_trackId");
   }
 
   /**
@@ -43,7 +46,7 @@ export class FakeTrack extends FakeAgoraEventEmitter {
    * @return The media track ID.
    */
   public getTrackId(): string {
-    return this.trackId;
+    return this._trackId;
   }
   /**
    * Gets an [MediaStreamTrack](https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack) object.

@@ -3,6 +3,7 @@ import type { FakeRemoteTrackProps } from "./remote-track";
 
 import ipadMp4 from "../../videos/ipad-2988.mp4";
 import { FakeRemoteTrack } from "./remote-track";
+import { hideProperties } from "../utils";
 
 export interface FakeRemoteVideoTrackProps extends Omit<FakeRemoteTrackProps, "trackMediaType"> {
   videoURI?: string;
@@ -13,12 +14,14 @@ export class FakeRemoteVideoTrack extends FakeRemoteTrack {
     return new FakeRemoteVideoTrack(props) as unknown as IRemoteVideoTrack;
   }
 
-  private readonly videoURI: string;
+  private readonly _videoURI: string;
 
   protected constructor({ videoURI = ipadMp4, ...props }: FakeRemoteVideoTrackProps = {}) {
     super({ ...props, trackMediaType: "video" });
 
-    this.videoURI = videoURI;
+    this._videoURI = videoURI;
+
+    hideProperties(this, "_config", "_videoEl", "_videoURI");
   }
   /**
    * Plays a remote video track on the web page.
@@ -42,7 +45,7 @@ export class FakeRemoteVideoTrack extends FakeRemoteTrack {
       this._videoEl.muted = true;
     }
 
-    this._videoEl.src = this.videoURI;
+    this._videoEl.src = this._videoURI;
     this._videoEl.style.opacity = "1";
 
     if (container) {

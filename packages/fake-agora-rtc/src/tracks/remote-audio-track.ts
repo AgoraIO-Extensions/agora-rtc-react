@@ -3,6 +3,7 @@ import type { FakeRemoteTrackProps } from "./remote-track";
 
 import keyboardMp3 from "../../videos/quick-mechanical-keyboard-14391.mp3";
 import { FakeRemoteTrack } from "./remote-track";
+import { hideProperties } from "../utils";
 
 export interface FakeRemoteAudioTrackProps extends Omit<FakeRemoteTrackProps, "trackMediaType"> {
   audioURI?: string;
@@ -15,7 +16,19 @@ export class FakeRemoteAudioTrack extends FakeRemoteTrack {
     return new FakeRemoteAudioTrack(props) as unknown as IRemoteAudioTrack;
   }
 
-  private readonly audioURI: string;
+  private readonly _audioURI: string;
+
+  public override valueOf(): string {
+    return "valueOf";
+  }
+
+  public override toString(): string {
+    return "toString";
+  }
+
+  public toJSON(): string {
+    return "toJSON";
+  }
 
   protected constructor({
     audioURI = keyboardMp3,
@@ -24,7 +37,9 @@ export class FakeRemoteAudioTrack extends FakeRemoteTrack {
   }: FakeRemoteAudioTrackProps = {}) {
     super({ ...props, trackMediaType: "audio" });
     this._volume = Math.max(0, Math.min(100, volume));
-    this.audioURI = audioURI;
+    this._audioURI = audioURI;
+
+    hideProperties(this, "_audioEl", "_volume", "_audioURI");
   }
   /**
    * Plays a remote audio track.
@@ -38,7 +53,7 @@ export class FakeRemoteAudioTrack extends FakeRemoteTrack {
       document.body.appendChild(this._audioEl);
     }
 
-    this._audioEl.src = this.audioURI;
+    this._audioEl.src = this._audioURI;
     this._audioEl.volume = this._volume / 100;
 
     if (this._audioEl) {
@@ -95,3 +110,5 @@ export class FakeRemoteAudioTrack extends FakeRemoteTrack {
   private _audioEl?: HTMLAudioElement;
   private _volume: number;
 }
+
+console.log(Object.keys(FakeRemoteAudioTrack.create()));

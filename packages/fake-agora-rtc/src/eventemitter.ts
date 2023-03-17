@@ -1,9 +1,15 @@
+import { hideProperties } from "./utils";
+
 type Fn = (...args: any[]) => any;
 
 /** Fake Agora internal Eventemitter */
 export class FakeAgoraEventEmitter {
   private _events = new Map<string, Fn[]>();
   private _once = new WeakMap<Fn, Fn>();
+
+  public constructor() {
+    hideProperties(this, "_events", "_once");
+  }
 
   /**
    * Gets all the listeners for a specified event.

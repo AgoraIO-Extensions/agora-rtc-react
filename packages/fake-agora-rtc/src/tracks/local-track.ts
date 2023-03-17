@@ -3,6 +3,7 @@ import type { FakeTrackProps } from "./track";
 
 import { faker } from "@faker-js/faker";
 import { FakeTrack } from "./track";
+import { hideProperties } from "../utils";
 
 export interface FakeLocalTrackProps extends FakeTrackProps {
   /** track label */
@@ -28,6 +29,8 @@ export class FakeLocalTrack extends FakeTrack {
     this._label = label;
     this.enabled = enabled;
     this.muted = muted;
+
+    hideProperties(this, "_label");
   }
   /**
    * **Since**

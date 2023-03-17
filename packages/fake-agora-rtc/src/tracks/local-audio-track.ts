@@ -3,6 +3,7 @@ import type { FakeLocalTrackProps } from "./local-track";
 
 import keyboardMp3 from "../../videos/quick-mechanical-keyboard-14391.mp3";
 import { FakeLocalTrack } from "./local-track";
+import { hideProperties } from "../utils";
 
 export interface FakeLocalAudioTrackProps extends Omit<FakeLocalTrackProps, "trackMediaType"> {
   audioURI?: string;
@@ -15,7 +16,7 @@ export class FakeLocalAudioTrack extends FakeLocalTrack {
     return new FakeLocalAudioTrack(props) as unknown as ILocalAudioTrack;
   }
 
-  private readonly audioURI: string;
+  private readonly _audioURI: string;
 
   protected constructor({
     audioURI = keyboardMp3,
@@ -24,7 +25,9 @@ export class FakeLocalAudioTrack extends FakeLocalTrack {
   }: FakeLocalAudioTrackProps = {}) {
     super({ ...props, trackMediaType: "audio" });
     this._volume = Math.max(0, Math.min(100, volume));
-    this.audioURI = audioURI;
+    this._audioURI = audioURI;
+
+    hideProperties(this, "_audioEl", "_volume", "_audioURI");
   }
   /**
    * Plays a local audio track on the web page.
@@ -41,7 +44,7 @@ export class FakeLocalAudioTrack extends FakeLocalTrack {
       document.body.appendChild(this._audioEl);
     }
 
-    this._audioEl.src = this.audioURI;
+    this._audioEl.src = this._audioURI;
     this._audioEl.muted = this.muted;
     this._audioEl.volume = this._volume / 100;
 

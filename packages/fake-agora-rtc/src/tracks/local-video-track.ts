@@ -3,6 +3,7 @@ import type { FakeLocalTrackProps } from "./local-track";
 
 import ipadMp4 from "../../videos/ipad-2988.mp4";
 import { FakeLocalTrack } from "./local-track";
+import { hideProperties } from "../utils";
 
 export interface FakeLocalVideoTrackProps extends Omit<FakeLocalTrackProps, "trackMediaType"> {
   videoURI?: string;
@@ -13,12 +14,14 @@ export class FakeLocalVideoTrack extends FakeLocalTrack {
     return new FakeLocalVideoTrack(props) as unknown as ILocalVideoTrack;
   }
 
-  private readonly videoURI: string;
+  private readonly _videoURI: string;
 
   protected constructor({ videoURI = ipadMp4, ...props }: FakeLocalVideoTrackProps = {}) {
     super({ ...props, trackMediaType: "video" });
 
-    this.videoURI = videoURI;
+    this._videoURI = videoURI;
+
+    hideProperties(this, "_config", "_videoEl", "_videoURI");
   }
   /**
    * Plays a local video track on the web page.
@@ -41,7 +44,7 @@ export class FakeLocalVideoTrack extends FakeLocalTrack {
       this._videoEl.muted = true;
     }
 
-    this._videoEl.src = this.videoURI;
+    this._videoEl.src = this._videoURI;
     this._videoEl.style.objectFit = this._config?.fit || "cover";
     this._videoEl.style.opacity = "1";
 

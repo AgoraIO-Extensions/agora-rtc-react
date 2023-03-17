@@ -8,6 +8,7 @@ import type { FakeTrackProps } from "./track";
 
 import { faker } from "@faker-js/faker";
 import { FakeTrack } from "./track";
+import { hideProperties } from "../utils";
 
 export interface FakeRemoteTrackProps extends FakeTrackProps {
   /** track label */
@@ -24,6 +25,8 @@ export class FakeRemoteTrack extends FakeTrack {
   protected constructor({ uid = faker.datatype.uuid(), ...trackProps }: FakeRemoteTrackProps = {}) {
     super(trackProps);
     this._uid = uid;
+
+    hideProperties(this, "_uid");
   }
   /**
    * Gets the `uid` of the remote user who publishes the remote track.
