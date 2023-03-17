@@ -11,6 +11,13 @@ const meta: Meta<LocalAudioTrackProps> = {
   parameters: {
     layout: "fullscreen",
   },
+  argTypes: {
+    track: {
+      control: {
+        type: null,
+      },
+    },
+  },
   render(args) {
     return (
       <LocalAudioTrack {...args}>

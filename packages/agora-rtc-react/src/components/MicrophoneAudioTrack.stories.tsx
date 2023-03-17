@@ -11,6 +11,13 @@ const meta: Meta<MicrophoneAudioTrackProps> = {
   parameters: {
     layout: "fullscreen",
   },
+  argTypes: {
+    track: {
+      control: {
+        type: null,
+      },
+    },
+  },
   render(args) {
     return (
       <MicrophoneAudioTrack {...args}>

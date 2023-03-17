@@ -11,6 +11,13 @@ const meta: Meta<RemoteAudioTrackProps> = {
   parameters: {
     layout: "fullscreen",
   },
+  argTypes: {
+    track: {
+      control: {
+        type: null,
+      },
+    },
+  },
   render(args) {
     return (
       <RemoteAudioTrack {...args}>
