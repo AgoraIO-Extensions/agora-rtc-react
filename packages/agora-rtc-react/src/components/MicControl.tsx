@@ -9,10 +9,21 @@ import { SVGMicrophoneMute } from "./icons/SVGMicrophoneMute";
 import { useVolumeLevel } from "../hooks";
 
 export interface MicControlProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Audio track to subscribe volume level.
+   */
   audioTrack?: ILocalAudioTrack | IRemoteAudioTrack;
+  /**
+   * Microphone is on.
+   */
   micOn?: boolean;
+  /**
+   * Callback when microphone is on/off.
+   */
   onMicChange?: (micOn: boolean) => void;
-  /** 0~1 */
+  /**
+   * Add noise to volume level for a more organic effect.
+   */
   noise?: number;
 }
 

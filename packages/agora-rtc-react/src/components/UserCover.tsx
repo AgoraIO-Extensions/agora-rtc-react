@@ -3,6 +3,9 @@ import "./UserCover.css";
 import type { HTMLProps } from "react";
 
 export interface UserCoverProps extends HTMLProps<HTMLDivElement> {
+  /**
+   * Cover image url.
+   */
   cover?: string;
 }
 

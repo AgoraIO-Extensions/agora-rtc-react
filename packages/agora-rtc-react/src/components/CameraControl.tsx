@@ -7,7 +7,13 @@ import { SVGCamera } from "./icons/SVGCamera";
 import { SVGCameraMute } from "./icons/SVGCameraMute";
 
 export interface CameraControlProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Camera is on.
+   */
   cameraOn?: boolean;
+  /**
+   * Callback when camera is on/off.
+   */
   onCameraChange?: (cameraOn: boolean) => void;
 }
 
