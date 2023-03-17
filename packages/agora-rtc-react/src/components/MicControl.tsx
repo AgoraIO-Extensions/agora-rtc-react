@@ -16,6 +16,10 @@ export interface MicControlProps extends ButtonHTMLAttributes<HTMLButtonElement>
   noise?: number;
 }
 
+/**
+ * A button with microphone icon.
+ * Display realtime volume level when `audioTrack` is provided.
+ */
 export function MicControl({
   noise,
   audioTrack,

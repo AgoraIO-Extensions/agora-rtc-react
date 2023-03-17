@@ -10,6 +10,7 @@ import { interval } from "../utils";
 const meta: Meta<MicControlProps> = {
   title: "Prebuilt/MicControl",
   component: MicControl,
+  tags: ["autodocs"],
   parameters: {
     backgrounds: { default: "light" },
   },
@@ -23,7 +24,7 @@ const meta: Meta<MicControlProps> = {
           }, 2000);
         }
       }, [audioTrack]);
-      return <Story />;
+      return Story();
     },
   ],
 };

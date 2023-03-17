@@ -1,13 +1,13 @@
 import type { LocalAudioTrackProps } from "./LocalAudioTrack";
 import type { StoryObj, Meta } from "@storybook/react";
-import type { FC } from "react";
 
 import { LocalAudioTrack } from "./LocalAudioTrack";
 import { FakeLocalAudioTrack } from "fake-agora-rtc";
 
 const meta: Meta<LocalAudioTrackProps> = {
   title: "Core/LocalAudioTrack",
-  component: LocalAudioTrack as FC<LocalAudioTrackProps>,
+  component: LocalAudioTrack,
+  tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },

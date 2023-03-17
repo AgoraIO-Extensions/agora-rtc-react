@@ -1,13 +1,13 @@
 import type { CameraVideoTrackProps } from "./CameraVideoTrack";
 import type { StoryObj, Meta } from "@storybook/react";
-import type { FC } from "react";
 
 import { CameraVideoTrack } from "./CameraVideoTrack";
 import { FakeCameraVideoTrack } from "fake-agora-rtc";
 
 const meta: Meta<CameraVideoTrackProps> = {
   title: "Core/CameraVideoTrack",
-  component: CameraVideoTrack as FC<CameraVideoTrackProps>,
+  component: CameraVideoTrack,
+  tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },

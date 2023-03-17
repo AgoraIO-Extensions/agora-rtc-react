@@ -1,13 +1,13 @@
 import type { RemoteAudioTrackProps } from "./RemoteAudioTrack";
 import type { StoryObj, Meta } from "@storybook/react";
-import type { FC } from "react";
 
 import { RemoteAudioTrack } from "./RemoteAudioTrack";
 import { FakeRemoteAudioTrack } from "fake-agora-rtc";
 
 const meta: Meta<RemoteAudioTrackProps> = {
   title: "Core/RemoteAudioTrack",
-  component: RemoteAudioTrack as FC<RemoteAudioTrackProps>,
+  component: RemoteAudioTrack,
+  tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },

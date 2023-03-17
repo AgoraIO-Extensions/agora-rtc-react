@@ -11,6 +11,9 @@ export interface CameraControlProps extends ButtonHTMLAttributes<HTMLButtonEleme
   onCameraChange?: (cameraOn: boolean) => void;
 }
 
+/**
+ * A button with camera icon.
+ */
 export function CameraControl({
   cameraOn,
   onCameraChange,

@@ -1,13 +1,13 @@
 import type { MicrophoneAudioTrackProps } from "./MicrophoneAudioTrack";
 import type { StoryObj, Meta } from "@storybook/react";
-import type { FC } from "react";
 
 import { MicrophoneAudioTrack } from "./MicrophoneAudioTrack";
 import { FakeMicrophoneAudioTrack } from "fake-agora-rtc";
 
 const meta: Meta<MicrophoneAudioTrackProps> = {
   title: "Core/MicrophoneAudioTrack",
-  component: MicrophoneAudioTrack as FC<MicrophoneAudioTrackProps>,
+  component: MicrophoneAudioTrack,
+  tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },

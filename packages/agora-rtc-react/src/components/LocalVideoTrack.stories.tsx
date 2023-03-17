@@ -1,13 +1,13 @@
 import type { LocalVideoTrackProps } from "./LocalVideoTrack";
 import type { StoryObj, Meta } from "@storybook/react";
-import type { FC } from "react";
 
 import { LocalVideoTrack } from "./LocalVideoTrack";
 import { FakeLocalVideoTrack } from "fake-agora-rtc";
 
 const meta: Meta<LocalVideoTrackProps> = {
   title: "Core/LocalVideoTrack",
-  component: LocalVideoTrack as FC<LocalVideoTrackProps>,
+  component: LocalVideoTrack,
+  tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },

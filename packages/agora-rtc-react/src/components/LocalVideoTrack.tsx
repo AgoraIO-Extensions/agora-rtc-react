@@ -17,6 +17,9 @@ export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
   readonly play?: boolean;
 }
 
+/**
+ * A component which renders a local video track.
+ */
 export function LocalVideoTrack({ track: maybeTrack, play, ...props }: LocalVideoTrackProps) {
   const [div, setDiv] = useState<HTMLDivElement | null>(null);
 

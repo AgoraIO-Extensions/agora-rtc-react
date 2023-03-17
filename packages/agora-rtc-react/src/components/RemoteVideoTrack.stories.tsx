@@ -1,13 +1,13 @@
 import type { RemoteVideoTrackProps } from "./RemoteVideoTrack";
 import type { StoryObj, Meta } from "@storybook/react";
-import type { FC } from "react";
 
 import { RemoteVideoTrack } from "./RemoteVideoTrack";
 import { FakeRemoteVideoTrack } from "fake-agora-rtc";
 
 const meta: Meta<RemoteVideoTrackProps> = {
   title: "Core/RemoteVideoTrack",
-  component: RemoteVideoTrack as FC<RemoteVideoTrackProps>,
+  component: RemoteVideoTrack,
+  tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },

@@ -24,7 +24,7 @@ export interface CameraVideoTrackProps extends LocalVideoTrackProps {
 }
 
 /**
- * A component which renders a camera video track.
+ * A component which renders a camera video track, with device options.
  *
  * ```jsx
  * const track = useMemo(() => AgoraRTC.createCameraVideoTrack(), [])

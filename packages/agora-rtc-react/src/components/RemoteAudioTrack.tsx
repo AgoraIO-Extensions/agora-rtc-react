@@ -1,4 +1,5 @@
 import type { IRemoteAudioTrack } from "agora-rtc-sdk-ng";
+import type { PropsWithChildren } from "react";
 import type { Nullable } from "../utils";
 
 import { useEffect } from "react";
@@ -27,7 +28,16 @@ export interface RemoteAudioTrackProps {
   readonly volume?: number;
 }
 
-export function RemoteAudioTrack({ track, play, playbackDeviceId, volume }: RemoteAudioTrackProps) {
+/**
+ * A component which plays a remote audio track.
+ */
+export function RemoteAudioTrack({
+  track,
+  play,
+  playbackDeviceId,
+  volume,
+  children,
+}: PropsWithChildren<RemoteAudioTrackProps>) {
   useStopTrackOnUmount(track);
 
   useEffect(() => {
@@ -48,5 +58,5 @@ export function RemoteAudioTrack({ track, play, playbackDeviceId, volume }: Remo
     }
   }, [track, volume]);
 
-  return null;
+  return children ? <>{children}</> : null;
 }

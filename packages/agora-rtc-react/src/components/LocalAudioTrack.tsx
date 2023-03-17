@@ -1,4 +1,5 @@
 import type { ILocalAudioTrack } from "agora-rtc-sdk-ng";
+import type { PropsWithChildren } from "react";
 import type { MaybePromiseOrNull } from "../utils";
 
 import { useEffect } from "react";
@@ -20,7 +21,15 @@ export interface LocalAudioTrackProps {
   readonly volume?: number;
 }
 
-export function LocalAudioTrack({ track: maybeTrack, play, volume }: LocalAudioTrackProps) {
+/**
+ * A component which plays a local audio track.
+ */
+export function LocalAudioTrack({
+  track: maybeTrack,
+  play,
+  volume,
+  children,
+}: PropsWithChildren<LocalAudioTrackProps>) {
   const track = useAwaited(maybeTrack);
   useStopTrackOnUmount(track);
 
@@ -36,5 +45,5 @@ export function LocalAudioTrack({ track: maybeTrack, play, volume }: LocalAudioT
     }
   }, [track, volume]);
 
-  return null;
+  return children ? <>{children}</> : null;
 }

@@ -16,6 +16,9 @@ export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
   readonly play?: boolean;
 }
 
+/**
+ * A component which renders a remote video track.
+ */
 export function RemoteVideoTrack({ track, play, ...props }: RemoteVideoTrackProps) {
   const [div, setDiv] = useState<HTMLDivElement | null>(null);
 

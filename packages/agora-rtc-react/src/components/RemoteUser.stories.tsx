@@ -16,6 +16,7 @@ import { RemoteUser } from "./RemoteUser";
 const meta: Meta<RemoteUserProps> = {
   title: "Prebuilt/RemoteUser",
   component: RemoteUser as FC<RemoteUserProps>,
+  tags: ["autodocs"],
   argTypes: {
     user: { table: { disable: true } },
   },
@@ -42,11 +43,7 @@ const meta: Meta<RemoteUserProps> = {
           unsubscribe: async () => void 0,
         }),
       );
-      return (
-        <AgoraRTCProvider client={client}>
-          <Story />
-        </AgoraRTCProvider>
-      );
+      return <AgoraRTCProvider client={client}>{Story()}</AgoraRTCProvider>;
     },
   ],
 };
@@ -65,9 +62,13 @@ export const Overview: StoryObj<RemoteUserProps> = {
   },
 };
 
-export const WithControls: StoryObj<RemoteUserProps> = {
+export const WithCover: StoryObj<RemoteUserProps> = {
   parameters: {
-    backgrounds: { default: "dark" },
+    docs: {
+      description: {
+        story: "Show cover image if `playVideo` is `false`.",
+      },
+    },
   },
   args: {
     user: {
@@ -76,6 +77,27 @@ export const WithControls: StoryObj<RemoteUserProps> = {
       hasAudio: true,
     },
     playVideo: false,
+    playAudio: false,
+    cover: "http://placekitten.com/200/200",
+  },
+};
+
+export const WithControls: StoryObj<RemoteUserProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Add buttons to control the video and audio track. Navigate to the story on the right sidebar and paly with it.",
+      },
+    },
+  },
+  args: {
+    user: {
+      uid: faker.datatype.uuid(),
+      hasVideo: true,
+      hasAudio: true,
+    },
+    playVideo: true,
     playAudio: false,
     style: { borderRadius: 8 },
     cover: "http://placekitten.com/200/200",
