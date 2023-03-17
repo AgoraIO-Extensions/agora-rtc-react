@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@faker-js/faker": "^7.6.0",
+    "@ngneat/falso": "^6.4.0",
     "agora-rtc-react": "workspace:*",
     "agora-rtc-sdk-ng": "^4.16.1",
     "clsx": "^1.2.1",

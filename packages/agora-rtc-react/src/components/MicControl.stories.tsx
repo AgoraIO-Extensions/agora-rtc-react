@@ -2,7 +2,7 @@ import type { MicControlProps } from "./MicControl";
 import type { StoryObj, Meta } from "@storybook/react";
 
 import { FakeLocalAudioTrack, FakeRemoteAudioTrack } from "fake-agora-rtc";
-import { faker } from "@faker-js/faker";
+import { randNumber } from "@ngneat/falso";
 import { useEffect } from "react";
 import { MicControl } from "./MicControl";
 import { interval } from "../utils";
@@ -20,7 +20,7 @@ const meta: Meta<MicControlProps> = {
       useEffect(() => {
         if (audioTrack) {
           return interval(() => {
-            audioTrack.setVolume(faker.datatype.number({ min: 0, max: 100 }));
+            audioTrack.setVolume(randNumber({ min: 0, max: 100 }));
           }, 2000);
         }
       }, [audioTrack]);

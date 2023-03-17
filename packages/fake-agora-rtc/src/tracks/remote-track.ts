@@ -6,7 +6,7 @@ import type {
 } from "agora-rtc-sdk-ng";
 import type { FakeTrackProps } from "./track";
 
-import { faker } from "@faker-js/faker";
+import { randUuid } from "@ngneat/falso";
 import { FakeTrack } from "./track";
 import { hideProperties } from "../utils";
 
@@ -22,7 +22,7 @@ export class FakeRemoteTrack extends FakeTrack {
 
   protected _uid: UID;
 
-  protected constructor({ uid = faker.datatype.uuid(), ...trackProps }: FakeRemoteTrackProps = {}) {
+  protected constructor({ uid = randUuid(), ...trackProps }: FakeRemoteTrackProps = {}) {
     super(trackProps);
     this._uid = uid;
 

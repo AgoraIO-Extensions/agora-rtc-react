@@ -1,14 +1,17 @@
 import type { UID } from "agora-rtc-sdk-ng";
 
-import { faker } from "@faker-js/faker";
+import { randNumber, randFirstName, seed } from "@ngneat/falso";
 
 export const fakeName = (uid: UID): string => {
-  faker.seed(Number(uid));
-  return faker.name.firstName();
+  seed(String(uid));
+  const name = randFirstName();
+  seed();
+  return name;
 };
 
 export const fakeAvatar = (uid: UID): string => {
-  faker.seed(Number(uid));
-  const size = faker.datatype.number({ min: 200, max: 300 });
+  seed(String(uid));
+  const size = randNumber({ min: 200, max: 300 });
+  seed();
   return `http://placekitten.com/${size}/${size}`;
 };

@@ -110,5 +110,3 @@ export class FakeRemoteAudioTrack extends FakeRemoteTrack {
   private _audioEl?: HTMLAudioElement;
   private _volume: number;
 }
-
-console.log(Object.keys(FakeRemoteAudioTrack.create()));

@@ -1,7 +1,7 @@
 import type { ILocalTrack, LocalAudioTrackStats, LocalVideoTrackStats } from "agora-rtc-sdk-ng";
 import type { FakeTrackProps } from "./track";
 
-import { faker } from "@faker-js/faker";
+import { randProductDescription } from "@ngneat/falso";
 import { FakeTrack } from "./track";
 import { hideProperties } from "../utils";
 
@@ -20,7 +20,7 @@ export class FakeLocalTrack extends FakeTrack {
   protected _label: string;
 
   protected constructor({
-    label = faker.commerce.productDescription(),
+    label = randProductDescription(),
     enabled = true,
     muted = false,
     ...trackProps

@@ -107,3 +107,5 @@ dist
 docs
 
 .DS_Store
+
+storybook-static

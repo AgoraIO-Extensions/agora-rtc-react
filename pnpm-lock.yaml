@@ -30,7 +30,7 @@ importers:
 
   examples/mobx:
     specifiers:
-      '@faker-js/faker': ^7.6.0
+      '@ngneat/falso': ^6.4.0
       '@types/react': ^18.0.28
       '@types/react-dom': ^18.0.11
       '@vitejs/plugin-react': ^3.1.0
@@ -46,7 +46,7 @@ importers:
       typescript: ^4.9.5
       vite: ^4.1.4
     dependencies:
-      '@faker-js/faker': 7.6.0
+      '@ngneat/falso': 6.4.0
       agora-rtc-react: link:../../packages/agora-rtc-react
       agora-rtc-sdk-ng: 4.16.1
       clsx: 1.2.1
@@ -65,9 +65,9 @@ importers:
 
   examples/overview:
     specifiers:
-      '@faker-js/faker': ^7.6.0
       '@iconify-json/lucide': ^1.1.70
       '@iconify-json/mdi': ^1.1.50
+      '@ngneat/falso': ^6.4.0
       '@types/react': ^18.0.28
       '@types/react-dom': ^18.0.11
       '@vitejs/plugin-react': ^3.1.0
@@ -88,9 +88,9 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       sanitize.css: 13.0.0
     devDependencies:
-      '@faker-js/faker': 7.6.0
       '@iconify-json/lucide': 1.1.70
       '@iconify-json/mdi': 1.1.50
+      '@ngneat/falso': 6.4.0
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
       '@vitejs/plugin-react': 3.1.0_vite@4.1.4
@@ -100,7 +100,7 @@ importers:
 
   packages/agora-rtc-react:
     specifiers:
-      '@faker-js/faker': ^7.6.0
+      '@ngneat/falso': ^6.4.0
       '@storybook/addon-actions': 7.0.0-beta.43
       '@storybook/addon-essentials': ^7.0.0-rc.3
       '@storybook/addon-interactions': ^7.0.0-rc.3
@@ -128,7 +128,7 @@ importers:
       vite: ^4.1.4
       vitest: ^0.29.2
     devDependencies:
-      '@faker-js/faker': 7.6.0
+      '@ngneat/falso': 6.4.0
       '@storybook/addon-actions': 7.0.0-beta.43_biqbaboplfbrettd7655fr4n2y
       '@storybook/addon-essentials': 7.0.0-rc.3_biqbaboplfbrettd7655fr4n2y
       '@storybook/addon-interactions': 7.0.0-rc.3_biqbaboplfbrettd7655fr4n2y
@@ -158,12 +158,12 @@ importers:
 
   packages/fake-agora-rtc:
     specifiers:
-      '@faker-js/faker': ^7.6.0
+      '@ngneat/falso': ^6.4.0
       agora-rtc-sdk-ng: ^4.16.1
       typescript: ^4.9.5
       vite: ^4.1.4
     devDependencies:
-      '@faker-js/faker': 7.6.0
+      '@ngneat/falso': 6.4.0
       agora-rtc-sdk-ng: 4.16.1
       typescript: 4.9.5
       vite: 4.1.4
@@ -1921,10 +1921,6 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@faker-js/faker/7.6.0:
-    resolution: {integrity: sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==}
-    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
-
   /@fal-works/esbuild-plugin-global-externals/2.1.2:
     resolution: {integrity: sha512-cEee/Z+I12mZcFJshKcCqC8tuX5hG3s+d+9nZ3LabqKF1vKdF41B92pJVCBggjAGORAeOzyyDDKrZwIkLffeOQ==}
     dev: true
@@ -2131,6 +2127,12 @@ packages:
       tar-fs: 2.1.1
     dev: true
 
+  /@ngneat/falso/6.4.0:
+    resolution: {integrity: sha512-f6r036h2fX/AoHw1eV2t8+qWQwrbSrozs3zXMhhwoO7SJBc+DGMxRWEhFeYIinfwx0uhUH8ggx5+PDLzYESLOA==}
+    dependencies:
+      seedrandom: 3.0.5
+      uuid: 8.3.2
+
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -2319,7 +2321,7 @@ packages:
       '@storybook/csf-plugin': 7.0.0-rc.3
       '@storybook/csf-tools': 7.0.0-rc.3
       '@storybook/global': 5.0.0
-      '@storybook/mdx2-csf': 1.0.0-next.5
+      '@storybook/mdx2-csf': 1.0.0-next.6
       '@storybook/node-logger': 7.0.0-rc.3
       '@storybook/postinstall': 7.0.0-rc.3
       '@storybook/preview-api': 7.0.0-rc.3
@@ -2596,7 +2598,7 @@ packages:
       '@storybook/client-logger': 7.0.0-rc.3
       '@storybook/core-common': 7.0.0-rc.3
       '@storybook/csf-plugin': 7.0.0-rc.3
-      '@storybook/mdx2-csf': 1.0.0-next.5
+      '@storybook/mdx2-csf': 1.0.0-next.6
       '@storybook/node-logger': 7.0.0-rc.3
       '@storybook/preview': 7.0.0-rc.3
       '@storybook/preview-api': 7.0.0-rc.3
@@ -3013,8 +3015,8 @@ packages:
     resolution: {integrity: sha512-8Q/vpHkvWQ/fZHRPFOgGC4Qhgpmafe9GV2QKk3yRA/p9zcW4UzP9fbL4qw6tq+5GLM/kFKArBu28ZA7L7sKB9A==}
     dev: true
 
-  /@storybook/mdx2-csf/1.0.0-next.5:
-    resolution: {integrity: sha512-02w0sgGZaK1agT050yCVhJ+o4rLHANWvLKWjQjeAsYbjneLC5ITt+3GDB4jRiWwJboZ8dHW1fGSK1Vg5fA34aQ==}
+  /@storybook/mdx2-csf/1.0.0-next.6:
+    resolution: {integrity: sha512-m6plojocU/rmrqWd26yvm8D+oHZPZ6PtSSFmZIgpNDEPVmc8s4fBD6LXOAB5MiPI5f8KLUr2HVhOMZ97o5pDTw==}
     dev: true
 
   /@storybook/node-logger/7.0.0-rc.3:
@@ -8161,6 +8163,9 @@ packages:
     dependencies:
       loose-envify: 1.4.0
 
+  /seedrandom/3.0.5:
+    resolution: {integrity: sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg==}
+
   /semver/5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
     hasBin: true
@@ -9062,6 +9067,10 @@ packages:
   /uuid-browser/3.1.0:
     resolution: {integrity: sha512-dsNgbLaTrd6l3MMxTtouOCFw4CBFc/3a+GgYA2YyrJvyQ1u6q4pcu3ktLoUZ/VN/Aw9WsauazbgsgdfVWgAKQg==}
     dev: true
+
+  /uuid/8.3.2:
+    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
 
   /v8-to-istanbul/9.1.0:
     resolution: {integrity: sha512-6z3GW9x8G1gd+JIIgQQQxXuiJtCXeAjp6RaPEPLv62mH3iPHPxV6W3robxtCzNErRo6ZwTmzWhsbNvjyEBKzKA==}

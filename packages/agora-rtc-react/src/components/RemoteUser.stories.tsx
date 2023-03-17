@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import type { FC } from "react";
 import { useCallback } from "react";
 import type { RemoteUserProps } from "./RemoteUser";
 
-import { faker } from "@faker-js/faker";
+import { randFirstName, randNumber, randUuid } from "@ngneat/falso";
 import { createFakeRtcClient, FakeRemoteAudioTrack, FakeRemoteVideoTrack } from "fake-agora-rtc";
 import { useArgs } from "@storybook/preview-api";
 import { useEffect, useState } from "react";
@@ -15,7 +14,7 @@ import { RemoteUser } from "./RemoteUser";
 
 const meta: Meta<RemoteUserProps> = {
   title: "Prebuilt/RemoteUser",
-  component: RemoteUser as FC<RemoteUserProps>,
+  component: RemoteUser,
   tags: ["autodocs"],
   argTypes: {
     user: { table: { disable: true } },
@@ -29,7 +28,7 @@ const meta: Meta<RemoteUserProps> = {
       useEffect(() => {
         if (audioTrack) {
           return interval(() => {
-            audioTrack.setVolume(faker.datatype.number({ min: 0, max: 100 }));
+            audioTrack.setVolume(randNumber({ min: 0, max: 100 }));
           }, 2000);
         }
       }, [audioTrack]);
@@ -53,7 +52,7 @@ export default meta;
 export const Overview: StoryObj<RemoteUserProps> = {
   args: {
     user: {
-      uid: faker.datatype.uuid(),
+      uid: randUuid(),
       hasVideo: true,
       hasAudio: true,
     },
@@ -72,7 +71,7 @@ export const WithCover: StoryObj<RemoteUserProps> = {
   },
   args: {
     user: {
-      uid: faker.datatype.uuid(),
+      uid: randUuid(),
       hasVideo: true,
       hasAudio: true,
     },
@@ -93,7 +92,7 @@ export const WithControls: StoryObj<RemoteUserProps> = {
   },
   args: {
     user: {
-      uid: faker.datatype.uuid(),
+      uid: randUuid(),
       hasVideo: true,
       hasAudio: true,
     },
@@ -104,7 +103,7 @@ export const WithControls: StoryObj<RemoteUserProps> = {
   },
   render(args) {
     /* eslint-disable react-hooks/rules-of-hooks */
-    const [userName] = useState(faker.name.firstName());
+    const [userName] = useState(randFirstName());
     const [, updateArgs] = useArgs();
     const setVideo = useCallback(
       (playVideo: boolean): void => {

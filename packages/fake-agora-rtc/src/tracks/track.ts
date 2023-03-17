@@ -1,6 +1,6 @@
 import type { ITrack } from "agora-rtc-sdk-ng";
 
-import { faker } from "@faker-js/faker";
+import { randUuid } from "@ngneat/falso";
 import { FakeAgoraEventEmitter } from "../eventemitter";
 import { hideProperties } from "../utils";
 
@@ -16,10 +16,7 @@ export class FakeTrack extends FakeAgoraEventEmitter {
 
   private readonly _trackId: string;
 
-  protected constructor({
-    trackMediaType = "video",
-    trackId = faker.datatype.uuid(),
-  }: FakeTrackProps = {}) {
+  protected constructor({ trackMediaType = "video", trackId = randUuid() }: FakeTrackProps = {}) {
     super();
 
     this.trackMediaType = trackMediaType;

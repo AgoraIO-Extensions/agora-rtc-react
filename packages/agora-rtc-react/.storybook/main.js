@@ -15,4 +15,9 @@ module.exports = {
   core: {
     disableTelemetry: true,
   },
+  typescript: {
+    reactDocgen: "react-docgen",
+    skipBabel: true,
+    check: false,
+  },
 };

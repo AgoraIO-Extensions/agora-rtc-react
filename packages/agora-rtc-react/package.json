@@ -31,6 +31,9 @@
     "build": "tsup",
     "start": "pnpm run -F example-overview start",
     "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "storybook-docs": "storybook dev --docs",
+    "build-storybook-docs": "storybook build --docs",
     "test": "vitest run --coverage",
     "test:watch": "vitest"
   },
@@ -39,7 +42,7 @@
     "react": ">=16.8"
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.6.0",
+    "@ngneat/falso": "^6.4.0",
     "@storybook/addon-actions": "7.0.0-beta.43",
     "@storybook/addon-essentials": "^7.0.0-rc.3",
     "@storybook/addon-interactions": "^7.0.0-rc.3",

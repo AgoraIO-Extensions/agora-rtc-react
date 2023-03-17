@@ -1,5 +1,7 @@
 build/
-dist/
-node_modules/
+**/dist/*
+**/coverage/*
+**/node_modules/*
+**/storybook-static/*
 .snapshots/
 *.min.js
