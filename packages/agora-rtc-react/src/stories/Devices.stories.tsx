@@ -4,6 +4,7 @@ import { randNumber, randFood, randUuid, seed } from "@ngneat/falso";
 
 const meta: Meta = {
   title: "Recipes/Devices",
+  tags: ["autodocs"],
 };
 
 export default meta;

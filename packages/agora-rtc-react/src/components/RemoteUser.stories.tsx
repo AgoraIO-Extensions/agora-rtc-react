@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useCallback } from "react";
+import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import type { RemoteUserProps } from "./RemoteUser";
 
 import { randFirstName, randNumber, randUuid } from "@ngneat/falso";
-import { createFakeRtcClient, FakeRemoteAudioTrack, FakeRemoteVideoTrack } from "fake-agora-rtc";
 import { useArgs } from "@storybook/preview-api";
-import { useEffect, useState } from "react";
+import { createFakeRtcClient, FakeRemoteAudioTrack, FakeRemoteVideoTrack } from "fake-agora-rtc";
+import { useCallback, useEffect, useState } from "react";
 import { AgoraRTCProvider } from "../hooks/context";
 import { interval } from "../utils";
 import { CameraControl } from "./CameraControl";
@@ -25,6 +25,7 @@ const meta: Meta<RemoteUserProps> = {
   decorators: [
     (Story, context) => {
       const audioTrack = context.args.user?.audioTrack;
+
       useEffect(() => {
         if (audioTrack) {
           return interval(() => {
@@ -35,10 +36,17 @@ const meta: Meta<RemoteUserProps> = {
 
       const [client] = useState(() =>
         createFakeRtcClient({
-          subscribe: async (user, mediaType): Promise<any> =>
-            mediaType === "audio"
-              ? (user.audioTrack = FakeRemoteAudioTrack.create())
-              : (user.videoTrack = FakeRemoteVideoTrack.create()),
+          subscribe: async (user, mediaType): Promise<any> => {
+            if (mediaType === "audio") {
+              const audioTrack = FakeRemoteAudioTrack.create();
+              user.audioTrack = audioTrack;
+              return audioTrack;
+            } else {
+              const videoTrack = FakeRemoteVideoTrack.create();
+              user.videoTrack = videoTrack;
+              return videoTrack;
+            }
+          },
           unsubscribe: async () => void 0,
         }),
       );
@@ -49,16 +57,22 @@ const meta: Meta<RemoteUserProps> = {
 
 export default meta;
 
+function RenderRemoteUser(args: RemoteUserProps) {
+  const [user] = useState<IAgoraRTCRemoteUser | undefined>(() => args.user && { ...args.user });
+  return <RemoteUser {...args} user={user} />;
+}
+
 export const Overview: StoryObj<RemoteUserProps> = {
   args: {
+    playVideo: true,
+    playAudio: false,
     user: {
       uid: randUuid(),
       hasVideo: true,
       hasAudio: true,
     },
-    playVideo: true,
-    playAudio: false,
   },
+  render: RenderRemoteUser,
 };
 
 export const WithCover: StoryObj<RemoteUserProps> = {
@@ -79,6 +93,7 @@ export const WithCover: StoryObj<RemoteUserProps> = {
     playAudio: false,
     cover: "http://placekitten.com/200/200",
   },
+  render: RenderRemoteUser,
 };
 
 export const WithControls: StoryObj<RemoteUserProps> = {
@@ -102,6 +117,7 @@ export const WithControls: StoryObj<RemoteUserProps> = {
     cover: "http://placekitten.com/200/200",
   },
   render: function WithControls(args) {
+    const [user] = useState<IAgoraRTCRemoteUser | undefined>(() => args.user && { ...args.user });
     const [userName] = useState(randFirstName());
     const [, updateArgs] = useArgs();
     const setVideo = useCallback(
@@ -118,7 +134,7 @@ export const WithControls: StoryObj<RemoteUserProps> = {
     );
 
     return (
-      <RemoteUser {...args}>
+      <RemoteUser {...args} user={user}>
         <div
           style={{
             display: "flex",
