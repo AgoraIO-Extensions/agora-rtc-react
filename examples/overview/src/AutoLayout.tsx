@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "react";
 import { clsx } from "clsx";
 import { forwardRef } from "react";
 
-const Item = forwardRef<HTMLDivElement, PropsWithChildren<{ className?: string }>>(
+const Item = /* @__PURE__ */ forwardRef<HTMLDivElement, PropsWithChildren<{ className?: string }>>(
   ({ className, children }, ref) => (
     <div
       ref={ref}

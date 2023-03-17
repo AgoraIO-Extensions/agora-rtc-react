@@ -112,7 +112,7 @@ export class FakeLocalAudioTrack extends FakeLocalTrack {
    * <br>&emsp;&emsp;&emsp;*4.1.0*
    *
    * > Note:
-   * > - As of v4.7.0, this method no longer takes effect. Use [IRemoteAudioTrack.setPlaybackDevice]{@link IRemoteAudioTrack.setPlaybackDevice} instead.
+   * > - As of v4.7.0, this method no longer takes effect. Use IRemoteAudioTrack.setPlaybackDevice() instead.
    * > - This method supports Chrome on desktop devices only. Other browsers throw a '`NOT_SUPPORTED` error when calling this method.
    *
    * Sets the playback device (speaker) for the remote audio stream.

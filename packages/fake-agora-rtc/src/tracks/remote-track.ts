@@ -39,7 +39,7 @@ export class FakeRemoteTrack extends FakeTrack {
   /**
    * Gets the statistics of a remote track.
    *
-   * **DEPRECATED** from v4.1.0. Use [AgoraRTCClient.getRemoteVideoStats]{@link IAgoraRTCClient.getRemoteVideoStats} and [AgoraRTCClient.getRemoteAudioStats]{@link IAgoraRTCClient.getRemoteAudioStats} instead.
+   * **DEPRECATED** from v4.1.0. Use AgoraRTCClient.getRemoteVideoStats() and AgoraRTCClient.getRemoteAudioStats() instead.
    * @return An [[RemoteAudioTrackStats]] or [[RemoteVideoTrackStats]] object.
    */
   getStats(): RemoteAudioTrackStats | RemoteVideoTrackStats {

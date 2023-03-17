@@ -101,7 +101,7 @@ export class FakeRemoteAudioTrack extends FakeRemoteTrack {
    * Sets the audio playback device, for example, the speaker.
    *
    * > This method supports Chrome on desktop devices only. Other browsers throw a `NOT_SUPPORTED` error when calling this method.
-   * @param deviceId Device ID, which can be retrieved by calling [[getPlaybackDevices]].
+   * @param deviceId Device ID, which can be retrieved by calling getPlaybackDevices().
    */
   public async setPlaybackDevice(deviceId: string): Promise<void> {
     console.log("[FakeRemoteAudioTrack]: setPlaybackDevice", deviceId);

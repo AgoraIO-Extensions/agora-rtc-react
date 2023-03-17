@@ -14,7 +14,7 @@ export class FakeCameraVideoTrack extends FakeLocalVideoTrack {
    *
    * > You can call this method either before or after publishing the video track.
    *
-   * @param deviceId The ID of the specified device. You can get the `deviceId` by calling [AgoraRTC.getCameras]{@link IAgoraRTC.getCameras}.
+   * @param deviceId The ID of the specified device. You can get the `deviceId` by calling AgoraRTC.getCameras().
    */
   public async setDevice(deviceId: string): Promise<void> {
     console.log("[FakeCameraVideoTrack]: setDevice", deviceId);

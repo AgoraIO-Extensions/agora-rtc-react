@@ -101,8 +101,7 @@ export const WithControls: StoryObj<RemoteUserProps> = {
     style: { borderRadius: 8 },
     cover: "http://placekitten.com/200/200",
   },
-  render(args) {
-    /* eslint-disable react-hooks/rules-of-hooks */
+  render: function WithControls(args) {
     const [userName] = useState(randFirstName());
     const [, updateArgs] = useArgs();
     const setVideo = useCallback(
@@ -117,7 +116,6 @@ export const WithControls: StoryObj<RemoteUserProps> = {
       },
       [updateArgs],
     );
-    /* eslint-enable react-hooks/rules-of-hooks */
 
     return (
       <RemoteUser {...args}>

@@ -14,7 +14,7 @@ export class FakeMicrophoneAudioTrack extends FakeLocalAudioTrack {
    *
    * > You can call the method either before or after publishing an audio track.
    *
-   * @param deviceId The ID of the specified device. You can get the `deviceId` by calling [AgoraRTC.getMicrophones]{@link IAgoraRTC.getMicrophones}.
+   * @param deviceId The ID of the specified device. You can get the `deviceId` by calling AgoraRTC.getMicrophones().
    */
   public async setDevice(deviceId: string): Promise<void> {
     console.log("[FakeMicrophoneAudioTrack]: setDevice", deviceId);
