@@ -1,6 +1,12 @@
 import "./App.css";
 
-import type { IAgoraRTCClient, UID } from "agora-rtc-sdk-ng";
+import type {
+  IAgoraRTCClient,
+  ICameraVideoTrack,
+  IMicrophoneAudioTrack,
+  UID,
+} from "agora-rtc-sdk-ng";
+
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { useEffect, useMemo, useState } from "react";
 
@@ -13,8 +19,6 @@ import {
   SVGCameraMute,
   SVGMicrophone,
   SVGMicrophoneMute,
-  useCamera,
-  useMicrophone,
   usePublishedRemoteUsers,
   UserCover,
   useRemoteUsers,
@@ -44,8 +48,27 @@ export const App = () => {
   const remoteUsers = useRemoteUsers(client);
   const publishedUsers = usePublishedRemoteUsers(client);
 
-  const { audioTrack, micOn, setMic } = useMicrophone(client, false, { ANS: true, AEC: true });
-  const { videoTrack, cameraOn, setCamera } = useCamera(client, false);
+  const [micOn, setMic] = useState(false);
+  const [audioTrack, setAudioTrack] = useState<IMicrophoneAudioTrack | null>(null);
+  useEffect(() => {
+    if (micOn && !audioTrack) {
+      sp(AgoraRTC.createMicrophoneAudioTrack({ ANS: true, AEC: true })).then(setAudioTrack);
+    }
+    if (audioTrack) {
+      audioTrack.setEnabled(micOn);
+    }
+  }, [audioTrack, micOn, sp]);
+
+  const [cameraOn, setCamera] = useState(false);
+  const [videoTrack, setVideoTrack] = useState<ICameraVideoTrack | null>(null);
+  useEffect(() => {
+    if (cameraOn && !videoTrack) {
+      sp(AgoraRTC.createCameraVideoTrack()).then(setVideoTrack);
+    }
+    if (videoTrack) {
+      videoTrack.setEnabled(cameraOn);
+    }
+  }, [videoTrack, cameraOn, sp]);
 
   const selfPublished = micOn || cameraOn;
 

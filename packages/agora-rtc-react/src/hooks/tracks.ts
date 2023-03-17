@@ -1,76 +1,14 @@
 import type {
-  MicrophoneAudioTrackInitConfig,
-  CameraVideoTrackInitConfig,
-  IAgoraRTCClient,
   IAgoraRTCRemoteUser,
+  ILocalAudioTrack,
   IRemoteAudioTrack,
   IRemoteVideoTrack,
-  ILocalAudioTrack,
 } from "agora-rtc-sdk-ng";
 
-import AgoraRTC from "agora-rtc-sdk-ng";
-import { useState, useMemo, useEffect } from "react";
-import { listen } from "../listen";
+import { useEffect, useState } from "react";
 import { interval, joinDisposers } from "../utils";
-import { useConnectionState } from "./client";
+import { listen } from "../listen";
 import { useRTCClient } from "./context";
-import { useAwaited } from "./tools";
-
-/**
- * Create and publish microphone audio track.
- *
- * If `client` is null, it will not publish the track.
- */
-export function useMicrophone(
-  client: IAgoraRTCClient | null,
-  defaultMicOn: boolean,
-  config?: MicrophoneAudioTrackInitConfig,
-) {
-  const [micOn, setMic] = useState(defaultMicOn);
-  const pAudioTrack = useMemo(
-    // TODO: config change?
-    () => (micOn ? AgoraRTC.createMicrophoneAudioTrack(config) : null),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [micOn],
-  );
-  const audioTrack = useAwaited(pAudioTrack);
-  const connectionState = useConnectionState(client);
-  useEffect(() => {
-    if (client && audioTrack && connectionState === "CONNECTED") {
-      client.publish(audioTrack).catch(console.error);
-      return () => void client.unpublish(audioTrack);
-    }
-  }, [audioTrack, client, connectionState]);
-  return { audioTrack, micOn, setMic };
-}
-
-/**
- * Create and publish camera video track.
- *
- * If `client` is null, it will not publish the track.
- */
-export function useCamera(
-  client: IAgoraRTCClient | null,
-  defaultCameraOn: boolean,
-  config?: CameraVideoTrackInitConfig,
-) {
-  const [cameraOn, setCamera] = useState(defaultCameraOn);
-  const pVideoTrack = useMemo(
-    // TODO: config change?
-    () => (cameraOn ? AgoraRTC.createCameraVideoTrack(config) : null),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [cameraOn],
-  );
-  const videoTrack = useAwaited(pVideoTrack);
-  const connectionState = useConnectionState(client);
-  useEffect(() => {
-    if (client && videoTrack && connectionState === "CONNECTED") {
-      client.publish(videoTrack).catch(console.error);
-      return () => void client.unpublish(videoTrack);
-    }
-  }, [videoTrack, client, connectionState]);
-  return { videoTrack, cameraOn, setCamera };
-}
 
 /**
  * Subscribe and get remote user video track.
