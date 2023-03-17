@@ -19,7 +19,6 @@ export const Enabled: StoryObj<MicrophoneAudioTrackProps> = {
   args: {
     track: FakeMicrophoneAudioTrack.create(),
     play: true,
-    enabled: true,
   },
 };
 
@@ -33,5 +32,6 @@ export const Disabled: StoryObj<MicrophoneAudioTrackProps> = {
   args: {
     track: FakeMicrophoneAudioTrack.create(),
     play: true,
+    disabled: true,
   },
 };

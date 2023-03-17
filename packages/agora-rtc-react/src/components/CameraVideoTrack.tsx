@@ -20,7 +20,7 @@ export interface CameraVideoTrackProps extends LocalVideoTrackProps {
    *
    * If a track is disabled, the SDK stops playing and publishing the track.
    */
-  readonly enabled?: boolean;
+  readonly disabled?: boolean;
 }
 
 /**
@@ -34,7 +34,7 @@ export interface CameraVideoTrackProps extends LocalVideoTrackProps {
 export function CameraVideoTrack({
   track: maybeTrack,
   deviceId,
-  enabled,
+  disabled,
   ...props
 }: CameraVideoTrackProps) {
   const track = useAwaited(maybeTrack);
@@ -46,10 +46,10 @@ export function CameraVideoTrack({
   }, [deviceId, track]);
 
   useEffect(() => {
-    if (track && enabled != null) {
-      track.setEnabled(enabled).catch(console.warn);
+    if (track) {
+      track.setEnabled(!disabled).catch(console.warn);
     }
-  }, [enabled, track]);
+  }, [disabled, track]);
 
   return <LocalVideoTrack track={maybeTrack} {...props} />;
 }

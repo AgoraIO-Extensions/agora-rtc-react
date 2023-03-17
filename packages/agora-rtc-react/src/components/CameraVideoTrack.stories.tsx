@@ -18,7 +18,6 @@ export default meta;
 export const Enabled: StoryObj<CameraVideoTrackProps> = {
   args: {
     track: FakeCameraVideoTrack.create(),
-    enabled: true,
     play: true,
   },
 };
@@ -33,5 +32,6 @@ export const Disabled: StoryObj<CameraVideoTrackProps> = {
   args: {
     track: FakeCameraVideoTrack.create(),
     play: true,
+    disabled: true,
   },
 };

@@ -21,7 +21,7 @@ export interface MicrophoneAudioTrackProps extends LocalAudioTrackProps {
    *
    * If a track is disabled, the SDK stops playing and publishing the track.
    */
-  readonly enabled?: boolean;
+  readonly disabled?: boolean;
 }
 
 /**
@@ -35,7 +35,7 @@ export interface MicrophoneAudioTrackProps extends LocalAudioTrackProps {
 export function MicrophoneAudioTrack({
   track: maybeTrack,
   deviceId,
-  enabled,
+  disabled,
   ...props
 }: PropsWithChildren<MicrophoneAudioTrackProps>) {
   const track = useAwaited(maybeTrack);
@@ -47,10 +47,10 @@ export function MicrophoneAudioTrack({
   }, [deviceId, track]);
 
   useEffect(() => {
-    if (track && enabled != null) {
-      track.setEnabled(enabled).catch(console.warn);
+    if (track) {
+      track.setEnabled(!disabled).catch(console.warn);
     }
-  }, [enabled, track]);
+  }, [disabled, track]);
 
   return <LocalAudioTrack track={maybeTrack} {...props} />;
 }
