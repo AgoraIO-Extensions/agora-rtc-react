@@ -14,11 +14,11 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
    */
   readonly user?: IAgoraRTCRemoteUser;
   /**
-   * Whether to play the remote user's video track. Default true.
+   * Whether to play the remote user's video track. Default false.
    */
   readonly playVideo?: boolean;
   /**
-   * Whether to play the remote user's audio track. Default true.
+   * Whether to play the remote user's audio track. Default false.
    */
   readonly playAudio?: boolean;
   /**
@@ -50,8 +50,8 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
  */
 export function RemoteUser({
   user,
-  playVideo = true,
-  playAudio = true,
+  playVideo,
+  playAudio,
   playbackDeviceId,
   volume,
   darkenOnHover,
