@@ -27,4 +27,7 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  options: {
+    showPanel: true,
+  },
 };

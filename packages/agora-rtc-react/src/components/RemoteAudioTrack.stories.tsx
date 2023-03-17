@@ -11,6 +11,13 @@ const meta: Meta<RemoteAudioTrackProps> = {
   parameters: {
     layout: "fullscreen",
   },
+  render(args) {
+    return (
+      <RemoteAudioTrack {...args}>
+        <p>An Example Remote Audio Track</p>
+      </RemoteAudioTrack>
+    );
+  },
 };
 
 export default meta;
