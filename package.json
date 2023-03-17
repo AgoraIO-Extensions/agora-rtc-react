@@ -6,6 +6,7 @@
     "build": "pnpm -r run build",
     "start": "pnpm run example",
     "storybook": "pnpm -F agora-rtc-react run storybook",
+    "build-storybook": "pnpm -F agora-rtc-react run build-storybook",
     "test": "pnpm -r run test",
     "lint": "eslint --ext .ts,.tsx . && prettier --check .",
     "lint:fix": "eslint --fix --ext .ts,.tsx . && prettier --write .",
