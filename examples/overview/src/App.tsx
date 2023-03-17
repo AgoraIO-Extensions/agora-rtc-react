@@ -52,7 +52,10 @@ export const App = () => {
   const [audioTrack, setAudioTrack] = useState<IMicrophoneAudioTrack | null>(null);
   useEffect(() => {
     if (micOn && !audioTrack) {
-      sp(AgoraRTC.createMicrophoneAudioTrack({ ANS: true, AEC: true })).then(setAudioTrack);
+      sp(AgoraRTC.createMicrophoneAudioTrack({ ANS: true, AEC: true })).then(track => {
+        client.publish(track);
+        setAudioTrack(track);
+      });
     }
     if (audioTrack) {
       audioTrack.setEnabled(micOn);
@@ -63,7 +66,10 @@ export const App = () => {
   const [videoTrack, setVideoTrack] = useState<ICameraVideoTrack | null>(null);
   useEffect(() => {
     if (cameraOn && !videoTrack) {
-      sp(AgoraRTC.createCameraVideoTrack()).then(setVideoTrack);
+      sp(AgoraRTC.createCameraVideoTrack()).then(track => {
+        client.publish(track);
+        setVideoTrack(track);
+      });
     }
     if (videoTrack) {
       videoTrack.setEnabled(cameraOn);
