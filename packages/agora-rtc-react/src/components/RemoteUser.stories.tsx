@@ -63,9 +63,6 @@ export default meta;
 
 function RenderRemoteUser(args: RemoteUserProps) {
   const [user] = useState<IAgoraRTCRemoteUser | undefined>(() => args.user && { ...args.user });
-  const [, updateArgs] = useArgs();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => updateArgs({ user }), []);
   return <RemoteUser {...args} user={user} />;
 }
 
@@ -127,8 +124,6 @@ export const WithControls: StoryObj<RemoteUserProps> = {
     const [user] = useState<IAgoraRTCRemoteUser | undefined>(() => args.user && { ...args.user });
     const [userName] = useState(randFirstName());
     const [, updateArgs] = useArgs();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => updateArgs({ user }), []);
     const setVideo = useCallback(
       (playVideo: boolean): void => {
         updateArgs({ playVideo });
