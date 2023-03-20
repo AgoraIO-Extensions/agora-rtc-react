@@ -3,6 +3,7 @@ import type { IAgoraRTCClient, IAgoraRTCRemoteUser, UID } from "agora-rtc-sdk-ng
 import { listen } from "agora-rtc-react";
 import { makeAutoObservable, observable } from "mobx";
 import { SideEffectManager } from "side-effect-manager";
+import { MyShareScreen, ShareScreenUID } from "./share-screen.store";
 import { MyLocalUser } from "./local-user.store";
 import { MyRemoteUser } from "./remote-user.store";
 
@@ -10,6 +11,7 @@ export class MyUsers {
   private readonly _remoteUsersMap = observable.map<UID, MyRemoteUser>();
   private readonly _sideEffect = new SideEffectManager();
 
+  shareScreen = new MyShareScreen();
   localUser: MyLocalUser | null = null;
 
   get remoteUsers() {
@@ -33,6 +35,8 @@ export class MyUsers {
           },
 
           listen(client, "user-joined", user => {
+            // ignore sharescreen
+            if (user.uid === ShareScreenUID) return;
             this._updateRemoteUser(user, true);
           }),
 
@@ -43,11 +47,23 @@ export class MyUsers {
           listen(client, "user-published", async (user, mediaType) => {
             // ignore self
             if (user.uid === client.uid) return;
+            // sharescreen
+            if (user.uid === ShareScreenUID && !this.shareScreen.enabled) {
+              const track = await client.subscribe(user, mediaType);
+              this.shareScreen.setRemoteTrack(track, mediaType);
+              return;
+            }
+            // normal remote user
             await client.subscribe(user, mediaType);
             this._updateRemoteUser(user);
           }),
 
-          listen(client, "user-unpublished", user => {
+          listen(client, "user-unpublished", (user, mediaType) => {
+            // sharescreen
+            if (user.uid === ShareScreenUID) {
+              this.shareScreen.setRemoteTrack(null, mediaType);
+              return;
+            }
             this._updateRemoteUser(user);
           }),
         ];

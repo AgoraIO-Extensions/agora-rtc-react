@@ -1,6 +1,7 @@
 import { useConnectionState } from "agora-rtc-react";
 import { observer } from "mobx-react-lite";
 import { appStore } from "../stores/app.store";
+import { fakeName } from "../utils";
 
 const appId = import.meta.env.AGORA_APPID;
 const channel = import.meta.env.AGORA_CHANNEL;
@@ -22,7 +23,22 @@ export const JoinLeave = observer(function JoinLeave() {
         LEAVE
       </button>
       &nbsp;
-      {appStore.uid && <samp>[UID={appStore.uid}]</samp>}
+      <button
+        disabled={
+          connectionState !== "CONNECTED" ||
+          appStore.users.shareScreen.enabled ||
+          !!appStore.users.shareScreen.remoteVideoTrack
+        }
+        onClick={() => appStore.users.shareScreen.enable()}
+      >
+        Enable ShareScreen
+      </button>
+      &nbsp;
+      {appStore.uid && (
+        <samp>
+          [UID={appStore.uid}, {fakeName(appStore.uid)}]
+        </samp>
+      )}
     </div>
   );
 });

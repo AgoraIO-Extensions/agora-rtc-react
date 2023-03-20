@@ -1,13 +1,37 @@
-import { CameraControl, MicControl, RemoteUser } from "agora-rtc-react";
+import {
+  CameraControl,
+  MicControl,
+  RemoteAudioTrack,
+  RemoteUser,
+  RemoteVideoTrack,
+} from "agora-rtc-react";
 import { observer } from "mobx-react-lite";
 import { appStore } from "../stores/app.store";
 import { LocalUser } from "./LocalUser";
 
 export const Room = observer(function Room() {
-  const { remoteUsers } = appStore.users;
+  const { remoteUsers, shareScreen } = appStore.users;
 
   return (
     <div style={{ padding: "8px 0", flex: 1, display: "flex", gap: 8 }}>
+      {shareScreen.remoteAudioTrack && (
+        <RemoteAudioTrack track={shareScreen.remoteAudioTrack} play />
+      )}
+      {shareScreen.remoteVideoTrack && (
+        <RemoteVideoTrack
+          style={{
+            width: 400,
+            height: 300,
+            background: "#000",
+            position: "relative",
+            border: "1px solid",
+            borderRadius: 8,
+            overflow: "hidden",
+          }}
+          track={shareScreen.remoteVideoTrack}
+          play
+        />
+      )}
       {appStore.uid && <LocalUser />}
       {remoteUsers.map(user => (
         <RemoteUser
