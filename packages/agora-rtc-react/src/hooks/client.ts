@@ -1,13 +1,20 @@
 import type { ConnectionState, IAgoraRTCClient } from "agora-rtc-sdk-ng";
 
-import { useState } from "react";
-import { useClientEvent } from "./events";
+import { useEffect, useState } from "react";
+import { listen } from "../listen";
 
 export function useConnectionState(client?: IAgoraRTCClient | null): ConnectionState {
   const [connectionState, setConnectionState] = useState(
     client ? client.connectionState : "DISCONNECTED",
   );
-  useClientEvent(client, "connection-state-change", setConnectionState);
+  useEffect(() => {
+    if (client) {
+      setConnectionState(client.connectionState);
+      return listen(client, "connection-state-change", setConnectionState);
+    } else {
+      setConnectionState("DISCONNECTED");
+    }
+  }, [client]);
   return connectionState;
 }
 
@@ -59,12 +66,18 @@ const initQuality = (): NetworkQuality => ({
  */
 export function useNetworkQuality(client?: IAgoraRTCClient | null): NetworkQuality {
   const [networkQuality, setNetworkQuality] = useState<NetworkQuality>(initQuality);
-  useClientEvent(client, "network-quality", q =>
-    setNetworkQuality({
-      uplink: q.uplinkNetworkQuality,
-      downlink: q.downlinkNetworkQuality,
-      delay: client?.getRTCStats().RTT ?? 0,
-    }),
-  );
+  useEffect(() => {
+    if (client) {
+      return listen(client, "network-quality", q =>
+        setNetworkQuality({
+          uplink: q.uplinkNetworkQuality,
+          downlink: q.downlinkNetworkQuality,
+          delay: client?.getRTCStats().RTT ?? 0,
+        }),
+      );
+    } else {
+      setNetworkQuality(initQuality());
+    }
+  }, [client]);
   return networkQuality;
 }
