@@ -1,13 +1,21 @@
-import type { IAgoraRTCClient, IAgoraRTCRemoteUser, UID } from "agora-rtc-sdk-ng";
+import type { IAgoraRTCClient, IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { listen } from "../listen";
 import { joinDisposers } from "../utils";
+import { useRTCClient } from "./context";
 
 /**
- * Get interactive remote users in react components.
+ * Occurs when a remote user becomes online or offline. (client `user-join` and `user-left` events)
  *
- * Note: does not include self.
+ * Updated when one of the following situations occurs:
+ * - In a communication channel:
+ *   - A remote user joins or leaves the channel.
+ *   - A remote user has dropped offline or rejoins the channel after a network interruption.
+ * - In a live-broadcast channel:
+ *   - A remote host joins or leaves the channel.
+ *   - A remote host has dropped offline or rejoins the channel after a network interruption.
+ *   - A remote host/user switches the client role between host and audience.
  *
  * ```jsx
  * const remoteUsers = useRemoteUsers(client)
@@ -16,25 +24,27 @@ import { joinDisposers } from "../utils";
  * ))
  * ```
  */
-export function useRemoteUsers(client: IAgoraRTCClient): readonly IAgoraRTCRemoteUser[] {
-  const [users, setUsers] = useState(client.remoteUsers);
+export function useRemoteUsers(client?: IAgoraRTCClient): readonly IAgoraRTCRemoteUser[] {
+  const clientFromContext = useRTCClient(true);
+  const resolvedClient = client || clientFromContext;
+  const [users, setUsers] = useState(resolvedClient ? resolvedClient.remoteUsers : []);
 
   useEffect(() => {
-    // .slice(): make sure the array reference is updated
-    const update = () => setUsers(client.remoteUsers.slice());
-    return joinDisposers([
-      listen(client, "user-joined", update),
-      listen(client, "user-left", update),
-    ]);
-  }, [client]);
+    if (resolvedClient) {
+      // .slice(): make sure the array reference is updated
+      const update = () => setUsers(resolvedClient.remoteUsers.slice());
+      return joinDisposers([
+        listen(resolvedClient, "user-joined", update),
+        listen(resolvedClient, "user-left", update),
+      ]);
+    }
+  }, [resolvedClient]);
 
   return users;
 }
 
 /**
- * Get published remote users, which may have audio or video tracks.
- *
- * Note: does not include self.
+ * Updated when a remote user publishes or unpublishes an audio or video track. (client `user-published` and `user-unpublished` events)
  *
  * ```jsx
  * const publishedUsers = usePublishedUsers(client)
@@ -43,41 +53,27 @@ export function useRemoteUsers(client: IAgoraRTCClient): readonly IAgoraRTCRemot
  * ))
  * ```
  */
-export function usePublishedRemoteUsers(client: IAgoraRTCClient): readonly IAgoraRTCRemoteUser[] {
-  const publishedMap = useRef<Record<UID, number>>({}); // 0b01: audio, 0b10: video, 0b11: both, 0: none
+export function usePublishedRemoteUsers(client?: IAgoraRTCClient): readonly IAgoraRTCRemoteUser[] {
+  const clientFromContext = useRTCClient(true);
+  const resolvedClient = client || clientFromContext;
+
   const [users, setUsers] = useState<IAgoraRTCRemoteUser[]>([]);
 
-  useEffect(
-    () =>
-      joinDisposers([
-        listen(client, "user-published", (user, mediaType) => {
-          if (user.uid === client.uid) return;
-          publishedMap.current[user.uid] |= mediaType === "audio" ? 0b01 : 0b10;
-          setUsers(users => replaceOrPush(users.slice(), user));
-        }),
-        listen(client, "user-unpublished", (user, mediaType) => {
-          if (user.uid === client.uid) return;
-          if ((publishedMap.current[user.uid] &= mediaType === "audio" ? 0b10 : 0b01))
-            setUsers(users => replaceOrPush(users.slice(), user));
-          else {
-            delete publishedMap.current[user.uid];
-            setUsers(users => users.filter(u => u.uid !== user.uid));
-          }
-        }),
-      ]),
-    [client],
-  );
+  useEffect(() => {
+    if (resolvedClient) {
+      const updatePublishedRemoteUsers = () => {
+        setUsers(
+          resolvedClient.remoteUsers.filter(
+            user => user.uid !== resolvedClient.uid && (user.hasAudio || user.hasVideo),
+          ),
+        );
+      };
+      return joinDisposers([
+        listen(resolvedClient, "user-published", updatePublishedRemoteUsers),
+        listen(resolvedClient, "user-unpublished", updatePublishedRemoteUsers),
+      ]);
+    }
+  }, [resolvedClient]);
 
   return users;
-
-  function replaceOrPush(array: IAgoraRTCRemoteUser[], item: IAgoraRTCRemoteUser) {
-    for (let i = array.length - 1; i >= 0; --i) {
-      if (array[i].uid === item.uid) {
-        array[i] = item;
-        return array;
-      }
-    }
-    array.push(item);
-    return array;
-  }
 }
