@@ -3,8 +3,6 @@ import type {
   ConnectionState,
   IAgoraRTCClient,
   IAgoraRTCRemoteUser,
-  ICameraVideoTrack,
-  IMicrophoneAudioTrack,
   IRemoteAudioTrack,
   IRemoteVideoTrack,
   UID,
@@ -14,6 +12,7 @@ import AgoraRTC from "agora-rtc-sdk-ng";
 import { makeAutoObservable, observable } from "mobx";
 import { Disposable } from "side-effect-manager";
 import { fakeAvatar, fakeName } from "./utils";
+import { MyLocalUser } from "./local-user";
 
 AgoraRTC.setLogLevel(/* warning */ 2);
 
@@ -29,6 +28,8 @@ interface MyRemoteUser {
 }
 
 class AppStore {
+  localUser: MyLocalUser | null = null;
+
   private readonly remoteUsersMap = observable.map<UID, MyRemoteUser>();
   private readonly disposable = new Disposable();
 
@@ -36,8 +37,6 @@ class AppStore {
   connectionState: ConnectionState = "DISCONNECTED";
 
   uid?: UID = void 0;
-  localMicTrack?: IMicrophoneAudioTrack = void 0;
-  localCameraTrack?: ICameraVideoTrack = void 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -47,12 +46,12 @@ class AppStore {
     return [...this.remoteUsersMap.values()];
   }
 
-  get avatar(): string {
-    return fakeAvatar(this.uid || 0);
+  get avatar(): string | undefined {
+    return this.localUser?.avatar;
   }
 
-  get name(): string {
-    return fakeName(this.uid || 0);
+  get name(): string | undefined {
+    return this.localUser?.name;
   }
 
   async join(appid: string, channel: string, token: string | null): Promise<void> {
@@ -95,15 +94,8 @@ class AppStore {
 
   async leave(): Promise<void> {
     this.disposable.flushAll();
-    if (this.localMicTrack) {
-      this.localMicTrack.stop();
-      this.localMicTrack.close();
-      this.localMicTrack = void 0;
-    }
-    if (this.localCameraTrack) {
-      this.localCameraTrack.stop();
-      this.localCameraTrack.close();
-      this.localCameraTrack = void 0;
+    if (this.localUser) {
+      this.localUser.leave();
     }
     if (this.client) {
       this.remoteUsers.forEach(({ rtcUser }) => {
@@ -111,30 +103,10 @@ class AppStore {
         rtcUser.videoTrack?.stop();
       });
       this.remoteUsersMap.clear();
-
       await this.client.leave();
-      this.updateClient(void 0, void 0);
-      this.updateConnectionState("DISCONNECTED");
     }
-  }
-
-  async createLocalMicTrack(): Promise<void> {
-    if (this.client && !this.localMicTrack) {
-      const track = await AgoraRTC.createMicrophoneAudioTrack({
-        AEC: true,
-        ANS: true,
-      });
-      await this.client.publish(track);
-      this.updateLocalMicTrack(track);
-    }
-  }
-
-  async createLocalCameraTrack(): Promise<void> {
-    if (this.client && !this.localMicTrack) {
-      const track = await AgoraRTC.createCameraVideoTrack();
-      await this.client.publish(track);
-      this.updateLocalCameraTrack(track);
-    }
+    this.updateClient(void 0, void 0);
+    this.updateConnectionState("DISCONNECTED");
   }
 
   private updateConnectionState(state: ConnectionState) {
@@ -144,6 +116,7 @@ class AppStore {
   private updateClient(client?: IAgoraRTCClient, uid?: UID): void {
     this.client = client;
     this.uid = uid;
+    this.localUser = client && uid ? new MyLocalUser({ client, uid }) : null;
   }
 
   private updateRemoteUser(rtcUser: IAgoraRTCRemoteUser, createIfNotExist?: boolean): void {
@@ -174,14 +147,6 @@ class AppStore {
 
   private deleteRemoteUser(uid: UID): void {
     this.remoteUsersMap.delete(uid);
-  }
-
-  private updateLocalMicTrack(track: IMicrophoneAudioTrack): void {
-    this.localMicTrack = track;
-  }
-
-  private updateLocalCameraTrack(track: ICameraVideoTrack): void {
-    this.localCameraTrack = track;
   }
 }
 
