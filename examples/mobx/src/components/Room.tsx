@@ -8,7 +8,7 @@ export const Room = observer(function Room() {
 
   return (
     <div style={{ padding: "8px 0", flex: 1, display: "flex", gap: 8 }}>
-      <LocalUser />
+      {appStore.uid && <LocalUser />}
       {remoteUsers.map(user => (
         <RemoteUser
           key={user.uid}

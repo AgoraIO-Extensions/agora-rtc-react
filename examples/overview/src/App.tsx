@@ -96,10 +96,10 @@ export const App = () => {
           <AutoLayout.Item>
             <CameraVideoTrack className="w-full h-full" track={videoTrack} play={cameraOn} />
             <MicrophoneAudioTrack track={audioTrack} play={micOn} />
-            {!cameraOn && (
+            {!cameraOn && uid && (
               <UserCover cover={userAvatar} className="w-full h-full absolute top-0 left-0" />
             )}
-            <Label>{`${userName}{${uid}}`}</Label>
+            {uid && <Label>{`${userName}{${uid}}`}</Label>}
           </AutoLayout.Item>
           {remoteUsers.map(user => (
             <AutoLayout.Item key={user.uid}>
