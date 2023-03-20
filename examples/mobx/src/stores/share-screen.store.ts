@@ -44,6 +44,8 @@ export class MyShareScreen {
       throw new Error("remote screen video track already exists");
     }
 
+    this.enabled = true;
+
     if (this._pTogglingShareScreen) {
       await this._pTogglingShareScreen;
     }
@@ -64,6 +66,8 @@ export class MyShareScreen {
   }
 
   async disable() {
+    this.enabled = false;
+
     if (this._pTogglingShareScreen) {
       await this._pTogglingShareScreen;
     }
