@@ -81,7 +81,7 @@ export class MyLocalUser {
     this.cameraTrack = track;
   }
 
-  leave() {
+  dispose() {
     if (this.micTrack) {
       this.micTrack.stop();
       this.micTrack.close();

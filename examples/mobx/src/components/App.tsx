@@ -3,11 +3,8 @@ import { appStore } from "../stores/app.store";
 
 import "agora-rtc-react/dist/agora-rtc-react.css";
 import { AgoraRTCProvider } from "agora-rtc-react";
+import { JoinLeave } from "./JoinLeave";
 import { Room } from "./Room";
-
-const appId = import.meta.env.AGORA_APPID;
-const channel = import.meta.env.AGORA_CHANNEL;
-const token = import.meta.env.AGORA_TOKEN;
 
 export const App = observer(function App() {
   return (
@@ -23,23 +20,7 @@ export const App = observer(function App() {
         flexDirection: "column",
       }}
     >
-      <div>
-        <button
-          disabled={appStore.connectionState !== "DISCONNECTED"}
-          onClick={() => appStore.join(appId, channel, token)}
-        >
-          JOIN
-        </button>
-        &nbsp;
-        <button
-          disabled={appStore.connectionState !== "CONNECTED"}
-          onClick={() => appStore.leave()}
-        >
-          LEAVE
-        </button>
-        &nbsp;
-        {appStore.uid && <samp>[UID={appStore.uid}]</samp>}
-      </div>
+      <JoinLeave />
       {appStore.client && (
         <AgoraRTCProvider client={appStore.client}>
           <Room />
