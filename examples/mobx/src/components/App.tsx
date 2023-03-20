@@ -1,7 +1,8 @@
 import { observer } from "mobx-react-lite";
-import { appStore } from "./store";
+import { appStore } from "../stores/app.store";
 
 import "agora-rtc-react/dist/agora-rtc-react.css";
+import { AgoraRTCProvider } from "agora-rtc-react";
 import { Room } from "./Room";
 
 const appId = import.meta.env.AGORA_APPID;
@@ -39,7 +40,11 @@ export const App = observer(function App() {
         &nbsp;
         {appStore.uid && <samp>[UID={appStore.uid}]</samp>}
       </div>
-      {appStore.client && <Room client={appStore.client} />}
+      {appStore.client && (
+        <AgoraRTCProvider client={appStore.client}>
+          <Room />
+        </AgoraRTCProvider>
+      )}
     </div>
   );
 });

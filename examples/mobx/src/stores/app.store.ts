@@ -1,31 +1,13 @@
 import { listen } from "agora-rtc-react";
-import type {
-  ConnectionState,
-  IAgoraRTCClient,
-  IAgoraRTCRemoteUser,
-  IRemoteAudioTrack,
-  IRemoteVideoTrack,
-  UID,
-} from "agora-rtc-sdk-ng";
+import type { ConnectionState, IAgoraRTCClient, IAgoraRTCRemoteUser, UID } from "agora-rtc-sdk-ng";
 
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { makeAutoObservable, observable } from "mobx";
 import { Disposable } from "side-effect-manager";
-import { fakeAvatar, fakeName } from "./utils";
-import { MyLocalUser } from "./local-user";
+import { MyLocalUser } from "./local-user.store";
+import { MyRemoteUser } from "./remote-user.store";
 
 AgoraRTC.setLogLevel(/* warning */ 2);
-
-interface MyRemoteUser {
-  uid: UID;
-  name: string;
-  avatar: string;
-  rtcUser: IAgoraRTCRemoteUser;
-  cameraOn: boolean;
-  micOn: boolean;
-  videoTrack?: IRemoteVideoTrack;
-  audioTrack?: IRemoteAudioTrack;
-}
 
 class AppStore {
   localUser: MyLocalUser | null = null;
@@ -123,25 +105,9 @@ class AppStore {
     const user = this.remoteUsersMap.get(rtcUser.uid);
     // trigger MobX updates
     if (user) {
-      user.rtcUser = rtcUser;
-      user.cameraOn = rtcUser.hasVideo;
-      user.micOn = rtcUser.hasAudio;
-      user.audioTrack = rtcUser.audioTrack;
-      user.videoTrack = rtcUser.videoTrack;
+      user.update(rtcUser);
     } else if (createIfNotExist) {
-      this.remoteUsersMap.set(
-        rtcUser.uid,
-        observable.object<MyRemoteUser>({
-          uid: rtcUser.uid,
-          name: fakeName(rtcUser.uid),
-          avatar: fakeAvatar(rtcUser.uid),
-          rtcUser,
-          cameraOn: rtcUser.hasVideo,
-          micOn: rtcUser.hasAudio,
-          audioTrack: rtcUser.audioTrack,
-          videoTrack: rtcUser.videoTrack,
-        }),
-      );
+      this.remoteUsersMap.set(rtcUser.uid, new MyRemoteUser(rtcUser));
     }
   }
 
