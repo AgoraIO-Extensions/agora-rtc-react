@@ -3,7 +3,7 @@ import type { HTMLProps } from "react";
 import type { Nullable } from "../utils";
 
 import { useEffect, useState } from "react";
-import { useStopTrackOnUmount } from "../hooks/internal";
+import { useAutoStopTrack } from "../hooks/internal";
 
 export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**
@@ -22,12 +22,12 @@ export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
 export function RemoteVideoTrack({ track, play, ...props }: RemoteVideoTrackProps) {
   const [div, setDiv] = useState<HTMLDivElement | null>(null);
 
-  useStopTrackOnUmount(track);
+  useAutoStopTrack(track);
 
   useEffect(() => {
     if (div && track && play) {
       track.play(div);
-    } else if (track && !play) {
+    } else if (track && !play && track.isPlaying) {
       track.stop();
     }
   }, [div, play, track]);

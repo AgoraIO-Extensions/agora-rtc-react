@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "react";
 import type { Nullable } from "../utils";
 
 import { useEffect } from "react";
-import { useStopTrackOnUmount } from "../hooks/internal";
+import { useAutoStopTrack } from "../hooks/internal";
 
 export interface RemoteAudioTrackProps {
   /**
@@ -33,15 +33,15 @@ export interface RemoteAudioTrackProps {
  */
 export function RemoteAudioTrack({
   track,
-  play,
+  play = false,
   playbackDeviceId,
   volume,
   children,
 }: PropsWithChildren<RemoteAudioTrackProps>) {
-  useStopTrackOnUmount(track);
+  useAutoStopTrack(track);
 
   useEffect(() => {
-    if (track) {
+    if (track && play !== track.isPlaying) {
       play ? track.play() : track.stop();
     }
   }, [play, track]);

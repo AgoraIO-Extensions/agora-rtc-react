@@ -1,6 +1,8 @@
 import type { IAgoraRTCClient } from "agora-rtc-sdk-ng";
 import type { PropsWithChildren } from "react";
+
 import { createContext, useContext } from "react";
+export { TrackBoundary } from "./internal";
 
 const AgoraRTCContext = /* @__PURE__ */ createContext<IAgoraRTCClient | null>(null);
 

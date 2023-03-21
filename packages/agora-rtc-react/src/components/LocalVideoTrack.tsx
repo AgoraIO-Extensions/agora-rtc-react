@@ -4,7 +4,7 @@ import type { MaybePromiseOrNull } from "../utils";
 
 import { useEffect, useState } from "react";
 import { useAwaited } from "../hooks";
-import { useStopTrackOnUmount } from "../hooks/internal";
+import { useAutoStopTrack } from "../hooks/internal";
 
 export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**
@@ -43,12 +43,12 @@ export function LocalVideoTrack({
   const [div, setDiv] = useState<HTMLDivElement | null>(null);
 
   const track = useAwaited(maybeTrack);
-  useStopTrackOnUmount(track);
+  useAutoStopTrack(track);
 
   useEffect(() => {
     if (div && track && play) {
       track.play(div);
-    } else if (track && !play) {
+    } else if (track && !play && track.isPlaying) {
       track.stop();
     }
   }, [div, play, track]);

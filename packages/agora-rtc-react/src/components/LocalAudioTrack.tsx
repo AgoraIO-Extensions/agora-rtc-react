@@ -4,7 +4,7 @@ import type { MaybePromiseOrNull } from "../utils";
 
 import { useEffect } from "react";
 import { useAwaited } from "../hooks";
-import { useStopTrackOnUmount } from "../hooks/internal";
+import { useAutoStopTrack } from "../hooks/internal";
 
 export interface LocalAudioTrackProps {
   /**
@@ -39,17 +39,17 @@ export interface LocalAudioTrackProps {
  */
 export function LocalAudioTrack({
   track: maybeTrack,
-  play,
+  play = false,
   volume,
   disabled,
   muted,
   children,
 }: PropsWithChildren<LocalAudioTrackProps>) {
   const track = useAwaited(maybeTrack);
-  useStopTrackOnUmount(track);
+  useAutoStopTrack(track);
 
   useEffect(() => {
-    if (track) {
+    if (track && play !== track.isPlaying) {
       play ? track.play() : track.stop();
     }
   }, [play, track]);
