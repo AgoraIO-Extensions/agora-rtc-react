@@ -15,12 +15,6 @@ export interface CameraVideoTrackProps extends LocalVideoTrackProps {
    * Device ID, which can be retrieved by calling `getDevices()`.
    */
   readonly deviceId?: string;
-  /**
-   * Enable or disable the track.
-   *
-   * If a track is disabled, the SDK stops playing and publishing the track.
-   */
-  readonly disabled?: boolean;
 }
 
 /**
@@ -31,12 +25,7 @@ export interface CameraVideoTrackProps extends LocalVideoTrackProps {
  * return <CameraVideoTrack track={track} play />
  * ```
  */
-export function CameraVideoTrack({
-  track: maybeTrack,
-  deviceId,
-  disabled,
-  ...props
-}: CameraVideoTrackProps) {
+export function CameraVideoTrack({ track: maybeTrack, deviceId, ...props }: CameraVideoTrackProps) {
   const track = useAwaited(maybeTrack);
 
   useEffect(() => {
@@ -44,12 +33,6 @@ export function CameraVideoTrack({
       track.setDevice(deviceId).catch(console.warn);
     }
   }, [deviceId, track]);
-
-  useEffect(() => {
-    if (track) {
-      track.setEnabled(!disabled).catch(console.warn);
-    }
-  }, [disabled, track]);
 
   return <LocalVideoTrack track={maybeTrack} {...props} />;
 }

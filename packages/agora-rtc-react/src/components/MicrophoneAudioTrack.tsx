@@ -16,12 +16,6 @@ export interface MicrophoneAudioTrackProps extends LocalAudioTrackProps {
    * Device ID, which can be retrieved by calling `getDevices()`.
    */
   readonly deviceId?: string;
-  /**
-   * Enable or disable the track.
-   *
-   * If a track is disabled, the SDK stops playing and publishing the track.
-   */
-  readonly disabled?: boolean;
 }
 
 /**
@@ -35,7 +29,6 @@ export interface MicrophoneAudioTrackProps extends LocalAudioTrackProps {
 export function MicrophoneAudioTrack({
   track: maybeTrack,
   deviceId,
-  disabled,
   ...props
 }: PropsWithChildren<MicrophoneAudioTrackProps>) {
   const track = useAwaited(maybeTrack);
@@ -45,12 +38,6 @@ export function MicrophoneAudioTrack({
       track.setDevice(deviceId).catch(console.warn);
     }
   }, [deviceId, track]);
-
-  useEffect(() => {
-    if (track) {
-      track.setEnabled(!disabled).catch(console.warn);
-    }
-  }, [disabled, track]);
 
   return <LocalAudioTrack track={maybeTrack} {...props} />;
 }

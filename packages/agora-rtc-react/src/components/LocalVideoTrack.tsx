@@ -15,12 +15,31 @@ export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
    * Whether to play the track.
    */
   readonly play?: boolean;
+  /**
+   * Enable or disable the track.
+   *
+   * If a track is disabled, the SDK stops playing and publishing the track.
+   */
+  readonly disabled?: boolean;
+  /**
+   * Sends or stops sending the media data of the track.
+   *
+   * - Setting `muted` does not stop capturing video and takes shorter time to take effect than `disabled`. For details, see [What are the differences between setEnabled and setMuted?](https://docs.agora.io/en/Interactive%20Broadcast/faq/differences_between_setenabled_and_setmuted).
+   * - Do not use `disabled` and `muted` together.
+   */
+  readonly muted?: boolean;
 }
 
 /**
  * A component which renders a local video track.
  */
-export function LocalVideoTrack({ track: maybeTrack, play, ...props }: LocalVideoTrackProps) {
+export function LocalVideoTrack({
+  track: maybeTrack,
+  play,
+  disabled,
+  muted,
+  ...props
+}: LocalVideoTrackProps) {
   const [div, setDiv] = useState<HTMLDivElement | null>(null);
 
   const track = useAwaited(maybeTrack);
@@ -33,6 +52,18 @@ export function LocalVideoTrack({ track: maybeTrack, play, ...props }: LocalVide
       track.stop();
     }
   }, [div, play, track]);
+
+  useEffect(() => {
+    if (track && disabled != null) {
+      track.setEnabled(!disabled).catch(console.warn);
+    }
+  }, [disabled, track]);
+
+  useEffect(() => {
+    if (track && muted != null) {
+      track.setMuted(muted).catch(console.warn);
+    }
+  }, [muted, track]);
 
   return <div ref={setDiv} {...props} />;
 }
