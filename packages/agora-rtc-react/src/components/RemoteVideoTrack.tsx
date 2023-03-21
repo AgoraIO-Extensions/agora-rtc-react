@@ -3,7 +3,7 @@ import type { HTMLProps } from "react";
 import type { Nullable } from "../utils";
 
 import { useEffect, useState } from "react";
-import { useAutoStopTrack } from "../hooks/internal";
+import { useAutoStopTrack } from "./TrackBoundary";
 
 export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**

@@ -4,7 +4,7 @@ import type { MaybePromiseOrNull } from "../utils";
 
 import { useEffect, useState } from "react";
 import { useAwaited } from "../hooks";
-import { useAutoStopTrack } from "../hooks/internal";
+import { useAutoStopTrack } from "./TrackBoundary";
 
 export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**

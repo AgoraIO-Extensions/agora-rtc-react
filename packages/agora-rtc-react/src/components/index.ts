@@ -9,3 +9,4 @@ export * from "./RemoteUser";
 export * from "./MicControl";
 export * from "./CameraControl";
 export * from "./UserCover";
+export * from "./TrackBoundary";
