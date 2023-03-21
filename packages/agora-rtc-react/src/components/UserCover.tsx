@@ -15,8 +15,8 @@ export interface UserCoverProps extends HTMLProps<HTMLDivElement> {
 export function UserCover({ cover, ...props }: UserCoverProps) {
   return (
     <div {...props}>
-      <div className="arr-remote-user-cover-blur" style={{ backgroundImage: `url(${cover})` }} />
-      <img className="arr-remote-user-cover-img" src={cover} />
+      <div className="arr-user-cover-blur" style={{ backgroundImage: `url(${cover})` }} />
+      <img className="arr-user-cover-img" src={cover} />
     </div>
   );
 }

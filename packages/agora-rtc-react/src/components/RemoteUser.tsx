@@ -1,4 +1,4 @@
-import "./RemoteUser.css";
+import "./User.css";
 
 import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import type { HTMLProps, PropsWithChildren } from "react";
@@ -64,19 +64,16 @@ export function RemoteUser({
   const audioTrack = useRemoteUserTrack(user, "audio");
 
   return (
-    <div
-      className={`arr-remote-user ${className} ${darkenOnHover ? "darken-on-hover" : ""}`}
-      {...props}
-    >
-      <RemoteVideoTrack className="arr-remote-user-video" track={videoTrack} play={playVideo} />
+    <div className={`arr-user ${className} ${darkenOnHover ? "darken-on-hover" : ""}`} {...props}>
+      <RemoteVideoTrack className="arr-user-video" track={videoTrack} play={playVideo} />
       <RemoteAudioTrack
         playbackDeviceId={playbackDeviceId}
         volume={volume}
         track={audioTrack}
         play={playAudio}
       />
-      {cover && !playVideo && <UserCover className="arr-remote-user-cover" cover={cover} />}
-      <div className="arr-remote-user-body">{children}</div>
+      {cover && !playVideo && <UserCover className="arr-user-cover" cover={cover} />}
+      <div className="arr-user-body">{children}</div>
     </div>
   );
 }
