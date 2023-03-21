@@ -14,8 +14,8 @@ interface TrackBoundaryController {
 
 function createTrackBoundaryController(): TrackBoundaryController {
   const tracks = new Map<ITrack, number>();
-  const CLEAR_INTERVAL = 10000;
-  const REPORT_INTERVAL = 1000;
+  const CLEAR_INTERVAL = 1500;
+  const REPORT_INTERVAL = 500;
 
   const stopTracks = (force?: boolean) => {
     const now = Date.now();
