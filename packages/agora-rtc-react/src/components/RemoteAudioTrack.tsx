@@ -1,5 +1,5 @@
 import type { IRemoteAudioTrack } from "agora-rtc-sdk-ng";
-import type { PropsWithChildren } from "react";
+import type { ReactNode } from "react";
 import type { Nullable } from "../utils";
 
 import { useEffect } from "react";
@@ -26,6 +26,8 @@ export interface RemoteAudioTrackProps {
    * The volume. The value ranges from 0 (mute) to 100 (maximum). A value of 100 is the current volume.
    */
   readonly volume?: number;
+
+  readonly children?: ReactNode;
 }
 
 /**
@@ -37,7 +39,7 @@ export function RemoteAudioTrack({
   playbackDeviceId,
   volume,
   children,
-}: PropsWithChildren<RemoteAudioTrackProps>) {
+}: RemoteAudioTrackProps) {
   useAutoStopTrack(track);
 
   useEffect(() => {

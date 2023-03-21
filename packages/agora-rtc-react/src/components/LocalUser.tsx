@@ -1,14 +1,14 @@
 import "./User.css";
 
 import type { IAgoraRTCClient, ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
-import type { HTMLProps, PropsWithChildren } from "react";
+import type { HTMLProps, ReactNode } from "react";
 
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { useEffect, useState } from "react";
 import { CameraVideoTrack } from "./CameraVideoTrack";
 import { MicrophoneAudioTrack } from "./MicrophoneAudioTrack";
 import { UserCover } from "./UserCover";
-import { useSafePromise } from "../hooks";
+import { useRTCClient, useSafePromise } from "../hooks";
 
 export interface LocalUserProps extends HTMLProps<HTMLDivElement> {
   /**
@@ -51,6 +51,8 @@ export interface LocalUserProps extends HTMLProps<HTMLDivElement> {
    * Render cover image if playVideo is off.
    */
   readonly cover?: string;
+
+  readonly children?: ReactNode;
 }
 
 /**
@@ -61,8 +63,8 @@ export function LocalUser({
   client,
   micOn,
   cameraOn,
-  playAudio,
-  playVideo,
+  playAudio = false,
+  playVideo = true,
   micDeviceId,
   cameraDeviceId,
   volume,
@@ -71,8 +73,10 @@ export function LocalUser({
   children,
   className = "",
   ...props
-}: PropsWithChildren<LocalUserProps>) {
+}: LocalUserProps) {
   const sp = useSafePromise();
+  const clientFromContext = useRTCClient(true);
+  const mergedClient = client ?? clientFromContext;
   const [audioTrack, setAudioTrack] = useState<IMicrophoneAudioTrack | null>(null);
   const [videoTrack, setVideoTrack] = useState<ICameraVideoTrack | null>(null);
 
@@ -89,16 +93,16 @@ export function LocalUser({
   }, [cameraOn, sp, videoTrack]);
 
   useEffect(() => {
-    if (client && audioTrack) {
-      client.publish(audioTrack);
+    if (mergedClient && audioTrack) {
+      mergedClient.publish(audioTrack);
     }
-  }, [audioTrack, client]);
+  }, [audioTrack, mergedClient]);
 
   useEffect(() => {
-    if (client && videoTrack) {
-      client.publish(videoTrack);
+    if (mergedClient && videoTrack) {
+      mergedClient.publish(videoTrack);
     }
-  }, [videoTrack, client]);
+  }, [videoTrack, mergedClient]);
 
   return (
     <div className={`arr-user ${className} ${darkenOnHover ? "darken-on-hover" : ""}`} {...props}>

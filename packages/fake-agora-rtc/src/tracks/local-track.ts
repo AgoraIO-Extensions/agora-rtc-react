@@ -50,7 +50,7 @@ export class FakeLocalTrack extends FakeTrack {
    */
   public async setEnabled(enabled: boolean): Promise<void> {
     if (enabled !== this.enabled) {
-      this.enabled = !enabled;
+      this.enabled = enabled;
       if (enabled) {
         this.play();
       } else {

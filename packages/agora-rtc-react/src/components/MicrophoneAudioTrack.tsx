@@ -1,5 +1,5 @@
 import type { IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
-import type { PropsWithChildren } from "react";
+import type { ReactNode } from "react";
 import type { MaybePromiseOrNull } from "../utils";
 import type { LocalAudioTrackProps } from "./LocalAudioTrack";
 
@@ -16,6 +16,8 @@ export interface MicrophoneAudioTrackProps extends LocalAudioTrackProps {
    * Device ID, which can be retrieved by calling `getDevices()`.
    */
   readonly deviceId?: string;
+
+  readonly children?: ReactNode;
 }
 
 /**
@@ -30,7 +32,7 @@ export function MicrophoneAudioTrack({
   track: maybeTrack,
   deviceId,
   ...props
-}: PropsWithChildren<MicrophoneAudioTrackProps>) {
+}: MicrophoneAudioTrackProps) {
   const track = useAwaited(maybeTrack);
 
   useEffect(() => {

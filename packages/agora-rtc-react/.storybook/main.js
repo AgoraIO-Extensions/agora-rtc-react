@@ -1,3 +1,5 @@
+const { mergeConfig } = require('vite')
+
 module.exports = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
@@ -20,4 +22,13 @@ module.exports = {
     skipBabel: true,
     check: false,
   },
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      resolve: {
+        alias: {
+          "agora-rtc-sdk-ng": require.resolve('../../fake-agora-rtc/src/main.ts'),
+        },
+      },
+    })
+  }
 };

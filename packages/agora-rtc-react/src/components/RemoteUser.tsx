@@ -1,7 +1,7 @@
 import "./User.css";
 
 import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
-import type { HTMLProps, PropsWithChildren } from "react";
+import type { HTMLProps, ReactNode } from "react";
 
 import { useRemoteUserTrack } from "../hooks";
 import { RemoteAudioTrack } from "./RemoteAudioTrack";
@@ -41,6 +41,8 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
    * Render cover image if playVideo is off.
    */
   readonly cover?: string;
+
+  readonly children?: ReactNode;
 }
 
 /**
@@ -59,7 +61,7 @@ export function RemoteUser({
   children,
   className = "",
   ...props
-}: PropsWithChildren<RemoteUserProps>) {
+}: RemoteUserProps) {
   const videoTrack = useRemoteUserTrack(user, "video");
   const audioTrack = useRemoteUserTrack(user, "audio");
 

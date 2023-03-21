@@ -1,5 +1,5 @@
 import type { ILocalAudioTrack } from "agora-rtc-sdk-ng";
-import type { PropsWithChildren } from "react";
+import type { ReactNode } from "react";
 import type { MaybePromiseOrNull } from "../utils";
 
 import { useEffect } from "react";
@@ -32,6 +32,8 @@ export interface LocalAudioTrackProps {
    * - Do not use `disabled` and `muted` together.
    */
   readonly muted?: boolean;
+
+  readonly children?: ReactNode;
 }
 
 /**
@@ -44,7 +46,7 @@ export function LocalAudioTrack({
   disabled,
   muted,
   children,
-}: PropsWithChildren<LocalAudioTrackProps>) {
+}: LocalAudioTrackProps) {
   const track = useAwaited(maybeTrack);
   useAutoStopTrack(track);
 

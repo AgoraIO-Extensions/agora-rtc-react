@@ -1,5 +1,5 @@
 import type { IAgoraRTCClient } from "agora-rtc-sdk-ng";
-import type { PropsWithChildren } from "react";
+import type { ReactNode } from "react";
 
 import { createContext, useContext } from "react";
 export { TrackBoundary } from "../components/TrackBoundary";
@@ -7,10 +7,11 @@ export { TrackBoundary } from "../components/TrackBoundary";
 const AgoraRTCContext = /* @__PURE__ */ createContext<IAgoraRTCClient | null>(null);
 
 export interface AgoraRTCProviderProps {
-  client: IAgoraRTCClient;
+  readonly client: IAgoraRTCClient;
+  readonly children?: ReactNode;
 }
 
-export function AgoraRTCProvider({ client, children }: PropsWithChildren<AgoraRTCProviderProps>) {
+export function AgoraRTCProvider({ client, children }: AgoraRTCProviderProps) {
   return <AgoraRTCContext.Provider value={client}>{children}</AgoraRTCContext.Provider>;
 }
 
