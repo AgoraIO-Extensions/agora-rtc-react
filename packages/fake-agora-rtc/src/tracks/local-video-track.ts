@@ -49,6 +49,9 @@ export class FakeLocalVideoTrack extends FakeLocalTrack {
     this._videoEl.style.opacity = "1";
 
     if (container) {
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
       container.appendChild(this._videoEl);
     }
 

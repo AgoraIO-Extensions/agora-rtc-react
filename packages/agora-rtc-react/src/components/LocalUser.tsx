@@ -1,28 +1,30 @@
 import "./User.css";
 
-import type { IAgoraRTCClient, ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
+import type { ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
 import type { HTMLProps, ReactNode } from "react";
+import type { MaybePromiseOrNull } from "../utils";
 
-import AgoraRTC from "agora-rtc-sdk-ng";
-import { useEffect, useState } from "react";
 import { CameraVideoTrack } from "./CameraVideoTrack";
 import { MicrophoneAudioTrack } from "./MicrophoneAudioTrack";
 import { UserCover } from "./UserCover";
-import { useRTCClient, useSafePromise } from "../hooks";
 
-export interface LocalUserProps extends HTMLProps<HTMLDivElement> {
-  /**
-   * The client to publish local tracks to.
-   */
-  readonly client?: IAgoraRTCClient;
+export interface LocalMicrophoneAndCameraUserProps extends HTMLProps<HTMLDivElement> {
   /**
    * Whether to turn on the local user's microphone. Default false.
    */
-  readonly micOn?: boolean;
+  readonly micDisabled?: boolean;
   /**
    * Whether to turn on the local user's camera. Default false.
    */
-  readonly cameraOn?: boolean;
+  readonly cameraDisabled?: boolean;
+  /**
+   * A microphone audio track which can be created by `createMicrophoneAudioTrack()`.
+   */
+  readonly audioTrack?: MaybePromiseOrNull<IMicrophoneAudioTrack>;
+  /**
+   * A camera video track which can be created by `createCameraVideoTrack()`.
+   */
+  readonly videoTrack?: MaybePromiseOrNull<ICameraVideoTrack>;
   /**
    * Whether to play the local user's audio track. Default false.
    */
@@ -59,12 +61,13 @@ export interface LocalUserProps extends HTMLProps<HTMLDivElement> {
  * Publish and play local user video and audio track.
  * High-level Component for rendering and publishing a local user video and audio track.
  */
-export function LocalUser({
-  client,
-  micOn,
-  cameraOn,
-  playAudio = false,
-  playVideo = true,
+export function LocalMicrophoneAndCameraUser({
+  micDisabled,
+  cameraDisabled,
+  audioTrack,
+  videoTrack,
+  playAudio,
+  playVideo,
   micDeviceId,
   cameraDeviceId,
   volume,
@@ -73,37 +76,7 @@ export function LocalUser({
   children,
   className = "",
   ...props
-}: LocalUserProps) {
-  const sp = useSafePromise();
-  const clientFromContext = useRTCClient(true);
-  const mergedClient = client ?? clientFromContext;
-  const [audioTrack, setAudioTrack] = useState<IMicrophoneAudioTrack | null>(null);
-  const [videoTrack, setVideoTrack] = useState<ICameraVideoTrack | null>(null);
-
-  useEffect(() => {
-    if (micOn && !audioTrack) {
-      sp(AgoraRTC.createMicrophoneAudioTrack({ ANS: true, AEC: true })).then(setAudioTrack);
-    }
-  }, [audioTrack, micOn, sp]);
-
-  useEffect(() => {
-    if (cameraOn && !videoTrack) {
-      sp(AgoraRTC.createCameraVideoTrack()).then(setVideoTrack);
-    }
-  }, [cameraOn, sp, videoTrack]);
-
-  useEffect(() => {
-    if (mergedClient && audioTrack) {
-      mergedClient.publish(audioTrack);
-    }
-  }, [audioTrack, mergedClient]);
-
-  useEffect(() => {
-    if (mergedClient && videoTrack) {
-      mergedClient.publish(videoTrack);
-    }
-  }, [videoTrack, mergedClient]);
-
+}: LocalMicrophoneAndCameraUserProps) {
   return (
     <div className={`arr-user ${className} ${darkenOnHover ? "darken-on-hover" : ""}`} {...props}>
       <CameraVideoTrack
@@ -111,13 +84,13 @@ export function LocalUser({
         track={videoTrack}
         play={playVideo}
         deviceId={cameraDeviceId}
-        disabled={!cameraOn}
+        disabled={cameraDisabled}
       />
       <MicrophoneAudioTrack
         track={audioTrack}
         play={playAudio}
         deviceId={micDeviceId}
-        disabled={!micOn}
+        disabled={micDisabled}
       />
       {cover && !playVideo && <UserCover className="arr-user-cover" cover={cover} />}
       <div className="arr-user-body">{children}</div>

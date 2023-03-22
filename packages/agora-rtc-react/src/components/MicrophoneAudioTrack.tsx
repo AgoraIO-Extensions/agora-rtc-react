@@ -9,7 +9,7 @@ import { LocalAudioTrack } from "./LocalAudioTrack";
 
 export interface MicrophoneAudioTrackProps extends LocalAudioTrackProps {
   /**
-   * A local audio track which can be created by `createMicrophoneAudioTrack()`.
+   * A microphone audio track which can be created by `createMicrophoneAudioTrack()`.
    */
   readonly track?: MaybePromiseOrNull<IMicrophoneAudioTrack>;
   /**
