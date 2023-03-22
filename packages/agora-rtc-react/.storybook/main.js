@@ -1,4 +1,4 @@
-const { mergeConfig } = require('vite')
+const { mergeConfig } = require("vite");
 
 module.exports = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
@@ -26,9 +26,9 @@ module.exports = {
     return mergeConfig(config, {
       resolve: {
         alias: {
-          "agora-rtc-sdk-ng": require.resolve('../../fake-agora-rtc/src/main.ts'),
+          "agora-rtc-sdk-ng": require.resolve("../../fake-agora-rtc/src/main.ts"),
         },
       },
-    })
-  }
+    });
+  },
 };
