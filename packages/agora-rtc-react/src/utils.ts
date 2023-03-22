@@ -20,3 +20,8 @@ export function interval(fn: Fn, interval: number): Disposer {
   const id = setInterval(fn, interval);
   return () => clearInterval(id);
 }
+
+export function timeout(fn: Fn, ms: number): Disposer {
+  const id = setTimeout(fn, ms);
+  return () => clearTimeout(id);
+}

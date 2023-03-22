@@ -3,42 +3,52 @@ import type { PropsWithChildren } from "react";
 import type { Nullable } from "../utils";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { interval } from "../utils";
+import { timeout } from "../utils";
 import { useIsomorphicLayoutEffect } from "../hooks/tools";
 
 interface TrackBoundaryController {
-  tracks: Map<ITrack, number>;
-  report: (track: ITrack) => () => void;
-  start: () => () => void;
+  onMount: (track: ITrack) => void;
+  onUnmount: (track: ITrack) => void;
+  dispose: () => void;
 }
 
 function createTrackBoundaryController(): TrackBoundaryController {
-  const tracks = new Map<ITrack, number>();
-  const CLEAR_INTERVAL = 1500;
-  const REPORT_INTERVAL = 500;
-
-  const stopTracks = (force?: boolean) => {
-    const now = Date.now();
-    for (const [track, timestamp] of tracks) {
-      if (force || now - timestamp > CLEAR_INTERVAL) {
-        track.stop();
-        tracks.delete(track);
-      }
-    }
-  };
+  const cancelStops = new Map<ITrack, () => void>();
+  const STOP_TIMEOUT = 1500;
 
   return {
-    tracks,
-    report: track => {
-      tracks.set(track, Date.now());
-      return interval(() => tracks.set(track, Date.now()), REPORT_INTERVAL);
+    onMount: track => {
+      const cancel = cancelStops.get(track);
+      if (cancel) {
+        cancel();
+        cancelStops.delete(track);
+      }
     },
-    start: () => {
-      const disposer = interval(stopTracks, CLEAR_INTERVAL);
-      return () => {
-        disposer();
-        stopTracks(true);
-      };
+    onUnmount: track => {
+      const cancel = cancelStops.get(track);
+      if (cancel) {
+        cancel();
+      }
+      cancelStops.set(
+        track,
+        timeout(() => {
+          if (track.isPlaying) {
+            track.stop();
+          }
+          cancelStops.delete(track);
+        }, STOP_TIMEOUT),
+      );
+    },
+    dispose: () => {
+      for (const [track, cancel] of cancelStops) {
+        if (track.isPlaying) {
+          track.stop();
+        }
+        if (cancel) {
+          cancel();
+        }
+      }
+      cancelStops.clear();
     },
   };
 }
@@ -70,7 +80,7 @@ const TrackBoundaryContext = /* @__PURE__ */ createContext<TrackBoundaryControll
 export function TrackBoundary({ children }: PropsWithChildren) {
   const [controller] = useState(createTrackBoundaryController);
 
-  useEffect(() => controller.start(), [controller]);
+  useEffect(() => controller.dispose, [controller]);
 
   return (
     <TrackBoundaryContext.Provider value={controller}>{children}</TrackBoundaryContext.Provider>
@@ -87,7 +97,8 @@ export function useAutoStopTrack(track: Nullable<ITrack>) {
   useIsomorphicLayoutEffect(() => {
     if (track) {
       if (controller) {
-        return controller.report(track);
+        controller.onMount(track);
+        return () => controller.onUnmount(track);
       } else {
         return () => track.stop();
       }
