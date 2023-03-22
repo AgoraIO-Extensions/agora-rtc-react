@@ -10,18 +10,23 @@
     "test": "pnpm -r run test",
     "lint": "eslint --ext .ts,.tsx . && prettier --check .",
     "lint:fix": "eslint --fix --ext .ts,.tsx . && prettier --write .",
-    "example": "pnpm -F agora-rtc-react run build && pnpm -F example-overview run start"
+    "example": "pnpm -F agora-rtc-react run build && pnpm -F example-overview run start",
+    "renew": "esbuild-dev scripts/renew.ts"
   },
   "devDependencies": {
+    "@hyrious/esbuild-dev": "^0.10.1",
     "@types/node": "^18.14.6",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
+    "agora-token": "^2.0.2",
     "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "fast-glob": "^3.2.12",
     "prettier": "^2.8.4",
     "typescript": "^4.9.5"
   },
@@ -30,6 +35,10 @@
       "ignoreMissing": [
         "rollup"
       ]
+    },
+    "overrides": {
+      "//": "https://github.com/AgoraIO/Tools/issues/304",
+      "nodeunit": "npm:noop-package@1.0.0"
     }
   }
 }
