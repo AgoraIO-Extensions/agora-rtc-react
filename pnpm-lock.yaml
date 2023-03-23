@@ -7,7 +7,8 @@ importers:
 
   .:
     specifiers:
-      '@hyrious/esbuild-dev': ^0.10.1
+      '@hyrious/esbuild-dev': ^0.9.1
+      '@types/minimist': ^1.2.2
       '@types/node': ^18.14.6
       '@typescript-eslint/eslint-plugin': ^5.54.1
       '@typescript-eslint/parser': ^5.54.1
@@ -19,11 +20,12 @@ importers:
       eslint-plugin-prettier: ^4.2.1
       eslint-plugin-react: ^7.32.2
       eslint-plugin-react-hooks: ^4.6.0
-      fast-glob: ^3.2.12
+      minimist: ^1.2.8
       prettier: ^2.8.4
       typescript: ^4.9.5
     devDependencies:
-      '@hyrious/esbuild-dev': 0.10.1
+      '@hyrious/esbuild-dev': 0.9.1
+      '@types/minimist': 1.2.2
       '@types/node': 18.14.6
       '@typescript-eslint/eslint-plugin': 5.54.1_mlk7dnz565t663n4razh6a6v6i
       '@typescript-eslint/parser': 5.54.1_ycpbpc6yetojsgtrx3mwntkhsu
@@ -35,7 +37,7 @@ importers:
       eslint-plugin-prettier: 4.2.1_xprnzp4ul2bcpmfe73av4voica
       eslint-plugin-react: 7.32.2_eslint@8.35.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.35.0
-      fast-glob: 3.2.12
+      minimist: 1.2.8
       prettier: 2.8.4
       typescript: 4.9.5
 
@@ -1956,12 +1958,15 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@hyrious/esbuild-dev/0.10.1:
-    resolution: {integrity: sha512-WeTeReHhle1xPPK3VuuN1o0u0Tye3EPtslG5zRHMXxk3NGjYSqNpDQR4XU9WN/rSWx07PW7xtWnjmD0xn/q+1g==}
-    engines: {node: ^14.18 || >=16}
+  /@hyrious/esbuild-dev/0.9.1:
+    resolution: {integrity: sha512-FjF9Ofuk32fZvn1pDoeCKeusZbVwhrQDx+hlVhBdj3bplWD25ccZ/W3HnTbdFIy8Nqxwjpvv8lgHPd63/tqHsQ==}
+    engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
-      esbuild: '>=0.17'
+      esbuild: <=0.16
+    peerDependenciesMeta:
+      esbuild:
+        optional: true
     dev: true
 
   /@iconify-json/lucide/1.1.70:
@@ -3505,6 +3510,10 @@ packages:
     resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
     dev: true
 
+  /@types/minimist/1.2.2:
+    resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
+    dev: true
+
   /@types/node-fetch/2.6.2:
     resolution: {integrity: sha512-DHqhlq5jeESLy19TYhLakJ07kNumXWjcDdxXsLUMJZ6ue8VZJj4kLPQVE/2mdHh3xZziNF1xppu5lwmS53HR+A==}
     dependencies:
@@ -3965,6 +3974,9 @@ packages:
     engines: {node: '>=14.15.0'}
     peerDependencies:
       esbuild: '>=0.10.0'
+    peerDependenciesMeta:
+      esbuild:
+        optional: true
     dependencies:
       esbuild: 0.16.17
       tslib: 2.5.0
@@ -4453,6 +4465,9 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     peerDependencies:
       esbuild: '>=0.17'
+    peerDependenciesMeta:
+      esbuild:
+        optional: true
     dependencies:
       esbuild: 0.17.11
       load-tsconfig: 0.2.3
@@ -5210,6 +5225,9 @@ packages:
     resolution: {integrity: sha512-kG/XyTDyz6+YDuyfB9ZoSIOOmgyFCH+xPRtsCa8W85HLRV5Csp+o3jWVbOSHgSLfyLc5DmP+KFDNwty4mEjC+Q==}
     peerDependencies:
       esbuild: '>=0.12 <1'
+    peerDependenciesMeta:
+      esbuild:
+        optional: true
     dependencies:
       debug: 4.3.4
       esbuild: 0.16.17
