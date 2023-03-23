@@ -32,7 +32,10 @@ npm add agora-rtc-sdk-ng agora-rtc-react
 
 ## Examples
 
-To start examples, add a `.env.local` file to monorepo root and fill in the Agora account info following the format of `.env.example`.
+To start examples, you need to fill in Agora tokens.
+
+- You can add a `.env.local` file to each example directory and fill in the Agora account info following the format of `.env.example`.
+- Or add a `.env.local` at monorepo root with `AGORA_APPID` and `AGORA_CERTIFICATE`, then `pnpm renew` to auto-renew tokens.
 
 - `pnpm start` to start the overview example.
 - `pnpm -F [package-name] run start` to start other examples.
