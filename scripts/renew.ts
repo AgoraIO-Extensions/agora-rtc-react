@@ -14,7 +14,7 @@ if (!AGORA_APPID || !AGORA_CERTIFICATE || !AGORA_CHANNEL) {
 
 const uid = 0;
 const role = RtcRole.PUBLISHER;
-const expirationTimeInSeconds = 86400; // 1 day
+const expiration = 24 * 3600;
 
 const AGORA_TOKEN = RtcTokenBuilder.buildTokenWithUid(
   AGORA_APPID,
@@ -22,8 +22,8 @@ const AGORA_TOKEN = RtcTokenBuilder.buildTokenWithUid(
   AGORA_CHANNEL,
   uid,
   role,
-  expirationTimeInSeconds,
-  expirationTimeInSeconds,
+  expiration,
+  expiration,
 );
 
 import fs from "fs";

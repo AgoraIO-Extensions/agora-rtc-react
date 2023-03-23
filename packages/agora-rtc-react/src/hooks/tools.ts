@@ -17,12 +17,12 @@ export function useForceUpdate() {
 
 export function useIsUnmounted(): RefObject<boolean> {
   const isUnmountRef = useRef(false);
-  useEffect(
-    () => () => {
+  useEffect(() => {
+    isUnmountRef.current = false;
+    return () => {
       isUnmountRef.current = true;
-    },
-    [],
-  );
+    };
+  }, []);
   return isUnmountRef;
 }
 

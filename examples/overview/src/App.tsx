@@ -24,10 +24,11 @@ import {
   useRemoteUsers,
   useSafePromise,
 } from "agora-rtc-react";
-import { Container } from "./Container";
-import { UsersInfo } from "./UsersInfo";
+import clsx from "clsx";
 import { AutoLayout } from "./AutoLayout";
+import { Container } from "./Container";
 import { Label } from "./Label";
+import { UsersInfo } from "./UsersInfo";
 import { fakeAvatar, fakeName } from "./utils";
 
 const appId = import.meta.env.AGORA_APPID;
@@ -42,11 +43,19 @@ setupEasyTesting(client);
 export const App = () => {
   const sp = useSafePromise();
 
+  const [calling, setCalling] = useState(false);
   const [uid, setUID] = useState<UID>(0);
   const userName = useMemo(() => fakeName(uid), [uid]);
   const userAvatar = useMemo(() => fakeAvatar(uid), [uid]);
   const remoteUsers = useRemoteUsers(client);
   const publishedUsers = usePublishedRemoteUsers(client);
+
+  useEffect(() => {
+    if (calling) {
+      sp(client.join(appId, channel, token)).then(setUID);
+      return () => void sp(client.leave()).then(() => setUID(0));
+    }
+  }, [calling, sp]);
 
   const [micOn, setMic] = useState(false);
   const [audioTrack, setAudioTrack] = useState<IMicrophoneAudioTrack | null>(null);
@@ -77,13 +86,6 @@ export const App = () => {
   }, [videoTrack, cameraOn, sp]);
 
   const selfPublished = micOn || cameraOn;
-
-  // join channel on init
-  useEffect(() => {
-    // uid = null: use random uid assigned by Agora server
-    sp(client.join(appId, channel, token, null)).then(setUID);
-    return () => void sp(client.leave()).then(() => setUID(0));
-  }, [sp]);
 
   return (
     <AgoraRTCProvider client={client}>
@@ -121,6 +123,13 @@ export const App = () => {
           </button>
           <button className="btn" onClick={() => setCamera(a => !a)}>
             {cameraOn ? <SVGCamera /> : <SVGCameraMute />}
+          </button>
+          <span className="flex-1" />
+          <button
+            className={clsx("btn btn-phone", { "btn-phone-active": calling })}
+            onClick={() => setCalling(a => !a)}
+          >
+            {calling ? <i className="i-mdi-phone-hangup" /> : <i className="i-mdi-phone" />}
           </button>
         </div>
       </Container>

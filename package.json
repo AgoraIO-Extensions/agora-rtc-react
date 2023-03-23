@@ -36,8 +36,8 @@
         "rollup"
       ]
     },
+    "//": "https://github.com/AgoraIO/Tools/issues/304",
     "overrides": {
-      "//": "https://github.com/AgoraIO/Tools/issues/304",
       "nodeunit": "npm:noop-package@1.0.0"
     }
   }
