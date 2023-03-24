@@ -18,6 +18,23 @@ export function useConnectionState(client?: IAgoraRTCClient | null): ConnectionS
   return connectionState;
 }
 
+export function useIsConnected(client?: IAgoraRTCClient | null): boolean {
+  const [isConnected, setConnected] = useState(
+    client ? client.connectionState === "CONNECTED" : false,
+  );
+  useEffect(() => {
+    if (client) {
+      setConnected(client.connectionState === "CONNECTED");
+      return listen(client, "connection-state-change", state => {
+        setConnected(state === "CONNECTED");
+      });
+    } else {
+      setConnected(false);
+    }
+  }, [client]);
+  return isConnected;
+}
+
 export interface NetworkQuality {
   /**
    * The uplink network quality.
