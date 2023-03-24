@@ -9,17 +9,18 @@ interface LocalUserProps {
 
 export const LocalUser = observer(function LocalUser({ className, localUser }: LocalUserProps) {
   return (
-    <LocalMicrophoneAndCameraUser
-      className={className}
-      micDisabled={!localUser.micOn}
-      audioTrack={localUser.micTrack}
-      cameraDisabled={!localUser.cameraOn}
-      videoTrack={localUser.cameraTrack}
-      playVideo={localUser.cameraOn}
-      cover={localUser.avatar}
-    >
-      <span className="user-name">{localUser.name}</span>
-      {localUser.micOn && <MicControl micOn={localUser.micOn} audioTrack={localUser.micTrack} />}
-    </LocalMicrophoneAndCameraUser>
+    <div className={className}>
+      <LocalMicrophoneAndCameraUser
+        micOn={localUser.micOn}
+        audioTrack={localUser.micTrack}
+        cameraOn={localUser.cameraOn}
+        videoTrack={localUser.cameraTrack}
+        playVideo={localUser.cameraOn}
+        cover={localUser.avatar}
+      >
+        <span className="user-name">{localUser.name}</span>
+        {localUser.micOn && <MicControl micOn disabled audioTrack={localUser.micTrack} />}
+      </LocalMicrophoneAndCameraUser>
+    </div>
   );
 });

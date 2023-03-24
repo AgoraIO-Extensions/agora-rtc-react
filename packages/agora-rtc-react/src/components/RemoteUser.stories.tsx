@@ -4,7 +4,7 @@ import type { RemoteUserProps } from "./RemoteUser";
 
 import { randFirstName, randNumber, randUuid } from "@ngneat/falso";
 import { useArgs } from "@storybook/preview-api";
-import { createFakeRtcClient, FakeRemoteAudioTrack, FakeRemoteVideoTrack } from "fake-agora-rtc";
+import { FakeRTCClient } from "fake-agora-rtc";
 import { useCallback, useEffect, useState } from "react";
 import { AgoraRTCProvider } from "../hooks/context";
 import { interval } from "../utils";
@@ -38,22 +38,7 @@ const meta: Meta<RemoteUserProps> = {
         }
       }, [audioTrack]);
 
-      const [client] = useState(() =>
-        createFakeRtcClient({
-          subscribe: async (user, mediaType): Promise<any> => {
-            if (mediaType === "audio") {
-              const audioTrack = FakeRemoteAudioTrack.create();
-              user.audioTrack = audioTrack;
-              return audioTrack;
-            } else {
-              const videoTrack = FakeRemoteVideoTrack.create();
-              user.videoTrack = videoTrack;
-              return videoTrack;
-            }
-          },
-          unsubscribe: async () => void 0,
-        }),
-      );
+      const [client] = useState(() => FakeRTCClient.create());
       return <AgoraRTCProvider client={client}>{Story()}</AgoraRTCProvider>;
     },
   ],
@@ -74,6 +59,10 @@ export const Overview: StoryObj<RemoteUserProps> = {
       uid: randUuid(),
       hasVideo: true,
       hasAudio: true,
+    },
+    style: {
+      width: 288,
+      height: 216,
     },
   },
   render: RenderRemoteUser,
@@ -96,6 +85,10 @@ export const WithCover: StoryObj<RemoteUserProps> = {
     playVideo: false,
     playAudio: false,
     cover: "http://placekitten.com/200/200",
+    style: {
+      width: 288,
+      height: 216,
+    },
   },
   render: RenderRemoteUser,
 };
@@ -117,7 +110,11 @@ export const WithControls: StoryObj<RemoteUserProps> = {
     },
     playVideo: true,
     playAudio: false,
-    style: { borderRadius: 8 },
+    style: {
+      borderRadius: 8,
+      width: 288,
+      height: 216,
+    },
     cover: "http://placekitten.com/200/200",
   },
   render: function WithControls(args) {

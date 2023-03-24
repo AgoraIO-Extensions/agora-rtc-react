@@ -29,7 +29,7 @@ function main() {
   writeEnv(process.cwd(), { ...pkgEnv, AGORA_APPID, AGORA_CHANNEL, AGORA_TOKEN });
 }
 
-function loadSecrets(rootEnv: dotenv.DotenvParseOutput, pkgEnv: dotenv.DotenvParseOutput) {
+export function loadSecrets(rootEnv: dotenv.DotenvParseOutput, pkgEnv: dotenv.DotenvParseOutput) {
   const pkgEnvConfigured = Boolean(pkgEnv.AGORA_APPID && pkgEnv.AGORA_CERTIFICATE);
 
   const AGORA_CERTIFICATE = pkgEnvConfigured ? pkgEnv.AGORA_CERTIFICATE : rootEnv.AGORA_CERTIFICATE;
@@ -47,7 +47,11 @@ function loadSecrets(rootEnv: dotenv.DotenvParseOutput, pkgEnv: dotenv.DotenvPar
   return { AGORA_APPID, AGORA_CERTIFICATE };
 }
 
-function buildToken(AGORA_APPID: string, AGORA_CERTIFICATE: string, AGORA_CHANNEL: string): string {
+export function buildToken(
+  AGORA_APPID: string,
+  AGORA_CERTIFICATE: string,
+  AGORA_CHANNEL: string,
+): string {
   const uid = 0;
   const role = RtcRole.PUBLISHER;
   const expiration = 24 * 3600;
@@ -65,7 +69,7 @@ function buildToken(AGORA_APPID: string, AGORA_CERTIFICATE: string, AGORA_CHANNE
   return AGORA_TOKEN;
 }
 
-function loadEnv(envDir: string) {
+export function loadEnv(envDir: string) {
   try {
     return dotenv.parse(fs.readFileSync(path.join(envDir, ".env.local")));
   } catch {
@@ -73,7 +77,7 @@ function loadEnv(envDir: string) {
   }
 }
 
-function writeEnv(envDir: string, data: Record<string, string>) {
+export function writeEnv(envDir: string, data: Record<string, string>) {
   const file = path.join(envDir, ".env.local");
   fs.writeFileSync(
     file,

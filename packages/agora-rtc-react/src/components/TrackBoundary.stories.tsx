@@ -3,7 +3,7 @@ import type { IAgoraRTCRemoteUser, ITrack } from "agora-rtc-sdk-ng";
 
 import { randUuid } from "@ngneat/falso";
 import { action } from "@storybook/addon-actions";
-import { createFakeRtcClient, FakeRemoteAudioTrack, FakeRemoteVideoTrack } from "fake-agora-rtc";
+import { FakeRTCClient } from "fake-agora-rtc";
 import { useState } from "react";
 import { RemoteUser } from ".";
 import { AgoraRTCProvider, TrackBoundary } from "../hooks";
@@ -45,21 +45,17 @@ const meta: Meta = {
   decorators: [
     Story => {
       const [client] = useState(() =>
-        createFakeRtcClient({
-          subscribe: async (user, mediaType): Promise<any> => {
-            if (mediaType === "audio") {
-              const audioTrack = FakeRemoteAudioTrack.create();
-              user.audioTrack = audioTrack;
-              logTrackStop(audioTrack, () => action("AudioTrack.stop()")(user.uid));
-              return audioTrack;
-            } else {
-              const videoTrack = FakeRemoteVideoTrack.create();
-              user.videoTrack = videoTrack;
-              logTrackStop(videoTrack, () => action("VideoTrack.stop()")(user.uid));
-              return videoTrack;
-            }
-          },
-          unsubscribe: async () => void 0,
+        FakeRTCClient.create(client => {
+          const subscribe = client.subscribe.bind(client);
+          return {
+            subscribe: async (user, mediaType): Promise<any> => {
+              const track = await subscribe(user, mediaType);
+              logTrackStop(track, () =>
+                action(`${mediaType === "audio" ? "AudioTrack" : "VideoTrack"}.stop()`)(user.uid),
+              );
+              return track;
+            },
+          };
         }),
       );
 

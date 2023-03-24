@@ -1,11 +1,10 @@
-import "./User.css";
-
 import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import type { HTMLProps, ReactNode } from "react";
 
 import { useRemoteUserTrack } from "../hooks";
 import { RemoteAudioTrack } from "./RemoteAudioTrack";
 import { RemoteVideoTrack } from "./RemoteVideoTrack";
+import { FloatBoxStyle, useMergedStyle, VideoTrackWrapperStyle } from "./styles";
 import { UserCover } from "./UserCover";
 
 export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
@@ -14,11 +13,11 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
    */
   readonly user?: IAgoraRTCRemoteUser;
   /**
-   * Whether to play the remote user's video track. Default false.
+   * Whether to play the remote user's video track. Default follows `user.hasVideo`.
    */
   readonly playVideo?: boolean;
   /**
-   * Whether to play the remote user's audio track. Default false.
+   * Whether to play the remote user's audio track. Default follows `user.hasAudio`.
    */
   readonly playAudio?: boolean;
   /**
@@ -34,14 +33,12 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
    */
   readonly volume?: number;
   /**
-   * Whether to darken the video canvas when the mouse hovers over it. Default false.
-   */
-  readonly darkenOnHover?: boolean;
-  /**
    * Render cover image if playVideo is off.
    */
-  readonly cover?: string;
-
+  readonly cover?: string | (() => ReactNode);
+  /**
+   * Children is rendered on top of the video canvas.
+   */
   readonly children?: ReactNode;
 }
 
@@ -56,26 +53,29 @@ export function RemoteUser({
   playAudio,
   playbackDeviceId,
   volume,
-  darkenOnHover,
   cover,
+  style,
   children,
-  className = "",
   ...props
 }: RemoteUserProps) {
+  const mergedStyle = useMergedStyle(VideoTrackWrapperStyle, style);
   const videoTrack = useRemoteUserTrack(user, "video");
   const audioTrack = useRemoteUserTrack(user, "audio");
 
+  playVideo = playVideo ?? user?.hasVideo;
+  playAudio = playAudio ?? user?.hasAudio;
+
   return (
-    <div className={`arr-user ${className} ${darkenOnHover ? "darken-on-hover" : ""}`} {...props}>
-      <RemoteVideoTrack className="arr-user-video" track={videoTrack} play={playVideo} />
+    <div {...props} style={mergedStyle}>
+      <RemoteVideoTrack track={videoTrack} play={playVideo} />
       <RemoteAudioTrack
         playbackDeviceId={playbackDeviceId}
         volume={volume}
         track={audioTrack}
         play={playAudio}
       />
-      {cover && !playVideo && <UserCover className="arr-user-cover" cover={cover} />}
-      <div className="arr-user-body">{children}</div>
+      {cover && !playVideo && <UserCover cover={cover} />}
+      <div style={FloatBoxStyle}>{children}</div>
     </div>
   );
 }

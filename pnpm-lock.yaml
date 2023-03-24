@@ -182,11 +182,13 @@ importers:
     specifiers:
       '@ngneat/falso': ^6.4.0
       agora-rtc-sdk-ng: ^4.16.1
+      side-effect-manager: ^1.2.2
       typescript: ^4.9.5
       vite: ^4.1.4
     devDependencies:
       '@ngneat/falso': 6.4.0
       agora-rtc-sdk-ng: 4.16.1
+      side-effect-manager: 1.2.2
       typescript: 4.9.5
       vite: 4.1.4
 
@@ -8384,7 +8386,6 @@ packages:
 
   /side-effect-manager/1.2.2:
     resolution: {integrity: sha512-luMB5SOIKdkMfWaFkPWFkv+OYk93SBeHE+xLkNxqDGW5j+V1MWSEfeT5Jo0vQ+boV2oRdgWRPNT4M+zR5QcLcg==}
-    dev: false
 
   /siginfo/2.0.0:
     resolution: {integrity: sha512-ybx0WO1/8bSBLEWXZvEd7gMW3Sn3JFlW3TvX1nREbDLRNQNaeNN8WK0meBwPdAaOI7TtRRRJn/Es1zhrrCHu7g==}

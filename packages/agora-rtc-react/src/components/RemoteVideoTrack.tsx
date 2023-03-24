@@ -4,6 +4,7 @@ import type { Nullable } from "../utils";
 
 import { useEffect, useState } from "react";
 import { useAutoStopTrack } from "./TrackBoundary";
+import { useMergedStyle, VideoTrackStyle } from "./styles";
 
 export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**
@@ -19,7 +20,8 @@ export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
 /**
  * A component which renders a remote video track.
  */
-export function RemoteVideoTrack({ track, play, ...props }: RemoteVideoTrackProps) {
+export function RemoteVideoTrack({ track, play, style, ...props }: RemoteVideoTrackProps) {
+  const mergedStyle = useMergedStyle(VideoTrackStyle, style);
   const [div, setDiv] = useState<HTMLDivElement | null>(null);
 
   useAutoStopTrack(track);
@@ -32,5 +34,5 @@ export function RemoteVideoTrack({ track, play, ...props }: RemoteVideoTrackProp
     }
   }, [div, play, track]);
 
-  return <div ref={setDiv} {...props} />;
+  return <div {...props} ref={setDiv} style={mergedStyle} />;
 }

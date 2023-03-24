@@ -1,5 +1,3 @@
-import "./User.css";
-
 import type { ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
 import type { HTMLProps, ReactNode } from "react";
 import type { MaybePromiseOrNull } from "../utils";
@@ -7,16 +5,17 @@ import type { MaybePromiseOrNull } from "../utils";
 import { CameraVideoTrack } from "./CameraVideoTrack";
 import { MicrophoneAudioTrack } from "./MicrophoneAudioTrack";
 import { UserCover } from "./UserCover";
+import { FloatBoxStyle, useMergedStyle, VideoTrackWrapperStyle } from "./styles";
 
 export interface LocalMicrophoneAndCameraUserProps extends HTMLProps<HTMLDivElement> {
   /**
    * Whether to turn on the local user's microphone. Default false.
    */
-  readonly micDisabled?: boolean;
+  readonly micOn?: boolean;
   /**
    * Whether to turn on the local user's camera. Default false.
    */
-  readonly cameraDisabled?: boolean;
+  readonly cameraOn?: boolean;
   /**
    * A microphone audio track which can be created by `createMicrophoneAudioTrack()`.
    */
@@ -26,11 +25,11 @@ export interface LocalMicrophoneAndCameraUserProps extends HTMLProps<HTMLDivElem
    */
   readonly videoTrack?: MaybePromiseOrNull<ICameraVideoTrack>;
   /**
-   * Whether to play the local user's audio track. Default false.
+   * Whether to play the local user's audio track. Default follows `micOn`.
    */
   readonly playAudio?: boolean;
   /**
-   * Whether to play the local user's video track. Default false.
+   * Whether to play the local user's video track. Default follows `cameraOn`.
    */
   readonly playVideo?: boolean;
   /**
@@ -46,14 +45,12 @@ export interface LocalMicrophoneAndCameraUserProps extends HTMLProps<HTMLDivElem
    */
   readonly volume?: number;
   /**
-   * Whether to darken the video canvas when the mouse hovers over it. Default false.
-   */
-  readonly darkenOnHover?: boolean;
-  /**
    * Render cover image if playVideo is off.
    */
   readonly cover?: string;
-
+  /**
+   * Children is rendered on top of the video canvas.
+   */
   readonly children?: ReactNode;
 }
 
@@ -62,8 +59,8 @@ export interface LocalMicrophoneAndCameraUserProps extends HTMLProps<HTMLDivElem
  * High-level Component for rendering and publishing a local user video and audio track.
  */
 export function LocalMicrophoneAndCameraUser({
-  micDisabled,
-  cameraDisabled,
+  micOn,
+  cameraOn,
   audioTrack,
   videoTrack,
   playAudio,
@@ -71,29 +68,30 @@ export function LocalMicrophoneAndCameraUser({
   micDeviceId,
   cameraDeviceId,
   volume,
-  darkenOnHover,
   cover,
   children,
-  className = "",
+  style,
   ...props
 }: LocalMicrophoneAndCameraUserProps) {
+  const mergedStyle = useMergedStyle(VideoTrackWrapperStyle, style);
+  playVideo = playVideo ?? !!cameraOn;
+  playAudio = playAudio ?? !!micOn;
   return (
-    <div className={`arr-user ${className} ${darkenOnHover ? "darken-on-hover" : ""}`} {...props}>
+    <div {...props} style={mergedStyle}>
       <CameraVideoTrack
-        className="arr-user-video"
         track={videoTrack}
         play={playVideo}
         deviceId={cameraDeviceId}
-        disabled={cameraDisabled}
+        disabled={!cameraOn}
       />
       <MicrophoneAudioTrack
         track={audioTrack}
         play={playAudio}
         deviceId={micDeviceId}
-        disabled={micDisabled}
+        disabled={!micOn}
       />
-      {cover && !playVideo && <UserCover className="arr-user-cover" cover={cover} />}
-      <div className="arr-user-body">{children}</div>
+      {cover && !cameraOn && <UserCover cover={cover} />}
+      <div style={FloatBoxStyle}>{children}</div>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import type { MaybePromiseOrNull } from "../utils";
 import { useEffect, useState } from "react";
 import { useAwaited } from "../hooks";
 import { useAutoStopTrack } from "./TrackBoundary";
+import { useMergedStyle, VideoTrackStyle } from "./styles";
 
 export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**
@@ -38,8 +39,10 @@ export function LocalVideoTrack({
   play,
   disabled,
   muted,
+  style,
   ...props
 }: LocalVideoTrackProps) {
+  const mergedStyle = useMergedStyle(VideoTrackStyle, style);
   const [div, setDiv] = useState<HTMLDivElement | null>(null);
 
   const track = useAwaited(maybeTrack);
@@ -65,5 +68,5 @@ export function LocalVideoTrack({
     }
   }, [muted, track]);
 
-  return <div ref={setDiv} {...props} />;
+  return <div {...props} ref={setDiv} style={mergedStyle} />;
 }

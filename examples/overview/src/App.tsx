@@ -12,15 +12,13 @@ import { useEffect, useMemo, useState } from "react";
 
 import {
   AgoraRTCProvider,
-  CameraVideoTrack,
-  MicrophoneAudioTrack,
+  LocalMicrophoneAndCameraUser,
   RemoteUser,
   SVGCamera,
   SVGCameraMute,
   SVGMicrophone,
   SVGMicrophoneMute,
   usePublishedRemoteUsers,
-  UserCover,
   useRemoteUsers,
   useSafePromise,
 } from "agora-rtc-react";
@@ -95,23 +93,22 @@ export const App = () => {
           total={remoteUsers.length + 1}
         />
         <AutoLayout>
-          <AutoLayout.Item>
-            <CameraVideoTrack className="w-full h-full" track={videoTrack} play={cameraOn} />
-            <MicrophoneAudioTrack track={audioTrack} play={micOn} />
-            {!cameraOn && uid && (
-              <UserCover cover={userAvatar} className="w-full h-full absolute top-0 left-0" />
-            )}
-            {uid && <Label>{`${userName}{${uid}}`}</Label>}
-          </AutoLayout.Item>
+          {uid && (
+            <AutoLayout.Item>
+              <LocalMicrophoneAndCameraUser
+                cameraOn={cameraOn}
+                micOn={micOn}
+                videoTrack={videoTrack}
+                audioTrack={audioTrack}
+                cover={userAvatar}
+              >
+                {<Label>{`${userName}{${uid}}`}</Label>}
+              </LocalMicrophoneAndCameraUser>
+            </AutoLayout.Item>
+          )}
           {remoteUsers.map(user => (
             <AutoLayout.Item key={user.uid}>
-              <RemoteUser
-                className="w-full h-full"
-                user={user}
-                cover={fakeAvatar(user.uid)}
-                playAudio={user.hasAudio}
-                playVideo={user.hasVideo}
-              />
+              <RemoteUser user={user} cover={fakeAvatar(user.uid)} />
               <Label>{`${fakeName(user.uid)}{${user.uid}}}`}</Label>
             </AutoLayout.Item>
           ))}

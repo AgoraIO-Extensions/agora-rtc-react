@@ -2,11 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import type { LocalMicrophoneAndCameraUserProps } from "./LocalUser";
 
 import { action } from "@storybook/addon-actions";
-import {
-  createFakeRtcClient,
-  FakeCameraVideoTrack,
-  FakeMicrophoneAudioTrack,
-} from "fake-agora-rtc";
+import { FakeRTCClient, FakeCameraVideoTrack, FakeMicrophoneAudioTrack } from "fake-agora-rtc";
 import { useEffect, useMemo, useState } from "react";
 import { AgoraRTCProvider } from "../hooks";
 import { LocalMicrophoneAndCameraUser } from "./LocalUser";
@@ -35,12 +31,15 @@ export const Overview: StoryObj<OverviewArgs> = {
     cameraOn: false,
     playVideo: false,
     playAudio: false,
-    style: { borderRadius: 8 },
     cover: "http://placekitten.com/200/200",
+    style: {
+      width: 288,
+      height: 216,
+    },
   },
   render: function RenderLocalUser({ micOn, cameraOn, ...args }: OverviewArgs) {
     const [client] = useState(() =>
-      createFakeRtcClient({
+      FakeRTCClient.create({
         publish: async () => {
           action("IAgoraRTCClient.publish()")();
         },
@@ -72,8 +71,8 @@ export const Overview: StoryObj<OverviewArgs> = {
         <LocalMicrophoneAndCameraUser
           audioTrack={audioTrack}
           videoTrack={videoTrack}
-          micDisabled={!micOn}
-          cameraDisabled={!cameraOn}
+          micOn={micOn}
+          cameraOn={cameraOn}
           {...args}
         />
       </AgoraRTCProvider>
