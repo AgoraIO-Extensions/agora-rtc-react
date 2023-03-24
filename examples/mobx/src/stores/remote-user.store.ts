@@ -7,6 +7,13 @@ import type {
 import { makeAutoObservable } from "mobx";
 import { fakeAvatar, fakeName } from "../utils";
 
+/**
+ * This class extracts fields from the IAgoraRTCRemoteUser object so that mobx can track them.
+ *
+ * `uid`, `audioTrack`, `videoTrack` → same\
+ * `hasAudio` → `micOn`\
+ * `hasVideo` → `cameraOn`
+ */
 export class MyRemoteUser {
   uid: UID;
   name: string;

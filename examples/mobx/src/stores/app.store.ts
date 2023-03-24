@@ -27,8 +27,10 @@ class AppStore {
   async leave(): Promise<void> {
     this.users.dispose();
     const client = this.client;
-    this._updateClient(null);
-    await client?.leave();
+    if (client) {
+      await client.leave();
+      this._updateClient(null);
+    }
   }
 
   private _updateClient(client: IAgoraRTCClient | null): void {

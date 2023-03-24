@@ -3,7 +3,7 @@ import type { IAgoraRTCClient, IAgoraRTCRemoteUser, UID } from "agora-rtc-sdk-ng
 import { listen } from "agora-rtc-react";
 import { makeAutoObservable, observable } from "mobx";
 import { SideEffectManager } from "side-effect-manager";
-import { MyShareScreen, ShareScreenUID } from "./share-screen.store";
+import { ShareScreen, ShareScreenUID } from "./share-screen.store";
 import { MyLocalUser } from "./local-user.store";
 import { MyRemoteUser } from "./remote-user.store";
 
@@ -11,7 +11,7 @@ export class MyUsers {
   private readonly _remoteUsersMap = observable.map<UID, MyRemoteUser>();
   private readonly _sideEffect = new SideEffectManager();
 
-  shareScreen = new MyShareScreen();
+  shareScreen = new ShareScreen();
   localUser: MyLocalUser | null = null;
 
   get remoteUsers() {

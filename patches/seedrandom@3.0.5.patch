@@ -1,0 +1,18 @@
+diff --git a/seedrandom.js b/seedrandom.js
+index 12d7ee1ddd93e8708629953a7ef416f64cc4be75..63439c59165c5526961eeb9a29b414c2182d118c 100644
+--- a/seedrandom.js
++++ b/seedrandom.js
+@@ -232,9 +232,10 @@ mixkey(math.random(), pool);
+ if ((typeof module) == 'object' && module.exports) {
+   module.exports = seedrandom;
+   // When in node.js, try using crypto package for autoseeding.
+-  try {
+-    nodecrypto = require('crypto');
+-  } catch (ex) {}
++  // PATCH: remove nodecrypto
++  // try {
++  //   nodecrypto = require('crypto');
++  // } catch (ex) {}
+ } else if ((typeof define) == 'function' && define.amd) {
+   define(function() { return seedrandom; });
+ } else {

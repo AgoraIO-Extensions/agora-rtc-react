@@ -3,6 +3,11 @@ lockfileVersion: 5.4
 overrides:
   nodeunit: npm:noop-package@1.0.0
 
+patchedDependencies:
+  seedrandom@3.0.5:
+    hash: hrvea3ysnhtmjgu7pcuhw34beu
+    path: patches/seedrandom@3.0.5.patch
+
 importers:
 
   .:
@@ -43,6 +48,7 @@ importers:
 
   examples/mobx:
     specifiers:
+      '@iconify-json/mdi': ^1.1.50
       '@ngneat/falso': ^6.4.0
       '@types/react': ^18.0.28
       '@types/react-dom': ^18.0.11
@@ -57,6 +63,7 @@ importers:
       sanitize.css: ^13.0.0
       side-effect-manager: ^1.2.2
       typescript: ^4.9.5
+      unocss: ^0.50.4
       vite: ^4.1.4
     dependencies:
       '@ngneat/falso': 6.4.0
@@ -70,10 +77,12 @@ importers:
       sanitize.css: 13.0.0
       side-effect-manager: 1.2.2
     devDependencies:
+      '@iconify-json/mdi': 1.1.50
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
       '@vitejs/plugin-react': 3.1.0_vite@4.1.4
       typescript: 4.9.5
+      unocss: 0.50.4_vite@4.1.4
       vite: 4.1.4
 
   examples/overview:
@@ -2154,7 +2163,7 @@ packages:
   /@ngneat/falso/6.4.0:
     resolution: {integrity: sha512-f6r036h2fX/AoHw1eV2t8+qWQwrbSrozs3zXMhhwoO7SJBc+DGMxRWEhFeYIinfwx0uhUH8ggx5+PDLzYESLOA==}
     dependencies:
-      seedrandom: 3.0.5
+      seedrandom: 3.0.5_hrvea3ysnhtmjgu7pcuhw34beu
       uuid: 8.3.2
 
   /@nodelib/fs.scandir/2.1.5:
@@ -8257,8 +8266,9 @@ packages:
     dependencies:
       loose-envify: 1.4.0
 
-  /seedrandom/3.0.5:
+  /seedrandom/3.0.5_hrvea3ysnhtmjgu7pcuhw34beu:
     resolution: {integrity: sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg==}
+    patched: true
 
   /semver/5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}

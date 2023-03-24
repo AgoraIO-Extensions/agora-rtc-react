@@ -16,7 +16,7 @@ const appId = import.meta.env.AGORA_APPID;
 const channel = import.meta.env.AGORA_CHANNEL;
 const token = import.meta.env.AGORA_TOKEN;
 
-export class MyShareScreen {
+export class ShareScreen {
   readonly client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 
   enabled = false;
@@ -24,6 +24,10 @@ export class MyShareScreen {
   localVideoTrack: ILocalVideoTrack | null = null;
   remoteAudioTrack: IRemoteAudioTrack | null = null;
   remoteVideoTrack: IRemoteVideoTrack | null = null;
+
+  get isRunning() {
+    return this.enabled || this.remoteVideoTrack != null;
+  }
 
   constructor() {
     makeAutoObservable(this);
@@ -44,8 +48,6 @@ export class MyShareScreen {
       throw new Error("remote screen video track already exists");
     }
 
-    this.enabled = true;
-
     if (this._pTogglingShareScreen) {
       await this._pTogglingShareScreen;
     }
@@ -63,6 +65,8 @@ export class MyShareScreen {
       resolve();
       this._pTogglingShareScreen = undefined;
     }
+
+    this.enabled = true;
   }
 
   async disable() {

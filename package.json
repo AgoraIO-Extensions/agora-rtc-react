@@ -41,6 +41,9 @@
     "//": "https://github.com/AgoraIO/Tools/issues/304",
     "overrides": {
       "nodeunit": "npm:noop-package@1.0.0"
+    },
+    "patchedDependencies": {
+      "seedrandom@3.0.5": "patches/seedrandom@3.0.5.patch"
     }
   }
 }
