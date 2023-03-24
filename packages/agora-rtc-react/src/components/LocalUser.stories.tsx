@@ -8,7 +8,7 @@ import { AgoraRTCProvider } from "../hooks";
 import { LocalMicrophoneAndCameraUser } from "./LocalUser";
 
 const meta: Meta<LocalMicrophoneAndCameraUserProps> = {
-  title: "Prebuilt/LocalUser",
+  title: "User/LocalUser",
   component: LocalMicrophoneAndCameraUser,
   tags: ["autodocs"],
   parameters: {

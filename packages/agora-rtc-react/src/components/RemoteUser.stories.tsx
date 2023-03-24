@@ -2,18 +2,17 @@ import type { Meta, StoryObj } from "@storybook/react";
 import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import type { RemoteUserProps } from "./RemoteUser";
 
+import { CameraControl, MicControl } from "agora-rtc-react-ui";
 import { randFirstName, randNumber, randUuid } from "@ngneat/falso";
 import { useArgs } from "@storybook/preview-api";
 import { FakeRTCClient } from "fake-agora-rtc";
 import { useCallback, useEffect, useState } from "react";
 import { AgoraRTCProvider } from "../hooks/context";
 import { interval } from "../utils";
-import { CameraControl } from "./CameraControl";
-import { MicControl } from "./MicControl";
 import { RemoteUser } from "./RemoteUser";
 
 const meta: Meta<RemoteUserProps> = {
-  title: "Prebuilt/RemoteUser",
+  title: "User/RemoteUser",
   component: RemoteUser,
   tags: ["autodocs"],
   argTypes: {

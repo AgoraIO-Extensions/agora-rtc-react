@@ -1,7 +1,6 @@
 import type { SVGProps } from "react";
 
 import { useState, useEffect } from "react";
-import { interval } from "../../utils";
 
 const vHeight = 14;
 const vWidth = 8;
@@ -26,11 +25,12 @@ export function SVGMicrophone({
   useEffect(() => {
     if (baseVolumeLevel && noise) {
       const safeNoise = Math.max(0, Math.min(1, noise));
-      return interval(() => {
+      const ticket = setInterval(() => {
         setVolumeLevel(
           baseVolumeLevel + Math.random() * safeNoise * (Math.random() > 0.5 ? 1 : -1),
         );
       }, 50);
+      return () => clearInterval(ticket);
     }
   }, [baseVolumeLevel, noise]);
 

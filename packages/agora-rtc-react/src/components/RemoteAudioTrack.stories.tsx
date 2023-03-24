@@ -5,7 +5,7 @@ import { RemoteAudioTrack } from "./RemoteAudioTrack";
 import { FakeRemoteAudioTrack } from "fake-agora-rtc";
 
 const meta: Meta<RemoteAudioTrackProps> = {
-  title: "Core/RemoteAudioTrack",
+  title: "Track/RemoteAudioTrack",
   component: RemoteAudioTrack,
   tags: ["autodocs"],
   parameters: {

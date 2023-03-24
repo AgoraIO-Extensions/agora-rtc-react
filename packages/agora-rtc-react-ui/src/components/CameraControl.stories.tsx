@@ -4,7 +4,7 @@ import type { StoryObj, Meta } from "@storybook/react";
 import { CameraControl } from "./CameraControl";
 
 const meta: Meta<CameraControlProps> = {
-  title: "Prebuilt/CameraControl",
+  title: "Controls/CameraControl",
   component: CameraControl,
   tags: ["autodocs"],
   parameters: {

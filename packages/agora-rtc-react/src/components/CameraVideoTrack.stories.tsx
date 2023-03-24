@@ -6,7 +6,7 @@ import { FakeCameraVideoTrack } from "fake-agora-rtc";
 import { useState } from "react";
 
 const meta: Meta<CameraVideoTrackProps> = {
-  title: "Core/CameraVideoTrack",
+  title: "Track/CameraVideoTrack",
   component: CameraVideoTrack,
   tags: ["autodocs"],
   parameters: {

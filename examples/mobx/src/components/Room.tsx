@@ -1,4 +1,5 @@
-import { MicControl, RemoteUser, RemoteVideoTrack } from "agora-rtc-react";
+import { RemoteUser, RemoteVideoTrack } from "agora-rtc-react";
+import { MicControl } from "agora-rtc-react-ui";
 import { observer } from "mobx-react-lite";
 import { appStore } from "../stores/app.store";
 import { Controls } from "./Controls";

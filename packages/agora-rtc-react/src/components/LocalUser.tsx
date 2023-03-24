@@ -55,8 +55,7 @@ export interface LocalMicrophoneAndCameraUserProps extends HTMLProps<HTMLDivElem
 }
 
 /**
- * Publish and play local user video and audio track.
- * High-level Component for rendering and publishing a local user video and audio track.
+ * Play/Stop local user camera and microphone track.
  */
 export function LocalMicrophoneAndCameraUser({
   micOn,

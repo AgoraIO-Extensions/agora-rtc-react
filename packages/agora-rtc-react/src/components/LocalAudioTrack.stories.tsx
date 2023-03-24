@@ -5,7 +5,7 @@ import { LocalAudioTrack } from "./LocalAudioTrack";
 import { FakeLocalAudioTrack } from "fake-agora-rtc";
 
 const meta: Meta<LocalAudioTrackProps> = {
-  title: "Core/LocalAudioTrack",
+  title: "Track/LocalAudioTrack",
   component: LocalAudioTrack,
   tags: ["autodocs"],
   parameters: {

@@ -44,7 +44,6 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
 
 /**
  * Subscribe and play remote user video and audio track.
- * High-level Component for rendering a remote user video and audio track.
  * An `IAgoraRTCRemoteUser` can only be own by one `RemoteUser`.
  */
 export function RemoteUser({

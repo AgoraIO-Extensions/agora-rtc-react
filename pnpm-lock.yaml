@@ -54,6 +54,7 @@ importers:
       '@types/react-dom': ^18.0.11
       '@vitejs/plugin-react': ^3.1.0
       agora-rtc-react: workspace:*
+      agora-rtc-react-ui: workspace:*
       agora-rtc-sdk-ng: ^4.16.1
       clsx: ^1.2.1
       mobx: ^6.8.0
@@ -68,6 +69,7 @@ importers:
     dependencies:
       '@ngneat/falso': 6.4.0
       agora-rtc-react: link:../../packages/agora-rtc-react
+      agora-rtc-react-ui: link:../../packages/agora-rtc-react-ui
       agora-rtc-sdk-ng: 4.16.1
       clsx: 1.2.1
       mobx: 6.8.0
@@ -94,6 +96,7 @@ importers:
       '@types/react-dom': ^18.0.11
       '@vitejs/plugin-react': ^3.1.0
       agora-rtc-react: workspace:*
+      agora-rtc-react-ui: workspace:*
       agora-rtc-sdk-ng: ^4.16.1
       clsx: ^1.2.1
       react: ^18.2.0
@@ -104,6 +107,7 @@ importers:
       vite: ^4.1.4
     dependencies:
       agora-rtc-react: link:../../packages/agora-rtc-react
+      agora-rtc-react-ui: link:../../packages/agora-rtc-react-ui
       agora-rtc-sdk-ng: 4.16.1
       clsx: 1.2.1
       react: 18.2.0
@@ -138,6 +142,7 @@ importers:
       '@types/react-dom': ^18.0.11
       '@vitejs/plugin-react': ^3.0.0
       '@vitest/coverage-c8': ^0.29.2
+      agora-rtc-react-ui: workspace:*
       agora-rtc-sdk-ng: ^4.16.1
       fake-agora-rtc: workspace:*
       jsdom: ^21.1.0
@@ -166,6 +171,67 @@ importers:
       '@types/react-dom': 18.0.11
       '@vitejs/plugin-react': 3.1.0_vite@4.1.4
       '@vitest/coverage-c8': 0.29.2_vitest@0.29.2
+      agora-rtc-react-ui: link:../agora-rtc-react-ui
+      agora-rtc-sdk-ng: 4.16.1
+      fake-agora-rtc: link:../fake-agora-rtc
+      jsdom: 21.1.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-test-renderer: 18.2.0_react@18.2.0
+      storybook: 7.0.0-rc.3
+      tsup: 6.6.3_typescript@4.9.5
+      typescript: 4.9.5
+      vite: 4.1.4
+      vitest: 0.29.2_jsdom@21.1.0
+
+  packages/agora-rtc-react-ui:
+    specifiers:
+      '@ngneat/falso': ^6.4.0
+      '@storybook/addon-actions': 7.0.0-beta.43
+      '@storybook/addon-essentials': ^7.0.0-rc.3
+      '@storybook/addon-interactions': ^7.0.0-rc.3
+      '@storybook/addon-links': ^7.0.0-rc.3
+      '@storybook/blocks': ^7.0.0-rc.3
+      '@storybook/builder-vite': ^7.0.0-rc.3
+      '@storybook/preview-api': 7.0.0-beta.40
+      '@storybook/react': ^7.0.0-rc.3
+      '@storybook/react-vite': ^7.0.0-rc.3
+      '@testing-library/react': ^14.0.0
+      '@types/jest': ^29.4.0
+      '@types/react': ^18.0.28
+      '@types/react-dom': ^18.0.11
+      '@vitejs/plugin-react': ^3.0.0
+      '@vitest/coverage-c8': ^0.29.2
+      agora-rtc-react: workspace:*
+      agora-rtc-sdk-ng: ^4.16.1
+      fake-agora-rtc: workspace:*
+      jsdom: ^21.1.0
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      react-test-renderer: ^18.2.0
+      storybook: ^7.0.0-rc.3
+      tsup: ^6.6.3
+      typescript: ^4.9.5
+      vite: ^4.1.4
+      vitest: ^0.29.2
+    devDependencies:
+      '@ngneat/falso': 6.4.0
+      '@storybook/addon-actions': 7.0.0-beta.43_biqbaboplfbrettd7655fr4n2y
+      '@storybook/addon-essentials': 7.0.0-rc.3_biqbaboplfbrettd7655fr4n2y
+      '@storybook/addon-interactions': 7.0.0-rc.3_biqbaboplfbrettd7655fr4n2y
+      '@storybook/addon-links': 7.0.0-rc.3_biqbaboplfbrettd7655fr4n2y
+      '@storybook/blocks': 7.0.0-rc.3_biqbaboplfbrettd7655fr4n2y
+      '@storybook/builder-vite': 7.0.0-rc.3_vwvfc4ezh6jlf6pa67auy3eulu
+      '@storybook/preview-api': 7.0.0-beta.40
+      '@storybook/react': 7.0.0-rc.3_ygqkwb4gg3aean7xjfdauovyqq
+      '@storybook/react-vite': 7.0.0-rc.3_ndsstb2ob2rgr4m75wxvpqsrpi
+      '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
+      '@types/jest': 29.4.0
+      '@types/react': 18.0.28
+      '@types/react-dom': 18.0.11
+      '@vitejs/plugin-react': 3.1.0_vite@4.1.4
+      '@vitest/coverage-c8': 0.29.2_vitest@0.29.2
+      agora-rtc-react: link:../agora-rtc-react
       agora-rtc-sdk-ng: 4.16.1
       fake-agora-rtc: link:../fake-agora-rtc
       jsdom: 21.1.0

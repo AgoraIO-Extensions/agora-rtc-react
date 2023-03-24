@@ -6,7 +6,7 @@ import { FakeLocalVideoTrack } from "fake-agora-rtc";
 import { useState } from "react";
 
 const meta: Meta<LocalVideoTrackProps> = {
-  title: "Core/LocalVideoTrack",
+  title: "Track/LocalVideoTrack",
   component: LocalVideoTrack,
   tags: ["autodocs"],
   parameters: {

@@ -11,6 +11,7 @@
   "dependencies": {
     "@ngneat/falso": "^6.4.0",
     "agora-rtc-react": "workspace:*",
+    "agora-rtc-react-ui": "workspace:*",
     "agora-rtc-sdk-ng": "^4.16.1",
     "clsx": "^1.2.1",
     "mobx": "^6.8.0",

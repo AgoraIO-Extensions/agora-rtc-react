@@ -5,10 +5,9 @@ import { FakeLocalAudioTrack, FakeRemoteAudioTrack } from "fake-agora-rtc";
 import { randNumber } from "@ngneat/falso";
 import { useEffect } from "react";
 import { MicControl } from "./MicControl";
-import { interval } from "../utils";
 
 const meta: Meta<MicControlProps> = {
-  title: "Prebuilt/MicControl",
+  title: "Controls/MicControl",
   component: MicControl,
   tags: ["autodocs"],
   parameters: {
@@ -19,9 +18,10 @@ const meta: Meta<MicControlProps> = {
       const audioTrack = context.args.audioTrack;
       useEffect(() => {
         if (audioTrack) {
-          return interval(() => {
+          const ticket = setInterval(() => {
             audioTrack.setVolume(randNumber({ min: 0, max: 100 }));
           }, 2000);
+          return () => clearInterval(ticket);
         }
       }, [audioTrack]);
       return Story();

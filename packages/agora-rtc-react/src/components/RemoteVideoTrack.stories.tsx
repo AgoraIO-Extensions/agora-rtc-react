@@ -6,7 +6,7 @@ import { FakeRemoteVideoTrack } from "fake-agora-rtc";
 import { useState } from "react";
 
 const meta: Meta<RemoteVideoTrackProps> = {
-  title: "Core/RemoteVideoTrack",
+  title: "Track/RemoteVideoTrack",
   component: RemoteVideoTrack,
   tags: ["autodocs"],
   parameters: {

@@ -1,0 +1,25 @@
+.arr-user-control {
+  overflow: hidden;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  transition: background-color 0.4s;
+  cursor: pointer;
+  user-select: none;
+}
+
+.arr-user-control:hover,
+.arr-user-control:focus,
+.arr-user-control:active {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.arr-user-control:disabled {
+  cursor: default;
+}

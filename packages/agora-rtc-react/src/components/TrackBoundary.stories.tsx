@@ -14,7 +14,7 @@ interface Controls {
 }
 
 const meta: Meta = {
-  title: "Prebuilt/TrackBoundary",
+  title: "Tools/TrackBoundary",
   tags: ["autodocs"],
   component: TrackBoundary,
   argTypes: {

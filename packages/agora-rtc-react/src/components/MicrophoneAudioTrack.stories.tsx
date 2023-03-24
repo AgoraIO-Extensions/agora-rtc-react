@@ -5,7 +5,7 @@ import { MicrophoneAudioTrack } from "./MicrophoneAudioTrack";
 import { FakeMicrophoneAudioTrack } from "fake-agora-rtc";
 
 const meta: Meta<MicrophoneAudioTrackProps> = {
-  title: "Core/MicrophoneAudioTrack",
+  title: "Track/MicrophoneAudioTrack",
   component: MicrophoneAudioTrack,
   tags: ["autodocs"],
   parameters: {

@@ -1,4 +1,3 @@
-export * from "./icons";
 export * from "./LocalAudioTrack";
 export * from "./LocalVideoTrack";
 export * from "./MicrophoneAudioTrack";
@@ -7,6 +6,4 @@ export * from "./LocalUser";
 export * from "./RemoteAudioTrack";
 export * from "./RemoteVideoTrack";
 export * from "./RemoteUser";
-export * from "./MicControl";
-export * from "./CameraControl";
 export * from "./TrackBoundary";

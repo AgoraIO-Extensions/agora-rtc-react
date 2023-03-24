@@ -4,9 +4,9 @@ import type { ButtonHTMLAttributes, MouseEvent } from "react";
 import type { ILocalAudioTrack, IRemoteAudioTrack } from "agora-rtc-sdk-ng";
 
 import { useCallback } from "react";
+import { useVolumeLevel } from "agora-rtc-react";
 import { SVGMicrophone } from "./icons/SVGMicrophone";
 import { SVGMicrophoneMute } from "./icons/SVGMicrophoneMute";
-import { useVolumeLevel } from "../hooks";
 
 export interface MicControlProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
