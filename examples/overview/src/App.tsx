@@ -114,20 +114,21 @@ export const App = () => {
           ))}
         </AutoLayout>
         {/* Camera and Microphone Controls */}
-        <div className="flex gap-3 px-6 py-3 bg-#21242c c-coolgray-3">
-          <button className="btn" onClick={() => setMic(a => !a)}>
-            {micOn ? <SVGMicrophone /> : <SVGMicrophoneMute />}
-          </button>
-          <button className="btn" onClick={() => setCamera(a => !a)}>
-            {cameraOn ? <SVGCamera /> : <SVGCameraMute />}
-          </button>
-          <span className="flex-1" />
+        <div className="flex justify-center items-center gap-3 px-6 py-3 bg-#21242c c-coolgray-3 relative">
           <button
             className={clsx("btn btn-phone", { "btn-phone-active": calling })}
             onClick={() => setCalling(a => !a)}
           >
             {calling ? <i className="i-mdi-phone-hangup" /> : <i className="i-mdi-phone" />}
           </button>
+          <div className="flex-1 flex absolute top-0 left-0 h-full items-center gap-3 px-6 py-3">
+            <button className="btn" onClick={() => setMic(a => !a)} disabled={!calling}>
+              {micOn ? <SVGMicrophone /> : <SVGMicrophoneMute />}
+            </button>
+            <button className="btn" onClick={() => setCamera(a => !a)} disabled={!calling}>
+              {cameraOn ? <SVGCamera /> : <SVGCameraMute />}
+            </button>
+          </div>
         </div>
       </Container>
     </AgoraRTCProvider>
