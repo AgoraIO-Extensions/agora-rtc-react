@@ -3,14 +3,13 @@ import type { MyLocalUser } from "../stores/local-user.store";
 import { observer } from "mobx-react-lite";
 import { clsx } from "clsx";
 import { appStore } from "../stores/app.store";
+import { shareScreen } from "../stores/share-screen.store";
 
 interface ControlsProps {
   localUser: MyLocalUser;
 }
 
 export const Controls = observer(function Controls({ localUser }: ControlsProps) {
-  const { shareScreen } = appStore.users;
-
   return (
     <div className="controls">
       <button

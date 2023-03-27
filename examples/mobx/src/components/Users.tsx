@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { appStore } from "../stores/app.store";
+import { shareScreen } from "../stores/share-screen.store";
 
 export const Users = observer(function Users() {
   const { localUser, remoteUsers } = appStore.users;
@@ -14,14 +15,16 @@ export const Users = observer(function Users() {
           {localUser?.micOn && <i className="i-mdi-microphone"></i>}
           {localUser?.cameraOn && <i className="i-mdi-video"></i>}
         </div>
-        {remoteUsers.map(user => (
-          <div key={user.uid} className="user">
-            <i className="i-mdi-account"></i>
-            <span>{user.name}</span>
-            {user.micOn && <i className="i-mdi-microphone"></i>}
-            {user.cameraOn && <i className="i-mdi-video"></i>}
-          </div>
-        ))}
+        {remoteUsers
+          .filter(user => user.uid !== shareScreen.uid)
+          .map(user => (
+            <div key={user.uid} className="user">
+              <i className="i-mdi-account"></i>
+              <span>{user.name}</span>
+              {user.micOn && <i className="i-mdi-microphone"></i>}
+              {user.cameraOn && <i className="i-mdi-video"></i>}
+            </div>
+          ))}
       </div>
     </div>
   );

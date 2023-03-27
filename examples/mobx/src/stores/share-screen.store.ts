@@ -9,14 +9,12 @@ import type {
 } from "agora-rtc-sdk-ng";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { makeAutoObservable } from "mobx";
+import { appId, channel, token } from "../constants";
 
 export const ShareScreenUID: UID = 10;
 
-const appId = import.meta.env.AGORA_APPID;
-const channel = import.meta.env.AGORA_CHANNEL;
-const token = import.meta.env.AGORA_TOKEN;
-
 export class ShareScreen {
+  readonly uid = ShareScreenUID;
   readonly client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 
   enabled = false;
@@ -111,3 +109,5 @@ export class ShareScreen {
     return [this.localAudioTrack, this.localVideoTrack].filter(Boolean) as ILocalTrack[];
   }
 }
+
+export const shareScreen = new ShareScreen();

@@ -2,13 +2,14 @@ import type { IAgoraRTCClient } from "agora-rtc-sdk-ng";
 
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { makeAutoObservable } from "mobx";
-import { MyUsers } from "./users.store";
+import { Users } from "./users.store";
 
 AgoraRTC.setLogLevel(/* warning */ 2);
 
 class AppStore {
   client: IAgoraRTCClient | null = null;
-  users = new MyUsers();
+  users = new Users();
+  subClients: IAgoraRTCClient[] = [];
 
   get uid() {
     return this.client?.uid;
