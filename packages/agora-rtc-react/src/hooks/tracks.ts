@@ -9,9 +9,10 @@ import { useEffect, useState } from "react";
 import { interval, joinDisposers } from "../utils";
 import { listen } from "../listen";
 import { useRTCClient } from "./context";
+import { useIsConnected } from "./client";
 
 /**
- * Subscribe and get remote user video track.
+ * Auto-subscribe and get remote user video track.
  * Unsubscribe track on unmount.
  */
 export function useRemoteUserTrack(
@@ -19,7 +20,7 @@ export function useRemoteUserTrack(
   mediaType: "video",
 ): IRemoteVideoTrack | undefined;
 /**
- * Subscribe and get remote user audio track.
+ * Auto-subscribe and get remote user audio track.
  * Unsubscribe track on unmount.
  */
 export function useRemoteUserTrack(
@@ -33,9 +34,10 @@ export function useRemoteUserTrack(
   const client = useRTCClient();
   const trackName = mediaType === "audio" ? "audioTrack" : "videoTrack";
   const [track, setTrack] = useState(user && user[trackName]);
+  const isConnected = useIsConnected();
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || !isConnected) return;
 
     let isUnmounted = false;
 
@@ -63,14 +65,14 @@ export function useRemoteUserTrack(
     const unsubscribe = (user: IAgoraRTCRemoteUser, mediaType: "audio" | "video"): Promise<void> =>
       client.unsubscribe(user, mediaType).catch(console.error);
 
-    if (!user[trackName] && user[hasTrack]) {
+    if (!user[trackName] && user[hasTrack] && client.remoteUsers.includes(user)) {
       subscribe(user, mediaType);
     }
 
     return joinDisposers([
       () => {
         isUnmounted = true;
-        if (user[trackName]) {
+        if (user[trackName] && client.remoteUsers.includes(user)) {
           unsubscribe(user, mediaType);
         }
       },
@@ -86,7 +88,7 @@ export function useRemoteUserTrack(
         }
       }),
     ]);
-  }, [client, user, mediaType, trackName]);
+  }, [isConnected, client, user, mediaType, trackName]);
 
   return track;
 }

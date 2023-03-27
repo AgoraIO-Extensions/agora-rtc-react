@@ -2,7 +2,7 @@ import type { ConnectionState, IAgoraRTCClient, UID } from "agora-rtc-sdk-ng";
 
 import { useEffect, useState } from "react";
 import { listen } from "../listen";
-import { timeout } from "../utils";
+import { joinDisposers, timeout } from "../utils";
 import { useRTCClient } from "./context";
 import { useAsyncEffect } from "./tools";
 
@@ -35,9 +35,15 @@ export function useIsConnected(client?: IAgoraRTCClient | null): boolean {
   useEffect(() => {
     if (resolvedClient) {
       setConnected(resolvedClient.connectionState === "CONNECTED");
-      return listen(resolvedClient, "connection-state-change", state => {
-        setConnected(state === "CONNECTED");
-      });
+      let dispose: (() => void) | undefined;
+      return joinDisposers([
+        listen(resolvedClient, "connection-state-change", state => {
+          dispose?.();
+          // RTC is really connected after a short delay
+          dispose = timeout(() => setConnected(state === "CONNECTED"), 0);
+        }),
+        () => dispose?.(),
+      ]);
     } else {
       setConnected(false);
     }
@@ -58,6 +64,7 @@ export function useCurrentUID(client?: IAgoraRTCClient | null): UID | undefined 
     if (resolvedClient) {
       return listen(resolvedClient, "connection-state-change", state => {
         if (state === "CONNECTED") {
+          // RTC is really connected after a short delay
           return timeout(() => setUID(resolvedClient.uid), 0);
         } else if (state === "DISCONNECTED") {
           setUID(void 0);
