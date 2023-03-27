@@ -1,5 +1,6 @@
 import type { MutableRefObject, Ref, RefObject } from "react";
-import type { MaybePromise } from "../utils";
+import { createAsyncTaskRunner } from "../utils";
+import type { MaybePromise, AsyncTaskRunner } from "../utils";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
@@ -132,76 +133,11 @@ export function useAsyncEffect(
   effect: () => MaybePromise<void | (() => MaybePromise<void>)>,
   deps?: ReadonlyArray<unknown>,
 ): void {
-  const contextRef = useRef<
-    | {
-        isRunning?: boolean;
-        nextTask?: () => MaybePromise<void>;
-        disposer?: void | (() => MaybePromise<void>);
-      }
-    | undefined
-  >();
+  const runnerRef = useRef<AsyncTaskRunner | undefined>();
   useEffect(() => {
-    const context = (contextRef.current ||= {});
-
-    if (context.isRunning) {
-      context.nextTask = () => runTask(effect);
-    } else {
-      runTask(effect);
-    }
-
-    function runNextTask() {
-      const nextTask = context.nextTask;
-      if (nextTask) {
-        context.nextTask = void 0;
-        nextTask();
-      }
-    }
-
-    async function disposeEffect() {
-      const disposer = context.disposer;
-      if (disposer) {
-        context.disposer = void 0;
-        try {
-          await disposer();
-        } catch (e) {
-          console.error(e);
-        }
-      }
-    }
-
-    async function runTask(effect: () => MaybePromise<void | (() => MaybePromise<void>)>) {
-      context.isRunning = true;
-
-      await disposeEffect();
-
-      try {
-        context.disposer = await effect();
-      } catch (e) {
-        console.error(e);
-      }
-
-      context.isRunning = false;
-
-      runNextTask();
-    }
-
-    async function stopTask() {
-      context.isRunning = true;
-
-      await disposeEffect();
-
-      context.isRunning = false;
-
-      runNextTask();
-    }
-
-    return () => {
-      if (context.isRunning) {
-        context.nextTask = stopTask;
-      } else {
-        stopTask();
-      }
-    };
+    const { run, dispose } = (runnerRef.current ||= createAsyncTaskRunner());
+    run(effect);
+    return dispose;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }

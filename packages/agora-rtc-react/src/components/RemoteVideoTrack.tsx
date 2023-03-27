@@ -2,8 +2,8 @@ import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import type { HTMLProps } from "react";
 import type { Nullable } from "../utils";
 
-import { useEffect, useState } from "react";
-import { useAutoStopTrack } from "./TrackBoundary";
+import { useState } from "react";
+import { useAutoPlayVideoTrack } from "./TrackBoundary";
 import { useMergedStyle, VideoTrackStyle } from "./styles";
 
 export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
@@ -24,15 +24,7 @@ export function RemoteVideoTrack({ track, play, style, ...props }: RemoteVideoTr
   const mergedStyle = useMergedStyle(VideoTrackStyle, style);
   const [div, setDiv] = useState<HTMLDivElement | null>(null);
 
-  useAutoStopTrack(track);
-
-  useEffect(() => {
-    if (div && track && play) {
-      track.play(div);
-    } else if (track && !play && track.isPlaying) {
-      track.stop();
-    }
-  }, [div, play, track]);
+  useAutoPlayVideoTrack(track, play, div);
 
   return <div {...props} ref={setDiv} style={mergedStyle} />;
 }

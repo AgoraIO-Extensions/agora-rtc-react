@@ -55,18 +55,40 @@ export function useRemoteUsers(client?: IAgoraRTCClient | null): IAgoraRTCRemote
 export function usePublishedRemoteUsers(client?: IAgoraRTCClient | null): IAgoraRTCRemoteUser[] {
   const resolvedClient = useRTCClient(client);
 
-  const [users, setUsers] = useState<IAgoraRTCRemoteUser[]>([]);
+  const [users, setUsers] = useState<IAgoraRTCRemoteUser[]>(() =>
+    resolvedClient.remoteUsers.filter(
+      user => user.uid !== resolvedClient.uid && (user.hasAudio || user.hasVideo),
+    ),
+  );
 
   useEffect(() => {
     if (resolvedClient) {
       const updatePublishedRemoteUsers = () => {
-        setUsers(
-          resolvedClient.remoteUsers.filter(
-            user => user.uid !== resolvedClient.uid && (user.hasAudio || user.hasVideo),
-          ),
-        );
+        setUsers(users => {
+          const newUsers: IAgoraRTCRemoteUser[] = [];
+          let isSame = true;
+
+          for (let i = 0; i < resolvedClient.remoteUsers.length; i++) {
+            const user = resolvedClient.remoteUsers[i];
+            if (user.uid !== resolvedClient.uid && (user.hasAudio || user.hasVideo)) {
+              newUsers.push(user);
+              if (isSame) {
+                isSame = i < users.length && users[i] === user;
+              }
+            }
+          }
+
+          isSame = isSame && newUsers.length === users.length;
+
+          return isSame ? users : newUsers;
+        });
       };
+
+      updatePublishedRemoteUsers();
+
       return joinDisposers([
+        listen(resolvedClient, "user-joined", updatePublishedRemoteUsers),
+        listen(resolvedClient, "user-left", updatePublishedRemoteUsers),
         listen(resolvedClient, "user-published", updatePublishedRemoteUsers),
         listen(resolvedClient, "user-unpublished", updatePublishedRemoteUsers),
       ]);

@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import type { Nullable } from "../utils";
 
 import { useEffect } from "react";
-import { useAutoStopTrack } from "./TrackBoundary";
+import { useAutoPlayAudioTrack } from "./TrackBoundary";
 
 export interface RemoteAudioTrackProps {
   /**
@@ -40,13 +40,7 @@ export function RemoteAudioTrack({
   volume,
   children,
 }: RemoteAudioTrackProps) {
-  useAutoStopTrack(track);
-
-  useEffect(() => {
-    if (track && play !== track.isPlaying) {
-      play ? track.play() : track.stop();
-    }
-  }, [play, track]);
+  useAutoPlayAudioTrack(track, play);
 
   useEffect(() => {
     if (track && playbackDeviceId != null) {

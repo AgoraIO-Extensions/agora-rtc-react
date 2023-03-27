@@ -1,4 +1,10 @@
-import type { ITrack } from "agora-rtc-sdk-ng";
+import type {
+  ILocalAudioTrack,
+  ILocalVideoTrack,
+  IRemoteAudioTrack,
+  IRemoteVideoTrack,
+  ITrack,
+} from "agora-rtc-sdk-ng";
 import type { PropsWithChildren } from "react";
 import type { Nullable } from "../utils";
 
@@ -88,19 +94,61 @@ export function TrackBoundary({ children }: PropsWithChildren) {
 }
 
 /**
- * Stops local or remote track when the component unmounts.
+ * Stops local or remote video track when the component unmounts.
  * If `<TrackBoundary />` exists in ancestor it will not stop track on unmount but delegates to TrackBoundary.
  */
-export function useAutoStopTrack(track: Nullable<ITrack>) {
+export function useAutoPlayVideoTrack(
+  track: Nullable<IRemoteVideoTrack | ILocalVideoTrack>,
+  play?: boolean,
+  div?: HTMLElement | null,
+) {
   const controller = useContext(TrackBoundaryContext);
 
-  useIsomorphicLayoutEffect(() => {
+  useEffect(() => {
     if (track) {
+      if (div && play) {
+        track.play(div);
+      }
+
       if (controller) {
         controller.onMount(track);
         return () => controller.onUnmount(track);
       } else {
-        return () => track.stop();
+        return () => {
+          if (track.isPlaying) {
+            track.stop();
+          }
+        };
+      }
+    }
+  }, [track, div, play, controller]);
+}
+
+/**
+ * Stops local or remote audio track when the component unmounts.
+ * If `<TrackBoundary />` exists in ancestor it will not stop track on unmount but delegates to TrackBoundary.
+ */
+export function useAutoPlayAudioTrack(
+  track: Nullable<IRemoteAudioTrack | ILocalAudioTrack>,
+  play?: boolean,
+) {
+  const controller = useContext(TrackBoundaryContext);
+
+  useIsomorphicLayoutEffect(() => {
+    if (track) {
+      if (play) {
+        track.play();
+      }
+
+      if (controller) {
+        controller.onMount(track);
+        return () => controller.onUnmount(track);
+      } else {
+        return () => {
+          if (track.isPlaying) {
+            track.stop();
+          }
+        };
       }
     }
   }, [track, controller]);

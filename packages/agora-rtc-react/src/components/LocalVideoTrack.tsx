@@ -4,8 +4,8 @@ import type { MaybePromiseOrNull } from "../utils";
 
 import { useEffect, useState } from "react";
 import { useAwaited } from "../hooks";
-import { useAutoStopTrack } from "./TrackBoundary";
 import { useMergedStyle, VideoTrackStyle } from "./styles";
+import { useAutoPlayVideoTrack } from "./TrackBoundary";
 
 export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**
@@ -46,15 +46,8 @@ export function LocalVideoTrack({
   const [div, setDiv] = useState<HTMLDivElement | null>(null);
 
   const track = useAwaited(maybeTrack);
-  useAutoStopTrack(track);
 
-  useEffect(() => {
-    if (div && track && play) {
-      track.play(div);
-    } else if (track && !play && track.isPlaying) {
-      track.stop();
-    }
-  }, [div, play, track]);
+  useAutoPlayVideoTrack(track, play, div);
 
   useEffect(() => {
     if (track && disabled != null) {
