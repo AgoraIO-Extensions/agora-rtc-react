@@ -32,7 +32,8 @@
     "Vals",
     "vite",
     "vitest",
-    "yoctocolors"
+    "yoctocolors",
+    "zustand"
   ],
   "ignorePaths": [
     "**/coverage/**",
