@@ -14,14 +14,11 @@ import {
   AgoraRTCProvider,
   LocalMicrophoneAndCameraUser,
   RemoteUser,
-  SVGCamera,
-  SVGCameraMute,
-  SVGMicrophone,
-  SVGMicrophoneMute,
   usePublishedRemoteUsers,
   useRemoteUsers,
   useSafePromise,
 } from "agora-rtc-react";
+import { SVGCamera, SVGCameraMute, SVGMicrophone, SVGMicrophoneMute } from "agora-rtc-react-ui";
 import clsx from "clsx";
 import { AutoLayout } from "./AutoLayout";
 import { Container } from "./Container";
