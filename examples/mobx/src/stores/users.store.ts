@@ -10,6 +10,9 @@ export class Users {
   private readonly _remoteUsersMap = observable.map<UID, MyRemoteUser>();
   private readonly _sideEffect = new SideEffectManager();
 
+  /** will not be included in `remoteUsers` and will not be subscribed */
+  readonly localUIDs: UID[] = [];
+
   localUser: MyLocalUser | null = null;
 
   get remoteUsers() {
@@ -33,16 +36,22 @@ export class Users {
           },
 
           listen(client, "user-joined", user => {
+            // ignore locals
+            if (this.localUIDs.includes(user.uid)) return;
             this._updateRemoteUser(user, true);
           }),
 
           listen(client, "user-left", user => {
+            // ignore locals
+            if (this.localUIDs.includes(user.uid)) return;
             this._deleteRemoteUser(user.uid);
           }),
 
-          listen(client, "user-published", async user => {
+          listen(client, "user-published", user => {
             // ignore self
             if (user.uid === client.uid) return;
+            // ignore locals
+            if (this.localUIDs.includes(user.uid)) return;
             // normal remote user
             this._updateRemoteUser(user);
           }),
@@ -50,6 +59,8 @@ export class Users {
           listen(client, "user-unpublished", user => {
             // ignore self
             if (user.uid === client.uid) return;
+            // ignore locals
+            if (this.localUIDs.includes(user.uid)) return;
             // normal remote user
             this._updateRemoteUser(user);
           }),

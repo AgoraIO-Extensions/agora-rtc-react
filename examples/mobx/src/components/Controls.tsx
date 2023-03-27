@@ -3,13 +3,14 @@ import type { MyLocalUser } from "../stores/local-user.store";
 import { observer } from "mobx-react-lite";
 import { clsx } from "clsx";
 import { appStore } from "../stores/app.store";
-import { shareScreen } from "../stores/share-screen.store";
 
 interface ControlsProps {
   localUser: MyLocalUser;
 }
 
 export const Controls = observer(function Controls({ localUser }: ControlsProps) {
+  const { shareScreen } = appStore;
+
   return (
     <div className="controls">
       <button
@@ -34,7 +35,7 @@ export const Controls = observer(function Controls({ localUser }: ControlsProps)
       <button
         className={clsx("btn", { active: shareScreen.enabled })}
         disabled={shareScreen.remoteVideoTrack != null}
-        onClick={() => shareScreen.enable()}
+        onClick={() => (shareScreen.enabled ? shareScreen.disable() : shareScreen.enable())}
       >
         <i className="i-mdi-arrow-up-bold-box" />
         <span className="btn-text">Share Screen</span>

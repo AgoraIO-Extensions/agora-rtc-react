@@ -1,14 +1,8 @@
-import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
-import { RemoteVideoTrack, useRemoteUserTrack } from "agora-rtc-react";
+import { RemoteVideoTrack } from "agora-rtc-react";
 import { observer } from "mobx-react-lite";
+import { appStore } from "../stores/app.store";
 
-interface ShareScreenTracksProps {
-  user?: IAgoraRTCRemoteUser;
-}
-
-export const ShareScreenTracks = observer(function ShareScreenTracks({
-  user,
-}: ShareScreenTracksProps) {
-  const track = useRemoteUserTrack(user, "video");
-  return <RemoteVideoTrack className="share-screen" track={track} play />;
+export const ShareScreenTracks = observer(function ShareScreenTracks() {
+  const { shareScreen } = appStore;
+  return <RemoteVideoTrack className="share-screen" track={shareScreen.remoteVideoTrack} play />;
 });

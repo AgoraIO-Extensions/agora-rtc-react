@@ -1,4 +1,6 @@
+import { listen } from "agora-rtc-react";
 import type {
+  IAgoraRTCClient,
   ILocalAudioTrack,
   ILocalTrack,
   ILocalVideoTrack,
@@ -7,13 +9,17 @@ import type {
   IRemoteVideoTrack,
   UID,
 } from "agora-rtc-sdk-ng";
+
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { makeAutoObservable } from "mobx";
+import { SideEffectManager } from "side-effect-manager";
 import { appId, channel, token } from "../constants";
 
 export const ShareScreenUID: UID = 10;
 
 export class ShareScreen {
+  private readonly _sideEffect = new SideEffectManager();
+
   readonly uid = ShareScreenUID;
   readonly client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 
@@ -31,12 +37,45 @@ export class ShareScreen {
     makeAutoObservable(this);
   }
 
+  updateMainClient(client: IAgoraRTCClient | null) {
+    this._sideEffect.add(() => {
+      if (client && client.uid) {
+        return [
+          listen(client, "user-published", async (user, mediaType) => {
+            if (user.uid !== this.uid || this.enabled) return;
+            const track = await client.subscribe(user, mediaType);
+            this.setRemoteTrack(track, mediaType);
+          }),
+          listen(client, "user-unpublished", (user, mediaType) => {
+            if (user.uid !== this.uid) return;
+            this.setRemoteTrack(null, mediaType);
+          }),
+        ];
+      } else {
+        return null;
+      }
+    }, "update-client");
+  }
+
   setRemoteTrack(track: IRemoteTrack | null, mediaType: "audio" | "video") {
     if (mediaType === "audio") {
       this.remoteAudioTrack = track as IRemoteAudioTrack;
     } else {
       this.remoteVideoTrack = track as IRemoteVideoTrack;
     }
+  }
+
+  async dispose() {
+    this._sideEffect.flushAll();
+    if (this.remoteVideoTrack) {
+      this.remoteVideoTrack.stop();
+      this.remoteVideoTrack = null;
+    }
+    if (this.remoteAudioTrack) {
+      this.remoteAudioTrack.stop();
+      this.remoteAudioTrack = null;
+    }
+    await this.disable();
   }
 
   private _pTogglingShareScreen?: Promise<void>;
@@ -94,7 +133,7 @@ export class ShareScreen {
     }
   }
 
-  async createLocalTracks() {
+  private async createLocalTracks() {
     const ret = await AgoraRTC.createScreenVideoTrack({}, "auto");
     if (Array.isArray(ret)) {
       [this.localVideoTrack, this.localAudioTrack] = ret;
@@ -109,5 +148,3 @@ export class ShareScreen {
     return [this.localAudioTrack, this.localVideoTrack].filter(Boolean) as ILocalTrack[];
   }
 }
-
-export const shareScreen = new ShareScreen();

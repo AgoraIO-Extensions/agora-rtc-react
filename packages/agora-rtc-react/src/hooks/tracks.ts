@@ -60,7 +60,7 @@ export function useRemoteUserTrack(
       }
     };
 
-    const unsubscribe = (user: IAgoraRTCRemoteUser, mediaType: "audio" | "video") =>
+    const unsubscribe = (user: IAgoraRTCRemoteUser, mediaType: "audio" | "video"): Promise<void> =>
       client.unsubscribe(user, mediaType).catch(console.error);
 
     if (!user[trackName] && user[hasTrack]) {
@@ -82,6 +82,7 @@ export function useRemoteUserTrack(
       listen(client, "user-unpublished", (pubUser, pubMediaType) => {
         if (pubUser.uid === uid && pubMediaType === mediaType && pubUser[trackName]) {
           unsubscribe(pubUser, mediaType);
+          setTrack(undefined);
         }
       }),
     ]);
