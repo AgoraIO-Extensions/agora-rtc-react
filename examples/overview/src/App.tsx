@@ -1,11 +1,6 @@
 import "./App.css";
 
-import type {
-  IAgoraRTCClient,
-  ICameraVideoTrack,
-  IMicrophoneAudioTrack,
-  UID,
-} from "agora-rtc-sdk-ng";
+import type { IAgoraRTCClient, ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
 
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { useEffect, useMemo, useState } from "react";
@@ -14,6 +9,9 @@ import {
   AgoraRTCProvider,
   LocalMicrophoneAndCameraUser,
   RemoteUser,
+  useAsyncEffect,
+  useCurrentUID,
+  useIsConnected,
   usePublishedRemoteUsers,
   useRemoteUsers,
   useSafePromise,
@@ -39,18 +37,21 @@ export const App = () => {
   const sp = useSafePromise();
 
   const [calling, setCalling] = useState(false);
-  const [uid, setUID] = useState<UID>(0);
-  const userName = useMemo(() => fakeName(uid), [uid]);
-  const userAvatar = useMemo(() => fakeAvatar(uid), [uid]);
   const remoteUsers = useRemoteUsers(client);
   const publishedUsers = usePublishedRemoteUsers(client);
 
-  useEffect(() => {
+  const uid = useCurrentUID(client) || 0;
+  const userName = useMemo(() => fakeName(uid), [uid]);
+  const userAvatar = useMemo(() => fakeAvatar(uid), [uid]);
+
+  const isConnected = useIsConnected(client);
+
+  useAsyncEffect(async () => {
     if (calling) {
-      sp(client.join(appId, channel, token)).then(setUID);
-      return () => void sp(client.leave()).then(() => setUID(0));
+      await client.join(appId, channel, token);
+      return () => client.leave();
     }
-  }, [calling, sp]);
+  }, [calling]);
 
   const [micOn, setMic] = useState(false);
   const [audioTrack, setAudioTrack] = useState<IMicrophoneAudioTrack | null>(null);
@@ -90,7 +91,7 @@ export const App = () => {
           total={remoteUsers.length + 1}
         />
         <AutoLayout>
-          {uid && (
+          {isConnected && (
             <AutoLayout.Item>
               <LocalMicrophoneAndCameraUser
                 cameraOn={cameraOn}

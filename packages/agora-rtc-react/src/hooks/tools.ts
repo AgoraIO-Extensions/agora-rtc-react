@@ -123,3 +123,85 @@ export function useAwaited<T>(promise: MaybePromise<T>): T | undefined {
 
   return value;
 }
+
+/**
+ * Accepts a function that contains imperative, possibly asynchronous effect-ful code.
+ * During the side-effect running/removing, if multiple effects are triggered, only the last one will be executed.
+ */
+export function useAsyncEffect(
+  effect: () => MaybePromise<void | (() => MaybePromise<void>)>,
+  deps?: ReadonlyArray<unknown>,
+): void {
+  const contextRef = useRef<
+    | {
+        isRunning?: boolean;
+        nextTask?: () => MaybePromise<void>;
+        disposer?: void | (() => MaybePromise<void>);
+      }
+    | undefined
+  >();
+  useEffect(() => {
+    const context = (contextRef.current ||= {});
+
+    if (context.isRunning) {
+      context.nextTask = () => runTask(effect);
+    } else {
+      runTask(effect);
+    }
+
+    function runNextTask() {
+      const nextTask = context.nextTask;
+      if (nextTask) {
+        context.nextTask = void 0;
+        nextTask();
+      }
+    }
+
+    async function disposeEffect() {
+      const disposer = context.disposer;
+      if (disposer) {
+        context.disposer = void 0;
+        try {
+          await disposer();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
+
+    async function runTask(effect: () => MaybePromise<void | (() => MaybePromise<void>)>) {
+      context.isRunning = true;
+
+      await disposeEffect();
+
+      try {
+        context.disposer = await effect();
+      } catch (e) {
+        console.error(e);
+      }
+
+      context.isRunning = false;
+
+      runNextTask();
+    }
+
+    async function stopTask() {
+      context.isRunning = true;
+
+      await disposeEffect();
+
+      context.isRunning = false;
+
+      runNextTask();
+    }
+
+    return () => {
+      if (context.isRunning) {
+        context.nextTask = stopTask;
+      } else {
+        stopTask();
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
+}
