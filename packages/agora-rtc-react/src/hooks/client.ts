@@ -15,7 +15,19 @@ export function useConnectionState(client?: IAgoraRTCClient | null): ConnectionS
   useEffect(() => {
     if (resolvedClient) {
       setConnectionState(resolvedClient.connectionState);
-      return listen(resolvedClient, "connection-state-change", setConnectionState);
+      let dispose: (() => void) | undefined;
+      return joinDisposers([
+        listen(resolvedClient, "connection-state-change", state => {
+          dispose?.();
+          if (state === "CONNECTED") {
+            // RTC is really connected after a short delay
+            dispose = timeout(() => setConnectionState(state), 0);
+          } else {
+            setConnectionState(state);
+          }
+        }),
+        () => dispose?.(),
+      ]);
     } else {
       setConnectionState("DISCONNECTED");
     }
