@@ -7,8 +7,7 @@ import { useRTCClient } from "./context";
 import { useAsyncEffect } from "./tools";
 
 export function useConnectionState(client?: IAgoraRTCClient | null): ConnectionState {
-  const clientFromContext = useRTCClient(true);
-  const resolvedClient = client || clientFromContext;
+  const resolvedClient = useRTCClient(client);
 
   const [connectionState, setConnectionState] = useState(
     resolvedClient ? resolvedClient.connectionState : "DISCONNECTED",
@@ -26,8 +25,7 @@ export function useConnectionState(client?: IAgoraRTCClient | null): ConnectionS
 }
 
 export function useIsConnected(client?: IAgoraRTCClient | null): boolean {
-  const clientFromContext = useRTCClient(true);
-  const resolvedClient = client || clientFromContext;
+  const resolvedClient = useRTCClient(client);
 
   const [isConnected, setConnected] = useState(
     resolvedClient ? resolvedClient.connectionState === "CONNECTED" : false,
@@ -56,8 +54,7 @@ export function useIsConnected(client?: IAgoraRTCClient | null): boolean {
  * @returns The UID of the local user if connected to a channel, `undefined` otherwise.
  */
 export function useCurrentUID(client?: IAgoraRTCClient | null): UID | undefined {
-  const clientFromContext = useRTCClient(true);
-  const resolvedClient = client || clientFromContext;
+  const resolvedClient = useRTCClient(client);
 
   const [uid, setUID] = useState<UID | undefined>(resolvedClient?.uid);
   useEffect(() => {
@@ -123,8 +120,7 @@ const initQuality = (): NetworkQuality => ({
  * After the local user joins the channel, the SDK triggers this callback to report the uplink and downlink network conditions of the local user once every two second.
  */
 export function useNetworkQuality(client?: IAgoraRTCClient | null): NetworkQuality {
-  const clientFromContext = useRTCClient(true);
-  const resolvedClient = client || clientFromContext;
+  const resolvedClient = useRTCClient(client);
 
   const [networkQuality, setNetworkQuality] = useState<NetworkQuality>(initQuality);
   useEffect(() => {
@@ -151,8 +147,7 @@ export function useAutoJoin(
   uid?: UID | null,
   client?: IAgoraRTCClient | null,
 ): void {
-  const clientFromContext = useRTCClient(true);
-  const resolvedClient = client || clientFromContext;
+  const resolvedClient = useRTCClient(client);
 
   useAsyncEffect(async () => {
     if (resolvedClient) {

@@ -16,20 +16,26 @@ export function AgoraRTCProvider({ client, children }: AgoraRTCProviderProps) {
 }
 
 /**
- * Get a Agora RTC client from context
+ * Get a Agora RTC client from context.
+ * @param client If a client is provided, it will be used instead.
  */
-export function useRTCClient(optional?: false): IAgoraRTCClient;
+export function useOptionalRTCClient(client?: IAgoraRTCClient | null): IAgoraRTCClient | null {
+  const clientFromContext = useContext(AgoraRTCContext);
+  return client || clientFromContext;
+}
+
 /**
- * Get a Agora RTC client from context
- * @param optional do not throw error if client is not found
+ * Get a Agora RTC client from context. Throws error if client not found.
+ * @param client If a client is provided, it will be used instead.
  */
-export function useRTCClient(optional: true): IAgoraRTCClient | null;
-export function useRTCClient(optional?: boolean) {
-  const client = useContext(AgoraRTCContext);
-  if (!client) {
-    if (!optional) {
-      throw new Error("should be wrapped in <AgoraRTCProvider value={client} />");
-    }
+export function useRTCClient(client?: IAgoraRTCClient | null): IAgoraRTCClient {
+  const resolvedClient = useOptionalRTCClient(client);
+
+  if (!resolvedClient) {
+    throw new Error(
+      "Agora RTC client not found. Should be wrapped in <AgoraRTCProvider value={client} />",
+    );
   }
-  return client;
+
+  return resolvedClient;
 }

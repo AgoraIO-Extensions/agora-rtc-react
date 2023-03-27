@@ -24,9 +24,8 @@ import { useRTCClient } from "./context";
  * ))
  * ```
  */
-export function useRemoteUsers(client?: IAgoraRTCClient): IAgoraRTCRemoteUser[] {
-  const clientFromContext = useRTCClient(true);
-  const resolvedClient = client || clientFromContext;
+export function useRemoteUsers(client?: IAgoraRTCClient | null): IAgoraRTCRemoteUser[] {
+  const resolvedClient = useRTCClient(client);
   const [users, setUsers] = useState(resolvedClient ? resolvedClient.remoteUsers : []);
 
   useEffect(() => {
@@ -53,9 +52,8 @@ export function useRemoteUsers(client?: IAgoraRTCClient): IAgoraRTCRemoteUser[] 
  * ))
  * ```
  */
-export function usePublishedRemoteUsers(client?: IAgoraRTCClient): IAgoraRTCRemoteUser[] {
-  const clientFromContext = useRTCClient(true);
-  const resolvedClient = client || clientFromContext;
+export function usePublishedRemoteUsers(client?: IAgoraRTCClient | null): IAgoraRTCRemoteUser[] {
+  const resolvedClient = useRTCClient(client);
 
   const [users, setUsers] = useState<IAgoraRTCRemoteUser[]>([]);
 

@@ -1,4 +1,5 @@
 import type {
+  IAgoraRTCClient,
   IAgoraRTCRemoteUser,
   ILocalAudioTrack,
   IRemoteAudioTrack,
@@ -18,6 +19,7 @@ import { useIsConnected } from "./client";
 export function useRemoteUserTrack(
   user: IAgoraRTCRemoteUser | undefined,
   mediaType: "video",
+  client?: IAgoraRTCClient | null,
 ): IRemoteVideoTrack | undefined;
 /**
  * Auto-subscribe and get remote user audio track.
@@ -26,12 +28,14 @@ export function useRemoteUserTrack(
 export function useRemoteUserTrack(
   user: IAgoraRTCRemoteUser | undefined,
   mediaType: "audio",
+  client?: IAgoraRTCClient | null,
 ): IRemoteAudioTrack | undefined;
 export function useRemoteUserTrack(
   user: IAgoraRTCRemoteUser | undefined,
   mediaType: "video" | "audio",
+  client?: IAgoraRTCClient | null,
 ): IRemoteVideoTrack | IRemoteAudioTrack | undefined {
-  const client = useRTCClient();
+  const resolvedClient = useRTCClient(client);
   const trackName = mediaType === "audio" ? "audioTrack" : "videoTrack";
   const [track, setTrack] = useState(user && user[trackName]);
   const isConnected = useIsConnected();
@@ -48,11 +52,11 @@ export function useRemoteUserTrack(
 
     const subscribe = async (user: IAgoraRTCRemoteUser, mediaType: "audio" | "video") => {
       try {
-        await client.subscribe(user, mediaType);
+        await resolvedClient.subscribe(user, mediaType);
         await new Promise(resolve => setTimeout(resolve, 1000));
         if (isUnmounted) {
           if (user[hasTrack]) {
-            client.unsubscribe(user, mediaType);
+            resolvedClient.unsubscribe(user, mediaType);
           }
           return;
         }
@@ -63,32 +67,32 @@ export function useRemoteUserTrack(
     };
 
     const unsubscribe = (user: IAgoraRTCRemoteUser, mediaType: "audio" | "video"): Promise<void> =>
-      client.unsubscribe(user, mediaType).catch(console.error);
+      resolvedClient.unsubscribe(user, mediaType).catch(console.error);
 
-    if (!user[trackName] && user[hasTrack] && client.remoteUsers.includes(user)) {
+    if (!user[trackName] && user[hasTrack] && resolvedClient.remoteUsers.includes(user)) {
       subscribe(user, mediaType);
     }
 
     return joinDisposers([
       () => {
         isUnmounted = true;
-        if (user[trackName] && client.remoteUsers.includes(user)) {
+        if (user[trackName] && resolvedClient.remoteUsers.includes(user)) {
           unsubscribe(user, mediaType);
         }
       },
-      listen(client, "user-published", (pubUser, pubMediaType) => {
+      listen(resolvedClient, "user-published", (pubUser, pubMediaType) => {
         if (pubUser.uid === uid && pubMediaType === mediaType) {
           subscribe(pubUser, pubMediaType);
         }
       }),
-      listen(client, "user-unpublished", (pubUser, pubMediaType) => {
+      listen(resolvedClient, "user-unpublished", (pubUser, pubMediaType) => {
         if (pubUser.uid === uid && pubMediaType === mediaType && pubUser[trackName]) {
           unsubscribe(pubUser, mediaType);
           setTrack(undefined);
         }
       }),
     ]);
-  }, [isConnected, client, user, mediaType, trackName]);
+  }, [isConnected, resolvedClient, user, mediaType, trackName]);
 
   return track;
 }
