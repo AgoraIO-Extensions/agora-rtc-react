@@ -8,6 +8,7 @@ import type { OptionProps } from "react-select";
 import { RemoteUserList } from "./RemoteUserList";
 import type { Room } from "./stores";
 import { useAppStore } from "./stores";
+import { CurrentUser } from "./CurrentUser";
 
 const Item = memo(function Item({ label }: { channel: string; label: string }) {
   const remoteUsers = usePublishedRemoteUsers();
@@ -15,6 +16,7 @@ const Item = memo(function Item({ label }: { channel: string; label: string }) {
     <div className={styles.item}>
       <i className="i-mdi-chat-processing-outline text-5 color-zinc" />
       <code className="bg-rose color-white px-2 rounded">{label}</code>
+      <CurrentUser />
       <RemoteUserList users={remoteUsers} />
     </div>
   );

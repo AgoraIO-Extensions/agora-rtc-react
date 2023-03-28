@@ -30,7 +30,8 @@ export const useAppStore = create<AppState>((set, get) => {
       return { token, channel, client };
     }),
     selectChannel: async (channel?: string | null) => {
-      let { hostRoom, rooms, localTracks } = get();
+      let { hostRoom, localTracks } = get();
+      const { rooms } = get();
 
       if (!channel) {
         if (hostRoom) {
@@ -38,9 +39,8 @@ export const useAppStore = create<AppState>((set, get) => {
             await hostRoom.client.unpublish(localTracks);
           }
           hostRoom.client.setClientRole("audience");
-          rooms = [...rooms, hostRoom];
           hostRoom = null;
-          set({ hostRoom, rooms, localTracks });
+          set({ hostRoom, localTracks });
         }
         return;
       }
@@ -53,7 +53,6 @@ export const useAppStore = create<AppState>((set, get) => {
           await hostRoom.client.unpublish(localTracks);
         }
         await hostRoom.client.setClientRole("audience");
-        rooms = [...rooms, hostRoom];
       }
       hostRoom = rooms.find(room => room.client.channelName === channel);
       if (hostRoom) {
@@ -63,8 +62,8 @@ export const useAppStore = create<AppState>((set, get) => {
         }
         await hostRoom.client.publish(localTracks);
       }
-      rooms = rooms.filter(room => room.client.channelName !== channel);
-      set({ localTracks, hostRoom, rooms });
+
+      set({ localTracks, hostRoom });
     },
     dispose: () => {
       const { rooms, hostRoom } = get();
