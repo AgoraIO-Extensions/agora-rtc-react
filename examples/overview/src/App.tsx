@@ -119,7 +119,7 @@ export const App = () => {
           {remoteUsers.map(user => (
             <AutoLayout.Item key={user.uid}>
               <RemoteUser user={user} cover={fakeAvatar(user.uid)} />
-              <Label>{`${fakeName(user.uid)}{${user.uid}}}`}</Label>
+              <Label>{`${fakeName(user.uid)}{${user.uid}}`}</Label>
             </AutoLayout.Item>
           ))}
         </AutoLayout>
