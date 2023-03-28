@@ -55,31 +55,43 @@ export const App = () => {
 
   const [micOn, setMic] = useState(false);
   const [audioTrack, setAudioTrack] = useState<IMicrophoneAudioTrack | null>(null);
+  const [audioEnabled, setAudioEnabled] = useState(false); // track localAudioTrack.enabled
   useEffect(() => {
     if (micOn && !audioTrack) {
-      sp(AgoraRTC.createMicrophoneAudioTrack({ ANS: true, AEC: true })).then(track => {
-        client.publish(track);
-        setAudioTrack(track);
-      });
+      sp(AgoraRTC.createMicrophoneAudioTrack({ ANS: true, AEC: true })).then(setAudioTrack);
     }
     if (audioTrack) {
-      audioTrack.setEnabled(micOn);
+      sp(audioTrack.setEnabled(micOn)).then(() => setAudioEnabled(audioTrack.enabled));
     }
   }, [audioTrack, micOn, sp]);
 
   const [cameraOn, setCamera] = useState(false);
   const [videoTrack, setVideoTrack] = useState<ICameraVideoTrack | null>(null);
+  const [videoEnabled, setVideoEnabled] = useState(false);
   useEffect(() => {
     if (cameraOn && !videoTrack) {
-      sp(AgoraRTC.createCameraVideoTrack()).then(track => {
-        client.publish(track);
-        setVideoTrack(track);
-      });
+      sp(AgoraRTC.createCameraVideoTrack()).then(setVideoTrack);
     }
     if (videoTrack) {
-      videoTrack.setEnabled(cameraOn);
+      sp(videoTrack.setEnabled(cameraOn).then(() => setVideoEnabled(videoTrack.enabled)));
     }
   }, [videoTrack, cameraOn, sp]);
+
+  // publish local tracks only when:
+  // 1. client is connected
+  // 2. tracks are enabled
+  // 3. tracks are not published (not in client.localTracks)
+  useAsyncEffect(async () => {
+    if (isConnected && audioTrack && audioEnabled && !client.localTracks.includes(audioTrack)) {
+      await client.publish(audioTrack);
+    }
+  }, [isConnected, audioTrack, audioEnabled]);
+
+  useAsyncEffect(async () => {
+    if (isConnected && videoTrack && videoEnabled && !client.localTracks.includes(videoTrack)) {
+      await client.publish(videoTrack);
+    }
+  }, [isConnected, videoTrack, videoEnabled]);
 
   const selfPublished = micOn || cameraOn;
 
@@ -120,10 +132,10 @@ export const App = () => {
             {calling ? <i className="i-mdi-phone-hangup" /> : <i className="i-mdi-phone" />}
           </button>
           <div className="flex-1 flex absolute top-0 left-0 h-full items-center gap-3 px-6 py-3">
-            <button className="btn" onClick={() => setMic(a => !a)} disabled={!calling}>
+            <button className="btn" onClick={() => setMic(a => !a)}>
               {micOn ? <SVGMicrophone /> : <SVGMicrophoneMute />}
             </button>
-            <button className="btn" onClick={() => setCamera(a => !a)} disabled={!calling}>
+            <button className="btn" onClick={() => setCamera(a => !a)}>
               {cameraOn ? <SVGCamera /> : <SVGCameraMute />}
             </button>
           </div>
