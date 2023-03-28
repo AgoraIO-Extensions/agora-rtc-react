@@ -11,7 +11,8 @@
     "lint": "eslint --ext .ts,.tsx . && prettier --check .",
     "lint:fix": "eslint --fix --ext .ts,.tsx . && prettier --write .",
     "example": "pnpm -F example-mobx run start",
-    "renew": "pnpm -r run renew"
+    "renew": "pnpm -r run renew",
+    "copy-docs": "esbuild-dev ./scripts/copy-docs.ts"
   },
   "devDependencies": {
     "@hyrious/esbuild-dev": "^0.9.1",

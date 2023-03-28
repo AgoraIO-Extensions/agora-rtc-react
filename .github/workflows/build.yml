@@ -25,9 +25,13 @@ jobs:
           run_install: true
 
       - name: Build 🔧
+        env:
+          AGORA_APPID: ${{ secrets.AGORA_APPID }}
+          AGORA_CERTIFICATE: ${{ secrets.AGORA_CERTIFICATE }}
         run: |
           pnpm run lint
           pnpm run test
+          pnpm run renew
           pnpm run build
 
       # - name: Coveralls
@@ -38,9 +42,10 @@ jobs:
       - name: Build Docs 📖
         run: |
           pnpm run build-storybook
+          pnpm run copy-docs
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./packages/agora-rtc-react/storybook-static
+          publish_dir: ./packages/docs
