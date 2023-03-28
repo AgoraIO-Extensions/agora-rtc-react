@@ -6,6 +6,7 @@ import presetIcons from "unocss/preset-icons";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "./",
   plugins: [
     // https://uno.antfu.me/
     uno({

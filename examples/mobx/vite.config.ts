@@ -5,6 +5,7 @@ import presetIcons from "unocss/preset-icons";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "./",
   plugins: [react(), uno({ presets: [presetIcons()] })],
   envPrefix: "AGORA_",
 });
