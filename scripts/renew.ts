@@ -17,7 +17,7 @@ function main() {
   const rootEnv = loadEnv(path.join(__dirname, ".."));
   const pkgEnv = loadEnv(process.cwd());
 
-  const secrets = loadSecrets(rootEnv, pkgEnv);
+  const secrets = loadSecrets(rootEnv, pkgEnv, process.env as dotenv.DotenvParseOutput);
   if (!secrets) return;
 
   const { AGORA_APPID, AGORA_CERTIFICATE } = secrets;
@@ -29,22 +29,21 @@ function main() {
   writeEnv(process.cwd(), { ...pkgEnv, AGORA_APPID, AGORA_CHANNEL, AGORA_TOKEN });
 }
 
-export function loadSecrets(rootEnv: dotenv.DotenvParseOutput, pkgEnv: dotenv.DotenvParseOutput) {
-  const pkgEnvConfigured = Boolean(pkgEnv.AGORA_APPID && pkgEnv.AGORA_CERTIFICATE);
-
-  const AGORA_CERTIFICATE = pkgEnvConfigured ? pkgEnv.AGORA_CERTIFICATE : rootEnv.AGORA_CERTIFICATE;
-  if (!AGORA_CERTIFICATE) {
+export function loadSecrets(...variables: dotenv.DotenvParseOutput[]) {
+  for (let i = variables.length - 1; i >= 0; i--) {
+    const { AGORA_APPID, AGORA_CERTIFICATE } = variables[i];
+    if (AGORA_APPID && AGORA_CERTIFICATE) {
+      return { AGORA_APPID, AGORA_CERTIFICATE };
+    }
+  }
+  if (!variables[0].AGORA_CERTIFICATE) {
     console.log("Missing env AGORA_CERTIFICATE. Token renew skipped.");
     return;
   }
-
-  const AGORA_APPID = pkgEnvConfigured ? pkgEnv.AGORA_APPID : rootEnv.AGORA_APPID;
-  if (!AGORA_APPID) {
+  if (!variables[0].AGORA_APPID) {
     console.log("Missing env AGORA_APPID. Token renew skipped.");
     return;
   }
-
-  return { AGORA_APPID, AGORA_CERTIFICATE };
 }
 
 export function buildToken(
