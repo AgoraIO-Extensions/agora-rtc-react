@@ -4,7 +4,7 @@ on:
     branches:
       - main
   schedule:
-    - build-and-deploy: "0 16 * * *"
+    - cron: "0 16 * * *"
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
