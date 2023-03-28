@@ -17,7 +17,7 @@ function main() {
   const rootEnv = loadEnv(path.join(__dirname, ".."));
   const pkgEnv = loadEnv(process.cwd());
 
-  const secrets = loadSecrets(rootEnv, pkgEnv, process.env as dotenv.DotenvParseOutput);
+  const secrets = loadSecrets(rootEnv, pkgEnv);
   if (!secrets) return;
 
   const { AGORA_APPID, AGORA_CERTIFICATE } = secrets;
@@ -30,6 +30,10 @@ function main() {
 }
 
 export function loadSecrets(...variables: dotenv.DotenvParseOutput[]) {
+  const { AGORA_APPID, AGORA_CERTIFICATE } = process.env;
+  if (AGORA_APPID && AGORA_CERTIFICATE) {
+    return { AGORA_APPID, AGORA_CERTIFICATE };
+  }
   for (let i = variables.length - 1; i >= 0; i--) {
     const { AGORA_APPID, AGORA_CERTIFICATE } = variables[i];
     if (AGORA_APPID && AGORA_CERTIFICATE) {
