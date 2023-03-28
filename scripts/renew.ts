@@ -54,7 +54,7 @@ export function buildToken(
 ): string {
   const uid = 0;
   const role = RtcRole.PUBLISHER;
-  const expiration = 24 * 3600;
+  const expiration = 25 * 3600;
 
   const AGORA_TOKEN = RtcTokenBuilder.buildTokenWithUid(
     AGORA_APPID,
