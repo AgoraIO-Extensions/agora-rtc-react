@@ -1,5 +1,9 @@
 # Agora RTC React Overview Example
 
+- Simple example without external state management.
+
+<https://netless-io.github.io/agora-rtc-react/overview/>
+
 ## Develop
 
 1. Add a `.env.local` file to this directory and fill in the Agora account info following the format of `.env.example`.
