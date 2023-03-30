@@ -10,19 +10,19 @@ import {
   LocalMicrophoneAndCameraUser,
   RemoteUser,
   useAsyncEffect,
+  useAutoJoin,
   useCurrentUID,
   useIsConnected,
   usePublishedRemoteUsers,
   useRemoteUsers,
-  useSafePromise,
 } from "agora-rtc-react";
 import { SVGCamera, SVGCameraMute, SVGMicrophone, SVGMicrophoneMute } from "agora-rtc-react-ui";
-import clsx from "clsx";
 import { AutoLayout } from "./AutoLayout";
 import { Container } from "./Container";
 import { Label } from "./Label";
 import { UsersInfo } from "./UsersInfo";
 import { fakeAvatar, fakeName } from "./utils";
+import clsx from "clsx";
 
 const appId = import.meta.env.AGORA_APPID;
 const channel = import.meta.env.AGORA_CHANNEL;
@@ -34,64 +34,46 @@ const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 setupEasyTesting(client);
 
 export const App = () => {
-  const sp = useSafePromise();
-
-  const [calling, setCalling] = useState(false);
-  const remoteUsers = useRemoteUsers(client);
-  const publishedUsers = usePublishedRemoteUsers(client);
+  const isConnected = useIsConnected(client);
 
   const uid = useCurrentUID(client) || 0;
   const userName = useMemo(() => fakeName(uid), [uid]);
   const userAvatar = useMemo(() => fakeAvatar(uid), [uid]);
 
-  const isConnected = useIsConnected(client);
+  const remoteUsers = useRemoteUsers(client);
+  const publishedUsers = usePublishedRemoteUsers(client);
 
-  useAsyncEffect(async () => {
-    if (calling) {
-      await client.join(appId, channel, token);
-      return () => client.leave();
-    }
-  }, [calling]);
+  useAutoJoin(appId, channel, token, null, client);
 
   const [micOn, setMic] = useState(false);
   const [audioTrack, setAudioTrack] = useState<IMicrophoneAudioTrack | null>(null);
-  const [audioEnabled, setAudioEnabled] = useState(false); // track localAudioTrack.enabled
-  useEffect(() => {
+  useAsyncEffect(async () => {
     if (micOn && !audioTrack) {
-      sp(AgoraRTC.createMicrophoneAudioTrack({ ANS: true, AEC: true })).then(setAudioTrack);
+      const track = await AgoraRTC.createMicrophoneAudioTrack({ ANS: true, AEC: true });
+      await client.publish(track);
+      setAudioTrack(track);
     }
+  }, [micOn, audioTrack, client]);
+  useEffect(() => {
     if (audioTrack) {
-      sp(audioTrack.setEnabled(micOn)).then(() => setAudioEnabled(audioTrack.enabled));
+      audioTrack.setEnabled(micOn);
     }
-  }, [audioTrack, micOn, sp]);
+  }, [audioTrack, micOn]);
 
   const [cameraOn, setCamera] = useState(false);
   const [videoTrack, setVideoTrack] = useState<ICameraVideoTrack | null>(null);
-  const [videoEnabled, setVideoEnabled] = useState(false);
-  useEffect(() => {
+  useAsyncEffect(async () => {
     if (cameraOn && !videoTrack) {
-      sp(AgoraRTC.createCameraVideoTrack()).then(setVideoTrack);
+      const track = await AgoraRTC.createCameraVideoTrack();
+      await client.publish(track);
+      setVideoTrack(track);
     }
+  }, [cameraOn, videoTrack, client]);
+  useEffect(() => {
     if (videoTrack) {
-      sp(videoTrack.setEnabled(cameraOn).then(() => setVideoEnabled(videoTrack.enabled)));
+      videoTrack.setEnabled(cameraOn);
     }
-  }, [videoTrack, cameraOn, sp]);
-
-  // publish local tracks only when:
-  // 1. client is connected
-  // 2. tracks are enabled
-  // 3. tracks are not published (not in client.localTracks)
-  useAsyncEffect(async () => {
-    if (isConnected && audioTrack && audioEnabled && !client.localTracks.includes(audioTrack)) {
-      await client.publish(audioTrack);
-    }
-  }, [isConnected, audioTrack, audioEnabled]);
-
-  useAsyncEffect(async () => {
-    if (isConnected && videoTrack && videoEnabled && !client.localTracks.includes(videoTrack)) {
-      await client.publish(videoTrack);
-    }
-  }, [isConnected, videoTrack, videoEnabled]);
+  }, [videoTrack, cameraOn]);
 
   const selfPublished = micOn || cameraOn;
 
@@ -126,10 +108,11 @@ export const App = () => {
         {/* Camera and Microphone Controls */}
         <div className="flex justify-center items-center gap-3 px-6 py-3 bg-#21242c c-coolgray-3 relative">
           <button
-            className={clsx("btn btn-phone", { "btn-phone-active": calling })}
-            onClick={() => setCalling(a => !a)}
+            className={clsx("btn btn-phone", { "btn-phone-active": isConnected })}
+            onClick={() => window.close()}
+            disabled={!isConnected}
           >
-            {calling ? <i className="i-mdi-phone-hangup" /> : <i className="i-mdi-phone" />}
+            {isConnected ? <i className="i-mdi-phone-hangup" /> : <i className="i-mdi-phone" />}
           </button>
           <div className="flex-1 flex absolute top-0 left-0 h-full items-center gap-3 px-6 py-3">
             <button className="btn" onClick={() => setMic(a => !a)}>
