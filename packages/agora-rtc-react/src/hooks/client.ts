@@ -164,7 +164,13 @@ export function useAutoJoin(
   useAsyncEffect(async () => {
     if (resolvedClient) {
       await resolvedClient.join(appid, channel, token, uid);
-      return () => resolvedClient.leave();
+      return () => {
+        for (const track of resolvedClient.localTracks) {
+          track.stop();
+          track.close();
+        }
+        return resolvedClient.leave();
+      };
     }
   }, [appid, channel, token, uid, resolvedClient]);
 }
