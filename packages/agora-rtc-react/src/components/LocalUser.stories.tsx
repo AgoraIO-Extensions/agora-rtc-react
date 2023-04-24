@@ -70,9 +70,9 @@ export const Overview: StoryObj<OverviewArgs> = {
       <AgoraRTCProvider client={client}>
         <LocalUser
           audioTrack={audioTrack}
-          videoTrack={videoTrack}
-          micOn={micOn}
           cameraOn={cameraOn}
+          micOn={micOn}
+          videoTrack={videoTrack}
           {...args}
         />
       </AgoraRTCProvider>

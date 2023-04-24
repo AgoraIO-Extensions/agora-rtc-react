@@ -71,11 +71,11 @@ export function Room({ micOn, cameraOn }: RoomProps) {
         {isConnected && (
           <AutoLayout.Item>
             <LocalMicrophoneAndCameraUser
+              audioTrack={audioTrack}
               cameraOn={cameraOn}
+              cover={userAvatar}
               micOn={micOn}
               videoTrack={videoTrack}
-              audioTrack={audioTrack}
-              cover={userAvatar}
             >
               {<Label>{`${userName}{${uid}}`}</Label>}
             </LocalMicrophoneAndCameraUser>
@@ -83,7 +83,7 @@ export function Room({ micOn, cameraOn }: RoomProps) {
         )}
         {remoteUsers.map(user => (
           <AutoLayout.Item key={user.uid}>
-            <RemoteUser user={user} cover={fakeAvatar(user.uid)} />
+            <RemoteUser cover={fakeAvatar(user.uid)} user={user} />
             <Label>{`${fakeName(user.uid)}{${user.uid}}`}</Label>
           </AutoLayout.Item>
         ))}

@@ -21,7 +21,7 @@ export const App = () => {
   return (
     <AgoraRTCProvider client={client}>
       <Container>
-        {calling && <Room micOn={micOn} cameraOn={cameraOn} />}
+        {calling && <Room cameraOn={cameraOn} micOn={micOn} />}
         {/* Camera and Microphone Controls */}
         <div className="fixed inset-0 top-a flex justify-center items-center gap-3 px-6 py-3 bg-#21242c c-coolgray-3">
           <button

@@ -78,16 +78,16 @@ export function LocalMicrophoneAndCameraUser({
   return (
     <div {...props} style={mergedStyle}>
       <CameraVideoTrack
-        track={videoTrack}
-        play={playVideo}
         deviceId={cameraDeviceId}
         disabled={!cameraOn}
+        play={playVideo}
+        track={videoTrack}
       />
       <MicrophoneAudioTrack
-        track={audioTrack}
-        play={playAudio}
         deviceId={micDeviceId}
         disabled={!micOn}
+        play={playAudio}
+        track={audioTrack}
       />
       {cover && !cameraOn && <UserCover cover={cover} />}
       <div style={FloatBoxStyle}>{children}</div>

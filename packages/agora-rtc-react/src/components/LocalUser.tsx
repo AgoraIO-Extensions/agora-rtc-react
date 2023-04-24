@@ -67,8 +67,8 @@ export function LocalUser({
   playAudio = playAudio ?? !!micOn;
   return (
     <div {...props} style={mergedStyle}>
-      <LocalVideoTrack track={videoTrack} play={playVideo} disabled={!cameraOn} />
-      <LocalAudioTrack track={audioTrack} play={playAudio} disabled={!micOn} />
+      <LocalVideoTrack disabled={!cameraOn} play={playVideo} track={videoTrack} />
+      <LocalAudioTrack disabled={!micOn} play={playAudio} track={audioTrack} />
       {cover && !cameraOn && <UserCover cover={cover} />}
       <div style={FloatBoxStyle}>{children}</div>
     </div>

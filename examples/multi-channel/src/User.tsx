@@ -16,7 +16,7 @@ export function User({ uid, children }: UserProps) {
   return (
     <div className={styles.user}>
       {children}
-      <div className={styles.mask}></div>
+      <div className={styles.mask} />
       <label className={styles.label}>{name}</label>
     </div>
   );

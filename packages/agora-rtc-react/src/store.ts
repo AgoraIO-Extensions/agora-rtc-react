@@ -12,7 +12,7 @@ export interface Readable<T> {
    * Subscribe on value changes.
    * @param run subscription callback
    */
-  subscribe(this: void, run: Subscriber<T>): Disposer;
+  subscribe: (this: void, run: Subscriber<T>) => Disposer;
 }
 
 export function readable<T>(value: T, start: StartStopNotifier<T>): Readable<T> {

@@ -49,5 +49,5 @@ export type { AppStore };
 export const appStore = new AppStore();
 
 if (import.meta.env.DEV) {
-  (window as any).appStore = appStore;
+  window.appStore = appStore;
 }

@@ -20,7 +20,7 @@ export function CurrentUser() {
 
   return (
     <User uid={client.uid}>
-      <LocalUser cameraOn micOn audioTrack={localTracks[0]} videoTrack={localTracks[1]} />
+      <LocalUser audioTrack={localTracks[0]} cameraOn micOn videoTrack={localTracks[1]} />
     </User>
   );
 }
