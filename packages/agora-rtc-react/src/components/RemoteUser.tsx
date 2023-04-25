@@ -66,12 +66,12 @@ export function RemoteUser({
 
   return (
     <div {...props} style={mergedStyle}>
-      <RemoteVideoTrack track={videoTrack} play={playVideo} />
+      <RemoteVideoTrack play={playVideo} track={videoTrack} />
       <RemoteAudioTrack
-        playbackDeviceId={playbackDeviceId}
-        volume={volume}
-        track={audioTrack}
         play={playAudio}
+        playbackDeviceId={playbackDeviceId}
+        track={audioTrack}
+        volume={volume}
       />
       {cover && !playVideo && <UserCover cover={cover} />}
       <div style={FloatBoxStyle}>{children}</div>

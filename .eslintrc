@@ -2,6 +2,7 @@
   "parser": "@typescript-eslint/parser",
   "extends": [
     "eslint:recommended",
+    "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended"
@@ -11,11 +12,30 @@
   },
   "plugins": ["@typescript-eslint", "react-hooks", "prettier"],
   "root": true,
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
+    "@typescript-eslint/adjacent-overload-signatures": "error",
+    "@typescript-eslint/method-signature-style": "error",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
     "@typescript-eslint/consistent-type-imports": ["warn"],
     "@typescript-eslint/no-empty-interface": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-non-null-assertion": "off",
+    "react/display-name": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-closing-bracket-location": ["error", "line-aligned"],
+    "react/self-closing-comp": "error",
+    "react/jsx-wrap-multilines": "error",
+    "react/jsx-pascal-case": "error",
+    "react/jsx-tag-spacing": "error",
+    "react/jsx-sort-props": "error",
+    "react/jsx-boolean-value": "error",
+    "react/no-array-index-key": "error",
+    "react/jsx-no-bind": ["error", { "allowArrowFunctions": true }],
+    "react/destructuring-assignment": "error",
+    "react/no-deprecated": "error",
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {
