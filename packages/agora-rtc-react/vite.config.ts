@@ -9,9 +9,11 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: "jsdom",
+    globals: true,
     coverage: {
       provider: "c8",
       reporter: ["text", "json", "html", "lcov"],
     },
+    setupFiles: ["./test/setup.tsx"],
   },
 });
