@@ -58,7 +58,7 @@ export class FakeRemoteAudioTrack extends FakeRemoteTrack {
 
     if (this._audioEl) {
       this.isPlaying = true;
-      this._audioEl.play().catch(console.log);
+      this._audioEl.play();
     }
   }
   /**

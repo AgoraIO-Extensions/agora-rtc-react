@@ -57,7 +57,7 @@ export class FakeLocalVideoTrack extends FakeLocalTrack {
 
     if (this.enabled && this._videoEl) {
       this.isPlaying = true;
-      this._videoEl.play().catch(console.log);
+      this._videoEl.play();
     }
   }
   /**

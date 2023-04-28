@@ -37,7 +37,7 @@ export function MicrophoneAudioTrack({
 
   useEffect(() => {
     if (track && deviceId != null) {
-      track.setDevice(deviceId).catch(console.warn);
+      track.setDevice(deviceId);
     }
   }, [deviceId, track]);
 

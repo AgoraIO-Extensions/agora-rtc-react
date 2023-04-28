@@ -59,13 +59,13 @@ export function LocalAudioTrack({
 
   useEffect(() => {
     if (track && disabled != null) {
-      track.setEnabled(!disabled).catch(console.warn);
+      track.setEnabled(!disabled);
     }
   }, [disabled, track]);
 
   useEffect(() => {
     if (track && muted != null) {
-      track.setMuted(muted).catch(console.warn);
+      track.setMuted(muted);
     }
   }, [muted, track]);
 

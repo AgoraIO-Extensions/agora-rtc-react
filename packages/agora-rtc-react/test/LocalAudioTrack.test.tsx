@@ -1,33 +1,67 @@
-import { render, screen, renderHook, render } from "@testing-library/react";
-import { composeStories } from "@storybook/react";
-import * as stories from "../src/components/LocalAudioTrack.stories";
-import { FakeLocalAudioTrack } from "fake-agora-rtc";
-import type { ILocalAudioTrack } from "agora-rtc-sdk-ng";
-import type { MaybePromiseOrNull } from "../src/utils";
-const { EmptyTrack } = composeStories(stories);
+import type { Mock } from "vitest";
 import { describe, test, vi, expect } from "vitest";
-import { LocalAudioTrack } from "../src/components";
+import { render } from "@testing-library/react";
+import { composeStories } from "@storybook/react";
+import type { ILocalAudioTrack } from "agora-rtc-sdk-ng";
+import * as stories from "../src/components/LocalAudioTrack.stories";
+const { Enabled } = composeStories(stories);
+import { LocalAudioTrack, useAutoPlayAudioTrack } from "../src/components";
+import { useAwaited } from "../src/hooks";
+
+vi.mock("../src/hooks", () => ({
+  useAwaited: vi.fn(),
+}));
+vi.mock("../src/components/TrackBoundary", () => ({
+  useAutoPlayAudioTrack: vi.fn(),
+}));
+const mockTrack: ILocalAudioTrack = {
+  setEnabled: vi.fn(),
+  setMuted: vi.fn(),
+  setVolume: vi.fn(),
+} as unknown as ILocalAudioTrack;
+const mockUseAwaited = useAwaited as Mock;
+const mockUseAutoPlayAudioTrack = useAutoPlayAudioTrack as Mock;
 
 describe("LocalAudioTrack component", () => {
-  test("renders without crashing with track", () => {
-    const track: MaybePromiseOrNull<ILocalAudioTrack> = FakeLocalAudioTrack.create();
-    render(<LocalAudioTrack track={track} />);
+  test("renders without crashing", () => {
+    mockUseAwaited.mockReturnValueOnce(mockTrack);
+    mockUseAutoPlayAudioTrack.mockReturnValueOnce(mockTrack);
+    const { container } = render(<LocalAudioTrack />);
+    expect(container).toBeInTheDocument();
+    vi.resetAllMocks();
   });
 
   test("sets volume on audio track", () => {
-    const track: MaybePromiseOrNull<ILocalAudioTrack> = FakeLocalAudioTrack.create();
-    track.setVolume = vi.fn();
-    render(<LocalAudioTrack track={track} volume={0.5} />);
-    expect(track.setVolume).toHaveBeenCalledWith(0.5);
+    mockUseAwaited.mockReturnValueOnce(mockTrack);
+    mockUseAutoPlayAudioTrack.mockReturnValueOnce(mockTrack);
+    render(<LocalAudioTrack track={mockTrack} volume={0.5} />);
+    expect(mockTrack.setVolume).toHaveBeenCalledTimes(1);
+    expect(mockTrack.setVolume).toHaveBeenCalledWith(0.5);
+    vi.resetAllMocks();
   });
 
-  test("disables audio track", () => {
-    const track: MaybePromiseOrNull<ILocalAudioTrack> = FakeLocalAudioTrack.create();
-    render(<LocalAudioTrack disabled track={track} />);
-    expect(track.enabled).toBe(false);
+  test("sets disabled on audio track", () => {
+    mockUseAwaited.mockReturnValueOnce(mockTrack);
+    mockUseAutoPlayAudioTrack.mockReturnValueOnce(mockTrack);
+    render(<LocalAudioTrack disabled />);
+    expect(mockTrack.setEnabled).toHaveBeenCalledTimes(1);
+    expect(mockTrack.setEnabled).toHaveBeenCalledWith(false);
+    vi.resetAllMocks();
   });
 
-  test("renders without crashing without track", () => {
-    render(<EmptyTrack />);
+  test("sets muted on audio track", () => {
+    mockUseAwaited.mockReturnValueOnce(mockTrack);
+    mockUseAutoPlayAudioTrack.mockReturnValueOnce(mockTrack);
+    render(<LocalAudioTrack muted />);
+    expect(mockTrack.setMuted).toHaveBeenCalledTimes(1);
+    expect(mockTrack.setMuted).toHaveBeenCalledWith(true);
+    vi.resetAllMocks();
+  });
+});
+
+describe("LocalAudioTrack component stories", () => {
+  test("renders Enabled stories", () => {
+    const { getByText } = render(<Enabled />);
+    expect(getByText(/An Example Local Audio Track/i)).toBeInTheDocument();
   });
 });

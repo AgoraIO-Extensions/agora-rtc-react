@@ -44,7 +44,7 @@ export function RemoteAudioTrack({
 
   useEffect(() => {
     if (track && playbackDeviceId != null) {
-      track.setPlaybackDevice(playbackDeviceId).catch(console.warn);
+      track.setPlaybackDevice(playbackDeviceId);
     }
   }, [track, playbackDeviceId]);
 
