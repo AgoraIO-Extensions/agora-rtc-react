@@ -1,8 +1,8 @@
-# Agora RTC React Track Example
+# Agora RTC React advanced Example
 
 - Simple example without external state management.
 
-<https://agoraio-extensions.github.io/agora-rtc-react/track/>
+<https://agoraio-extensions.github.io/agora-rtc-react/advanced/>
 
 ## Develop
 
