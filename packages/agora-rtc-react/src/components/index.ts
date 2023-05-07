@@ -8,3 +8,4 @@ export * from "./RemoteAudioTrack";
 export * from "./RemoteVideoTrack";
 export * from "./RemoteUser";
 export * from "./TrackBoundary";
+export * from "./RemoteVideoPlayer";
