@@ -30,29 +30,23 @@ export const SwitchLayout = () => {
 
   const [layout, setLayout] = useState<boolean>(true);
 
-  const {
-    videoTracks,
-    ready: videoTracksIsReady,
-    error: videoTracksError,
-  } = useRemoteVideoTracks(layout ? remoteUsers : remoteUsers.filter((_user, index) => index == 0));
+  const videoTracks = useRemoteVideoTracks(
+    layout ? remoteUsers : remoteUsers.filter((_user, index) => index == 0),
+  );
 
-  const {
-    audioTracks,
-    ready: audioTracksIsReady,
-    error: audioTracksError,
-  } = useRemoteAudioTracks(remoteUsers);
+  const audioTracks = useRemoteAudioTracks(remoteUsers);
 
   audioTracks.map(track => track.play());
   if (isConnected) {
-    console.log("videoTracks:", videoTracks, videoTracksIsReady, videoTracksError);
-    console.log("audioTracks:", audioTracks, audioTracksIsReady, audioTracksError);
+    console.log("videoTracks:", videoTracks);
+    console.log("audioTracks:", audioTracks);
   }
 
   const renderAction = () => {
     return (
       <div className="p-4 text-xl">
         <Button onClick={() => setLayout(layout => !layout)} type="primary">
-          {`switch to layout ${layout ? 1 : 2}`}
+          {`switch to layout ${layout ? 2 : 1}`}
         </Button>
       </div>
     );
