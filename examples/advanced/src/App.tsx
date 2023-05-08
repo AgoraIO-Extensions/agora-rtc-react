@@ -4,11 +4,13 @@ import "antd/dist/reset.css";
 import { Layout, Menu } from "antd";
 import React, { useState } from "react";
 import { Pages, defaultPage } from "./pages";
+import { Client } from "./components";
 
 const { Content, Sider } = Layout;
 
 export default function App() {
   const [collapsed, setCollapsed] = useState(false);
+
   const navigate = useNavigate();
   return (
     <>
@@ -32,7 +34,18 @@ export default function App() {
             <Routes>
               <Route element={<Navigate to={defaultPage} />} path="/" />
               {Pages.map(({ label, component }) => {
-                return <Route Component={component} key={label} path={`/${label}`} />;
+                const RouteComponent = component;
+                return (
+                  <Route
+                    Component={() => (
+                      <Client>
+                        <RouteComponent />
+                      </Client>
+                    )}
+                    key={label}
+                    path={`/${label}`}
+                  />
+                );
               })}
             </Routes>
           </Content>
