@@ -1,9 +1,9 @@
-import { useNavigate, Route, Routes, Navigate } from "react-router-dom";
+import { useNavigate, Route, Routes } from "react-router-dom";
 import "antd/dist/reset.css";
 
 import { Layout, Menu } from "antd";
 import React, { useState } from "react";
-import { Pages, defaultPage } from "./pages";
+import { Pages } from "./pages";
 import { Client } from "./components";
 import Setting from "./pages/Setting";
 
