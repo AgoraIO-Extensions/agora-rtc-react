@@ -6,6 +6,5 @@ const Pages = [
     component: SwitchLayout,
   },
 ];
-const defaultPage = `/SwitchLayout`;
 
-export { Pages, defaultPage };
+export { Pages };
