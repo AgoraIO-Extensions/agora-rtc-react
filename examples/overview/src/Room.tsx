@@ -26,7 +26,7 @@ interface RoomProps {
 
 const appId = import.meta.env.AGORA_APPID;
 const channel = import.meta.env.AGORA_CHANNEL;
-const token = import.meta.env.AGORA_TOKEN;
+const token = import.meta.env.AGORA_TOKEN ? import.meta.env.AGORA_TOKEN : null;
 
 export function Room({ micOn, cameraOn }: RoomProps) {
   useAutoJoin(appId, channel, token);
