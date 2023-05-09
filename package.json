@@ -3,6 +3,7 @@
   "private": true,
   "description": "Agora RTC React SDK",
   "scripts": {
+    "prepare": "husky install",
     "build": "pnpm -r run build",
     "start": "pnpm run example",
     "storybook": "pnpm -F agora-rtc-react run storybook",
@@ -15,12 +16,14 @@
     "copy-docs": "esbuild-dev ./scripts/copy-docs.ts"
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "^17.6.1",
     "@hyrious/esbuild-dev": "^0.9.1",
     "@types/minimist": "^1.2.2",
     "@types/node": "^18.14.6",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
     "agora-token": "^2.0.2",
+    "commitlint": "^17.6.1",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "eslint": "^8.35.0",
@@ -28,9 +31,36 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.1",
     "minimist": "^1.2.8",
     "prettier": "^2.8.4",
     "typescript": "^4.9.5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "cross-env NODE_ENV=development eslint --cache"
+    ],
+    "*.json,.{eslintrc,prettierrc}": [
+      "prettier --ignore-path .eslintignore --parser json --write"
+    ],
+    "*.{css,scss}": [
+      "prettier --ignore-path .eslintignore --single-quote --write"
+    ],
+    "*.{html,md,yml}": [
+      "prettier --ignore-path .eslintignore --single-quote --write"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test",
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
+    }
   },
   "pnpm": {
     "peerDependencyRules": {

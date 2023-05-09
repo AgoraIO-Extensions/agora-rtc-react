@@ -12,15 +12,15 @@ export const LocalUser = observer(function LocalUser({ className, localUser }: L
   return (
     <div className={className}>
       <LocalMicrophoneAndCameraUser
-        micOn={localUser.micOn}
         audioTrack={localUser.micTrack}
         cameraOn={localUser.cameraOn}
-        videoTrack={localUser.cameraTrack}
-        playVideo={localUser.cameraOn}
         cover={localUser.avatar}
+        micOn={localUser.micOn}
+        playVideo={localUser.cameraOn}
+        videoTrack={localUser.cameraTrack}
       >
         <span className="user-name">{localUser.name}</span>
-        {localUser.micOn && <MicControl micOn disabled audioTrack={localUser.micTrack} />}
+        {localUser.micOn && <MicControl audioTrack={localUser.micTrack} disabled micOn />}
       </LocalMicrophoneAndCameraUser>
     </div>
   );

@@ -17,15 +17,15 @@ export const Room = observer(function Room() {
           <div className="tracks layout" data-size={remoteUsers.length + (localUser ? 1 : 0)}>
             {localUser && <LocalUser className="layout-item" localUser={localUser} />}
             {remoteUsers.map(user => (
-              <div key={user.uid} className="layout-item">
+              <div className="layout-item" key={user.uid}>
                 <RemoteUser
-                  user={user.rtcUser}
+                  cover={user.avatar}
                   playAudio={user.micOn}
                   playVideo={user.cameraOn}
-                  cover={user.avatar}
+                  user={user.rtcUser}
                 >
                   <span className="user-name">{user.name}</span>
-                  {user.micOn && <MicControl micOn disabled audioTrack={user.audioTrack} />}
+                  {user.micOn && <MicControl audioTrack={user.audioTrack} disabled micOn />}
                 </RemoteUser>
               </div>
             ))}

@@ -49,11 +49,11 @@ export const RoomSelector = () => {
   return (
     <div className={styles.container}>
       <Select
-        menuIsOpen
-        isMulti={false}
         components={{ Option: CustomOption }}
-        options={options}
+        isMulti={false}
+        menuIsOpen
         onChange={data => selectChannel(data?.value?.channel)}
+        options={options}
       />
     </div>
   );

@@ -4,5 +4,5 @@ import { appStore } from "../stores/app.store";
 
 export const ShareScreenTracks = observer(function ShareScreenTracks() {
   const { shareScreen } = appStore;
-  return <RemoteVideoTrack className="share-screen" track={shareScreen.remoteVideoTrack} play />;
+  return <RemoteVideoTrack className="share-screen" play track={shareScreen.remoteVideoTrack} />;
 });

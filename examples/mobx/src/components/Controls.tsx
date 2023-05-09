@@ -31,7 +31,7 @@ export const Controls = observer(function Controls({ localUser }: ControlsProps)
         {localUser.cameraOn ? <i className="i-mdi-video" /> : <i className="i-mdi-video-off" />}
         <span className="btn-text">Video</span>
       </button>
-      <div className="flex-1"></div>
+      <div className="flex-1" />
       <button
         className={clsx("btn", { active: shareScreen.enabled })}
         disabled={shareScreen.remoteVideoTrack != null}
@@ -40,9 +40,9 @@ export const Controls = observer(function Controls({ localUser }: ControlsProps)
         <i className="i-mdi-arrow-up-bold-box" />
         <span className="btn-text">Share Screen</span>
       </button>
-      <div className="flex-1"></div>
+      <div className="flex-1" />
       <button className="btn btn-quit" onClick={() => appStore.leave()}>
-        <i className="i-mdi-exit-to-app"></i>
+        <i className="i-mdi-exit-to-app" />
         <span className="btn-text">Quit</span>
       </button>
     </div>

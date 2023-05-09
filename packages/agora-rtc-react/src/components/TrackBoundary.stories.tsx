@@ -48,6 +48,7 @@ const meta: Meta = {
         FakeRTCClient.create(client => {
           const subscribe = client.subscribe.bind(client);
           return {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             subscribe: async (user, mediaType): Promise<any> => {
               const track = await subscribe(user, mediaType);
               logTrackStop(track, () =>

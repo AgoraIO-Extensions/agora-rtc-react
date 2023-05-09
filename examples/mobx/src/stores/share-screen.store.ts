@@ -95,7 +95,13 @@ export class ShareScreen {
         resolve = resolve_;
       });
 
-      await this.createLocalTracks();
+      try {
+        await this.createLocalTracks();
+      } catch {
+        resolve();
+        this._pTogglingShareScreen = undefined;
+        return;
+      }
       await this.client.join(appId, channel, token, ShareScreenUID);
       await this.client.publish(this._getLocalTracks());
 

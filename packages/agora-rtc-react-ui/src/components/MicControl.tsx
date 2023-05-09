@@ -52,7 +52,7 @@ export function MicControl({
 
   return (
     <button {...props} className={`arr-user-control ${className}`} onClick={handleClick}>
-      {micOn ? <SVGMicrophone volumeLevel={volumeLevel} noise={noise} /> : <SVGMicrophoneMute />}
+      {micOn ? <SVGMicrophone noise={noise} volumeLevel={volumeLevel} /> : <SVGMicrophoneMute />}
     </button>
   );
 }

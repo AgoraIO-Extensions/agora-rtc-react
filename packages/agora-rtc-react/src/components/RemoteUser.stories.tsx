@@ -46,8 +46,9 @@ const meta: Meta<RemoteUserProps> = {
 export default meta;
 
 function RenderRemoteUser(args: RemoteUserProps) {
-  const [user] = useState<IAgoraRTCRemoteUser | undefined>(() => args.user && { ...args.user });
-  return <RemoteUser {...args} user={user} />;
+  const { user } = args;
+  const [_user] = useState<IAgoraRTCRemoteUser | undefined>(() => user && { ...user });
+  return <RemoteUser {...args} user={_user} />;
 }
 
 export const Overview: StoryObj<RemoteUserProps> = {
@@ -150,9 +151,9 @@ export const WithControls: StoryObj<RemoteUserProps> = {
         >
           <span style={{ userSelect: "none" }}>{userName}</span>
           <CameraControl
-            style={{ margin: "0 10px 0 auto" }}
             cameraOn={args.playVideo}
             onCameraChange={setVideo}
+            style={{ margin: "0 10px 0 auto" }}
           />
           <MicControl audioTrack={user?.audioTrack} micOn={args.playAudio} onMicChange={setAudio} />
         </div>

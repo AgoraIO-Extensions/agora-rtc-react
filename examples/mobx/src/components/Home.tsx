@@ -23,7 +23,7 @@ export const Home = observer(function Home() {
       </div>
       <div className="buttons">
         <NewButton />
-        <JoinButton onClick={joinChannel} isLoading={isLoading} />
+        <JoinButton isLoading={isLoading} onClick={joinChannel} />
         <ScheduleButton />
         <ScreenShareButton />
       </div>

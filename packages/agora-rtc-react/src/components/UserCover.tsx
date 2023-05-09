@@ -37,7 +37,7 @@ export function UserCover({ cover }: UserCoverProps) {
       {typeof cover === "string" ? (
         <>
           <div style={{ ...CoverBlurStyle, backgroundImage: `url(${cover})` }} />
-          <img style={CoverImgStyle} src={cover} />
+          <img src={cover} style={CoverImgStyle} />
         </>
       ) : (
         cover()

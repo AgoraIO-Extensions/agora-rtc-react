@@ -1,9 +1,9 @@
 # agora-rtc-react
 
-[![Build Status](https://github.com/netless-io/agora-rtc-react/actions/workflows/build.yml/badge.svg)](https://github.com/netless-io/agora-rtc-react/actions/workflows/build.yml)
+[![Build Status](https://github.com/agoraio-extensions/agora-rtc-react/actions/workflows/build.yml/badge.svg)](https://github.com/agoraio-extensions/agora-rtc-react/actions/workflows/build.yml)
 
 <!-- [![npm-version](https://img.shields.io/npm/v/agora-rtc-react.svg)](https://www.npmjs.com/package/agora-rtc-react)
-[![Coverage Status](https://img.shields.io/coveralls/github/netless-io/agora-rtc-react/main)](https://coveralls.io/github/netless-io/agora-rtc-react?branch=main)
+[![Coverage Status](https://img.shields.io/coveralls/github/agoraio-extensions/agora-rtc-react/main)](https://coveralls.io/github/agoraio-extensions/agora-rtc-react?branch=main)
 [![minified-size](https://img.shields.io/bundlephobia/minzip/agora-rtc-react)](https://bundlephobia.com/package/agora-rtc-react) -->
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?maxAge=2592000)](http://commitizen.github.io/cz-cli/)

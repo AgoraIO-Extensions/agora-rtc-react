@@ -1,130 +1,29 @@
 import "./App.css";
 
-import type { IAgoraRTCClient, ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
-
 import AgoraRTC from "agora-rtc-sdk-ng";
-import { useEffect, useMemo, useState } from "react";
 
-import {
-  AgoraRTCProvider,
-  LocalMicrophoneAndCameraUser,
-  RemoteUser,
-  useAsyncEffect,
-  useCurrentUID,
-  useIsConnected,
-  usePublishedRemoteUsers,
-  useRemoteUsers,
-  useSafePromise,
-} from "agora-rtc-react";
+import { AgoraRTCProvider } from "agora-rtc-react";
 import { SVGCamera, SVGCameraMute, SVGMicrophone, SVGMicrophoneMute } from "agora-rtc-react-ui";
-import clsx from "clsx";
-import { AutoLayout } from "./AutoLayout";
-import { Container } from "./Container";
-import { Label } from "./Label";
-import { UsersInfo } from "./UsersInfo";
-import { fakeAvatar, fakeName } from "./utils";
 
-const appId = import.meta.env.AGORA_APPID;
-const channel = import.meta.env.AGORA_CHANNEL;
-const token = import.meta.env.AGORA_TOKEN;
+import clsx from "clsx";
+import { useState } from "react";
+import { Container } from "./Container";
+import { Room } from "./Room";
 
 AgoraRTC.setLogLevel(/* warning */ 2);
-const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
-
-setupEasyTesting(client);
 
 export const App = () => {
-  const sp = useSafePromise();
-
+  const [client] = useState(() => AgoraRTC.createClient({ mode: "rtc", codec: "vp8" }));
   const [calling, setCalling] = useState(false);
-  const remoteUsers = useRemoteUsers(client);
-  const publishedUsers = usePublishedRemoteUsers(client);
-
-  const uid = useCurrentUID(client) || 0;
-  const userName = useMemo(() => fakeName(uid), [uid]);
-  const userAvatar = useMemo(() => fakeAvatar(uid), [uid]);
-
-  const isConnected = useIsConnected(client);
-
-  useAsyncEffect(async () => {
-    if (calling) {
-      await client.join(appId, channel, token);
-      return () => client.leave();
-    }
-  }, [calling]);
-
   const [micOn, setMic] = useState(false);
-  const [audioTrack, setAudioTrack] = useState<IMicrophoneAudioTrack | null>(null);
-  const [audioEnabled, setAudioEnabled] = useState(false); // track localAudioTrack.enabled
-  useEffect(() => {
-    if (micOn && !audioTrack) {
-      sp(AgoraRTC.createMicrophoneAudioTrack({ ANS: true, AEC: true })).then(setAudioTrack);
-    }
-    if (audioTrack) {
-      sp(audioTrack.setEnabled(micOn)).then(() => setAudioEnabled(audioTrack.enabled));
-    }
-  }, [audioTrack, micOn, sp]);
-
   const [cameraOn, setCamera] = useState(false);
-  const [videoTrack, setVideoTrack] = useState<ICameraVideoTrack | null>(null);
-  const [videoEnabled, setVideoEnabled] = useState(false);
-  useEffect(() => {
-    if (cameraOn && !videoTrack) {
-      sp(AgoraRTC.createCameraVideoTrack()).then(setVideoTrack);
-    }
-    if (videoTrack) {
-      sp(videoTrack.setEnabled(cameraOn).then(() => setVideoEnabled(videoTrack.enabled)));
-    }
-  }, [videoTrack, cameraOn, sp]);
-
-  // publish local tracks only when:
-  // 1. client is connected
-  // 2. tracks are enabled
-  // 3. tracks are not published (not in client.localTracks)
-  useAsyncEffect(async () => {
-    if (isConnected && audioTrack && audioEnabled && !client.localTracks.includes(audioTrack)) {
-      await client.publish(audioTrack);
-    }
-  }, [isConnected, audioTrack, audioEnabled]);
-
-  useAsyncEffect(async () => {
-    if (isConnected && videoTrack && videoEnabled && !client.localTracks.includes(videoTrack)) {
-      await client.publish(videoTrack);
-    }
-  }, [isConnected, videoTrack, videoEnabled]);
-
-  const selfPublished = micOn || cameraOn;
 
   return (
     <AgoraRTCProvider client={client}>
       <Container>
-        <UsersInfo
-          published={publishedUsers.length + (selfPublished ? 1 : 0)}
-          total={remoteUsers.length + 1}
-        />
-        <AutoLayout>
-          {isConnected && (
-            <AutoLayout.Item>
-              <LocalMicrophoneAndCameraUser
-                cameraOn={cameraOn}
-                micOn={micOn}
-                videoTrack={videoTrack}
-                audioTrack={audioTrack}
-                cover={userAvatar}
-              >
-                {<Label>{`${userName}{${uid}}`}</Label>}
-              </LocalMicrophoneAndCameraUser>
-            </AutoLayout.Item>
-          )}
-          {remoteUsers.map(user => (
-            <AutoLayout.Item key={user.uid}>
-              <RemoteUser user={user} cover={fakeAvatar(user.uid)} />
-              <Label>{`${fakeName(user.uid)}{${user.uid}}`}</Label>
-            </AutoLayout.Item>
-          ))}
-        </AutoLayout>
+        {calling && <Room cameraOn={cameraOn} micOn={micOn} />}
         {/* Camera and Microphone Controls */}
-        <div className="flex justify-center items-center gap-3 px-6 py-3 bg-#21242c c-coolgray-3 relative">
+        <div className="fixed inset-0 top-a flex justify-center items-center gap-3 px-6 py-3 bg-#21242c c-coolgray-3">
           <button
             className={clsx("btn btn-phone", { "btn-phone-active": calling })}
             onClick={() => setCalling(a => !a)}
@@ -146,16 +45,3 @@ export const App = () => {
 };
 
 export default App;
-
-declare global {
-  interface Window {
-    AgoraRTC: typeof AgoraRTC;
-    client: IAgoraRTCClient;
-  }
-}
-
-/** Expose client to window for easy playing with */
-function setupEasyTesting(client: IAgoraRTCClient): void {
-  window.AgoraRTC = AgoraRTC;
-  window.client = client;
-}
