@@ -23,6 +23,7 @@
     "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
     "@typescript-eslint/consistent-type-imports": ["warn"],
     "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-explicit-any": ["warn", { "ignoreRestArgs": true }],
     "react/display-name": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-closing-bracket-location": ["error", "line-aligned"],

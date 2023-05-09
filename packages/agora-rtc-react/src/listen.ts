@@ -24,9 +24,9 @@ import type { Disposer, Fn } from "./utils";
 export declare class AgoraRTCError extends Error {
   readonly code: `${AgoraRTCErrorCode}`;
   readonly message: string;
-  readonly data?: any;
+  readonly data?: unknown;
   readonly name: string;
-  constructor(code: `${AgoraRTCErrorCode}`, message?: string, data?: any);
+  constructor(code: `${AgoraRTCErrorCode}`, message?: string, data?: unknown);
   toString(): string;
   print(level?: "error" | "warning"): AgoraRTCError;
   throw(): never;
@@ -145,8 +145,8 @@ export declare enum VisibleHiddenReason {
 }
 
 export interface Listenable {
-  on: (event: any, listener: Fn) => void;
-  off: (event: any, listener: Fn) => void;
+  on: (event: string, listener: Fn) => void;
+  off: (event: string, listener: Fn) => void;
 }
 
 /**

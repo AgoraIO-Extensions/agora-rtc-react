@@ -1,5 +1,5 @@
 export type Disposer = () => void;
-export type Fn = (...args: any[]) => any;
+export type Fn = (...args: unknown[]) => unknown;
 export type Nullable<T> = T | null | undefined;
 export type MaybePromise<T> = T | PromiseLike<T>;
 export type MaybePromiseOrNull<T> = MaybePromise<Nullable<T>>;

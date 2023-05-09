@@ -61,7 +61,10 @@ export class MyLocalUser {
       await this.client.publish(track);
       this.updateLocalMicTrack(track);
     }
-    return this.micTrack!;
+    if (this.micTrack) {
+      return this.micTrack;
+    }
+    return Promise.reject();
   }
 
   updateLocalMicTrack(track: IMicrophoneAudioTrack) {
@@ -74,7 +77,10 @@ export class MyLocalUser {
       await this.client.publish(track);
       this.updateLocalCameraTrack(track);
     }
-    return this.cameraTrack!;
+    if (this.cameraTrack) {
+      return this.cameraTrack;
+    }
+    return Promise.reject();
   }
 
   updateLocalCameraTrack(track: ICameraVideoTrack) {
