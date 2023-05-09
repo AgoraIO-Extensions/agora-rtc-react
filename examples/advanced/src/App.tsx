@@ -5,6 +5,7 @@ import { Layout, Menu } from "antd";
 import React, { useState } from "react";
 import { Pages, defaultPage } from "./pages";
 import { Client } from "./components";
+import Setting from "./pages/Setting";
 
 const { Content, Sider } = Layout;
 
@@ -17,7 +18,6 @@ export default function App() {
       <Layout>
         <Sider collapsed={collapsed} collapsible onCollapse={value => setCollapsed(value)}>
           <Menu
-            defaultSelectedKeys={[defaultPage]}
             items={Pages.map(page => ({
               key: `/${page.label}`,
               label: page.label,
@@ -32,7 +32,7 @@ export default function App() {
         <Layout>
           <Content>
             <Routes>
-              <Route element={<Navigate to={defaultPage} />} path="/" />
+              <Route Component={() => <Setting />} path="/" />
               {Pages.map(({ label, component }) => {
                 const RouteComponent = component;
                 return (
