@@ -63,8 +63,8 @@ export function useRemoteUserTrack(
       if (user[trackName] && resolvedClient.remoteUsers.some(({ uid }) => user.uid === uid)) {
         try {
           await resolvedClient.unsubscribe(user, mediaType);
-        } catch (e) {
-          console.error(e);
+        } catch (error) {
+          console.error(error);
         }
       }
       if (!isUnmounted) {
@@ -151,51 +151,47 @@ export function useRemoteAudioTracks(
     if (!users || !isConnected) return;
     let isUnmounted = false;
     const subscribe = async (user: IAgoraRTCRemoteUser) => {
-      try {
-        if (!user.audioTrack && users.some(({ uid }) => user.uid === uid)) {
-          await resolvedClient.subscribe(user, "video").catch(error => {
-            void error;
-          });
+      if (!user.audioTrack && users.some(({ uid }) => user.uid === uid)) {
+        try {
+          await resolvedClient.subscribe(user, "audio");
+        } catch (error) {
+          console.error(error);
+        }
+
+        if (user.audioTrack && !nextTracks.current.some(track => track.getUserId() === user.uid)) {
+          nextTracks.current.push(user.audioTrack);
+        }
+
+        // when hot update mode, track will change every time, so need to update nextTracks
+        nextTracks.current = nextTracks.current.map(track => {
           if (
             user.audioTrack &&
-            !nextTracks.current.some(track => track.getUserId() === user.uid)
+            track.getUserId() === user.uid &&
+            track.getTrackId() !== user.audioTrack.getTrackId()
           ) {
-            nextTracks.current.push(user.audioTrack);
+            return user.audioTrack;
+          } else {
+            return track;
           }
+        });
 
-          nextTracks.current = nextTracks.current.map(track => {
-            if (
-              user.audioTrack &&
-              track.getUserId() === user.uid &&
-              track.getTrackId() !== user.audioTrack.getTrackId()
-            ) {
-              return user.audioTrack;
-            } else {
-              return track;
-            }
-          });
-          if (!isUnmounted) {
-            setTracks(nextTracks.current);
-          }
+        if (!isUnmounted) {
+          setTracks(nextTracks.current);
         }
-      } catch (error) {
-        console.error(error);
       }
     };
 
     const unsubscribe = async (user: IAgoraRTCRemoteUser): Promise<void> => {
-      try {
-        if (users.some(({ uid }) => user.uid === uid)) {
-          if (!isUnmounted) {
-            nextTracks.current = nextTracks.current.filter(track => track.getUserId() !== user.uid);
-            console.log(nextTracks.current);
-            setTracks(nextTracks.current);
-          }
-
-          await resolvedClient.unsubscribe(user, "audio");
+      if (users.some(({ uid }) => user.uid === uid)) {
+        if (!isUnmounted) {
+          nextTracks.current = nextTracks.current.filter(track => track.getUserId() !== user.uid);
+          setTracks(nextTracks.current);
         }
-      } catch (error) {
-        console.error(error);
+        try {
+          await resolvedClient.unsubscribe(user, "audio");
+        } catch (error) {
+          console.error(error);
+        }
       }
     };
 
@@ -211,7 +207,6 @@ export function useRemoteAudioTracks(
       if (users && users.length > 0 && !users.some(user => user.uid === track.getUserId())) {
         const user = resolvedClient.remoteUsers.find(user => user.uid === track.getUserId());
         if (user) {
-          console.log(user.uid, "unsubscribe audio track");
           unsubscribeList.push({
             user,
             mediaType: "audio",
@@ -243,7 +238,8 @@ export function useRemoteAudioTracks(
         }
       }),
     ]);
-  }, [isConnected, resolvedClient, tracks, users]);
+  }, [isConnected, resolvedClient, users]);
+
   return tracks;
 }
 
@@ -264,51 +260,46 @@ export function useRemoteVideoTracks(
     if (!users || !isConnected) return;
     let isUnmounted = false;
     const subscribe = async (user: IAgoraRTCRemoteUser) => {
-      try {
-        if (!user.videoTrack && users.some(({ uid }) => user.uid === uid)) {
-          await resolvedClient.subscribe(user, "video").catch(error => {
-            void error;
-          });
+      if (!user.videoTrack && users.some(({ uid }) => user.uid === uid)) {
+        try {
+          await resolvedClient.subscribe(user, "video");
+        } catch (error) {
+          console.error(error);
+        }
+
+        if (user.videoTrack && !nextTracks.current.some(track => track.getUserId() === user.uid)) {
+          nextTracks.current.push(user.videoTrack);
+        }
+
+        // when hot update mode, track will change every time, so need to update nextTracks
+        nextTracks.current = nextTracks.current.map(track => {
           if (
             user.videoTrack &&
-            !nextTracks.current.some(track => track.getUserId() === user.uid)
+            track.getUserId() === user.uid &&
+            track.getTrackId() !== user.videoTrack.getTrackId()
           ) {
-            nextTracks.current.push(user.videoTrack);
+            return user.videoTrack;
+          } else {
+            return track;
           }
-
-          nextTracks.current = nextTracks.current.map(track => {
-            if (
-              user.videoTrack &&
-              track.getUserId() === user.uid &&
-              track.getTrackId() !== user.videoTrack.getTrackId()
-            ) {
-              return user.videoTrack;
-            } else {
-              return track;
-            }
-          });
-          if (!isUnmounted) {
-            setTracks(nextTracks.current);
-          }
+        });
+        if (!isUnmounted) {
+          setTracks(nextTracks.current);
         }
-      } catch (error) {
-        console.error(error);
       }
     };
 
     const unsubscribe = async (user: IAgoraRTCRemoteUser): Promise<void> => {
-      try {
-        if (users.some(({ uid }) => user.uid === uid)) {
-          if (!isUnmounted) {
-            nextTracks.current = nextTracks.current.filter(track => track.getUserId() !== user.uid);
-            console.log(nextTracks.current);
-            setTracks(nextTracks.current);
-          }
-
-          await resolvedClient.unsubscribe(user, "video");
+      if (users.some(({ uid }) => user.uid === uid)) {
+        if (!isUnmounted) {
+          nextTracks.current = nextTracks.current.filter(track => track.getUserId() !== user.uid);
+          setTracks(nextTracks.current);
         }
-      } catch (error) {
-        console.error(error);
+        try {
+          await resolvedClient.unsubscribe(user, "video");
+        } catch (error) {
+          console.error(error);
+        }
       }
     };
 
@@ -324,7 +315,6 @@ export function useRemoteVideoTracks(
       if (users && users.length > 0 && !users.some(user => user.uid === track.getUserId())) {
         const user = resolvedClient.remoteUsers.find(user => user.uid === track.getUserId());
         if (user) {
-          console.log(user.uid, "unsubscribe video track");
           unsubscribeList.push({
             user,
             mediaType: "video",
@@ -356,6 +346,6 @@ export function useRemoteVideoTracks(
         }
       }),
     ]);
-  }, [isConnected, resolvedClient, tracks, users]);
+  }, [isConnected, resolvedClient, users]);
   return tracks;
 }
