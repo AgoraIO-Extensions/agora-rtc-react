@@ -1,0 +1,53 @@
+.btn {
+  display: inline-flex;
+  flex-direction: column;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  appearance: none;
+  cursor: pointer;
+  align-items: center;
+  font-size: 0;
+  color: inherit;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  &:disabled {
+    background-color: transparent;
+    cursor: not-allowed;
+  }
+  > i {
+    font-size: 1.5rem;
+  }
+  > span {
+    font-size: 0.75rem;
+  }
+  &-phone {
+    border-radius: 0.55rem;
+    padding: 0.5rem 4rem;
+    color: #fff;
+    background-color: #16a34a;
+    &:hover {
+      background-color: #22c55e;
+    }
+    &-active,
+    &-active:hover {
+      background-color: #dc2626;
+    }
+  }
+  &-switch-layout {
+    border: 1px solid;
+    cursor: pointer;
+    &-active {
+      background: red;
+    }
+  }
+}
+.remote {
+  > .label {
+    > i {
+      font-size: 1rem;
+    }
+  }
+}

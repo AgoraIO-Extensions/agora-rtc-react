@@ -26,7 +26,7 @@ export const useAppStore = create<AppState>((set, get) => {
   return {
     rooms: tokens.map(({ token, channel }) => {
       const client = AgoraRTC.createClient({ mode: "live", codec: "vp8" });
-      client.join(appId, channel, token, null);
+      client.join(appId, channel, token ? token : null, null);
       return { token, channel, client };
     }),
     selectChannel: async (channel?: string | null) => {

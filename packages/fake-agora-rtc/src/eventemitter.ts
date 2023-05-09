@@ -1,6 +1,6 @@
 import { hideProperties } from "./utils";
 
-type Fn = (...args: any[]) => any;
+type Fn = (...args: any[]) => unknown;
 
 /** Fake Agora internal Eventemitter */
 export class FakeAgoraEventEmitter {

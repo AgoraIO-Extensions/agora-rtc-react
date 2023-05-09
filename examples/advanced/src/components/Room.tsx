@@ -2,7 +2,6 @@ import type { ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-sdk-ng"
 
 import {
   LocalMicrophoneAndCameraUser,
-  RemoteUser,
   useAsyncEffect,
   useAutoJoin,
   useCurrentUID,
@@ -13,23 +12,27 @@ import {
 } from "agora-rtc-react";
 
 import AgoraRTC from "agora-rtc-sdk-ng";
+import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
-import { AutoLayout } from "./AutoLayout";
-import { Label } from "./Label";
-import { UsersInfo } from "./UsersInfo";
-import { fakeAvatar, fakeName } from "./utils";
+import { Label, AutoLayout, UsersInfo } from "./index";
+import { fakeAvatar, fakeName, appConfig } from "../utils";
 
 interface RoomProps {
+  renderAction?: () => ReactNode;
+  renderLocalUser?: () => ReactNode;
+  renderRemoteUsers?: () => ReactNode;
   micOn: boolean;
   cameraOn: boolean;
 }
 
-const appId = import.meta.env.AGORA_APPID;
-const channel = import.meta.env.AGORA_CHANNEL;
-const token = import.meta.env.AGORA_TOKEN ? import.meta.env.AGORA_TOKEN : null;
-
-export function Room({ micOn, cameraOn }: RoomProps) {
-  useAutoJoin(appId, channel, token);
+export function Room({
+  micOn,
+  cameraOn,
+  renderAction,
+  renderLocalUser,
+  renderRemoteUsers,
+}: RoomProps) {
+  useAutoJoin(appConfig.appId, appConfig.channel, appConfig.token);
 
   const client = useRTCClient();
   const isConnected = useIsConnected();
@@ -60,33 +63,31 @@ export function Room({ micOn, cameraOn }: RoomProps) {
       setVideoTrack(track);
     }
   }, [isConnected, cameraOn, videoTrack, client]);
-
   return (
     <>
+      {renderAction ? renderAction() : undefined}
       <UsersInfo
         published={publishedUsers.length + (selfPublished ? 1 : 0)}
         total={remoteUsers.length + 1}
       />
       <AutoLayout>
-        {isConnected && (
-          <AutoLayout.Item>
-            <LocalMicrophoneAndCameraUser
-              audioTrack={audioTrack}
-              cameraOn={cameraOn}
-              cover={userAvatar}
-              micOn={micOn}
-              videoTrack={videoTrack}
-            >
-              {<Label>{`${userName}{${uid}}`}</Label>}
-            </LocalMicrophoneAndCameraUser>
-          </AutoLayout.Item>
-        )}
-        {remoteUsers.map(user => (
-          <AutoLayout.Item key={user.uid}>
-            <RemoteUser cover={fakeAvatar(user.uid)} user={user} />
-            <Label>{`${fakeName(user.uid)}{${user.uid}}`}</Label>
-          </AutoLayout.Item>
-        ))}
+        {isConnected &&
+          (renderLocalUser ? (
+            renderLocalUser()
+          ) : (
+            <AutoLayout.Item>
+              <LocalMicrophoneAndCameraUser
+                audioTrack={audioTrack}
+                cameraOn={cameraOn}
+                cover={userAvatar}
+                micOn={micOn}
+                videoTrack={videoTrack}
+              >
+                {<Label>{`${userName}{${uid}}`}</Label>}
+              </LocalMicrophoneAndCameraUser>
+            </AutoLayout.Item>
+          ))}
+        {renderRemoteUsers ? renderRemoteUsers() : undefined}
       </AutoLayout>
     </>
   );
