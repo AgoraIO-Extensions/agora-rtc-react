@@ -8,12 +8,9 @@ import {
   useRemoteUsers,
   useRemoteVideoTracks,
 } from "agora-rtc-react";
-import { SVGCamera, SVGCameraMute, SVGMicrophone, SVGMicrophoneMute } from "agora-rtc-react-ui";
-
-import clsx from "clsx";
 import { useState } from "react";
 
-import { AutoLayout, Container, Label, Room } from "../../components";
+import { AutoLayout, Container, Label, MediaControl, Room } from "../../components";
 import { Button, Typography } from "antd";
 import { appConfig, fakeAvatar, fakeName } from "../../utils";
 const { Title, Paragraph, Text } = Typography;
@@ -83,23 +80,20 @@ export const SwitchLayout = () => {
           </Paragraph>
         </div>
       )}
-      {/* Camera and Microphone Controls */}
-      <div className="inset-0 top-a flex justify-center items-center gap-3 px-6 py-3 bg-#21242c c-coolgray-3">
-        <div className="flex-1 flex top-0 left-0 h-full items-center gap-3 px-6 py-3">
-          <button className="btn" onClick={() => setMic(a => !a)}>
-            {micOn ? <SVGMicrophone /> : <SVGMicrophoneMute />}
-          </button>
-          <button className="btn" onClick={() => setCamera(a => !a)}>
-            {cameraOn ? <SVGCamera /> : <SVGCameraMute />}
-          </button>
-        </div>
-        <button
-          className={clsx("btn btn-phone", { "btn-phone-active": calling })}
-          onClick={() => setCalling(a => !a)}
-        >
-          {calling ? <i className="i-mdi-phone-hangup" /> : <i className="i-mdi-phone" />}
-        </button>
-      </div>
+      <MediaControl
+        calling={calling}
+        cameraOn={cameraOn}
+        micOn={micOn}
+        setCalling={() => {
+          setCalling(a => !a);
+        }}
+        setCamera={() => {
+          setCamera(a => !a);
+        }}
+        setMic={() => {
+          setMic(a => !a);
+        }}
+      />
     </Container>
   );
 };
