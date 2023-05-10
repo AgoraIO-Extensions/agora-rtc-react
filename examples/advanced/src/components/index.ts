@@ -5,3 +5,4 @@ export * from "./LocalTracks";
 export * from "./UsersInfo";
 export * from "./Room";
 export * from "./Client";
+export * from "./MediaControl";
