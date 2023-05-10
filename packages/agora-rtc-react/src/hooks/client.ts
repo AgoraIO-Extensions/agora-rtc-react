@@ -169,7 +169,6 @@ export function useAutoJoin(
           if (track.isPlaying) {
             track.stop();
           }
-          console.log(11);
           track.close();
         }
         return resolvedClient.leave();
