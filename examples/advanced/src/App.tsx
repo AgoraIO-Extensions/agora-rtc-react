@@ -26,6 +26,7 @@ export default function App() {
             onClick={e => {
               navigate(e.key);
             }}
+            selectedKeys={[window.location.hash.slice(1)]}
             theme="dark"
           />
         </Sider>

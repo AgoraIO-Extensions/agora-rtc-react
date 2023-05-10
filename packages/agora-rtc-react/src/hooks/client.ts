@@ -166,11 +166,48 @@ export function useAutoJoin(
       await resolvedClient.join(appid, channel, token, uid);
       return () => {
         for (const track of resolvedClient.localTracks) {
-          track.stop();
+          if (track.isPlaying) {
+            track.stop();
+          }
+          console.log(11);
           track.close();
         }
         return resolvedClient.leave();
       };
     }
   }, [appid, channel, token, uid, resolvedClient]);
+}
+
+export interface joinOptions {
+  appid: string;
+  channel: string;
+  token: string | null;
+  uid?: UID | null;
+}
+
+export type FetchArgs = (() => Promise<joinOptions>) | joinOptions;
+
+export function useJoin(fetchArgs: FetchArgs, ready = true, client?: IAgoraRTCClient | null): void {
+  const resolvedClient = useRTCClient(client);
+
+  useAsyncEffect(async () => {
+    if (ready && resolvedClient) {
+      try {
+        const { appid, channel, token, uid } =
+          typeof fetchArgs === "function" ? await fetchArgs() : fetchArgs;
+        await resolvedClient.join(appid, channel, token, uid);
+      } catch (error) {
+        console.error(error);
+      }
+      return () => {
+        for (const track of resolvedClient.localTracks) {
+          if (track.isPlaying) {
+            track.stop();
+          }
+          track.close();
+        }
+        return resolvedClient.leave();
+      };
+    }
+  }, [ready, client]);
 }

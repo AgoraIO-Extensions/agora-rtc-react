@@ -1,9 +1,9 @@
 import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
-import AgoraRTC from "agora-rtc-sdk-ng";
 import "./index.scss";
 import {
   RemoteVideoPlayer,
   useIsConnected,
+  useJoin,
   useRemoteAudioTracks,
   useRemoteUsers,
   useRemoteVideoTracks,
@@ -15,14 +15,22 @@ import { useState } from "react";
 
 import { AutoLayout, Container, Label, Room } from "../../components";
 import { Button, Typography } from "antd";
-import { fakeAvatar, fakeName } from "../../utils";
+import { appConfig, fakeAvatar, fakeName } from "../../utils";
 const { Title, Paragraph, Text } = Typography;
 
-AgoraRTC.setLogLevel(/* warning */ 2);
 export const SwitchLayout = () => {
   const isConnected = useIsConnected();
-
   const [calling, setCalling] = useState(false);
+
+  useJoin(
+    {
+      appid: appConfig.appId,
+      channel: appConfig.channel,
+      token: appConfig.token,
+    },
+    calling,
+  );
+
   const [micOn, setMic] = useState(false);
   const [cameraOn, setCamera] = useState(false);
 

@@ -3,7 +3,6 @@ import type { ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-sdk-ng"
 import {
   LocalMicrophoneAndCameraUser,
   useAsyncEffect,
-  useAutoJoin,
   useCurrentUID,
   useIsConnected,
   usePublishedRemoteUsers,
@@ -15,7 +14,7 @@ import AgoraRTC from "agora-rtc-sdk-ng";
 import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
 import { Label, AutoLayout, UsersInfo } from "./index";
-import { fakeAvatar, fakeName, appConfig } from "../utils";
+import { fakeAvatar, fakeName } from "../utils";
 
 interface RoomProps {
   renderAction?: () => ReactNode;
@@ -32,8 +31,6 @@ export function Room({
   renderLocalUser,
   renderRemoteUsers,
 }: RoomProps) {
-  useAutoJoin(appConfig.appId, appConfig.channel, appConfig.token);
-
   const client = useRTCClient();
   const isConnected = useIsConnected();
 
