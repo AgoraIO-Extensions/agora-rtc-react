@@ -1,3 +1,10 @@
+[allowlist]
+description = "gh pages build file allow lists"
+paths = [
+    '''gitleaks.toml''',
+    '''index-[0-9a-f]{8}.js''',
+]
+
 # ----- BEGIN Agora AppId -----
  [[rules]]
  id = "agora-appid"
