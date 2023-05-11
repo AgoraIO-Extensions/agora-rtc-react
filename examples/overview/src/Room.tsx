@@ -12,6 +12,7 @@ import {
   useRemoteUsers,
 } from "agora-rtc-react";
 
+import CryptoJS from "crypto-js";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { useMemo, useState } from "react";
 import { AutoLayout } from "./AutoLayout";
@@ -24,8 +25,15 @@ interface RoomProps {
   cameraOn: boolean;
 }
 
-const appId = import.meta.env.AGORA_APPID;
-const channel = import.meta.env.AGORA_CHANNEL;
+let id = import.meta.env.AGORA_APPID;
+if (import.meta.env.AGORA_AES_SALT) {
+  // only for github-pages demo
+  const bytes = CryptoJS.AES.decrypt(import.meta.env.AGORA_APPID, import.meta.env.AGORA_AES_SALT);
+  id = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+}
+
+const appId = id;
+const channel = import.meta.env.AGORA_CHANNEL || "test";
 const token = import.meta.env.AGORA_TOKEN ? import.meta.env.AGORA_TOKEN : null;
 
 export function Room({ micOn, cameraOn }: RoomProps) {
