@@ -1,0 +1,19 @@
+on: ["pull_request"]
+
+name: gitleaks
+
+jobs:
+  scan:
+    name: Checkout
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install Package with Brew
+        run: |
+          brew update
+          brew install gitleaks
+      - name: Check
+        run: |
+          gitleaks detect --staged --source . -v agora-rtc-react.git -c .gitleaks.toml
