@@ -33,7 +33,7 @@ if (import.meta.env.AGORA_AES_SALT) {
 }
 
 const appId = id;
-const channel = import.meta.env.AGORA_CHANNEL;
+const channel = import.meta.env.AGORA_CHANNEL || "test";
 const token = import.meta.env.AGORA_TOKEN ? import.meta.env.AGORA_TOKEN : null;
 
 export function Room({ micOn, cameraOn }: RoomProps) {

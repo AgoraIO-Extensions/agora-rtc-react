@@ -9,7 +9,7 @@ if (import.meta.env.AGORA_AES_SALT) {
 
 const appConfig = {
   appId: appId,
-  channel: import.meta.env.AGORA_CHANNEL,
+  channel: import.meta.env.AGORA_CHANNEL || "test",
   token: import.meta.env.AGORA_TOKEN ? import.meta.env.AGORA_TOKEN : null,
 };
 

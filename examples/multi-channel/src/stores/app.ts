@@ -3,7 +3,6 @@ import CryptoJS from "crypto-js";
 import type { IAgoraRTCClient, ILocalAudioTrack, ILocalVideoTrack } from "agora-rtc-sdk-ng";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { getAgoraTokens } from "../utils";
-import { env } from "process";
 
 let id = import.meta.env.AGORA_APPID;
 if (import.meta.env.AGORA_AES_SALT) {
