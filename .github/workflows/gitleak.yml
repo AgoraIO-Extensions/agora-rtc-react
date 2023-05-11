@@ -5,7 +5,7 @@ name: gitleaks
 jobs:
   scan:
     name: Checkout
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
         with:
@@ -14,6 +14,8 @@ jobs:
         run: |
           brew update
           brew install gitleaks
+          brew upgrade
+
       - name: Check
         run: |
           gitleaks detect --staged --source . -v agora-rtc-react.git -c .gitleaks.toml
