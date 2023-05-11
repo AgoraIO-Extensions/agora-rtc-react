@@ -4,7 +4,7 @@
 - Custom user name and avatar.
 - Create tracks on demand.
 
-<https://netless-io.github.io/agora-rtc-react/mobx/>
+<https://agoraio-extensions.github.io/agora-rtc-react/mobx/>
 
 ## Develop
 

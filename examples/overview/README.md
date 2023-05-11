@@ -2,7 +2,7 @@
 
 - Simple example without external state management.
 
-<https://netless-io.github.io/agora-rtc-react/overview/>
+<https://agoraio-extensions.github.io/agora-rtc-react/overview/>
 
 ## Develop
 

@@ -5,7 +5,7 @@ Demonstrates how to use Agora RTC React SDK to build a multi-channel application
 - Zustand for state management.
 - Each channel is handled by a client. With `AgoraRTCProvider` the rest of the Components consume the client in a dependency injection manner, without caring which client is provided.
 
-<https://netless-io.github.io/agora-rtc-react/multi-channel/>
+<https://agoraio-extensions.github.io/agora-rtc-react/multi-channel/>
 
 ## Develop
 

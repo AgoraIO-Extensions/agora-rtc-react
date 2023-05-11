@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - main
-  schedule:
-    - cron: "0 16 * * *"
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -27,18 +25,13 @@ jobs:
       - name: Build 🔧
         env:
           AGORA_APPID: ${{ secrets.AGORA_APPID }}
-          AGORA_CERTIFICATE: ${{ secrets.AGORA_CERTIFICATE }}
+          AGORA_AES_SALT: ${{secrets.AGORA_AES_SALT}}
         run: |
           pnpm install
           pnpm run lint
           pnpm run test
           pnpm run renew
           pnpm run build
-
-      # - name: Coveralls
-      #   uses: coverallsapp/github-action@master
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docs 📖
         run: |

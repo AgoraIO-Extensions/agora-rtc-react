@@ -24,8 +24,10 @@ import type { Disposer, Fn } from "./utils";
 export declare class AgoraRTCError extends Error {
   readonly code: `${AgoraRTCErrorCode}`;
   readonly message: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly data?: any;
   readonly name: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(code: `${AgoraRTCErrorCode}`, message?: string, data?: any);
   toString(): string;
   print(level?: "error" | "warning"): AgoraRTCError;
@@ -145,7 +147,9 @@ export declare enum VisibleHiddenReason {
 }
 
 export interface Listenable {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   on: (event: any, listener: Fn) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   off: (event: any, listener: Fn) => void;
 }
 

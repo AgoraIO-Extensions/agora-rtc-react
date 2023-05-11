@@ -1,9 +1,17 @@
 import { create } from "zustand";
+import CryptoJS from "crypto-js";
 import type { IAgoraRTCClient, ILocalAudioTrack, ILocalVideoTrack } from "agora-rtc-sdk-ng";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { getAgoraTokens } from "../utils";
 
-const appId = import.meta.env.AGORA_APPID;
+let id = import.meta.env.AGORA_APPID;
+if (import.meta.env.AGORA_AES_SALT) {
+  // only for github-pages demo
+  const bytes = CryptoJS.AES.decrypt(import.meta.env.AGORA_APPID, import.meta.env.AGORA_AES_SALT);
+  id = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+}
+
+const appId = id;
 const tokens = getAgoraTokens();
 
 AgoraRTC.setLogLevel(/* warning */ 2);
@@ -26,7 +34,7 @@ export const useAppStore = create<AppState>((set, get) => {
   return {
     rooms: tokens.map(({ token, channel }) => {
       const client = AgoraRTC.createClient({ mode: "live", codec: "vp8" });
-      client.join(appId, channel, token, null);
+      client.join(appId, channel, token ? token : null, null);
       return { token, channel, client };
     }),
     selectChannel: async (channel?: string | null) => {

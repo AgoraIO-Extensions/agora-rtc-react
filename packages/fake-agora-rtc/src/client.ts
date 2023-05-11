@@ -91,13 +91,13 @@ export class FakeRTCClient extends FakeAgoraEventEmitter {
           String(user.uid),
         );
       }
-      return Promise.resolve(user.audioTrack!);
+      return Promise.resolve(user.audioTrack);
     } else {
       if (!user.videoTrack) {
         const videoTrack = FakeRemoteVideoTrack.create();
         user.videoTrack = videoTrack;
       }
-      return Promise.resolve(user.videoTrack!);
+      return Promise.resolve(user.videoTrack);
     }
   }
 
