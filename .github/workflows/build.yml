@@ -2,7 +2,7 @@ name: build
 on:
   push:
     branches:
-      - dev/gitleak
+      - main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
