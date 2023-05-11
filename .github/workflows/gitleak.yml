@@ -12,10 +12,8 @@ jobs:
           fetch-depth: 0
       - name: Install Package with Brew
         run: |
-          brew update
           brew install gitleaks
-          brew upgrade
 
       - name: Check
         run: |
-          gitleaks detect --staged --source . -v agora-rtc-react.git -c .gitleaks.toml
+          gitleaks detect --source . -v agora-rtc-react.git -c .gitleaks.toml
