@@ -1,7 +1,9 @@
+import { ClientRole } from "agora-rtc-sdk-ng";
 import type {
   IAgoraRTCClient,
   IAgoraRTCRemoteUser,
   ILocalAudioTrack,
+  ILocalTrack,
   IRemoteAudioTrack,
   IRemoteVideoTrack,
 } from "agora-rtc-sdk-ng";
@@ -348,4 +350,94 @@ export function useRemoteVideoTracks(
     ]);
   }, [isConnected, resolvedClient, users]);
   return tracks;
+}
+
+export function usePublish(
+  tracks?: ILocalTrack[],
+  client?: IAgoraRTCClient,
+  readyToPublish = true,
+): void {
+  const resolvedClient = useRTCClient(client);
+  const isConnected = useIsConnected(client);
+  if (!tracks) {
+    tracks = resolvedClient.localTracks;
+  }
+  useAsyncEffect(async () => {
+    if (!readyToPublish || !resolvedClient) {
+      return;
+    }
+    // let isUnmounted = false;
+    const baseCheck = (track: ILocalTrack): boolean => {
+      if (!isConnected) {
+        return false;
+      }
+      // if (resolvedClient === "audience") {
+      //   return false;
+      // }
+      // if (!track.enabled) {
+      //   return false;
+      // }
+      if (!track.muted) {
+        return false;
+      }
+      return true;
+    };
+    const canPublish = async (track: ILocalTrack): Promise<boolean> => {
+      if (!baseCheck(track)) {
+        return false;
+      }
+      if (track.enabled) {
+        return false;
+      }
+      if (track.isPlaying) {
+        return false;
+      }
+      return true;
+    };
+    const canUnPublish = async (track: ILocalTrack): Promise<boolean> => {
+      if (!track.muted) {
+        return false;
+      }
+      // if(track)
+      return true;
+    };
+    if (tracks && tracks.length > 0) {
+      console.log(resolvedClient);
+      for (const track of tracks) {
+        try {
+          if (await canPublish(track)) {
+            // await resolvedClient.setClientRole("host");
+            resolvedClient.publish(track);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+
+    // const publish = async () => {
+    //   setIsPublishing(true);
+    //   try {
+    //     await client.publish(tracks);
+    //     if (!isUnmounted) {
+    //       setIsPublished(true);
+    //     }
+    //   } catch (error) {
+    //     setError(error);
+    //   } finally {
+    //     if (!isUnmounted) {
+    //       setIsPublishing(false);
+    //     }
+    //   }
+    // };
+    // publish();
+    return joinDisposers([
+      listen(resolvedClient, "user-joined", user => {
+        console.log(user);
+      }),
+      listen(resolvedClient, "user-left", user => {
+        console.log(user);
+      }),
+    ]);
+  }, [readyToPublish, resolvedClient, tracks]);
 }

@@ -1,6 +1,7 @@
 import SwitchLayout from "./SwitchLayout";
 import UseJoin from "./UseJoin";
 import UseJoinAfterAction from "./UseJoinAfterAction";
+import UsePublish from "./UsePublish";
 
 const Pages = [
   {
@@ -14,6 +15,10 @@ const Pages = [
   {
     label: "UseJoinAfterAction",
     component: UseJoinAfterAction,
+  },
+  {
+    label: "UsePublish",
+    component: UsePublish,
   },
 ];
 
