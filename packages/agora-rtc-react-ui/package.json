@@ -32,7 +32,7 @@
     "storybook-docs": "storybook dev --docs",
     "build-storybook-docs": "storybook build --docs",
     "test": "vitest run --coverage",
-    "test:watch": "vitest"
+    "test:watch": "vitest --ui"
   },
   "peerDependencies": {
     "react": ">=16.8",
