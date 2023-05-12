@@ -23,6 +23,7 @@ import { useMemo, useState } from "react";
 import { AutoLayout, Container, Label, MediaControl, UsersInfo } from "../../components";
 import { appConfig, fakeAvatar, fakeName } from "../../utils";
 import AgoraRTC from "agora-rtc-sdk-ng";
+import { Button } from "antd";
 
 export const UsePublish = () => {
   const client = useRTCClient();
@@ -40,10 +41,12 @@ export const UsePublish = () => {
   const [audioTrack, setAudioTrack] = useState<IMicrophoneAudioTrack | null>(null);
   const [localTrackList, setLocalTrackList] = useState<ILocalTrack[]>([]);
   const [videoTrack, setVideoTrack] = useState<ICameraVideoTrack | null>(null);
+  const [isPublished, setIsPublished] = useState<boolean>(true);
 
   useAsyncEffect(async () => {
     if (isConnected && micOn && !audioTrack) {
       const track = await AgoraRTC.createMicrophoneAudioTrack({ ANS: true, AEC: true });
+
       setLocalTrackList([...localTrackList, track]);
       setAudioTrack(track);
     }
@@ -52,6 +55,7 @@ export const UsePublish = () => {
   useAsyncEffect(async () => {
     if (isConnected && cameraOn && !videoTrack) {
       const track = await AgoraRTC.createCameraVideoTrack();
+
       setLocalTrackList([...localTrackList, track]);
 
       setVideoTrack(track);
@@ -65,15 +69,25 @@ export const UsePublish = () => {
   const audioTracks = useRemoteAudioTracks(remoteUsers);
   audioTracks.map(track => track.play());
 
+  const unpublish = () => {
+    setIsPublished(false);
+    setLocalTrackList([]);
+  };
+
   return (
     <Container>
       <>
+        <div className="p-4 text-xl">
+          <Button onClick={() => unpublish()} type="primary">
+            {`unpublish`}
+          </Button>
+        </div>
         <UsersInfo
           published={publishedUsers.length + (micOn || cameraOn ? 1 : 0)}
           total={remoteUsers.length + 1}
         />
         <AutoLayout>
-          {isConnected && (
+          {isConnected && isPublished ? (
             <AutoLayout.Item>
               <LocalMicrophoneAndCameraUser
                 audioTrack={audioTrack}
@@ -85,7 +99,7 @@ export const UsePublish = () => {
                 {<Label>{`${userName}{${uid}}`}</Label>}
               </LocalMicrophoneAndCameraUser>
             </AutoLayout.Item>
-          )}
+          ) : null}
           <>
             {videoTracks.map((track: IRemoteVideoTrack) => (
               <AutoLayout.Item key={track.getUserId()}>

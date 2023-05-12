@@ -1,4 +1,3 @@
-import { ClientRole } from "agora-rtc-sdk-ng";
 import type {
   IAgoraRTCClient,
   IAgoraRTCRemoteUser,
@@ -352,6 +351,10 @@ export function useRemoteVideoTracks(
   return tracks;
 }
 
+/**
+ * auto published local tracks
+ * UnPublish track on unmount.
+ */
 export function usePublish(
   tracks?: ILocalTrack[],
   client?: IAgoraRTCClient,
@@ -362,76 +365,63 @@ export function usePublish(
   if (!tracks) {
     tracks = resolvedClient.localTracks;
   }
+  const fetchedTrackList = useRef<{ trackId: string; isPublished: boolean }[]>([]);
   useAsyncEffect(async () => {
-    if (!readyToPublish || !resolvedClient) {
+    if (!resolvedClient) {
       return;
     }
     // let isUnmounted = false;
     const baseCheck = (track: ILocalTrack): boolean => {
-      if (!isConnected) {
-        return false;
-      }
-      // if (resolvedClient === "audience") {
-      //   return false;
-      // }
-      // if (!track.enabled) {
-      //   return false;
-      // }
-      if (!track.muted) {
-        return false;
-      }
-      return true;
+      return (
+        isConnected &&
+        // need wait web sdk update
+        !(resolvedClient["mode"] === "live" && resolvedClient["role"] === "audience") &&
+        track.enabled
+      );
     };
-    const canPublish = async (track: ILocalTrack): Promise<boolean> => {
-      if (!baseCheck(track)) {
-        return false;
-      }
-      if (track.enabled) {
-        return false;
-      }
-      if (track.isPlaying) {
-        return false;
-      }
-      return true;
+    const isPublished = (track: ILocalTrack): boolean => {
+      return fetchedTrackList.current.some(a => a.trackId === track.getTrackId() && a.isPublished);
     };
-    const canUnPublish = async (track: ILocalTrack): Promise<boolean> => {
-      if (!track.muted) {
-        return false;
-      }
-      // if(track)
-      return true;
+    const canPublish = (track: ILocalTrack): boolean => {
+      return baseCheck(track) && readyToPublish && !isPublished(track);
+    };
+    const canUnPublish = (track: ILocalTrack): boolean => {
+      return baseCheck(track) && isPublished(track);
     };
     if (tracks && tracks.length > 0) {
-      console.log(resolvedClient);
       for (const track of tracks) {
-        try {
-          if (await canPublish(track)) {
-            // await resolvedClient.setClientRole("host");
-            resolvedClient.publish(track);
+        if (canPublish(track)) {
+          console.log("before-publish", track.enabled, track.isPlaying, track.muted);
+          try {
+            await resolvedClient.publish(track);
+          } catch (error) {
+            console.log(error);
           }
-        } catch (error) {
-          console.log(error);
+          if (!fetchedTrackList.current.some(a => a.trackId === track.getTrackId())) {
+            fetchedTrackList.current.push({ trackId: track.getTrackId(), isPublished: true });
+          }
+          console.log("after-publish", track.enabled, track.isPlaying, track.muted);
         }
       }
     }
 
-    // const publish = async () => {
-    //   setIsPublishing(true);
-    //   try {
-    //     await client.publish(tracks);
-    //     if (!isUnmounted) {
-    //       setIsPublished(true);
-    //     }
-    //   } catch (error) {
-    //     setError(error);
-    //   } finally {
-    //     if (!isUnmounted) {
-    //       setIsPublishing(false);
-    //     }
-    //   }
-    // };
-    // publish();
     return joinDisposers([
+      async () => {
+        if (tracks && tracks.length > 0) {
+          for (const track of tracks) {
+            if (canUnPublish(track)) {
+              console.log("before-unpublish", track.enabled, track.isPlaying, track.muted);
+              try {
+                await resolvedClient.unpublish(track);
+              } catch (error) {
+                console.log(error);
+              }
+              fetchedTrackList.current.filter(a => a.trackId !== track.getTrackId());
+              console.log("after-unpublish", track.enabled, track.isPlaying, track.muted);
+            }
+          }
+        }
+      },
       listen(resolvedClient, "user-joined", user => {
         console.log(user);
       }),
@@ -439,5 +429,5 @@ export function usePublish(
         console.log(user);
       }),
     ]);
-  }, [readyToPublish, resolvedClient, tracks]);
+  }, [isConnected, readyToPublish, resolvedClient, tracks]);
 }
