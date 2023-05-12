@@ -12,7 +12,7 @@ vi.mock("../src/hooks", () => ({
   useAwaited: vi.fn(),
 }));
 const mockTrack: ICameraVideoTrack = {
-  setDevice: vi.fn(),
+  setDevice: vi.fn().mockReturnValue(Promise.resolve()),
 } as unknown as ICameraVideoTrack;
 const mockUseAwaited = useAwaited as Mock;
 
@@ -21,7 +21,7 @@ describe("LocalVideoTrack component", () => {
     mockUseAwaited.mockReturnValueOnce(mockTrack);
     const { container } = render(<CameraVideoTrack track={mockTrack} />);
     expect(container).toBeInTheDocument();
-    vi.resetAllMocks();
+    vi.clearAllMocks();
   });
 
   test("sets device ID on audio track", async () => {
@@ -29,7 +29,7 @@ describe("LocalVideoTrack component", () => {
     render(<CameraVideoTrack deviceId={"123"} />);
     expect(mockTrack.setDevice).toHaveBeenCalledTimes(1);
     expect(mockTrack.setDevice).toHaveBeenCalledWith("123");
-    vi.resetAllMocks();
+    vi.clearAllMocks();
   });
 });
 

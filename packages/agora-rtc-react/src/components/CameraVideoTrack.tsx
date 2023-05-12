@@ -30,7 +30,7 @@ export function CameraVideoTrack({ track: maybeTrack, deviceId, ...props }: Came
 
   useEffect(() => {
     if (track && deviceId != null) {
-      track.setDevice(deviceId);
+      track.setDevice(deviceId).catch(console.warn);
     }
   }, [deviceId, track]);
 

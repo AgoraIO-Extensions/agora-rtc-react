@@ -15,8 +15,8 @@ vi.mock("../src/components/TrackBoundary", () => ({
   useAutoPlayAudioTrack: vi.fn(),
 }));
 const mockTrack: ILocalAudioTrack = {
-  setEnabled: vi.fn(),
-  setMuted: vi.fn(),
+  setEnabled: vi.fn().mockReturnValue(Promise.resolve()),
+  setMuted: vi.fn().mockReturnValue(Promise.resolve()),
   setVolume: vi.fn(),
 } as unknown as ILocalAudioTrack;
 const mockUseAwaited = useAwaited as Mock;
@@ -28,7 +28,7 @@ describe("LocalAudioTrack component", () => {
     mockUseAutoPlayAudioTrack.mockReturnValueOnce(mockTrack);
     const { container } = render(<LocalAudioTrack />);
     expect(container).toBeInTheDocument();
-    vi.resetAllMocks();
+    vi.clearAllMocks();
   });
 
   test("sets volume on audio track", () => {
@@ -37,7 +37,7 @@ describe("LocalAudioTrack component", () => {
     render(<LocalAudioTrack track={mockTrack} volume={0.5} />);
     expect(mockTrack.setVolume).toHaveBeenCalledTimes(1);
     expect(mockTrack.setVolume).toHaveBeenCalledWith(0.5);
-    vi.resetAllMocks();
+    vi.clearAllMocks();
   });
 
   test("sets disabled on audio track", () => {
@@ -46,7 +46,7 @@ describe("LocalAudioTrack component", () => {
     render(<LocalAudioTrack disabled />);
     expect(mockTrack.setEnabled).toHaveBeenCalledTimes(1);
     expect(mockTrack.setEnabled).toHaveBeenCalledWith(false);
-    vi.resetAllMocks();
+    vi.clearAllMocks();
   });
 
   test("sets muted on audio track", () => {
@@ -55,7 +55,7 @@ describe("LocalAudioTrack component", () => {
     render(<LocalAudioTrack muted />);
     expect(mockTrack.setMuted).toHaveBeenCalledTimes(1);
     expect(mockTrack.setMuted).toHaveBeenCalledWith(true);
-    vi.resetAllMocks();
+    vi.clearAllMocks();
   });
 });
 

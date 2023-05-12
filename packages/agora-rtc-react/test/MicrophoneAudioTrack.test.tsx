@@ -12,8 +12,7 @@ vi.mock("../src/hooks", () => ({
   useAwaited: vi.fn(),
 }));
 const mockTrack: IMicrophoneAudioTrack = {
-  setDevice: vi.fn(),
-  setEnabled: vi.fn(),
+  setDevice: vi.fn().mockReturnValue(Promise.resolve()),
 } as unknown as IMicrophoneAudioTrack;
 const mockUseAwaited = useAwaited as Mock;
 
@@ -22,7 +21,7 @@ describe("MicrophoneAudioTrack component", () => {
     mockUseAwaited.mockReturnValueOnce(mockTrack);
     const { container } = render(<MicrophoneAudioTrack />);
     expect(container).toBeInTheDocument();
-    vi.resetAllMocks();
+    vi.clearAllMocks();
   });
 
   test("sets device ID on audio track", () => {
@@ -31,7 +30,7 @@ describe("MicrophoneAudioTrack component", () => {
     render(<MicrophoneAudioTrack deviceId={deviceId} />);
     expect(mockTrack.setDevice).toHaveBeenCalledTimes(1);
     expect(mockTrack.setDevice).toHaveBeenCalledWith(deviceId);
-    vi.resetAllMocks();
+    vi.clearAllMocks();
   });
 });
 

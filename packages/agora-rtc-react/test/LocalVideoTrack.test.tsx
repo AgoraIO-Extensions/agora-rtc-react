@@ -15,8 +15,8 @@ vi.mock("../src/components/TrackBoundary", () => ({
   useAutoPlayVideoTrack: vi.fn(),
 }));
 const mockTrack: ILocalVideoTrack = {
-  setEnabled: vi.fn(),
-  setMuted: vi.fn(),
+  setEnabled: vi.fn().mockReturnValue(Promise.resolve()),
+  setMuted: vi.fn().mockReturnValue(Promise.resolve()),
 } as unknown as ILocalVideoTrack;
 const mockUseAwaited = useAwaited as Mock;
 const mockUseAutoPlayVideoTrack = useAutoPlayVideoTrack as Mock;
@@ -27,7 +27,7 @@ describe("LocalVideoTrack component", () => {
     mockUseAutoPlayVideoTrack.mockReturnValueOnce(mockTrack);
     const { container } = render(<LocalVideoTrack />);
     expect(container).toBeInTheDocument();
-    vi.resetAllMocks();
+    vi.clearAllMocks();
   });
 
   test("sets disabled on video track", () => {
@@ -36,7 +36,7 @@ describe("LocalVideoTrack component", () => {
     render(<LocalVideoTrack disabled />);
     expect(mockTrack.setEnabled).toHaveBeenCalledTimes(1);
     expect(mockTrack.setEnabled).toHaveBeenCalledWith(false);
-    vi.resetAllMocks();
+    vi.clearAllMocks();
   });
 
   test("sets muted on video track", () => {
@@ -45,7 +45,7 @@ describe("LocalVideoTrack component", () => {
     render(<LocalVideoTrack muted />);
     expect(mockTrack.setMuted).toHaveBeenCalledTimes(1);
     expect(mockTrack.setMuted).toHaveBeenCalledWith(true);
-    vi.resetAllMocks();
+    vi.clearAllMocks();
   });
 });
 

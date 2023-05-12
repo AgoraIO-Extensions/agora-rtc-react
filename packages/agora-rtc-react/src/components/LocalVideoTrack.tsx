@@ -51,13 +51,13 @@ export function LocalVideoTrack({
 
   useEffect(() => {
     if (track && disabled != null) {
-      track.setEnabled(!disabled);
+      track.setEnabled(!disabled).catch(console.warn);
     }
   }, [disabled, track]);
 
   useEffect(() => {
     if (track && muted != null) {
-      track.setMuted(muted);
+      track.setMuted(muted).catch(console.warn);
     }
   }, [muted, track]);
 
