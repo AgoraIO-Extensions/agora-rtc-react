@@ -54,7 +54,7 @@ export class FakeRemoteVideoTrack extends FakeRemoteTrack {
 
     if (this._videoEl) {
       this.isPlaying = true;
-      this._videoEl.play();
+      this._videoEl.play().catch(console.log);
     }
   }
 
