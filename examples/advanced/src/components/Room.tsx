@@ -1,19 +1,16 @@
-import type { ICameraVideoTrack, ILocalTrack, IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
-
 import {
   LocalMicrophoneAndCameraUser,
-  useAsyncEffect,
   useCurrentUID,
   useIsConnected,
+  useLocalAudioTrack,
+  useLocalVideoTrack,
   usePublish,
   usePublishedRemoteUsers,
-  useRTCClient,
   useRemoteUsers,
 } from "agora-rtc-react";
 
-import AgoraRTC from "agora-rtc-sdk-ng";
 import type { ReactNode } from "react";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Label, AutoLayout, UsersInfo } from "./index";
 import { fakeAvatar, fakeName } from "../utils";
 
@@ -32,7 +29,6 @@ export function Room({
   renderLocalUser,
   renderRemoteUsers,
 }: RoomProps) {
-  const client = useRTCClient();
   const isConnected = useIsConnected();
 
   const uid = useCurrentUID() || 0;
@@ -44,30 +40,9 @@ export function Room({
 
   const selfPublished = micOn || cameraOn;
 
-  const [trackList, setTrackList] = useState<ILocalTrack[]>([]);
-
-  const [audioTrack, setAudioTrack] = useState<IMicrophoneAudioTrack | null>(null);
-  useAsyncEffect(async () => {
-    if (isConnected && micOn && !audioTrack) {
-      const track = await AgoraRTC.createMicrophoneAudioTrack({ ANS: true, AEC: true });
-      // await client.publish(track);
-      setTrackList([...trackList, track]);
-      setAudioTrack(track);
-    }
-  }, [isConnected, micOn, audioTrack, client]);
-
-  const [videoTrack, setVideoTrack] = useState<ICameraVideoTrack | null>(null);
-  useAsyncEffect(async () => {
-    if (isConnected && cameraOn && !videoTrack) {
-      const track = await AgoraRTC.createCameraVideoTrack();
-      // await client.publish(track);
-      setTrackList([...trackList, track]);
-
-      setVideoTrack(track);
-    }
-  }, [isConnected, cameraOn, videoTrack, client]);
-
-  usePublish(trackList);
+  const audioTrack = useLocalAudioTrack(micOn);
+  const videoTrack = useLocalVideoTrack(cameraOn);
+  usePublish([audioTrack, videoTrack]);
   return (
     <>
       {renderAction ? renderAction() : undefined}

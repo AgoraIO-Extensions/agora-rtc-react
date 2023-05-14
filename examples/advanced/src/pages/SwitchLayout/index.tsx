@@ -2,7 +2,6 @@ import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import "./index.scss";
 import {
   RemoteVideoPlayer,
-  useIsConnected,
   useJoin,
   useRemoteAudioTracks,
   useRemoteUsers,
@@ -16,7 +15,6 @@ import { appConfig, fakeAvatar, fakeName } from "../../utils";
 const { Title, Paragraph, Text } = Typography;
 
 export const SwitchLayout = () => {
-  const isConnected = useIsConnected();
   const [calling, setCalling] = useState(false);
 
   useJoin(
@@ -42,10 +40,6 @@ export const SwitchLayout = () => {
   const audioTracks = useRemoteAudioTracks(remoteUsers);
 
   audioTracks.map(track => track.play());
-  if (isConnected) {
-    console.log("videoTracks:", videoTracks);
-    console.log("audioTracks:", audioTracks);
-  }
 
   const renderAction = () => {
     return (
