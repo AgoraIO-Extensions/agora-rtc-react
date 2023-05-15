@@ -16,18 +16,24 @@ export interface Room {
 interface AppState {
   localTracks?: [ILocalAudioTrack, ILocalVideoTrack];
   hostRoom?: Room | null;
-  rooms: Room[];
+  rooms?: Room[];
+  getRooms: () => void;
   selectChannel: (channel?: string | null) => Promise<void>;
   dispose: () => void;
 }
 
 export const useAppStore = create<AppState>((set, get) => {
   return {
-    rooms: tokens.map(({ token, channel }) => {
-      const client = AgoraRTC.createClient({ mode: "live", codec: "vp8" });
-      client.join(appId, channel, token ? token : null, null);
-      return { token, channel, client };
-    }),
+    getRooms: () => {
+      let { rooms } = get();
+
+      rooms = tokens.map(({ token, channel }) => {
+        const client = AgoraRTC.createClient({ mode: "live", codec: "vp8" });
+        client.join(appId, channel, token ? token : null, null);
+        return { channel, token, client };
+      });
+      set({ rooms });
+    },
     selectChannel: async (channel?: string | null) => {
       let { hostRoom, localTracks } = get();
       const { rooms } = get();
@@ -53,7 +59,7 @@ export const useAppStore = create<AppState>((set, get) => {
         }
         await hostRoom.client.setClientRole("audience");
       }
-      hostRoom = rooms.find(room => room.client.channelName === channel);
+      hostRoom = rooms?.find(room => room.client.channelName === channel);
       if (hostRoom) {
         await hostRoom.client.setClientRole("host");
         if (!localTracks) {
@@ -67,8 +73,10 @@ export const useAppStore = create<AppState>((set, get) => {
     dispose: () => {
       const { rooms, hostRoom } = get();
       hostRoom?.client.leave();
-      for (const room of rooms) {
-        room.client.leave();
+      if (rooms) {
+        for (const room of rooms) {
+          room.client.leave();
+        }
       }
     },
   };

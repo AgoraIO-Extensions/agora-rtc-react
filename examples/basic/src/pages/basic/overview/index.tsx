@@ -4,14 +4,11 @@ import {
   useRemoteUsers,
   useRemoteVideoTracks,
 } from "agora-rtc-react";
-import AgoraRTC from "agora-rtc-sdk-ng";
 import { useState } from "react";
 
 import { Container, MediaControl, Room } from "../../../components";
 import { RenderRemoteUsers } from "../../../components/RemoteUsers";
 import { appConfig } from "../../../utils";
-
-AgoraRTC.setLogLevel(/* warning */ 2);
 
 export const Overview = () => {
   const [calling, setCalling] = useState(false);

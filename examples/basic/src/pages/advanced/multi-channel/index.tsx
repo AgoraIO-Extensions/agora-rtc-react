@@ -7,7 +7,8 @@ import {
   usePublishedRemoteUsers,
   useRTCClient,
 } from "agora-rtc-react";
-import { memo, useMemo } from "react";
+import { Button, Typography } from "antd";
+import { memo, useEffect, useMemo, useState } from "react";
 import type { OptionProps } from "react-select";
 import Select from "react-select";
 
@@ -16,6 +17,7 @@ import { fakeName } from "../../../utils";
 
 import type { Room } from "./store";
 import { useAppStore } from "./store";
+const { Title, Paragraph } = Typography;
 
 import "./index.scss";
 
@@ -69,24 +71,44 @@ const CustomOption = ({
 };
 
 export const MultiChannel = () => {
+  const getRooms = useAppStore(state => state.getRooms);
+  const [isReady, setIsReady] = useState(false);
+  useEffect(() => {
+    getRooms();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const rooms = useAppStore(state => state.rooms);
   const selectChannel = useAppStore(state => state.selectChannel);
   const options = useMemo(
-    () => rooms.map(room => ({ label: room.channel.replace(/[^0-9]*/, "Room"), value: room })),
+    () => rooms?.map(room => ({ label: room.channel.replace(/[^0-9]*/, "Room"), value: room })),
     [rooms],
   );
 
   return (
     <Container>
-      <div className="max-w-lg p-10">
-        <Select
-          components={{ Option: CustomOption }}
-          isMulti={false}
-          menuIsOpen
-          onChange={data => selectChannel(data?.value?.channel)}
-          options={options}
-        />
-      </div>
+      {isReady ? (
+        <div className="max-w-lg p-10">
+          <Select
+            components={{ Option: CustomOption }}
+            isMulti={false}
+            menuIsOpen
+            onChange={data => selectChannel(data?.value?.channel)}
+            options={options}
+          />
+        </div>
+      ) : (
+        <div className="h-screen p-3">
+          <Title>multi-channel</Title>
+          <Paragraph>
+            This is multi-channel example. By create multi Agora Client. You can join multi-channel
+          </Paragraph>
+          <div className="text-xl">
+            <Button onClick={() => setIsReady(true)} type="primary">
+              {`show demo`}
+            </Button>
+          </div>
+        </div>
+      )}
     </Container>
   );
 };
