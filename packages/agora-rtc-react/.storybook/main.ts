@@ -3,8 +3,8 @@ const { mergeConfig } = require("vite");
 module.exports = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
-    "@storybook/addon-links",
     "@storybook/addon-essentials",
+    "@storybook/addon-links",
     "@storybook/addon-interactions",
   ],
   framework: {
@@ -13,6 +13,7 @@ module.exports = {
   },
   docs: {
     autodocs: "tag",
+    defaultName: "Docs", // doc name
   },
   core: {
     disableTelemetry: true,
