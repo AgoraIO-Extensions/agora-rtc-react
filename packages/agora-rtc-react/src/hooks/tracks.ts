@@ -415,15 +415,17 @@ export function usePublish(
   const isConnected = useIsConnected(client);
   //maintain an internal ref to track published
   const pubTracks = useRef<(ILocalTrack | null)[]>([]);
+  tracks = tracks.filter(track => track !== null && track !== undefined);
+
   useAsyncEffect(async () => {
-    if (!resolvedClient) {
+    if (!resolvedClient || !isConnected || !readyToPublish) {
       return;
     }
     const baseCheck = (_track: ILocalTrack): boolean => {
       return (
         // need wait web sdk update
-        // !(resolvedClient["mode"] === "live" && resolvedClient["role"] === "audience") &&
-        isConnected
+        // !(resolvedClient["mode"] === "live" && resolvedClient["role"] === "audience")
+        true
       );
     };
     const isPublished = (track: ILocalTrack): boolean => {
@@ -434,29 +436,28 @@ export function usePublish(
     const canPublish = (track: ILocalTrack): boolean => {
       return baseCheck(track) && track.enabled && readyToPublish && !isPublished(track);
     };
-    const updatePubTracks = async () => {
-      let isSame = true;
-      const newTracks: ILocalTrack[] = [];
+    let isSame = true;
+    const newTracks: ILocalTrack[] = [];
 
-      for (let i = 0; i < tracks.length; i++) {
-        const track = tracks[i];
-        if (track) {
-          if (canPublish(track)) {
-            try {
-              await resolvedClient.publish(track);
-            } catch (error) {
-              console.error(error);
-            }
-          }
-          newTracks.push(track);
-          if (isSame) {
-            isSame = i < tracks.length && track.getTrackId() === pubTracks.current[i]?.getTrackId();
+    for (let i = 0; i < tracks.length; i++) {
+      const track = tracks[i];
+      if (track) {
+        if (canPublish(track)) {
+          try {
+            await resolvedClient.publish(track);
+          } catch (error) {
+            console.error(error);
           }
         }
+        newTracks.push(track);
+        if (isSame) {
+          isSame = i < tracks.length && track.getTrackId() === pubTracks.current[i]?.getTrackId();
+        }
       }
-      isSame = isSame && newTracks.length === tracks.length;
-      pubTracks.current = isSame ? tracks : newTracks;
-    };
-    await updatePubTracks();
+    }
+    isSame = isSame && newTracks.length === tracks.length;
+    pubTracks.current = isSame ? tracks : newTracks;
+
+    // published tracks will be unpublished on unmount by useJoin
   }, [isConnected, readyToPublish, resolvedClient, tracks]);
 }

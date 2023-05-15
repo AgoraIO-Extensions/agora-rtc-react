@@ -42,7 +42,7 @@ export const UsePublish = () => {
   const [cameraOn, setCamera] = useState(false);
   const audioTrack = useLocalAudioTrack(micOn);
   const videoTrack = useLocalVideoTrack(cameraOn);
-  usePublish([audioTrack, videoTrack]);
+  usePublish([audioTrack, videoTrack], calling);
 
   //remote
   const remoteUsers = useRemoteUsers();
@@ -60,7 +60,7 @@ export const UsePublish = () => {
               key={track.getUserId()}
               track={track}
             />
-            <Label>{`Layout1 ${fakeName(track.getUserId())}{${track.getUserId()}}`}</Label>
+            <Label>{`${fakeName(track.getUserId())}{${track.getUserId()}}`}</Label>
           </AutoLayout.Item>
         ))}
       </>
