@@ -1,9 +1,9 @@
-import type { CameraVideoTrackProps } from "./CameraVideoTrack";
-import type { StoryObj, Meta } from "@storybook/react";
-
-import { CameraVideoTrack } from "./CameraVideoTrack";
+import type { Meta, StoryObj } from "@storybook/react";
 import { FakeCameraVideoTrack } from "fake-agora-rtc";
 import { useState } from "react";
+
+import type { CameraVideoTrackProps } from "./CameraVideoTrack";
+import { CameraVideoTrack } from "./CameraVideoTrack";
 
 const meta: Meta<CameraVideoTrackProps> = {
   title: "Track/CameraVideoTrack",

@@ -1,10 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import type { LocalMicrophoneAndCameraUserProps } from "./LocalMicrophoneAndCameraUser";
-
 import { action } from "@storybook/addon-actions";
-import { FakeRTCClient, FakeCameraVideoTrack, FakeMicrophoneAudioTrack } from "fake-agora-rtc";
+import type { Meta, StoryObj } from "@storybook/react";
+import { FakeCameraVideoTrack, FakeMicrophoneAudioTrack, FakeRTCClient } from "fake-agora-rtc";
 import { useEffect, useMemo, useState } from "react";
+
 import { AgoraRTCProvider } from "../hooks";
+
+import type { LocalMicrophoneAndCameraUserProps } from "./LocalMicrophoneAndCameraUser";
 import { LocalUser } from "./LocalUser";
 
 const meta: Meta<LocalMicrophoneAndCameraUserProps> = {

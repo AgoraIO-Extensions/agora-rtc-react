@@ -1,4 +1,4 @@
-import { SVGMicrophone, SVGMicrophoneMute, SVGCamera, SVGCameraMute } from "agora-rtc-react-ui";
+import { SVGCamera, SVGCameraMute, SVGMicrophone, SVGMicrophoneMute } from "agora-rtc-react-ui";
 import clsx from "clsx";
 
 interface MediaControlProps {

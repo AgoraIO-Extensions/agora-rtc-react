@@ -9,10 +9,10 @@ import type {
   IRemoteVideoTrack,
   UID,
 } from "agora-rtc-sdk-ng";
-
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { makeAutoObservable } from "mobx";
 import { SideEffectManager } from "side-effect-manager";
+
 import { appId, channel, token } from "../constants";
 
 export const ShareScreenUID: UID = 10;

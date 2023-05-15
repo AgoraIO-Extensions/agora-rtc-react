@@ -1,6 +1,6 @@
 import type { IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
-import type { FakeLocalAudioTrackProps } from "./local-audio-track";
 
+import type { FakeLocalAudioTrackProps } from "./local-audio-track";
 import { FakeLocalAudioTrack } from "./local-audio-track";
 
 export interface FakeMicrophoneAudioTrackProps extends FakeLocalAudioTrackProps {}

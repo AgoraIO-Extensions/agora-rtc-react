@@ -1,23 +1,27 @@
-import SwitchLayout from "./SwitchLayout";
-import UseJoin from "./UseJoin";
-import UseJoinAfterAction from "./UseJoinAfterAction";
-import UsePublish from "./UsePublish";
-
+import MultiChannel from "./multi-channel";
+import SwitchLayout from "./switchLayout";
+import UseJoin from "./useJoin";
+import UseJoinAfterAction from "./useJoinAfterAction";
+import UsePublish from "./usePublish";
 const Pages = [
   {
-    label: "SwitchLayout",
+    label: "switch-layout",
     component: SwitchLayout,
   },
   {
-    label: "UseJoin",
+    label: "multi-channel",
+    component: MultiChannel,
+  },
+  {
+    label: "useJoin",
     component: UseJoin,
   },
   {
-    label: "UseJoinAfterAction",
+    label: "useJoinAfterAction",
     component: UseJoinAfterAction,
   },
   {
-    label: "UsePublish",
+    label: "usePublish",
     component: UsePublish,
   },
 ];

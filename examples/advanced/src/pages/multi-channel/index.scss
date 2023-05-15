@@ -1,3 +1,22 @@
+.room-selector-item {
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 0 10px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: #6b72801a;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+    background-color: #6b728005;
+  }
+}
+
 .user {
   position: relative;
   width: 54px;

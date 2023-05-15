@@ -1,4 +1,3 @@
-import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import {
   RemoteVideoPlayer,
   useJoin,
@@ -6,6 +5,7 @@ import {
   useRemoteUsers,
   useRemoteVideoTracks,
 } from "agora-rtc-react";
+import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import { useState } from "react";
 
 import { AutoLayout, Container, Label, MediaControl, Room } from "../../components";

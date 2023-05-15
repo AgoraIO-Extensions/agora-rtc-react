@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import type { RemoteVideoPlayerProps } from "./RemoteVideoPlayer";
-
 import { FakeRTCClient, FakeRemoteVideoTrack } from "fake-agora-rtc";
 import { useState } from "react";
+
 import { AgoraRTCProvider } from "../hooks/context";
+
+import type { RemoteVideoPlayerProps } from "./RemoteVideoPlayer";
 import { RemoteVideoPlayer } from "./RemoteVideoPlayer";
 
 const meta: Meta<RemoteVideoPlayerProps> = {

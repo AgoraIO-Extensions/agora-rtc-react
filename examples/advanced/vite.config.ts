@@ -1,8 +1,8 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import uno from "unocss/vite";
-import presetUno from "unocss/preset-uno";
 import presetIcons from "unocss/preset-icons";
+import presetUno from "unocss/preset-uno";
+import uno from "unocss/vite";
+import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({

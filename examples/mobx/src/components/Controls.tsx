@@ -1,8 +1,8 @@
-import type { MyLocalUser } from "../stores/local-user.store";
-
-import { observer } from "mobx-react-lite";
 import { clsx } from "clsx";
+import { observer } from "mobx-react-lite";
+
 import { appStore } from "../stores/app.store";
+import type { MyLocalUser } from "../stores/local-user.store";
 
 interface ControlsProps {
   localUser: MyLocalUser;

@@ -8,11 +8,12 @@ import {
   usePublishedRemoteUsers,
   useRemoteUsers,
 } from "agora-rtc-react";
-
 import type { ReactNode } from "react";
 import { useMemo } from "react";
-import { Label, AutoLayout, UsersInfo } from "./index";
+
 import { fakeAvatar, fakeName } from "../utils";
+
+import { AutoLayout, Label, UsersInfo } from "./index";
 
 interface RoomProps {
   renderAction?: () => ReactNode;

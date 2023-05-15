@@ -1,6 +1,6 @@
 import type { ICameraVideoTrack } from "agora-rtc-sdk-ng";
-import type { FakeLocalVideoTrackProps } from "./local-video-track";
 
+import type { FakeLocalVideoTrackProps } from "./local-video-track";
 import { FakeLocalVideoTrack } from "./local-video-track";
 
 export interface FakeCameraVideoTrackProps extends FakeLocalVideoTrackProps {}

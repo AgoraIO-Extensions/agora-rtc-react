@@ -1,4 +1,5 @@
 import { observer } from "mobx-react-lite";
+
 import { appStore } from "../stores/app.store";
 
 export const Users = observer(function Users() {

@@ -1,9 +1,10 @@
 import type { IRemoteVideoTrack, VideoPlayerConfig } from "agora-rtc-sdk-ng";
-import type { FakeRemoteTrackProps } from "./remote-track";
 
 import ipadMp4 from "../../videos/ipad-2988.mp4";
-import { FakeRemoteTrack } from "./remote-track";
 import { hideProperties } from "../utils";
+
+import type { FakeRemoteTrackProps } from "./remote-track";
+import { FakeRemoteTrack } from "./remote-track";
 
 export interface FakeRemoteVideoTrackProps extends Omit<FakeRemoteTrackProps, "trackMediaType"> {
   videoURI?: string;

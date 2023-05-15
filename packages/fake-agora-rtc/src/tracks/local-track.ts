@@ -1,9 +1,10 @@
-import type { ILocalTrack, LocalAudioTrackStats, LocalVideoTrackStats } from "agora-rtc-sdk-ng";
-import type { FakeTrackProps } from "./track";
-
 import { randProductDescription } from "@ngneat/falso";
-import { FakeTrack } from "./track";
+import type { ILocalTrack, LocalAudioTrackStats, LocalVideoTrackStats } from "agora-rtc-sdk-ng";
+
 import { hideProperties } from "../utils";
+
+import type { FakeTrackProps } from "./track";
+import { FakeTrack } from "./track";
 
 export interface FakeLocalTrackProps extends FakeTrackProps {
   /** track label */

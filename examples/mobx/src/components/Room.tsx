@@ -1,7 +1,9 @@
 import { RemoteUser } from "agora-rtc-react";
 import { MicControl } from "agora-rtc-react-ui";
 import { observer } from "mobx-react-lite";
+
 import { appStore } from "../stores/app.store";
+
 import { Controls } from "./Controls";
 import { LocalUser } from "./LocalUser";
 import { ShareScreenTracks } from "./ShareScreenTracks";

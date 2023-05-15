@@ -5,6 +5,7 @@ import type {
   UID,
 } from "agora-rtc-sdk-ng";
 import { makeAutoObservable } from "mobx";
+
 import { fakeAvatar, fakeName } from "../utils";
 
 /**

@@ -1,4 +1,3 @@
-import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import {
   RemoteVideoPlayer,
   useJoin,
@@ -6,11 +5,13 @@ import {
   useRemoteUsers,
   useRemoteVideoTracks,
 } from "agora-rtc-react";
+import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
+import { Typography } from "antd";
 import { useState } from "react";
 
 import { AutoLayout, Container, Label, MediaControl, Room } from "../../components";
 import { fakeAvatar, fakeFetch, fakeName } from "../../utils";
-import { Typography } from "antd";
+
 const { Title, Paragraph, Text } = Typography;
 
 export const UseJoinAfterAction = () => {

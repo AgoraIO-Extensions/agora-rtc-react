@@ -10,7 +10,7 @@
   "env": {
     "browser": true
   },
-  "plugins": ["@typescript-eslint", "react-hooks", "prettier"],
+  "plugins": ["@typescript-eslint", "react-hooks", "prettier", "import"],
   "root": true,
   "settings": {
     "react": {
@@ -50,6 +50,23 @@
       {
         "types": { "{}": false },
         "extendDefaults": true
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "orderImportKind": "asc"
+        }
+      }
+    ],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false
       }
     ]
   }

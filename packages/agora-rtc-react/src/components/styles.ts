@@ -1,5 +1,4 @@
 import type { CSSProperties } from "react";
-
 import { useMemo } from "react";
 
 export const VideoTrackWrapperStyle: CSSProperties = {

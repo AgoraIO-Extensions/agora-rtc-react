@@ -1,12 +1,11 @@
 import "./App.css";
 
-import AgoraRTC from "agora-rtc-sdk-ng";
-
 import { AgoraRTCProvider } from "agora-rtc-react";
 import { SVGCamera, SVGCameraMute, SVGMicrophone, SVGMicrophoneMute } from "agora-rtc-react-ui";
-
+import AgoraRTC from "agora-rtc-sdk-ng";
 import clsx from "clsx";
 import { useState } from "react";
+
 import { Container } from "./Container";
 import { Room } from "./Room";
 

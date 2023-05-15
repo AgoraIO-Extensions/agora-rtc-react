@@ -1,6 +1,5 @@
 import type { SVGProps } from "react";
-
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const vHeight = 14;
 const vWidth = 8;

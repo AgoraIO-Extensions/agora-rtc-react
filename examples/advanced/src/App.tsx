@@ -1,10 +1,11 @@
-import { useNavigate, Route, Routes } from "react-router-dom";
 import "antd/dist/reset.css";
 
 import { Layout, Menu } from "antd";
 import React, { useState } from "react";
-import { Pages } from "./pages";
+import { Route, Routes, useNavigate } from "react-router-dom";
+
 import { Client } from "./components";
+import { Pages } from "./pages";
 import Setting from "./pages/Setting";
 
 const { Content, Sider } = Layout;

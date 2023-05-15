@@ -1,10 +1,11 @@
 import type { IAgoraRTCClient, IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import type { HTMLProps, ReactNode } from "react";
 
-import { RemoteVideoTrack } from "./RemoteVideoTrack";
-import { FloatBoxStyle, useMergedStyle, VideoTrackWrapperStyle } from "./styles";
-import { UserCover } from "./UserCover";
 import { useRTCClient } from "../hooks";
+
+import { RemoteVideoTrack } from "./RemoteVideoTrack";
+import { UserCover } from "./UserCover";
+import { FloatBoxStyle, VideoTrackWrapperStyle, useMergedStyle } from "./styles";
 
 export interface RemoteVideoPlayerProps extends HTMLProps<HTMLDivElement> {
   /**

@@ -1,5 +1,3 @@
-import type { ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
-
 import {
   LocalMicrophoneAndCameraUser,
   RemoteUser,
@@ -11,10 +9,11 @@ import {
   useRTCClient,
   useRemoteUsers,
 } from "agora-rtc-react";
-
-import CryptoJS from "crypto-js";
+import type { ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
 import AgoraRTC from "agora-rtc-sdk-ng";
+import CryptoJS from "crypto-js";
 import { useMemo, useState } from "react";
+
 import { AutoLayout } from "./AutoLayout";
 import { Label } from "./Label";
 import { UsersInfo } from "./UsersInfo";

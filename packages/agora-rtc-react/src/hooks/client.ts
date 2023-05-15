@@ -1,8 +1,9 @@
 import type { ConnectionState, IAgoraRTCClient, UID } from "agora-rtc-sdk-ng";
-
 import { useEffect, useState } from "react";
+
 import { listen } from "../listen";
 import { joinDisposers, timeout } from "../utils";
+
 import { useRTCClient } from "./context";
 import { useAsyncEffect } from "./tools";
 
@@ -186,6 +187,13 @@ export interface joinOptions {
 
 export type FetchArgs = (() => Promise<joinOptions>) | joinOptions;
 
+/**
+ * a hook to join rtc channel
+ * unmount will leave channel and close all tracks
+ * @param fetchArgs
+ * @param ready
+ * @param client
+ */
 export function useJoin(fetchArgs: FetchArgs, ready = true, client?: IAgoraRTCClient | null): void {
   const resolvedClient = useRTCClient(client);
 

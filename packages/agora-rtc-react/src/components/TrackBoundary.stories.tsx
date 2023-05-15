@@ -1,12 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import type { IAgoraRTCRemoteUser, ITrack } from "agora-rtc-sdk-ng";
-
 import { randUuid } from "@ngneat/falso";
 import { action } from "@storybook/addon-actions";
+import type { Meta, StoryObj } from "@storybook/react";
+import type { IAgoraRTCRemoteUser, ITrack } from "agora-rtc-sdk-ng";
 import { FakeRTCClient } from "fake-agora-rtc";
 import { useState } from "react";
-import { RemoteUser } from ".";
+
 import { AgoraRTCProvider, TrackBoundary } from "../hooks";
+
+import { RemoteUser } from ".";
 
 interface Controls {
   direction: "row" | "column";

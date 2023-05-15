@@ -1,10 +1,11 @@
 // https://docs.agora.io/en/video-calling/develop/integrate-token-generation?platform=web
 
+import fs from "node:fs";
+import path from "node:path";
+
 import AgoraToken from "agora-token";
 import dotenv from "dotenv";
 import minimist from "minimist";
-import path from "node:path";
-import fs from "node:fs";
 
 const { RtcRole, RtcTokenBuilder } = AgoraToken;
 const argv = minimist(process.argv.slice(2));

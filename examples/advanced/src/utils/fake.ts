@@ -1,6 +1,6 @@
+import { randFirstName, randNumber, seed } from "@ngneat/falso";
 import type { UID } from "agora-rtc-sdk-ng";
 
-import { randNumber, randFirstName, seed } from "@ngneat/falso";
 import { appConfig } from "./const";
 
 export const fakeName = (uid: UID): string => {

@@ -1,9 +1,10 @@
 import type { ILocalVideoTrack, VideoPlayerConfig } from "agora-rtc-sdk-ng";
-import type { FakeLocalTrackProps } from "./local-track";
 
 import ipadMp4 from "../../videos/ipad-2988.mp4";
-import { FakeLocalTrack } from "./local-track";
 import { hideProperties } from "../utils";
+
+import type { FakeLocalTrackProps } from "./local-track";
+import { FakeLocalTrack } from "./local-track";
 
 export interface FakeLocalVideoTrackProps extends Omit<FakeLocalTrackProps, "trackMediaType"> {
   videoURI?: string;

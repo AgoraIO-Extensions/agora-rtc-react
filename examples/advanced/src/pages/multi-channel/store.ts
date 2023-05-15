@@ -1,20 +1,11 @@
-import { create } from "zustand";
-import CryptoJS from "crypto-js";
 import type { IAgoraRTCClient, ILocalAudioTrack, ILocalVideoTrack } from "agora-rtc-sdk-ng";
 import AgoraRTC from "agora-rtc-sdk-ng";
-import { getAgoraTokens } from "../utils";
+import { create } from "zustand";
 
-let id = import.meta.env.AGORA_APPID;
-if (import.meta.env.AGORA_AES_SALT) {
-  // only for github-pages demo
-  const bytes = CryptoJS.AES.decrypt(import.meta.env.AGORA_APPID, import.meta.env.AGORA_AES_SALT);
-  id = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-}
+import { appConfig, getAgoraTokens } from "../../utils";
 
-const appId = id;
+const appId = appConfig.appId;
 const tokens = getAgoraTokens();
-
-AgoraRTC.setLogLevel(/* warning */ 2);
 
 export interface Room {
   channel: string;
