@@ -10,8 +10,8 @@ import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import { Button, Typography } from "antd";
 import { useState } from "react";
 
-import { AutoLayout, Container, Label, MediaControl, Room } from "../../components";
-import { appConfig, fakeAvatar, fakeName } from "../../utils";
+import { AutoLayout, Container, Label, MediaControl, Room } from "../../../components";
+import { appConfig, fakeAvatar, fakeName } from "../../../utils";
 const { Title, Paragraph, Text } = Typography;
 
 export const SwitchLayout = () => {

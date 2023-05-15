@@ -11,8 +11,8 @@ import { memo, useMemo } from "react";
 import type { OptionProps } from "react-select";
 import Select from "react-select";
 
-import { Container } from "../../components";
-import { fakeName } from "../../utils";
+import { Container } from "../../../components";
+import { fakeName } from "../../../utils";
 
 import type { Room } from "./store";
 import { useAppStore } from "./store";

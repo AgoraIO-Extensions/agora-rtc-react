@@ -15,8 +15,8 @@ import {
 import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import { useMemo, useState } from "react";
 
-import { AutoLayout, Container, Label, MediaControl, UsersInfo } from "../../components";
-import { appConfig, fakeAvatar, fakeName } from "../../utils";
+import { AutoLayout, Container, Label, MediaControl, UsersInfo } from "../../../components";
+import { appConfig, fakeAvatar, fakeName } from "../../../utils";
 
 export const UsePublish = () => {
   const [calling, setCalling] = useState(false);

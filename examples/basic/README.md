@@ -1,8 +1,8 @@
-# Agora RTC React advanced Example
+# Agora RTC React basic Example
 
 - Simple example without external state management.
 
-<https://agoraio-extensions.github.io/agora-rtc-react/advanced/>
+<https://agoraio-extensions.github.io/agora-rtc-react/basic/>
 
 ## Develop
 

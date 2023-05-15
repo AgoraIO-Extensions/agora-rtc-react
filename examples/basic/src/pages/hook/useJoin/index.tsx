@@ -9,28 +9,30 @@ import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import { Typography } from "antd";
 import { useState } from "react";
 
-import { AutoLayout, Container, Label, MediaControl, Room } from "../../components";
-import { fakeAvatar, fakeFetch, fakeName } from "../../utils";
+import { AutoLayout, Container, Label, MediaControl, Room } from "../../../components";
+import { appConfig, fakeAvatar, fakeName } from "../../../utils";
 
 const { Title, Paragraph, Text } = Typography;
 
-export const UseJoinAfterAction = () => {
-  const [isReady, setIsReady] = useState(false);
+export const UseJoin = () => {
+  const [calling, setCalling] = useState(false);
 
-  useJoin(async () => {
-    //you can do some actions like fetching token before calling join.
-    const getData = await fakeFetch("/get-token");
-    return JSON.parse(getData);
-  }, isReady);
+  //local
+  useJoin(
+    {
+      appid: appConfig.appId,
+      channel: appConfig.channel,
+      token: appConfig.token,
+    },
+    calling,
+  );
   const [micOn, setMic] = useState(false);
   const [cameraOn, setCamera] = useState(false);
 
+  // remote
   const remoteUsers = useRemoteUsers();
-
   const videoTracks = useRemoteVideoTracks(remoteUsers);
-
   const audioTracks = useRemoteAudioTracks(remoteUsers);
-
   audioTracks.map(track => track.play());
 
   const renderRemoteUsers = () => {
@@ -51,7 +53,7 @@ export const UseJoinAfterAction = () => {
   };
   return (
     <Container>
-      {isReady ? (
+      {calling ? (
         <Room cameraOn={cameraOn} micOn={micOn} renderRemoteUsers={renderRemoteUsers} />
       ) : (
         <div className="h-screen p-3">
@@ -63,11 +65,11 @@ export const UseJoinAfterAction = () => {
         </div>
       )}
       <MediaControl
-        calling={isReady}
+        calling={calling}
         cameraOn={cameraOn}
         micOn={micOn}
         setCalling={() => {
-          setIsReady(a => !a);
+          setCalling(a => !a);
         }}
         setCamera={() => {
           setCamera(a => !a);
@@ -80,4 +82,4 @@ export const UseJoinAfterAction = () => {
   );
 };
 
-export default UseJoinAfterAction;
+export default UseJoin;

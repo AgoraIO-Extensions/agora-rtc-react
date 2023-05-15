@@ -2,7 +2,7 @@ import type { IAgoraRTCClient, ILocalAudioTrack, ILocalVideoTrack } from "agora-
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { create } from "zustand";
 
-import { appConfig, getAgoraTokens } from "../../utils";
+import { appConfig, getAgoraTokens } from "../../../utils";
 
 const appId = appConfig.appId;
 const tokens = getAgoraTokens();

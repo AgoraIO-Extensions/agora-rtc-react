@@ -1,5 +1,5 @@
 {
-  "name": "example-track",
+  "name": "agora-rtc-react-example",
   "private": true,
   "type": "module",
   "main": "./main.tsx",
