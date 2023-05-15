@@ -1,11 +1,13 @@
-on: ["pull_request"]
-
 name: gitleaks
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
 
 jobs:
   scan:
-    name: Checkout
-    runs-on: macos-latest
+    name: gitleaks
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
