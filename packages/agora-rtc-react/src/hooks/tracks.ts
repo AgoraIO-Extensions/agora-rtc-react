@@ -357,10 +357,10 @@ export function useRemoteVideoTracks(
 }
 
 /**
- * a hook can create a local video track
+ * a hook can create a local camera track
  * unpublish track on unmount.
  */
-export function useLocalVideoTrack(
+export function useLocalCameraTrack(
   ready = true,
   client?: IAgoraRTCClient,
 ): ICameraVideoTrack | null {
@@ -370,13 +370,14 @@ export function useLocalVideoTrack(
   useAsyncEffect(async () => {
     let isUnmounted = false;
 
-    if (!isUnmounted) {
-      if (isConnected && ready && !track) {
-        setTrack(await AgoraRTC.createCameraVideoTrack());
+    if (isConnected && ready && !track) {
+      const result = await AgoraRTC.createCameraVideoTrack();
+      if (!isUnmounted) {
+        setTrack(result);
       }
-      if (!isConnected) {
-        setTrack(null);
-      }
+    }
+    if (!isConnected && !isUnmounted) {
+      setTrack(null);
     }
 
     return () => {
@@ -402,13 +403,14 @@ export function useLocalAudioTrack(
   useAsyncEffect(async () => {
     let isUnmounted = false;
 
-    if (!isUnmounted) {
-      if (isConnected && ready && !track) {
-        setTrack(await AgoraRTC.createMicrophoneAudioTrack(audioTrackConfig));
+    if (isConnected && ready && !track) {
+      const result = await AgoraRTC.createMicrophoneAudioTrack(audioTrackConfig);
+      if (!isUnmounted) {
+        setTrack(result);
       }
-      if (!isConnected) {
-        setTrack(null);
-      }
+    }
+    if (!isConnected && !isUnmounted) {
+      setTrack(null);
     }
 
     return () => {
@@ -431,12 +433,14 @@ export function usePublish(
   const isConnected = useIsConnected(client);
   //maintain an internal ref to track published
   const pubTracks = useRef<(ILocalTrack | null)[]>([]);
-  tracks = tracks.filter(track => track !== null && track !== undefined);
 
   useAsyncEffect(async () => {
     if (!resolvedClient || !isConnected || !readyToPublish) {
       return;
     }
+
+    const filterTracks = tracks.filter(track => track !== null && track !== undefined);
+
     const baseCheck = (_track: ILocalTrack): boolean => {
       return (
         // need wait web sdk update
@@ -453,8 +457,8 @@ export function usePublish(
       return baseCheck(track) && track.enabled && readyToPublish && !isPublished(track);
     };
 
-    for (let i = 0; i < tracks.length; i++) {
-      const track = tracks[i];
+    for (let i = 0; i < filterTracks.length; i++) {
+      const track = filterTracks[i];
       if (track) {
         if (canPublish(track)) {
           try {
@@ -465,7 +469,7 @@ export function usePublish(
         }
       }
     }
-    pubTracks.current = tracks;
+    pubTracks.current = filterTracks;
 
     // published tracks will be unpublished on unmount by useJoin
   }, [isConnected, readyToPublish, resolvedClient, tracks]);
