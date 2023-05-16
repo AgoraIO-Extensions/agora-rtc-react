@@ -368,12 +368,20 @@ export function useLocalVideoTrack(
   const [track, setTrack] = useState<ICameraVideoTrack | null>(null);
 
   useAsyncEffect(async () => {
-    if (isConnected && ready && !track) {
-      setTrack(await AgoraRTC.createCameraVideoTrack());
+    let isUnmounted = false;
+
+    if (!isUnmounted) {
+      if (isConnected && ready && !track) {
+        setTrack(await AgoraRTC.createCameraVideoTrack());
+      }
+      if (!isConnected) {
+        setTrack(null);
+      }
     }
-    if (!isConnected) {
-      setTrack(null);
-    }
+
+    return () => {
+      isUnmounted = true;
+    };
   }, [isConnected, ready]);
   return track;
 }
@@ -392,12 +400,20 @@ export function useLocalAudioTrack(
   const [track, setTrack] = useState<IMicrophoneAudioTrack | null>(null);
 
   useAsyncEffect(async () => {
-    if (isConnected && ready && !track) {
-      setTrack(await AgoraRTC.createMicrophoneAudioTrack(audioTrackConfig));
+    let isUnmounted = false;
+
+    if (!isUnmounted) {
+      if (isConnected && ready && !track) {
+        setTrack(await AgoraRTC.createMicrophoneAudioTrack(audioTrackConfig));
+      }
+      if (!isConnected) {
+        setTrack(null);
+      }
     }
-    if (!isConnected) {
-      setTrack(null);
-    }
+
+    return () => {
+      isUnmounted = true;
+    };
   }, [isConnected, ready]);
   return track;
 }
@@ -436,8 +452,6 @@ export function usePublish(
     const canPublish = (track: ILocalTrack): boolean => {
       return baseCheck(track) && track.enabled && readyToPublish && !isPublished(track);
     };
-    let isSame = true;
-    const newTracks: ILocalTrack[] = [];
 
     for (let i = 0; i < tracks.length; i++) {
       const track = tracks[i];
@@ -449,14 +463,9 @@ export function usePublish(
             console.error(error);
           }
         }
-        newTracks.push(track);
-        if (isSame) {
-          isSame = i < tracks.length && track.getTrackId() === pubTracks.current[i]?.getTrackId();
-        }
       }
     }
-    isSame = isSame && newTracks.length === tracks.length;
-    pubTracks.current = isSame ? tracks : newTracks;
+    pubTracks.current = tracks;
 
     // published tracks will be unpublished on unmount by useJoin
   }, [isConnected, readyToPublish, resolvedClient, tracks]);
