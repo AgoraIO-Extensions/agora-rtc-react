@@ -1,8 +1,8 @@
 import MultiChannel from "./advanced/multi-channel";
 import SwitchLayout from "./advanced/switch-layout";
 import Overview from "./basic/overview";
-import UsePublish from "./hook/UsePublish";
 import UseJoin from "./hook/useJoin";
+import UsePublish from "./hook/usePublish";
 
 const Pages = [
   {
