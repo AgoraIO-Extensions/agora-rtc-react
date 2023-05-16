@@ -403,8 +403,8 @@ export function useLocalAudioTrack(
 }
 
 /**
- * auto published local tracks
- * UnPublish track on unmount.
+ * publish tacks when readyToPublish is true
+ * unpublish on unmount.
  */
 export function usePublish(
   tracks: (ILocalTrack | null)[],
