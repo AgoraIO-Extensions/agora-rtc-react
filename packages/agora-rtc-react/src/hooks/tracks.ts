@@ -2,9 +2,15 @@ import type {
   IAgoraRTCClient,
   IAgoraRTCRemoteUser,
   ILocalAudioTrack,
+  ILocalTrack,
   IRemoteAudioTrack,
   IRemoteVideoTrack,
+  MicrophoneAudioTrackInitConfig,
+  IMicrophoneAudioTrack,
+  ICameraVideoTrack,
 } from "agora-rtc-sdk-ng";
+import AgoraRTC from "agora-rtc-sdk-ng";
+
 import type { AsyncTaskRunner } from "../utils";
 
 import { useEffect, useRef, useState } from "react";
@@ -12,7 +18,7 @@ import { createAsyncTaskRunner, interval, joinDisposers } from "../utils";
 import { listen } from "../listen";
 import { useRTCClient } from "./context";
 import { useIsConnected } from "./client";
-import { useAsyncEffect } from "./tools";
+import { useAsyncEffect, useIsUnmounted } from "./tools";
 
 interface massUserProps {
   user: IAgoraRTCRemoteUser;
@@ -348,4 +354,113 @@ export function useRemoteVideoTracks(
     ]);
   }, [isConnected, resolvedClient, users]);
   return tracks;
+}
+
+/**
+ * a hook can create a local video track, this track will only be created once until Component is destroyed.
+ * when you ready to create track, set ready to true.
+ * unpublish track on unmount.
+ */
+export function useLocalCameraTrack(
+  ready = true,
+  client?: IAgoraRTCClient,
+): ICameraVideoTrack | null {
+  const isConnected = useIsConnected(client);
+  const [track, setTrack] = useState<ICameraVideoTrack | null>(null);
+  const isUnmountRef = useIsUnmounted();
+
+  useAsyncEffect(async () => {
+    if (isConnected && ready && !track) {
+      const result = await AgoraRTC.createCameraVideoTrack();
+      if (!isUnmountRef.current) {
+        setTrack(result);
+      }
+    }
+    if (!isConnected && !isUnmountRef.current) {
+      setTrack(null);
+    }
+  }, [isConnected, ready]);
+  return track;
+}
+
+/**
+ * a hook can create a local audio track, this track will only be created once until Component is destroyed.
+ * when you ready to create track, set ready to true.
+ * close track on unmount.
+ */
+export function useLocalAudioTrack(
+  ready = true,
+  audioTrackConfig: MicrophoneAudioTrackInitConfig = { ANS: true, AEC: true },
+  client?: IAgoraRTCClient,
+): IMicrophoneAudioTrack | null {
+  const isConnected = useIsConnected(client);
+  const [track, setTrack] = useState<IMicrophoneAudioTrack | null>(null);
+  const isUnmountRef = useIsUnmounted();
+
+  useAsyncEffect(async () => {
+    if (isConnected && ready && !track) {
+      const result = await AgoraRTC.createMicrophoneAudioTrack(audioTrackConfig);
+      if (!isUnmountRef.current) {
+        setTrack(result);
+      }
+    }
+    if (!isConnected && !isUnmountRef.current) {
+      setTrack(null);
+    }
+  }, [isConnected, ready]);
+  return track;
+}
+
+/**
+ * publish tacks when readyToPublish is true
+ * unpublish on unmount.
+ */
+export function usePublish(
+  tracks: (ILocalTrack | null)[],
+  readyToPublish = true,
+  client?: IAgoraRTCClient,
+): void {
+  const resolvedClient = useRTCClient(client);
+  const isConnected = useIsConnected(client);
+  //maintain an internal ref to track published
+  const pubTracks = useRef<(ILocalTrack | null)[]>([]);
+
+  useAsyncEffect(async () => {
+    if (!resolvedClient || !isConnected || !readyToPublish) {
+      return;
+    }
+
+    const filterTracks = tracks.filter(Boolean);
+    const baseCheck = (_track: ILocalTrack): boolean => {
+      return (
+        // need wait web sdk update
+        // !(resolvedClient["mode"] === "live" && resolvedClient["role"] === "audience")
+        true
+      );
+    };
+    const isPublished = (track: ILocalTrack): boolean => {
+      return pubTracks.current.some(
+        pubTrack => pubTrack && pubTrack.getTrackId() === track.getTrackId(),
+      );
+    };
+    const canPublish = (track: ILocalTrack): boolean => {
+      return baseCheck(track) && track.enabled && readyToPublish && !isPublished(track);
+    };
+
+    for (let i = 0; i < filterTracks.length; i++) {
+      const track = filterTracks[i];
+      if (track) {
+        if (canPublish(track)) {
+          try {
+            await resolvedClient.publish(track);
+          } catch (error) {
+            console.error(error);
+          }
+        }
+      }
+    }
+    pubTracks.current = filterTracks;
+
+    // published tracks will be unpublished on unmount by useJoin
+  }, [isConnected, readyToPublish, resolvedClient, tracks]);
 }

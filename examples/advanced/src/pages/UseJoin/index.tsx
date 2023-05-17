@@ -47,7 +47,7 @@ export const UseJoin = () => {
   };
   return (
     <Container>
-      {<Room cameraOn={cameraOn} micOn={micOn} renderRemoteUsers={renderRemoteUsers} />}
+      <Room cameraOn={cameraOn} micOn={micOn} renderRemoteUsers={renderRemoteUsers} />
       <MediaControl
         cameraOn={cameraOn}
         micOn={micOn}
