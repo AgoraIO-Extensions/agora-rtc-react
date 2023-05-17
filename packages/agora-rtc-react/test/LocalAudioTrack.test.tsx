@@ -1,11 +1,12 @@
-import type { Mock } from "vitest";
-import { describe, test, vi, expect } from "vitest";
-import { render } from "@testing-library/react";
 import { composeStories } from "@storybook/react";
+import { render } from "@testing-library/react";
 import type { ILocalAudioTrack } from "agora-rtc-sdk-ng";
+import type { Mock } from "vitest";
+import { describe, expect, test, vi } from "vitest";
+
+import { LocalAudioTrack, useAutoPlayAudioTrack } from "../src/components";
 import * as stories from "../src/components/LocalAudioTrack.stories";
 const { Enabled } = composeStories(stories);
-import { LocalAudioTrack, useAutoPlayAudioTrack } from "../src/components";
 import { useAwaited } from "../src/hooks";
 
 vi.mock("../src/hooks", () => ({

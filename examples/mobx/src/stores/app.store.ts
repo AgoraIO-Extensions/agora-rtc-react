@@ -1,7 +1,7 @@
 import type { IAgoraRTCClient } from "agora-rtc-sdk-ng";
-
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { makeAutoObservable } from "mobx";
+
 import { ShareScreen } from "./share-screen.store";
 import { Users } from "./users.store";
 

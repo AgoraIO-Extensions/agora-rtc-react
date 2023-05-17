@@ -1,8 +1,9 @@
 import type { IRemoteAudioTrack } from "agora-rtc-sdk-ng";
 import type { ReactNode } from "react";
+import { useEffect } from "react";
+
 import type { Nullable } from "../utils";
 
-import { useEffect } from "react";
 import { useAutoPlayAudioTrack } from "./TrackBoundary";
 
 export interface RemoteAudioTrackProps {

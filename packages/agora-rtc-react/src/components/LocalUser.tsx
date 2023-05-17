@@ -1,11 +1,12 @@
 import type { ILocalAudioTrack, ILocalVideoTrack } from "agora-rtc-sdk-ng";
 import type { HTMLProps, ReactNode } from "react";
+
 import type { MaybePromiseOrNull } from "../utils";
 
-import { LocalVideoTrack } from "./LocalVideoTrack";
 import { LocalAudioTrack } from "./LocalAudioTrack";
+import { LocalVideoTrack } from "./LocalVideoTrack";
 import { UserCover } from "./UserCover";
-import { FloatBoxStyle, useMergedStyle, VideoTrackWrapperStyle } from "./styles";
+import { FloatBoxStyle, VideoTrackWrapperStyle, useMergedStyle } from "./styles";
 
 export interface LocalUserProps extends HTMLProps<HTMLDivElement> {
   /**

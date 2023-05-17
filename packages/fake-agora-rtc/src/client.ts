@@ -7,6 +7,7 @@ import type {
   IRemoteVideoTrack,
 } from "agora-rtc-sdk-ng";
 import { SideEffectManager } from "side-effect-manager";
+
 import { FakeAgoraEventEmitter } from "./eventemitter";
 import { FakeRemoteAudioTrack, FakeRemoteVideoTrack } from "./tracks";
 import { hideProperties } from "./utils";

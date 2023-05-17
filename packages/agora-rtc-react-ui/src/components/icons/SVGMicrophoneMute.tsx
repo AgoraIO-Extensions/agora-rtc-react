@@ -1,5 +1,4 @@
 import type { SVGProps } from "react";
-
 import { memo } from "react";
 
 export type SVGMicrophoneMuteProps = SVGProps<SVGSVGElement>;

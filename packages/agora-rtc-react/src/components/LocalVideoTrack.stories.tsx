@@ -1,9 +1,9 @@
-import type { LocalVideoTrackProps } from "./LocalVideoTrack";
-import type { StoryObj, Meta } from "@storybook/react";
-
-import { LocalVideoTrack } from "./LocalVideoTrack";
+import type { Meta, StoryObj } from "@storybook/react";
 import { FakeLocalVideoTrack } from "fake-agora-rtc";
 import { useState } from "react";
+
+import type { LocalVideoTrackProps } from "./LocalVideoTrack";
+import { LocalVideoTrack } from "./LocalVideoTrack";
 
 const meta: Meta<LocalVideoTrackProps> = {
   title: "Track/LocalVideoTrack",

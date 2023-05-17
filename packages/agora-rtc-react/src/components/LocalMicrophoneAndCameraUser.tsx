@@ -1,11 +1,12 @@
 import type { ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
 import type { HTMLProps, ReactNode } from "react";
+
 import type { MaybePromiseOrNull } from "../utils";
 
 import { CameraVideoTrack } from "./CameraVideoTrack";
 import { MicrophoneAudioTrack } from "./MicrophoneAudioTrack";
 import { UserCover } from "./UserCover";
-import { FloatBoxStyle, useMergedStyle, VideoTrackWrapperStyle } from "./styles";
+import { FloatBoxStyle, VideoTrackWrapperStyle, useMergedStyle } from "./styles";
 
 export interface LocalMicrophoneAndCameraUserProps extends HTMLProps<HTMLDivElement> {
   /**

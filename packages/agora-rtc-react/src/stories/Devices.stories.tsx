@@ -1,6 +1,6 @@
+import { randFood, randNumber, randUuid, seed } from "@ngneat/falso";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useEffect, useMemo, useState } from "react";
-import { randNumber, randFood, randUuid, seed } from "@ngneat/falso";
 
 const meta: Meta = {
   title: "Recipes/Devices",

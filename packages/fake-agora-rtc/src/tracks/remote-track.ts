@@ -1,14 +1,15 @@
+import { randUuid } from "@ngneat/falso";
 import type {
   IRemoteTrack,
   RemoteAudioTrackStats,
   RemoteVideoTrackStats,
   UID,
 } from "agora-rtc-sdk-ng";
-import type { FakeTrackProps } from "./track";
 
-import { randUuid } from "@ngneat/falso";
-import { FakeTrack } from "./track";
 import { hideProperties } from "../utils";
+
+import type { FakeTrackProps } from "./track";
+import { FakeTrack } from "./track";
 
 export interface FakeRemoteTrackProps extends FakeTrackProps {
   /** track label */

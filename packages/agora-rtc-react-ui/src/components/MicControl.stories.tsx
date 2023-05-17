@@ -1,9 +1,9 @@
-import type { MicControlProps } from "./MicControl";
-import type { StoryObj, Meta } from "@storybook/react";
-
-import { FakeLocalAudioTrack, FakeRemoteAudioTrack } from "fake-agora-rtc";
 import { randNumber } from "@ngneat/falso";
+import type { Meta, StoryObj } from "@storybook/react";
+import { FakeLocalAudioTrack, FakeRemoteAudioTrack } from "fake-agora-rtc";
 import { useEffect } from "react";
+
+import type { MicControlProps } from "./MicControl";
 import { MicControl } from "./MicControl";
 
 const meta: Meta<MicControlProps> = {

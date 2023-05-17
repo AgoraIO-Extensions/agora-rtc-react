@@ -1,9 +1,10 @@
 import type { ILocalAudioTrack } from "agora-rtc-sdk-ng";
-import type { FakeLocalTrackProps } from "./local-track";
 
 import keyboardMp3 from "../../videos/quick-mechanical-keyboard-14391.mp3";
-import { FakeLocalTrack } from "./local-track";
 import { hideProperties } from "../utils";
+
+import type { FakeLocalTrackProps } from "./local-track";
+import { FakeLocalTrack } from "./local-track";
 
 export interface FakeLocalAudioTrackProps extends Omit<FakeLocalTrackProps, "trackMediaType"> {
   audioURI?: string;

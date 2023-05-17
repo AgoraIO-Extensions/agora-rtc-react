@@ -1,8 +1,8 @@
-import type { MicrophoneAudioTrackProps } from "./MicrophoneAudioTrack";
-import type { StoryObj, Meta } from "@storybook/react";
-
-import { MicrophoneAudioTrack } from "./MicrophoneAudioTrack";
+import type { Meta, StoryObj } from "@storybook/react";
 import { FakeMicrophoneAudioTrack } from "fake-agora-rtc";
+
+import type { MicrophoneAudioTrackProps } from "./MicrophoneAudioTrack";
+import { MicrophoneAudioTrack } from "./MicrophoneAudioTrack";
 
 const meta: Meta<MicrophoneAudioTrackProps> = {
   title: "Track/MicrophoneAudioTrack",

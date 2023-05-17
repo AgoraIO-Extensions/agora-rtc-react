@@ -1,11 +1,12 @@
 import type { ILocalVideoTrack } from "agora-rtc-sdk-ng";
 import type { HTMLProps } from "react";
+import { useEffect, useState } from "react";
+
+import { useAwaited } from "../hooks";
 import type { MaybePromiseOrNull } from "../utils";
 
-import { useEffect, useState } from "react";
-import { useAwaited } from "../hooks";
-import { useMergedStyle, VideoTrackStyle } from "./styles";
 import { useAutoPlayVideoTrack } from "./TrackBoundary";
+import { VideoTrackStyle, useMergedStyle } from "./styles";
 
 export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**

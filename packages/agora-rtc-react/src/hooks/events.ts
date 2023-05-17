@@ -17,11 +17,13 @@ import type {
   RemoteStreamType,
   UID,
 } from "agora-rtc-sdk-ng";
+import { useEffect, useRef } from "react";
+
 import type { AgoraRTCError, CheckVideoVisibleResult, InspectState } from "../listen";
+import { listen } from "../listen";
 import type { Fn, Nullable } from "../utils";
 
-import { useEffect, useRef } from "react";
-import { listen } from "../listen";
+
 import { useIsomorphicLayoutEffect } from "./tools";
 
 /**

@@ -1,8 +1,8 @@
-import type { RemoteAudioTrackProps } from "./RemoteAudioTrack";
-import type { StoryObj, Meta } from "@storybook/react";
-
-import { RemoteAudioTrack } from "./RemoteAudioTrack";
+import type { Meta, StoryObj } from "@storybook/react";
 import { FakeRemoteAudioTrack } from "fake-agora-rtc";
+
+import type { RemoteAudioTrackProps } from "./RemoteAudioTrack";
+import { RemoteAudioTrack } from "./RemoteAudioTrack";
 
 const meta: Meta<RemoteAudioTrackProps> = {
   title: "Track/RemoteAudioTrack",

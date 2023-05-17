@@ -1,9 +1,10 @@
 import type { IRemoteAudioTrack } from "agora-rtc-sdk-ng";
-import type { FakeRemoteTrackProps } from "./remote-track";
 
 import keyboardMp3 from "../../videos/quick-mechanical-keyboard-14391.mp3";
-import { FakeRemoteTrack } from "./remote-track";
 import { hideProperties } from "../utils";
+
+import type { FakeRemoteTrackProps } from "./remote-track";
+import { FakeRemoteTrack } from "./remote-track";
 
 export interface FakeRemoteAudioTrackProps extends Omit<FakeRemoteTrackProps, "trackMediaType"> {
   audioURI?: string;

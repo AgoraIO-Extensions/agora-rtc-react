@@ -1,0 +1,53 @@
+.room-selector-item {
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 0 10px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: #6b72801a;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+    background-color: #6b728005;
+  }
+}
+
+.user {
+  position: relative;
+  width: 54px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.1) 60%,
+    rgba(0, 0, 0, 0.3) 80%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+.label {
+  position: absolute;
+  z-index: 1;
+  left: 2px;
+  bottom: -2px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: keep-all;
+  font-size: 12px;
+  color: #fff;
+}

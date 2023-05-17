@@ -1,6 +1,6 @@
+import { randUuid } from "@ngneat/falso";
 import type { ITrack } from "agora-rtc-sdk-ng";
 
-import { randUuid } from "@ngneat/falso";
 import { FakeAgoraEventEmitter } from "../eventemitter";
 import { hideProperties } from "../utils";
 

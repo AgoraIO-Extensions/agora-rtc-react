@@ -6,11 +6,11 @@ import type {
   ITrack,
 } from "agora-rtc-sdk-ng";
 import type { PropsWithChildren } from "react";
-import type { Nullable } from "../utils";
-
 import { createContext, useContext, useEffect, useState } from "react";
-import { timeout } from "../utils";
+
 import { useIsomorphicLayoutEffect } from "../hooks/tools";
+import type { Nullable } from "../utils";
+import { timeout } from "../utils";
 
 interface TrackBoundaryController {
   onMount: (track: ITrack) => void;

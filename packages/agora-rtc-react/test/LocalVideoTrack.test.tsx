@@ -1,11 +1,12 @@
-import type { Mock } from "vitest";
-import { describe, test, vi, expect } from "vitest";
-import { render } from "@testing-library/react";
 import { composeStories } from "@storybook/react";
+import { render } from "@testing-library/react";
 import type { ILocalVideoTrack } from "agora-rtc-sdk-ng";
+import type { Mock } from "vitest";
+import { describe, expect, test, vi } from "vitest";
+
+import { LocalVideoTrack, useAutoPlayVideoTrack } from "../src/components";
 import * as stories from "../src/components/LocalVideoTrack.stories";
 const { Enabled, EmptyTrack } = composeStories(stories);
-import { LocalVideoTrack, useAutoPlayVideoTrack } from "../src/components";
 import { useAwaited } from "../src/hooks";
 
 vi.mock("../src/hooks", () => ({

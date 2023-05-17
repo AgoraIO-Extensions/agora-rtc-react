@@ -6,6 +6,7 @@ import type {
 } from "agora-rtc-sdk-ng";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { makeAutoObservable } from "mobx";
+
 import { fakeAvatar, fakeName } from "../utils";
 
 export class MyLocalUser {
