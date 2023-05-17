@@ -18,7 +18,7 @@ import { createAsyncTaskRunner, interval, joinDisposers } from "../utils";
 import { listen } from "../listen";
 import { useRTCClient } from "./context";
 import { useIsConnected } from "./client";
-import { useAsyncEffect } from "./tools";
+import { useAsyncEffect, useIsUnmounted } from "./tools";
 
 interface massUserProps {
   user: IAgoraRTCRemoteUser;
@@ -366,23 +366,18 @@ export function useLocalCameraTrack(
 ): ICameraVideoTrack | null {
   const isConnected = useIsConnected(client);
   const [track, setTrack] = useState<ICameraVideoTrack | null>(null);
+  const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
-    let isUnmounted = false;
-
     if (isConnected && ready && !track) {
       const result = await AgoraRTC.createCameraVideoTrack();
-      if (!isUnmounted) {
+      if (!isUnmountRef.current) {
         setTrack(result);
       }
     }
-    if (!isConnected && !isUnmounted) {
+    if (!isConnected && !isUnmountRef.current) {
       setTrack(null);
     }
-
-    return () => {
-      isUnmounted = true;
-    };
   }, [isConnected, ready]);
   return track;
 }
@@ -397,25 +392,19 @@ export function useLocalAudioTrack(
   client?: IAgoraRTCClient,
 ): IMicrophoneAudioTrack | null {
   const isConnected = useIsConnected(client);
-
   const [track, setTrack] = useState<IMicrophoneAudioTrack | null>(null);
+  const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
-    let isUnmounted = false;
-
     if (isConnected && ready && !track) {
       const result = await AgoraRTC.createMicrophoneAudioTrack(audioTrackConfig);
-      if (!isUnmounted) {
+      if (!isUnmountRef.current) {
         setTrack(result);
       }
     }
-    if (!isConnected && !isUnmounted) {
+    if (!isConnected && !isUnmountRef.current) {
       setTrack(null);
     }
-
-    return () => {
-      isUnmounted = true;
-    };
   }, [isConnected, ready]);
   return track;
 }
@@ -439,8 +428,7 @@ export function usePublish(
       return;
     }
 
-    const filterTracks = tracks.filter(track => track !== null && track !== undefined);
-
+    const filterTracks = tracks.filter(Boolean);
     const baseCheck = (_track: ILocalTrack): boolean => {
       return (
         // need wait web sdk update
