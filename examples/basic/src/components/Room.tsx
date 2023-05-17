@@ -3,7 +3,7 @@ import {
   useCurrentUID,
   useIsConnected,
   useLocalAudioTrack,
-  useLocalVideoTrack,
+  useLocalCameraTrack,
   usePublish,
   usePublishedRemoteUsers,
   useRemoteUsers,
@@ -42,7 +42,7 @@ export function Room({
   const selfPublished = micOn || cameraOn;
 
   const audioTrack = useLocalAudioTrack(micOn);
-  const videoTrack = useLocalVideoTrack(cameraOn);
+  const videoTrack = useLocalCameraTrack(cameraOn);
   usePublish([audioTrack, videoTrack]);
   return (
     <>

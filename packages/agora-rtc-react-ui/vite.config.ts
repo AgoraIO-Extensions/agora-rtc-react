@@ -11,7 +11,7 @@ export default defineConfig({
     environment: "jsdom",
     coverage: {
       provider: "c8",
-      reporter: ["text", "json", "html", "lcov"],
+      reporter: ["text", "json", "html", "lcov", "json-summary"],
     },
   },
 });

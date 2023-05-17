@@ -18,7 +18,7 @@ import { createAsyncTaskRunner, interval, joinDisposers } from "../utils";
 
 import { useIsConnected } from "./client";
 import { useRTCClient } from "./context";
-import { useAsyncEffect } from "./tools";
+import { useAsyncEffect, useIsUnmounted } from "./tools";
 
 interface massUserProps {
   user: IAgoraRTCRemoteUser;
@@ -357,22 +357,26 @@ export function useRemoteVideoTracks(
 }
 
 /**
- * a hook can create a local audio track, this track will only be created once until Component is destroyed.
+ * a hook can create a local video track, this track will only be created once until Component is destroyed.
  * when you ready to create track, set ready to true.
  * unpublish track on unmount.
  */
-export function useLocalVideoTrack(
+export function useLocalCameraTrack(
   ready = true,
   client?: IAgoraRTCClient,
 ): ICameraVideoTrack | null {
   const isConnected = useIsConnected(client);
   const [track, setTrack] = useState<ICameraVideoTrack | null>(null);
+  const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
     if (isConnected && ready && !track) {
-      setTrack(await AgoraRTC.createCameraVideoTrack());
+      const result = await AgoraRTC.createCameraVideoTrack();
+      if (!isUnmountRef.current) {
+        setTrack(result);
+      }
     }
-    if (!isConnected) {
+    if (!isConnected && !isUnmountRef.current) {
       setTrack(null);
     }
   }, [isConnected, ready]);
@@ -390,14 +394,17 @@ export function useLocalAudioTrack(
   client?: IAgoraRTCClient,
 ): IMicrophoneAudioTrack | null {
   const isConnected = useIsConnected(client);
-
   const [track, setTrack] = useState<IMicrophoneAudioTrack | null>(null);
+  const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
     if (isConnected && ready && !track) {
-      setTrack(await AgoraRTC.createMicrophoneAudioTrack(audioTrackConfig));
+      const result = await AgoraRTC.createMicrophoneAudioTrack(audioTrackConfig);
+      if (!isUnmountRef.current) {
+        setTrack(result);
+      }
     }
-    if (!isConnected) {
+    if (!isConnected && !isUnmountRef.current) {
       setTrack(null);
     }
   }, [isConnected, ready]);
@@ -405,8 +412,8 @@ export function useLocalAudioTrack(
 }
 
 /**
- * auto published local tracks
- * UnPublish track on unmount.
+ * publish tacks when readyToPublish is true
+ * unpublish on unmount.
  */
 export function usePublish(
   tracks: (ILocalTrack | null)[],
@@ -417,15 +424,18 @@ export function usePublish(
   const isConnected = useIsConnected(client);
   //maintain an internal ref to track published
   const pubTracks = useRef<(ILocalTrack | null)[]>([]);
+
   useAsyncEffect(async () => {
-    if (!resolvedClient) {
+    if (!resolvedClient || !isConnected || !readyToPublish) {
       return;
     }
+
+    const filterTracks = tracks.filter(Boolean);
     const baseCheck = (_track: ILocalTrack): boolean => {
       return (
         // need wait web sdk update
-        // !(resolvedClient["mode"] === "live" && resolvedClient["role"] === "audience") &&
-        isConnected
+        // !(resolvedClient["mode"] === "live" && resolvedClient["role"] === "audience")
+        true
       );
     };
     const isPublished = (track: ILocalTrack): boolean => {
@@ -436,29 +446,21 @@ export function usePublish(
     const canPublish = (track: ILocalTrack): boolean => {
       return baseCheck(track) && track.enabled && readyToPublish && !isPublished(track);
     };
-    const updatePubTracks = async () => {
-      let isSame = true;
-      const newTracks: ILocalTrack[] = [];
 
-      for (let i = 0; i < tracks.length; i++) {
-        const track = tracks[i];
-        if (track) {
-          if (canPublish(track)) {
-            try {
-              await resolvedClient.publish(track);
-            } catch (error) {
-              console.error(error);
-            }
-          }
-          newTracks.push(track);
-          if (isSame) {
-            isSame = i < tracks.length && track.getTrackId() === pubTracks.current[i]?.getTrackId();
+    for (let i = 0; i < filterTracks.length; i++) {
+      const track = filterTracks[i];
+      if (track) {
+        if (canPublish(track)) {
+          try {
+            await resolvedClient.publish(track);
+          } catch (error) {
+            console.error(error);
           }
         }
       }
-      isSame = isSame && newTracks.length === tracks.length;
-      pubTracks.current = isSame ? tracks : newTracks;
-    };
-    await updatePubTracks();
+    }
+    pubTracks.current = filterTracks;
+
+    // published tracks will be unpublished on unmount by useJoin
   }, [isConnected, readyToPublish, resolvedClient, tracks]);
 }
