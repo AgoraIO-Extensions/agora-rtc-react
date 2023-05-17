@@ -357,7 +357,8 @@ export function useRemoteVideoTracks(
 }
 
 /**
- * a hook can create a local video track
+ * a hook can create a local audio track, this track will only be created once until Component is destroyed.
+ * when you ready to create track, set ready to true.
  * unpublish track on unmount.
  */
 export function useLocalVideoTrack(
@@ -379,7 +380,8 @@ export function useLocalVideoTrack(
 }
 
 /**
- * a hook can create a local audio track
+ * a hook can create a local audio track, this track will only be created once until Component is destroyed.
+ * when you ready to create track, set ready to true.
  * close track on unmount.
  */
 export function useLocalAudioTrack(
