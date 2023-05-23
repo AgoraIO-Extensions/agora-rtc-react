@@ -17,7 +17,7 @@ const mockTrack: ICameraVideoTrack = {
 } as unknown as ICameraVideoTrack;
 const mockUseAwaited = useAwaited as Mock;
 
-describe("LocalVideoTrack component", () => {
+describe("CameraVideoTrack component", () => {
   test("renders without crashing", () => {
     mockUseAwaited.mockReturnValueOnce(mockTrack);
     const { container } = render(<CameraVideoTrack track={mockTrack} />);
@@ -34,7 +34,7 @@ describe("LocalVideoTrack component", () => {
   });
 });
 
-describe("LocalVideoTrack component stories", () => {
+describe("CameraVideoTrack component stories", () => {
   test("renders Enabled stories", () => {
     const { container } = render(<Enabled />);
     expect(container).toBeInTheDocument();

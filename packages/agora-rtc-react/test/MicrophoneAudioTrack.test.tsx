@@ -36,7 +36,7 @@ describe("MicrophoneAudioTrack component", () => {
 });
 
 describe("MicrophoneAudioTrack component stories", () => {
-  test("renders EmptyTrack stories", async () => {
+  test("renders Enabled stories", async () => {
     const { getByText } = render(<Enabled />);
     expect(getByText("An Example Microphone Audio Track")).toBeInTheDocument();
   });
