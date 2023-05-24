@@ -2,11 +2,11 @@ import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
 import { describe, expect, test, vi } from "vitest";
 
-import { RemoteVideoTrack } from "../src/components";
-import * as stories from "../src/components/RemoteVideoTrack.stories";
+import { RemoteVideoTrack } from "../../src/components";
+import * as stories from "../../src/components/RemoteVideoTrack.stories";
 const { Enabled, EmptyTrack } = composeStories(stories);
 
-vi.mock("../src/components/TrackBoundary", () => ({
+vi.mock("../../src/components/TrackBoundary", () => ({
   useAutoPlayVideoTrack: vi.fn(),
 }));
 

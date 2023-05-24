@@ -39,6 +39,7 @@ describe("TrackBoundary component stories", () => {
     expect(container).toBeInTheDocument();
     unmount();
     expect(mockTrack.stop).toHaveBeenCalledTimes(0);
+    vi.clearAllMocks();
   });
 
   test("renders LayoutSwitchWithoutTrackBoundary stories", () => {
@@ -48,5 +49,6 @@ describe("TrackBoundary component stories", () => {
     expect(container).toBeInTheDocument();
     unmount();
     expect(mockTrack.stop).toHaveBeenCalledTimes(0);
+    vi.clearAllMocks();
   });
 });

@@ -4,12 +4,12 @@ import type { IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
 import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 
-import { MicrophoneAudioTrack } from "../src/components";
-import * as stories from "../src/components/MicrophoneAudioTrack.stories";
+import { MicrophoneAudioTrack } from "../../src/components";
+import * as stories from "../../src/components/MicrophoneAudioTrack.stories";
 const { Enabled } = composeStories(stories);
-import { useAwaited } from "../src/hooks";
+import { useAwaited } from "../../src/hooks";
 
-vi.mock("../src/hooks", () => ({
+vi.mock("../../src/hooks", () => ({
   useAwaited: vi.fn(),
 }));
 const mockTrack: IMicrophoneAudioTrack = {

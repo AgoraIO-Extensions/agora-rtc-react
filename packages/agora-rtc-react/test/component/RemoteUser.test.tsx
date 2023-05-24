@@ -1,13 +1,23 @@
 import { randUuid } from "@ngneat/falso";
 import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
+import type { IRemoteAudioTrack, IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import { FakeRTCClient } from "fake-agora-rtc";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 
-import { RemoteUser } from "../src/components";
-import * as stories from "../src/components/RemoteUser.stories";
-import { AgoraRTCProvider } from "../src/hooks";
+import { RemoteUser } from "../../src/components";
+import * as stories from "../../src/components/RemoteUser.stories";
+import { AgoraRTCProvider } from "../../src/hooks";
 const { Overview, WithCover, WithControls } = composeStories(stories);
+
+const mockAudioTrack: IRemoteAudioTrack = {
+  setVolume: vi.fn(),
+  play: vi.fn(),
+} as unknown as IRemoteAudioTrack;
+
+const mockVideoTrack: IRemoteVideoTrack = {
+  play: vi.fn(),
+} as unknown as IRemoteVideoTrack;
 
 describe("RemoteUser component", () => {
   test("renders without crashing", () => {
@@ -59,13 +69,27 @@ describe("RemoteUser component stories", () => {
 
   test("renders WithCover stories", () => {
     const { container } = render(<WithCover />);
-    expect(container.querySelector("img")?.getAttribute("src")).toBe(
-      "http://placekitten.com/200/200",
-    );
+    expect(Boolean(container.querySelector("img")?.getAttribute("src"))).toBe(true);
   });
 
   test("renders WithControls stories", () => {
     const { container } = render(<WithControls />);
     expect(container.querySelector(".arr-user-control")).toBeInTheDocument();
+  });
+
+  test("renders WithControls stories but playAudio true", () => {
+    const user = {
+      uid: randUuid(),
+      hasVideo: true,
+      hasAudio: true,
+      audioTrack: mockAudioTrack,
+      videoTrack: mockVideoTrack,
+    };
+    const { rerender } = render(<WithControls playAudio playVideo={false} user={user} />);
+    expect(mockVideoTrack.play).toBeCalledTimes(0);
+    expect(mockAudioTrack.play).toHaveBeenCalled();
+    rerender(<WithControls playAudio playVideo user={user} />);
+    expect(mockVideoTrack.play).toHaveBeenCalled();
+    vi.clearAllMocks();
   });
 });

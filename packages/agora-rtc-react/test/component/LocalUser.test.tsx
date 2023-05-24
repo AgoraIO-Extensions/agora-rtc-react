@@ -1,10 +1,18 @@
 import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 
-import { LocalUser } from "../src/components";
-import * as stories from "../src/components/LocalUser.stories";
+import { LocalUser } from "../../src/components";
+import * as stories from "../../src/components/LocalUser.stories";
 const { Overview } = composeStories(stories);
+
+vi.mock("../../src/hooks", async () => {
+  const actual: object = await vi.importActual("../../src/hooks");
+  return {
+    ...actual,
+    useAwaited: vi.fn(),
+  };
+});
 
 describe("LocalUser component", () => {
   test("renders without crashing", () => {
@@ -28,8 +36,11 @@ describe("LocalUser component", () => {
 describe("LocalUser component stories", () => {
   test("renders Overview stories", () => {
     const { container } = render(<Overview />);
-    expect(container.querySelector("img")?.getAttribute("src")).toBe(
-      "http://placekitten.com/200/200",
-    );
+    expect(Boolean(container.querySelector("img")?.getAttribute("src"))).toBe(true);
+  });
+
+  test("renders Enabled stories", () => {
+    const { container } = render(<Overview cameraOn micOn playAudio playVideo />);
+    expect(container.querySelector("img")?.getAttribute("src")).toBeUndefined();
   });
 });

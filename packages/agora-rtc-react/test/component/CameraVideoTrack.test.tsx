@@ -4,12 +4,12 @@ import type { ICameraVideoTrack } from "agora-rtc-sdk-ng";
 import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 
-import { CameraVideoTrack } from "../src/components";
-import * as stories from "../src/components/CameraVideoTrack.stories";
+import { CameraVideoTrack } from "../../src/components";
+import * as stories from "../../src/components/CameraVideoTrack.stories";
 const { Enabled, EmptyTrack } = composeStories(stories);
-import { useAwaited } from "../src/hooks";
+import { useAwaited } from "../../src/hooks";
 
-vi.mock("../src/hooks", () => ({
+vi.mock("../../src/hooks", () => ({
   useAwaited: vi.fn(),
 }));
 const mockTrack: ICameraVideoTrack = {

@@ -4,11 +4,11 @@ import type { IRemoteAudioTrack } from "agora-rtc-sdk-ng";
 import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 
-import { RemoteAudioTrack, useAutoPlayAudioTrack } from "../src/components";
-import * as stories from "../src/components/RemoteAudioTrack.stories";
+import { RemoteAudioTrack, useAutoPlayAudioTrack } from "../../src/components";
+import * as stories from "../../src/components/RemoteAudioTrack.stories";
 const { Enabled, EmptyTrack } = composeStories(stories);
 
-vi.mock("../src/components/TrackBoundary", () => ({
+vi.mock("../../src/components/TrackBoundary", () => ({
   useAutoPlayAudioTrack: vi.fn(),
 }));
 const mockTrack: IRemoteAudioTrack = {
