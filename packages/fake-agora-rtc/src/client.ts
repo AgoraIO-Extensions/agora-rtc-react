@@ -13,6 +13,8 @@ import { FakeRemoteAudioTrack, FakeRemoteVideoTrack } from "./tracks";
 import { hideProperties } from "./utils";
 
 export class FakeRTCClient extends FakeAgoraEventEmitter {
+  remoteUsers: IAgoraRTCRemoteUser[] = [];
+
   public static create(
     executor?: Partial<IAgoraRTCClient> | ((client: FakeRTCClient) => Partial<IAgoraRTCClient>),
   ): IAgoraRTCClient {
