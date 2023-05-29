@@ -18,6 +18,9 @@ importers:
       '@hyrious/esbuild-dev':
         specifier: ^0.9.1
         version: 0.9.1
+      '@release-it/bumper':
+        specifier: ^4.0.2
+        version: 4.0.2(release-it@15.10.3)
       '@testing-library/jest-dom':
         specifier: ^5.16.5
         version: 5.16.5
@@ -2995,6 +2998,24 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
+
+  /@release-it/bumper@4.0.2(release-it@15.10.3):
+    resolution: {integrity: sha512-HjiFIBNvb67cLTbzdm6EqiSRwpB4MJY4TGJFY/ac5qnIxERWK5gx1zBnwbJZffDSoS46hJMugoXrDbITEfX4gA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      release-it: ^15.2.0
+    dependencies:
+      '@iarna/toml': 2.2.5
+      detect-indent: 7.0.1
+      fast-glob: 3.2.12
+      ini: 3.0.1
+      js-yaml: 4.1.0
+      lodash.castarray: 4.4.0
+      lodash.get: 4.4.2
+      lodash.set: 4.3.2
+      release-it: 15.10.3
+      semver: 7.5.0
+    dev: true
 
   /@remix-run/router@1.6.1:
     resolution: {integrity: sha512-YUkWj+xs0oOzBe74OgErsuR3wVn+efrFhXBWrit50kOiED+pvQe2r6MWY0iJMQU/mSVKxvNzL4ZaYvjdX+G7ZA==}
@@ -6612,6 +6633,11 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /detect-indent@7.0.1:
+    resolution: {integrity: sha512-Mc7QhQ8s+cLrnUfU/Ji94vG/r8M26m8f++vyres4ZoojaRDpZ1eSIh/EpzLNwlWuvzSZ3UbDFspjFvTDXe6e/g==}
+    engines: {node: '>=12.20'}
+    dev: true
+
   /detect-package-manager@2.0.1:
     resolution: {integrity: sha512-j/lJHyoLlWi6G1LDdLgvUtz60Zo5GEj+sVYtTVXnYLDPuzgC3llMxonXym9zIwhhUII8vjdw0LXxavpLqTbl1A==}
     engines: {node: '>=12'}
@@ -8261,6 +8287,11 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
+  /ini@3.0.1:
+    resolution: {integrity: sha512-it4HyVAUTKBc6m8e1iXWvXSTdndF7HbdN713+kvLrymxTaU4AUBWrJ4vEooP+V7fexnVD3LKcBshjGGPefSMUQ==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+    dev: true
+
   /inquirer@9.2.0:
     resolution: {integrity: sha512-WWERbVqjsTXjXub1ZW0ZHDit1dyHqy0T9XIkky9TnmKAPrjU9Jkd59nZPK0dUuM3s73GZAZu2Jo4iFU3XSPVLA==}
     engines: {node: '>=14.18.0'}
@@ -9173,12 +9204,20 @@ packages:
     resolution: {integrity: sha512-kZzYOKspf8XVX5AvmQF94gQW0lejFVgb80G85bU4ZWzoJ6C03PQg3coYAUpSTpQWelrZELd3XWgHzw4Ck5kaIw==}
     dev: true
 
+  /lodash.castarray@4.4.0:
+    resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
+    dev: true
+
   /lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
     dev: true
 
   /lodash.escaperegexp@4.1.2:
     resolution: {integrity: sha512-TM9YBvyC84ZxE3rgfefxUWiQKLilstD6k7PTGt6wfbtXF8ixIJLOL3VYyV/z+ZiPLsVxAsKAFVwWlWeb2Y8Yyw==}
+    dev: true
+
+  /lodash.get@4.4.2:
+    resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
     dev: true
 
   /lodash.isfunction@3.0.9:
@@ -9203,6 +9242,10 @@ packages:
 
   /lodash.mergewith@4.6.2:
     resolution: {integrity: sha512-GK3g5RPZWTRSeLSpgP8Xhra+pnjBC56q9FZYe1d5RN3TJ35dbkGy3YqBSMbyCrlbi+CM9Z3Jk5yTL7RCsqboyQ==}
+    dev: true
+
+  /lodash.set@4.3.2:
+    resolution: {integrity: sha512-4hNPN5jlm/N/HLMCO43v8BXKq9Z7QdAGc/VGrRD61w8gN9g/6jF9A4L1pbUgBLCffi0w9VsXfTOij5x8iTyFvg==}
     dev: true
 
   /lodash.snakecase@4.1.1:
