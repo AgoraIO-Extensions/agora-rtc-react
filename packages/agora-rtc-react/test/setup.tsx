@@ -43,3 +43,5 @@ export const createWrapper =
   (client: IAgoraRTCClient): React.FC<Props> =>
   ({ children }: { children: ReactNode }) =>
     <AgoraRTCProvider client={client}>{children}</AgoraRTCProvider>;
+
+export const errorMessage = "Agora-RTC-REACT [ERROR_TEST_MSG]";

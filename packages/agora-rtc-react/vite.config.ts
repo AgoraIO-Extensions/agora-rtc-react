@@ -14,6 +14,7 @@ export default defineConfig({
       if (log.includes("Agora-SDK [WARNING]: ")) return false;
       if (log.includes("Agora-SDK [ERROR]: ")) return false;
       if (log.includes("Agora-SDK [INFO]: ")) return false;
+      if (log.includes("Agora-RTC-REACT [ERROR_TEST_MSG]")) return false;
     },
     environment: "jsdom",
     globals: true,

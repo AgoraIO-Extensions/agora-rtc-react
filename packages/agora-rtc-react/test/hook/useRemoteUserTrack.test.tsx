@@ -6,7 +6,7 @@ import { vi } from "vitest";
 
 import * as clientHook from "../../src/hooks/client";
 import { useRemoteUserTrack } from "../../src/hooks/index";
-import { createWrapper } from "../setup";
+import { createWrapper, errorMessage } from "../setup";
 
 const user = {
   uid: "1",
@@ -63,6 +63,7 @@ describe("useRemoteUserTrack", () => {
   test("should return undefined when user-unpublished", async () => {
     const client = FakeRTCClient.create();
     const spy2 = vi.spyOn(client, "unsubscribe");
+    const spy3 = vi.spyOn(client, "subscribe");
 
     (client.remoteUsers as IAgoraRTCRemoteUser[]) = [user];
 
@@ -78,6 +79,18 @@ describe("useRemoteUserTrack", () => {
       expect(spy2).toBeCalledWith(user, "video");
       expect(result.current).not.toBeNull();
       expect(result.current).toBeUndefined();
+    });
+
+    act(() => {
+      dispatchRTCEvent(client, "user-published", user, "video");
+    });
+    await waitFor(() => {
+      expect(spy).toBeCalled();
+      expect(spy3).toBeCalledTimes(1);
+      expect(spy3).toBeCalledWith(user, "video");
+      expect(result.current).not.toBeNull();
+      expect(result.current).not.toBeUndefined();
+      expect(result.current?.trackMediaType).toBe("video");
     });
   });
 
@@ -99,6 +112,45 @@ describe("useRemoteUserTrack", () => {
       expect(spy2).toBeCalledWith(user, "audio");
       expect(result.current).not.toBeNull();
       expect(result.current).toBeUndefined();
+    });
+  });
+
+  test("should return log error when unsubscribe is failed", async () => {
+    const client = FakeRTCClient.create();
+    const spy2 = vi.spyOn(client, "unsubscribe").mockReturnValue(Promise.reject(errorMessage));
+    const spy3 = vi.spyOn(console, "error");
+
+    (client.remoteUsers as IAgoraRTCRemoteUser[]) = [user];
+
+    renderHook(() => useRemoteUserTrack(user, "video", client), {
+      wrapper: createWrapper(client),
+    });
+    act(() => {
+      dispatchRTCEvent(client, "user-unpublished", user, "video");
+    });
+    await waitFor(() => {
+      expect(spy2).toBeCalledTimes(1);
+      expect(spy3).toHaveBeenCalledWith(errorMessage);
+    });
+  });
+
+  test("should return log error when subscribe is failed", async () => {
+    const client = FakeRTCClient.create();
+    const spy2 = vi.spyOn(client, "subscribe").mockReturnValue(Promise.reject(errorMessage));
+    const spy3 = vi.spyOn(console, "error");
+    const newUser = {
+      uid: "2",
+      hasAudio: true,
+      hasVideo: true,
+    };
+    (client.remoteUsers as IAgoraRTCRemoteUser[]) = [newUser];
+
+    renderHook(() => useRemoteUserTrack(newUser, "video", client), {
+      wrapper: createWrapper(client),
+    });
+    await waitFor(() => {
+      expect(spy2).toBeCalledTimes(1);
+      expect(spy3).toHaveBeenCalledWith(errorMessage);
     });
   });
 });

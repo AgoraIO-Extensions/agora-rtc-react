@@ -5,7 +5,7 @@ import { vi } from "vitest";
 
 import * as clientHook from "../../src/hooks/client";
 import { useRemoteAudioTracks } from "../../src/hooks/index";
-import { createWrapper } from "../setup";
+import { createWrapper, errorMessage } from "../setup";
 
 describe("useRemoteAudioTracks", () => {
   test("should return audio tracks", async () => {
@@ -29,12 +29,60 @@ describe("useRemoteAudioTracks", () => {
     vi.clearAllMocks();
   });
 
+  test("should return error log when subscribe is failed", async () => {
+    const userList = [{ uid: "1", hasAudio: true, hasVideo: true }];
+    const client = FakeRTCClient.create();
+    const spy = vi.spyOn(clientHook, "useIsConnected");
+    spy.mockReturnValue(true);
+    const spy2 = vi.spyOn(client, "subscribe").mockReturnValue(Promise.reject(errorMessage));
+    const spy3 = vi.spyOn(console, "error");
+
+    renderHook(() => useRemoteAudioTracks(userList, client), {
+      wrapper: createWrapper(client),
+    });
+    await waitFor(() => {
+      expect(spy2).toBeCalledTimes(1);
+      expect(spy2).toBeCalledWith(userList[0], "audio");
+      expect(spy3).toHaveBeenCalledWith(errorMessage);
+    });
+    vi.resetAllMocks();
+    vi.clearAllMocks();
+  });
+
+  test("should return error log when unsubscribe is failed", async () => {
+    const userList = [{ uid: "1", hasAudio: true, hasVideo: true }];
+    const client = FakeRTCClient.create();
+    const spy = vi.spyOn(clientHook, "useIsConnected");
+    spy.mockReturnValue(true);
+    const spy2 = vi.spyOn(client, "unsubscribe").mockRejectedValue(new Error());
+    (client.remoteUsers as IAgoraRTCRemoteUser[]) = userList;
+
+    const { result } = renderHook(() => useRemoteAudioTracks(userList, client), {
+      wrapper: createWrapper(client),
+    });
+    await waitFor(() => {
+      userList[0].uid = result.current[0].getTrackId();
+      (client.remoteUsers as IAgoraRTCRemoteUser[]) = userList;
+    });
+    act(() => {
+      dispatchRTCEvent(client, "user-unpublished", userList[0], "audio");
+    });
+    await waitFor(async () => {
+      expect(spy2).toBeCalledTimes(1);
+      await expect(spy2).rejects.toThrowError();
+    });
+
+    vi.resetAllMocks();
+    vi.clearAllMocks();
+  });
+
   test("should return [] when unsubscribe", async () => {
     const userList = [{ uid: "1", hasAudio: true, hasVideo: true }];
     const client = FakeRTCClient.create();
     const spy = vi.spyOn(clientHook, "useIsConnected");
     spy.mockReturnValue(true);
     const spy2 = vi.spyOn(client, "unsubscribe");
+    const spy3 = vi.spyOn(client, "subscribe");
     (client.remoteUsers as IAgoraRTCRemoteUser[]) = userList;
 
     const { result } = renderHook(
@@ -55,6 +103,14 @@ describe("useRemoteAudioTracks", () => {
     });
     await waitFor(() => {
       expect(spy2).toBeCalledTimes(1);
+      expect(spy3).toBeCalledTimes(1);
+    });
+
+    act(() => {
+      dispatchRTCEvent(client, "user-published", userList[0], "audio");
+    });
+    await waitFor(() => {
+      expect(spy3).toBeCalledTimes(2);
     });
 
     vi.resetAllMocks();
