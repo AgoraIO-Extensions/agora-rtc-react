@@ -34,7 +34,6 @@ describe("useLocalAudioTrack", () => {
       wrapper: createWrapper(client),
     });
     await waitFor(() => {
-      AgoraRTC.setLogLevel(4);
       expect(AgoraRTC.createMicrophoneAudioTrack).toBeCalledTimes(1);
       expect(result.current !== null).toBe(true);
     });
@@ -49,7 +48,6 @@ describe("useLocalAudioTrack", () => {
       wrapper: createWrapper(client),
     });
     await waitFor(() => {
-      AgoraRTC.setLogLevel(4);
       expect(AgoraRTC.createMicrophoneAudioTrack).toBeCalledTimes(1);
       expect(result.current !== null).toBe(true);
     });

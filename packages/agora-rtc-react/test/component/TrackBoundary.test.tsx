@@ -5,12 +5,12 @@ import { FakeRTCClient } from "fake-agora-rtc";
 import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 
-import { TrackBoundary } from "../src/components";
-import * as stories from "../src/components/TrackBoundary.stories";
-import { AgoraRTCProvider, useRemoteUserTrack } from "../src/hooks";
+import { TrackBoundary } from "../../src/components";
+import * as stories from "../../src/components/TrackBoundary.stories";
+import { AgoraRTCProvider, useRemoteUserTrack } from "../../src/hooks";
 const { LayoutSwitchWithTrackBoundary, LayoutSwitchWithoutTrackBoundary } = composeStories(stories);
 
-vi.mock("../src/hooks", () => ({
+vi.mock("../../src/hooks", () => ({
   useRemoteUserTrack: vi.fn(),
   AgoraRTCProvider: vi.fn(),
 }));
