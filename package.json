@@ -5,6 +5,7 @@
   "scripts": {
     "prepare": "husky install",
     "build": "pnpm -r run build",
+    "release": "release-it",
     "start": "pnpm run example",
     "storybook": "pnpm -F agora-rtc-react run storybook",
     "build-storybook": "pnpm -F agora-rtc-react run build-storybook",
@@ -37,6 +38,7 @@
     "lint-staged": "^13.2.1",
     "minimist": "^1.2.8",
     "prettier": "^2.8.4",
+    "release-it": "^15.10.3",
     "typescript": "^4.9.5"
   },
   "lint-staged": {
@@ -77,6 +79,18 @@
     },
     "patchedDependencies": {
       "seedrandom@3.0.5": "patches/seedrandom@3.0.5.patch"
+    }
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "v${version}"
+    },
+    "npm": {
+      "publish": true
+    },
+    "github": {
+      "release": true
     }
   }
 }
