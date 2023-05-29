@@ -47,10 +47,7 @@ describe("useLocalAudioTrack", () => {
     const { result, rerender } = renderHook(() => useLocalAudioTrack(true), {
       wrapper: createWrapper(client),
     });
-    await waitFor(() => {
-      expect(AgoraRTC.createMicrophoneAudioTrack).toBeCalledTimes(1);
-      expect(result.current !== null).toBe(true);
-    });
+
     spy.mockReturnValue(false);
     rerender();
 

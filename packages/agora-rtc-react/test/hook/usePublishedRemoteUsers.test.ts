@@ -53,11 +53,11 @@ describe("usePublishedRemoteUsers", () => {
     const client = FakeRTCClient.create();
     const { result } = setUp(client);
     act(() => {
-      (client.remoteUsers as IAgoraRTCRemoteUser[]) = [user3];
+      (client.remoteUsers as IAgoraRTCRemoteUser[]) = [];
       dispatchRTCEvent(client, "user-left");
     });
     await waitFor(() => {
-      expect(result.current.length).toBe(client.remoteUsers.length);
+      expect(result.current.length).toBe(0);
     });
   });
 

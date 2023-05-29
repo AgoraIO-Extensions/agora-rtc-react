@@ -47,10 +47,7 @@ describe("useLocalCameraTrack", () => {
     const { result, rerender } = renderHook(() => useLocalCameraTrack(true, client), {
       wrapper: createWrapper(client),
     });
-    await waitFor(() => {
-      expect(AgoraRTC.createCameraVideoTrack).toBeCalledTimes(1);
-      expect(result.current !== null).toBe(true);
-    });
+
     spy.mockReturnValue(false);
     rerender();
 

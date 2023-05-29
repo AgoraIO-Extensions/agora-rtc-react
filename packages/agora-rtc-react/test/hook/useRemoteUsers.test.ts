@@ -21,10 +21,10 @@ describe("useRemoteUsers", () => {
     const client = FakeRTCClient.create();
     const { result } = setUp(client);
     act(() => {
-      (client.remoteUsers as IAgoraRTCRemoteUser[]) = [];
-      dispatchRTCEvent(client, "user-left");
+      (client.remoteUsers as IAgoraRTCRemoteUser[]) = userList;
+      dispatchRTCEvent(client, "user-joined");
     });
-    expect(result.current.length).toBe(0);
+    expect(result.current.length).toBe(1);
   });
 
   test("should return user list when user-left", async () => {
