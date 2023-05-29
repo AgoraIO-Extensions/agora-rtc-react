@@ -50,10 +50,10 @@ This example will render Agora Client into a container on the page.
 
 # API
 
-# Resources
+<!-- # Resources -->
 
-- changelog
-- [documentation](https://agoraio-extensions.github.io/agora-rtc-react)
+<!-- - changelog -->
+<!-- - [documentation](https://agoraio-extensions.github.io/agora-rtc-react) -->
 
 # License
 
