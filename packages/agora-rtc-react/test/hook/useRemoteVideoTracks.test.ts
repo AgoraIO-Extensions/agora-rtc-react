@@ -20,6 +20,9 @@ describe("useRemoteVideoTracks", () => {
     });
     await waitFor(() => {
       expect(spy2).toBeCalledTimes(1);
+      expect(spy2).toBeCalledWith(userList[0], "video");
+      expect(result.current).not.toBeNull();
+      expect(result.current).not.toBeUndefined();
       expect(result.current.length).toBe(userList.length);
     });
     vi.resetAllMocks();
@@ -82,6 +85,9 @@ describe("useRemoteVideoTracks", () => {
     rerender({ userList: [], client: client });
     await waitFor(() => {
       expect(client.massUnsubscribe).toBeCalledTimes(1);
+      expect(result.current).not.toBeNull();
+      expect(result.current).not.toBeUndefined();
+      expect(Array.isArray(result.current)).toBe(true);
       expect(result.current.length).toBe(0);
     });
     vi.resetAllMocks();

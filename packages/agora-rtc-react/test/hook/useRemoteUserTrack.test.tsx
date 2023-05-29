@@ -34,6 +34,9 @@ describe("useRemoteUserTrack", () => {
     await waitFor(() => {
       expect(spy).toBeCalled();
       expect(spy2).toBeCalledTimes(1);
+      expect(spy2).toBeCalledWith(user, "video");
+      expect(result.current).not.toBeNull();
+      expect(result.current).not.toBeUndefined();
       expect(result.current?.trackMediaType).toBe("video");
     });
   });
@@ -50,11 +53,14 @@ describe("useRemoteUserTrack", () => {
     await waitFor(() => {
       expect(spy).toBeCalled();
       expect(spy2).toBeCalledTimes(1);
+      expect(spy2).toBeCalledWith(user, "audio");
+      expect(result.current).not.toBeNull();
+      expect(result.current).not.toBeUndefined();
       expect(result.current?.trackMediaType).toBe("audio");
     });
   });
 
-  test("should return null when user-unpublished", async () => {
+  test("should return undefined when user-unpublished", async () => {
     const client = FakeRTCClient.create();
     const spy2 = vi.spyOn(client, "unsubscribe");
 
@@ -69,11 +75,13 @@ describe("useRemoteUserTrack", () => {
     await waitFor(() => {
       expect(spy).toBeCalled();
       expect(spy2).toBeCalledTimes(1);
-      expect(result.current?.trackMediaType).toBeUndefined();
+      expect(spy2).toBeCalledWith(user, "video");
+      expect(result.current).not.toBeNull();
+      expect(result.current).toBeUndefined();
     });
   });
 
-  test("should return null when user-unpublished", async () => {
+  test("should return undefined when user-unpublished", async () => {
     const client = FakeRTCClient.create();
     const spy2 = vi.spyOn(client, "unsubscribe");
 
@@ -88,7 +96,9 @@ describe("useRemoteUserTrack", () => {
     await waitFor(() => {
       expect(spy).toBeCalled();
       expect(spy2).toBeCalledTimes(1);
-      expect(result.current?.trackMediaType).toBeUndefined();
+      expect(spy2).toBeCalledWith(user, "audio");
+      expect(result.current).not.toBeNull();
+      expect(result.current).toBeUndefined();
     });
   });
 });
