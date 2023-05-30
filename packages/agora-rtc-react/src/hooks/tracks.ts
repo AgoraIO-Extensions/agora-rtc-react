@@ -154,7 +154,7 @@ export function useRemoteAudioTracks(
   const nextTracks = useRef<IRemoteAudioTrack[]>([]);
 
   useAsyncEffect(async () => {
-    if (!users || !isConnected) return;
+    if (!Array.isArray(users) || !isConnected) return;
     let isUnmounted = false;
     const subscribe = async (user: IAgoraRTCRemoteUser) => {
       if (!user.audioTrack && users.some(({ uid }) => user.uid === uid)) {
@@ -210,7 +210,7 @@ export function useRemoteAudioTracks(
     const unsubscribeList: massUserProps[] = [];
     for (let i = 0; i < nextTracks.current.length; i++) {
       const track = nextTracks.current[i];
-      if (users && users.length > 0 && !users.some(user => user.uid === track.getUserId())) {
+      if (!users.some(user => user.uid === track.getUserId())) {
         const user = resolvedClient.remoteUsers.find(user => user.uid === track.getUserId());
         if (user) {
           unsubscribeList.push({
@@ -263,7 +263,7 @@ export function useRemoteVideoTracks(
   const nextTracks = useRef<IRemoteVideoTrack[]>([]);
 
   useAsyncEffect(async () => {
-    if (!users || !isConnected) return;
+    if (!Array.isArray(users) || !isConnected) return;
     let isUnmounted = false;
     const subscribe = async (user: IAgoraRTCRemoteUser) => {
       if (!user.videoTrack && users.some(({ uid }) => user.uid === uid)) {
@@ -318,7 +318,7 @@ export function useRemoteVideoTracks(
     const unsubscribeList: massUserProps[] = [];
     for (let i = 0; i < nextTracks.current.length; i++) {
       const track = nextTracks.current[i];
-      if (users && users.length > 0 && !users.some(user => user.uid === track.getUserId())) {
+      if (!users.some(user => user.uid === track.getUserId())) {
         const user = resolvedClient.remoteUsers.find(user => user.uid === track.getUserId());
         if (user) {
           unsubscribeList.push({

@@ -4,15 +4,15 @@ import type { ILocalVideoTrack } from "agora-rtc-sdk-ng";
 import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 
-import { LocalVideoTrack, useAutoPlayVideoTrack } from "../src/components";
-import * as stories from "../src/components/LocalVideoTrack.stories";
+import { LocalVideoTrack, useAutoPlayVideoTrack } from "../../src/components";
+import * as stories from "../../src/components/LocalVideoTrack.stories";
 const { Enabled, EmptyTrack } = composeStories(stories);
-import { useAwaited } from "../src/hooks";
+import { useAwaited } from "../../src/hooks";
 
-vi.mock("../src/hooks", () => ({
+vi.mock("../../src/hooks", () => ({
   useAwaited: vi.fn(),
 }));
-vi.mock("../src/components/TrackBoundary", () => ({
+vi.mock("../../src/components/TrackBoundary", () => ({
   useAutoPlayVideoTrack: vi.fn(),
 }));
 const mockTrack: ILocalVideoTrack = {

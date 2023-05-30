@@ -10,36 +10,51 @@
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-brightgreen.svg?maxAge=2592000)](https://conventionalcommits.org)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-## Install
+agora-rtc-react makes it easier to integrate [agora-rtc-sdk-ng](https://www.npmjs.com/package/agora-rtc-sdk-ng) in React applications.
+
+# Installation
 
 ```bash
-npm add agora-rtc-sdk-ng agora-rtc-react
+npm i agora-rtc-react
 ```
 
-## Usage
+# Usage
+
+Here is the first one to get you started:
 
 ```tsx
+import AgoraRTC from "agora-rtc-sdk-ng";
+import { AgoraRTCProvider } from "agora-rtc-react";
 
+const Client = ({ children }) => {
+  return (
+    <AgoraRTCProvider client={AgoraRTC.createClient({ mode: "rtc", codec: "vp8" })}>
+      {children}
+    </AgoraRTCProvider>
+  );
+};
+const root = createRoot(document.getElementById("container"));
+root.render(<Client />);
 ```
 
-## Development
+This example will render Agora Client into a container on the page.
 
-1. Clone this project.
-2. `pnpm i` to install dependencies.
-3. `pnpm build` to build the library.
+# Examples
 
-- `pnpm storybook` to start the storybook.
+### You can view examples [on the website](https://agoraio-extensions.github.io/agora-rtc-react/basic/).
 
-## Examples
+### Or run in local by following steps:
 
-To start examples, you need to fill in Agora tokens.
+- add a `.env.local` file to each example directory and fill in the Agora account info following the format of `.env.example`.
+- `pnpm start` to start the example.
 
-- You can add a `.env.local` file to each example directory and fill in the Agora account info following the format of `.env.example`.
-- Or add a `.env.local` at monorepo root with `AGORA_APPID` and `AGORA_CERTIFICATE`, then `pnpm renew` to auto-renew tokens.
+# API
 
-- `pnpm start` to start the overview example.
-- `pnpm -F [package-name] run start` to start other examples.
+<!-- # Resources -->
 
-## License
+<!-- - changelog -->
+<!-- - [documentation](https://agoraio-extensions.github.io/agora-rtc-react) -->
+
+# License
 
 MIT © [Agora.io](https://github.com/AgoraIO)

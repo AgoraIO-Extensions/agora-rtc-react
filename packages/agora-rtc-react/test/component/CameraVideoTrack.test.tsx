@@ -4,12 +4,12 @@ import type { ICameraVideoTrack } from "agora-rtc-sdk-ng";
 import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 
-import { CameraVideoTrack } from "../src/components";
-import * as stories from "../src/components/CameraVideoTrack.stories";
+import { CameraVideoTrack } from "../../src/components";
+import * as stories from "../../src/components/CameraVideoTrack.stories";
 const { Enabled, EmptyTrack } = composeStories(stories);
-import { useAwaited } from "../src/hooks";
+import { useAwaited } from "../../src/hooks";
 
-vi.mock("../src/hooks", () => ({
+vi.mock("../../src/hooks", () => ({
   useAwaited: vi.fn(),
 }));
 const mockTrack: ICameraVideoTrack = {
@@ -17,7 +17,7 @@ const mockTrack: ICameraVideoTrack = {
 } as unknown as ICameraVideoTrack;
 const mockUseAwaited = useAwaited as Mock;
 
-describe("LocalVideoTrack component", () => {
+describe("CameraVideoTrack component", () => {
   test("renders without crashing", () => {
     mockUseAwaited.mockReturnValueOnce(mockTrack);
     const { container } = render(<CameraVideoTrack track={mockTrack} />);
@@ -34,7 +34,7 @@ describe("LocalVideoTrack component", () => {
   });
 });
 
-describe("LocalVideoTrack component stories", () => {
+describe("CameraVideoTrack component stories", () => {
   test("renders Enabled stories", () => {
     const { container } = render(<Enabled />);
     expect(container).toBeInTheDocument();
