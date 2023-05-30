@@ -9,6 +9,7 @@ import { RemoteUser } from "../../src/components";
 import * as stories from "../../src/components/RemoteUser.stories";
 import { AgoraRTCProvider } from "../../src/hooks";
 const { Overview, WithCover, WithControls } = composeStories(stories);
+import * as clientHook from "../../src/hooks/client";
 
 const mockAudioTrack: IRemoteAudioTrack = {
   setVolume: vi.fn(),
@@ -20,6 +21,13 @@ const mockVideoTrack: IRemoteVideoTrack = {
 } as unknown as IRemoteVideoTrack;
 
 describe("RemoteUser component", () => {
+  beforeAll(() => {
+    const spy = vi.spyOn(clientHook, "useIsConnected");
+    spy.mockReturnValue(true);
+  });
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
   test("renders without crashing", () => {
     const { container } = render(
       <AgoraRTCProvider client={FakeRTCClient.create()}>
@@ -61,6 +69,13 @@ describe("RemoteUser component", () => {
 });
 
 describe("RemoteUser component stories", () => {
+  beforeAll(() => {
+    const spy = vi.spyOn(clientHook, "useIsConnected");
+    spy.mockReturnValue(true);
+  });
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
   test("renders Overview stories", () => {
     const { container } = render(<Overview />);
     expect(container.querySelector("div")?.style.width).toBe("288px");
