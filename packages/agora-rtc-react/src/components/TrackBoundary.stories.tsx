@@ -5,7 +5,8 @@ import type { IAgoraRTCRemoteUser, ITrack } from "agora-rtc-sdk-ng";
 import { FakeRTCClient } from "fake-agora-rtc";
 import { useState } from "react";
 
-import { AgoraRTCProvider, TrackBoundary } from "../hooks";
+import { TrackBoundary } from "../components";
+import { AgoraRTCProvider } from "../hooks";
 
 import { RemoteUser } from ".";
 

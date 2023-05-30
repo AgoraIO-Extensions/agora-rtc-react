@@ -4,15 +4,15 @@ import type { ILocalAudioTrack } from "agora-rtc-sdk-ng";
 import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 
-import { LocalAudioTrack, useAutoPlayAudioTrack } from "../src/components";
-import * as stories from "../src/components/LocalAudioTrack.stories";
+import { LocalAudioTrack, useAutoPlayAudioTrack } from "../../src/components";
+import * as stories from "../../src/components/LocalAudioTrack.stories";
 const { Enabled } = composeStories(stories);
-import { useAwaited } from "../src/hooks";
+import { useAwaited } from "../../src/hooks";
 
-vi.mock("../src/hooks", () => ({
+vi.mock("../../src/hooks", () => ({
   useAwaited: vi.fn(),
 }));
-vi.mock("../src/components/TrackBoundary", () => ({
+vi.mock("../../src/components/TrackBoundary", () => ({
   useAutoPlayAudioTrack: vi.fn(),
 }));
 const mockTrack: ILocalAudioTrack = {

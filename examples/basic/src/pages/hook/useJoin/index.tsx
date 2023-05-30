@@ -17,6 +17,13 @@ const { Title, Paragraph, Text } = Typography;
 export const UseJoin = () => {
   const [calling, setCalling] = useState(false);
 
+  // you can use useJoin like this by passing a function as first argument.
+  // useJoin(async () => {
+  //   //you can do some actions like fetching token before calling join.
+  //   const getData = await fakeFetch("/get-token");
+  //   return JSON.parse(getData);
+  // }, calling);
+
   //local
   useJoin(
     {
