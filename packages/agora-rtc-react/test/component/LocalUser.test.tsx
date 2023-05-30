@@ -1,18 +1,12 @@
 import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
+import { FakeLocalAudioTrack } from "fake-agora-rtc";
 import { describe, expect, test, vi } from "vitest";
 
 import { LocalUser } from "../../src/components";
 import * as stories from "../../src/components/LocalUser.stories";
 const { Overview } = composeStories(stories);
-
-vi.mock("../../src/hooks", async () => {
-  const actual: object = await vi.importActual("../../src/hooks");
-  return {
-    ...actual,
-    useAwaited: vi.fn(),
-  };
-});
+import * as clientHook from "../../src/hooks/tools";
 
 describe("LocalUser component", () => {
   test("renders without crashing", () => {
@@ -23,6 +17,18 @@ describe("LocalUser component", () => {
   test("sets cover", () => {
     const cover = "test";
     const { container } = render(<LocalUser cover={cover} />);
+    expect(container.querySelector("img")?.getAttribute("src")).toBe(cover);
+  });
+
+  test("sets volume", async () => {
+    const cover = "test";
+    const track = FakeLocalAudioTrack.create();
+    const spy = vi.spyOn(clientHook, "useAwaited");
+    spy.mockReturnValue(track);
+    track.setVolume = vi.fn();
+
+    const { container } = render(<LocalUser audioTrack={track} cover={cover} volume={40} />);
+    expect(track.setVolume).toHaveBeenCalledWith(40);
     expect(container.querySelector("img")?.getAttribute("src")).toBe(cover);
   });
 
