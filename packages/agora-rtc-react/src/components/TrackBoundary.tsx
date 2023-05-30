@@ -151,5 +151,5 @@ export function useAutoPlayAudioTrack(
         };
       }
     }
-  }, [track, controller]);
+  }, [track, play, controller]);
 }
