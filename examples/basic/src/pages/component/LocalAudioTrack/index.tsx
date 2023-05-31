@@ -36,7 +36,7 @@ export const LocalAudioTrackComponent = () => {
   return (
     <Container>
       <div className="h-screen p-3">
-        <Title>audio track status</Title>
+        <Title>local audio track status</Title>
         {audioTrackState && (
           <>
             <Paragraph>{`muted: ${audioTrackState?.muted}`}</Paragraph>
