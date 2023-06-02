@@ -24,6 +24,17 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GH_TOKEN }}
 
+      - name: Install pnpm 🤏🏻
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: latest
+
+      - name: Setup Node 💚
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "pnpm"
+
       - name: Setup NPM auth token
         run: |
           npm set "//registry.npmjs.org/:_authToken" ${{ secrets.NPM_TOKEN }}
@@ -31,6 +42,7 @@ jobs:
       - name: Dry Run Release
         if: ${{ inputs.dry-run }}
         run: |
+          pnpm install
           pnpm release ${{ inputs.increment }} -d --ci
 
       - name: NPM Publish
