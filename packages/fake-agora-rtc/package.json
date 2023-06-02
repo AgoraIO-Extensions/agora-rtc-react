@@ -13,11 +13,17 @@
     "url": "https://github.com/AgoraIO-Extensions/agora-rtc-react/issues"
   },
   "main": "src/main.ts",
+  "scripts": {
+    "release": "release-it"
+  },
   "devDependencies": {
     "@ngneat/falso": "^6.4.0",
     "agora-rtc-sdk-ng": "^4.16.1",
     "side-effect-manager": "^1.2.2",
     "typescript": "^4.9.5",
     "vite": "^4.1.4"
+  },
+  "release-it": {
+    "git": false
   }
 }

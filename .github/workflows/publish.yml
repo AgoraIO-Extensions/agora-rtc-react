@@ -35,6 +35,10 @@ jobs:
           node-version: 18
           cache: "pnpm"
 
+      - name: Setup Dependencies 💚
+        run: |
+          pnpm install
+
       - name: Setup NPM auth token
         run: |
           npm set "//registry.npmjs.org/:_authToken" ${{ secrets.NPM_TOKEN }}
@@ -42,7 +46,6 @@ jobs:
       - name: Dry Run Release
         if: ${{ inputs.dry-run }}
         run: |
-          pnpm install
           pnpm release ${{ inputs.increment }} -d --ci
 
       - name: NPM Publish
