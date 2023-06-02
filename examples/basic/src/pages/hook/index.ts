@@ -1,4 +1,5 @@
 import UseConnectionState from "./useConnectionState";
+import UseCurrentUID from "./useCurrentUID";
 import UseIsConnected from "./useIsConnected";
 import UseJoin from "./useJoin";
 import UsePublish from "./usePublish";
@@ -23,6 +24,10 @@ const Hooks = [
   {
     label: "useIsConnected",
     component: UseIsConnected,
+  },
+  {
+    label: "useCurrentUID",
+    component: UseCurrentUID,
   },
 ];
 
