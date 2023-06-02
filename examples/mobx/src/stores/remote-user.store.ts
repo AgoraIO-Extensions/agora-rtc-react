@@ -28,7 +28,7 @@ export class MyRemoteUser {
   constructor(rtcUser: IAgoraRTCRemoteUser) {
     this.uid = rtcUser.uid;
     this.name = fakeName(rtcUser.uid);
-    this.avatar = fakeAvatar(rtcUser.uid);
+    this.avatar = fakeAvatar();
     this.rtcUser = rtcUser;
     this.micOn = rtcUser.hasAudio;
     this.cameraOn = rtcUser.hasVideo;
