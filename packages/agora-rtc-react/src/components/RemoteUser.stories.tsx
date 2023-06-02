@@ -85,7 +85,7 @@ export const WithCover: StoryObj<RemoteUserProps> = {
     },
     playVideo: false,
     playAudio: false,
-    cover: "http://placekitten.com/200/200",
+    cover: "https://www.agora.io/en/wp-content/uploads/2022/10/3d-spatial-audio-icon.svg",
     style: {
       width: 288,
       height: 216,
@@ -116,7 +116,7 @@ export const WithControls: StoryObj<RemoteUserProps> = {
       width: 288,
       height: 216,
     },
-    cover: "http://placekitten.com/200/200",
+    cover: "https://www.agora.io/en/wp-content/uploads/2022/10/3d-spatial-audio-icon.svg",
   },
   render: function WithControls(args) {
     const [user] = useState<IAgoraRTCRemoteUser | undefined>(() => args.user && { ...args.user });

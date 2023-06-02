@@ -73,7 +73,7 @@ export const WithCover: StoryObj<RemoteVideoPlayerProps> = {
   args: {
     playVideo: false,
     track: FakeRemoteVideoTrack.create(),
-    cover: "http://placekitten.com/200/200",
+    cover: "https://www.agora.io/en/wp-content/uploads/2022/10/3d-spatial-audio-icon.svg",
     style: {
       width: 288,
       height: 216,

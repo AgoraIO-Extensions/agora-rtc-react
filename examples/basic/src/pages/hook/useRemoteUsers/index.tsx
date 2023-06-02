@@ -21,7 +21,7 @@ export const UseRemoteUsers = () => {
 
   const uid = useCurrentUID() || 0;
   const userName = useMemo(() => fakeName(uid), [uid]);
-  const userAvatar = useMemo(() => fakeAvatar(uid), [uid]);
+  const userAvatar = useMemo(() => fakeAvatar(), []);
 
   const publishedUsers = usePublishedRemoteUsers();
 
@@ -67,7 +67,7 @@ export const UseRemoteUsers = () => {
           )}
           {remoteUsers.map(user => (
             <AutoLayout.Item key={user.uid}>
-              <RemoteUser cover={fakeAvatar(user.uid)} user={user} />
+              <RemoteUser cover={fakeAvatar()} user={user} />
               <Label>{`${fakeName(user.uid)}{${user.uid}}`}</Label>
             </AutoLayout.Item>
           ))}
