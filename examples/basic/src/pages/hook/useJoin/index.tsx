@@ -64,7 +64,7 @@ export const UseJoin = () => {
         <Room cameraOn={cameraOn} micOn={micOn} renderRemoteUsers={renderRemoteUsers} />
       ) : (
         <div className="h-screen p-3">
-          <Title>UseJoinAfterAction</Title>
+          <Title>UseJoin</Title>
           <Paragraph>
             By using <Text keyboard>UseJoin</Text> hook to join room.
           </Paragraph>
