@@ -1,7 +1,5 @@
 import {
-  LocalAudioTrack,
   LocalMicrophoneAndCameraUser,
-  useCurrentUID,
   useJoin,
   useLocalAudioTrack,
   useLocalCameraTrack,
@@ -23,11 +21,10 @@ export const LocalMicrophoneAndCameraUserComponent = () => {
     },
     true,
   );
-  const uid = useCurrentUID() || 0;
 
   const [micOn, setMic] = useState(false);
   const [cameraOn, setCamera] = useState(false);
-  const userAvatar = useMemo(() => fakeAvatar(uid), [uid]);
+  const userAvatar = useMemo(() => fakeAvatar(), []);
 
   const [audioTrackState, setAudioTrackState] = useState<{
     muted: boolean;
