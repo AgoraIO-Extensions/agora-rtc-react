@@ -1,0 +1,37 @@
+name: Generate Stories
+
+on:
+  workflow_dispatch:
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Install pnpm 🤏🏻
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: latest
+
+      - name: Setup Node 💚
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "pnpm"
+
+      - name: Generate Docs 📖
+        run: |
+          pnpm gene-stories
+      - name: Check for Changes
+        run: |
+          if git diff --quiet; then echo "No changes, exit"
+          else
+            git checkout -b doc/gene-doc
+            git add .
+            git commit -m "Update doc"
+            git push origin doc/gene-doc
+            gh pr create -B main -H doc/gene-doc --title 'generate-stories-doc' --body 'Created by Github action'
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
