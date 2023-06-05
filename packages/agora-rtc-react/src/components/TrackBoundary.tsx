@@ -108,6 +108,8 @@ export function useAutoPlayVideoTrack(
     if (track) {
       if (div && play) {
         track.play(div);
+      } else {
+        track.stop();
       }
 
       if (controller) {
@@ -138,6 +140,8 @@ export function useAutoPlayAudioTrack(
     if (track) {
       if (play) {
         track.play();
+      } else {
+        track.stop();
       }
 
       if (controller) {
