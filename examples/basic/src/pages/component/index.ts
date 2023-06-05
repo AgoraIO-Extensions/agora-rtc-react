@@ -1,4 +1,5 @@
 import LocalAudioTrackComponent from "./LocalAudioTrack";
+import LocalMicrophoneAndCameraUserComponent from "./LocalMicrophoneAndCameraUser";
 import LocalUserComponent from "./LocalUser";
 import LocalVideoTrackComponent from "./LocalVideoTrack";
 import RemoteAudioTrackComponent from "./RemoteAudioTrack";
@@ -24,6 +25,10 @@ const Components = [
   {
     label: "LocalUser",
     component: LocalUserComponent,
+  },
+  {
+    label: "LocalMicrophoneAndCameraUser",
+    component: LocalMicrophoneAndCameraUserComponent,
   },
 ];
 

@@ -47,11 +47,7 @@ export const UseJoin = () => {
       <>
         {videoTracks.map((track: IRemoteVideoTrack) => (
           <AutoLayout.Item key={track.getUserId()}>
-            <RemoteVideoPlayer
-              cover={fakeAvatar(track.getUserId())}
-              key={track.getUserId()}
-              track={track}
-            />
+            <RemoteVideoPlayer cover={fakeAvatar()} key={track.getUserId()} track={track} />
             <Label>{`${fakeName(track.getUserId())}{${track.getUserId()}}`}</Label>
           </AutoLayout.Item>
         ))}

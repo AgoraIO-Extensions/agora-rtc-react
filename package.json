@@ -5,19 +5,21 @@
   "scripts": {
     "prepare": "husky install",
     "build": "pnpm -r run build",
+    "release": "pnpm -F agora-rtc-react release",
     "start": "pnpm run example",
     "storybook": "pnpm -F agora-rtc-react run storybook",
     "build-storybook": "pnpm -F agora-rtc-react run build-storybook",
     "test": "pnpm -r run test",
     "lint": "eslint --ext .ts,.tsx . && prettier --check .",
     "lint:fix": "eslint --fix --ext .ts,.tsx . && prettier --write .",
-    "example": "pnpm -F example-mobx run start",
+    "example": "pnpm -F agora-rtc-react-example run start",
     "renew": "pnpm -r run renew",
     "copy-docs": "esbuild-dev ./scripts/copy-docs.ts"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.6.1",
     "@hyrious/esbuild-dev": "^0.9.1",
+    "@release-it/bumper": "^4.0.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@types/minimist": "^1.2.2",
     "@types/node": "^18.14.6",
@@ -37,6 +39,7 @@
     "lint-staged": "^13.2.1",
     "minimist": "^1.2.8",
     "prettier": "^2.8.4",
+    "release-it": "^15.10.3",
     "typescript": "^4.9.5"
   },
   "lint-staged": {
@@ -77,6 +80,30 @@
     },
     "patchedDependencies": {
       "seedrandom@3.0.5": "patches/seedrandom@3.0.5.patch"
+    }
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "v${version}"
+    },
+    "npm": {
+      "publish": true
+    },
+    "github": {
+      "release": true
+    },
+    "plugins": {
+      "@release-it/bumper": {
+        "out": {
+          "file": "package.json",
+          "path": [
+            "dependencies.agora-rtc-react",
+            "dependencies.agora-rtc-react-ui",
+            "dependencies.fake-agora-rtc"
+          ]
+        }
+      }
     }
   }
 }

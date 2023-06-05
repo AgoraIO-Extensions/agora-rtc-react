@@ -24,7 +24,7 @@ export const UsePublish = () => {
 
   const uid = useCurrentUID() || 0;
   const userName = useMemo(() => fakeName(uid), [uid]);
-  const userAvatar = useMemo(() => fakeAvatar(uid), [uid]);
+  const userAvatar = useMemo(() => fakeAvatar(), []);
 
   const publishedUsers = usePublishedRemoteUsers();
 
@@ -55,11 +55,7 @@ export const UsePublish = () => {
       <>
         {videoTracks.map((track: IRemoteVideoTrack) => (
           <AutoLayout.Item key={track.getUserId()}>
-            <RemoteVideoPlayer
-              cover={fakeAvatar(track.getUserId())}
-              key={track.getUserId()}
-              track={track}
-            />
+            <RemoteVideoPlayer cover={fakeAvatar()} key={track.getUserId()} track={track} />
             <Label>{`Layout1 ${fakeName(track.getUserId())}{${track.getUserId()}}`}</Label>
           </AutoLayout.Item>
         ))}

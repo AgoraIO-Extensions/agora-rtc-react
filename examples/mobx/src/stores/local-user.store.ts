@@ -24,7 +24,7 @@ export class MyLocalUser {
     this.client = client;
     this.uid = uid;
     this.name = fakeName(this.uid);
-    this.avatar = fakeAvatar(this.uid);
+    this.avatar = fakeAvatar();
     this.micOn = false;
     this.cameraOn = false;
     this.micTrack = void 0;

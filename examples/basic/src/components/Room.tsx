@@ -34,7 +34,7 @@ export function Room({
 
   const uid = useCurrentUID() || 0;
   const userName = useMemo(() => fakeName(uid), [uid]);
-  const userAvatar = useMemo(() => fakeAvatar(uid), [uid]);
+  const userAvatar = useMemo(() => fakeAvatar(), []);
 
   const remoteUsers = useRemoteUsers();
   const publishedUsers = usePublishedRemoteUsers();
