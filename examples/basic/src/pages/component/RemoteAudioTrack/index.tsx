@@ -29,7 +29,6 @@ export const RemoteAudioTrackComponent = () => {
 
   const remoteUsers = useRemoteUsers();
   const audioTracks = useRemoteAudioTracks(remoteUsers);
-  // audioTracks.map(track => track.play());
 
   useEffect(() => {
     if (audioTracks && audioTracks.length > 0) {
