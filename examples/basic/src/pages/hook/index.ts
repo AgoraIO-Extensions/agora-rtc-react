@@ -1,3 +1,5 @@
+import UseAutoPlayAudioTrack from "./useAutoPlayAudioTrack";
+import UseAutoPlayVideoTrack from "./useAutoPlayVideoTrack";
 import UseConnectionState from "./useConnectionState";
 import UseCurrentUID from "./useCurrentUID";
 import UseIsConnected from "./useIsConnected";
@@ -28,6 +30,14 @@ const Hooks = [
   {
     label: "useCurrentUID",
     component: UseCurrentUID,
+  },
+  {
+    label: "useAutoPlayAudioTrack",
+    component: UseAutoPlayAudioTrack,
+  },
+  {
+    label: "useAutoPlayVideoTrack",
+    component: UseAutoPlayVideoTrack,
   },
 ];
 
