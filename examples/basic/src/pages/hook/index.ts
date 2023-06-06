@@ -4,6 +4,7 @@ import UseConnectionState from "./useConnectionState";
 import UseCurrentUID from "./useCurrentUID";
 import UseIsConnected from "./useIsConnected";
 import UseJoin from "./useJoin";
+import UseNetworkQuality from "./useNetworkQuality";
 import UsePublish from "./usePublish";
 import UseRemoteUsers from "./useRemoteUsers";
 const Hooks = [
@@ -38,6 +39,10 @@ const Hooks = [
   {
     label: "useAutoPlayVideoTrack",
     component: UseAutoPlayVideoTrack,
+  },
+  {
+    label: "useNetworkQuality",
+    component: UseNetworkQuality,
   },
 ];
 
