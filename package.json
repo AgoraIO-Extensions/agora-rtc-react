@@ -53,7 +53,7 @@
     "*.{css,scss}": [
       "prettier --ignore-path .eslintignore --write"
     ],
-    "*.{html,md,yml}": [
+    "*.{html,md,mdx,yml}": [
       "prettier --ignore-path .eslintignore --write"
     ]
   },
