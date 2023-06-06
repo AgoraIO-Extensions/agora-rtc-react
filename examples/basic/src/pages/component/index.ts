@@ -5,6 +5,8 @@ import LocalUserComponent from "./LocalUser";
 import LocalVideoTrackComponent from "./LocalVideoTrack";
 import MicrophoneAudioTrackComponent from "./MicrophoneAudioTrack";
 import RemoteAudioTrackComponent from "./RemoteAudioTrack";
+import RemoteUserComponent from "./RemoteUser";
+import RemoteVideoPlayerComponent from "./RemoteVideoPlayer";
 import RemoteVideoTrackComponent from "./RemoteVideoTrack";
 
 const Components = [
@@ -39,6 +41,14 @@ const Components = [
   {
     label: "MicrophoneAudioTrack",
     component: MicrophoneAudioTrackComponent,
+  },
+  {
+    label: "RemoteUser",
+    component: RemoteUserComponent,
+  },
+  {
+    label: "RemoteVideoPlayer",
+    component: RemoteVideoPlayerComponent,
   },
 ];
 

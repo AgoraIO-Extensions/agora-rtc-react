@@ -1,10 +1,10 @@
-import { RemoteVideoTrack, useJoin, useRemoteUsers, useRemoteVideoTracks } from "agora-rtc-react";
+import { RemoteVideoPlayer, useJoin, useRemoteUsers, useRemoteVideoTracks } from "agora-rtc-react";
 import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import { Button, Typography } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { Container, MediaControl } from "../../../components";
-import { appConfig } from "../../../utils";
+import { appConfig, fakeAvatar } from "../../../utils";
 const { Title } = Typography;
 
 interface videoTrackStateList {
@@ -13,8 +13,9 @@ interface videoTrackStateList {
   track: IRemoteVideoTrack;
 }
 
-export const RemoteVideoTrackComponent = () => {
+export const RemoteVideoPlayerComponent = () => {
   const [calling, setCalling] = useState(false);
+  const userAvatar = useMemo(() => fakeAvatar(), []);
 
   useJoin(
     {
@@ -51,7 +52,7 @@ export const RemoteVideoTrackComponent = () => {
   return (
     <Container>
       <div className="h-screen p-3">
-        <Title>remote video track status</Title>
+        <Title>RemoteVideoPlayer</Title>
         {videoTrackStateList &&
           videoTrackStateList.length > 0 &&
           videoTrackStateList.map(item => (
@@ -62,14 +63,15 @@ export const RemoteVideoTrackComponent = () => {
                     item.isPlay = !item.isPlay;
                     setVideoTrackStateList([...videoTrackStateList]);
                   }}
-                  type="primary"
+                  type={item.isPlay ? "default" : "primary"}
                 >
-                  {`switch this remote video track play status`}
+                  {`${item.isPlay ? "stop" : "play"} RemoteVideoPlayer`}
                 </Button>
               </div>
               <div className="p-4 text-xl">
-                <RemoteVideoTrack
-                  play={item.isPlay}
+                <RemoteVideoPlayer
+                  cover={userAvatar}
+                  playVideo={item.isPlay}
                   style={{ width: "150px", height: "100px" }}
                   track={item.track}
                 />
@@ -87,4 +89,4 @@ export const RemoteVideoTrackComponent = () => {
   );
 };
 
-export default RemoteVideoTrackComponent;
+export default RemoteVideoPlayerComponent;

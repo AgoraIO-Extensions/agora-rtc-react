@@ -7,6 +7,12 @@ import { Container, MediaControl } from "../../../components";
 import { appConfig } from "../../../utils";
 const { Title } = Typography;
 
+interface audioTrackStateList {
+  isPlay: boolean;
+  id: string;
+  track: IRemoteAudioTrack;
+}
+
 export const RemoteAudioTrackComponent = () => {
   const [calling, setCalling] = useState(false);
 
@@ -19,24 +25,14 @@ export const RemoteAudioTrackComponent = () => {
     calling,
   );
 
-  const [audioTrackStateList, setAudioTrackStateList] = useState<
-    {
-      isPlay: boolean;
-      id: string;
-      track: IRemoteAudioTrack;
-    }[]
-  >();
+  const [audioTrackStateList, setAudioTrackStateList] = useState<audioTrackStateList[]>();
 
   const remoteUsers = useRemoteUsers();
   const audioTracks = useRemoteAudioTracks(remoteUsers);
 
   useEffect(() => {
     if (audioTracks && audioTracks.length > 0) {
-      const stateList: {
-        isPlay: boolean;
-        id: string;
-        track: IRemoteAudioTrack;
-      }[] = [];
+      const stateList: audioTrackStateList[] = [];
       audioTracks.map(track => {
         stateList.push({ isPlay: track.isPlaying, id: track.getTrackId(), track: track });
       });
@@ -45,6 +41,12 @@ export const RemoteAudioTrackComponent = () => {
       setAudioTrackStateList([]);
     }
   }, [audioTracks]);
+
+  useEffect(() => {
+    if (!calling) {
+      setAudioTrackStateList([]);
+    }
+  }, [calling]);
 
   return (
     <Container>
