@@ -46,7 +46,8 @@
     "build-storybook-docs": "storybook build --docs",
     "test": "vitest run --coverage",
     "test:watch": "vitest --ui",
-    "gene-stories": "esbuild-dev ../../scripts/generate-storybook-mdx.ts"
+    "gene-stories": "esbuild-dev ../../scripts/generate-storybook-mdx.ts",
+    "gene-docs": "esbuild-dev ../../scripts/generate-docs.ts"
   },
   "peerDependencies": {
     "agora-rtc-sdk-ng": "^4.1.0",
