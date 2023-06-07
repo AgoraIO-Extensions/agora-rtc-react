@@ -5,8 +5,6 @@ const packagePath = path.join(__dirname, "..", "packages", "agora-rtc-react");
 const docsPath = path.join(packagePath, "docs");
 const storiesPath = path.join(packagePath, "src", "stories");
 
-const docType = ["components", "hooks"];
-
 const copyDir = (sourceDir, targetDir) => {
   fs.readdir(sourceDir, (err, files) => {
     if (err) throw err;
@@ -16,6 +14,10 @@ const copyDir = (sourceDir, targetDir) => {
       fs.stat(sourcePath, (err, stats) => {
         if (err) throw err;
         if (stats.isDirectory()) {
+          // do not copy components
+          if (path.basename(sourcePath) === "components") {
+            return;
+          }
           fs.stat(targetPath, err => {
             if (err) throw err;
             copyDir(sourcePath, targetPath);
