@@ -1,0 +1,46 @@
+### LocalMicrophoneAndCameraUser
+
+该组件用于渲染本地用户的摄像头视频轨道和麦克风音频轨道（支持指定使用的媒体设备）。
+
+#### Props
+
+| 属性名           | 类型                    | 默认值 | 描述                                                                                                                                                                                                       |
+| ---------------- | ----------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `micOn`          | `boolean`               | -      | <li>`true`：打开本地用户的麦克风。</li><li>`false`：关闭本地用户的麦克风。</li>                                                                                                                            |
+| `cameraOn`       | `boolean`               | -      | <li>`true`：打开本地用户的摄像头。</li><li>`false`：关闭本地用户的摄像头。</li>                                                                                                                            |
+| `audioTrack`     | `IMicrophoneAudioTrack` | -      | 要播放的麦克风音频轨道。通过 [createMicrophoneAudioTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createmicrophoneaudiotrack) 创建。 |
+| `videoTrack`     | `ICameraVideoTrack`     | -      | 要播放的摄像头视频轨道。通过 [createCameraVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createcameravideotrack) 创建。         |
+| `playAudio`      | `boolean`               | -      | <li>`true`：播放本地用户的音频轨道。</li><li>`false`：停止播放本地用户的音频轨道。</li>                                                                                                                    |
+| `playVideo`      | `boolean`               | -      | <li>`true`：播放本地用户的视频轨道。</li><li>`false`：停止播放本地用户的视频轨道。</li>                                                                                                                    |
+| `micDeviceId`    | `string`                | -      | 麦克风设备 ID，通过 [getDevices](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getdevices) 获取。                                          |
+| `cameraDeviceId` | `string`                | -      | 摄像头设备 ID，通过 [getDevices](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getdevices) 获取。                                          |
+| `volume`         | `number`                | -      | 音量大小。取值范围从 0（静音）到 1000（最大音量）。100 为原始音量。                                                                                                                                        |
+| `cover`          | `string`                | -      | 当 `cameraOn` 为 `false` 时渲染的封面图片，用于替代视频画面显示。                                                                                                                                          |
+| `children`       | `ReactNode`             | -      | 需要展示的 React 节点。                                                                                                                                                                                    |
+
+#### 使用示例
+
+```jsx
+import {
+  LocalMicrophoneAndCameraUser,
+  useLocalAudioTrack,
+  useLocalCameraTrack,
+} from "agora-rtc-react";
+
+function App() {
+  //create local audio track
+  const audioTrack = useLocalAudioTrack();
+  //create local video track
+  const videoTrack = useLocalCameraTrack();
+
+  return (
+    <LocalMicrophoneAndCameraUser
+      audioTrack={audioTrack}
+      cameraOn
+      cover={COVER_IMAGE_URL}
+      micOn
+      videoTrack={videoTrack}
+    />
+  );
+}
+```

@@ -5,6 +5,8 @@ const packagePath = path.join(__dirname, "..", "packages", "agora-rtc-react");
 const docsPath = path.join(packagePath, "docs");
 const storiesPath = path.join(packagePath, "src", "stories");
 
+const docType = ["components", "hooks"];
+
 const copyDir = (sourceDir, targetDir) => {
   fs.readdir(sourceDir, (err, files) => {
     if (err) throw err;
@@ -14,13 +16,18 @@ const copyDir = (sourceDir, targetDir) => {
       fs.stat(sourcePath, (err, stats) => {
         if (err) throw err;
         if (stats.isDirectory()) {
-          fs.mkdir(targetPath, err => {
+          fs.stat(targetPath, err => {
             if (err) throw err;
             copyDir(sourcePath, targetPath);
           });
         } else {
-          const prependContent = `import Readme from "../../docs/${file}?raw";\r\rimport { Meta, Markdown } from "@storybook/blocks";\r\r<Meta title="Hook/${file.replace(
-            ".mdx",
+          //only copy .en-US.md
+          if (file.indexOf(".en-US") === -1) {
+            return;
+          }
+          const docType = path.basename(path.dirname(targetPath));
+          const prependContent = `import Readme from "../../../docs/${docType}/${file}?raw";\r\rimport { Meta, Markdown } from "@storybook/blocks";\r\r<Meta title="${docType}/${file.replace(
+            ".en-US.mdx",
             "",
           )}" />\r\r<Markdown>{Readme}</Markdown>\r`;
           fs.writeFile(targetPath, prependContent, err => {

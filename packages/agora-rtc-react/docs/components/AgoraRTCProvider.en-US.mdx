@@ -1,0 +1,22 @@
+### AgoraRTCProvider
+
+该`Provider`用于承载 `client` 对象。它将`client`提供给`children`内的各个组件。
+
+#### Props
+
+| 属性名     | 类型              | 默认值 | 描述                                                                                                                                          |
+| ---------- | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client`   | `IAgoraRTCClient` | -      | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
+| `children` | `ReactNode`       | -      | 需要展示的 React 节点。                                                                                                                       |
+
+#### 使用示例
+
+```jsx
+import { AgoraRTCProvider } from "agora-rtc-react";
+import AgoraRTC from "agora-rtc-sdk-ng";
+
+function App({ children }) {
+  const [client] = useState(() => AgoraRTC.createClient({ mode: "rtc", codec: "vp8" }));
+  return <AgoraRTCProvider client={client}>{children}</AgoraRTCProvider>;
+}
+```

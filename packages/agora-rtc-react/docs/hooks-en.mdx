@@ -1,411 +1,437 @@
-### AgoraRTCProvider
+### useAutoPlayVideoTrack
 
-该`Provider`用于承载 `client` 对象。它将`client`提供给`children`内的各个组件。
+用于在组件卸载时停止播放本地或远端视频轨道的 Hook。// TODO: 那当组件挂载时时默认开始播放吗？
 
-#### Props
+如果祖先元素中存在 `<TrackBoundary />`，则 `useAutoPlayVideoTrack` 不会在组件卸载时停止播放轨道，而是委托给 TrackBoundary。// TODO: TrackBoundary 组件之前说不用对外，那这里怎么描述比较好；另外“祖先元素”是不是叫“父节点”更好？
 
-| 属性名     | 类型              | 默认值 | 描述                                                                                                                                          |
-| ---------- | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client`   | `IAgoraRTCClient` | -      | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
-| `children` | `ReactNode`       | -      | 需要展示的 React 节点。                                                                                                                       |
+#### 参数
+
+| 参数名  | 类型               | 是否必选          | 描述                                 |
+| ------- | ------------------ | ----------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `track` | `IRemoteVideoTrack | ILocalVideoTrack` | 必选                                 | 远端视频轨道对象或本地视频轨道对象。                                                                   |
+| `play`  | `boolean`          | 可选              | 是否播放视频轨道。//TODO: 有默认值吗 |
+| `div`   | `HTMLElement       | null`             | 可选                                 | 用于渲染视频的 HTML 元素。如果提供了该参数，视频将在该元素中自动播放。如果未提供，则不会自动播放视频。 |
+
+#### 返回值
+
+无。
 
 #### 使用示例
 
 ```jsx
-import { AgoraRTCProvider } from "agora-rtc-react";
-import AgoraRTC from "agora-rtc-sdk-ng";
-
-function App({ children }) {
-  const [client] = useState(() => AgoraRTC.createClient({ mode: "rtc", codec: "vp8" }));
-  return <AgoraRTCProvider client={client}>{children}</AgoraRTCProvider>;
-}
+TODO:
 ```
 
-### AgoraRTCScreenShareProvider
+### useAutoPlayAudioTrack
 
-该`Provider`用于承载屏幕分享的`client` 对象。它将`client`提供给`children`内的各个组件。
+//TODO: 问题同 useAutoPlayVideoTrack
 
-#### Props
+用于在组件卸载时停止播放本地或远端音频轨道的 Hook。
 
-| 属性名     | 类型              | 默认值 | 描述                                                                                                                                          |
-| ---------- | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client`   | `IAgoraRTCClient` | -      | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
-| `children` | `ReactNode`       | -      | 需要展示的 React 节点。                                                                                                                       |
+如果祖先元素中存在 `<TrackBoundary />`，则在卸载时不会停止轨道，而是委托给 TrackBoundary。
 
-#### 注意事项
+#### 参数
 
-可与`AgoraRTCProvider`共存。但不会共享 client。
+| 参数名  | 类型               | 是否必选           | 描述               |
+| ------- | ------------------ | ------------------ | ------------------ | ------------------------------------ |
+| `track` | `IRemoteAudioTrack | ILocalAudioTrack>` | 必选               | 远端音频轨道对象或本地音频轨道对象。 |
+| `play`  | `boolean`          | 可选               | 是否播放音频轨道。 |
+
+#### 返回值
+
+无。
 
 #### 使用示例
 
 ```jsx
-import { AgoraRTCScreenShareProvider } from "agora-rtc-react";
-import AgoraRTC from "agora-rtc-sdk-ng";
-
-function App({ children }) {
-  const [client] = useState(() => AgoraRTC.createClient({ mode: "rtc", codec: "vp8" }));
-  return <AgoraRTCScreenShareProvider client={client}>{children}</AgoraRTCScreenShareProvider>;
-}
+TODO:
 ```
 
-### LocalAudioTrack
+### useConnectionState
 
-该组件用于渲染本地音频轨道。
+用于获取客户端连接状态的 Hook。
 
-#### Props
+#### 参数
 
-| 属性名     | 类型               | 默认值 | 描述                                                                                                                                                                                                     |
-| ---------- | ------------------ | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `track`    | `ILocalAudioTrack` | -      | 要播放的本地音频轨道。通过 [createMicrophoneAudioTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createmicrophoneaudiotrack) 创建。 |
-| `play`     | `boolean`          | -      | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                                                          |
-| `volume`   | `number`           | -      | 音量大小。取值范围从 0（静音）到 1000（最大音量）。100 为原始音量。                                                                                                                                      |
-| `disabled` | `boolean`          | -      | <li>`true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。</li><li>`false`：启用该轨道。</li>                                                                                                          |
-| `muted`    | `boolean`          | -      | <li>`true`：暂停发送该轨道的媒体数据。</li><li>`false`：恢复发送该轨道的媒体数据。</li>                                                                                                                  |
-| `children` | `ReactNode`        | -      | 需要展示的 React 节点。                                                                                                                                                                                  |
+| 参数名   | 类型             | 是否必选 | 描述 |
+| -------- | ---------------- | -------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client` | `IAgoraRTCClient | null`    | 可选 | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
 
-#### 注意事项
+#### 返回值
 
-设置 `disabled` 和 `muted` 属性时调用了 JavaScript SDK 的 [setEnabled](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setenabled) 方法和 [setMuted](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setmuted) 方法，因此：
-
-- 与设置 `disabled` 属性相比，设置 `muted` 属性的响应速度更快且不影响视频采集状态。
-- 不能同时设置 `muted` 属性和 `disabled` 属性。
+| 类型              | 描述                                                                                                                                                                 |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ConnectionState` | 客户端与服务器的连接状态。详见 [ConnectionState](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/globals.html#connectionstate)。 |
 
 #### 使用示例
 
 ```jsx
-import { LocalAudioTrack, useLocalAudioTrack } from "agora-rtc-react";
-
-function App() {
-  //create local audio track
-  const audioTrack = useLocalAudioTrack();
-
-  return <LocalAudioTrack track={audioTrack} play />;
-}
+TODO:
 ```
 
-### LocalVideoTrack
+### useIsConnected
 
-该组件用于渲染本地视频轨道（不支持指定使用的媒体设备）。
+用于获取客户端是否连接到服务器的 Hook。
 
-#### Props
+#### 参数
 
-| 属性名     | 类型               | 默认值 | 描述                                                                                                                                                                                                                                                                                                                                                               |
-| ---------- | ------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `track`    | `ILocalVideoTrack` | -      | 要渲染的本地视频轨道。通过 [createCameraVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createcameravideotrack) 或 [createScreenVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack) 创建。 |
-| `play`     | `boolean`          | -      | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                                                                                                                                                                                                                    |
-| `disabled` | `boolean`          | -      | <li>`true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。</li><li>`false`：启用该轨道。</li>                                                                                                                                                                                                                                                                    |
-| `muted`    | `boolean`          | -      | <li>`true`：暂停发送该轨道的媒体数据。</li><li>`false`：恢复发送该轨道的媒体数据。</li>                                                                                                                                                                                                                                                                            |
+| 参数名   | 类型             | 是否必选 | 描述 |
+| -------- | ---------------- | -------- | ---- | ------------------------ |
+| `client` | `IAgoraRTCClient | null`    | 可选 | `IAgoraRTCClient` 对象。 |
 
-#### 注意事项
+#### 返回值
 
-设置 `disabled` 和 `muted` 属性时其实是调用了 JavaScript SDK 的 [setEnabled](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setenabled) 方法和 [setMuted](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setmuted) 方法，因此：
-
-- 与设置 `disabled` 属性相比，设置 `muted` 属性的响应速度更快且不影响视频采集状态。
-- 不能同时设置 `muted` 属性和 `disabled` 属性。
+| 类型      | 描述                                                                              |
+| --------- | --------------------------------------------------------------------------------- |
+| `boolean` | <li>`true`：客户端已连接到服务器。</li><li>`false`：客户端没有连接到服务器。</li> |
 
 #### 使用示例
 
 ```jsx
-import { LocalVideoTrack, useLocalCameraTrack } from "agora-rtc-react";
-
-function App() {
-  //create local video track
-  const videoTrack = useLocalCameraTrack();
-
-  return <LocalVideoTrack track={videoTrack} play />;
-}
+TODO:
 ```
 
-### MicrophoneAudioTrack
+### useCurrentUID
 
-该组件用于渲染本地麦克风音频轨道（支持指定使用的媒体设备）。
+用于获取当前用户 UID 的 Hook。
 
-#### Props
+#### 参数
 
-| 属性名     | 类型                    | 默认值 | 描述                                                                                                                                                                                                       |
-| ---------- | ----------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `track`    | `IMicrophoneAudioTrack` | -      | 要渲染的麦克风音频轨道。通过 [createMicrophoneAudioTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createmicrophoneaudiotrack) 创建。 |
-| `deviceId` | `string`                | -      | 要使用的设备 ID，通过 [getDevices](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getdevices) 获取。                                        |
-| `play`     | `boolean`               | -      | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                                                            |
-| `volume`   | `number`                | -      | 音量大小。取值范围从 0（静音）到 1000（最大音量）。100 为原始音量。                                                                                                                                        |
-| `disabled` | `boolean`               | -      | <li>`true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。</li><li>`false`：启用该轨道。</li>                                                                                                            |
-| `muted`    | `boolean`               | -      | <li>`true`：暂停发送该轨道的媒体数据。</li><li>`false`：恢复发送该轨道的媒体数据。</li>                                                                                                                    |
-| `children` | `ReactNode`             | -      | 需要展示的 React 节点。                                                                                                                                                                                    |
+| 参数名   | 类型             | 是否必选 | 描述 |
+| -------- | ---------------- | -------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client` | `IAgoraRTCClient | null`    | 可选 | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
+
+#### 返回值
+
+| 类型 | 描述       |
+| ---- | ---------- | ------------------------------------------------------------------ |
+| `UID | undefined` | 当前用户的 UID。如果当前用户没有加入任何频道，则返回 `undefined`。 |
 
 #### 使用示例
 
 ```jsx
-import { LocalAudioTrack, useLocalAudioTrack } from "agora-rtc-react";
-
-function App() {
-  //create local audio track
-  const audioTrack = useLocalAudioTrack();
-
-  return <LocalAudioTrack track={audioTrack} play />;
-}
+TODO:
 ```
 
-### CameraVideoTrack
+### useNetworkQuality
 
-该组件用于渲染本地摄像头视频轨道（支持指定使用的媒体设备）。
+用于获取本地用户网络质量的 Hook。
 
-#### Props
+#### 参数
 
-| 属性名     | 类型                | 默认值 | 描述                                                                                                                                                                                              |
-| ---------- | ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `track`    | `ICameraVideoTrack` | -      | 要渲染的摄像头视频轨道。通过 [createCameraVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createcameravideotrack)创建。 |
-| `deviceId` | `string`            | -      | 要使用的设备 ID。通过 [getDevices](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getdevices) 获取。                               |
-| `play`     | `boolean`           | -      | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                                                   |
-| `disabled` | `boolean`           | -      | <li>`true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。</li><li>`false`：启用该轨道。</li>                                                                                                   |
-| `muted`    | `boolean`           | -      | <li>`true`：暂停发送该轨道的媒体数据。</li><li>`false`：恢复发送该轨道的媒体数据。</li>                                                                                                           |
+| 参数名   | 类型             | 是否必选 | 描述 |
+| -------- | ---------------- | -------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client` | `IAgoraRTCClient | null`    | 可选 | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
 
-#### 注意事项
+#### 返回值
 
-设置 `disabled` 和 `muted` 属性时调用了 JavaScript SDK 的 [setEnabled](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setenabled) 方法和 [setMuted](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setmuted) 方法，因此：
-
-- 与设置 `disabled` 属性相比，设置 `muted` 属性的响应速度更快且不影响视频采集状态。
-- 不能同时设置 `muted` 属性和 `disabled` 属性。
+| 类型             | 描述                                                                                                                                                             |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NetworkQuality` | 本地用户的网络质量信息。详见 [NetworkQuality](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/globals.html#networkquality)。 |
 
 #### 使用示例
 
 ```jsx
-import { CameraVideoTrack, useLocalCameraTrack } from "agora-rtc-react";
-
-function App() {
-  //create local video track
-  const videoTrack = useLocalCameraTrack();
-
-  return <CameraVideoTrack track={videoTrack} play />;
-}
+TODO:
 ```
 
-### LocalUser
+### useAutoJoin
 
-该组件通过用于渲染本地用户的摄像头视频轨道和麦克风音频轨道（不支持指定使用的媒体设备）。
+用于自动加入频道和管理本地音视频轨道的 Hook。
 
-#### Props
+#### 参数
 
-| 属性名       | 类型                    | 默认值 | 描述                                                                                                                                                                                                       |
-| ------------ | ----------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `micOn`      | `boolean`               | -      | <li>`true`：打开本地用户的麦克风。</li><li>`false`：关闭本地用户的麦克风。</li>                                                                                                                            |
-| `cameraOn`   | `boolean`               | -      | <li>`true`：打开本地用户的摄像头。</li><li>`false`：关闭本地用户的摄像头。</li>                                                                                                                            |
-| `audioTrack` | `IMicrophoneAudioTrack` | -      | 要播放的麦克风音频轨道。通过 [createMicrophoneAudioTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createmicrophoneaudiotrack) 创建。 |
-| `videoTrack` | `ICameraVideoTrack`     | -      | 要播放的摄像头视频轨道。通过 [createCameraVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createcameravideotrack) 创建。         |
-| `playAudio`  | `boolean`               | -      | <li>`true`：播放本地用户的音频轨道。</li><li>`false`：停止播放本地用户的音频轨道。</li>                                                                                                                    |
-| `playVideo`  | `boolean`               | -      | <li>`true`：播放本地用户的视频轨道。</li><li>`false`：停止播放本地用户的视频轨道。</li>                                                                                                                    |
-| `volume`     | `number`                | -      | 音量大小。取值范围从 0（静音）到 1000（最大音量）。100 为原始音量。                                                                                                                                        |
-| `cover`      | `string`                | -      | 如果 `cameraOn` 为 `false`，则渲染封面图片。                                                                                                                                                               |
-| `children`   | `ReactNode`             | -      | 需要展示的 React 节点。                                                                                                                                                                                    |
+| 参数名    | 类型             | 是否必选 | 描述                                                                                                                                                                  |
+| --------- | ---------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `appid`   | `string`         | 必选     | 声网项目的 App ID。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。 |
+| `channel` | `string`         | 必选     | 要加入的频道名称。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。  |
+| `token`   | `string          | null`    | 必选                                                                                                                                                                  | 用于鉴权的 Token，如果频道启用了 Token 鉴权机制，则需要提供有效的 Token；如果没有启用 Token 鉴权，则传入 `null`。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。 |
+| `uid`     | `UID             | null`    | 可选                                                                                                                                                                  | 用户 ID，如果不提供则由服务器自动生成。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。                                                                           |
+| `client`  | `IAgoraRTCClient | null`    | 可选                                                                                                                                                                  | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。                                                                                                                       |
+
+#### 返回值
+
+无。
 
 #### 使用示例
 
 ```jsx
-import { LocalUser, useLocalAudioTrack, useLocalCameraTrack } from "agora-rtc-react";
-
-function App() {
-  //create local audio track
-  const audioTrack = useLocalAudioTrack();
-  //create local video track
-  const videoTrack = useLocalCameraTrack();
-
-  return (
-    <LocalUser
-      audioTrack={audioTrack}
-      cameraOn
-      cover={COVER_IMAGE_URL}
-      micOn
-      playAudio
-      playVideo
-      videoTrack={videoTrack}
-    />
-  );
-}
+TODO:
 ```
 
-### LocalMicrophoneAndCameraUser
+### useOptionalRTCClient
 
-该组件用于渲染本地用户的摄像头视频轨道和麦克风音频轨道（支持指定使用的媒体设备）。
+用于从上下文中获取 `IAgoraRTCClient` 对象的 Hook。
 
-#### Props
+#### 参数
 
-| 属性名           | 类型                    | 默认值 | 描述                                                                                                                                                                                                       |
-| ---------------- | ----------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `micOn`          | `boolean`               | -      | <li>`true`：打开本地用户的麦克风。</li><li>`false`：关闭本地用户的麦克风。</li>                                                                                                                            |
-| `cameraOn`       | `boolean`               | -      | <li>`true`：打开本地用户的摄像头。</li><li>`false`：关闭本地用户的摄像头。</li>                                                                                                                            |
-| `audioTrack`     | `IMicrophoneAudioTrack` | -      | 要播放的麦克风音频轨道。通过 [createMicrophoneAudioTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createmicrophoneaudiotrack) 创建。 |
-| `videoTrack`     | `ICameraVideoTrack`     | -      | 要播放的摄像头视频轨道。通过 [createCameraVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createcameravideotrack) 创建。         |
-| `playAudio`      | `boolean`               | -      | <li>`true`：播放本地用户的音频轨道。</li><li>`false`：停止播放本地用户的音频轨道。</li>                                                                                                                    |
-| `playVideo`      | `boolean`               | -      | <li>`true`：播放本地用户的视频轨道。</li><li>`false`：停止播放本地用户的视频轨道。</li>                                                                                                                    |
-| `micDeviceId`    | `string`                | -      | 麦克风设备 ID，通过 [getDevices](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getdevices) 获取。                                          |
-| `cameraDeviceId` | `string`                | -      | 摄像头设备 ID，通过 [getDevices](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getdevices) 获取。                                          |
-| `volume`         | `number`                | -      | 音量大小。取值范围从 0（静音）到 1000（最大音量）。100 为原始音量。                                                                                                                                        |
-| `cover`          | `string`                | -      | 当 `cameraOn` 为 `false` 时渲染的封面图片，用于替代视频画面显示。                                                                                                                                          |
-| `children`       | `ReactNode`             | -      | 需要展示的 React 节点。                                                                                                                                                                                    |
+| 参数名   | 类型             | 是否必选 | 描述 |
+| -------- | ---------------- | -------- | ---- | ------------------------------------------------------------------------------------------------------------ |
+| `client` | `IAgoraRTCClient | null`    | 可选 | 如果传入该参数，则使用传入的 `IAgoraRTCClient` 对象；如果不传入该参数，则使用返回的 `IAgoraRTCClient` 对象。 |
+
+#### 返回值
+
+| 类型             | 描述  |
+| ---------------- | ----- | ------------------------ |
+| `IAgoraRTCClient | null` | `IAgoraRTCClient` 对象。 |
 
 #### 使用示例
 
 ```jsx
-import {
-  LocalMicrophoneAndCameraUser,
-  useLocalAudioTrack,
-  useLocalCameraTrack,
-} from "agora-rtc-react";
-
-function App() {
-  //create local audio track
-  const audioTrack = useLocalAudioTrack();
-  //create local video track
-  const videoTrack = useLocalCameraTrack();
-
-  return (
-    <LocalMicrophoneAndCameraUser
-      audioTrack={audioTrack}
-      cameraOn
-      cover={COVER_IMAGE_URL}
-      micOn
-      videoTrack={videoTrack}
-    />
-  );
-}
+TODO:
 ```
 
-### RemoteAudioTrack
+### useRTCClient
 
-该组件用于渲染远端用户的音频轨道，并且支持指定播放设备。
+用于从上下文中获取 `IAgoraRTCClient` 对象的 Hook。如果没有获取到该对象，则抛出错误。
 
-#### Props
+#### 参数
 
-| 属性名             | 类型                | 默认值 | 描述                                                                                                                                                                                                                                                                                                       |
-| ------------------ | ------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `track`            | `IRemoteAudioTrack` | -      | 要播放的远端音频轨道。详见 [IRemoteAudioTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iremoteaudiotrack.html)。                                                                                                                                    |
-| `play`             | `boolean`           | -      | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                                                                                                                                                            |
-| `playbackDeviceId` | `string`            | -      | 要使用的播放设备 ID，例如扬声器。设备 ID 通过 [getPlaybackDevices](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getplaybackdevices) 获取。该属性仅支持桌面端的 Chrome 浏览器，在其它浏览器上修改该属性的值将会抛出 `NOT_SUPPORTED` 错误。 |
-| `volume`           | `number`            | -      | 音量大小。取值范围从 0（静音）到 1000（最大音量）。100 为原始音量。                                                                                                                                                                                                                                        |
-| `children`         | `ReactNode`         | -      | 需要展示的 React 节点。                                                                                                                                                                                                                                                                                    |
+| 参数名   | 类型             | 是否必选 | 描述 |
+| -------- | ---------------- | -------- | ---- | ------------------------------------------------------------------------------------------------------------ |
+| `client` | `IAgoraRTCClient | null`    | 可选 | 如果传入该参数，则使用传入的 `IAgoraRTCClient` 对象；如果不传入该参数，则使用返回的 `IAgoraRTCClient` 对象。 |
+
+#### 返回值
+
+| 类型              | 描述                     |
+| ----------------- | ------------------------ |
+| `IAgoraRTCClient` | `IAgoraRTCClient` 对象。 |
 
 #### 使用示例
 
 ```jsx
-import { RemoteAudioTrack, useJoin, useRemoteAudioTracks, useRemoteUsers } from "agora-rtc-react";
-
-function App() {
-  //get remote users
-  const remoteUsers = useRemoteUsers();
-  //get remote audio tracks by remote users
-  const audioTracks = useRemoteAudioTracks(remoteUsers);
-
-  return (
-    <>
-      {audioTracks.map(track => (
-        <RemoteAudioTrack key={track.getUserId()} play track={track} />
-      ))}
-    </>
-  );
-}
+TODO:
 ```
 
-### RemoteVideoTrack
+### useRemoteUserTrack
 
-该组件用于渲染远端用户的视频轨道。
+用于获取远端用户视频轨道的 Hook。
 
-#### Props
+#### 参数
 
-| 属性名  | 类型                | 默认值 | 描述                                                                                                                                                                |
-| ------- | ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `track` | `IRemoteVideoTrack` | -      | 远端视频轨道对象。详见 [IRemoteVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iremotevideotrack.html)。 |
-| `play`  | `boolean`           | -      | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                     |
+| 参数名      | 类型                 | 是否必选   | 描述                             |
+| ----------- | -------------------- | ---------- | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `user`      | `IAgoraRTCRemoteUser | undefined` | 必选                             | 远端用户对象。                                                                                                                                                                          |
+| `mediaType` | `"video"`            | 必选       | 媒体类型，目前仅支持 `"video"`。 |
+| `client`    | `IAgoraRTCClient     | null`      | 可选                             | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。。如果提供了客户端实例，则使用提供的实例。 |
+
+#### 返回值
+
+| 类型               | 描述       |
+| ------------------ | ---------- | ---------------------------------------------------------------------- |
+| `IRemoteVideoTrack | undefined` | 远端用户的视频轨道。如果远端用户或视频轨道不存在，则返回 `undefined`。 |
 
 #### 使用示例
 
 ```jsx
-import { RemoteAudioTrack, useJoin, useRemoteAudioTracks, useRemoteUsers } from "agora-rtc-react";
-
-function App() {
-  //get remote users
-  const remoteUsers = useRemoteUsers();
-  //get remote audio tracks by remote users
-  const audioTracks = useRemoteAudioTracks(remoteUsers);
-
-  return (
-    <>
-      {audioTracks.map(track => (
-        <RemoteAudioTrack key={track.getUserId()} play track={track} />
-      ))}
-    </>
-  );
-}
+TODO:
 ```
 
-### RemoteUser
+### useVolumeLevel
 
-该组件用于订阅和播放远端用户的视频和音频轨道（支持指定使用的音频设备）。
+用于获取音频轨道音量级别的 Hook。
 
-#### Props
+#### 参数
 
-| 属性名             | 类型                          | 默认值                                                                                                                                                     | 描述                                                                                                                                                                                                                                                                                                       |
-| ------------------ | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `user`             | `IAgoraRTCRemoteUser`         | -                                                                                                                                                          | 远端用户对象。详见 [IAgoraRTCRemoteUser](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcremoteuser.html)。                                                                                                                                        |
-| `playVideo`        | `boolean`                     | [user.hasVideo](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcremoteuser.html#hasvideo) 属性的值 | <li>`true`：播放远端用户的视频轨道。</li><li>`false`：停止播放远端用户的视频轨道。</li>                                                                                                                                                                                                                    |
-| `playAudio`        | `boolean`                     | [user.hasAudio](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcremoteuser.html#hasaudio) 属性的值 | <li>`true`：播放远端用户的音频轨道。</li><li>`false`：停止播放远端用户的音频轨道。</li>                                                                                                                                                                                                                    |
-| `playbackDeviceId` | `string`                      | -                                                                                                                                                          | 要使用的播放设备 ID，例如扬声器。设备 ID 通过 [getPlaybackDevices](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getplaybackdevices) 获取。该属性仅支持桌面端的 Chrome 浏览器，在其它浏览器上修改该属性的值将会抛出 `NOT_SUPPORTED` 错误。 |
-| `volume`           | `number`                      | -                                                                                                                                                          | 音量大小。取值范围从 0（静音）到 1000（最大音量）。100 为原始音量。                                                                                                                                                                                                                                        |
-| `cover`            | `string` 或 `() => ReactNode` | -                                                                                                                                                          | 当 `playVideo` 为 `false`时要渲染的封面图片或自定义组件，用于替代视频画面显示。                                                                                                                                                                                                                            |
-| `children`         | `ReactNode`                   | -                                                                                                                                                          | 需要展示的 React 节点。                                                                                                                                                                                                                                                                                    |
+| 参数名       | 类型               | 是否必选         | 描述       |
+| ------------ | ------------------ | ---------------- | ---------- | ---- | ------------------------------------------------ |
+| `audioTrack` | `IRemoteAudioTrack | ILocalAudioTrack | undefined` | 可选 | 本地或远端音频轨道。如果未定义，则音量级别为 0。 |
+
+#### 返回值
+
+| 类型     | 描述                                |
+| -------- | ----------------------------------- |
+| `number` | 音频轨道的音量级别，范围从 0 到 1。 |
 
 #### 使用示例
 
 ```jsx
-import { RemoteUser, useRemoteUsers } from "agora-rtc-react";
-
-function App() {
-  //get remote users
-  const remoteUsers = useRemoteUsers();
-
-  return (
-    <>
-      {remoteUsers.map(user => (
-        <RemoteUser key={user.uid} user={user} />
-      ))}
-    </>
-  );
-}
+TODO:
 ```
 
-### RemoteVideoPlayer
+### useRemoteUsers
 
-该组件用于订阅和播放远端用户的视频轨道。
+用于获取远端用户列表的 Hook。
 
-#### Props
+#### 参数
 
-| 属性名      | 类型                          | 默认值                                                                                                                                                     | 描述                                                                                                                                                                |
-| ----------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `track`     | `IRemoteVideoTrack`           | -                                                                                                                                                          | 远端视频轨道对象。详见 [IRemoteVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iremotevideotrack.html)。 |
-| `playVideo` | `boolean`                     | [user.hasVideo](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcremoteuser.html#hasvideo) 属性的值 | <li>`true`：播放远端用户的视频轨道。</li><li>`false`：停止播放远端用户的视频轨道。</li>                                                                             |
-| `cover`     | `string` 或 `() => ReactNode` | -                                                                                                                                                          | 当 `playVideo` 为 `false`时要渲染的封面图片或自定义组件，用于替代视频画面显示。                                                                                     |
-| `client`    | `IAgoraRTCClient`             | -                                                                                                                                                          | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。                       |
-| `children`  | `ReactNode`                   | -                                                                                                                                                          | 需要展示的 React 节点。                                                                                                                                             |
+| 参数名   | 类型             | 是否必选 | 描述 |
+| -------- | ---------------- | -------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client` | `IAgoraRTCClient | null`    | 可选 | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
 
-#### 注意事项
+#### 返回值
 
-一个 `IRemoteVideoTrack` 对象只能由一个 `RemoteVideoPlayer` 拥有。
+| 类型                    | 描述           |
+| ----------------------- | -------------- |
+| `IAgoraRTCRemoteUser[]` | 远端用户列表。 |
 
 #### 使用示例
 
 ```jsx
-import { RemoteUser, useRemoteUsers, useRemoteVideoTracks } from "agora-rtc-react";
+TODO:
+```
 
-function App() {
-  //get remote users
-  const remoteUsers = useRemoteUsers();
-  //get remote video tracks by remote users
-  const videoTracks = useRemoteVideoTracks(remoteUsers);
+### usePublishedRemoteUsers
 
-  return (
-    <>
-      {videoTracks.map(track => (
-        <RemoteVideoPlayer key={track.getUserId()} track={track} />
-      ))}
-    </>
-  );
-}
+用于更新远端用户发布状态的 Hook。当远端用户发布或取消发布音频或视频轨道时，更新远端用户列表。
+
+#### 参数
+
+| 参数名   | 类型             | 是否必选 | 描述 |
+| -------- | ---------------- | -------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client` | `IAgoraRTCClient | null`    | 可选 | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
+
+#### 返回值
+
+| 类型                    | 描述                                   |
+| ----------------------- | -------------------------------------- |
+| `IAgoraRTCRemoteUser[]` | 当前发布音频或视频轨道的远端用户列表。 |
+
+#### 使用示例
+
+```jsx
+TODO:
+```
+
+### useRemoteVideoTracks
+
+用于自动订阅和获取远端用户视频轨道的 Hook。当组件卸载时， 该 Hook 会停止订阅所有远端用户。
+
+#### 参数
+
+| 参数名   | 类型                   | 是否必选   | 描述 |
+| -------- | ---------------------- | ---------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `users`  | `IAgoraRTCRemoteUser[] | undefined` | 必选 | 远端用户列表。                                                                                                                                  |
+| `client` | `IAgoraRTCClient       | null`      | 可选 | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。。 |
+
+#### 返回值
+
+| 类型                  | 描述                     |
+| --------------------- | ------------------------ |
+| `IRemoteVideoTrack[]` | 远端用户的视频轨道列表。 |
+
+#### 使用示例
+
+```
+TODO:
+```
+
+### useRemoteAudioTracks
+
+用于自动订阅和获取远端用户音频轨道的 Hook。当组件卸载时， 该 Hook 会停止订阅所有远端用户。
+
+#### 参数
+
+| 参数名   | 类型                   | 是否必选   | 描述 |
+| -------- | ---------------------- | ---------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `users`  | `IAgoraRTCRemoteUser[] | undefined` | 必选 | 远端用户列表。                                                                                                                                  |
+| `client` | `IAgoraRTCClient       | null`      | 可选 | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。。 |
+
+#### 返回值
+
+| 类型                  | 描述                     |
+| --------------------- | ------------------------ |
+| `IRemoteVideoTrack[]` | 远端用户的音频轨道列表。 |
+
+#### 使用示例
+
+```
+TODO:
+```
+
+### usePublish
+
+用于发布本地轨道的 Hook。本地轨道将在组件准备好时发布，在组件卸载时取消发布。
+
+#### 参数
+
+| 参数名           | 类型              | 是否必选 | 描述                                                                                                                                          |
+| ---------------- | ----------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `tracks`         | `(ILocalTrack     | null)[]` | 必选                                                                                                                                          | 本地轨道列表。 |
+| `readyToPublish` | `boolean`         | 可选     | 是否准备好进行发布。默认为 `true`。                                                                                                           |
+| `client`         | `IAgoraRTCClient` | 可选     | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
+
+#### 返回值
+
+无。
+
+#### 使用示例
+
+```jsx
+TODO:
+```
+
+### useJoin
+
+用于加入频道和管理本地音视频轨道的 Hook。还可以用于在加入频道前获取 Token。
+
+#### 参数
+
+| 参数名      | 类型              | 是否必选            | 描述                                                                                                                                          |
+| ----------- | ----------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| `fetchArgs` | `FetchArgs        | () => Promise<any>` | 必选                                                                                                                                          | 获取加入频道所需参数的函数或对象。 |
+| `ready`     | `boolean`         | 可选                | 是否准备好加入频道。默认为 `true`。                                                                                                           |
+| `client`    | `IAgoraRTCClient` | 可选                | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
+
+#### 返回值
+
+无。
+
+#### 使用示例
+
+```jsx
+TODO:
+```
+
+### useLocalAudioTrack
+
+用于创建本地麦克风音频轨道的 Hook。
+
+- 在组件被销毁之前，你只能调用一次 `useLocalAudioTrack`。
+- 组件卸载后，创建的轨道会停止发布。
+
+#### 参数
+
+| 参数名             | 类型                             | 是否必选 | 描述                                                                                                                                                                                                                                       |
+| ------------------ | -------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ready`            | `boolean`                        | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                                                                                                                                        |
+| `audioTrackConfig` | `MicrophoneAudioTrackInitConfig` | 可选     | 麦克风音频轨道的初始化配置，默认为 `{ ANS: true, AEC: true }`。详见 [MicrophoneAudioTrackInitConfig](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/microphoneaudiotrackinitconfig.html)。 |
+| `client`           | `IAgoraRTCClient`                | 可选     | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。                                                                                              |
+
+#### 返回值
+
+| 类型                   | 描述  |
+| ---------------------- | ----- | ------------------------ |
+| `IMicrophoneAudioTrack | null` | 本地麦克风音频轨道对象。 |
+
+#### 使用示例
+
+```jsx
+TODO:
+```
+
+### useLocalCameraTrack
+
+用于创建本地摄像头视频轨道的 Hook。
+
+- 在组件被销毁之前，你只能调用一次 `useLocalCameraTrack`。
+- 组件卸载后，创建的轨道会停止发布。
+
+#### 参数
+
+| 参数名   | 类型              | 是否必选 | 描述                                                                                                                                          |
+| -------- | ----------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ready`  | `boolean`         | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                                           |
+| `client` | `IAgoraRTCClient` | 可选     | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
+
+#### 返回值
+
+| 类型               | 描述  |
+| ------------------ | ----- | -------------------- |
+| `ICameraVideoTrack | null` | 摄像头视频轨道对象。 |
+
+#### 使用示例
+
+```jsx
+TODO:
 ```

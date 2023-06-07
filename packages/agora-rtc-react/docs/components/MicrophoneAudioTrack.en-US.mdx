@@ -1,0 +1,28 @@
+### MicrophoneAudioTrack
+
+该组件用于渲染本地麦克风音频轨道（支持指定使用的媒体设备）。
+
+#### Props
+
+| 属性名     | 类型                    | 默认值 | 描述                                                                                                                                                                                                       |
+| ---------- | ----------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `track`    | `IMicrophoneAudioTrack` | -      | 要渲染的麦克风音频轨道。通过 [createMicrophoneAudioTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createmicrophoneaudiotrack) 创建。 |
+| `deviceId` | `string`                | -      | 要使用的设备 ID，通过 [getDevices](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getdevices) 获取。                                        |
+| `play`     | `boolean`               | -      | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                                                            |
+| `volume`   | `number`                | -      | 音量大小。取值范围从 0（静音）到 1000（最大音量）。100 为原始音量。                                                                                                                                        |
+| `disabled` | `boolean`               | -      | <li>`true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。</li><li>`false`：启用该轨道。</li>                                                                                                            |
+| `muted`    | `boolean`               | -      | <li>`true`：暂停发送该轨道的媒体数据。</li><li>`false`：恢复发送该轨道的媒体数据。</li>                                                                                                                    |
+| `children` | `ReactNode`             | -      | 需要展示的 React 节点。                                                                                                                                                                                    |
+
+#### 使用示例
+
+```jsx
+import { LocalAudioTrack, useLocalAudioTrack } from "agora-rtc-react";
+
+function App() {
+  //create local audio track
+  const audioTrack = useLocalAudioTrack();
+
+  return <LocalAudioTrack track={audioTrack} play />;
+}
+```

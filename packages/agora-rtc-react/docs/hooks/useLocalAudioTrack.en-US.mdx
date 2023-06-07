@@ -1,0 +1,26 @@
+### useLocalAudioTrack
+
+用于创建本地麦克风音频轨道的 Hook。
+
+- 在组件被销毁之前，你只能调用一次 `useLocalAudioTrack`。
+- 组件卸载后，创建的轨道会停止发布。
+
+#### 参数
+
+| 参数名             | 类型                             | 是否必选 | 描述                                                                                                                                                                                                                                       |
+| ------------------ | -------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ready`            | `boolean`                        | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                                                                                                                                        |
+| `audioTrackConfig` | `MicrophoneAudioTrackInitConfig` | 可选     | 麦克风音频轨道的初始化配置，默认为 `{ ANS: true, AEC: true }`。详见 [MicrophoneAudioTrackInitConfig](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/microphoneaudiotrackinitconfig.html)。 |
+| `client`           | `IAgoraRTCClient`                | 可选     | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。                                                                                              |
+
+#### 返回值
+
+| 类型                   | 描述  |
+| ---------------------- | ----- | ------------------------ |
+| `IMicrophoneAudioTrack | null` | 本地麦克风音频轨道对象。 |
+
+#### 使用示例
+
+```jsx
+TODO:
+```

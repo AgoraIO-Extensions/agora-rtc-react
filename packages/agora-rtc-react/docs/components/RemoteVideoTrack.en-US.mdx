@@ -1,0 +1,31 @@
+### RemoteVideoTrack
+
+该组件用于渲染远端用户的视频轨道。
+
+#### Props
+
+| 属性名  | 类型                | 默认值 | 描述                                                                                                                                                                |
+| ------- | ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `track` | `IRemoteVideoTrack` | -      | 远端视频轨道对象。详见 [IRemoteVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iremotevideotrack.html)。 |
+| `play`  | `boolean`           | -      | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                     |
+
+#### 使用示例
+
+```jsx
+import { RemoteAudioTrack, useJoin, useRemoteAudioTracks, useRemoteUsers } from "agora-rtc-react";
+
+function App() {
+  //get remote users
+  const remoteUsers = useRemoteUsers();
+  //get remote audio tracks by remote users
+  const audioTracks = useRemoteAudioTracks(remoteUsers);
+
+  return (
+    <>
+      {audioTracks.map(track => (
+        <RemoteAudioTrack key={track.getUserId()} play track={track} />
+      ))}
+    </>
+  );
+}
+```

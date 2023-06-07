@@ -1,0 +1,34 @@
+### LocalAudioTrack
+
+该组件用于渲染本地音频轨道。
+
+#### Props
+
+| 属性名     | 类型               | 默认值 | 描述                                                                                                                                                                                                     |
+| ---------- | ------------------ | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `track`    | `ILocalAudioTrack` | -      | 要播放的本地音频轨道。通过 [createMicrophoneAudioTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createmicrophoneaudiotrack) 创建。 |
+| `play`     | `boolean`          | -      | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                                                          |
+| `volume`   | `number`           | -      | 音量大小。取值范围从 0（静音）到 1000（最大音量）。100 为原始音量。                                                                                                                                      |
+| `disabled` | `boolean`          | -      | <li>`true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。</li><li>`false`：启用该轨道。</li>                                                                                                          |
+| `muted`    | `boolean`          | -      | <li>`true`：暂停发送该轨道的媒体数据。</li><li>`false`：恢复发送该轨道的媒体数据。</li>                                                                                                                  |
+| `children` | `ReactNode`        | -      | 需要展示的 React 节点。                                                                                                                                                                                  |
+
+#### 注意事项
+
+设置 `disabled` 和 `muted` 属性时调用了 JavaScript SDK 的 [setEnabled](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setenabled) 方法和 [setMuted](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setmuted) 方法，因此：
+
+- 与设置 `disabled` 属性相比，设置 `muted` 属性的响应速度更快且不影响视频采集状态。
+- 不能同时设置 `muted` 属性和 `disabled` 属性。
+
+#### 使用示例
+
+```jsx
+import { LocalAudioTrack, useLocalAudioTrack } from "agora-rtc-react";
+
+function App() {
+  //create local audio track
+  const audioTrack = useLocalAudioTrack();
+
+  return <LocalAudioTrack track={audioTrack} play />;
+}
+```

@@ -1,0 +1,34 @@
+### RemoteAudioTrack
+
+该组件用于渲染远端用户的音频轨道，并且支持指定播放设备。
+
+#### Props
+
+| 属性名             | 类型                | 默认值 | 描述                                                                                                                                                                                                                                                                                                       |
+| ------------------ | ------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `track`            | `IRemoteAudioTrack` | -      | 要播放的远端音频轨道。详见 [IRemoteAudioTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iremoteaudiotrack.html)。                                                                                                                                    |
+| `play`             | `boolean`           | -      | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                                                                                                                                                            |
+| `playbackDeviceId` | `string`            | -      | 要使用的播放设备 ID，例如扬声器。设备 ID 通过 [getPlaybackDevices](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getplaybackdevices) 获取。该属性仅支持桌面端的 Chrome 浏览器，在其它浏览器上修改该属性的值将会抛出 `NOT_SUPPORTED` 错误。 |
+| `volume`           | `number`            | -      | 音量大小。取值范围从 0（静音）到 1000（最大音量）。100 为原始音量。                                                                                                                                                                                                                                        |
+| `children`         | `ReactNode`         | -      | 需要展示的 React 节点。                                                                                                                                                                                                                                                                                    |
+
+#### 使用示例
+
+```jsx
+import { RemoteAudioTrack, useJoin, useRemoteAudioTracks, useRemoteUsers } from "agora-rtc-react";
+
+function App() {
+  //get remote users
+  const remoteUsers = useRemoteUsers();
+  //get remote audio tracks by remote users
+  const audioTracks = useRemoteAudioTracks(remoteUsers);
+
+  return (
+    <>
+      {audioTracks.map(track => (
+        <RemoteAudioTrack key={track.getUserId()} play track={track} />
+      ))}
+    </>
+  );
+}
+```

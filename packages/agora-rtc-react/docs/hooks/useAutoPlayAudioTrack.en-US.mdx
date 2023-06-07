@@ -1,0 +1,24 @@
+### useAutoPlayAudioTrack
+
+//TODO: 问题同 useAutoPlayVideoTrack
+
+用于在组件卸载时停止播放本地或远端音频轨道的 Hook。
+
+如果祖先元素中存在 `<TrackBoundary />`，则在卸载时不会停止轨道，而是委托给 TrackBoundary。
+
+#### 参数
+
+| 参数名  | 类型               | 是否必选           | 描述               |
+| ------- | ------------------ | ------------------ | ------------------ | ------------------------------------ |
+| `track` | `IRemoteAudioTrack | ILocalAudioTrack>` | 必选               | 远端音频轨道对象或本地音频轨道对象。 |
+| `play`  | `boolean`          | 可选               | 是否播放音频轨道。 |
+
+#### 返回值
+
+无。
+
+#### 使用示例
+
+```jsx
+TODO:
+```
