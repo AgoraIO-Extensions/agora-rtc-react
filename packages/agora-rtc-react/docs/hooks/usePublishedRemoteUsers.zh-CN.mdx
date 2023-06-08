@@ -1,12 +1,14 @@
 ### usePublishedRemoteUsers
 
-用于更新远端用户发布状态的 Hook。当远端用户发布或取消发布音频或视频轨道时，更新远端用户列表。
+用于获取远端用户列表的 Hook。
+
+- 当远端用户发布或取消发布音频或视频轨道时，更新该 hook 的返回值。
 
 #### 参数
 
-| 参数名   | 类型             | 是否必选 | 描述 |
-| -------- | ---------------- | -------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client` | `IAgoraRTCClient | null`    | 可选 | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
+| 参数名   | 类型                                         | 是否必选 | 描述                                                                                                                                          |
+| -------- | -------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client` | `IAgoraRTCClient `<code>&#124;</code>` null` | 可选     | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
 
 #### 返回值
 
@@ -17,5 +19,12 @@
 #### 使用示例
 
 ```jsx
-TODO:
+import { usePublishedRemoteUsers } from "agora-rtc-react";
+
+function App() {
+  //get remote user list
+  const publishedRemoteUsers = usePublishedRemoteUsers();
+
+  return <></>;
+}
 ```

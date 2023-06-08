@@ -2,7 +2,7 @@
 
 用于创建本地摄像头视频轨道的 Hook。
 
-- 在组件被销毁之前，你只能调用一次 `useLocalCameraTrack`。
+- 在组件被销毁之前，该 Hook 只会创建一次音频轨道。
 - 组件卸载后，创建的轨道会停止发布。
 
 #### 参数
@@ -14,12 +14,18 @@
 
 #### 返回值
 
-| 类型               | 描述  |
-| ------------------ | ----- | -------------------- |
-| `ICameraVideoTrack | null` | 摄像头视频轨道对象。 |
+| 类型                                           | 描述                 |
+| ---------------------------------------------- | -------------------- |
+| `ICameraVideoTrack `<code>&#124;</code>` null` | 摄像头视频轨道对象。 |
 
 #### 使用示例
 
 ```jsx
-TODO:
+import { useLocalCameraTrack } from "agora-rtc-react";
+
+function App() {
+  const audioTrack = useLocalCameraTrack();
+
+  return <></>;
+}
 ```
