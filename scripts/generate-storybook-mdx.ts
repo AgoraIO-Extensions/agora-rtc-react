@@ -31,7 +31,7 @@ const copyDir = (sourceDir, targetDir) => {
           const prependContent = `import Readme from "../../../docs/${docType}/${file}?raw";\r\rimport { Meta, Markdown } from "@storybook/blocks";\r\r<Meta title="${docType}/${file.replace(
             ".en-US.mdx",
             "",
-          )}" />\r\r<Markdown>{Readme}</Markdown>\r`;
+          )}" />\r\r<Markdown options={{ namedCodesToUnicode: { VerticalLine: "\u007c" } }}>{Readme}</Markdown>\r`;
           fs.writeFile(targetPath, prependContent, err => {
             if (err) throw err;
             console.log(`${sourcePath} copied to ${targetPath}`);
