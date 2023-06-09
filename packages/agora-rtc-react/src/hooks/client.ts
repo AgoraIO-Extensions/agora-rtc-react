@@ -178,14 +178,14 @@ export function useAutoJoin(
   }, [appid, channel, token, uid, resolvedClient]);
 }
 
-export interface joinOptions {
+export interface JoinOptions {
   appid: string;
   channel: string;
   token: string | null;
   uid?: UID | null;
 }
 
-export type FetchArgs = (() => Promise<joinOptions>) | joinOptions;
+export type FetchArgs = (() => Promise<JoinOptions>) | JoinOptions;
 
 /**
  * a hook to join rtc channel
