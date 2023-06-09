@@ -89,6 +89,7 @@ export function LocalMicrophoneAndCameraUser({
         disabled={!micOn}
         play={playAudio}
         track={audioTrack}
+        volume={volume}
       />
       {cover && !cameraOn && <UserCover cover={cover} />}
       <div style={FloatBoxStyle}>{children}</div>
