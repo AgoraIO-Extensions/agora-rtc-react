@@ -79,7 +79,19 @@ export default function App() {
   return (
     <>
       <Layout>
-        <Sider collapsed={collapsed} collapsible onCollapse={value => setCollapsed(value)}>
+        <Sider
+          collapsed={collapsed}
+          collapsible
+          onCollapse={value => setCollapsed(value)}
+          style={{
+            overflow: "auto",
+            height: "100vh",
+            position: "fixed",
+            left: 0,
+            top: 0,
+            bottom: 0,
+          }}
+        >
           <Menu
             items={items}
             mode="inline"
@@ -92,7 +104,7 @@ export default function App() {
             theme="dark"
           />
         </Sider>
-        <Layout>
+        <Layout style={{ marginLeft: collapsed ? 80 : 200 }}>
           <Content>
             <Routes>
               <Route Component={() => <Setting />} path="/*" />

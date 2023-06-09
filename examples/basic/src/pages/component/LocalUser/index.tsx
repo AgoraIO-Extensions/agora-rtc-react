@@ -32,53 +32,50 @@ export const LocalUserComponent = () => {
   usePublish([audioTrack, videoTrack]);
   return (
     <Container>
-      <div className="h-screen p-3">
+      <div className="h-screen p-3 overflow-auto">
         <Title>local user status</Title>
-        <div className="p-4 text-xl">
-          <Button
-            onClick={() => {
-              setPlayAudio(a => !a);
-            }}
-            type={playAudio ? "primary" : "default"}
-          >
-            playAudio : {JSON.stringify(playAudio)}
-          </Button>
-        </div>
-        <div className="p-4 text-xl">
-          <Button
-            onClick={() => {
-              setPlayVideo(a => !a);
-            }}
-            type={playVideo ? "primary" : "default"}
-          >
-            playVideo : {JSON.stringify(playVideo)}
-          </Button>
-        </div>
-        <div className="p-4 text-xl">
-          <Button
-            onClick={() => {
-              setPlayVideo(true);
-              setCamera(false);
-            }}
-            type="primary"
-          >
-            cameraOn=false playVideo=true
-          </Button>
-        </div>
-        <div className="p-4 text-xl">
-          <Button
-            onClick={() => {
-              setPlayVideo(false);
-              setCamera(true);
-            }}
-            type="primary"
-          >
-            cameraOn=true playVideo=false
-          </Button>
-        </div>
+        <Button
+          className="m-2"
+          onClick={() => {
+            setPlayAudio(a => !a);
+          }}
+          type={playAudio ? "primary" : "default"}
+        >
+          playAudio : {JSON.stringify(playAudio)}
+        </Button>
+        <Button
+          className="m-2"
+          onClick={() => {
+            setPlayVideo(a => !a);
+          }}
+          type={playVideo ? "primary" : "default"}
+        >
+          playVideo : {JSON.stringify(playVideo)}
+        </Button>
+        <Button
+          className="m-2"
+          onClick={() => {
+            setPlayVideo(true);
+            setCamera(false);
+          }}
+          type="primary"
+        >
+          cameraOn=false playVideo=true
+        </Button>
+        <Button
+          className="m-2"
+          onClick={() => {
+            setPlayVideo(false);
+            setCamera(true);
+          }}
+          type="primary"
+        >
+          cameraOn=true playVideo=false
+        </Button>
         <LocalUser
           audioTrack={audioTrack}
           cameraOn={cameraOn}
+          className="m-2"
           micOn={micOn}
           playAudio={playAudio}
           playVideo={playVideo}
