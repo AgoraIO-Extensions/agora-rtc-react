@@ -28,6 +28,8 @@ jobs:
         run: |
           if git diff --quiet; then echo "No changes, no need to update docs."; exit 0;
           else
+            git config --global user.email "${{ secrets.GIT_EMAIL }}"
+            git config --global user.name "${{ secrets.GIT_USERNAME }}"
             git checkout -b doc/update-doc
             git add .
             git commit -m "Update doc"
