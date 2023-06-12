@@ -32,9 +32,9 @@ jobs:
             git config --global user.name "${{ secrets.GIT_USERNAME }}"
             git checkout -b doc/update-doc
             git add .
-            git commit -m "Update doc"
+            git commit -m "docs: update doc"
             git push origin doc/update-doc
-            gh pr create -B main -H doc/update-doc --title 'update-doc' --body 'Created by Github action'
+            gh pr create -B main -H doc/update-doc --title '📖update-doc' --body 'Created by Github action'
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
