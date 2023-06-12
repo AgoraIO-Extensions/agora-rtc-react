@@ -22,6 +22,7 @@ jobs:
 
       - name: Update Docs 📖
         run: |
+          pnpm install
           pnpm gene-docs
       - name: Check for Changes and Commit 📝
         run: |
