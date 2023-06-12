@@ -26,7 +26,7 @@ jobs:
           pnpm gene-docs
       - name: Check for Changes and Commit 📝
         run: |
-          if git diff --quiet; then echo "No changes, no need to commit."; exit 0;
+          if git diff --quiet; then echo "No changes, no need to update docs."; exit 0;
           else
             git checkout -b doc/update-doc
             git add .
