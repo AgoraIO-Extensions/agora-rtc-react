@@ -47,7 +47,8 @@
     "test": "vitest run --coverage",
     "test:watch": "vitest --ui",
     "gene-stories": "esbuild-dev ../../scripts/generate-storybook-mdx.ts",
-    "gene-docs": "esbuild-dev ../../scripts/generate-docs.ts"
+    "gene-md": "esbuild-dev ../../scripts/generate-docs.ts",
+    "gene-docs": "pnpm run gene-md && pnpm run gene-stories"
   },
   "peerDependencies": {
     "agora-rtc-sdk-ng": "^4.1.0",

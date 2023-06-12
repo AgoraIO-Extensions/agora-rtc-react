@@ -15,7 +15,6 @@
     "example": "pnpm -F agora-rtc-react-example run start",
     "renew": "pnpm -r run renew",
     "copy-docs": "esbuild-dev ./scripts/copy-docs.ts",
-    "gene-stories": "pnpm -r run gene-stories",
     "gene-docs": "pnpm -r run gene-docs"
   },
   "devDependencies": {
