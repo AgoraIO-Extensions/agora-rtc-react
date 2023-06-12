@@ -6,6 +6,12 @@ jobs:
   generate-docs:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout origin repo 🛎️
+        uses: actions/checkout@v3
+        with:
+          repository: AgoraIO/shengwang-doc-source
+          ref: rtc-react-beta
+
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
