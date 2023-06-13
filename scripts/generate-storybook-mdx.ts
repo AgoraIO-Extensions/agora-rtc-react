@@ -14,8 +14,8 @@ const copyDir = (sourceDir, targetDir) => {
       fs.stat(sourcePath, (err, stats) => {
         if (err) throw err;
         if (stats.isDirectory()) {
-          // do not copy components
-          if (path.basename(sourcePath) === "components") {
+          // only copy hooks
+          if (path.basename(sourcePath) !== "hooks") {
             return;
           }
           fs.stat(targetPath, err => {

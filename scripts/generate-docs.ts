@@ -4,7 +4,7 @@ import path from "node:path";
 const packagePath = path.join(__dirname, "..", "packages", "agora-rtc-react");
 const docsPath = path.join(packagePath, "docs");
 
-const docType = ["components", "hooks"];
+const docType = ["components", "hooks", "interfaces"];
 const languages = ["", "-en"];
 const languagesFormat = [".zh-CN", ".en-US"];
 
