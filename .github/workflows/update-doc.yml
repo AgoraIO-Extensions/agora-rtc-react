@@ -6,13 +6,13 @@ jobs:
   generate-docs:
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout origin repo 🛎️
-      #   uses: actions/checkout@v3
-      #   with:
-      #     repository: AgoraIO/shengwang-doc-source
-      #     ref: rtc-react-beta
-      #     path: "./shengwang-doc-source"
-      #     token: ${{ secrets.AGORAIO_ACCESS_TOKEN }}
+      - name: Checkout origin repo 🛎️
+        uses: actions/checkout@v3
+        with:
+          repository: guoxianzhe/docs
+          ref: main
+          path: "./video-call/react/docs"
+          # token: ${{ secrets.AGORAIO_ACCESS_TOKEN }}
 
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -33,6 +33,9 @@ jobs:
           git config --global user.email "${{ secrets.GIT_EMAIL }}"
           git config --global user.name "${{ secrets.GIT_USERNAME }}"
           git checkout -b doc/update-doc
+          pwd
+          ls
+          cp -r ../video-call/react/docs/* ./packages/agora-rtc-react/docs
           pnpm install
           pnpm gene-docs
           if git diff --quiet;
@@ -45,7 +48,7 @@ jobs:
       - name: Create Pull Request 📝
         run: |
           if gh pr list --state open --head doc/update-doc | grep -q "No open pull requests";
-            then gh pr create -B main -H doc/update-doc --title '[AUTO] 📖update docs' --body 'Created by Github action' --label 'ci:doc-update'
+            then gh pr create -B ${{ github.ref_name }} -H doc/update-doc --title '[AUTO] 📖update docs' --body 'Created by Github action' --label 'ci:doc-update'
           else
             echo "PR already exists for this branch"
           fi
