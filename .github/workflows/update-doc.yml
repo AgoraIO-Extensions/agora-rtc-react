@@ -11,7 +11,7 @@ jobs:
         with:
           repository: guoxianzhe/docs
           ref: main
-          path: "./video-call/react/docs"
+          path: "../video-call/react/docs"
           # token: ${{ secrets.AGORAIO_ACCESS_TOKEN }}
 
       - name: Checkout 🛎️
