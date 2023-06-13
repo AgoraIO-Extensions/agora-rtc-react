@@ -42,7 +42,7 @@ jobs:
             git checkout -b doc/update-doc
             git add .
             git commit -m "docs: update doc"
-            git push origin doc/update-doc
+            git push -f origin doc/update-doc
             if gh pr list --state open --head doc/update-doc | grep -q "No open pull requests";
               then gh pr create -B main -H doc/update-doc --title '[AUTO] 📖update docs' --body 'Created by Github action' --label 'ci:doc-update'
             else
