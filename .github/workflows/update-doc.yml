@@ -30,24 +30,24 @@ jobs:
 
       - name: Update Docs 📖
         run: |
+          git config --global user.email "${{ secrets.GIT_EMAIL }}"
+          git config --global user.name "${{ secrets.GIT_USERNAME }}"
+          git checkout -b doc/update-doc
           pnpm install
           pnpm gene-docs
-      - name: Check for Changes and Commit 📝
-        run: |
           if git diff --quiet;
-          then echo "No changes, no need to update docs.";
+          then echo "No changes, no need to update docs";
           else
-            git config --global user.email "${{ secrets.GIT_EMAIL }}"
-            git config --global user.name "${{ secrets.GIT_USERNAME }}"
-            git checkout -b doc/update-doc
             git add .
             git commit -m "docs: update doc"
-            git push -f origin doc/update-doc
-            if gh pr list --state open --head doc/update-doc | grep -q "No open pull requests";
-              then gh pr create -B main -H doc/update-doc --title '[AUTO] 📖update docs' --body 'Created by Github action' --label 'ci:doc-update'
-            else
-              echo "PR already exists for this branch"
-            fi
+            git push origin doc/update-doc
+          fi
+      - name: Create Pull Request 📝
+        run: |
+          if gh pr list --state open --head doc/update-doc | grep -q "No open pull requests";
+            then gh pr create -B main -H doc/update-doc --title '[AUTO] 📖update docs' --body 'Created by Github action' --label 'ci:doc-update'
+          else
+            echo "PR already exists for this branch"
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
