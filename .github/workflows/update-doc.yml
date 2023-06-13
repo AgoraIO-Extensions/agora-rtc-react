@@ -6,13 +6,13 @@ jobs:
   generate-docs:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout origin repo 🛎️
-        uses: actions/checkout@v3
-        with:
-          repository: AgoraIO/shengwang-doc-source
-          ref: rtc-react-beta
-          path: "./shengwang-doc-source"
-          token: ${{ secrets.AGORAIO_ACCESS_TOKEN }}
+      # - name: Checkout origin repo 🛎️
+      #   uses: actions/checkout@v3
+      #   with:
+      #     repository: AgoraIO/shengwang-doc-source
+      #     ref: rtc-react-beta
+      #     path: "./shengwang-doc-source"
+      #     token: ${{ secrets.AGORAIO_ACCESS_TOKEN }}
 
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -42,7 +42,7 @@ jobs:
             git add .
             git commit -m "docs: update doc"
             git push origin doc/update-doc
-            gh pr create -B main -H doc/update-doc --title '📖update docs' --body 'Created by Github action'
+            gh pr create -B main -H doc/update-doc --title '[AUTO] 📖update docs' --body 'Created by Github action' --label 'ci:doc-update'
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
