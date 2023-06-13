@@ -14,7 +14,7 @@ jobs:
         with:
           repository: guoxianzhe/docs
           ref: main
-          path: "video-call/react/docs"
+          path: "remote"
           # token: ${{ secrets.AGORAIO_ACCESS_TOKEN }}
 
       - name: Install pnpm 🤏🏻
@@ -33,7 +33,7 @@ jobs:
           git config --global user.email "${{ secrets.GIT_EMAIL }}"
           git config --global user.name "${{ secrets.GIT_USERNAME }}"
           git checkout -b doc/update-doc
-          cp -r video-call/react/docs/* packages/agora-rtc-react/docs
+          cp -r remote/video-call/react/* packages/agora-rtc-react/docs
           pnpm install
           pnpm gene-docs
           if git diff --quiet;
