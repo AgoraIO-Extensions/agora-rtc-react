@@ -8,6 +8,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { Client } from "./components";
 import { Advanced } from "./pages/advanced";
 import { Basic } from "./pages/basic";
+import { Components } from "./pages/component";
 import { Hooks } from "./pages/hook";
 import Setting from "./pages/setting";
 
@@ -19,7 +20,7 @@ interface items {
   children?: items[];
 }
 
-const rootItemKeys = ["Basic", "Hooks", "Advanced", "Setting"];
+const rootItemKeys = ["Basic", "Hooks", "Components", "Advanced", "Setting"];
 const items: items[] = [
   {
     label: rootItemKeys[0],
@@ -40,8 +41,16 @@ const items: items[] = [
   {
     label: rootItemKeys[2],
     key: rootItemKeys[2],
-    children: Advanced.map(page => ({
+    children: Components.map(page => ({
       key: `/${rootItemKeys[2]}/${page.label}`,
+      label: page.label,
+    })),
+  },
+  {
+    label: rootItemKeys[3],
+    key: rootItemKeys[3],
+    children: Advanced.map(page => ({
+      key: `/${rootItemKeys[3]}/${page.label}`,
       label: page.label,
     })),
   },
@@ -70,7 +79,19 @@ export default function App() {
   return (
     <>
       <Layout>
-        <Sider collapsed={collapsed} collapsible onCollapse={value => setCollapsed(value)}>
+        <Sider
+          collapsed={collapsed}
+          collapsible
+          onCollapse={value => setCollapsed(value)}
+          style={{
+            overflow: "auto",
+            height: "100vh",
+            position: "fixed",
+            left: 0,
+            top: 0,
+            bottom: 0,
+          }}
+        >
           <Menu
             items={items}
             mode="inline"
@@ -83,7 +104,7 @@ export default function App() {
             theme="dark"
           />
         </Sider>
-        <Layout>
+        <Layout style={{ marginLeft: collapsed ? 80 : 200 }}>
           <Content>
             <Routes>
               <Route Component={() => <Setting />} path="/*" />
@@ -116,7 +137,7 @@ export default function App() {
                   />
                 );
               })}
-              {Advanced.map(({ label, component }) => {
+              {Components.map(({ label, component }) => {
                 const RouteComponent = component;
                 return (
                   <Route
@@ -127,6 +148,20 @@ export default function App() {
                     )}
                     key={label}
                     path={`/${rootItemKeys[2]}/${label}`}
+                  />
+                );
+              })}
+              {Advanced.map(({ label, component }) => {
+                const RouteComponent = component;
+                return (
+                  <Route
+                    Component={() => (
+                      <Client>
+                        <RouteComponent />
+                      </Client>
+                    )}
+                    key={label}
+                    path={`/${rootItemKeys[3]}/${label}`}
                   />
                 );
               })}

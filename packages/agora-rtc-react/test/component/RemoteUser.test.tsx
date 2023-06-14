@@ -1,6 +1,6 @@
 import { randUuid } from "@ngneat/falso";
 import { composeStories } from "@storybook/react";
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import type { IRemoteAudioTrack, IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import { FakeRTCClient } from "fake-agora-rtc";
 import { describe, expect, test, vi } from "vitest";
@@ -14,10 +14,12 @@ import * as clientHook from "../../src/hooks/client";
 const mockAudioTrack: IRemoteAudioTrack = {
   setVolume: vi.fn(),
   play: vi.fn(),
+  stop: vi.fn(),
 } as unknown as IRemoteAudioTrack;
 
 const mockVideoTrack: IRemoteVideoTrack = {
   play: vi.fn(),
+  stop: vi.fn(),
 } as unknown as IRemoteVideoTrack;
 
 describe("RemoteUser component", () => {
@@ -92,7 +94,7 @@ describe("RemoteUser component stories", () => {
     expect(container.querySelector(".arr-user-control")).toBeInTheDocument();
   });
 
-  test("renders WithControls stories but playAudio true", () => {
+  test("renders WithControls stories but playAudio=true and playVideo=false", async () => {
     const user = {
       uid: randUuid(),
       hasVideo: true,
@@ -101,10 +103,18 @@ describe("RemoteUser component stories", () => {
       videoTrack: mockVideoTrack,
     };
     const { rerender } = render(<WithControls playAudio playVideo={false} user={user} />);
-    expect(mockVideoTrack.play).toBeCalledTimes(0);
-    expect(mockAudioTrack.play).toHaveBeenCalled();
-    rerender(<WithControls playAudio playVideo user={user} />);
-    expect(mockVideoTrack.play).toHaveBeenCalled();
-    vi.clearAllMocks();
+    await waitFor(() => {
+      expect(mockVideoTrack.play).toBeCalledTimes(0);
+      expect(mockVideoTrack.stop).toBeCalledTimes(2);
+      expect(mockAudioTrack.play).toHaveBeenCalledTimes(1);
+      expect(mockAudioTrack.stop).toBeCalledTimes(0);
+    });
+    rerender(<WithControls playAudio={false} playVideo user={user} />);
+    await waitFor(() => {
+      expect(mockVideoTrack.play).toBeCalledTimes(1);
+      expect(mockVideoTrack.stop).toBeCalledTimes(2);
+      expect(mockAudioTrack.play).toHaveBeenCalledTimes(1);
+      expect(mockAudioTrack.stop).toBeCalledTimes(1);
+    });
   });
 });
