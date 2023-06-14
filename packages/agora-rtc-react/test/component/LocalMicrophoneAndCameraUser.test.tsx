@@ -1,18 +1,12 @@
 import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
+import { FakeMicrophoneAudioTrack } from "fake-agora-rtc";
 import { describe, expect, test, vi } from "vitest";
 
 import { LocalMicrophoneAndCameraUser } from "../../src/components";
 import * as stories from "../../src/components/LocalMicrophoneAndCameraUser.stories";
 const { Overview } = composeStories(stories);
-
-vi.mock("../../src/hooks", async () => {
-  const actual: object = await vi.importActual("../../src/hooks");
-  return {
-    ...actual,
-    useAwaited: vi.fn(),
-  };
-});
+import * as clientHook from "../../src/hooks/tools";
 
 describe("LocalMicrophoneAndCameraUser component", () => {
   test("renders without crashing", () => {
@@ -24,6 +18,16 @@ describe("LocalMicrophoneAndCameraUser component", () => {
     const cover = "test";
     const { container } = render(<LocalMicrophoneAndCameraUser cover={cover} />);
     expect(container.querySelector("img")?.getAttribute("src")).toBe(cover);
+  });
+
+  test("sets volume", async () => {
+    const track = FakeMicrophoneAudioTrack.create();
+    const spy = vi.spyOn(clientHook, "useAwaited");
+    spy.mockReturnValue(track);
+    track.setVolume = vi.fn();
+
+    render(<LocalMicrophoneAndCameraUser audioTrack={track} volume={40} />);
+    expect(track.setVolume).toHaveBeenCalledWith(40);
   });
 
   test("sets cover but cameraOn is true", () => {

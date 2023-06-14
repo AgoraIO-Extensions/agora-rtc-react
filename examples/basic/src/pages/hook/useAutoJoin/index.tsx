@@ -1,6 +1,6 @@
 import {
   RemoteVideoPlayer,
-  useJoin,
+  useAutoJoin,
   useRemoteAudioTracks,
   useRemoteUsers,
   useRemoteVideoTracks,
@@ -12,27 +12,12 @@ import { useState } from "react";
 import { AutoLayout, Container, Label, MediaControl, Room } from "../../../components";
 import { appConfig, fakeAvatar, fakeName } from "../../../utils";
 
-const { Title, Paragraph, Text } = Typography;
+const { Title } = Typography;
 
-export const UseJoin = () => {
-  const [calling, setCalling] = useState(false);
-
-  // you can use useJoin like this by passing a function as first argument.
-  // useJoin(async () => {
-  //   //you can do some actions like fetching token before calling join.
-  //   const getData = await fakeFetch("/get-token");
-  //   return JSON.parse(getData);
-  // }, calling);
-
+export const UseAutoJoin = () => {
   //local
-  useJoin(
-    {
-      appid: appConfig.appId,
-      channel: appConfig.channel,
-      token: appConfig.token,
-    },
-    calling,
-  );
+  useAutoJoin(appConfig.appId, appConfig.channel, appConfig.token);
+
   const [micOn, setMic] = useState(false);
   const [cameraOn, setCamera] = useState(false);
 
@@ -56,24 +41,13 @@ export const UseJoin = () => {
   };
   return (
     <Container>
-      {calling ? (
+      <div className="h-screen p-3">
+        <Title>useAutoJoin</Title>
         <Room cameraOn={cameraOn} micOn={micOn} renderRemoteUsers={renderRemoteUsers} />
-      ) : (
-        <div className="h-screen p-3">
-          <Title>UseJoin</Title>
-          <Paragraph>
-            By using <Text keyboard>UseJoin</Text> hook to join room.
-          </Paragraph>
-          <Paragraph>you can do some actions like fetching token before calling join.</Paragraph>
-        </div>
-      )}
+      </div>
       <MediaControl
-        calling={calling}
         cameraOn={cameraOn}
         micOn={micOn}
-        setCalling={() => {
-          setCalling(a => !a);
-        }}
         setCamera={() => {
           setCamera(a => !a);
         }}
@@ -85,4 +59,4 @@ export const UseJoin = () => {
   );
 };
 
-export default UseJoin;
+export default UseAutoJoin;
