@@ -56,4 +56,4 @@ jobs:
       - name: Create Pull Request 📝
         if: env.CREATE_PR == 1
         run: |
-          gh pr create -B ${{ github.ref_name }} -H ${{ inputs.create-branch-name }} --title '[AUTO] upgrade ${{inputs.package-name}} to ${{inputs.package-version}}' --body 'Created by Github action' --label 'ci:dep-upgrade'
+          gh pr create -B ${{ github.ref_name }} -H ${{ inputs.create-branch-name }} --title '🤖chore: upgrade ${{inputs.package-name}} to ${{inputs.package-version}}' --body 'Created by Github action' --label 'ci:dep-upgrade'
