@@ -1,0 +1,16 @@
+name: Setup
+description: Setup Node.js and pnpm
+
+runs:
+  using: composite
+  steps:
+    - name: Install pnpm 🤏🏻
+      uses: pnpm/action-setup@v2.2.4
+      with:
+        version: latest
+
+    - name: Setup Node 💚
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: "pnpm"
