@@ -43,7 +43,7 @@ jobs:
             echo "CREATE_PR=1" >> "$GITHUB_ENV"
           fi
           pnpm -r exec esbuild-dev $PWD/scripts/upgrade-deps.ts dep:${{ inputs.package-name }} @${{ inputs.package-version }}
-          pnpm install
+          pnpm install --no-frozen-lockfile
           # pnpm run test
           if git diff --quiet;
           then
