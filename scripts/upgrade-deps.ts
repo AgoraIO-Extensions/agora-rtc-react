@@ -21,25 +21,14 @@ const newVersion = args[1].substring(args[1].lastIndexOf("@") + 1);
 const packageJsonPath = path.join(process.cwd(), "package.json");
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
 
-let notFound = false;
-if (!packageJson.dependencies || !packageJson.dependencies[depName]) {
-  notFound = true;
-} else {
-  notFound = false;
+if (packageJson.dependencies && packageJson.dependencies[depName]) {
   packageJson.dependencies[depName] = `${newVersion}`;
   console.log(`Dependency ${depName} version updated to ^${newVersion} in ${packageJsonPath}`);
 }
 
-if (!packageJson.devDependencies || !packageJson.devDependencies[depName]) {
-  notFound = true;
-} else {
-  notFound = false;
+if (packageJson.devDependencies && packageJson.devDependencies[depName]) {
   packageJson.devDependencies[depName] = `${newVersion}`;
   console.log(`devDependencies ${depName} version updated to ^${newVersion} in ${packageJsonPath}`);
-}
-
-if (notFound) {
-  process.exit(1);
 }
 
 fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + "\n");
