@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 overrides:
   nodeunit: npm:noop-package@1.0.0
 
@@ -97,8 +101,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/agora-rtc-react-ui
       agora-rtc-sdk-ng:
-        specifier: 4.17.2
-        version: 4.17.2
+        specifier: 4.17.0
+        version: 4.17.0
       antd:
         specifier: ^5.4.7
         version: 5.4.7(react-dom@18.2.0)(react@18.2.0)
@@ -176,8 +180,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/agora-rtc-react-ui
       agora-rtc-sdk-ng:
-        specifier: 4.17.2
-        version: 4.17.2
+        specifier: 4.17.0
+        version: 4.17.0
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
@@ -288,8 +292,8 @@ importers:
         specifier: workspace:*
         version: link:../agora-rtc-react-ui
       agora-rtc-sdk-ng:
-        specifier: 4.17.2
-        version: 4.17.2
+        specifier: 4.17.0
+        version: 4.17.0
       fake-agora-rtc:
         specifier: workspace:*
         version: link:../fake-agora-rtc
@@ -375,8 +379,8 @@ importers:
         specifier: workspace:*
         version: link:../agora-rtc-react
       agora-rtc-sdk-ng:
-        specifier: 4.17.2
-        version: 4.17.2
+        specifier: 4.17.0
+        version: 4.17.0
       fake-agora-rtc:
         specifier: workspace:*
         version: link:../fake-agora-rtc
@@ -414,8 +418,8 @@ importers:
         specifier: ^6.4.0
         version: 6.4.0
       agora-rtc-sdk-ng:
-        specifier: 4.17.2
-        version: 4.17.2
+        specifier: 4.17.0
+        version: 4.17.0
       side-effect-manager:
         specifier: ^1.2.2
         version: 1.2.2
@@ -5145,8 +5149,8 @@ packages:
       indent-string: 4.0.0
     dev: true
 
-  /agora-rtc-sdk-ng@4.17.2:
-    resolution: {integrity: sha512-ErIHOYgf3R/ya3gVCCBKRw3RMdATmoM/8aUGOob4g0VHBBkVDEf9JT0RW2jQgtwm61jszWof+wo2duQDBgTfpw==}
+  /agora-rtc-sdk-ng@4.17.0:
+    resolution: {integrity: sha512-TmqnvWr7J9cVm62KzE3jhBjVcQpcvxj0GoSMHUylce5GWZrN6rkDLgcPNvhNmPPK5Slqwsx/d70FrWM7T3ngQw==}
     dependencies:
       agora-rte-extension: 1.2.3
 
