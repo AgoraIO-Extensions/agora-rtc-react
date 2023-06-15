@@ -13,7 +13,7 @@
     "@ant-design/icons": "^5.0.1",
     "agora-rtc-react": "workspace:*",
     "agora-rtc-react-ui": "workspace:*",
-    "agora-rtc-sdk-ng": "^4.16.1",
+    "agora-rtc-sdk-ng": "4.17.2",
     "antd": "^5.4.7",
     "clsx": "^1.2.1",
     "crypto-js": "^4.1.1",
