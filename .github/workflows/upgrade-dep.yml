@@ -1,0 +1,57 @@
+name: Upgrade Dependencies
+
+on:
+  workflow_dispatch:
+    inputs:
+      package-name:
+        description: 'upgrade package name: [default: "agora-rtc-sdk-ng"]'
+        required: true
+        default: "agora-rtc-sdk-ng"
+        type: string
+      package-version:
+      description: "upgrade package version:"
+      required: true
+      type: string
+      create-branch-name:
+        description: "head branch name:"
+        required: true
+        type: string
+
+jobs:
+  release-it:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Upgrade Dependencies 🚀
+        run: |
+          pnpm -r -F "./packages/**" exec esbuild-dev $PWD/scripts/upgrade-deps.ts dep:"${{ inputs.package-name }}"" @"${{ inputs.package-version }}"
+      - name: Upgrade Docs 📖
+        run: |
+          git config --global user.email "${{ secrets.GIT_EMAIL }}"
+          git config --global user.name "${{ secrets.GIT_USERNAME }}"
+          git fetch
+          if git rev-parse --verify origin/${{ inputs.create-branch-name }} >/dev/null 2>&1
+          then
+            git switch ${{ inputs.create-branch-name }}
+          else
+            git switch -c ${{ inputs.create-branch-name }}
+            echo "CREATE_PR=1" >> "$GITHUB_ENV"
+          fi
+          if git diff --quiet;
+          then
+            echo "No changes, no need to update dependencies.";
+          else
+            git add .
+            git commit -m "chore: upgrade ${{inputs.package-name}} to ${{inputs.package-version}}"
+            git push origin ${{ inputs.create-branch-name }}
+          fi
+      - name: Create Pull Request 📝
+        if: env.CREATE_PR == 1
+        run: |
+          gh pr create -B ${{ github.ref_name }} -H ${{ inputs.create-branch-name }} --title '[AUTO] upgrade ${{inputs.package-name}} to ${{inputs.package-version}}' --body 'Created by Github action' --label 'ci:dep-upgrade'
