@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx lint-staged
+npx lint-staged --allow-empty
 
 if command -v gitleaks >/dev/null 2>&1;
  then
