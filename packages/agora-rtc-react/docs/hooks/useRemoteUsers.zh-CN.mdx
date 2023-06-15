@@ -1,0 +1,30 @@
+### useRemoteUsers
+
+用于获取远端用户列表的 Hook。
+
+- 当远端用户加入或离开时，更新该 hook 的返回值。
+- 当远端用户改变身份时，更新该 hook 的返回值。
+
+#### 参数
+
+| 参数名   | 类型                                    | 是否必选 | 描述                                                                                                                                          |
+| -------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
+
+#### 返回值
+
+| 类型                    | 描述           |
+| ----------------------- | -------------- |
+| `IAgoraRTCRemoteUser[]` | 远端用户列表。 |
+
+#### 使用示例
+
+```jsx
+import { useRemoteUsers } from "agora-rtc-react";
+
+function App() {
+  const remoteUsers = useRemoteUsers();
+
+  return <></>;
+}
+```

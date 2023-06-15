@@ -8,6 +8,17 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref_name }}
+          path: main
+
+      - name: Checkout origin repo 🛎️
+        uses: actions/checkout@v3
+        with:
+          repository: guoxianzhe/docs
+          ref: main
+          path: "remote-repo"
+          # token: ${{ secrets.AGORAIO_ACCESS_TOKEN }}
 
       - name: Install pnpm 🤏🏻
         uses: pnpm/action-setup@v2.2.4
@@ -19,19 +30,37 @@ jobs:
         with:
           node-version: 18
           cache: "pnpm"
+          cache-dependency-path: "./main/pnpm-lock.yaml"
 
       - name: Update Docs 📖
+        working-directory: "./main"
         run: |
-          pnpm gene-docs
-      - name: Check for Changes and Commit 📝
-        run: |
-          if git diff --quiet; then echo "No changes, no need to commit."; exit 0;
+          git config --global user.email "${{ secrets.GIT_EMAIL }}"
+          git config --global user.name "${{ secrets.GIT_USERNAME }}"
+          git fetch
+          if git rev-parse --verify origin/doc/update-doc >/dev/null 2>&1
+          then
+            git switch doc/update-doc
           else
-            git checkout -b doc/update-doc
-            git add .
-            git commit -m "Update doc"
-            git push origin doc/update-doc
-            gh pr create -B main -H doc/update-doc --title 'update-doc' --body 'Created by Github action'
+            git switch -c doc/update-doc
+            echo "CREATE_PR=1" >> "$GITHUB_ENV"
           fi
+          cp -r ../remote-repo/video-call/react/* packages/agora-rtc-react/docs
+          pnpm install
+          pnpm gene-docs
+          pnpm run lint:fix
+          if git diff --quiet;
+          then
+            echo "No changes, no need to update docs";
+          else
+            git add .
+            git commit -m "docs: update doc"
+            git push origin doc/update-doc
+          fi
+      - name: Create Pull Request 📝
+        working-directory: "./main"
+        if: env.CREATE_PR == 1
+        run: |
+          gh pr create -B ${{ github.ref_name }} -H doc/update-doc --title '[AUTO] 📖update docs' --body 'Created by Github action' --label 'ci:doc-update'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

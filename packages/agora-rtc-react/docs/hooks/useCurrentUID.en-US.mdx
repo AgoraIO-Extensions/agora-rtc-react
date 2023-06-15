@@ -1,0 +1,27 @@
+### useCurrentUID
+
+用于获取当前用户 UID 的 Hook。
+
+#### 参数
+
+| 参数名   | 类型                                      | 是否必选 | 描述                                                                                                                                          |
+| -------- | ----------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client` | `IAgoraRTCClient ` &VerticalLine; ` null` | 可选     | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
+
+#### 返回值
+
+| 类型                             | 描述                                                               |
+| -------------------------------- | ------------------------------------------------------------------ |
+| `UID` &VerticalLine; `undefined` | 当前用户的 UID。如果当前用户没有加入任何频道，则返回 `undefined`。 |
+
+#### 使用示例
+
+```jsx
+import { useCurrentUID } from "agora-rtc-react";
+
+function App() {
+  const uid = useCurrentUID();
+
+  return <div>{uid}</div>;
+}
+```

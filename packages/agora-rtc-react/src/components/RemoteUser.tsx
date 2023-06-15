@@ -30,7 +30,7 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
    */
   readonly playbackDeviceId?: string;
   /**
-   * The volume. The value ranges from 0 (mute) to 100 (maximum). A value of 100 is the current volume.
+   * The volume. The value ranges from 0 (mute) to 1000 (maximum). A value of 100 is the current volume.
    */
   readonly volume?: number;
   /**

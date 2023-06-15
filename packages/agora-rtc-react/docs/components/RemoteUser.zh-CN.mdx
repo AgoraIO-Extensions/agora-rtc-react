@@ -1,0 +1,34 @@
+### RemoteUser
+
+该组件用于订阅和播放远端用户的视频和音频轨道（支持指定使用的音频设备）。
+
+#### Props
+
+| 属性名             | 类型                          | 默认值                                                                                                                                                     | 描述                                                                                                                                                                                                                                                                                                       |
+| ------------------ | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `user`             | `IAgoraRTCRemoteUser`         | -                                                                                                                                                          | 远端用户对象。详见 [IAgoraRTCRemoteUser](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcremoteuser.html)。                                                                                                                                        |
+| `playVideo`        | `boolean`                     | [user.hasVideo](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcremoteuser.html#hasvideo) 属性的值 | <li>`true`：播放远端用户的视频轨道。</li><li>`false`：停止播放远端用户的视频轨道。</li>                                                                                                                                                                                                                    |
+| `playAudio`        | `boolean`                     | [user.hasAudio](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcremoteuser.html#hasaudio) 属性的值 | <li>`true`：播放远端用户的音频轨道。</li><li>`false`：停止播放远端用户的音频轨道。</li>                                                                                                                                                                                                                    |
+| `playbackDeviceId` | `string`                      | -                                                                                                                                                          | 要使用的播放设备 ID，例如扬声器。设备 ID 通过 [getPlaybackDevices](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getplaybackdevices) 获取。该属性仅支持桌面端的 Chrome 浏览器，在其它浏览器上修改该属性的值将会抛出 `NOT_SUPPORTED` 错误。 |
+| `volume`           | `number`                      | -                                                                                                                                                          | 音量大小。取值范围从 0（静音）到 1000（最大音量）。100 为原始音量。                                                                                                                                                                                                                                        |
+| `cover`            | `string` 或 `() => ReactNode` | -                                                                                                                                                          | 当 `playVideo` 为 `false`时要渲染的封面图片或自定义组件，用于替代视频画面显示。                                                                                                                                                                                                                            |
+| `children`         | `ReactNode`                   | -                                                                                                                                                          | 需要展示的 React 节点。                                                                                                                                                                                                                                                                                    |
+
+#### 使用示例
+
+```jsx
+import { RemoteUser, useRemoteUsers } from "agora-rtc-react";
+
+function App() {
+  //get remote users
+  const remoteUsers = useRemoteUsers();
+
+  return (
+    <>
+      {remoteUsers.map(user => (
+        <RemoteUser key={user.uid} user={user} />
+      ))}
+    </>
+  );
+}
+```

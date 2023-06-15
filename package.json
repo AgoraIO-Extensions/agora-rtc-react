@@ -14,7 +14,8 @@
     "lint:fix": "eslint --fix --ext .ts,.tsx . && prettier --write .",
     "example": "pnpm -F agora-rtc-react-example run start",
     "renew": "pnpm -r run renew",
-    "copy-docs": "esbuild-dev ./scripts/copy-docs.ts"
+    "copy-docs": "esbuild-dev ./scripts/copy-docs.ts",
+    "gene-docs": "pnpm -r run gene-docs"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.6.1",
@@ -52,7 +53,7 @@
     "*.{css,scss}": [
       "prettier --ignore-path .eslintignore --write"
     ],
-    "*.{html,md,yml}": [
+    "*.{html,md,mdx,yml}": [
       "prettier --ignore-path .eslintignore --write"
     ]
   },

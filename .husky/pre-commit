@@ -2,4 +2,11 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npx lint-staged
-gitleaks protect --staged --source . -v agora-rtc-react.git -c .gitleaks.toml
+
+if command -v gitleaks >/dev/null 2>&1;
+ then
+  echo "gitleaks found, proceeding..."
+  gitleaks protect --staged --source . -v agora-rtc-react.git -c .gitleaks.toml
+ else
+  echo "gitleaks not found, skip"
+ fi

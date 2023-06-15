@@ -1,0 +1,26 @@
+### AgoraRTCScreenShareProvider
+
+该`Provider`用于承载屏幕分享的`client` 对象。它将`client`提供给`children`内的各个组件。
+
+#### Props
+
+| 属性名     | 类型              | 默认值 | 描述                                                                                                                                          |
+| ---------- | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client`   | `IAgoraRTCClient` | -      | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
+| `children` | `ReactNode`       | -      | 需要展示的 React 节点。                                                                                                                       |
+
+#### 注意事项
+
+可与`AgoraRTCProvider`共存。但不会共享 client。
+
+#### 使用示例
+
+```jsx
+import { AgoraRTCScreenShareProvider } from "agora-rtc-react";
+import AgoraRTC from "agora-rtc-sdk-ng";
+
+function App({ children }) {
+  const [client] = useState(() => AgoraRTC.createClient({ mode: "rtc", codec: "vp8" }));
+  return <AgoraRTCScreenShareProvider client={client}>{children}</AgoraRTCScreenShareProvider>;
+}
+```
