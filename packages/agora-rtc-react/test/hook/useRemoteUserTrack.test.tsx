@@ -6,7 +6,8 @@ import { vi } from "vitest";
 
 import * as clientHook from "../../src/hooks/client";
 import { useRemoteUserTrack } from "../../src/hooks/index";
-import { createWrapper, errorMessage } from "../setup";
+import { errorMessage } from "../setup/agora";
+import { createWrapper } from "../setup/wrapper";
 
 const user = {
   uid: "1",

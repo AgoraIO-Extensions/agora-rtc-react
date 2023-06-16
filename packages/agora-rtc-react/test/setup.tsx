@@ -1,16 +1,17 @@
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import matchers from "@testing-library/jest-dom/matchers";
-import type { IAgoraRTCClient } from "agora-rtc-sdk-ng";
-import AgoraRTC from "agora-rtc-sdk-ng";
 import type { ReactNode } from "react";
 import { expect, vi } from "vitest";
 
-import { AgoraRTCProvider } from "../src/hooks";
-
 expect.extend(matchers);
 
-AgoraRTC.setLogLevel(4);
+/**
+ * started agora-rtc-sdk-ng@17.0.0, need mock RTCPeerConnection.
+ * RTCPeerConnection does not implement global
+ */
+// @ts-expect-error type
+global.RTCPeerConnection = vi.fn();
 
 /**
  * JSDOM does not implement global "HTMLMediaElement.prototype.play" function
@@ -38,10 +39,3 @@ Object.defineProperty(global.navigator, "mediaDevices", {
 export interface Props {
   children: ReactNode;
 }
-
-export const createWrapper =
-  (client: IAgoraRTCClient): React.FC<Props> =>
-  ({ children }: { children: ReactNode }) =>
-    <AgoraRTCProvider client={client}>{children}</AgoraRTCProvider>;
-
-export const errorMessage = "Agora-RTC-REACT [ERROR_TEST_MSG]";

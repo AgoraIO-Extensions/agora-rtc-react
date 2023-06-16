@@ -5,7 +5,7 @@ import { expect, vi } from "vitest";
 
 import * as clientHook from "../../src/hooks/client";
 import { useLocalCameraTrack } from "../../src/hooks/index";
-import { createWrapper } from "../setup";
+import { createWrapper } from "../setup/wrapper";
 
 describe("useLocalCameraTrack", () => {
   const spy = vi.spyOn(clientHook, "useIsConnected");
