@@ -1,11 +1,12 @@
 import type { ConnectionState, IAgoraRTCClient, UID } from "agora-rtc-sdk-ng";
 import { useEffect, useState } from "react";
 
+import type { AgoraRTCError } from "../listen";
 import { listen } from "../listen";
 import { joinDisposers, timeout } from "../utils";
 
 import { useRTCClient } from "./context";
-import { useAsyncEffect } from "./tools";
+import { useAsyncEffect, useIsUnmounted } from "./tools";
 
 export function useConnectionState(client?: IAgoraRTCClient | null): ConnectionState {
   const resolvedClient = useRTCClient(client);
@@ -194,17 +195,38 @@ export type FetchArgs = (() => Promise<JoinOptions>) | JoinOptions;
  * @param ready
  * @param client
  */
-export function useJoin(fetchArgs: FetchArgs, ready = true, client?: IAgoraRTCClient | null): void {
+export function useJoin(
+  fetchArgs: FetchArgs,
+  ready = true,
+  client?: IAgoraRTCClient | null,
+): { data: UID; joinComplete: boolean; error: AgoraRTCError | null } {
   const resolvedClient = useRTCClient(client);
+  const [joinComplete, setJoinComplete] = useState(false);
+  const [joinResult, setJoinResult] = useState<UID>(0);
+  const [error, setError] = useState<AgoraRTCError | null>(null);
+  const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
     if (ready && resolvedClient) {
       try {
+        if (!isUnmountRef.current) {
+          setJoinComplete(false);
+        }
         const { appid, channel, token, uid } =
           typeof fetchArgs === "function" ? await fetchArgs() : fetchArgs;
-        await resolvedClient.join(appid, channel, token, uid);
-      } catch (error) {
-        console.error(error);
+        const result = await resolvedClient.join(appid, channel, token, uid);
+        if (!isUnmountRef.current) {
+          setJoinResult(result);
+          setError(null);
+          setJoinComplete(true);
+        }
+      } catch (err) {
+        console.error(err);
+        if (!isUnmountRef.current) {
+          setJoinResult(0);
+          setError(err as AgoraRTCError);
+          setJoinComplete(true);
+        }
       }
       return () => {
         for (const track of resolvedClient.localTracks) {
@@ -216,5 +238,15 @@ export function useJoin(fetchArgs: FetchArgs, ready = true, client?: IAgoraRTCCl
         return resolvedClient.leave();
       };
     }
+    if (!ready) {
+      setJoinResult(0);
+      setError(null);
+      setJoinComplete(false);
+    }
   }, [ready, client]);
+  return {
+    data: joinResult,
+    joinComplete: joinComplete,
+    error: error,
+  };
 }

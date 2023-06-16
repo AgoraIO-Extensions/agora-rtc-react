@@ -33,11 +33,11 @@ export const SwitchLayout = () => {
 
   const [layout, setLayout] = useState<boolean>(true);
 
-  const videoTracks = useRemoteVideoTracks(
+  const { videoTracks } = useRemoteVideoTracks(
     layout ? remoteUsers : remoteUsers.filter((_user, index) => index == 0),
   );
 
-  const audioTracks = useRemoteAudioTracks(remoteUsers);
+  const { audioTracks } = useRemoteAudioTracks(remoteUsers);
 
   audioTracks.map(track => track.play());
 

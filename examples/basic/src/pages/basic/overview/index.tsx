@@ -26,8 +26,8 @@ export const Overview = () => {
   const [cameraOn, setCamera] = useState(false);
 
   const remoteUsers = useRemoteUsers();
-  const videoTracks = useRemoteVideoTracks(remoteUsers);
-  const audioTracks = useRemoteAudioTracks(remoteUsers);
+  const { videoTracks } = useRemoteVideoTracks(remoteUsers);
+  const { audioTracks } = useRemoteAudioTracks(remoteUsers);
   audioTracks.map(track => track.play());
 
   return (

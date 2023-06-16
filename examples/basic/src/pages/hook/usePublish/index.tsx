@@ -46,8 +46,8 @@ export const UsePublish = () => {
 
   //remote
   const remoteUsers = useRemoteUsers();
-  const videoTracks = useRemoteVideoTracks(remoteUsers);
-  const audioTracks = useRemoteAudioTracks(remoteUsers);
+  const { videoTracks } = useRemoteVideoTracks(remoteUsers);
+  const { audioTracks } = useRemoteAudioTracks(remoteUsers);
   audioTracks.map(track => track.play());
 
   const renderRemoteUsers = () => {

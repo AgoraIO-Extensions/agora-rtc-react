@@ -1,10 +1,11 @@
-import { randNumber } from "@ngneat/falso";
+import { randNumber, randUuid } from "@ngneat/falso";
 import type {
   IAgoraRTCClient,
   IAgoraRTCRemoteUser,
   IRemoteAudioTrack,
   IRemoteTrack,
   IRemoteVideoTrack,
+  UID,
 } from "agora-rtc-sdk-ng";
 import { SideEffectManager } from "side-effect-manager";
 
@@ -119,5 +120,15 @@ export class FakeRTCClient extends FakeAgoraEventEmitter {
         user.videoTrack = undefined;
       }
     }
+  }
+
+  public massUnsubscribe(users: IAgoraRTCRemoteUser[], mediaType?: "video" | "audio" | undefined) {
+    users.forEach(user => {
+      this.unsubscribe(user, mediaType);
+    });
+  }
+
+  public join(): Promise<UID> {
+    return Promise.resolve(randUuid());
   }
 }
