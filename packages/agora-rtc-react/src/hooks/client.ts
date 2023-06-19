@@ -154,31 +154,6 @@ export function useNetworkQuality(client?: IAgoraRTCClient | null): NetworkQuali
   return networkQuality;
 }
 
-export function useAutoJoin(
-  appid: string,
-  channel: string,
-  token: string | null,
-  uid?: UID | null,
-  client?: IAgoraRTCClient | null,
-): void {
-  const resolvedClient = useRTCClient(client);
-
-  useAsyncEffect(async () => {
-    if (resolvedClient) {
-      await resolvedClient.join(appid, channel, token, uid);
-      return () => {
-        for (const track of resolvedClient.localTracks) {
-          if (track.isPlaying) {
-            track.stop();
-          }
-          track.close();
-        }
-        return resolvedClient.leave();
-      };
-    }
-  }, [appid, channel, token, uid, resolvedClient]);
-}
-
 export interface JoinOptions {
   appid: string;
   channel: string;
