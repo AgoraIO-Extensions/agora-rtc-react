@@ -39,6 +39,7 @@
   "scripts": {
     "prepublishOnly": "pnpm run build",
     "build": "tsup",
+    "release": "release-it",
     "start": "pnpm run -F example-overview start",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -85,5 +86,8 @@
     "typescript": "^4.9.5",
     "vite": "^4.1.4",
     "vitest": "^0.29.2"
+  },
+  "release-it": {
+    "git": false
   }
 }

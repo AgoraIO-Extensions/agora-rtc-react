@@ -27,6 +27,10 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      - name: Setup Dependencies 💚
+        run: |
+          pnpm install
+
       - name: Setup NPM auth token
         run: |
           npm set "//registry.npmjs.org/:_authToken" ${{ secrets.NPM_TOKEN }}
