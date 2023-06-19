@@ -26,11 +26,6 @@ export default defineConfig([
 * ${pkg.name}-v${pkg.version} Copyright AgoraInc.
 */
        `,
-        css: `
-/**
- * ${pkg.name}-v${pkg.version} Copyright AgoraInc.
- */
-        `,
       };
     },
     outExtension: () => {
@@ -39,11 +34,11 @@ export default defineConfig([
       };
     },
     format: ["iife"],
+    sourcemap: true,
     splitting: false,
-    sourcemap: false,
     clean: true,
-    treeshake: true,
-    dts: true,
-    minify: true,
+    minify: false,
+    external: Object.keys(pkg.peerDependencies),
+    platform: "browser",
   },
 ]);
