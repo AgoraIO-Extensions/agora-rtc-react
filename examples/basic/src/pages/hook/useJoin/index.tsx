@@ -33,7 +33,6 @@ export const UseJoin = () => {
     },
     calling,
   );
-  console.log(data, joinComplete, error);
   const [micOn, setMic] = useState(false);
   const [cameraOn, setCamera] = useState(false);
 
