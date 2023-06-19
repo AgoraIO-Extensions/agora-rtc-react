@@ -5,7 +5,6 @@
   "scripts": {
     "prepare": "husky install",
     "build": "pnpm -r run build",
-    "build-iife": "pnpm -r run build --iife",
     "start": "pnpm run example",
     "storybook": "pnpm -F agora-rtc-react run storybook",
     "build-storybook": "pnpm -F agora-rtc-react run build-storybook",

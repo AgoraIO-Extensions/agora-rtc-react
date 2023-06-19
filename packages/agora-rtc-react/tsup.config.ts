@@ -38,6 +38,7 @@ export default defineConfig([
     splitting: false,
     clean: true,
     minify: false,
-    target: "es5",
+    external: Object.keys(pkg.peerDependencies),
+    platform: "browser",
   },
 ]);
