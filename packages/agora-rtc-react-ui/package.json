@@ -82,7 +82,13 @@
     "vitest": "^0.29.2"
   },
   "release-it": {
-    "git": false,
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "v${version}"
+    },
+    "npm": {
+      "publish": true
+    },
     "plugins": {
       "@release-it/bumper": {
         "out": {

@@ -8,6 +8,10 @@ on:
         required: true
         default: "patch"
         type: string
+      releases:
+        description: "create Releases, choose false if specify version"
+        default: true
+        type: boolean
       dry-run:
         description: "Do not touch or write anything, but show the commands"
         default: true
@@ -17,12 +21,12 @@ jobs:
   release-it:
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup
         uses: ./.github/actions/setup
@@ -38,11 +42,12 @@ jobs:
       - name: Dry Run Release
         if: ${{ inputs.dry-run }}
         run: |
-          pnpm release ${{ inputs.increment }} -d --ci
+          npm whoami
+          pnpm -F agora-rtc-react release ${{ inputs.increment }} -d --ci --github.release=${{ inputs.releases }}
 
       - name: NPM Publish
         if: ${{ !inputs.dry-run }}
         run: |
           git config --global user.email "${{ secrets.GIT_EMAIL }}"
           git config --global user.name "${{ secrets.GIT_USERNAME }}"
-          pnpm release ${{ inputs.increment }} --ci --npm.allowSameVersion
+          pnpm -F agora-rtc-react release ${{ inputs.increment }} --ci --npm.allowSameVersion --github.release=${{ inputs.releases }}
