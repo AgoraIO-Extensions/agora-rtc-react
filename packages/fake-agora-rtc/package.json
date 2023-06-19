@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/AgoraIO-Extensions/agora-rtc-react/issues"
   },
-  "main": "src/main.ts",
+  "main": "src/index.ts",
   "scripts": {
     "release": "release-it"
   },

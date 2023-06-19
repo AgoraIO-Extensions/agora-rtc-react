@@ -23,15 +23,20 @@
     "guoxianzhe"
   ],
   "sideEffects": false,
-  "main": "src/main.ts",
+  "main": "src/index.ts",
   "publishConfig": {
     "main": "dist/agora-rtc-react.js",
     "module": "dist/agora-rtc-react.mjs",
     "types": "dist/agora-rtc-react.d.ts"
   },
-  "source": "src/main.ts",
+  "source": "src/index.ts",
   "files": [
-    "dist"
+    "src",
+    "dist",
+    "!src/stories",
+    "!src/**/*.stories.*",
+    "!src/vite-env.d.ts",
+    "!dist/*.v_*.js"
   ],
   "engines": {
     "node": ">=10"

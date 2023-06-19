@@ -22,13 +22,13 @@
     "CRIMX",
     "guoxianzhe"
   ],
-  "main": "src/main.ts",
+  "main": "src/index.ts",
   "publishConfig": {
     "main": "dist/agora-rtc-react-ui.js",
     "module": "dist/agora-rtc-react-ui.mjs",
     "types": "dist/agora-rtc-react-ui.d.ts"
   },
-  "source": "src/main.ts",
+  "source": "src/index.ts",
   "files": [
     "dist"
   ],

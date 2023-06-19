@@ -1,14 +1,49 @@
 import { defineConfig } from "tsup";
 
-export default defineConfig({
-  entryPoints: {
-    "agora-rtc-react-ui": "src/main.ts",
+import pkg from "./package.json";
+
+export default defineConfig([
+  {
+    entry: {
+      [pkg.name]: "src/index.ts",
+    },
+    format: ["cjs", "esm"],
+    splitting: false,
+    sourcemap: false,
+    clean: true,
+    treeshake: true,
+    dts: true,
+    minify: false,
   },
-  format: ["cjs", "esm"],
-  splitting: false,
-  sourcemap: false,
-  clean: true,
-  treeshake: true,
-  dts: true,
-  minify: false,
-});
+  {
+    entry: {
+      [pkg.name]: "src/index.ts",
+    },
+    banner: () => {
+      return {
+        js: `
+/**
+* ${pkg.name}-v${pkg.version} Copyright AgoraInc.
+*/
+       `,
+        css: `
+/**
+ * ${pkg.name}-v${pkg.version} Copyright AgoraInc.
+ */
+        `,
+      };
+    },
+    outExtension: () => {
+      return {
+        js: `.v_${pkg.version}.js`,
+      };
+    },
+    format: ["iife"],
+    splitting: false,
+    sourcemap: false,
+    clean: true,
+    treeshake: true,
+    dts: true,
+    minify: true,
+  },
+]);
