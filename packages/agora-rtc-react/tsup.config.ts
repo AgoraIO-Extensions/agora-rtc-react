@@ -1,5 +1,7 @@
 import { defineConfig } from "tsup";
 
+import setGlobals from "../../scripts/tsup/set-globals";
+
 import pkg from "./package.json";
 
 export default defineConfig([
@@ -37,8 +39,19 @@ export default defineConfig([
     sourcemap: true,
     splitting: false,
     clean: true,
-    minify: false,
+    minify: true,
     external: Object.keys(pkg.peerDependencies),
+    define: {
+      "process.env.NODE_ENV": JSON.stringify("production"),
+    },
+    globalName: "AgoraRTCReact",
+    esbuildPlugins: [
+      setGlobals({
+        "react": "React",
+        "react-dom": "ReactDOM",
+        "agora-rtc-sdk-ng": "AgoraRTC",
+      }),
+    ],
     platform: "browser",
   },
 ]);
