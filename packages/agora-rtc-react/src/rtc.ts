@@ -8,6 +8,6 @@ class AgoraRTCReact {
   }
 }
 
-const instance = new AgoraRTCReact();
+new AgoraRTCReact();
 
-export { instance as AgoraRTCReact };
+export const VERSION = "1.1.0";

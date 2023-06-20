@@ -7,6 +7,7 @@ import pkg from "./package.json";
 const banner = `
 /**
  * @license ${pkg.name}
+ * @version ${pkg.version}
  *
  * Copyright (c) Agora, Inc.
  *

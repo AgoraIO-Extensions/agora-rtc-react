@@ -45,6 +45,11 @@ jobs:
           npm whoami
           pnpm -F agora-rtc-react release ${{ inputs.increment }} -d --ci --github.release=${{ inputs.releases }}
 
+      - name: Update VERSION
+        if: ${{ !inputs.dry-run }}
+        run: |
+          pnpm run update-version target:agora-rtc-react @${{ inputs.increment }}
+
       - name: NPM Publish
         if: ${{ !inputs.dry-run }}
         run: |
