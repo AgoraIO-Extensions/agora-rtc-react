@@ -545,13 +545,23 @@ export function usePublish(
   tracks: (ILocalTrack | null)[],
   readyToPublish = true,
   client?: IAgoraRTCClient,
-): void {
+): {
+  isLoading: boolean;
+  error: AgoraRTCError | null;
+} {
   const resolvedClient = useRTCClient(client);
   const isConnected = useIsConnected(client);
   //maintain an internal ref to track published
   const pubTracks = useRef<(ILocalTrack | null)[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<AgoraRTCError | null>(null);
+  const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
+    if (!isUnmountRef.current) {
+      setIsLoading(false);
+      setError(null);
+    }
     if (!resolvedClient || !isConnected || !readyToPublish) {
       return;
     }
@@ -578,9 +588,18 @@ export function usePublish(
       if (track) {
         if (canPublish(track)) {
           try {
+            if (!isUnmountRef.current) {
+              setIsLoading(true);
+            }
             await resolvedClient.publish(track);
-          } catch (error) {
-            console.error(error);
+          } catch (err) {
+            console.error(err);
+            if (!isUnmountRef.current) {
+              setError(err as AgoraRTCError);
+            }
+          }
+          if (!isUnmountRef.current) {
+            setIsLoading(false);
           }
         }
       }
@@ -589,4 +608,6 @@ export function usePublish(
 
     // published tracks will be unpublished on unmount by useJoin
   }, [isConnected, readyToPublish, resolvedClient, tracks]);
+
+  return { isLoading: isLoading, error: error };
 }

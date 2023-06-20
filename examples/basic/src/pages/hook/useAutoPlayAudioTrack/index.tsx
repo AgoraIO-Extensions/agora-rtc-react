@@ -17,8 +17,9 @@ export const UseAutoPlayAudioTrack = () => {
   );
 
   const [micOn, setMic] = useState(false);
-  const audioTrack = useLocalMicrophoneTrack();
-  useAutoPlayAudioTrack(audioTrack, micOn);
+  const { localMicrophoneTrack } = useLocalMicrophoneTrack();
+
+  useAutoPlayAudioTrack(localMicrophoneTrack, micOn);
 
   return (
     <Container>
