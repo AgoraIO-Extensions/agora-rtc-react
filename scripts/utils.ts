@@ -6,7 +6,6 @@ export function emptyDirectory(path) {
       const curPath = path + "/" + file;
       if (fs.lstatSync(curPath).isDirectory()) {
         emptyDirectory(curPath);
-        console.log(1);
         fs.rmdirSync(curPath);
       } else {
         fs.unlinkSync(curPath);

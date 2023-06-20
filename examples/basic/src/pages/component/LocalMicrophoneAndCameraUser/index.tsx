@@ -26,21 +26,21 @@ export const LocalMicrophoneAndCameraUserComponent = () => {
   const [cameraOn, setCamera] = useState(false);
   const userAvatar = useMemo(() => fakeAvatar(), []);
 
-  const audioTrack = useLocalMicrophoneTrack();
-  const videoTrack = useLocalCameraTrack();
+  const { localMicrophoneTrack } = useLocalMicrophoneTrack(micOn);
+  const { localCameraTrack } = useLocalCameraTrack(cameraOn);
 
-  usePublish([audioTrack, videoTrack]);
+  usePublish([localMicrophoneTrack, localCameraTrack]);
   return (
     <Container>
       <div className="h-screen p-3">
         <Title>local microphone and camera</Title>
         <LocalMicrophoneAndCameraUser
-          audioTrack={audioTrack}
+          audioTrack={localMicrophoneTrack}
           cameraOn={cameraOn}
           cover={userAvatar}
           micOn={micOn}
           style={{ width: "300px", height: "300px" }}
-          videoTrack={videoTrack}
+          videoTrack={localCameraTrack}
         />
       </div>
       <MediaControl

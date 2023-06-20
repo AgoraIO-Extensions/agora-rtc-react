@@ -19,8 +19,8 @@ export const UseAutoPlayVideoTrack = () => {
   const [cameraOn, setCamera] = useState(false);
 
   const div = useRef<HTMLDivElement | null>(null);
-  const videoTrack = useLocalCameraTrack();
-  useAutoPlayVideoTrack(videoTrack, cameraOn, div.current);
+  const { localCameraTrack } = useLocalCameraTrack();
+  useAutoPlayVideoTrack(localCameraTrack, cameraOn, div.current);
 
   return (
     <Container>

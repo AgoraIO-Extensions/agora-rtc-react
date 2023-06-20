@@ -451,23 +451,43 @@ export function useRemoteVideoTracks(
 export function useLocalCameraTrack(
   ready = true,
   client?: IAgoraRTCClient,
-): ICameraVideoTrack | null {
+): { localCameraTrack: ICameraVideoTrack | null; isLoading: boolean; error: AgoraRTCError | null } {
   const isConnected = useIsConnected(client);
   const [track, setTrack] = useState<ICameraVideoTrack | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<AgoraRTCError | null>(null);
   const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
+    if (!isUnmountRef.current) {
+      setIsLoading(false);
+      setError(null);
+    }
+
     if (isConnected && ready && !track) {
-      const result = await AgoraRTC.createCameraVideoTrack();
+      try {
+        if (!isUnmountRef.current) {
+          setIsLoading(true);
+        }
+        const result = await AgoraRTC.createCameraVideoTrack();
+        if (!isUnmountRef.current) {
+          setTrack(result);
+        }
+      } catch (err) {
+        console.error(err);
+        if (!isUnmountRef.current) {
+          setError(err as AgoraRTCError);
+        }
+      }
       if (!isUnmountRef.current) {
-        setTrack(result);
+        setIsLoading(false);
       }
     }
     if (!isConnected && !isUnmountRef.current) {
       setTrack(null);
     }
   }, [isConnected, ready]);
-  return track;
+  return { localCameraTrack: track, isLoading: isLoading, error: error };
 }
 
 /**
@@ -479,23 +499,42 @@ export function useLocalMicrophoneTrack(
   ready = true,
   audioTrackConfig: MicrophoneAudioTrackInitConfig = { ANS: true, AEC: true },
   client?: IAgoraRTCClient,
-): IMicrophoneAudioTrack | null {
+): {
+  localMicrophoneTrack: IMicrophoneAudioTrack | null;
+  isLoading: boolean;
+  error: AgoraRTCError | null;
+} {
   const isConnected = useIsConnected(client);
   const [track, setTrack] = useState<IMicrophoneAudioTrack | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<AgoraRTCError | null>(null);
   const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
     if (isConnected && ready && !track) {
-      const result = await AgoraRTC.createMicrophoneAudioTrack(audioTrackConfig);
+      try {
+        if (!isUnmountRef.current) {
+          setIsLoading(true);
+        }
+        const result = await AgoraRTC.createMicrophoneAudioTrack(audioTrackConfig);
+        if (!isUnmountRef.current) {
+          setTrack(result);
+        }
+      } catch (err) {
+        console.error(err);
+        if (!isUnmountRef.current) {
+          setError(err as AgoraRTCError);
+        }
+      }
       if (!isUnmountRef.current) {
-        setTrack(result);
+        setIsLoading(false);
       }
     }
     if (!isConnected && !isUnmountRef.current) {
       setTrack(null);
     }
   }, [isConnected, ready]);
-  return track;
+  return { localMicrophoneTrack: track, isLoading: isLoading, error: error };
 }
 
 /**

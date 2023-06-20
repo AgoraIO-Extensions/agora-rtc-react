@@ -40,9 +40,9 @@ export const UsePublish = () => {
   //local
   const [micOn, setMic] = useState(false);
   const [cameraOn, setCamera] = useState(false);
-  const audioTrack = useLocalMicrophoneTrack(micOn);
-  const videoTrack = useLocalCameraTrack(cameraOn);
-  usePublish([audioTrack, videoTrack]);
+  const { localMicrophoneTrack } = useLocalMicrophoneTrack(micOn);
+  const { localCameraTrack } = useLocalCameraTrack(cameraOn);
+  usePublish([localMicrophoneTrack, localCameraTrack]);
 
   //remote
   const remoteUsers = useRemoteUsers();
@@ -73,11 +73,11 @@ export const UsePublish = () => {
           {isConnected && (
             <AutoLayout.Item>
               <LocalMicrophoneAndCameraUser
-                audioTrack={audioTrack}
+                audioTrack={localMicrophoneTrack}
                 cameraOn={cameraOn}
                 cover={userAvatar}
                 micOn={micOn}
-                videoTrack={videoTrack}
+                videoTrack={localCameraTrack}
               >
                 {<Label>{`${userName}{${uid}}`}</Label>}
               </LocalMicrophoneAndCameraUser>

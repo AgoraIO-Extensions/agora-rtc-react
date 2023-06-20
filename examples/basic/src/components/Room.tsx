@@ -41,9 +41,9 @@ export function Room({
 
   const selfPublished = micOn || cameraOn;
 
-  const audioTrack = useLocalMicrophoneTrack(micOn);
-  const videoTrack = useLocalCameraTrack(cameraOn);
-  usePublish([audioTrack, videoTrack]);
+  const { localMicrophoneTrack } = useLocalMicrophoneTrack(micOn);
+  const { localCameraTrack } = useLocalCameraTrack(cameraOn);
+  usePublish([localMicrophoneTrack, localCameraTrack]);
   return (
     <>
       {renderAction ? renderAction() : undefined}
@@ -58,11 +58,11 @@ export function Room({
           ) : (
             <AutoLayout.Item>
               <LocalMicrophoneAndCameraUser
-                audioTrack={audioTrack}
+                audioTrack={localMicrophoneTrack}
                 cameraOn={cameraOn}
                 cover={userAvatar}
                 micOn={micOn}
-                videoTrack={videoTrack}
+                videoTrack={localCameraTrack}
               >
                 {<Label>{`${userName}{${uid}}`}</Label>}
               </LocalMicrophoneAndCameraUser>
