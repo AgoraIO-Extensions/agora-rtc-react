@@ -1,14 +1,10 @@
 import fs from "node:fs";
-import path from "node:path";
 
-const packagePath = path.join(__dirname, "..", "packages", "agora-rtc-react");
-const docsPath = path.join(packagePath, "docs");
-
-const docType = ["components", "hooks", "interfaces"];
-const languages = ["", "-en"];
-const languagesFormat = [".zh-CN", ".en-US"];
+import { docType, docsPath, languages, languagesFormat } from "./const";
+import { emptyDirectory } from "./utils";
 
 for (let j = 0; j < docType.length; j++) {
+  emptyDirectory(`${docsPath}/${docType[j]}`);
   for (let m = 0; m < languages.length; m++) {
     fs.readFile(`${docsPath}/${docType[j]}${languages[m]}.mdx`, "utf-8", (err, data) => {
       if (err) {
