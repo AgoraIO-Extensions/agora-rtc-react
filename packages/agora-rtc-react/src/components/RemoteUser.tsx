@@ -59,8 +59,8 @@ export function RemoteUser({
   ...props
 }: RemoteUserProps) {
   const mergedStyle = useMergedStyle(VideoTrackWrapperStyle, style);
-  const videoTrack = useRemoteUserTrack(user, "video");
-  const audioTrack = useRemoteUserTrack(user, "audio");
+  const { track: videoTrack } = useRemoteUserTrack(user, "video");
+  const { track: audioTrack } = useRemoteUserTrack(user, "audio");
 
   playVideo = playVideo ?? user?.hasVideo;
   playAudio = playAudio ?? user?.hasAudio;

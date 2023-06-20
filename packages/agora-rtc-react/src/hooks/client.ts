@@ -182,6 +182,12 @@ export function useJoin(
   const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
+    if (!isUnmountRef.current) {
+      setError(null);
+      setJoinResult(0);
+      setJoinComplete(false);
+    }
+
     if (ready && resolvedClient) {
       try {
         if (!isUnmountRef.current) {
@@ -192,16 +198,15 @@ export function useJoin(
         const result = await resolvedClient.join(appid, channel, token, uid);
         if (!isUnmountRef.current) {
           setJoinResult(result);
-          setError(null);
-          setJoinComplete(true);
         }
       } catch (err) {
         console.error(err);
         if (!isUnmountRef.current) {
-          setJoinResult(0);
           setError(err as AgoraRTCError);
-          setJoinComplete(true);
         }
+      }
+      if (!isUnmountRef.current) {
+        setJoinComplete(true);
       }
       return () => {
         for (const track of resolvedClient.localTracks) {
@@ -212,11 +217,6 @@ export function useJoin(
         }
         return resolvedClient.leave();
       };
-    }
-    if (!ready) {
-      setJoinResult(0);
-      setError(null);
-      setJoinComplete(false);
     }
   }, [ready, client]);
   return {
