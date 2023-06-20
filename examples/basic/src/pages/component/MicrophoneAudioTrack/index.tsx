@@ -1,4 +1,9 @@
-import { MicrophoneAudioTrack, useJoin, useLocalAudioTrack, usePublish } from "agora-rtc-react";
+import {
+  MicrophoneAudioTrack,
+  useJoin,
+  useLocalMicrophoneTrack,
+  usePublish,
+} from "agora-rtc-react";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { Select, Typography } from "antd";
 import { useEffect, useState } from "react";
@@ -26,7 +31,7 @@ export const MicrophoneAudioTrackComponent = () => {
   const [deviceList, setDeviceList] = useState<MediaDeviceInfo[]>([]);
   const [deviceId, setDeviceId] = useState("");
 
-  const audioTrack = useLocalAudioTrack();
+  const audioTrack = useLocalMicrophoneTrack();
   usePublish([audioTrack]);
 
   useEffect(() => {

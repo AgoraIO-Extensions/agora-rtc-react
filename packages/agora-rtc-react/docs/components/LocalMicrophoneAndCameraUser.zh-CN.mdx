@@ -23,13 +23,13 @@
 ```jsx
 import {
   LocalMicrophoneAndCameraUser,
-  useLocalAudioTrack,
+  useLocalMicrophoneTrack,
   useLocalCameraTrack,
 } from "agora-rtc-react";
 
 function App() {
   //create local audio track
-  const audioTrack = useLocalAudioTrack();
+  const audioTrack = useLocalMicrophoneTrack();
   //create local video track
   const videoTrack = useLocalCameraTrack();
 

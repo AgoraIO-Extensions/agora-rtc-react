@@ -1,8 +1,8 @@
 import {
   LocalMicrophoneAndCameraUser,
   useJoin,
-  useLocalAudioTrack,
   useLocalCameraTrack,
+  useLocalMicrophoneTrack,
   usePublish,
 } from "agora-rtc-react";
 import { Typography } from "antd";
@@ -26,7 +26,7 @@ export const LocalMicrophoneAndCameraUserComponent = () => {
   const [cameraOn, setCamera] = useState(false);
   const userAvatar = useMemo(() => fakeAvatar(), []);
 
-  const audioTrack = useLocalAudioTrack();
+  const audioTrack = useLocalMicrophoneTrack();
   const videoTrack = useLocalCameraTrack();
 
   usePublish([audioTrack, videoTrack]);

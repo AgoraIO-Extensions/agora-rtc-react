@@ -4,10 +4,10 @@ import { FakeMicrophoneAudioTrack, FakeRTCClient } from "fake-agora-rtc";
 import { expect, vi } from "vitest";
 
 import * as clientHook from "../../src/hooks/client";
-import { useLocalAudioTrack } from "../../src/hooks/index";
+import { useLocalMicrophoneTrack } from "../../src/hooks/index";
 import { createWrapper } from "../setup";
 
-describe("useLocalAudioTrack", () => {
+describe("useLocalMicrophoneTrack", () => {
   const spy = vi.spyOn(clientHook, "useIsConnected");
   beforeAll(() => {
     spy.mockReturnValue(true);
@@ -17,7 +17,7 @@ describe("useLocalAudioTrack", () => {
   });
   test("should return null when ready is false", async () => {
     const client = FakeRTCClient.create();
-    const { result } = renderHook(() => useLocalAudioTrack(false), {
+    const { result } = renderHook(() => useLocalMicrophoneTrack(false), {
       wrapper: createWrapper(client),
     });
     waitFor(() => {
@@ -30,7 +30,7 @@ describe("useLocalAudioTrack", () => {
     vi.spyOn(AgoraRTC, "createMicrophoneAudioTrack").mockReturnValue(
       Promise.resolve(FakeMicrophoneAudioTrack.create()),
     );
-    const { result } = renderHook(() => useLocalAudioTrack(true), {
+    const { result } = renderHook(() => useLocalMicrophoneTrack(true), {
       wrapper: createWrapper(client),
     });
     await waitFor(() => {
@@ -44,7 +44,7 @@ describe("useLocalAudioTrack", () => {
     vi.spyOn(AgoraRTC, "createMicrophoneAudioTrack").mockReturnValue(
       Promise.resolve(FakeMicrophoneAudioTrack.create()),
     );
-    const { result, rerender } = renderHook(() => useLocalAudioTrack(true), {
+    const { result, rerender } = renderHook(() => useLocalMicrophoneTrack(true), {
       wrapper: createWrapper(client),
     });
 

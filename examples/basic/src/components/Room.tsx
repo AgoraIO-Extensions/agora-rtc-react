@@ -2,8 +2,8 @@ import {
   LocalMicrophoneAndCameraUser,
   useCurrentUID,
   useIsConnected,
-  useLocalAudioTrack,
   useLocalCameraTrack,
+  useLocalMicrophoneTrack,
   usePublish,
   usePublishedRemoteUsers,
   useRemoteUsers,
@@ -41,7 +41,7 @@ export function Room({
 
   const selfPublished = micOn || cameraOn;
 
-  const audioTrack = useLocalAudioTrack(micOn);
+  const audioTrack = useLocalMicrophoneTrack(micOn);
   const videoTrack = useLocalCameraTrack(cameraOn);
   usePublish([audioTrack, videoTrack]);
   return (

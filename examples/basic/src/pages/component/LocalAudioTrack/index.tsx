@@ -1,4 +1,4 @@
-import { LocalAudioTrack, useJoin, useLocalAudioTrack, usePublish } from "agora-rtc-react";
+import { LocalAudioTrack, useJoin, useLocalMicrophoneTrack, usePublish } from "agora-rtc-react";
 import { Typography } from "antd";
 import { useEffect, useState } from "react";
 
@@ -22,7 +22,7 @@ export const LocalAudioTrackComponent = () => {
     isPlaying: boolean;
     enabled: boolean;
   }>();
-  const audioTrack = useLocalAudioTrack();
+  const audioTrack = useLocalMicrophoneTrack();
   usePublish([audioTrack]);
   useEffect(() => {
     if (audioTrack) {

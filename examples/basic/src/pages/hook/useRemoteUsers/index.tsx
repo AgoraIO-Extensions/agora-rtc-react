@@ -4,8 +4,8 @@ import {
   useCurrentUID,
   useIsConnected,
   useJoin,
-  useLocalAudioTrack,
   useLocalCameraTrack,
+  useLocalMicrophoneTrack,
   usePublish,
   usePublishedRemoteUsers,
   useRemoteUsers,
@@ -37,7 +37,7 @@ export const UseRemoteUsers = () => {
   //local
   const [micOn, setMic] = useState(false);
   const [cameraOn, setCamera] = useState(false);
-  const audioTrack = useLocalAudioTrack(micOn);
+  const audioTrack = useLocalMicrophoneTrack(micOn);
   const videoTrack = useLocalCameraTrack(cameraOn);
   usePublish([audioTrack, videoTrack]);
 

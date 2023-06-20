@@ -17,11 +17,11 @@
 #### 使用示例
 
 ```jsx
-import { LocalAudioTrack, useLocalAudioTrack } from "agora-rtc-react";
+import { LocalAudioTrack, useLocalMicrophoneTrack } from "agora-rtc-react";
 
 function App() {
   //create local audio track
-  const audioTrack = useLocalAudioTrack();
+  const audioTrack = useLocalMicrophoneTrack();
 
   return <LocalAudioTrack track={audioTrack} play />;
 }

@@ -1,8 +1,8 @@
 import {
   LocalUser,
   useJoin,
-  useLocalAudioTrack,
   useLocalCameraTrack,
+  useLocalMicrophoneTrack,
   usePublish,
 } from "agora-rtc-react";
 import { Button, Typography } from "antd";
@@ -27,7 +27,7 @@ export const LocalUserComponent = () => {
   const [playVideo, setPlayVideo] = useState(false);
   const [playAudio, setPlayAudio] = useState(false);
 
-  const audioTrack = useLocalAudioTrack();
+  const audioTrack = useLocalMicrophoneTrack();
   const videoTrack = useLocalCameraTrack();
   usePublish([audioTrack, videoTrack]);
   return (

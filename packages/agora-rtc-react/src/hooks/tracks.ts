@@ -449,7 +449,7 @@ export function useLocalCameraTrack(
  * when you ready to create track, set ready to true.
  * close track on unmount.
  */
-export function useLocalAudioTrack(
+export function useLocalMicrophoneTrack(
   ready = true,
   audioTrackConfig: MicrophoneAudioTrackInitConfig = { ANS: true, AEC: true },
   client?: IAgoraRTCClient,
