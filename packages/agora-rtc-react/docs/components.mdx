@@ -73,11 +73,11 @@ function App({ children }) {
 #### 使用示例
 
 ```jsx
-import { LocalAudioTrack, useLocalMicrophoneTrack } from "agora-rtc-react";
+import { LocalAudioTrack, useLocalAudioTrack } from "agora-rtc-react";
 
 function App() {
   //create local audio track
-  const audioTrack = useLocalMicrophoneTrack();
+  const audioTrack = useLocalAudioTrack();
 
   return <LocalAudioTrack track={audioTrack} play />;
 }
@@ -135,11 +135,11 @@ function App() {
 #### 使用示例
 
 ```jsx
-import { LocalAudioTrack, useLocalMicrophoneTrack } from "agora-rtc-react";
+import { LocalAudioTrack, useLocalAudioTrack } from "agora-rtc-react";
 
 function App() {
   //create local audio track
-  const audioTrack = useLocalMicrophoneTrack();
+  const audioTrack = useLocalAudioTrack();
 
   return <LocalAudioTrack track={audioTrack} play />;
 }
@@ -200,11 +200,11 @@ function App() {
 #### 使用示例
 
 ```jsx
-import { LocalUser, useLocalMicrophoneTrack, useLocalCameraTrack } from "agora-rtc-react";
+import { LocalUser, useLocalAudioTrack, useLocalCameraTrack } from "agora-rtc-react";
 
 function App() {
   //create local audio track
-  const audioTrack = useLocalMicrophoneTrack();
+  const audioTrack = useLocalAudioTrack();
   //create local video track
   const videoTrack = useLocalCameraTrack();
 
@@ -247,13 +247,13 @@ function App() {
 ```jsx
 import {
   LocalMicrophoneAndCameraUser,
-  useLocalMicrophoneTrack,
+  useLocalAudioTrack,
   useLocalCameraTrack,
 } from "agora-rtc-react";
 
 function App() {
   //create local audio track
-  const audioTrack = useLocalMicrophoneTrack();
+  const audioTrack = useLocalAudioTrack();
   //create local video track
   const videoTrack = useLocalCameraTrack();
 

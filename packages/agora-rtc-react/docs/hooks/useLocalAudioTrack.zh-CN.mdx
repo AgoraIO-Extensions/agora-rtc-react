@@ -1,4 +1,4 @@
-### useLocalMicrophoneTrack
+### useLocalAudioTrack
 
 用于创建本地麦克风音频轨道的 Hook。
 
@@ -22,10 +22,10 @@
 #### 使用示例
 
 ```jsx
-import { useLocalMicrophoneTrack } from "agora-rtc-react";
+import { useLocalAudioTrack } from "agora-rtc-react";
 
 function App() {
-  const audioTrack = useLocalMicrophoneTrack(true, { ANS: true, AEC: true });
+  const audioTrack = useLocalAudioTrack(true, { ANS: true, AEC: true });
 
   return <></>;
 }

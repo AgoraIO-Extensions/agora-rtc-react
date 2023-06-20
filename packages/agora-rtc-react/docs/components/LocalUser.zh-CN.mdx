@@ -19,11 +19,11 @@
 #### 使用示例
 
 ```jsx
-import { LocalUser, useLocalMicrophoneTrack, useLocalCameraTrack } from "agora-rtc-react";
+import { LocalUser, useLocalAudioTrack, useLocalCameraTrack } from "agora-rtc-react";
 
 function App() {
   //create local audio track
-  const audioTrack = useLocalMicrophoneTrack();
+  const audioTrack = useLocalAudioTrack();
   //create local video track
   const videoTrack = useLocalCameraTrack();
 
