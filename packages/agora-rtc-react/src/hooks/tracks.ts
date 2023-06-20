@@ -148,12 +148,12 @@ export function useVolumeLevel(audioTrack?: IRemoteAudioTrack | ILocalAudioTrack
 export function useRemoteAudioTracks(
   users: IAgoraRTCRemoteUser[] | undefined,
   client?: IAgoraRTCClient | null,
-): { audioTracks: IRemoteAudioTrack[]; loading: boolean; error: AgoraRTCError | null } {
+): { audioTracks: IRemoteAudioTrack[]; isLoading: boolean; error: AgoraRTCError | null } {
   const resolvedClient = useRTCClient(client);
   const [tracks, setTracks] = useState<IRemoteAudioTrack[]>([]);
   const isConnected = useIsConnected();
   const nextTracks = useRef<IRemoteAudioTrack[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<AgoraRTCError | null>(null);
   const isUnmountRef = useIsUnmounted();
 
@@ -163,7 +163,7 @@ export function useRemoteAudioTracks(
       if (!user.audioTrack && users.some(({ uid }) => user.uid === uid)) {
         try {
           if (!isUnmountRef.current) {
-            setLoading(true);
+            setIsLoading(true);
           }
           await resolvedClient.subscribe(user, "audio");
           if (!isUnmountRef.current) {
@@ -195,7 +195,7 @@ export function useRemoteAudioTracks(
 
         if (!isUnmountRef.current) {
           setTracks(nextTracks.current);
-          setLoading(false);
+          setIsLoading(false);
         }
       }
     };
@@ -205,7 +205,7 @@ export function useRemoteAudioTracks(
         if (!isUnmountRef.current) {
           nextTracks.current = nextTracks.current.filter(track => track.getUserId() !== user.uid);
           setTracks(nextTracks.current);
-          setLoading(false);
+          setIsLoading(false);
         }
         try {
           await resolvedClient.unsubscribe(user, "audio");
@@ -245,7 +245,7 @@ export function useRemoteAudioTracks(
     if (unsubscribeList.length > 0) {
       try {
         if (!isUnmountRef.current) {
-          setLoading(true);
+          setIsLoading(true);
         }
         await resolvedClient.massUnsubscribe(unsubscribeList);
         if (!isUnmountRef.current) {
@@ -259,7 +259,7 @@ export function useRemoteAudioTracks(
       }
       if (!isUnmountRef.current) {
         setTracks(nextTracks.current.slice());
-        setLoading(false);
+        setIsLoading(false);
       }
     }
 
@@ -277,7 +277,7 @@ export function useRemoteAudioTracks(
     ]);
   }, [isConnected, resolvedClient, users]);
 
-  return { audioTracks: tracks, loading: loading, error: error };
+  return { audioTracks: tracks, isLoading: isLoading, error: error };
 }
 
 /**
@@ -287,12 +287,12 @@ export function useRemoteAudioTracks(
 export function useRemoteVideoTracks(
   users: IAgoraRTCRemoteUser[] | undefined,
   client?: IAgoraRTCClient | null,
-): { videoTracks: IRemoteVideoTrack[]; loading: boolean; error: AgoraRTCError | null } {
+): { videoTracks: IRemoteVideoTrack[]; isLoading: boolean; error: AgoraRTCError | null } {
   const resolvedClient = useRTCClient(client);
   const [tracks, setTracks] = useState<IRemoteVideoTrack[]>([]);
   const isConnected = useIsConnected();
   const nextTracks = useRef<IRemoteVideoTrack[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<AgoraRTCError | null>(null);
   const isUnmountRef = useIsUnmounted();
 
@@ -302,7 +302,7 @@ export function useRemoteVideoTracks(
       if (!user.videoTrack && users.some(({ uid }) => user.uid === uid)) {
         try {
           if (!isUnmountRef.current) {
-            setLoading(true);
+            setIsLoading(true);
           }
           await resolvedClient.subscribe(user, "video");
           if (!isUnmountRef.current) {
@@ -333,7 +333,7 @@ export function useRemoteVideoTracks(
         });
         if (!isUnmountRef.current) {
           setTracks(nextTracks.current);
-          setLoading(false);
+          setIsLoading(false);
         }
       }
     };
@@ -343,7 +343,7 @@ export function useRemoteVideoTracks(
         if (!isUnmountRef.current) {
           nextTracks.current = nextTracks.current.filter(track => track.getUserId() !== user.uid);
           setTracks(nextTracks.current);
-          setLoading(false);
+          setIsLoading(false);
         }
         try {
           await resolvedClient.unsubscribe(user, "video");
@@ -383,7 +383,7 @@ export function useRemoteVideoTracks(
     if (unsubscribeList.length > 0) {
       try {
         if (!isUnmountRef.current) {
-          setLoading(true);
+          setIsLoading(true);
         }
         await resolvedClient.massUnsubscribe(unsubscribeList);
         if (!isUnmountRef.current) {
@@ -397,7 +397,7 @@ export function useRemoteVideoTracks(
       }
       if (!isUnmountRef.current) {
         setTracks(nextTracks.current.slice());
-        setLoading(false);
+        setIsLoading(false);
       }
     }
 
@@ -414,7 +414,7 @@ export function useRemoteVideoTracks(
       }),
     ]);
   }, [isConnected, resolvedClient, users]);
-  return { videoTracks: tracks, loading: loading, error: error };
+  return { videoTracks: tracks, isLoading: isLoading, error: error };
 }
 
 /**
