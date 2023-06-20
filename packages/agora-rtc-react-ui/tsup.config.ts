@@ -4,10 +4,25 @@ import setGlobals from "../../scripts/tsup/set-globals";
 
 import pkg from "./package.json";
 
+const banner = `
+/**
+ * @license ${pkg.name}
+ *
+ * Copyright (c) Agora, Inc.
+ *
+ * This source code is licensed under the MIT license.
+ */
+`;
+
 export default defineConfig([
   {
     entry: {
       [pkg.name]: "src/index.ts",
+    },
+    banner: () => {
+      return {
+        js: banner,
+      };
     },
     format: ["cjs", "esm"],
     splitting: false,
@@ -23,11 +38,7 @@ export default defineConfig([
     },
     banner: () => {
       return {
-        js: `
-/**
-* ${pkg.name}-v${pkg.version} Copyright AgoraInc.
-*/
-       `,
+        js: banner,
       };
     },
     outExtension: () => {
