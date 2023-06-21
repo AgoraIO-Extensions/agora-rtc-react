@@ -1,15 +1,5 @@
 import type { AgoraRTCError } from "./listen";
 
-export declare enum AgoraRtcReactErrorType {
-  UNEXPECTED_ERROR = "UNEXPECTED_ERROR",
-  UNEXPECTED_RESPONSE = "UNEXPECTED_RESPONSE",
-  TIMEOUT = "TIMEOUT",
-  INVALID_PARAMS = "INVALID_PARAMS",
-  NOT_READABLE = "NOT_READABLE",
-  NOT_SUPPORTED = "NOT_SUPPORTED",
-  INVALID_OPERATION = "INVALID_OPERATION",
-}
-
 export interface IAgoraRtcReactError extends AgoraRTCError {
   readonly rtcMethod: string;
   readonly rtcError: AgoraRTCError | string;
