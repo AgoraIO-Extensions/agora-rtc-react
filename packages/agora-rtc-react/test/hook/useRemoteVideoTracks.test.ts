@@ -5,7 +5,8 @@ import { vi } from "vitest";
 
 import * as clientHook from "../../src/hooks/client";
 import { useRemoteVideoTracks } from "../../src/hooks/index";
-import { createWrapper, errorMessage } from "../setup";
+import { errorMessage } from "../setup/agora";
+import { createWrapper } from "../setup/wrapper";
 
 describe("useRemoteVideoTracks", () => {
   test("should return video tracks", async () => {

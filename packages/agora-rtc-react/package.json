@@ -23,15 +23,20 @@
     "guoxianzhe"
   ],
   "sideEffects": false,
-  "main": "src/main.ts",
+  "main": "src/index.ts",
   "publishConfig": {
     "main": "dist/agora-rtc-react.js",
     "module": "dist/agora-rtc-react.mjs",
     "types": "dist/agora-rtc-react.d.ts"
   },
-  "source": "src/main.ts",
+  "source": "src/index.ts",
   "files": [
-    "dist"
+    "src",
+    "dist",
+    "!src/stories",
+    "!src/**/*.stories.*",
+    "!src/vite-env.d.ts",
+    "!dist/*.v_*.js"
   ],
   "engines": {
     "node": ">=10"
@@ -39,6 +44,7 @@
   "scripts": {
     "prepublishOnly": "pnpm run build",
     "build": "tsup",
+    "release": "release-it",
     "start": "pnpm run -F example-overview start",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -51,7 +57,7 @@
     "gene-docs": "pnpm run gene-md && pnpm run gene-stories"
   },
   "peerDependencies": {
-    "agora-rtc-sdk-ng": "^4.1.0",
+    "agora-rtc-sdk-ng": ">=4.18.0",
     "react": ">=16.8"
   },
   "devDependencies": {
@@ -74,7 +80,7 @@
     "@vitest/coverage-c8": "^0.29.2",
     "@vitest/ui": "^0.30.1",
     "agora-rtc-react-ui": "workspace:*",
-    "agora-rtc-sdk-ng": "^4.16.1",
+    "agora-rtc-sdk-ng": "4.18.0",
     "fake-agora-rtc": "workspace:*",
     "jsdom": "^21.1.0",
     "react": "^18.2.0",
@@ -85,5 +91,15 @@
     "typescript": "^4.9.5",
     "vite": "^4.1.4",
     "vitest": "^0.29.2"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "requireCleanWorkingDir": false,
+      "tagName": "v${version}"
+    },
+    "npm": {
+      "publish": true
+    }
   }
 }

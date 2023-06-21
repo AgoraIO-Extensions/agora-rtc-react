@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 overrides:
   nodeunit: npm:noop-package@1.0.0
 
@@ -97,8 +101,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/agora-rtc-react-ui
       agora-rtc-sdk-ng:
-        specifier: ^4.16.1
-        version: 4.16.1
+        specifier: 4.18.0
+        version: 4.18.0
       antd:
         specifier: ^5.4.7
         version: 5.4.7(react-dom@18.2.0)(react@18.2.0)
@@ -176,8 +180,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/agora-rtc-react-ui
       agora-rtc-sdk-ng:
-        specifier: ^4.16.1
-        version: 4.16.1
+        specifier: 4.18.0
+        version: 4.18.0
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
@@ -288,8 +292,8 @@ importers:
         specifier: workspace:*
         version: link:../agora-rtc-react-ui
       agora-rtc-sdk-ng:
-        specifier: ^4.16.1
-        version: 4.16.1
+        specifier: 4.18.0
+        version: 4.18.0
       fake-agora-rtc:
         specifier: workspace:*
         version: link:../fake-agora-rtc
@@ -375,8 +379,8 @@ importers:
         specifier: workspace:*
         version: link:../agora-rtc-react
       agora-rtc-sdk-ng:
-        specifier: ^4.16.1
-        version: 4.16.1
+        specifier: 4.18.0
+        version: 4.18.0
       fake-agora-rtc:
         specifier: workspace:*
         version: link:../fake-agora-rtc
@@ -414,8 +418,8 @@ importers:
         specifier: ^6.4.0
         version: 6.4.0
       agora-rtc-sdk-ng:
-        specifier: ^4.16.1
-        version: 4.16.1
+        specifier: 4.18.0
+        version: 4.18.0
       side-effect-manager:
         specifier: ^1.2.2
         version: 1.2.2
@@ -3285,7 +3289,7 @@ packages:
     dependencies:
       '@storybook/client-logger': 7.0.0-rc.3
       '@storybook/core-events': 7.0.0-rc.3
-      '@storybook/csf': 0.0.2-next.11
+      '@storybook/csf': 0.1.1-next.0
       '@storybook/global': 5.0.0
       '@storybook/manager-api': 7.0.0-rc.3(react-dom@18.2.0)(react@18.2.0)
       '@storybook/preview-api': 7.0.0-rc.3
@@ -3396,7 +3400,7 @@ packages:
       '@storybook/client-logger': 7.0.0-rc.3
       '@storybook/components': 7.0.0-rc.3(react-dom@18.2.0)(react@18.2.0)
       '@storybook/core-events': 7.0.0-rc.3
-      '@storybook/csf': 0.0.2-next.11
+      '@storybook/csf': 0.1.1-next.0
       '@storybook/docs-tools': 7.0.0-rc.3
       '@storybook/global': 5.0.0
       '@storybook/manager-api': 7.0.0-rc.3(react-dom@18.2.0)(react@18.2.0)
@@ -3614,7 +3618,7 @@ packages:
       '@babel/core': 7.21.0
       '@babel/preset-env': 7.20.2(@babel/core@7.21.0)
       '@babel/types': 7.21.2
-      '@storybook/csf': 0.0.2-next.11
+      '@storybook/csf': 0.1.1-next.0
       '@storybook/csf-tools': 7.0.0-rc.3
       '@storybook/node-logger': 7.0.0-rc.3
       '@storybook/types': 7.0.0-rc.3
@@ -3635,7 +3639,7 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@storybook/client-logger': 7.0.0-beta.43
-      '@storybook/csf': 0.0.2-next.11
+      '@storybook/csf': 0.1.1-next.0
       '@storybook/global': 5.0.0
       '@storybook/theming': 7.0.0-beta.43(react-dom@18.2.0)(react@18.2.0)
       '@storybook/types': 7.0.0-beta.43
@@ -3655,7 +3659,7 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@storybook/client-logger': 7.0.0-rc.3
-      '@storybook/csf': 0.0.2-next.11
+      '@storybook/csf': 0.1.1-next.0
       '@storybook/global': 5.0.0
       '@storybook/theming': 7.0.0-rc.3(react-dom@18.2.0)(react@18.2.0)
       '@storybook/types': 7.0.0-rc.3
@@ -3720,7 +3724,7 @@ packages:
       '@storybook/builder-manager': 7.0.0-rc.3
       '@storybook/core-common': 7.0.0-rc.3
       '@storybook/core-events': 7.0.0-rc.3
-      '@storybook/csf': 0.0.2-next.11
+      '@storybook/csf': 0.1.1-next.0
       '@storybook/csf-tools': 7.0.0-rc.3
       '@storybook/docs-mdx': 0.0.1-next.7
       '@storybook/global': 5.0.0
@@ -3781,7 +3785,7 @@ packages:
       '@babel/parser': 7.21.2
       '@babel/traverse': 7.21.2
       '@babel/types': 7.21.2
-      '@storybook/csf': 0.0.2-next.11
+      '@storybook/csf': 0.1.1-next.0
       '@storybook/types': 7.0.0-rc.3
       fs-extra: 11.1.0
       recast: 0.23.1
@@ -3790,8 +3794,8 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/csf@0.0.2-next.11:
-    resolution: {integrity: sha512-xGt0YSVxZb43sKmEf1GIQD8xEbo+c+S6khDEL7Qu/pYA0gh5z3WUuhOlovnelYj/YJod+XRsfVvk23AaRfUJ4Q==}
+  /@storybook/csf@0.1.1-next.0:
+    resolution: {integrity: sha512-2M8E4CZOVW77P9lrgZZc2rcwxhNKVVykpzbcAauc3bots7xvDJMG60EasMRB/Y+cfqnSu6aaSUEVmKHTKsVJ3A==}
     dependencies:
       type-fest: 2.19.0
     dev: true
@@ -3837,7 +3841,7 @@ packages:
       '@storybook/channels': 7.0.0-beta.43
       '@storybook/client-logger': 7.0.0-beta.43
       '@storybook/core-events': 7.0.0-beta.43
-      '@storybook/csf': 0.0.2-next.11
+      '@storybook/csf': 0.1.1-next.0
       '@storybook/global': 5.0.0
       '@storybook/router': 7.0.0-beta.43(react-dom@18.2.0)(react@18.2.0)
       '@storybook/theming': 7.0.0-beta.43(react-dom@18.2.0)(react@18.2.0)
@@ -3864,7 +3868,7 @@ packages:
       '@storybook/channels': 7.0.0-rc.3
       '@storybook/client-logger': 7.0.0-rc.3
       '@storybook/core-events': 7.0.0-rc.3
-      '@storybook/csf': 0.0.2-next.11
+      '@storybook/csf': 0.1.1-next.0
       '@storybook/global': 5.0.0
       '@storybook/router': 7.0.0-rc.3(react-dom@18.2.0)(react@18.2.0)
       '@storybook/theming': 7.0.0-rc.3(react-dom@18.2.0)(react@18.2.0)
@@ -3908,7 +3912,7 @@ packages:
       '@storybook/channels': 7.0.0-beta.40
       '@storybook/client-logger': 7.0.0-beta.40
       '@storybook/core-events': 7.0.0-beta.40
-      '@storybook/csf': 0.0.2-next.11
+      '@storybook/csf': 0.1.1-next.0
       '@storybook/global': 5.0.0
       '@storybook/types': 7.0.0-beta.40
       '@types/qs': 6.9.7
@@ -3931,7 +3935,7 @@ packages:
       '@storybook/channels': 7.0.0-beta.43
       '@storybook/client-logger': 7.0.0-beta.43
       '@storybook/core-events': 7.0.0-beta.43
-      '@storybook/csf': 0.0.2-next.11
+      '@storybook/csf': 0.1.1-next.0
       '@storybook/global': 5.0.0
       '@storybook/types': 7.0.0-beta.43
       '@types/qs': 6.9.7
@@ -3954,7 +3958,7 @@ packages:
       '@storybook/channels': 7.0.0-rc.3
       '@storybook/client-logger': 7.0.0-rc.3
       '@storybook/core-events': 7.0.0-rc.3
-      '@storybook/csf': 0.0.2-next.11
+      '@storybook/csf': 0.1.1-next.0
       '@storybook/global': 5.0.0
       '@storybook/types': 7.0.0-rc.3
       '@types/qs': 6.9.7
@@ -5145,8 +5149,8 @@ packages:
       indent-string: 4.0.0
     dev: true
 
-  /agora-rtc-sdk-ng@4.16.1:
-    resolution: {integrity: sha512-9ccs22X/BEAGe5tIGx2OqWkGpdvuGoB7xq72BouuR5HhP0WVBIBimixOvXXftlY9SwDWsBfKhBV23EtA7jtrTA==}
+  /agora-rtc-sdk-ng@4.18.0:
+    resolution: {integrity: sha512-BZgAwMgOkPfjIvYNsJl+7/aqFAkdcxvrh2BfDxDdDVm50hF/cQn7jqb34dFQq2jFYuUB+792RXMCLA4zjX6y9g==}
     dependencies:
       agora-rte-extension: 1.2.3
 

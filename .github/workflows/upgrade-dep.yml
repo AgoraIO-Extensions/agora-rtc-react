@@ -26,16 +26,8 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
-      - name: Install pnpm 🤏🏻
-        uses: pnpm/action-setup@v2.2.4
-        with:
-          version: latest
-
-      - name: Setup Node 💚
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: "pnpm"
+      - name: Setup 🛠️
+        uses: ./.github/actions/setup
 
       - name: Upgrade Dependencies 🚀
         run: |
@@ -50,7 +42,8 @@ jobs:
             git switch -c ${{ inputs.create-branch-name }}
             echo "CREATE_PR=1" >> "$GITHUB_ENV"
           fi
-          pnpm -r -F "./packages/**" exec esbuild-dev $PWD/scripts/upgrade-deps.ts dep:${{ inputs.package-name }} @${{ inputs.package-version }}
+          pnpm -r exec esbuild-dev $PWD/scripts/upgrade-deps.ts dep:${{ inputs.package-name }} @${{ inputs.package-version }}
+          pnpm install --no-frozen-lockfile
           # pnpm run test
           if git diff --quiet;
           then
@@ -63,4 +56,4 @@ jobs:
       - name: Create Pull Request 📝
         if: env.CREATE_PR == 1
         run: |
-          gh pr create -B ${{ github.ref_name }} -H ${{ inputs.create-branch-name }} --title '[AUTO] upgrade ${{inputs.package-name}} to ${{inputs.package-version}}' --body 'Created by Github action' --label 'ci:dep-upgrade'
+          gh pr create -B ${{ github.ref_name }} -H ${{ inputs.create-branch-name }} --title '🤖chore: upgrade ${{inputs.package-name}} to ${{inputs.package-version}}' --body 'Created by Github action' --label 'ci:dep-upgrade'

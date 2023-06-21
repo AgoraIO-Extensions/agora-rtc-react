@@ -26,7 +26,7 @@ module.exports = {
     return mergeConfig(config, {
       resolve: {
         alias: {
-          "agora-rtc-sdk-ng": require.resolve("../../fake-agora-rtc/src/main.ts"),
+          "agora-rtc-sdk-ng": require.resolve("../../fake-agora-rtc/src/index.ts"),
         },
       },
     });

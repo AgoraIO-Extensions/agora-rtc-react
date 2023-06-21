@@ -4,7 +4,8 @@ import { expect, vi } from "vitest";
 
 import * as clientHook from "../../src/hooks/client";
 import { usePublish } from "../../src/hooks/index";
-import { createWrapper, errorMessage } from "../setup";
+import { errorMessage } from "../setup/agora";
+import { createWrapper } from "../setup/wrapper";
 
 describe("usePublish", () => {
   const spy = vi.spyOn(clientHook, "useIsConnected");

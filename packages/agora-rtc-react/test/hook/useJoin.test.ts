@@ -5,7 +5,8 @@ import { expect, vi } from "vitest";
 
 import * as clientHook from "../../src/hooks/client";
 import { useJoin } from "../../src/hooks/index";
-import { createWrapper, errorMessage } from "../setup";
+import { errorMessage } from "../setup/agora";
+import { createWrapper } from "../setup/wrapper";
 
 const mockTrack: ILocalVideoTrack = {
   close: vi.fn(),

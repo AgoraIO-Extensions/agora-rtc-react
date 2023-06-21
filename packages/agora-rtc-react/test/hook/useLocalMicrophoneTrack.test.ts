@@ -5,7 +5,8 @@ import { expect, vi } from "vitest";
 
 import * as clientHook from "../../src/hooks/client";
 import { useLocalMicrophoneTrack } from "../../src/hooks/index";
-import { createWrapper, errorMessage } from "../setup";
+import { errorMessage } from "../setup/agora";
+import { createWrapper } from "../setup/wrapper";
 
 describe("useLocalMicrophoneTrack", () => {
   test("should return null when ready is false", async () => {
