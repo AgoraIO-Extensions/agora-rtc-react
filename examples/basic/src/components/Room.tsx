@@ -2,10 +2,9 @@ import {
   LocalMicrophoneAndCameraUser,
   useCurrentUID,
   useIsConnected,
-  useLocalAudioTrack,
   useLocalCameraTrack,
+  useLocalMicrophoneTrack,
   usePublish,
-  usePublishedRemoteUsers,
   useRemoteUsers,
 } from "agora-rtc-react";
 import type { ReactNode } from "react";
@@ -37,13 +36,13 @@ export function Room({
   const userAvatar = useMemo(() => fakeAvatar(), []);
 
   const remoteUsers = useRemoteUsers();
-  const publishedUsers = usePublishedRemoteUsers();
+  const publishedUsers = remoteUsers.filter(user => user.hasAudio || user.hasVideo);
 
   const selfPublished = micOn || cameraOn;
 
-  const audioTrack = useLocalAudioTrack(micOn);
-  const videoTrack = useLocalCameraTrack(cameraOn);
-  usePublish([audioTrack, videoTrack]);
+  const { localMicrophoneTrack } = useLocalMicrophoneTrack(micOn);
+  const { localCameraTrack } = useLocalCameraTrack(cameraOn);
+  usePublish([localMicrophoneTrack, localCameraTrack]);
   return (
     <>
       {renderAction ? renderAction() : undefined}
@@ -58,11 +57,11 @@ export function Room({
           ) : (
             <AutoLayout.Item>
               <LocalMicrophoneAndCameraUser
-                audioTrack={audioTrack}
+                audioTrack={localMicrophoneTrack}
                 cameraOn={cameraOn}
                 cover={userAvatar}
                 micOn={micOn}
-                videoTrack={videoTrack}
+                videoTrack={localCameraTrack}
               >
                 {<Label>{`${userName}{${uid}}`}</Label>}
               </LocalMicrophoneAndCameraUser>

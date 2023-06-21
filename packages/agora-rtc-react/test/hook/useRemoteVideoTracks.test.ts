@@ -23,7 +23,7 @@ describe("useRemoteVideoTracks", () => {
       expect(spy2).toBeCalledWith(userList[0], "video");
       expect(result.current).not.toBeNull();
       expect(result.current).not.toBeUndefined();
-      expect(result.current.length).toBe(userList.length);
+      expect(result.current.videoTracks.length).toBe(userList.length);
     });
     vi.resetAllMocks();
     vi.clearAllMocks();
@@ -37,13 +37,16 @@ describe("useRemoteVideoTracks", () => {
     const spy2 = vi.spyOn(client, "subscribe").mockReturnValue(Promise.reject(errorMessage));
     const spy3 = vi.spyOn(console, "error");
 
-    renderHook(() => useRemoteVideoTracks(userList, client), {
+    const { result } = renderHook(() => useRemoteVideoTracks(userList, client), {
       wrapper: createWrapper(client),
     });
     await waitFor(() => {
       expect(spy2).toBeCalledTimes(1);
       expect(spy2).toBeCalledWith(userList[0], "video");
       expect(spy3).toHaveBeenCalledWith(errorMessage);
+      expect(result.current.error).not.toBeNull();
+      expect(result.current.error).not.toBeUndefined();
+      expect(result.current.error).toBe(errorMessage);
     });
     vi.resetAllMocks();
     vi.clearAllMocks();
@@ -55,13 +58,14 @@ describe("useRemoteVideoTracks", () => {
     const spy = vi.spyOn(clientHook, "useIsConnected");
     spy.mockReturnValue(true);
     const spy2 = vi.spyOn(client, "unsubscribe").mockRejectedValue(new Error());
+    const spy3 = vi.spyOn(console, "error");
     (client.remoteUsers as IAgoraRTCRemoteUser[]) = userList;
 
     const { result } = renderHook(() => useRemoteVideoTracks(userList, client), {
       wrapper: createWrapper(client),
     });
     await waitFor(() => {
-      userList[0].uid = result.current[0].getTrackId();
+      userList[0].uid = result.current.videoTracks[0].getTrackId();
       (client.remoteUsers as IAgoraRTCRemoteUser[]) = userList;
     });
     act(() => {
@@ -69,7 +73,49 @@ describe("useRemoteVideoTracks", () => {
     });
     await waitFor(async () => {
       expect(spy2).toBeCalledTimes(1);
+      expect(spy3).toHaveBeenCalledTimes(1);
       await expect(spy2).rejects.toThrowError();
+      expect(result.current.error).not.toBeNull();
+      expect(result.current.error).not.toBeUndefined();
+      expect(result.current.error).toBeInstanceOf(Error);
+    });
+
+    vi.resetAllMocks();
+    vi.clearAllMocks();
+  });
+
+  test("should return error log when massUnsubscribe is failed", async () => {
+    const userList = [{ uid: "1", hasAudio: true, hasVideo: true }];
+    const client = FakeRTCClient.create();
+    const spy = vi.spyOn(clientHook, "useIsConnected");
+    spy.mockReturnValue(true);
+    const spy2 = vi.spyOn(client, "massUnsubscribe").mockRejectedValue(new Error());
+    const spy3 = vi.spyOn(console, "error");
+    (client.remoteUsers as IAgoraRTCRemoteUser[]) = userList;
+
+    const { result, rerender } = renderHook(
+      ({ userList, client }) => useRemoteVideoTracks(userList, client),
+      {
+        initialProps: { userList: userList, client: client },
+        wrapper: createWrapper(client),
+      },
+    );
+
+    await waitFor(() => {
+      expect(result.current.videoTracks.length).toBe(userList.length);
+      userList[0].uid = result.current.videoTracks[0].getUserId().toString();
+      (client.remoteUsers as IAgoraRTCRemoteUser[]) = userList;
+    });
+
+    rerender({ userList: [], client: client });
+
+    await waitFor(async () => {
+      expect(spy2).toBeCalledTimes(1);
+      expect(spy3).toHaveBeenCalledTimes(1);
+      await expect(spy2).rejects.toThrowError();
+      expect(result.current.error).not.toBeNull();
+      expect(result.current.error).not.toBeUndefined();
+      expect(result.current.error).toBeInstanceOf(Error);
     });
 
     vi.resetAllMocks();
@@ -94,8 +140,8 @@ describe("useRemoteVideoTracks", () => {
     );
     await waitFor(() => {
       expect(spy2).toBeCalledTimes(0);
-      expect(result.current.length).toBe(userList.length);
-      userList[0].uid = result.current[0].getTrackId();
+      expect(result.current.videoTracks.length).toBe(userList.length);
+      userList[0].uid = result.current.videoTracks[0].getTrackId();
       (client.remoteUsers as IAgoraRTCRemoteUser[]) = userList;
     });
     act(() => {
@@ -133,8 +179,8 @@ describe("useRemoteVideoTracks", () => {
       },
     );
     await waitFor(() => {
-      expect(result.current.length).toBe(userList.length);
-      userList[0].uid = result.current[0].getUserId().toString();
+      expect(result.current.videoTracks.length).toBe(userList.length);
+      userList[0].uid = result.current.videoTracks[0].getUserId().toString();
       (client.remoteUsers as IAgoraRTCRemoteUser[]) = userList;
     });
 
@@ -143,8 +189,8 @@ describe("useRemoteVideoTracks", () => {
       expect(client.massUnsubscribe).toBeCalledTimes(1);
       expect(result.current).not.toBeNull();
       expect(result.current).not.toBeUndefined();
-      expect(Array.isArray(result.current)).toBe(true);
-      expect(result.current.length).toBe(0);
+      expect(Array.isArray(result.current.videoTracks)).toBe(true);
+      expect(result.current.videoTracks.length).toBe(0);
     });
     vi.resetAllMocks();
     vi.clearAllMocks();

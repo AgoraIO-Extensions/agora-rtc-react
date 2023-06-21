@@ -28,7 +28,7 @@ export const RemoteAudioTrackComponent = () => {
   const [audioTrackStateList, setAudioTrackStateList] = useState<audioTrackStateList[]>();
 
   const remoteUsers = useRemoteUsers();
-  const audioTracks = useRemoteAudioTracks(remoteUsers);
+  const { audioTracks } = useRemoteAudioTracks(remoteUsers);
 
   useEffect(() => {
     if (audioTracks && audioTracks.length > 0) {

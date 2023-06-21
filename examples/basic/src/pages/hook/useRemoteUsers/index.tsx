@@ -4,10 +4,9 @@ import {
   useCurrentUID,
   useIsConnected,
   useJoin,
-  useLocalAudioTrack,
   useLocalCameraTrack,
+  useLocalMicrophoneTrack,
   usePublish,
-  usePublishedRemoteUsers,
   useRemoteUsers,
 } from "agora-rtc-react";
 import { useMemo, useState } from "react";
@@ -23,8 +22,6 @@ export const UseRemoteUsers = () => {
   const userName = useMemo(() => fakeName(uid), [uid]);
   const userAvatar = useMemo(() => fakeAvatar(), []);
 
-  const publishedUsers = usePublishedRemoteUsers();
-
   useJoin(
     {
       appid: appConfig.appId,
@@ -37,12 +34,13 @@ export const UseRemoteUsers = () => {
   //local
   const [micOn, setMic] = useState(false);
   const [cameraOn, setCamera] = useState(false);
-  const audioTrack = useLocalAudioTrack(micOn);
-  const videoTrack = useLocalCameraTrack(cameraOn);
-  usePublish([audioTrack, videoTrack]);
+  const { localMicrophoneTrack } = useLocalMicrophoneTrack(micOn);
+  const { localCameraTrack } = useLocalCameraTrack(cameraOn);
+  usePublish([localMicrophoneTrack, localCameraTrack]);
 
   //remote
   const remoteUsers = useRemoteUsers();
+  const publishedUsers = remoteUsers.filter(user => user.hasAudio || user.hasVideo);
 
   return (
     <Container>
@@ -55,11 +53,11 @@ export const UseRemoteUsers = () => {
           {isConnected && (
             <AutoLayout.Item>
               <LocalMicrophoneAndCameraUser
-                audioTrack={audioTrack}
+                audioTrack={localMicrophoneTrack}
                 cameraOn={cameraOn}
                 cover={userAvatar}
                 micOn={micOn}
-                videoTrack={videoTrack}
+                videoTrack={localCameraTrack}
               >
                 {<Label>{`${userName}{${uid}}`}</Label>}
               </LocalMicrophoneAndCameraUser>

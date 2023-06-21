@@ -1,4 +1,3 @@
-import UseAutoJoin from "./useAutoJoin";
 import UseAutoPlayAudioTrack from "./useAutoPlayAudioTrack";
 import UseAutoPlayVideoTrack from "./useAutoPlayVideoTrack";
 import UseConnectionState from "./useConnectionState";
@@ -44,10 +43,6 @@ const Hooks = [
   {
     label: "useNetworkQuality",
     component: UseNetworkQuality,
-  },
-  {
-    label: "useAutoJoin",
-    component: UseAutoJoin,
   },
 ];
 

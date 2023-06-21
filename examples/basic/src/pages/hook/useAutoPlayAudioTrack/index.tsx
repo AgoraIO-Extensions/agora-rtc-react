@@ -1,4 +1,4 @@
-import { useAutoPlayAudioTrack, useJoin, useLocalAudioTrack } from "agora-rtc-react";
+import { useAutoPlayAudioTrack, useJoin, useLocalMicrophoneTrack } from "agora-rtc-react";
 import { Typography } from "antd";
 import { useState } from "react";
 
@@ -17,8 +17,9 @@ export const UseAutoPlayAudioTrack = () => {
   );
 
   const [micOn, setMic] = useState(false);
-  const audioTrack = useLocalAudioTrack();
-  useAutoPlayAudioTrack(audioTrack, micOn);
+  const { localMicrophoneTrack } = useLocalMicrophoneTrack();
+
+  useAutoPlayAudioTrack(localMicrophoneTrack, micOn);
 
   return (
     <Container>

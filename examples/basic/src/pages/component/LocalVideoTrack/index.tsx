@@ -17,8 +17,8 @@ export const LocalVideoTrackComponent = () => {
   );
 
   const [cameraOn, setCamera] = useState(false);
-  const videoTrack = useLocalCameraTrack();
-  usePublish([videoTrack]);
+  const { localCameraTrack } = useLocalCameraTrack();
+  usePublish([localCameraTrack]);
   return (
     <Container>
       <div className="h-screen p-3">
@@ -26,7 +26,7 @@ export const LocalVideoTrackComponent = () => {
         <LocalVideoTrack
           play={cameraOn}
           style={{ width: "300px", height: "300px" }}
-          track={videoTrack}
+          track={localCameraTrack}
         />
       </div>
       <MediaControl

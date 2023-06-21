@@ -1,8 +1,8 @@
 import {
   LocalUser,
   useJoin,
-  useLocalAudioTrack,
   useLocalCameraTrack,
+  useLocalMicrophoneTrack,
   usePublish,
 } from "agora-rtc-react";
 import { Button, Typography } from "antd";
@@ -27,9 +27,9 @@ export const LocalUserComponent = () => {
   const [playVideo, setPlayVideo] = useState(false);
   const [playAudio, setPlayAudio] = useState(false);
 
-  const audioTrack = useLocalAudioTrack();
-  const videoTrack = useLocalCameraTrack();
-  usePublish([audioTrack, videoTrack]);
+  const { localMicrophoneTrack } = useLocalMicrophoneTrack(micOn);
+  const { localCameraTrack } = useLocalCameraTrack(cameraOn);
+  usePublish([localMicrophoneTrack, localCameraTrack]);
   return (
     <Container>
       <div className="h-screen p-3 overflow-auto">
@@ -73,14 +73,14 @@ export const LocalUserComponent = () => {
           cameraOn=true playVideo=false
         </Button>
         <LocalUser
-          audioTrack={audioTrack}
+          audioTrack={localMicrophoneTrack}
           cameraOn={cameraOn}
           className="m-2"
           micOn={micOn}
           playAudio={playAudio}
           playVideo={playVideo}
           style={{ width: "300px", height: "300px" }}
-          videoTrack={videoTrack}
+          videoTrack={localCameraTrack}
         />
       </div>
       <MediaControl

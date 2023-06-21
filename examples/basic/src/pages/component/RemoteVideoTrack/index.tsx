@@ -28,7 +28,7 @@ export const RemoteVideoTrackComponent = () => {
   const [videoTrackStateList, setVideoTrackStateList] = useState<videoTrackStateList[]>();
 
   const remoteUsers = useRemoteUsers();
-  const videoTracks = useRemoteVideoTracks(remoteUsers);
+  const { videoTracks } = useRemoteVideoTracks(remoteUsers);
 
   useEffect(() => {
     if (videoTracks && videoTracks.length > 0) {

@@ -1,4 +1,9 @@
-import { MicrophoneAudioTrack, useJoin, useLocalAudioTrack, usePublish } from "agora-rtc-react";
+import {
+  MicrophoneAudioTrack,
+  useJoin,
+  useLocalMicrophoneTrack,
+  usePublish,
+} from "agora-rtc-react";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { Select, Typography } from "antd";
 import { useEffect, useState } from "react";
@@ -26,8 +31,9 @@ export const MicrophoneAudioTrackComponent = () => {
   const [deviceList, setDeviceList] = useState<MediaDeviceInfo[]>([]);
   const [deviceId, setDeviceId] = useState("");
 
-  const audioTrack = useLocalAudioTrack();
-  usePublish([audioTrack]);
+  const { localMicrophoneTrack } = useLocalMicrophoneTrack();
+
+  usePublish([localMicrophoneTrack]);
 
   useEffect(() => {
     AgoraRTC.getMicrophones()
@@ -39,14 +45,14 @@ export const MicrophoneAudioTrackComponent = () => {
   }, []);
 
   useEffect(() => {
-    if (audioTrack) {
+    if (localMicrophoneTrack) {
       setAudioTrackState({
-        muted: audioTrack.muted,
-        isPlaying: audioTrack.isPlaying,
-        enabled: audioTrack.enabled,
+        muted: localMicrophoneTrack.muted,
+        isPlaying: localMicrophoneTrack.isPlaying,
+        enabled: localMicrophoneTrack.enabled,
       });
     }
-  }, [micOn, audioTrack]);
+  }, [micOn, localMicrophoneTrack]);
 
   const handleChange = (value: string) => {
     setDeviceId(value);
@@ -69,7 +75,7 @@ export const MicrophoneAudioTrackComponent = () => {
           options={deviceList}
           value={deviceId}
         />
-        <MicrophoneAudioTrack deviceId={deviceId} play={micOn} track={audioTrack} />
+        <MicrophoneAudioTrack deviceId={deviceId} play={micOn} track={localMicrophoneTrack} />
       </div>
       <MediaControl
         micOn={micOn}

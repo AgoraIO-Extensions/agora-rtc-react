@@ -1,4 +1,4 @@
-import { LocalAudioTrack, useJoin, useLocalAudioTrack, usePublish } from "agora-rtc-react";
+import { LocalAudioTrack, useJoin, useLocalMicrophoneTrack, usePublish } from "agora-rtc-react";
 import { Typography } from "antd";
 import { useEffect, useState } from "react";
 
@@ -22,17 +22,18 @@ export const LocalAudioTrackComponent = () => {
     isPlaying: boolean;
     enabled: boolean;
   }>();
-  const audioTrack = useLocalAudioTrack();
-  usePublish([audioTrack]);
+  const { localMicrophoneTrack } = useLocalMicrophoneTrack(micOn);
+
+  usePublish([localMicrophoneTrack]);
   useEffect(() => {
-    if (audioTrack) {
+    if (localMicrophoneTrack) {
       setAudioTrackState({
-        muted: audioTrack.muted,
-        isPlaying: audioTrack.isPlaying,
-        enabled: audioTrack.enabled,
+        muted: localMicrophoneTrack.muted,
+        isPlaying: localMicrophoneTrack.isPlaying,
+        enabled: localMicrophoneTrack.enabled,
       });
     }
-  }, [micOn, audioTrack]);
+  }, [micOn, localMicrophoneTrack]);
   return (
     <Container>
       <div className="h-screen p-3">
@@ -44,7 +45,7 @@ export const LocalAudioTrackComponent = () => {
             <Paragraph>{`enabled: ${audioTrackState?.enabled}`}</Paragraph>
           </>
         )}
-        <LocalAudioTrack play={micOn} track={audioTrack} />
+        <LocalAudioTrack play={micOn} track={localMicrophoneTrack} />
       </div>
       <MediaControl
         micOn={micOn}

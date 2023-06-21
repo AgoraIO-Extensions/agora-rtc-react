@@ -1,11 +1,12 @@
 import type { ConnectionState, IAgoraRTCClient, UID } from "agora-rtc-sdk-ng";
 import { useEffect, useState } from "react";
 
+import type { AgoraRTCError } from "../listen";
 import { listen } from "../listen";
 import { joinDisposers, timeout } from "../utils";
 
 import { useRTCClient } from "./context";
-import { useAsyncEffect } from "./tools";
+import { useAsyncEffect, useIsUnmounted } from "./tools";
 
 export function useConnectionState(client?: IAgoraRTCClient | null): ConnectionState {
   const resolvedClient = useRTCClient(client);
@@ -153,31 +154,6 @@ export function useNetworkQuality(client?: IAgoraRTCClient | null): NetworkQuali
   return networkQuality;
 }
 
-export function useAutoJoin(
-  appid: string,
-  channel: string,
-  token: string | null,
-  uid?: UID | null,
-  client?: IAgoraRTCClient | null,
-): void {
-  const resolvedClient = useRTCClient(client);
-
-  useAsyncEffect(async () => {
-    if (resolvedClient) {
-      await resolvedClient.join(appid, channel, token, uid);
-      return () => {
-        for (const track of resolvedClient.localTracks) {
-          if (track.isPlaying) {
-            track.stop();
-          }
-          track.close();
-        }
-        return resolvedClient.leave();
-      };
-    }
-  }, [appid, channel, token, uid, resolvedClient]);
-}
-
 export interface JoinOptions {
   appid: string;
   channel: string;
@@ -194,17 +170,45 @@ export type FetchArgs = (() => Promise<JoinOptions>) | JoinOptions;
  * @param ready
  * @param client
  */
-export function useJoin(fetchArgs: FetchArgs, ready = true, client?: IAgoraRTCClient | null): void {
+export function useJoin(
+  fetchArgs: FetchArgs,
+  ready = true,
+  client?: IAgoraRTCClient | null,
+): { data: UID; isLoading: boolean; isConnected: boolean; error: AgoraRTCError | null } {
   const resolvedClient = useRTCClient(client);
+  const isConnected = useIsConnected(client);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [joinResult, setJoinResult] = useState<UID>(0);
+  const [error, setError] = useState<AgoraRTCError | null>(null);
+  const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
+    if (!isUnmountRef.current) {
+      setError(null);
+      setJoinResult(0);
+      setIsLoading(false);
+    }
+
     if (ready && resolvedClient) {
       try {
+        if (!isUnmountRef.current) {
+          setIsLoading(true);
+        }
         const { appid, channel, token, uid } =
           typeof fetchArgs === "function" ? await fetchArgs() : fetchArgs;
-        await resolvedClient.join(appid, channel, token, uid);
-      } catch (error) {
-        console.error(error);
+        const result = await resolvedClient.join(appid, channel, token, uid);
+        if (!isUnmountRef.current) {
+          setJoinResult(result);
+        }
+      } catch (err) {
+        console.error(err);
+        if (!isUnmountRef.current) {
+          setError(err as AgoraRTCError);
+        }
+      }
+      if (!isUnmountRef.current) {
+        setIsLoading(false);
       }
       return () => {
         for (const track of resolvedClient.localTracks) {
@@ -217,4 +221,10 @@ export function useJoin(fetchArgs: FetchArgs, ready = true, client?: IAgoraRTCCl
       };
     }
   }, [ready, client]);
+  return {
+    data: joinResult,
+    isLoading: isLoading,
+    isConnected: isConnected,
+    error: error,
+  };
 }

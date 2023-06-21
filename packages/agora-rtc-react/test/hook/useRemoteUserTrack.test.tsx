@@ -35,9 +35,11 @@ describe("useRemoteUserTrack", () => {
       expect(spy).toBeCalled();
       expect(spy2).toBeCalledTimes(1);
       expect(spy2).toBeCalledWith(user, "video");
-      expect(result.current).not.toBeNull();
-      expect(result.current).not.toBeUndefined();
-      expect(result.current?.trackMediaType).toBe("video");
+      expect(result.current.track).not.toBeNull();
+      expect(result.current.track).not.toBeUndefined();
+      expect(result.current.track?.trackMediaType).toBe("video");
+      expect(result.current.isLoading).toBe(false);
+      expect(result.current.error).toBeNull();
     });
   });
 
@@ -54,9 +56,11 @@ describe("useRemoteUserTrack", () => {
       expect(spy).toBeCalled();
       expect(spy2).toBeCalledTimes(1);
       expect(spy2).toBeCalledWith(user, "audio");
-      expect(result.current).not.toBeNull();
-      expect(result.current).not.toBeUndefined();
-      expect(result.current?.trackMediaType).toBe("audio");
+      expect(result.current.track).not.toBeNull();
+      expect(result.current.track).not.toBeUndefined();
+      expect(result.current.track?.trackMediaType).toBe("audio");
+      expect(result.current.isLoading).toBe(false);
+      expect(result.current.error).toBeNull();
     });
   });
 
@@ -77,8 +81,10 @@ describe("useRemoteUserTrack", () => {
       expect(spy).toBeCalled();
       expect(spy2).toBeCalledTimes(1);
       expect(spy2).toBeCalledWith(user, "video");
-      expect(result.current).not.toBeNull();
-      expect(result.current).toBeUndefined();
+      expect(result.current.track).not.toBeNull();
+      expect(result.current.track).toBeUndefined();
+      expect(result.current.isLoading).toBe(false);
+      expect(result.current.error).toBeNull();
     });
 
     act(() => {
@@ -88,9 +94,11 @@ describe("useRemoteUserTrack", () => {
       expect(spy).toBeCalled();
       expect(spy3).toBeCalledTimes(1);
       expect(spy3).toBeCalledWith(user, "video");
-      expect(result.current).not.toBeNull();
-      expect(result.current).not.toBeUndefined();
-      expect(result.current?.trackMediaType).toBe("video");
+      expect(result.current.track).not.toBeNull();
+      expect(result.current.track).not.toBeUndefined();
+      expect(result.current.track?.trackMediaType).toBe("video");
+      expect(result.current.isLoading).toBe(false);
+      expect(result.current.error).toBeNull();
     });
   });
 
@@ -110,8 +118,10 @@ describe("useRemoteUserTrack", () => {
       expect(spy).toBeCalled();
       expect(spy2).toBeCalledTimes(1);
       expect(spy2).toBeCalledWith(user, "audio");
-      expect(result.current).not.toBeNull();
-      expect(result.current).toBeUndefined();
+      expect(result.current.track).not.toBeNull();
+      expect(result.current.track).toBeUndefined();
+      expect(result.current.isLoading).toBe(false);
+      expect(result.current.error).toBeNull();
     });
   });
 
@@ -122,7 +132,7 @@ describe("useRemoteUserTrack", () => {
 
     (client.remoteUsers as IAgoraRTCRemoteUser[]) = [user];
 
-    renderHook(() => useRemoteUserTrack(user, "video", client), {
+    const { result } = renderHook(() => useRemoteUserTrack(user, "video", client), {
       wrapper: createWrapper(client),
     });
     act(() => {
@@ -131,6 +141,8 @@ describe("useRemoteUserTrack", () => {
     await waitFor(() => {
       expect(spy2).toBeCalledTimes(1);
       expect(spy3).toHaveBeenCalledWith(errorMessage);
+      expect(result.current.isLoading).toBe(false);
+      expect(result.current.error).toBe(errorMessage);
     });
   });
 
@@ -145,12 +157,14 @@ describe("useRemoteUserTrack", () => {
     };
     (client.remoteUsers as IAgoraRTCRemoteUser[]) = [newUser];
 
-    renderHook(() => useRemoteUserTrack(newUser, "video", client), {
+    const { result } = renderHook(() => useRemoteUserTrack(newUser, "video", client), {
       wrapper: createWrapper(client),
     });
     await waitFor(() => {
       expect(spy2).toBeCalledTimes(1);
       expect(spy3).toHaveBeenCalledWith(errorMessage);
+      expect(result.current.isLoading).toBe(false);
+      expect(result.current.error).toBe(errorMessage);
     });
   });
 });
