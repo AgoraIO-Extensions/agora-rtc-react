@@ -7,7 +7,6 @@ import {
   useLocalCameraTrack,
   useLocalMicrophoneTrack,
   usePublish,
-  usePublishedRemoteUsers,
   useRemoteUsers,
 } from "agora-rtc-react";
 import { useMemo, useState } from "react";
@@ -22,8 +21,6 @@ export const UseRemoteUsers = () => {
   const uid = useCurrentUID() || 0;
   const userName = useMemo(() => fakeName(uid), [uid]);
   const userAvatar = useMemo(() => fakeAvatar(), []);
-
-  const publishedUsers = usePublishedRemoteUsers();
 
   useJoin(
     {
@@ -43,6 +40,7 @@ export const UseRemoteUsers = () => {
 
   //remote
   const remoteUsers = useRemoteUsers();
+  const publishedUsers = remoteUsers.filter(user => user.hasAudio || user.hasVideo);
 
   return (
     <Container>

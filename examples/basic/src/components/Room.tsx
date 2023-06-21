@@ -5,7 +5,6 @@ import {
   useLocalCameraTrack,
   useLocalMicrophoneTrack,
   usePublish,
-  usePublishedRemoteUsers,
   useRemoteUsers,
 } from "agora-rtc-react";
 import type { ReactNode } from "react";
@@ -37,7 +36,7 @@ export function Room({
   const userAvatar = useMemo(() => fakeAvatar(), []);
 
   const remoteUsers = useRemoteUsers();
-  const publishedUsers = usePublishedRemoteUsers();
+  const publishedUsers = remoteUsers.filter(user => user.hasAudio || user.hasVideo);
 
   const selfPublished = micOn || cameraOn;
 

@@ -7,7 +7,6 @@ import {
   useLocalCameraTrack,
   useLocalMicrophoneTrack,
   usePublish,
-  usePublishedRemoteUsers,
   useRemoteAudioTracks,
   useRemoteUsers,
   useRemoteVideoTracks,
@@ -25,8 +24,6 @@ export const UsePublish = () => {
   const uid = useCurrentUID() || 0;
   const userName = useMemo(() => fakeName(uid), [uid]);
   const userAvatar = useMemo(() => fakeAvatar(), []);
-
-  const publishedUsers = usePublishedRemoteUsers();
 
   useJoin(
     {
@@ -46,6 +43,7 @@ export const UsePublish = () => {
 
   //remote
   const remoteUsers = useRemoteUsers();
+  const publishedUsers = remoteUsers.filter(user => user.hasAudio || user.hasVideo);
   const { videoTracks } = useRemoteVideoTracks(remoteUsers);
   const { audioTracks } = useRemoteAudioTracks(remoteUsers);
   audioTracks.map(track => track.play());
