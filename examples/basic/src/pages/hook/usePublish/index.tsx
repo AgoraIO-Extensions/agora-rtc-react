@@ -2,7 +2,6 @@ import {
   LocalMicrophoneAndCameraUser,
   RemoteVideoPlayer,
   useCurrentUID,
-  useIsConnected,
   useJoin,
   useLocalCameraTrack,
   useLocalMicrophoneTrack,
@@ -19,13 +18,11 @@ import { appConfig, fakeAvatar, fakeName } from "../../../utils";
 
 export const UsePublish = () => {
   const [calling, setCalling] = useState(false);
-  const isConnected = useIsConnected();
-
   const uid = useCurrentUID() || 0;
   const userName = useMemo(() => fakeName(uid), [uid]);
   const userAvatar = useMemo(() => fakeAvatar(), []);
 
-  useJoin(
+  const { isConnected } = useJoin(
     {
       appid: appConfig.appId,
       channel: appConfig.channel,

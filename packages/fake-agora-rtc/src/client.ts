@@ -131,4 +131,8 @@ export class FakeRTCClient extends FakeAgoraEventEmitter {
   public join(): Promise<UID> {
     return Promise.resolve(randUuid());
   }
+
+  public leave(): Promise<void> {
+    return Promise.resolve();
+  }
 }

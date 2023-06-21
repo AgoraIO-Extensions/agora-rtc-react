@@ -174,9 +174,11 @@ export function useJoin(
   fetchArgs: FetchArgs,
   ready = true,
   client?: IAgoraRTCClient | null,
-): { data: UID; joinComplete: boolean; error: AgoraRTCError | null } {
+): { data: UID; isLoading: boolean; isConnected: boolean; error: AgoraRTCError | null } {
   const resolvedClient = useRTCClient(client);
-  const [joinComplete, setJoinComplete] = useState(false);
+  const isConnected = useIsConnected(client);
+
+  const [isLoading, setIsLoading] = useState(false);
   const [joinResult, setJoinResult] = useState<UID>(0);
   const [error, setError] = useState<AgoraRTCError | null>(null);
   const isUnmountRef = useIsUnmounted();
@@ -185,13 +187,13 @@ export function useJoin(
     if (!isUnmountRef.current) {
       setError(null);
       setJoinResult(0);
-      setJoinComplete(false);
+      setIsLoading(false);
     }
 
     if (ready && resolvedClient) {
       try {
         if (!isUnmountRef.current) {
-          setJoinComplete(false);
+          setIsLoading(true);
         }
         const { appid, channel, token, uid } =
           typeof fetchArgs === "function" ? await fetchArgs() : fetchArgs;
@@ -206,7 +208,7 @@ export function useJoin(
         }
       }
       if (!isUnmountRef.current) {
-        setJoinComplete(true);
+        setIsLoading(false);
       }
       return () => {
         for (const track of resolvedClient.localTracks) {
@@ -221,7 +223,8 @@ export function useJoin(
   }, [ready, client]);
   return {
     data: joinResult,
-    joinComplete: joinComplete,
+    isLoading: isLoading,
+    isConnected: isConnected,
     error: error,
   };
 }

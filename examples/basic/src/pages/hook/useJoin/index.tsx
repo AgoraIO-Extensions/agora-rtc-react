@@ -25,7 +25,7 @@ export const UseJoin = () => {
   // }, calling);
 
   //local
-  const { data, joinComplete, error } = useJoin(
+  const { data, isLoading, isConnected, error } = useJoin(
     {
       appid: appConfig.appId,
       channel: appConfig.channel,
@@ -66,18 +66,10 @@ export const UseJoin = () => {
           <br />
           Below is the returned data.
         </Paragraph>
-        <Text>
-          data: {data}
-          <br />
-        </Text>
-        <Text>
-          joinComplete: {`${joinComplete}`}
-          <br />
-        </Text>
-        <Text>
-          error: {`${JSON.stringify(error)}`}
-          <br />
-        </Text>
+        <Text>data: {data}</Text>
+        <Text className="pl-3">isLoading: {`${isLoading}`}</Text>
+        <Text className="pl-3">isConnected: {`${isConnected}`}</Text>
+        <Text className="pl-3">error: {`${JSON.stringify(error)}`}</Text>
       </div>
       {calling && <Room cameraOn={cameraOn} micOn={micOn} renderRemoteUsers={renderRemoteUsers} />}
       <MediaControl
