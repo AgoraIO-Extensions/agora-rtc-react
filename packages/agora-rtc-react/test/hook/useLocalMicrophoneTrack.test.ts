@@ -86,6 +86,7 @@ describe("useLocalMicrophoneTrack", () => {
       expect(spy3).toHaveBeenCalledTimes(1);
       expect(result.current.isLoading).toBe(false);
       expect(result.current.error).toBeInstanceOf(Error);
+      expect(result.current.error?.rtcMethod).toBe("IAgoraRTC.createMicrophoneAudioTrack");
     });
     vi.clearAllMocks();
     vi.resetAllMocks();

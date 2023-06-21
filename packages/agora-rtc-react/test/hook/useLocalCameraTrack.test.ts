@@ -86,6 +86,7 @@ describe("useLocalCameraTrack", () => {
       expect(spy3).toHaveBeenCalledTimes(1);
       expect(result.current.isLoading).toBe(false);
       expect(result.current.error).toBeInstanceOf(Error);
+      expect(result.current.error?.rtcMethod).toBe("IAgoraRTC.createCameraVideoTrack");
     });
     vi.clearAllMocks();
     vi.resetAllMocks();

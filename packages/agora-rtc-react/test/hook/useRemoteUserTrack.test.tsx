@@ -143,7 +143,8 @@ describe("useRemoteUserTrack", () => {
       expect(spy2).toBeCalledTimes(1);
       expect(spy3).toHaveBeenCalledWith(errorMessage);
       expect(result.current.isLoading).toBe(false);
-      expect(result.current.error).toBe(errorMessage);
+      expect(result.current.error).toBeInstanceOf(Error);
+      expect(result.current.error?.rtcMethod).toBe("IAgoraRTCClient.unsubscribe");
     });
   });
 
@@ -165,7 +166,8 @@ describe("useRemoteUserTrack", () => {
       expect(spy2).toBeCalledTimes(1);
       expect(spy3).toHaveBeenCalledWith(errorMessage);
       expect(result.current.isLoading).toBe(false);
-      expect(result.current.error).toBe(errorMessage);
+      expect(result.current.error).toBeInstanceOf(Error);
+      expect(result.current.error?.rtcMethod).toBe("IAgoraRTCClient.subscribe");
     });
   });
 });

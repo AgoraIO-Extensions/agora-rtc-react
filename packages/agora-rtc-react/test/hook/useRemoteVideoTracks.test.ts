@@ -47,7 +47,8 @@ describe("useRemoteVideoTracks", () => {
       expect(spy3).toHaveBeenCalledWith(errorMessage);
       expect(result.current.error).not.toBeNull();
       expect(result.current.error).not.toBeUndefined();
-      expect(result.current.error).toBe(errorMessage);
+      expect(result.current.error).toBeInstanceOf(Error);
+      expect(result.current.error?.rtcMethod).toBe("IAgoraRTCClient.subscribe");
     });
     vi.resetAllMocks();
     vi.clearAllMocks();
@@ -79,6 +80,7 @@ describe("useRemoteVideoTracks", () => {
       expect(result.current.error).not.toBeNull();
       expect(result.current.error).not.toBeUndefined();
       expect(result.current.error).toBeInstanceOf(Error);
+      expect(result.current.error?.rtcMethod).toBe("IAgoraRTCClient.unsubscribe");
     });
 
     vi.resetAllMocks();
@@ -117,6 +119,7 @@ describe("useRemoteVideoTracks", () => {
       expect(result.current.error).not.toBeNull();
       expect(result.current.error).not.toBeUndefined();
       expect(result.current.error).toBeInstanceOf(Error);
+      expect(result.current.error?.rtcMethod).toBe("IAgoraRTCClient.massUnsubscribe");
     });
 
     vi.resetAllMocks();
