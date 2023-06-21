@@ -19,7 +19,7 @@ import { createAsyncTaskRunner, interval, joinDisposers } from "../utils";
 
 import { useIsConnected } from "./client";
 import { useRTCClient } from "./context";
-import { useAsyncEffect, useIsUnmounted } from "./tools";
+import { compareVersion, useAsyncEffect, useIsUnmounted } from "./tools";
 
 interface massUserProps {
   user: IAgoraRTCRemoteUser;
@@ -568,11 +568,11 @@ export function usePublish(
 
     const filterTracks = tracks.filter(Boolean);
     const baseCheck = (_track: ILocalTrack): boolean => {
-      return (
-        // need wait web sdk update
-        // !(resolvedClient["mode"] === "live" && resolvedClient["role"] === "audience")
-        true
-      );
+      return compareVersion(AgoraRTC.VERSION, "4.18.1") >= 0
+        ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          resolvedClient.mode !== "live" || resolvedClient.role !== "audience"
+        : true;
     };
     const isPublished = (track: ILocalTrack): boolean => {
       return pubTracks.current.some(

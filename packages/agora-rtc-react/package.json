@@ -35,8 +35,7 @@
     "dist",
     "!src/stories",
     "!src/**/*.stories.*",
-    "!src/vite-env.d.ts",
-    "!dist/*.v_*.js"
+    "!src/vite-env.d.ts"
   ],
   "engines": {
     "node": ">=10"

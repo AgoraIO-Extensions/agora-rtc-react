@@ -141,3 +141,24 @@ export function useAsyncEffect(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }
+
+export function compareVersion(v1: string, v2: string): number {
+  const v1Parts = v1.split(".");
+  const v2Parts = v2.split(".");
+  const maxLength = Math.max(v1Parts.length, v2Parts.length);
+
+  for (let i = 0; i < maxLength; i++) {
+    const part1 = parseInt(v1Parts[i] || "0");
+    const part2 = parseInt(v2Parts[i] || "0");
+
+    if (part1 > part2) {
+      return 1;
+    }
+
+    if (part1 < part2) {
+      return -1;
+    }
+  }
+
+  return 0;
+}
