@@ -14,10 +14,9 @@ export function AgoraRTCProvider({ client, children }: AgoraRTCProviderProps) {
 }
 
 /**
- * Get a Agora RTC client from context.
- * @param client If a client is provided, it will be used instead.
+ * @ignore
  */
-export function useOptionalRTCClient(client?: IAgoraRTCClient | null): IAgoraRTCClient | null {
+function useOptionalRTCClient(client?: IAgoraRTCClient | null): IAgoraRTCClient | null {
   const clientFromContext = useContext(AgoraRTCContext);
   return client || clientFromContext;
 }

@@ -12,6 +12,7 @@ import type {
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { useEffect, useRef, useState } from "react";
 
+import type { AgoraRTCError } from "../listen";
 import { listen } from "../listen";
 import type { AsyncTaskRunner } from "../utils";
 import { createAsyncTaskRunner, interval, joinDisposers } from "../utils";
@@ -33,7 +34,7 @@ export function useRemoteUserTrack(
   user: IAgoraRTCRemoteUser | undefined,
   mediaType: "video",
   client?: IAgoraRTCClient | null,
-): IRemoteVideoTrack | undefined;
+): { track: IRemoteVideoTrack | undefined; isLoading: boolean; error: AgoraRTCError | null };
 /**
  * Auto-subscribe and get remote user audio track.
  * Unsubscribe track on unmount.
@@ -42,22 +43,32 @@ export function useRemoteUserTrack(
   user: IAgoraRTCRemoteUser | undefined,
   mediaType: "audio",
   client?: IAgoraRTCClient | null,
-): IRemoteAudioTrack | undefined;
+): { track: IRemoteAudioTrack | undefined; isLoading: boolean; error: AgoraRTCError | null };
 export function useRemoteUserTrack(
   user: IAgoraRTCRemoteUser | undefined,
   mediaType: "video" | "audio",
   client?: IAgoraRTCClient | null,
-): IRemoteVideoTrack | IRemoteAudioTrack | undefined {
+): {
+  track: IRemoteVideoTrack | IRemoteAudioTrack | undefined;
+  isLoading: boolean;
+  error: AgoraRTCError | null;
+} {
   const resolvedClient = useRTCClient(client);
   const trackName = mediaType === "audio" ? "audioTrack" : "videoTrack";
   const [track, setTrack] = useState(user && user[trackName]);
   const isConnected = useIsConnected();
   const runnerRef = useRef<AsyncTaskRunner | undefined>();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<AgoraRTCError | null>(null);
 
   useEffect(() => {
     if (!user || !isConnected) return;
 
     let isUnmounted = false;
+
+    if (!isUnmounted) {
+      setError(null);
+    }
 
     const hasTrack = mediaType === "audio" ? "hasAudio" : "hasVideo";
     const uid = user.uid;
@@ -68,26 +79,42 @@ export function useRemoteUserTrack(
     ): Promise<void> => {
       if (user[trackName] && resolvedClient.remoteUsers.some(({ uid }) => user.uid === uid)) {
         try {
+          if (!isUnmounted) {
+            setIsLoading(true);
+          }
           await resolvedClient.unsubscribe(user, mediaType);
-        } catch (error) {
-          console.error(error);
+        } catch (err) {
+          if (!isUnmounted) {
+            setError(err as AgoraRTCError);
+          }
+          console.error(err);
         }
       }
       if (!isUnmounted) {
         setTrack(void 0);
+        setIsLoading(false);
       }
     };
 
     const subscribe = async (user: IAgoraRTCRemoteUser, mediaType: "audio" | "video") => {
       try {
         if (!user[trackName] && resolvedClient.remoteUsers.some(({ uid }) => user.uid === uid)) {
+          if (!isUnmounted) {
+            setIsLoading(true);
+          }
           await resolvedClient.subscribe(user, mediaType);
         }
         if (!isUnmounted) {
           setTrack(user[trackName]);
         }
-      } catch (error) {
-        console.error(error);
+      } catch (err) {
+        if (!isUnmounted) {
+          setError(err as AgoraRTCError);
+        }
+        console.error(err);
+      }
+      if (!isUnmounted) {
+        setIsLoading(false);
       }
     };
 
@@ -117,7 +144,7 @@ export function useRemoteUserTrack(
     ]);
   }, [isConnected, resolvedClient, user, mediaType, trackName]);
 
-  return track;
+  return { track: track, isLoading: isLoading, error: error };
 }
 
 /**
@@ -147,21 +174,33 @@ export function useVolumeLevel(audioTrack?: IRemoteAudioTrack | ILocalAudioTrack
 export function useRemoteAudioTracks(
   users: IAgoraRTCRemoteUser[] | undefined,
   client?: IAgoraRTCClient | null,
-): IRemoteAudioTrack[] {
+): { audioTracks: IRemoteAudioTrack[]; isLoading: boolean; error: AgoraRTCError | null } {
   const resolvedClient = useRTCClient(client);
   const [tracks, setTracks] = useState<IRemoteAudioTrack[]>([]);
   const isConnected = useIsConnected();
   const nextTracks = useRef<IRemoteAudioTrack[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<AgoraRTCError | null>(null);
+  const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
+    if (!isUnmountRef.current) {
+      setError(null);
+    }
+
     if (!Array.isArray(users) || !isConnected) return;
-    let isUnmounted = false;
     const subscribe = async (user: IAgoraRTCRemoteUser) => {
       if (!user.audioTrack && users.some(({ uid }) => user.uid === uid)) {
         try {
+          if (!isUnmountRef.current) {
+            setIsLoading(true);
+          }
           await resolvedClient.subscribe(user, "audio");
-        } catch (error) {
-          console.error(error);
+        } catch (err) {
+          console.error(err);
+          if (!isUnmountRef.current) {
+            setError(err as AgoraRTCError);
+          }
         }
 
         if (user.audioTrack && !nextTracks.current.some(track => track.getUserId() === user.uid)) {
@@ -181,22 +220,32 @@ export function useRemoteAudioTracks(
           }
         });
 
-        if (!isUnmounted) {
+        if (!isUnmountRef.current) {
           setTracks(nextTracks.current);
+          setIsLoading(false);
         }
       }
     };
 
     const unsubscribe = async (user: IAgoraRTCRemoteUser): Promise<void> => {
       if (users.some(({ uid }) => user.uid === uid)) {
-        if (!isUnmounted) {
+        if (!isUnmountRef.current) {
           nextTracks.current = nextTracks.current.filter(track => track.getUserId() !== user.uid);
           setTracks(nextTracks.current);
         }
         try {
+          if (!isUnmountRef.current) {
+            setIsLoading(true);
+          }
           await resolvedClient.unsubscribe(user, "audio");
-        } catch (error) {
-          console.error(error);
+        } catch (err) {
+          console.error(err);
+          if (!isUnmountRef.current) {
+            setError(err as AgoraRTCError);
+          }
+        }
+        if (!isUnmountRef.current) {
+          setIsLoading(false);
         }
       }
     };
@@ -223,16 +272,24 @@ export function useRemoteAudioTracks(
       }
     }
     if (unsubscribeList.length > 0) {
-      await resolvedClient.massUnsubscribe(unsubscribeList);
-      if (!isUnmounted) {
+      try {
+        if (!isUnmountRef.current) {
+          setIsLoading(true);
+        }
+        await resolvedClient.massUnsubscribe(unsubscribeList);
+      } catch (err) {
+        console.error(err);
+        if (!isUnmountRef.current) {
+          setError(err as AgoraRTCError);
+        }
+      }
+      if (!isUnmountRef.current) {
         setTracks(nextTracks.current.slice());
+        setIsLoading(false);
       }
     }
 
     return joinDisposers([
-      () => {
-        isUnmounted = true;
-      },
       listen(resolvedClient, "user-published", (pubUser, pubMediaType) => {
         if (users.find(user => user.uid === pubUser.uid) && pubMediaType === "audio") {
           subscribe(pubUser);
@@ -246,7 +303,7 @@ export function useRemoteAudioTracks(
     ]);
   }, [isConnected, resolvedClient, users]);
 
-  return tracks;
+  return { audioTracks: tracks, isLoading: isLoading, error: error };
 }
 
 /**
@@ -256,21 +313,33 @@ export function useRemoteAudioTracks(
 export function useRemoteVideoTracks(
   users: IAgoraRTCRemoteUser[] | undefined,
   client?: IAgoraRTCClient | null,
-): IRemoteVideoTrack[] {
+): { videoTracks: IRemoteVideoTrack[]; isLoading: boolean; error: AgoraRTCError | null } {
   const resolvedClient = useRTCClient(client);
   const [tracks, setTracks] = useState<IRemoteVideoTrack[]>([]);
   const isConnected = useIsConnected();
   const nextTracks = useRef<IRemoteVideoTrack[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<AgoraRTCError | null>(null);
+  const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
+    if (!isUnmountRef.current) {
+      setError(null);
+    }
+
     if (!Array.isArray(users) || !isConnected) return;
-    let isUnmounted = false;
     const subscribe = async (user: IAgoraRTCRemoteUser) => {
       if (!user.videoTrack && users.some(({ uid }) => user.uid === uid)) {
         try {
+          if (!isUnmountRef.current) {
+            setIsLoading(true);
+          }
           await resolvedClient.subscribe(user, "video");
-        } catch (error) {
-          console.error(error);
+        } catch (err) {
+          console.error(err);
+          if (!isUnmountRef.current) {
+            setError(err as AgoraRTCError);
+          }
         }
 
         if (user.videoTrack && !nextTracks.current.some(track => track.getUserId() === user.uid)) {
@@ -289,22 +358,32 @@ export function useRemoteVideoTracks(
             return track;
           }
         });
-        if (!isUnmounted) {
+        if (!isUnmountRef.current) {
           setTracks(nextTracks.current);
+          setIsLoading(false);
         }
       }
     };
 
     const unsubscribe = async (user: IAgoraRTCRemoteUser): Promise<void> => {
       if (users.some(({ uid }) => user.uid === uid)) {
-        if (!isUnmounted) {
+        if (!isUnmountRef.current) {
           nextTracks.current = nextTracks.current.filter(track => track.getUserId() !== user.uid);
           setTracks(nextTracks.current);
         }
         try {
+          if (!isUnmountRef.current) {
+            setIsLoading(true);
+          }
           await resolvedClient.unsubscribe(user, "video");
-        } catch (error) {
-          console.error(error);
+        } catch (err) {
+          console.error(err);
+          if (!isUnmountRef.current) {
+            setError(err as AgoraRTCError);
+          }
+        }
+        if (!isUnmountRef.current) {
+          setIsLoading(false);
         }
       }
     };
@@ -331,16 +410,24 @@ export function useRemoteVideoTracks(
       }
     }
     if (unsubscribeList.length > 0) {
-      await resolvedClient.massUnsubscribe(unsubscribeList);
-      if (!isUnmounted) {
+      try {
+        if (!isUnmountRef.current) {
+          setIsLoading(true);
+        }
+        await resolvedClient.massUnsubscribe(unsubscribeList);
+      } catch (err) {
+        console.error(err);
+        if (!isUnmountRef.current) {
+          setError(err as AgoraRTCError);
+        }
+      }
+      if (!isUnmountRef.current) {
         setTracks(nextTracks.current.slice());
+        setIsLoading(false);
       }
     }
 
     return joinDisposers([
-      () => {
-        isUnmounted = true;
-      },
       listen(resolvedClient, "user-published", (pubUser, pubMediaType) => {
         if (users.find(user => user.uid === pubUser.uid) && pubMediaType === "video") {
           subscribe(pubUser);
@@ -353,7 +440,7 @@ export function useRemoteVideoTracks(
       }),
     ]);
   }, [isConnected, resolvedClient, users]);
-  return tracks;
+  return { videoTracks: tracks, isLoading: isLoading, error: error };
 }
 
 /**
@@ -364,23 +451,43 @@ export function useRemoteVideoTracks(
 export function useLocalCameraTrack(
   ready = true,
   client?: IAgoraRTCClient,
-): ICameraVideoTrack | null {
+): { localCameraTrack: ICameraVideoTrack | null; isLoading: boolean; error: AgoraRTCError | null } {
   const isConnected = useIsConnected(client);
   const [track, setTrack] = useState<ICameraVideoTrack | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<AgoraRTCError | null>(null);
   const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
+    if (!isUnmountRef.current) {
+      setIsLoading(false);
+      setError(null);
+    }
+
     if (isConnected && ready && !track) {
-      const result = await AgoraRTC.createCameraVideoTrack();
+      try {
+        if (!isUnmountRef.current) {
+          setIsLoading(true);
+        }
+        const result = await AgoraRTC.createCameraVideoTrack();
+        if (!isUnmountRef.current) {
+          setTrack(result);
+        }
+      } catch (err) {
+        console.error(err);
+        if (!isUnmountRef.current) {
+          setError(err as AgoraRTCError);
+        }
+      }
       if (!isUnmountRef.current) {
-        setTrack(result);
+        setIsLoading(false);
       }
     }
     if (!isConnected && !isUnmountRef.current) {
       setTrack(null);
     }
   }, [isConnected, ready]);
-  return track;
+  return { localCameraTrack: track, isLoading: isLoading, error: error };
 }
 
 /**
@@ -388,27 +495,46 @@ export function useLocalCameraTrack(
  * when you ready to create track, set ready to true.
  * close track on unmount.
  */
-export function useLocalAudioTrack(
+export function useLocalMicrophoneTrack(
   ready = true,
   audioTrackConfig: MicrophoneAudioTrackInitConfig = { ANS: true, AEC: true },
   client?: IAgoraRTCClient,
-): IMicrophoneAudioTrack | null {
+): {
+  localMicrophoneTrack: IMicrophoneAudioTrack | null;
+  isLoading: boolean;
+  error: AgoraRTCError | null;
+} {
   const isConnected = useIsConnected(client);
   const [track, setTrack] = useState<IMicrophoneAudioTrack | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<AgoraRTCError | null>(null);
   const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
     if (isConnected && ready && !track) {
-      const result = await AgoraRTC.createMicrophoneAudioTrack(audioTrackConfig);
+      try {
+        if (!isUnmountRef.current) {
+          setIsLoading(true);
+        }
+        const result = await AgoraRTC.createMicrophoneAudioTrack(audioTrackConfig);
+        if (!isUnmountRef.current) {
+          setTrack(result);
+        }
+      } catch (err) {
+        console.error(err);
+        if (!isUnmountRef.current) {
+          setError(err as AgoraRTCError);
+        }
+      }
       if (!isUnmountRef.current) {
-        setTrack(result);
+        setIsLoading(false);
       }
     }
     if (!isConnected && !isUnmountRef.current) {
       setTrack(null);
     }
   }, [isConnected, ready]);
-  return track;
+  return { localMicrophoneTrack: track, isLoading: isLoading, error: error };
 }
 
 /**
@@ -419,13 +545,23 @@ export function usePublish(
   tracks: (ILocalTrack | null)[],
   readyToPublish = true,
   client?: IAgoraRTCClient,
-): void {
+): {
+  isLoading: boolean;
+  error: AgoraRTCError | null;
+} {
   const resolvedClient = useRTCClient(client);
   const isConnected = useIsConnected(client);
   //maintain an internal ref to track published
   const pubTracks = useRef<(ILocalTrack | null)[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<AgoraRTCError | null>(null);
+  const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
+    if (!isUnmountRef.current) {
+      setIsLoading(false);
+      setError(null);
+    }
     if (!resolvedClient || !isConnected || !readyToPublish) {
       return;
     }
@@ -452,9 +588,18 @@ export function usePublish(
       if (track) {
         if (canPublish(track)) {
           try {
+            if (!isUnmountRef.current) {
+              setIsLoading(true);
+            }
             await resolvedClient.publish(track);
-          } catch (error) {
-            console.error(error);
+          } catch (err) {
+            console.error(err);
+            if (!isUnmountRef.current) {
+              setError(err as AgoraRTCError);
+            }
+          }
+          if (!isUnmountRef.current) {
+            setIsLoading(false);
           }
         }
       }
@@ -463,4 +608,6 @@ export function usePublish(
 
     // published tracks will be unpublished on unmount by useJoin
   }, [isConnected, readyToPublish, resolvedClient, tracks]);
+
+  return { isLoading: isLoading, error: error };
 }

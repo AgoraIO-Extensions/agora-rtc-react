@@ -21,8 +21,8 @@ export const CameraVideoTrackComponent = () => {
   const [deviceList, setDeviceList] = useState<MediaDeviceInfo[]>([]);
   const [deviceId, setDeviceId] = useState("");
 
-  const videoTrack = useLocalCameraTrack();
-  usePublish([videoTrack]);
+  const { localCameraTrack } = useLocalCameraTrack();
+  usePublish([localCameraTrack]);
 
   useEffect(() => {
     AgoraRTC.getCameras()
@@ -51,7 +51,7 @@ export const CameraVideoTrackComponent = () => {
           deviceId={deviceId}
           play={cameraOn}
           style={{ width: "300px", height: "300px" }}
-          track={videoTrack}
+          track={localCameraTrack}
         />
       </div>
       <MediaControl

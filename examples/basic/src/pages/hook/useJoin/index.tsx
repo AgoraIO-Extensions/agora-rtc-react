@@ -25,7 +25,7 @@ export const UseJoin = () => {
   // }, calling);
 
   //local
-  useJoin(
+  const { data, isLoading, isConnected, error } = useJoin(
     {
       appid: appConfig.appId,
       channel: appConfig.channel,
@@ -38,8 +38,8 @@ export const UseJoin = () => {
 
   // remote
   const remoteUsers = useRemoteUsers();
-  const videoTracks = useRemoteVideoTracks(remoteUsers);
-  const audioTracks = useRemoteAudioTracks(remoteUsers);
+  const { videoTracks } = useRemoteVideoTracks(remoteUsers);
+  const { audioTracks } = useRemoteAudioTracks(remoteUsers);
   audioTracks.map(track => track.play());
 
   const renderRemoteUsers = () => {
@@ -56,17 +56,22 @@ export const UseJoin = () => {
   };
   return (
     <Container>
-      {calling ? (
-        <Room cameraOn={cameraOn} micOn={micOn} renderRemoteUsers={renderRemoteUsers} />
-      ) : (
-        <div className="h-screen p-3">
-          <Title>UseJoin</Title>
-          <Paragraph>
-            By using <Text keyboard>UseJoin</Text> hook to join room.
-          </Paragraph>
-          <Paragraph>you can do some actions like fetching token before calling join.</Paragraph>
-        </div>
-      )}
+      <div className="h-screen p-3">
+        <Title>UseJoin</Title>
+        <Paragraph>
+          By using <Text keyboard>UseJoin</Text> hook to join room.
+        </Paragraph>
+        <Paragraph>
+          You can do some actions like fetching token before calling join.
+          <br />
+          Below is the returned data.
+        </Paragraph>
+        <Text>data: {data}</Text>
+        <Text className="pl-3">isLoading: {`${isLoading}`}</Text>
+        <Text className="pl-3">isConnected: {`${isConnected}`}</Text>
+        <Text className="pl-3">error: {`${JSON.stringify(error)}`}</Text>
+      </div>
+      {calling && <Room cameraOn={cameraOn} micOn={micOn} renderRemoteUsers={renderRemoteUsers} />}
       <MediaControl
         calling={calling}
         cameraOn={cameraOn}

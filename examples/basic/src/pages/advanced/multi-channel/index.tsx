@@ -4,8 +4,8 @@ import {
   LocalUser,
   RemoteUser,
   useIsConnected,
-  usePublishedRemoteUsers,
   useRTCClient,
+  useRemoteUsers,
 } from "agora-rtc-react";
 import { Button, Typography } from "antd";
 import { memo, useEffect, useMemo, useState } from "react";
@@ -22,7 +22,9 @@ const { Title, Paragraph } = Typography;
 import "./index.scss";
 
 const Item = memo(function Item({ label }: { label: string }) {
-  const remoteUsers = usePublishedRemoteUsers();
+  const remoteUsers = useRemoteUsers();
+  const publishedUsers = remoteUsers.filter(user => user.hasAudio || user.hasVideo);
+
   const localTracks = useAppStore(state => state.localTracks);
   const hostRoom = useAppStore(state => state.hostRoom);
   const isConnected = useIsConnected();
@@ -42,7 +44,7 @@ const Item = memo(function Item({ label }: { label: string }) {
           </div>
         )}
       <>
-        {remoteUsers.map(user => (
+        {publishedUsers.map(user => (
           <div className="user" key={user.uid}>
             <RemoteUser user={user} />
             <div className="mask" />

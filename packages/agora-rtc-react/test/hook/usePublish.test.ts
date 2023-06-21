@@ -19,11 +19,13 @@ describe("usePublish", () => {
     const client = FakeRTCClient.create();
     const tracks = [FakeMicrophoneAudioTrack.create(), FakeCameraVideoTrack.create()];
     client.publish = vi.fn().mockReturnValue(Promise.resolve());
-    renderHook(() => usePublish(tracks, false, client), {
+    const { result } = renderHook(() => usePublish(tracks, false, client), {
       wrapper: createWrapper(client),
     });
     await waitFor(() => {
       expect(client.publish).toHaveBeenCalledTimes(0);
+      expect(result.current.error).toBeNull();
+      expect(result.current.isLoading).toBe(false);
     });
   });
 
@@ -31,11 +33,13 @@ describe("usePublish", () => {
     const client = FakeRTCClient.create();
     const tracks = [FakeMicrophoneAudioTrack.create(), FakeCameraVideoTrack.create()];
     client.publish = vi.fn().mockReturnValue(Promise.resolve());
-    renderHook(() => usePublish(tracks, true, client), {
+    const { result } = renderHook(() => usePublish(tracks, true, client), {
       wrapper: createWrapper(client),
     });
     await waitFor(() => {
       expect(client.publish).toHaveBeenCalledTimes(tracks.length);
+      expect(result.current.error).toBeNull();
+      expect(result.current.isLoading).toBe(false);
     });
   });
 
@@ -45,13 +49,15 @@ describe("usePublish", () => {
     client.publish = vi.fn().mockReturnValue(Promise.reject(errorMessage));
     const spy = vi.spyOn(console, "error");
 
-    renderHook(() => usePublish(tracks, true, client), {
+    const { result } = renderHook(() => usePublish(tracks, true, client), {
       wrapper: createWrapper(client),
     });
     await waitFor(() => {
       expect(client.publish).toHaveBeenCalledTimes(tracks.length);
       expect(spy).toHaveBeenCalledWith(errorMessage);
       expect(spy).toHaveBeenCalledTimes(2);
+      expect(result.current.error).toBe(errorMessage);
+      expect(result.current.isLoading).toBe(false);
     });
   });
 });

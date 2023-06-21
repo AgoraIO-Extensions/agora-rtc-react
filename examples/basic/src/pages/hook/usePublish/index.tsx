@@ -2,12 +2,10 @@ import {
   LocalMicrophoneAndCameraUser,
   RemoteVideoPlayer,
   useCurrentUID,
-  useIsConnected,
   useJoin,
-  useLocalAudioTrack,
   useLocalCameraTrack,
+  useLocalMicrophoneTrack,
   usePublish,
-  usePublishedRemoteUsers,
   useRemoteAudioTracks,
   useRemoteUsers,
   useRemoteVideoTracks,
@@ -20,15 +18,11 @@ import { appConfig, fakeAvatar, fakeName } from "../../../utils";
 
 export const UsePublish = () => {
   const [calling, setCalling] = useState(false);
-  const isConnected = useIsConnected();
-
   const uid = useCurrentUID() || 0;
   const userName = useMemo(() => fakeName(uid), [uid]);
   const userAvatar = useMemo(() => fakeAvatar(), []);
 
-  const publishedUsers = usePublishedRemoteUsers();
-
-  useJoin(
+  const { isConnected } = useJoin(
     {
       appid: appConfig.appId,
       channel: appConfig.channel,
@@ -40,14 +34,15 @@ export const UsePublish = () => {
   //local
   const [micOn, setMic] = useState(false);
   const [cameraOn, setCamera] = useState(false);
-  const audioTrack = useLocalAudioTrack(micOn);
-  const videoTrack = useLocalCameraTrack(cameraOn);
-  usePublish([audioTrack, videoTrack]);
+  const { localMicrophoneTrack } = useLocalMicrophoneTrack(micOn);
+  const { localCameraTrack } = useLocalCameraTrack(cameraOn);
+  usePublish([localMicrophoneTrack, localCameraTrack]);
 
   //remote
   const remoteUsers = useRemoteUsers();
-  const videoTracks = useRemoteVideoTracks(remoteUsers);
-  const audioTracks = useRemoteAudioTracks(remoteUsers);
+  const publishedUsers = remoteUsers.filter(user => user.hasAudio || user.hasVideo);
+  const { videoTracks } = useRemoteVideoTracks(remoteUsers);
+  const { audioTracks } = useRemoteAudioTracks(remoteUsers);
   audioTracks.map(track => track.play());
 
   const renderRemoteUsers = () => {
@@ -73,11 +68,11 @@ export const UsePublish = () => {
           {isConnected && (
             <AutoLayout.Item>
               <LocalMicrophoneAndCameraUser
-                audioTrack={audioTrack}
+                audioTrack={localMicrophoneTrack}
                 cameraOn={cameraOn}
                 cover={userAvatar}
                 micOn={micOn}
-                videoTrack={videoTrack}
+                videoTrack={localCameraTrack}
               >
                 {<Label>{`${userName}{${uid}}`}</Label>}
               </LocalMicrophoneAndCameraUser>

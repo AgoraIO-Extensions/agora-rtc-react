@@ -1,20 +1,12 @@
 import { renderHook, waitFor } from "@testing-library/react";
-import type { IAgoraRTCClient, ILocalVideoTrack } from "agora-rtc-sdk-ng";
-import type { Mock } from "vitest";
+import type { ILocalTrack, ILocalVideoTrack } from "agora-rtc-sdk-ng";
+import { FakeRTCClient } from "fake-agora-rtc";
 import { expect, vi } from "vitest";
 
-import type { FetchArgs } from "../../src/hooks/index";
-import { useJoin, useRTCClient } from "../../src/hooks/index";
-const setUp = (fetchArgs: FetchArgs, ready = true, client?: IAgoraRTCClient | null) =>
-  renderHook(() => useJoin(fetchArgs, ready, client));
-
-vi.mock("../../src/hooks", async () => {
-  const actual: object = await vi.importActual("../../src/hooks");
-  return {
-    ...actual,
-    useRTCClient: vi.fn(),
-  };
-});
+import * as clientHook from "../../src/hooks/client";
+import { useJoin } from "../../src/hooks/index";
+import { errorMessage } from "../setup/agora";
+import { createWrapper } from "../setup/wrapper";
 
 const mockTrack: ILocalVideoTrack = {
   close: vi.fn(),
@@ -22,31 +14,49 @@ const mockTrack: ILocalVideoTrack = {
   isPlaying: false,
 } as unknown as ILocalVideoTrack;
 
-const mockRTCClient: IAgoraRTCClient = {
-  join: vi.fn().mockReturnValue(Promise.resolve()),
-  localTracks: [mockTrack],
-  leave: vi.fn().mockReturnValue(Promise.resolve()),
-} as unknown as IAgoraRTCClient;
-
-const mockUseRTCClient = useRTCClient as Mock;
-
 describe("useJoin", () => {
   test("ready is false", async () => {
-    mockUseRTCClient.mockReturnValueOnce(mockRTCClient);
-    setUp({ appid: "", token: "", channel: "", uid: "" }, false, mockRTCClient);
+    const client = FakeRTCClient.create();
+    const spy = vi.spyOn(clientHook, "useIsConnected");
+    const spy2 = vi.spyOn(client, "join");
+    spy.mockReturnValue(true);
+    const { result } = renderHook(
+      () => useJoin({ appid: "", token: "", channel: "", uid: "" }, false, client),
+      {
+        wrapper: createWrapper(client),
+      },
+    );
     await waitFor(() => {
-      expect(mockRTCClient.join).toBeCalledTimes(0);
+      expect(spy2).toBeCalledTimes(0);
+      expect(result.current.isLoading).toBe(false);
+      expect(result.current.isConnected).toBe(false);
+      expect(result.current.error).toBe(null);
     });
+    vi.clearAllMocks();
+    vi.resetAllMocks();
   });
   test("fetchArgs is function and ready is true", async () => {
-    mockUseRTCClient.mockReturnValueOnce(mockRTCClient);
-    const { unmount } = setUp({ appid: "", token: "", channel: "", uid: "" }, true, mockRTCClient);
+    const client = FakeRTCClient.create();
+    (client.localTracks as ILocalTrack[]) = [mockTrack];
+    const spy = vi.spyOn(clientHook, "useIsConnected");
+    spy.mockReturnValue(true);
+    const spy2 = vi.spyOn(client, "join");
+    const spy3 = vi.spyOn(client, "leave");
+    const { result, unmount } = renderHook(
+      () => useJoin({ appid: "", token: "", channel: "", uid: "" }, true, client),
+      {
+        wrapper: createWrapper(client),
+      },
+    );
     await waitFor(() => {
-      expect(mockRTCClient.join).toBeCalled();
+      expect(spy2).toBeCalled();
+      expect(result.current.isLoading).toBe(false);
+      expect(result.current.error).toBe(null);
+      expect(result.current.data).not.toBe(0);
     });
     unmount();
     await waitFor(() => {
-      expect(mockRTCClient.leave).toBeCalledTimes(1);
+      expect(spy3).toBeCalledTimes(1);
       if (mockTrack.isPlaying) {
         expect(mockTrack.stop).toBeCalledTimes(1);
       } else {
@@ -54,5 +64,33 @@ describe("useJoin", () => {
       }
       expect(mockTrack.close).toBeCalledTimes(1);
     });
+    vi.clearAllMocks();
+    vi.resetAllMocks();
+  });
+
+  test("return error when join is failed", async () => {
+    const client = FakeRTCClient.create();
+    const spy = vi.spyOn(clientHook, "useIsConnected");
+    spy.mockReturnValue(true);
+    const spy2 = vi.spyOn(client, "join").mockRejectedValue(errorMessage);
+    const spy3 = vi.spyOn(console, "error");
+    const { result } = renderHook(
+      () => useJoin({ appid: "", token: "", channel: "", uid: "" }, true, client),
+      {
+        wrapper: createWrapper(client),
+      },
+    );
+    await waitFor(() => {
+      expect(spy2).toBeCalled();
+      expect(result.current.isLoading).toBe(false);
+      expect(result.current.isConnected).toBe(false);
+      expect(result.current.error).not.toBeNull();
+      expect(result.current.error).not.toBeUndefined();
+      expect(result.current.error).toBe(errorMessage);
+      expect(spy3).toHaveBeenCalledWith(errorMessage);
+      expect(result.current.data).toBe(0);
+    });
+    vi.clearAllMocks();
+    vi.resetAllMocks();
   });
 });
