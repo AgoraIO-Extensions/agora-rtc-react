@@ -9,7 +9,6 @@ for (let i = 0; i < args.length; i++) {
     i--;
   }
 }
-console.log(args);
 
 if (args.length < 2 || !args[0].startsWith("target:") || !args[1].includes("@")) {
   console.log("Usage: node update-target-version.js target:<package-name>@<new-version>");

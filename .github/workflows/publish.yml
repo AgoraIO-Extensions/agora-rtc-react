@@ -48,7 +48,7 @@ jobs:
       - name: Update VERSION
         if: ${{ !inputs.dry-run }}
         run: |
-          pnpm run update-version target:agora-rtc-react @${{ inputs.increment }}
+          pnpm -F agora-rtc-react exec esbuild-dev $PWD/scripts/release/update-version.ts target:agora-rtc-react @${{ inputs.increment }}
 
       - name: NPM Publish
         if: ${{ !inputs.dry-run }}
