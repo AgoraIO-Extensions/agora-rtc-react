@@ -56,7 +56,8 @@ describe("usePublish", () => {
       expect(client.publish).toHaveBeenCalledTimes(tracks.length);
       expect(spy).toHaveBeenCalledWith(errorMessage);
       expect(spy).toHaveBeenCalledTimes(2);
-      expect(result.current.error).toBe(errorMessage);
+      expect(result.current.error).toBeInstanceOf(Error);
+      expect(result.current.error?.rtcMethod).toBe("IAgoraRTCClient.publish");
       expect(result.current.isLoading).toBe(false);
     });
   });

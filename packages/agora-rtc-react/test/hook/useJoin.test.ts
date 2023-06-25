@@ -86,7 +86,8 @@ describe("useJoin", () => {
       expect(result.current.isConnected).toBe(false);
       expect(result.current.error).not.toBeNull();
       expect(result.current.error).not.toBeUndefined();
-      expect(result.current.error).toBe(errorMessage);
+      expect(result.current.error).toBeInstanceOf(Error);
+      expect(result.current.error?.rtcMethod).toBe("IAgoraRTCClient.join");
       expect(spy3).toHaveBeenCalledWith(errorMessage);
       expect(result.current.data).toBe(0);
     });
