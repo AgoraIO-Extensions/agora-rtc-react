@@ -1,7 +1,7 @@
 import type { ConnectionState, IAgoraRTCClient, UID } from "agora-rtc-sdk-ng";
 import { useEffect, useState } from "react";
 
-import { AgoraRtcReactError } from "../error";
+import { AgoraRTCReactError } from "../error";
 import type { AgoraRTCError } from "../listen";
 import { listen } from "../listen";
 import { joinDisposers, timeout } from "../utils";
@@ -175,13 +175,13 @@ export function useJoin(
   fetchArgs: FetchArgs,
   ready = true,
   client?: IAgoraRTCClient | null,
-): { data: UID; isLoading: boolean; isConnected: boolean; error: AgoraRtcReactError | null } {
+): { data: UID; isLoading: boolean; isConnected: boolean; error: AgoraRTCReactError | null } {
   const resolvedClient = useRTCClient(client);
   const isConnected = useIsConnected(client);
 
   const [isLoading, setIsLoading] = useState(false);
   const [joinResult, setJoinResult] = useState<UID>(0);
-  const [error, setError] = useState<AgoraRtcReactError | null>(null);
+  const [error, setError] = useState<AgoraRTCReactError | null>(null);
   const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
@@ -205,7 +205,7 @@ export function useJoin(
       } catch (err) {
         console.error(err);
         if (!isUnmountRef.current) {
-          setError(new AgoraRtcReactError("IAgoraRTCClient.join", err as AgoraRTCError));
+          setError(new AgoraRTCReactError("IAgoraRTCClient.join", err as AgoraRTCError));
         }
       }
       if (!isUnmountRef.current) {

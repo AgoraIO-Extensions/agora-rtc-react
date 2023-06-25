@@ -1,13 +1,14 @@
 import type { AgoraRTCError } from "./listen";
 
-export interface IAgoraRtcReactError extends AgoraRTCError {
-  readonly rtcMethod: string;
-  readonly rtcError: AgoraRTCError | string;
-}
-
 type printType = "log" | "warn" | "error" | "info";
 
-export class AgoraRtcReactError extends Error {
+interface IAgoraRTCReactError extends Error {
+  readonly rtcMethod: string;
+  readonly rtcError: AgoraRTCError | string;
+  log: (type: printType) => void;
+}
+
+export class AgoraRTCReactError extends Error implements IAgoraRTCReactError {
   public readonly rtcMethod: string;
   public readonly rtcError: AgoraRTCError | string;
   public override readonly name: string = "AgoraRTCReactException";
@@ -22,11 +23,7 @@ export class AgoraRtcReactError extends Error {
     this.rtcError = rtcError;
   }
 
-  public print(type: printType) {
-    if (typeof this.rtcError === "string") {
-      console[type](this.rtcError);
-    } else {
-      console[type](this.rtcError.message);
-    }
+  public log(type: printType) {
+    console[type](this);
   }
 }
