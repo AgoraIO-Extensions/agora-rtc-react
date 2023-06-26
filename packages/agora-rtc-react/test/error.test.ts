@@ -32,8 +32,8 @@ describe("AgoraRTCReactError", () => {
     const rtcError = "testError";
     const agoraRTCReactError = new AgoraRTCReactError(rtcMethod, rtcError);
     console.log = vi.fn();
-    agoraRTCReactError.print("log");
-    expect(console.log).toHaveBeenCalledWith(rtcError);
+    agoraRTCReactError.log("log");
+    expect(console.log).toHaveBeenCalledWith(agoraRTCReactError);
   });
 
   it("should print the rtcError properly with console.warn", () => {
@@ -41,8 +41,8 @@ describe("AgoraRTCReactError", () => {
     const rtcError = "testError";
     const agoraRTCReactError = new AgoraRTCReactError(rtcMethod, rtcError);
     console.warn = vi.fn();
-    agoraRTCReactError.print("warn");
-    expect(console.warn).toHaveBeenCalledWith(rtcError);
+    agoraRTCReactError.log("warn");
+    expect(console.warn).toHaveBeenCalledWith(agoraRTCReactError);
   });
 
   it("should print the rtcError properly with console.error", () => {
@@ -50,8 +50,8 @@ describe("AgoraRTCReactError", () => {
     const rtcError = "testError";
     const agoraRTCReactError = new AgoraRTCReactError(rtcMethod, rtcError);
     console.error = vi.fn();
-    agoraRTCReactError.print("error");
-    expect(console.error).toHaveBeenCalledWith(rtcError);
+    agoraRTCReactError.log("error");
+    expect(console.error).toHaveBeenCalledWith(agoraRTCReactError);
   });
 
   it("should print the rtcError properly with console.info", () => {
@@ -59,7 +59,7 @@ describe("AgoraRTCReactError", () => {
     const rtcError = "testError";
     const agoraRTCReactError = new AgoraRTCReactError(rtcMethod, rtcError);
     console.info = vi.fn();
-    agoraRTCReactError.print("info");
-    expect(console.info).toHaveBeenCalledWith(rtcError);
+    agoraRTCReactError.log("info");
+    expect(console.info).toHaveBeenCalledWith(agoraRTCReactError);
   });
 });
