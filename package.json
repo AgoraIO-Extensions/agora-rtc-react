@@ -1,5 +1,6 @@
 {
   "name": "agora-rtc-react-mono",
+  "version": "0.0.36",
   "private": true,
   "description": "Agora RTC React SDK",
   "scripts": {
@@ -14,12 +15,13 @@
     "example": "pnpm -F agora-rtc-react-example run start",
     "renew": "pnpm -r run renew",
     "copy-docs": "esbuild-dev ./scripts/copy-docs.ts",
-    "gene-docs": "pnpm -r run gene-docs"
+    "gene-docs": "pnpm -r run gene-docs",
+    "release": "release-it"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.6.1",
     "@hyrious/esbuild-dev": "^0.9.1",
-    "@release-it/bumper": "^4.0.2",
+    "@release-it/conventional-changelog": "^5.1.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@types/minimist": "^1.2.2",
     "@types/node": "^18.14.6",
@@ -84,25 +86,18 @@
   },
   "release-it": {
     "git": {
-      "commitMessage": "chore: release ${version}",
-      "tagName": "v${version}"
+      "commitMessage": "docs: update CHANGELOG.md",
+      "requireCleanWorkingDir": false
     },
-    "npm": {
-      "publish": true
-    },
+    "npm": false,
     "github": {
-      "release": true
+      "release": false
     },
     "plugins": {
-      "@release-it/bumper": {
-        "out": {
-          "file": "package.json",
-          "path": [
-            "dependencies.agora-rtc-react",
-            "dependencies.agora-rtc-react-ui",
-            "dependencies.fake-agora-rtc"
-          ]
-        }
+      "@release-it/conventional-changelog": {
+        "header": "# agora-rtc-react",
+        "preset": "angular",
+        "infile": "CHANGELOG.md"
       }
     }
   }
