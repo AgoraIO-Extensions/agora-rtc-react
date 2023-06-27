@@ -1,11 +1,11 @@
 import "./index.scss";
 import {
-  RemoteVideoPlayer,
   useJoin,
   useRemoteAudioTracks,
   useRemoteUsers,
   useRemoteVideoTracks,
 } from "agora-rtc-react";
+import { RemoteVideoPlayer } from "agora-rtc-react-ui";
 import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import { Button, Typography } from "antd";
 import { useState } from "react";

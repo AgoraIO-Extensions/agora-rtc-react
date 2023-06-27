@@ -44,11 +44,11 @@ export default defineConfig([
     },
     outExtension: () => {
       return {
-        js: `.v_${pkg.version}.js`,
+        js: `.iife.${pkg.version}.js`,
       };
     },
     format: ["iife"],
-    sourcemap: true,
+    sourcemap: false,
     splitting: false,
     clean: true,
     minify: true,
@@ -56,7 +56,7 @@ export default defineConfig([
     define: {
       "process.env.NODE_ENV": JSON.stringify("production"),
     },
-    globalName: "AgoraRTCReact",
+    globalName: "AgoraRTCReactUIKit",
     esbuildPlugins: [
       setGlobals({
         "react": "React",

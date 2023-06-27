@@ -1,12 +1,14 @@
 import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
+import * as clientHook from "agora-rtc-react/src/hooks/tools";
 import { FakeMicrophoneAudioTrack } from "fake-agora-rtc";
+import React from "react";
 import { describe, expect, test, vi } from "vitest";
 
-import { LocalMicrophoneAndCameraUser } from "../../src/components";
-import * as stories from "../../src/components/LocalMicrophoneAndCameraUser.stories";
+import { LocalMicrophoneAndCameraUser } from "../src/components";
+import * as stories from "../src/components/LocalMicrophoneAndCameraUser.stories";
+
 const { Overview } = composeStories(stories);
-import * as clientHook from "../../src/hooks/tools";
 
 describe("LocalMicrophoneAndCameraUser component", () => {
   test("renders without crashing", () => {

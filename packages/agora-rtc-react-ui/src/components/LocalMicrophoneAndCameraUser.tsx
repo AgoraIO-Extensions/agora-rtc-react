@@ -1,12 +1,15 @@
+import { UserCover } from "agora-rtc-react/src/components/UserCover";
+import {
+  FloatBoxStyle,
+  VideoTrackWrapperStyle,
+  useMergedStyle,
+} from "agora-rtc-react/src/components/styles";
+import type { MaybePromiseOrNull } from "agora-rtc-react/src/utils";
 import type { ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
 import type { HTMLProps, ReactNode } from "react";
 
-import type { MaybePromiseOrNull } from "../utils";
-
 import { CameraVideoTrack } from "./CameraVideoTrack";
 import { MicrophoneAudioTrack } from "./MicrophoneAudioTrack";
-import { UserCover } from "./UserCover";
-import { FloatBoxStyle, VideoTrackWrapperStyle, useMergedStyle } from "./styles";
 
 export interface LocalMicrophoneAndCameraUserProps extends HTMLProps<HTMLDivElement> {
   /**

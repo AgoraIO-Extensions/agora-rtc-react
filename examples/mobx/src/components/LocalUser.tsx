@@ -1,5 +1,4 @@
-import { LocalMicrophoneAndCameraUser } from "agora-rtc-react";
-import { MicControl } from "agora-rtc-react-ui";
+import { LocalMicrophoneAndCameraUser, MicControl } from "agora-rtc-react-ui";
 import { observer } from "mobx-react-lite";
 
 import type { MyLocalUser } from "../stores/local-user.store";

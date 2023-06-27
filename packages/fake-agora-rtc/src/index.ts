@@ -6,6 +6,9 @@ export * from "./eventemitter";
 export * from "./client";
 
 export default createFakeAgoraRTC({
+  setAppType(): void {
+    //
+  },
   createMicrophoneAudioTrack: async () => FakeMicrophoneAudioTrack.create(),
   createCameraVideoTrack: async () => FakeCameraVideoTrack.create(),
 });

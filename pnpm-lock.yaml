@@ -368,6 +368,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.0.11
         version: 18.0.11
+      '@types/testing-library__jest-dom':
+        specifier: ^5.14.5
+        version: 5.14.5
       '@vitejs/plugin-react':
         specifier: ^3.0.0
         version: 3.1.0(vite@4.1.4)
