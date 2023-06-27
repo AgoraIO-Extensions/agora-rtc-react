@@ -34,4 +34,4 @@ jobs:
         if: always() # Also generate the report if tests are failing
         uses: davelosert/vitest-coverage-report-action@v1.4.0
         with:
-          working-directory: "./packages/agora-rtc-react"
+          working-directory: "./packages"
