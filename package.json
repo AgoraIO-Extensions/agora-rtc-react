@@ -1,6 +1,5 @@
 {
   "name": "agora-rtc-react-mono",
-  "version": "0.0.36",
   "private": true,
   "description": "Agora RTC React SDK",
   "scripts": {

@@ -24,24 +24,17 @@
   ],
   "sideEffects": false,
   "main": "src/index.ts",
-  "publishConfig": {
-    "main": "dist/agora-rtc-react.js",
-    "module": "dist/agora-rtc-react.mjs",
-    "types": "dist/agora-rtc-react.d.ts"
-  },
+  "types": "dist/agora-rtc-react.d.ts",
+  "module": "dist/agora-rtc-react.mjs",
   "source": "src/index.ts",
   "files": [
-    "src",
     "dist",
-    "!src/stories",
-    "!src/**/*.stories.*",
-    "!src/vite-env.d.ts"
+    "LICENSE"
   ],
   "engines": {
     "node": ">=10"
   },
   "scripts": {
-    "prepublishOnly": "pnpm run build",
     "build": "tsup",
     "release": "release-it",
     "start": "pnpm run -F example-overview start",
@@ -103,6 +96,9 @@
     },
     "github": {
       "release": true
+    },
+    "hooks": {
+      "before:npm:release": "pnpm esbuild-dev ../../scripts/release/clean.ts source:./package.json @./package.json && pnpm eslint --fix package.json && cp ../../LICENSE . && pnpm tsup"
     },
     "plugins": {
       "@release-it/conventional-changelog": {
