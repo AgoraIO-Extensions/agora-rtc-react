@@ -92,6 +92,9 @@
     "github": {
       "release": false
     },
+    "hooks": {
+      "before:git:release": "git reset HEAD package.json"
+    },
     "plugins": {
       "@release-it/conventional-changelog": {
         "header": "# agora-rtc-react",
