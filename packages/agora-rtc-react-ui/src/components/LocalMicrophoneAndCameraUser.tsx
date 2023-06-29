@@ -66,7 +66,7 @@ export function LocalMicrophoneAndCameraUser({
   cameraOn,
   audioTrack,
   videoTrack,
-  playAudio,
+  playAudio = false,
   playVideo,
   micDeviceId,
   cameraDeviceId,
