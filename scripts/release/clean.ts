@@ -28,6 +28,8 @@ fs.readFile(source, "utf8", (err, data) => {
   delete pkg.source;
   delete pkg["publish-config"];
   pkg["main"] = `dist/${pkg.name}.js`;
+  pkg["types"] = `dist/${pkg.name}.d.ts`;
+  pkg["module"] = `dist/${pkg.name}.mjs`;
 
   fs.writeFile(output, JSON.stringify(pkg), "utf8", err => {
     if (err) throw err;
