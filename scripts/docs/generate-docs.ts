@@ -1,7 +1,7 @@
 import fs from "node:fs";
 
-import { docType, docsPath, languages, languagesFormat } from "./const";
-import { emptyDirectory } from "./utils";
+import { docType, docsPath, languages, languagesFormat } from "../const";
+import { emptyDirectory } from "../utils";
 
 for (let j = 0; j < docType.length; j++) {
   emptyDirectory(`${docsPath}/${docType[j]}`);
