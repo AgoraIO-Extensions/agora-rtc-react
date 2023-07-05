@@ -2,10 +2,10 @@ import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import type { HTMLProps } from "react";
 import { useState } from "react";
 
-import type { Nullable } from "../utils";
+import { VideoTrackStyle, useMergedStyle } from "../assets/styles";
+import type { Nullable } from "../misc/utils";
 
 import { useAutoPlayVideoTrack } from "./TrackBoundary";
-import { VideoTrackStyle, useMergedStyle } from "./styles";
 
 export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**

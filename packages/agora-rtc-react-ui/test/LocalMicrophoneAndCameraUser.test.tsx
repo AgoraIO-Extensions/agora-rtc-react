@@ -5,8 +5,7 @@ import { FakeMicrophoneAudioTrack } from "fake-agora-rtc";
 import { describe, expect, test, vi } from "vitest";
 
 import { LocalMicrophoneAndCameraUser } from "../src/components";
-import * as stories from "../src/components/LocalMicrophoneAndCameraUser.stories";
-
+import * as stories from "../src/stories/LocalMicrophoneAndCameraUser.stories";
 const { Overview } = composeStories(stories);
 
 describe("LocalMicrophoneAndCameraUser component", () => {

@@ -1,5 +1,6 @@
 import type {
   IAgoraRTCClient,
+  IAgoraRTCError,
   IAgoraRTCRemoteUser,
   ICameraVideoTrack,
   ILocalAudioTrack,
@@ -13,10 +14,9 @@ import AgoraRTC from "agora-rtc-sdk-ng";
 import { useEffect, useRef, useState } from "react";
 
 import { AgoraRTCReactError } from "../error";
-import type { AgoraRTCError } from "../listen";
-import { listen } from "../listen";
-import type { AsyncTaskRunner } from "../utils";
-import { createAsyncTaskRunner, interval, joinDisposers } from "../utils";
+import { listen } from "../misc/listen";
+import type { AsyncTaskRunner } from "../misc/utils";
+import { createAsyncTaskRunner, interval, joinDisposers } from "../misc/utils";
 
 import { useIsConnected } from "./client";
 import { useRTCClient } from "./context";
@@ -86,7 +86,7 @@ export function useRemoteUserTrack(
           await resolvedClient.unsubscribe(user, mediaType);
         } catch (err) {
           if (!isUnmounted) {
-            setError(new AgoraRTCReactError("IAgoraRTCClient.unsubscribe", err as AgoraRTCError));
+            setError(new AgoraRTCReactError("IAgoraRTCClient.unsubscribe", err as IAgoraRTCError));
           }
           console.error(err);
         }
@@ -110,7 +110,7 @@ export function useRemoteUserTrack(
         }
       } catch (err) {
         if (!isUnmounted) {
-          setError(new AgoraRTCReactError("IAgoraRTCClient.subscribe", err as AgoraRTCError));
+          setError(new AgoraRTCReactError("IAgoraRTCClient.subscribe", err as IAgoraRTCError));
         }
         console.error(err);
       }
@@ -200,7 +200,7 @@ export function useRemoteAudioTracks(
         } catch (err) {
           console.error(err);
           if (!isUnmountRef.current) {
-            setError(new AgoraRTCReactError("IAgoraRTCClient.subscribe", err as AgoraRTCError));
+            setError(new AgoraRTCReactError("IAgoraRTCClient.subscribe", err as IAgoraRTCError));
           }
         }
 
@@ -242,7 +242,7 @@ export function useRemoteAudioTracks(
         } catch (err) {
           console.error(err);
           if (!isUnmountRef.current) {
-            setError(new AgoraRTCReactError("IAgoraRTCClient.unsubscribe", err as AgoraRTCError));
+            setError(new AgoraRTCReactError("IAgoraRTCClient.unsubscribe", err as IAgoraRTCError));
           }
         }
         if (!isUnmountRef.current) {
@@ -281,7 +281,9 @@ export function useRemoteAudioTracks(
       } catch (err) {
         console.error(err);
         if (!isUnmountRef.current) {
-          setError(new AgoraRTCReactError("IAgoraRTCClient.massUnsubscribe", err as AgoraRTCError));
+          setError(
+            new AgoraRTCReactError("IAgoraRTCClient.massUnsubscribe", err as IAgoraRTCError),
+          );
         }
       }
       if (!isUnmountRef.current) {
@@ -339,7 +341,7 @@ export function useRemoteVideoTracks(
         } catch (err) {
           console.error(err);
           if (!isUnmountRef.current) {
-            setError(new AgoraRTCReactError("IAgoraRTCClient.subscribe", err as AgoraRTCError));
+            setError(new AgoraRTCReactError("IAgoraRTCClient.subscribe", err as IAgoraRTCError));
           }
         }
 
@@ -380,7 +382,7 @@ export function useRemoteVideoTracks(
         } catch (err) {
           console.error(err);
           if (!isUnmountRef.current) {
-            setError(new AgoraRTCReactError("IAgoraRTCClient.unsubscribe", err as AgoraRTCError));
+            setError(new AgoraRTCReactError("IAgoraRTCClient.unsubscribe", err as IAgoraRTCError));
           }
         }
         if (!isUnmountRef.current) {
@@ -419,7 +421,9 @@ export function useRemoteVideoTracks(
       } catch (err) {
         console.error(err);
         if (!isUnmountRef.current) {
-          setError(new AgoraRTCReactError("IAgoraRTCClient.massUnsubscribe", err as AgoraRTCError));
+          setError(
+            new AgoraRTCReactError("IAgoraRTCClient.massUnsubscribe", err as IAgoraRTCError),
+          );
         }
       }
       if (!isUnmountRef.current) {
@@ -482,7 +486,7 @@ export function useLocalCameraTrack(
         console.error(err);
         if (!isUnmountRef.current) {
           setError(
-            new AgoraRTCReactError("IAgoraRTC.createCameraVideoTrack", err as AgoraRTCError),
+            new AgoraRTCReactError("IAgoraRTC.createCameraVideoTrack", err as IAgoraRTCError),
           );
         }
       }
@@ -531,7 +535,7 @@ export function useLocalMicrophoneTrack(
         console.error(err);
         if (!isUnmountRef.current) {
           setError(
-            new AgoraRTCReactError("IAgoraRTC.createMicrophoneAudioTrack", err as AgoraRTCError),
+            new AgoraRTCReactError("IAgoraRTC.createMicrophoneAudioTrack", err as IAgoraRTCError),
           );
         }
       }
@@ -612,7 +616,7 @@ export function usePublish(
           } catch (err) {
             console.error(err);
             if (!isUnmountRef.current) {
-              setError(new AgoraRTCReactError("IAgoraRTCClient.publish", err as AgoraRTCError));
+              setError(new AgoraRTCReactError("IAgoraRTCClient.publish", err as IAgoraRTCError));
             }
           }
           if (!isUnmountRef.current) {

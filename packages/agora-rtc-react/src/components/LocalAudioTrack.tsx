@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { useEffect } from "react";
 
 import { useAwaited } from "../hooks";
-import type { MaybePromiseOrNull } from "../utils";
+import type { MaybePromiseOrNull } from "../misc/utils";
 
 import { useAutoPlayAudioTrack } from "./TrackBoundary";
 

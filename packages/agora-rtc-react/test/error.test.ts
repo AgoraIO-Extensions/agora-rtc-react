@@ -1,6 +1,6 @@
+import type { IAgoraRTCError } from "agora-rtc-sdk-ng";
 import { vi } from "vitest";
 
-import type { AgoraRTCError } from "../src";
 import { AgoraRTCReactError } from "../src/error";
 
 describe("AgoraRTCReactError", () => {
@@ -14,12 +14,12 @@ describe("AgoraRTCReactError", () => {
     expect(agoraRTCReactError.name).toEqual("AgoraRTCReactException");
   });
 
-  it("should create an instance with rtcMethod and AgoraRTCError object", () => {
+  it("should create an instance with rtcMethod and IAgoraRTCError object", () => {
     const rtcMethod = "testMethod";
     const rtcError = { errorCode: "testErrorCode", message: "testErrorMessage" };
     const agoraRTCReactError = new AgoraRTCReactError(
       rtcMethod,
-      rtcError as unknown as AgoraRTCError,
+      rtcError as unknown as IAgoraRTCError,
     );
     expect(agoraRTCReactError).toBeInstanceOf(AgoraRTCReactError);
     expect(agoraRTCReactError.rtcMethod).toEqual(rtcMethod);

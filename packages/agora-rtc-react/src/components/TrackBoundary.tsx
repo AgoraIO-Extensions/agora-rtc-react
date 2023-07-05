@@ -9,8 +9,8 @@ import type { PropsWithChildren } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 
 import { useIsomorphicLayoutEffect } from "../hooks/tools";
-import type { Nullable } from "../utils";
-import { timeout } from "../utils";
+import type { Nullable } from "../misc/utils";
+import { timeout } from "../misc/utils";
 
 interface TrackBoundaryController {
   onMount: (track: ITrack) => void;

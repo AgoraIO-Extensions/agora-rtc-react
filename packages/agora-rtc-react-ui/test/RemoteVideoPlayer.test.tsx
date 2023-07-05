@@ -4,7 +4,7 @@ import { FakeRTCClient } from "fake-agora-rtc";
 import { describe, expect, test, vi } from "vitest";
 
 import { RemoteVideoPlayer } from "../src/components";
-import * as stories from "../src/components/RemoteVideoPlayer.stories";
+import * as stories from "../src/stories/RemoteVideoPlayer.stories";
 const { Overview, WithCover } = composeStories(stories);
 
 vi.mock("agora-rtc-react/src/components/TrackBoundary", () => ({

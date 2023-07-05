@@ -7,8 +7,7 @@ import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 
 import { CameraVideoTrack } from "../src/components";
-import * as stories from "../src/components/CameraVideoTrack.stories";
-
+import * as stories from "../src/stories/CameraVideoTrack.stories";
 const { Enabled, EmptyTrack } = composeStories(stories);
 
 vi.mock("agora-rtc-react/src/hooks", () => ({

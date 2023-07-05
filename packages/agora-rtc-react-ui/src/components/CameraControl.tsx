@@ -1,4 +1,4 @@
-import "./UserControl.css";
+import "../assets/UserControl.css";
 
 import type { ButtonHTMLAttributes, MouseEvent } from "react";
 import { useCallback } from "react";

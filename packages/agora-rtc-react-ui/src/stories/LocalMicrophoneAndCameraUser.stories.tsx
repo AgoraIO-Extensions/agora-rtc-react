@@ -1,16 +1,15 @@
 import { action } from "@storybook/addon-actions";
 import type { Meta, StoryObj } from "@storybook/react";
-import type { LocalMicrophoneAndCameraUserProps } from "agora-rtc-react-ui/src/components/LocalMicrophoneAndCameraUser";
+import { AgoraRTCProvider } from "agora-rtc-react/src/hooks";
 import { FakeCameraVideoTrack, FakeMicrophoneAudioTrack, FakeRTCClient } from "fake-agora-rtc";
 import { useEffect, useMemo, useState } from "react";
 
-import { AgoraRTCProvider } from "../hooks";
-
-import { LocalUser } from "./LocalUser";
+import type { LocalMicrophoneAndCameraUserProps } from "../components";
+import { LocalMicrophoneAndCameraUser } from "../components";
 
 const meta: Meta<LocalMicrophoneAndCameraUserProps> = {
-  title: "User/LocalUser",
-  component: LocalUser,
+  title: "User/LocalMicrophoneAndCameraUser",
+  component: LocalMicrophoneAndCameraUser,
   tags: ["autodocs"],
   parameters: {
     backgrounds: { default: "light" },
@@ -69,7 +68,7 @@ export const Overview: StoryObj<OverviewArgs> = {
 
     return (
       <AgoraRTCProvider client={client}>
-        <LocalUser
+        <LocalMicrophoneAndCameraUser
           audioTrack={audioTrack}
           cameraOn={cameraOn}
           micOn={micOn}

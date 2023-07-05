@@ -3,8 +3,8 @@ import { AgoraRTCProvider } from "agora-rtc-react/src/hooks";
 import { FakeRTCClient, FakeRemoteVideoTrack } from "fake-agora-rtc";
 import { useState } from "react";
 
-import type { RemoteVideoPlayerProps } from "./RemoteVideoPlayer";
-import { RemoteVideoPlayer } from "./RemoteVideoPlayer";
+import type { RemoteVideoPlayerProps } from "../components";
+import { RemoteVideoPlayer } from "../components";
 
 const meta: Meta<RemoteVideoPlayerProps> = {
   title: "Video/RemoteVideoPlayer",

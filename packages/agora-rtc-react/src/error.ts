@@ -1,19 +1,19 @@
-import type { AgoraRTCError } from "./listen";
+import type { IAgoraRTCError } from "agora-rtc-sdk-ng";
 
 type printType = "log" | "warn" | "error" | "info";
 
 interface IAgoraRTCReactError extends Error {
   readonly rtcMethod: string;
-  readonly rtcError: AgoraRTCError | string;
+  readonly rtcError: IAgoraRTCError | string;
   log: (type: printType) => void;
 }
 
 export class AgoraRTCReactError extends Error implements IAgoraRTCReactError {
   public readonly rtcMethod: string;
-  public readonly rtcError: AgoraRTCError | string;
+  public readonly rtcError: IAgoraRTCError | string;
   public override readonly name: string = "AgoraRTCReactException";
 
-  public constructor(rtcMethod: string, rtcError: AgoraRTCError | string) {
+  public constructor(rtcMethod: string, rtcError: IAgoraRTCError | string) {
     if (typeof rtcError === "string") {
       super(rtcError);
     } else {

@@ -6,11 +6,10 @@ import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import { FakeRTCClient } from "fake-agora-rtc";
 import { useCallback, useEffect, useState } from "react";
 
+import type { RemoteUserProps } from "../components";
+import { RemoteUser } from "../components";
 import { AgoraRTCProvider } from "../hooks/context";
-import { interval } from "../utils";
-
-import type { RemoteUserProps } from "./RemoteUser";
-import { RemoteUser } from "./RemoteUser";
+import { interval } from "../misc/utils";
 
 const meta: Meta<RemoteUserProps> = {
   title: "User/RemoteUser",

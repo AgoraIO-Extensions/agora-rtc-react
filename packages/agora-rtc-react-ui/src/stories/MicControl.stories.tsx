@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { FakeLocalAudioTrack, FakeRemoteAudioTrack } from "fake-agora-rtc";
 import { useEffect } from "react";
 
-import type { MicControlProps } from "./MicControl";
-import { MicControl } from "./MicControl";
+import type { MicControlProps } from "../components";
+import { MicControl } from "../components";
 
 const meta: Meta<MicControlProps> = {
   title: "Controls/MicControl",

@@ -1,8 +1,8 @@
 import type { IAgoraRTCClient, IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import { useEffect, useState } from "react";
 
-import { listen } from "../listen";
-import { joinDisposers } from "../utils";
+import { listen } from "../misc/listen";
+import { joinDisposers } from "../misc/utils";
 
 import { useRTCClient } from "./context";
 

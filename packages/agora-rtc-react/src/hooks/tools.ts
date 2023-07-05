@@ -1,8 +1,8 @@
 import type { MutableRefObject, Ref, RefObject } from "react";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import type { AsyncTaskRunner, MaybePromise } from "../utils";
-import { createAsyncTaskRunner } from "../utils";
+import type { AsyncTaskRunner, MaybePromise } from "../misc/utils";
+import { createAsyncTaskRunner } from "../misc/utils";
 
 export const useIsomorphicLayoutEffect =
   typeof document !== "undefined" ? useLayoutEffect : useEffect;

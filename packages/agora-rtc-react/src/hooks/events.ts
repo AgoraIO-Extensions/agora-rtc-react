@@ -6,6 +6,7 @@ import type {
   ConnectionDisconnectedReason,
   ConnectionState,
   IAgoraRTCClient,
+  IAgoraRTCError,
   IAgoraRTCRemoteUser,
   IBufferSourceAudioTrack,
   ILocalTrack,
@@ -19,9 +20,9 @@ import type {
 } from "agora-rtc-sdk-ng";
 import { useEffect, useRef } from "react";
 
-import type { AgoraRTCError, CheckVideoVisibleResult, InspectState } from "../listen";
-import { listen } from "../listen";
-import type { Fn, Nullable } from "../utils";
+import type { CheckVideoVisibleResult, InspectState } from "../misc/listen";
+import { listen } from "../misc/listen";
+import type { Fn, Nullable } from "../misc/utils";
 
 
 import { useIsomorphicLayoutEffect } from "./tools";
@@ -204,7 +205,7 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "networ
  * - `LIVE_STREAMING_CDN_ERROR`: An error occurs in the CDN.
  * - `LIVE_STREAMING_INVALID_RAW_STREAM`: Timeout for the CDN live streaming. Please check your media stream.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "live-streaming-error", listener: Nullable<(url: string, err: AgoraRTCError) => void>): void
+export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "live-streaming-error", listener: Nullable<(url: string, err: IAgoraRTCError) => void>): void
 
 /**
  * Occurs when a warning occurs in CDN live streaming.
@@ -216,7 +217,7 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "live-s
  * - `LIVE_STREAMING_WARN_FAILED_LOAD_IMAGE`: Fails to load the background image or watermark image.
  * - `LIVE_STREAMING_WARN_FREQUENT_REQUEST`: Pushes stremas to the CDN too frequently.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "live-streaming-warning", listener: Nullable<(url: string, err: AgoraRTCError) => void>): void
+export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "live-streaming-warning", listener: Nullable<(url: string, err: IAgoraRTCError) => void>): void
 
 /**
  * Reports exceptions in the channel.
@@ -299,7 +300,7 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "conten
 /**
  * Occurs when the state of the connection between the SDK and the server changes.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "content-inspect-error", listener: Nullable<(error?: AgoraRTCError) => void>): void
+export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "content-inspect-error", listener: Nullable<(error?: IAgoraRTCError) => void>): void
 export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: string, listener: Nullable<Fn>) {
   const listenerRef = useRef<Nullable<Fn>>(listener);
 

@@ -2,7 +2,7 @@ import type { IRemoteAudioTrack } from "agora-rtc-sdk-ng";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
 
-import type { Nullable } from "../utils";
+import type { Nullable } from "../misc/utils";
 
 import { useAutoPlayAudioTrack } from "./TrackBoundary";
 

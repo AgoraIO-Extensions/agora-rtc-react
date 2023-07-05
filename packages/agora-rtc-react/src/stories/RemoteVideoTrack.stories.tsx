@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { FakeRemoteVideoTrack } from "fake-agora-rtc";
 import { useState } from "react";
 
-import type { RemoteVideoTrackProps } from "./RemoteVideoTrack";
-import { RemoteVideoTrack } from "./RemoteVideoTrack";
+import type { RemoteVideoTrackProps } from "../components";
+import { RemoteVideoTrack } from "../components";
 
 const meta: Meta<RemoteVideoTrackProps> = {
   title: "Track/RemoteVideoTrack",

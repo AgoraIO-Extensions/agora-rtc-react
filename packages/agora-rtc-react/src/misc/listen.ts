@@ -1,7 +1,6 @@
 // TypeScript cannot infer union from overloaded function types
 // So duplicate the event types here
 import type {
-  AgoraRTCErrorCode,
   AudioSourceState,
   ChannelMediaRelayError,
   ChannelMediaRelayEvent,
@@ -9,6 +8,7 @@ import type {
   ConnectionDisconnectedReason,
   ConnectionState,
   IAgoraRTCClient,
+  IAgoraRTCError,
   IAgoraRTCRemoteUser,
   IBufferSourceAudioTrack,
   ILocalTrack,
@@ -21,21 +21,6 @@ import type {
 } from "agora-rtc-sdk-ng";
 
 import type { Disposer, Fn } from "./utils";
-
-// The following `declare` types are not exported well, so copy them here
-export declare class AgoraRTCError extends Error {
-  readonly code: `${AgoraRTCErrorCode}`;
-  readonly message: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly data?: any;
-  readonly name: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  constructor(code: `${AgoraRTCErrorCode}`, message?: string, data?: any);
-  toString(): string;
-  print(level?: "error" | "warning"): AgoraRTCError;
-  throw(): never;
-}
-
 
 export declare enum InspectState {
   CONNECTING = "CONNECTING",
@@ -68,14 +53,18 @@ export interface Listenable {
 /**
  * Occurs when the state of the connection between the SDK and the server changes.
  */
-export function listen(client: IAgoraRTCClient, event: "connection-state-change", listener: (
-  /** The current connection state. */
-  curState: ConnectionState,
-  /** The previous connection state. */
-  revState: ConnectionState,
-  /** The reason of disconnection if `curState` is `"DISCONNECTED"`. */
-  reason?: ConnectionDisconnectedReason,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "connection-state-change",
+  listener: (
+    /** The current connection state. */
+    curState: ConnectionState,
+    /** The previous connection state. */
+    revState: ConnectionState,
+    /** The reason of disconnection if `curState` is `"DISCONNECTED"`. */
+    reason?: ConnectionDisconnectedReason,
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when a remote user or host joins the channel.
@@ -88,10 +77,14 @@ export function listen(client: IAgoraRTCClient, event: "connection-state-change"
  * - A remote audience switches the user role to host by calling {@link IAgoraRTCClient.setClientRole} after joining the channel.
  * - A remote user or host rejoins the channel after a network interruption.
  */
-export function listen(client: IAgoraRTCClient, event: "user-joined", listener: (
-  /** Information of the remote user. */
-  user: IAgoraRTCRemoteUser,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "user-joined",
+  listener: (
+    /** Information of the remote user. */
+    user: IAgoraRTCRemoteUser,
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when a remote user becomes offline.
@@ -103,17 +96,21 @@ export function listen(client: IAgoraRTCClient, event: "user-joined", listener: 
  *
  * > In live-broadcast channels, the SDK triggers this callback only when a host goes offline.
  */
-export function listen(client: IAgoraRTCClient, event: "user-left", listener: (
-  /** Information of the user who is offline. */
-  user: IAgoraRTCRemoteUser,
-  /**
-   * Reason why the user has gone offline.
-   * - `"Quit"`: The user calls {@link leave} and leaves the channel.
-   * - `"ServerTimeOut"`: The user has dropped offline.
-   * - `"BecomeAudience"`: The client role is switched from host to audience.
-   */
-  reason: "Quit" | "ServerTimeOut" | "BecomeAudience",
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "user-left",
+  listener: (
+    /** Information of the user who is offline. */
+    user: IAgoraRTCRemoteUser,
+    /**
+     * Reason why the user has gone offline.
+     * - `"Quit"`: The user calls {@link leave} and leaves the channel.
+     * - `"ServerTimeOut"`: The user has dropped offline.
+     * - `"BecomeAudience"`: The client role is switched from host to audience.
+     */
+    reason: "Quit" | "ServerTimeOut" | "BecomeAudience",
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when a remote user publishes an audio or video track.
@@ -136,30 +133,38 @@ export function listen(client: IAgoraRTCClient, event: "user-left", listener: (
  * })
  * ```
  */
-export function listen(client: IAgoraRTCClient, event: "user-published", listener: (
-  /** Information of the remote user. */
-  user: IAgoraRTCRemoteUser,
-  /**
-   * Type of the track.
-   * - `"audio"`: The remote user publishes an audio track.
-   * - `"video"`: The remote user publishes a video track.
-   */
-  mediaType: "audio" | "video",
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "user-published",
+  listener: (
+    /** Information of the remote user. */
+    user: IAgoraRTCRemoteUser,
+    /**
+     * Type of the track.
+     * - `"audio"`: The remote user publishes an audio track.
+     * - `"video"`: The remote user publishes a video track.
+     */
+    mediaType: "audio" | "video",
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when a remote user unpublishes an audio or video track.
  */
-export function listen(client: IAgoraRTCClient, event: "user-unpublished", listener: (
-  /** Information of the remote user. */
-  user: IAgoraRTCRemoteUser,
-  /**
-   * Type of the track.
-   * - `"audio"`: The remote user unpublishes an audio track.
-   * - `"video"`: The remote user unpublishes a video track.
-   */
-  mediaType: "audio" | "video",
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "user-unpublished",
+  listener: (
+    /** Information of the remote user. */
+    user: IAgoraRTCRemoteUser,
+    /**
+     * Type of the track.
+     * - `"audio"`: The remote user unpublishes an audio track.
+     * - `"video"`: The remote user unpublishes a video track.
+     */
+    mediaType: "audio" | "video",
+  ) => void,
+): Disposer;
 
 /**
  * Reports the state change of users.
@@ -168,58 +173,78 @@ export function listen(client: IAgoraRTCClient, event: "user-unpublished", liste
  *
  * > This event indicating the media stream of a remote user is active does not necessarily mean that the local user can subscribe to this remote user. The local user can subscribe to a remote user only when receiving the [user-published]{@link IAgoraRTCClient.event_user_published} event.
  */
-export function listen(client: IAgoraRTCClient, event: "user-info-updated", listener: (
-  /** The ID of the remote user. */
-  uid: UID,
-  /** The current user state. Note that the `"enable-local-video"` and `"disable-local-video"` states are only for synchronizing states with the clients that integrate the RTC Native SDK. */
-  msg: `${"mute" | "unmute"}-${"audio" | "video"}` | `${"enable" | "disable"}-local-video`,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "user-info-updated",
+  listener: (
+    /** The ID of the remote user. */
+    uid: UID,
+    /** The current user state. Note that the `"enable-local-video"` and `"disable-local-video"` states are only for synchronizing states with the clients that integrate the RTC Native SDK. */
+    msg: `${"mute" | "unmute"}-${"audio" | "video"}` | `${"enable" | "disable"}-local-video`,
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when the SDK starts to reestablish the media connection for publishing and subscribing.
  */
-export function listen(client: IAgoraRTCClient, event: "media-reconnect-start", listener: (
-  /** The ID of the user who reestablishes the connection.  If it is the local `uid`, the connection is for publishing; if it is a remote `uid`, the connection is for subscribing. */
-  uid: UID,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "media-reconnect-start",
+  listener: (
+    /** The ID of the user who reestablishes the connection.  If it is the local `uid`, the connection is for publishing; if it is a remote `uid`, the connection is for subscribing. */
+    uid: UID,
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when the SDK ends reestablishing the media connection for publishing and subscribing.
  */
-export function listen(client: IAgoraRTCClient, event: "media-reconnect-end", listener: (
-  /** The ID of the user who reestablishes the connection. If it is the local `uid`, the connection is for publishing; if it is a remote `uid`, the connection is for subscribing. */
-  uid: UID,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "media-reconnect-end",
+  listener: (
+    /** The ID of the user who reestablishes the connection. If it is the local `uid`, the connection is for publishing; if it is a remote `uid`, the connection is for subscribing. */
+    uid: UID,
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when the type of a remote video stream changes.
  *
  * The SDK triggers this callback when a high-quality video stream changes to a low-quality video stream, or vice versa.
  */
-export function listen(client: IAgoraRTCClient, event: "stream-type-changed", listener: (
-  /** The ID of the remote user. */
-  uid: UID,
-  /**
-   * The new stream type:
-   * - 0: High-bitrate, high-resolution video stream.
-   * - 1: Low-bitrate, low-resolution video stream.
-   */
-  streamType: RemoteStreamType,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "stream-type-changed",
+  listener: (
+    /** The ID of the remote user. */
+    uid: UID,
+    /**
+     * The new stream type:
+     * - 0: High-bitrate, high-resolution video stream.
+     * - 1: Low-bitrate, low-resolution video stream.
+     */
+    streamType: RemoteStreamType,
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when a remote video stream falls back to an audio stream due to unreliable network conditions or switches back to video after the network conditions improve.
  */
-export function listen(client: IAgoraRTCClient, event: "stream-fallback", listener: (
-  /** The ID of the remote user. */
-  uid: UID,
-  /**
-   * Whether the remote media stream falls back or recovers:
-   * - `"fallback"`: The remote media stream falls back to audio-only due to unreliable network conditions.
-   * - `"recover"`: The remote media stream switches back to the video stream after the network conditions improve.
-   */
-  isFallbackOrRecover: "fallback" | "recover",
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "stream-fallback",
+  listener: (
+    /** The ID of the remote user. */
+    uid: UID,
+    /**
+     * Whether the remote media stream falls back or recovers:
+     * - `"fallback"`: The remote media stream falls back to audio-only due to unreliable network conditions.
+     * - `"recover"`: The remote media stream switches back to the video stream after the network conditions improve.
+     */
+    isFallbackOrRecover: "fallback" | "recover",
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when the state of the media stream relay changes.
@@ -228,20 +253,28 @@ export function listen(client: IAgoraRTCClient, event: "stream-fallback", listen
  *
  * If the media relay is in an abnormal state, you can find the error code in {@link ChannelMediaRelayError} (for example if the token has expired, or repeated reconnection attempts fail.)
  */
-export function listen(client: IAgoraRTCClient, event: "channel-media-relay-state", listener: (
-  /** The state of the media relay. */
-  state: ChannelMediaRelayState,
-  /** The error code. */
-  code: ChannelMediaRelayError,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "channel-media-relay-state",
+  listener: (
+    /** The state of the media relay. */
+    state: ChannelMediaRelayState,
+    /** The error code. */
+    code: ChannelMediaRelayError,
+  ) => void,
+): Disposer;
 
 /**
  * Reports events during a media stream relay.
  */
-export function listen(client: IAgoraRTCClient, event: "channel-media-relay-event", listener: (
-  /** The event code for a media stream relay. */
-  event: ChannelMediaRelayEvent,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "channel-media-relay-event",
+  listener: (
+    /** The event code for a media stream relay. */
+    event: ChannelMediaRelayEvent,
+  ) => void,
+): Disposer;
 
 /**
  * Reports all the speaking remote users and their volumes.
@@ -259,22 +292,30 @@ export function listen(client: IAgoraRTCClient, event: "channel-media-relay-even
  * });
  * ```
  */
-export function listen(client: IAgoraRTCClient, event: "volume-indicator", listener: (
-  /**
-   * An object consisting of the following properties:
-   * - level: The volume of the speaking user, ranging from 0 to 100.
-   * - uid: The ID of the speaking user.
-   *
-   */
-  result: { uid: UID; level: number }[],
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "volume-indicator",
+  listener: (
+    /**
+     * An object consisting of the following properties:
+     * - level: The volume of the speaking user, ranging from 0 to 100.
+     * - uid: The ID of the speaking user.
+     *
+     */
+    result: { uid: UID; level: number }[],
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when decryption fails.
  *
  * The SDK triggers this callback when the decryption fails during the process of subscribing to a stream. The failure is usually caused by incorrect encryption settings. See {@link setEncryptionConfig} for details.
  */
-export function listen(client: IAgoraRTCClient, event: "crypt-error", listener: () => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "crypt-error",
+  listener: () => void,
+): Disposer;
 
 /**
  * Occurs 30 seconds before a token expires.
@@ -288,7 +329,11 @@ export function listen(client: IAgoraRTCClient, event: "crypt-error", listener: 
  * });
  * ```
  */
-export function listen(client: IAgoraRTCClient, event: "token-privilege-will-expire", listener: () => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "token-privilege-will-expire",
+  listener: () => void,
+): Disposer;
 
 /**
  * Occurs when the token expires.
@@ -302,7 +347,11 @@ export function listen(client: IAgoraRTCClient, event: "token-privilege-will-exp
  * });
  * ```
  */
-export function listen(client: IAgoraRTCClient, event: "token-privilege-did-expire", listener: () => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "token-privilege-did-expire",
+  listener: () => void,
+): Disposer;
 
 /**
  * Reports the network quality of the local user.
@@ -311,10 +360,14 @@ export function listen(client: IAgoraRTCClient, event: "token-privilege-did-expi
  *
  * > Agora recommends listening for this event and displaying the network quality.
  */
-export function listen(client: IAgoraRTCClient, event: "network-quality", listener: (
-  /** The network quality of the local user. */
-  stats: NetworkQuality,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "network-quality",
+  listener: (
+    /** The network quality of the local user. */
+    stats: NetworkQuality,
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when an error occurs in CDN live streaming.
@@ -329,12 +382,16 @@ export function listen(client: IAgoraRTCClient, event: "network-quality", listen
  * - `LIVE_STREAMING_CDN_ERROR`: An error occurs in the CDN.
  * - `LIVE_STREAMING_INVALID_RAW_STREAM`: Timeout for the CDN live streaming. Please check your media stream.
  */
-export function listen(client: IAgoraRTCClient, event: "live-streaming-error", listener: (
-  /** The URL of the CDN live streaming that has errors. */
-  url: string,
-  /** The error details. */
-  err: AgoraRTCError,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "live-streaming-error",
+  listener: (
+    /** The URL of the CDN live streaming that has errors. */
+    url: string,
+    /** The error details. */
+    err: IAgoraRTCError,
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when a warning occurs in CDN live streaming.
@@ -346,12 +403,16 @@ export function listen(client: IAgoraRTCClient, event: "live-streaming-error", l
  * - `LIVE_STREAMING_WARN_FAILED_LOAD_IMAGE`: Fails to load the background image or watermark image.
  * - `LIVE_STREAMING_WARN_FREQUENT_REQUEST`: Pushes stremas to the CDN too frequently.
  */
-export function listen(client: IAgoraRTCClient, event: "live-streaming-warning", listener: (
-  /** The URL of the CDN live streaming that has warnings. */
-  url: string,
-  /** The warning details. */
-  err: AgoraRTCError,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "live-streaming-warning",
+  listener: (
+    /** The URL of the CDN live streaming that has warnings. */
+    url: string,
+    /** The warning details. */
+    err: IAgoraRTCError,
+  ) => void,
+): Disposer;
 
 /**
  * Reports exceptions in the channel.
@@ -388,7 +449,11 @@ export function listen(client: IAgoraRTCClient, event: "live-streaming-warning",
  * |4003   | SEND_AUDIO_BITRATE_TOO_LOW_RECOVER | Sent audio bitrate recovers |
  * |4005   | RECV_AUDIO_DECODE_FAILED_RECOVER   | Decoding received audio recovers |
  */
-export function listen(client: IAgoraRTCClient, event: "exception", listener: (event: { code: number, msg: string, uid: UID }) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "exception",
+  listener: (event: { code: number; msg: string; uid: UID }) => void,
+): Disposer;
 
 /**
  * **Since**
@@ -398,14 +463,18 @@ export function listen(client: IAgoraRTCClient, event: "exception", listener: (e
  * - Earlier than v4.10.0: The callback is triggered after the method call of [[publish]] succeeds.
  * - v4.10.0 and later: The callback is triggered after the method call of [[join]] succeeds.
  */
-export function listen(client: IAgoraRTCClient, event: "is-using-cloud-proxy", listener: (
-  /**
-   * Whether the media stream is forwarded by the Agora cloud proxy service.
-   * - `true`: Forwarded by the Agora cloud proxy service.
-   * - `false`: Not forwarded by the Agora cloud proxy service.
-   */
-  isUsingProxy: boolean,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "is-using-cloud-proxy",
+  listener: (
+    /**
+     * Whether the media stream is forwarded by the Agora cloud proxy service.
+     * - `true`: Forwarded by the Agora cloud proxy service.
+     * - `false`: Not forwarded by the Agora cloud proxy service.
+     */
+    isUsingProxy: boolean,
+  ) => void,
+): Disposer;
 
 /**
  * **Since**
@@ -416,10 +485,14 @@ export function listen(client: IAgoraRTCClient, event: "is-using-cloud-proxy", l
  * As of v4.11.0, if the SDK fails in the attempt to directly connect to Agora SD-RTN™ after you call [[join]],
  * the SDK automatically switches to TCP/TLS 443 in order to ensure connectivity.
  */
-export function listen(client: IAgoraRTCClient, event: "join-fallback-to-proxy", listener: (
-  /** The server address used after the switch. */
-  proxyServer: string,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "join-fallback-to-proxy",
+  listener: (
+    /** The server address used after the switch. */
+    proxyServer: string,
+  ) => void,
+): Disposer;
 
 /**
  * **Since**
@@ -434,28 +507,40 @@ export function listen(client: IAgoraRTCClient, event: "join-fallback-to-proxy",
  * >   - If you listen for the `published-user-list` event, users reported by the `published-user-list` callback are not reported by `user-joined` and `user-published`.
  * >   - If you do not listen for the `published-user-list` event, the `user-joined` and `user-published` callbacks are not affected.
  */
-export function listen(client: IAgoraRTCClient, event: "published-user-list", listener: (
-  /** The remote user. */
-  user: IAgoraRTCRemoteUser,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "published-user-list",
+  listener: (
+    /** The remote user. */
+    user: IAgoraRTCRemoteUser,
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when the state of the connection between the SDK and the server changes.
  */
-export function listen(client: IAgoraRTCClient, event: "content-inspect-connection-state-change", listener: (
-  /** The current connection state. */
-  preState: `${InspectState}`,
-  /** The previous connection state. */
-  newState: `${InspectState}`,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "content-inspect-connection-state-change",
+  listener: (
+    /** The current connection state. */
+    preState: `${InspectState}`,
+    /** The previous connection state. */
+    newState: `${InspectState}`,
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when the state of the connection between the SDK errors.
  */
-export function listen(client: IAgoraRTCClient, event: "content-inspect-error", listener: (
-  /** The current connection state. */
-  error?: AgoraRTCError,
-) => void): Disposer;
+export function listen(
+  client: IAgoraRTCClient,
+  event: "content-inspect-error",
+  listener: (
+    /** The current connection state. */
+    error?: IAgoraRTCError,
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when a audio or video track ends.
@@ -473,18 +558,22 @@ export function listen(client: ILocalTrack, event: "track-ended", listener: () =
 /**
  * Occurs when the state of processing the audio buffer in [BufferSourceAudioTrack]{@link IBufferSourceAudioTrack} changes.
  */
-export function listen(client: IBufferSourceAudioTrack, event: "source-state-change", listener: (
-  /**
-   *  The state of processing the audio buffer:
-   * - `"stopped"`: The SDK stops processing the audio buffer. Reasons may include:
-   *  - The SDK finishes processing the audio buffer.
-   *  - The user manually stops the processing of the audio buffer.
-   * - `"paused"`: The SDK pauses the processing of the audio buffer.
-   * - `"playing"`: The SDK is processing the audio buffer.
-   *
-   */
-  currentState: AudioSourceState,
-) => void): Disposer;
+export function listen(
+  client: IBufferSourceAudioTrack,
+  event: "source-state-change",
+  listener: (
+    /**
+     *  The state of processing the audio buffer:
+     * - `"stopped"`: The SDK stops processing the audio buffer. Reasons may include:
+     *  - The SDK finishes processing the audio buffer.
+     *  - The user manually stops the processing of the audio buffer.
+     * - `"paused"`: The SDK pauses the processing of the audio buffer.
+     * - `"playing"`: The SDK is processing the audio buffer.
+     *
+     */
+    currentState: AudioSourceState,
+  ) => void,
+): Disposer;
 
 /**
  * Occurs when the device is overloaded after you call [setBeautyEffect]{@link ILocalVideoTrack.setBeautyEffect} to enable image enhancement.
@@ -498,7 +587,11 @@ export function listen(client: IBufferSourceAudioTrack, event: "source-state-cha
  * });
  * ```
  */
-export function listen(client: ILocalVideoTrack, event: "beauty-effect-overload", listener: () => void): Disposer;
+export function listen(
+  client: ILocalVideoTrack,
+  event: "beauty-effect-overload",
+  listener: () => void,
+): Disposer;
 
 /**
  * Occurs when a audio or video track ends.
@@ -511,7 +604,11 @@ export function listen(client: ILocalVideoTrack, event: "beauty-effect-overload"
  * - A local media device malfunctions.
  * - The device permission is revoked.
  */
-export function listen(client: ILocalVideoTrack, event: "track-ended", listener: () => void): Disposer;
+export function listen(
+  client: ILocalVideoTrack,
+  event: "track-ended",
+  listener: () => void,
+): Disposer;
 
 /**
  * **Since**
@@ -523,12 +620,20 @@ export function listen(client: ILocalVideoTrack, event: "track-ended", listener:
  *
  * After you call `localVideoTrack.play`, the SDK creates an [`<video>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video) tag for playing video tracks. When `localVideoTrack.isPlaying` is `true` but you cannot see any video, this event helps you check whether the `<video>` tag is visible or not and learn the reason when the `<video>` tag is invisible.
  */
-export function listen(client: ILocalVideoTrack, event: "video-element-visible-status", listener: () => void): Disposer;
+export function listen(
+  client: ILocalVideoTrack,
+  event: "video-element-visible-status",
+  listener: () => void,
+): Disposer;
 
 /**
  * Occurs when the first remote audio or video frame is decoded.
  */
-export function listen(client: IRemoteTrack, event: "first-frame-decoded", listener: () => void): Disposer;
+export function listen(
+  client: IRemoteTrack,
+  event: "first-frame-decoded",
+  listener: () => void,
+): Disposer;
 
 /**
  * **Since**
@@ -540,10 +645,14 @@ export function listen(client: IRemoteTrack, event: "first-frame-decoded", liste
  *
  * After you call `localVideoTrack.play`, the SDK creates an [`<video>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video) tag for playing video tracks. When `localVideoTrack.isPlaying` is `true` but you cannot see any video, this event helps you check whether the `<video>` tag is visible or not and learn the reason when the `<video>` tag is invisible.
  */
-export function listen(client: IRemoteVideoTrack, event: "video-element-visible-status", listener: (
-  /** The visibility of the `<video>` tag. */
-  data?: CheckVideoVisibleResult,
-) => void): Disposer
+export function listen(
+  client: IRemoteVideoTrack,
+  event: "video-element-visible-status",
+  listener: (
+    /** The visibility of the `<video>` tag. */
+    data?: CheckVideoVisibleResult,
+  ) => void,
+): Disposer;
 
 export function listen(listenable: Listenable, event: string, listener: Fn): Disposer;
 export function listen(listenable: Listenable, event: string, listener: Fn) {

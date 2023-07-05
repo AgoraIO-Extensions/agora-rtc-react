@@ -5,9 +5,9 @@ import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 
 import { LocalVideoTrack, useAutoPlayVideoTrack } from "../../src/components";
-import * as stories from "../../src/components/LocalVideoTrack.stories";
-const { Enabled, EmptyTrack } = composeStories(stories);
 import { useAwaited } from "../../src/hooks";
+import * as stories from "../../src/stories/LocalVideoTrack.stories";
+const { Enabled, EmptyTrack } = composeStories(stories);
 
 vi.mock("../../src/hooks", () => ({
   useAwaited: vi.fn(),

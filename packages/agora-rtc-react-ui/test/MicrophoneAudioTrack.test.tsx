@@ -2,13 +2,11 @@ import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
 import { useAwaited } from "agora-rtc-react";
 import type { IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
-import React from "react";
 import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 
 import { MicrophoneAudioTrack } from "../src/components";
-import * as stories from "../src/components/MicrophoneAudioTrack.stories";
-
+import * as stories from "../src/stories/MicrophoneAudioTrack.stories";
 const { Enabled } = composeStories(stories);
 
 vi.mock("agora-rtc-react/src/hooks", () => ({

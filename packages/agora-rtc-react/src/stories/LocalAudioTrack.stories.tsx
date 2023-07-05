@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { FakeLocalAudioTrack } from "fake-agora-rtc";
 
-import type { LocalAudioTrackProps } from "./LocalAudioTrack";
-import { LocalAudioTrack } from "./LocalAudioTrack";
+import type { LocalAudioTrackProps } from "../components";
+import { LocalAudioTrack } from "../components";
 
 const meta: Meta<LocalAudioTrackProps> = {
   title: "Track/LocalAudioTrack",

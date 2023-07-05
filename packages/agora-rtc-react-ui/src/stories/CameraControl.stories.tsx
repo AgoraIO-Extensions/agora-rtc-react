@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import type { CameraControlProps } from "./CameraControl";
-import { CameraControl } from "./CameraControl";
+import type { CameraControlProps } from "../components";
+import { CameraControl } from "../components";
 
 const meta: Meta<CameraControlProps> = {
   title: "Controls/CameraControl",
