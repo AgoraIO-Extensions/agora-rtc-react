@@ -5,11 +5,11 @@ import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 
 import { LocalVideoTrack, useAutoPlayVideoTrack } from "../../src/components";
-import { useAwaited } from "../../src/hooks";
+import { useAwaited } from "../../src/hooks/tools";
 import * as stories from "../../src/stories/LocalVideoTrack.stories";
 const { Enabled, EmptyTrack } = composeStories(stories);
 
-vi.mock("../../src/hooks", () => ({
+vi.mock("../../src/hooks/tools", () => ({
   useAwaited: vi.fn(),
 }));
 vi.mock("../../src/components/TrackBoundary", () => ({

@@ -3,7 +3,7 @@ import type { IAgoraRTCClient } from "agora-rtc-sdk-ng";
 import { FakeRTCClient } from "fake-agora-rtc";
 import { expect } from "vitest";
 
-import { useIsConnected } from "../../src/hooks/index";
+import { useIsConnected } from "../../src/hooks/useIsConnected";
 const setUp = (client?: IAgoraRTCClient | null) => renderHook(() => useIsConnected(client));
 
 describe("useIsConnected", () => {

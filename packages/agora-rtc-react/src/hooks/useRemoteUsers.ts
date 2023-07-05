@@ -1,10 +1,9 @@
 import type { IAgoraRTCClient, IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import { useEffect, useState } from "react";
 
+import { useRTCClient } from "../hooks/useRTCClient";
 import { listen } from "../misc/listen";
 import { joinDisposers } from "../misc/utils";
-
-import { useRTCClient } from "./context";
 
 /**
  * Occurs when a remote user becomes online or offline. (client `user-join`, `user-left`, `user-published` and `user-unpublished` events)

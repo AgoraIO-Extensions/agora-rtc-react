@@ -7,7 +7,7 @@ import { describe, expect, test, vi } from "vitest";
 
 import { RemoteUser } from "../../src/components";
 import { AgoraRTCProvider } from "../../src/hooks";
-import * as clientHook from "../../src/hooks/client";
+import * as clientHook from "../../src/hooks";
 import * as stories from "../../src/stories/RemoteUser.stories";
 const { Overview, WithCover, WithControls } = composeStories(stories);
 

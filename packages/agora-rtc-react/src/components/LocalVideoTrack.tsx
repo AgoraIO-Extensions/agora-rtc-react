@@ -3,7 +3,7 @@ import type { HTMLProps } from "react";
 import { useEffect, useState } from "react";
 
 import { VideoTrackStyle, useMergedStyle } from "../assets/styles";
-import { useAwaited } from "../hooks";
+import { useAwaited } from "../hooks/tools";
 import type { MaybePromiseOrNull } from "../misc/utils";
 
 import { useAutoPlayVideoTrack } from "./TrackBoundary";

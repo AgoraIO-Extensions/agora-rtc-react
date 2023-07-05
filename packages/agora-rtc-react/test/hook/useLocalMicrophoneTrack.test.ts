@@ -3,8 +3,8 @@ import AgoraRTC from "agora-rtc-sdk-ng";
 import { FakeMicrophoneAudioTrack, FakeRTCClient } from "fake-agora-rtc";
 import { expect, vi } from "vitest";
 
-import * as clientHook from "../../src/hooks/client";
 import { useLocalMicrophoneTrack } from "../../src/hooks/index";
+import * as clientHook from "../../src/hooks/useIsConnected";
 import { errorMessage } from "../setup/agora";
 import { createWrapper } from "../setup/wrapper";
 

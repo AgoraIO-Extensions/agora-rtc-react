@@ -1,5 +1,6 @@
 import type { LocalAudioTrackProps } from "agora-rtc-react";
-import { LocalAudioTrack, useAwaited } from "agora-rtc-react";
+import { LocalAudioTrack } from "agora-rtc-react";
+import { useAwaited } from "agora-rtc-react/src/hooks/tools";
 import type { MaybePromiseOrNull } from "agora-rtc-react/src/misc/utils";
 import type { IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
 import type { ReactNode } from "react";

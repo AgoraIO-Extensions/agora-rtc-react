@@ -21,7 +21,7 @@ export default defineConfig({
     coverage: {
       provider: "c8",
       reporter: ["text", "json", "html", "lcov", "json-summary"],
-      exclude: ["test/**"],
+      exclude: ["test/**", "src/stories/*", "src/**/index.ts"],
     },
     exclude: ["**/node_modules/**"],
     setupFiles: ["./test/setup.tsx"],

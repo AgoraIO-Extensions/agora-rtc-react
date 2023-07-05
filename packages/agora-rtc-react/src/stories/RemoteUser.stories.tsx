@@ -8,7 +8,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import type { RemoteUserProps } from "../components";
 import { RemoteUser } from "../components";
-import { AgoraRTCProvider } from "../hooks/context";
+import { AgoraRTCProvider } from "../hooks/useRTCClient";
 import { interval } from "../misc/utils";
 
 const meta: Meta<RemoteUserProps> = {

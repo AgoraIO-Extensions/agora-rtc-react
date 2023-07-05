@@ -4,8 +4,8 @@ import { FakeRTCClient, dispatchRTCEvent } from "fake-agora-rtc";
 import { act } from "react-dom/test-utils";
 import { vi } from "vitest";
 
-import * as clientHook from "../../src/hooks/client";
-import { useRemoteUserTrack } from "../../src/hooks/index";
+import * as clientHook from "../../src/hooks/useIsConnected";
+import { useRemoteUserTrack } from "../../src/hooks/useRemoteUserTrack";
 import { errorMessage } from "../setup/agora";
 import { createWrapper } from "../setup/wrapper";
 
