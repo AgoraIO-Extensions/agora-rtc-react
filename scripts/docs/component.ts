@@ -15,8 +15,10 @@ async function writeComment(markdownPath) {
   const result = md.render(markdown, "utf-8");
   const dom: HTMLElement = new jsdom.JSDOM(result).window.document;
 
-  const target = dom.querySelector("h3")?.textContent;
-  const targetDescription = dom.querySelectorAll("p")[0]?.textContent;
+  const target = dom.querySelector("h3")?.innerHTML.replace(/<code>(.*?)<\/code>/g, "$1");
+  const targetDescription = dom
+    .querySelectorAll("p")[0]
+    ?.innerHTML.replace(/<code>(.*?)<\/code>/g, "$1");
   const targetRequireParameterList = tableToJson(dom.querySelectorAll("table")[0]);
 
   const files = fs.readdirSync(componentsPath);
