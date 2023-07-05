@@ -1,18 +1,13 @@
 import fs from "node:fs";
-import path from "node:path";
 
 import jsdom from "jsdom";
 import MarkdownIt from "markdown-it";
 
-import { componentsPath, docsPath, languagesFormat } from "../const";
+import { docsPath, interfacesPathList, languagesFormat, packagePath } from "../const";
 
 import { readDirRecursively, tableToJson } from "./utils";
 
 const md = new MarkdownIt();
-
-function isTargetFile(filePath: string) {
-  return !filePath.includes("TrackBoundary.tsx") && !filePath.includes("UserCover.tsx");
-}
 
 async function writeComment(markdownPath: string) {
   const markdown = fs.readFileSync(markdownPath, "utf-8");
@@ -25,19 +20,16 @@ async function writeComment(markdownPath: string) {
     ?.innerHTML.replace(/<code>(.*?)<\/code>/g, "$1");
   const targetRequireParameterList = tableToJson(dom.querySelectorAll("table")[0]);
 
-  const files = fs.readdirSync(componentsPath);
-  files.forEach(file => {
-    const filePath = path.join(componentsPath, file);
+  interfacesPathList.forEach(key => {
+    let content = fs.readFileSync(key, "utf-8");
 
-    let content = fs.readFileSync(filePath, "utf-8");
-
-    if (content.includes(`export function ${target}`)) {
+    if (content.includes(`export interface ${target}`)) {
       let comment = `
 /**
  * ${targetDescription}
 `;
       comment = comment.concat(`*/`);
-      const position = content.indexOf(`export function ${target}`);
+      const position = content.indexOf(`export interface ${target}`);
       content = content.slice(0, position - 1) + comment + content.slice(position - 1);
 
       for (const row of targetRequireParameterList) {
@@ -49,6 +41,7 @@ async function writeComment(markdownPath: string) {
         if (row[3]?.innerHTML) {
           replacedStr = row[3]?.innerHTML
             .replace(/<a href="(.*)">(.*)<\/a>/, "[$2]($1)")
+            .replace(/&lt;ul&gt;(.*?)&lt;\/ul&gt;/g, "$1")
             .replace(/&lt;li&gt;(.*?)&lt;\/li&gt;/g, "$1")
             .replace(/<code>(.*?)<\/code>/g, "`$1`");
         }
@@ -56,15 +49,14 @@ async function writeComment(markdownPath: string) {
 /**
  * ${replacedStr}
  */\n`;
-        if (content.includes(`readonly ${interfaceName}`)) {
-          const interfacePosition = content.indexOf(`readonly ${interfaceName}`);
-          content =
-            content.slice(0, interfacePosition - 1) +
-            interfaceComment +
-            content.slice(interfacePosition - 1);
+        const reg = new RegExp(`${interfaceName}(.*?);`, "g");
+        const result = content.match(reg);
+        if (result && result[0]) {
+          const position = content.indexOf(result[0]);
+          content = content.slice(0, position - 1) + interfaceComment + content.slice(position - 1);
         }
       }
-      fs.writeFileSync(filePath, content);
+      fs.writeFileSync(key, content);
     }
   });
 }
@@ -85,16 +77,13 @@ async function cleanComment(filePath) {
   fs.writeFileSync(filePath, content);
 }
 
-//components clean
-await readDirRecursively(`${componentsPath}`, async (filePath: string) => {
-  if (isTargetFile(filePath)) {
-    await cleanComment(filePath);
-  }
-});
-
-// components inject
-await readDirRecursively(`${docsPath}/components`, async (filePath: string) => {
-  if (filePath.includes(languagesFormat[1]) && isTargetFile(filePath)) {
+//interfaces clean
+await cleanComment(`${packagePath}/src/types.ts`);
+await cleanComment(`${packagePath}/src/error.ts`);
+await cleanComment(`${packagePath}/src/rtc.ts`);
+//interfaces inject
+await readDirRecursively(`${docsPath}/interfaces`, async (filePath: string) => {
+  if (filePath.includes(languagesFormat[1])) {
     await writeComment(filePath);
   }
 });

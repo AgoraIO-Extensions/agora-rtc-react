@@ -24,7 +24,6 @@ import type { CheckVideoVisibleResult, InspectState } from "../misc/listen";
 import { listen } from "../misc/listen";
 import type { Fn, Nullable } from "../misc/utils";
 
-
 import { useIsomorphicLayoutEffect } from "./tools";
 
 /**

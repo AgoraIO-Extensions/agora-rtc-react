@@ -1,5 +1,4 @@
 import fs from "node:fs";
-import path from "node:path";
 
 import jsdom from "jsdom";
 import MarkdownIt from "markdown-it";
@@ -10,7 +9,16 @@ import { readDirRecursively, tableToJson } from "./utils";
 
 const md = new MarkdownIt();
 
-async function writeComment(markdownPath) {
+function isNotTargetFile(filePath: string) {
+  return (
+    filePath.includes("src/hooks/tools.ts") ||
+    filePath.includes("src/hooks/events.ts") ||
+    filePath.includes("src/hooks/events.ts") ||
+    !filePath.includes(".ts")
+  );
+}
+
+async function writeComment(markdownPath: string) {
   const markdown = fs.readFileSync(markdownPath, "utf-8");
   const result = md.render(markdown, "utf-8");
   const dom: HTMLElement = new jsdom.JSDOM(result).window.document;
@@ -49,10 +57,9 @@ async function writeComment(markdownPath) {
     targetReturnParameterInsertList.push(targetReturnParameterContent);
   }
 
-  const files = fs.readdirSync(hooksPath);
-  files.forEach(file => {
-    const filePath = path.join(hooksPath, file);
-
+  await readDirRecursively(`${hooksPath}`, async (filePath: string) => {
+    if (isNotTargetFile(filePath)) return;
+    console.log(filePath);
     let content = fs.readFileSync(filePath, "utf-8");
 
     if (content.includes(`export function ${target}`)) {
@@ -76,7 +83,7 @@ async function writeComment(markdownPath) {
   });
 }
 
-async function cleanComment(filePath) {
+async function cleanComment(filePath: string) {
   let content = fs.readFileSync(filePath, "utf-8");
   const regex = /\/\*(.*?)\*\//gs;
 
@@ -94,36 +101,11 @@ async function cleanComment(filePath) {
 
 //hooks clean
 await readDirRecursively(`${hooksPath}`, async (filePath: string) => {
-  if (
-    filePath.includes("client.ts") ||
-    filePath.includes("context.ts") ||
-    filePath.includes("tracks.ts") ||
-    filePath.includes("users.ts")
-  ) {
+  if (!isNotTargetFile(filePath)) {
     await cleanComment(filePath);
   }
 });
-
 //hooks inject
-await readDirRecursively(`${docsPath}/hooks`, async (filePath: string) => {
-  if (filePath.includes(languagesFormat[1])) {
-    await writeComment(filePath);
-  }
-});
-
-//interfaces clean
-await readDirRecursively(`${hooksPath}`, async (filePath: string) => {
-  if (
-    filePath.includes("client.ts") ||
-    filePath.includes("context.ts") ||
-    filePath.includes("tracks.ts") ||
-    filePath.includes("users.ts")
-  ) {
-    await cleanComment(filePath);
-  }
-});
-
-//interfaces inject
 await readDirRecursively(`${docsPath}/hooks`, async (filePath: string) => {
   if (filePath.includes(languagesFormat[1])) {
     await writeComment(filePath);
