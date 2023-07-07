@@ -11,13 +11,13 @@ import { useIsConnected } from "./useIsConnected";
 /**
  * 用于加入频道。当组件准备好时加入频道，当组件卸载时自动离开频道。
  *
- * @param `fetchArgs` {joinOptions | (() => Promise<joinOptions>)} 加入频道所需参数或异步函数。详见 [joinOptions](./interfaces#joinoptions)。
+ * @param `fetchArgs` {JoinOptions | (() => Promise<JoinOptions>)} 加入频道所需参数或异步函数。详见 [JoinOptions](./data-types#joinoptions)。
  * @param `ready` {boolean} 是否准备好加入频道。默认为 `true`。
- * @param `client` {IAgoraRTCClient} [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。
+ * @param `client` {IAgoraRTCClient} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
  * @return data UID
  * @return isLoading boolean
  * @return isConnected boolean
- * @return error AgoraRtcReactError | null
+ * @return error AgoraRTCReactError | null
  */
 export function useJoin(
   fetchArgs: FetchArgs,

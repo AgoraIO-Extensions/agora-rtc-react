@@ -1,23 +1,23 @@
-### useRemoteUserTrack
+## useRemoteUserTrack
 
 用于获取远端用户音视频轨道。
 
 #### 参数
 
-| 参数名      | 类型                                             | 是否必选 | 描述                                                                                                                                          |
-| ----------- | ------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `user`      | `IAgoraRTCRemoteUser` &VerticalLine; `undefined` | 必选     | 远端用户对象。                                                                                                                                |
-| `mediaType` | `"video"` &VerticalLine; `"audio"`               | 必选     | 媒体类型，支持 `"video"` 和 `"audio"`。                                                                                                       |
-| `client`    | `IAgoraRTCClient` &VerticalLine; `null`          | 可选     | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
+| 参数名      | 类型                                             | 是否必选 | 描述                                                                                                                                                            |
+| ----------- | ------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `user`      | `IAgoraRTCRemoteUser` &VerticalLine; `undefined` | 必选     | 远端用户对象。                                                                                                                                                  |
+| `mediaType` | `"video"` &VerticalLine; `"audio"`               | 必选     | 媒体类型，支持传入 `"video"` 或 `"audio"`。                                                                                                                     |
+| `client`    | `IAgoraRTCClient` &VerticalLine; `null`          | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
 
 #### 返回值
 
 返回一个包含以下属性的对象：
 | 属性 | 类型 | 描述 |
 | ----------------------| ---------------------- | ------------------------ |
-| `track` | `IRemoteVideoTrack` &VerticalLine; `IRemoteAudioTrack` &VerticalLine; `undefined` | 远端用户的音频和视频轨道。如果远端用户或音频、视频轨道不存在，则返回 `undefined`。 |
+| `track` | `IRemoteVideoTrack` &VerticalLine; `IRemoteAudioTrack` &VerticalLine; `undefined` | 远端用户的音频或视频轨道（取决于传入的 `mediaType`）。如果远端用户或音频、视频轨道不存在，则返回 `undefined`。 |
 | `isLoading` | `boolean` |<li>`true`：正在执行获取轨道相关操作。</li><li>`false`：已经执行获取轨道相关操作，但不代表成功获取轨道。</li> |
-| `error` | `AgoraRtcReactError` &VerticalLine; `null` | 获取轨道成功则返回 `null`，获取轨道失败则抛出错误。错误详见 [AgoraRtcReactError](./interfaces#agorartcreacterror)。 |
+| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 获取轨道成功则返回 `null`，获取轨道失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。|
 
 #### 使用示例
 

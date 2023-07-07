@@ -1,15 +1,17 @@
-### LocalVideoTrack
+## LocalVideoTrack
 
-该组件用于播放本地视频轨道（不支持指定使用的媒体设备）。
+该组件用于播放本地视频轨道，播放设备为用户在浏览器中选择的设备。
+
+如果你需要自行设置摄像头设备，可使用 Web SDK 的 [ICameraVideoTrack.setDevice](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/icameravideotrack.html#setdevice) 方法。
 
 #### Props
 
-| 属性名     | 类型               | 默认值  | 描述                                                                                                                                                                                                                                                                                                                                                               |
-| ---------- | ------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `track`    | `ILocalVideoTrack` | 无      | 要播放的本地视频轨道。通过 [createCameraVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createcameravideotrack) 或 [createScreenVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack) 创建。 |
-| `play`     | `boolean`          | `false` | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                                                                                                                                                                                                                    |
-| `disabled` | `boolean`          | `false` | <li>`true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。</li><li>`false`：启用该轨道。</li>                                                                                                                                                                                                                                                                    |
-| `muted`    | `boolean`          | `false` | <li>`true`：暂停发送该轨道的媒体数据。</li><li>`false`：恢复发送该轨道的媒体数据。</li>                                                                                                                                                                                                                                                                            |
+| 属性名     | 类型               | 默认值  | 描述                                                                                                                                                                                                                                                                        |
+| ---------- | ------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `track`    | `ILocalVideoTrack` | 无      | 要播放的本地视频轨道。通过 [useLocalCameraTrack](./hooks#uselocalcameratrack) 或 Web SDK 的 [IAgoraRTC.createScreenVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack) 创建。 |
+| `play`     | `boolean`          | `false` | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                                                                                                                             |
+| `disabled` | `boolean`          | `false` | <li>`true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。</li><li>`false`：启用该轨道。</li>                                                                                                                                                                             |
+| `muted`    | `boolean`          | `false` | <li>`true`：暂停发送该轨道的媒体数据。</li><li>`false`：恢复发送该轨道的媒体数据。</li>                                                                                                                                                                                     |
 
 #### 注意事项
 

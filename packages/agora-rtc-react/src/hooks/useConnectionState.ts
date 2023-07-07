@@ -6,9 +6,9 @@ import { listen } from "../misc/listen";
 import { joinDisposers, timeout } from "../misc/utils";
 
 /**
- * 用于获取客户端连接状态。
+ * 用于获取详细的客户端连接状态，包括与服务器连接断开、正在连接中、已连接、正在重连中、正在断开连接。
  *
- * @param `client` {IAgoraRTCClient | null} [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。
+ * @param `client` {IAgoraRTCClient | null} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
  * @return ConnectionState 客户端与服务器的连接状态。详见 ConnectionState。
  */
 export function useConnectionState(client?: IAgoraRTCClient | null): ConnectionState {

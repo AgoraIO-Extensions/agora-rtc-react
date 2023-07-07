@@ -10,7 +10,7 @@ import { useAutoPlayVideoTrack } from "./TrackBoundary";
 
 export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**
-   * 要播放的本地视频轨道。通过 [createScreenVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createcameravideotrack">createCameraVideoTrack</a> 或 <a href="https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack) 创建。
+   * 要播放的本地视频轨道。通过 [IAgoraRTC.createScreenVideoTrack](./hooks#uselocalcameratrack">useLocalCameraTrack</a> 或 Web SDK 的 <a href="https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack) 创建。
    */
   readonly track?: MaybePromiseOrNull<ILocalVideoTrack>;
 
@@ -31,7 +31,7 @@ export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
 }
 
 /**
- * 该组件用于播放本地视频轨道（不支持指定使用的媒体设备）。
+ * 该组件用于播放本地视频轨道，播放设备为用户在浏览器中选择的设备。
  */
 export function LocalVideoTrack({
   track: maybeTrack,
