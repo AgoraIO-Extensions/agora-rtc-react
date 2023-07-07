@@ -53,9 +53,7 @@ export function usePublish(
         agoraRTCReactError.log("warn");
       }
       return isSupport
-        ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          resolvedClient.mode !== "live" || resolvedClient.role !== "audience"
+        ? resolvedClient.mode !== "live" || resolvedClient.role !== "audience"
         : true;
     };
     const isPublished = (track: ILocalTrack): boolean => {
