@@ -45,7 +45,14 @@ jobs:
             git switch -c doc/update-doc
             echo "CREATE_PR=1" >> "$GITHUB_ENV"
           fi
-          cp -r ../remote-repo/video-call/react/* packages/agora-rtc-react/docs
+          cp ../remote-repo/video-call/react-sdk/hooks.react.mdx packages/agora-rtc-react/docs/hooks.mdx
+          cp ../remote-repo/video-call/react-sdk/hooks-en.react.mdx packages/agora-rtc-react/docs/hooks-en.mdx
+          cp ../remote-repo/video-call/react-sdk/components.react.mdx packages/agora-rtc-react/docs/components.mdx
+          cp ../remote-repo/video-call/react-sdk/components-en.react.mdx packages/agora-rtc-react/docs/components-en.mdx
+          cp ../remote-repo/video-call/react-sdk/interfaces.react.mdx packages/agora-rtc-react/docs/interfaces.mdx
+          cp ../remote-repo/video-call/react-sdk/interfaces-en.react.mdx packages/agora-rtc-react/docs/interfaces-en.mdx
+
+
           pnpm install
           pnpm gene-docs
           pnpm run lint:fix

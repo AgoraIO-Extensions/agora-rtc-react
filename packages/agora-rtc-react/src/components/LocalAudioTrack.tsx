@@ -2,43 +2,45 @@ import type { ILocalAudioTrack } from "agora-rtc-sdk-ng";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
 
-import { useAwaited } from "../hooks";
-import type { MaybePromiseOrNull } from "../utils";
+import { useAwaited } from "../hooks/tools";
+import type { MaybePromiseOrNull } from "../misc/utils";
 
 import { useAutoPlayAudioTrack } from "./TrackBoundary";
 
 export interface LocalAudioTrackProps {
   /**
-   * A local audio track which can be created by `createMicrophoneAudioTrack()`.
+   * 要播放的本地音频轨道。通过 [createMicrophoneAudioTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createmicrophoneaudiotrack) 创建。
    */
   readonly track?: MaybePromiseOrNull<ILocalAudioTrack>;
+
   /**
-   * Whether to play the track.
+   * `true`：播放该轨道。`false`：停止播放该轨道。
    */
   readonly play?: boolean;
+
   /**
-   * The volume. The value ranges from 0 (mute) to 1000 (maximum). A value of 100 is the current volume.
+   * 音量大小。取值范围 [0, 1000]，0 代表静音，100 代表原始音量。100 以上会使用 [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) 进行音量增益。
    */
   readonly volume?: number;
+
   /**
-   * Enable or disable the track.
-   *
-   * If a track is disabled, the SDK stops playing and publishing the track.
+   * `true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。`false`：启用该轨道。
    */
   readonly disabled?: boolean;
+
   /**
-   * Sends or stops sending the media data of the track.
-   *
-   * - Setting `muted` does not stop capturing audio and takes shorter time to take effect than `disabled`. For details, see [What are the differences between setEnabled and setMuted?](https://docs.agora.io/en/Interactive%20Broadcast/faq/differences_between_setenabled_and_setmuted).
-   * - Do not use `disabled` and `muted` together.
+   * `true`：暂停发送该轨道的媒体数据。`false`：恢复发送该轨道的媒体数据。
    */
   readonly muted?: boolean;
 
+  /**
+   * 需要展示的 React 节点。
+   */
   readonly children?: ReactNode;
 }
 
 /**
- * A component which plays a local audio track.
+ * 该组件用于播放本地音频轨道（不支持指定使用的媒体设备）。
  */
 export function LocalAudioTrack({
   track: maybeTrack,

@@ -30,7 +30,7 @@ jobs:
           pnpm run test
           pnpm run build
 
-      - name: Report Coverage 🟢
+      - name: Report Coverage for agora-rtc-react 🟢
         if: always() # Also generate the report if tests are failing
         uses: davelosert/vitest-coverage-report-action@v1.4.0
         with:

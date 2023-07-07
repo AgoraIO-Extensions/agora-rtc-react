@@ -1,9 +1,9 @@
-import { useSafePromise } from "agora-rtc-react";
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
 
 import { appId, channel, token } from "../constants";
 import { appStore } from "../stores/app.store";
+import { useSafePromise } from "../utils";
 
 import { RoomInfo } from "./RoomInfo";
 import { JoinButton, NewButton, ScheduleButton, ScreenShareButton } from "./buttons";

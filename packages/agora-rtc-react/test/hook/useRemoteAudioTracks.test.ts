@@ -3,8 +3,8 @@ import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import { FakeRTCClient, dispatchRTCEvent } from "fake-agora-rtc";
 import { vi } from "vitest";
 
-import * as clientHook from "../../src/hooks/client";
-import { useRemoteAudioTracks } from "../../src/hooks/index";
+import * as clientHook from "../../src/hooks/useIsConnected";
+import { useRemoteAudioTracks } from "../../src/hooks/useRemoteAudioTracks";
 import { errorMessage } from "../setup/agora";
 import { createWrapper } from "../setup/wrapper";
 

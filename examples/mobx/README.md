@@ -3,6 +3,7 @@
 - MobX for state management.
 - Custom user name and avatar.
 - Create tracks on demand.
+- import React & SDK by CDN.
 
 <https://agoraio-extensions.github.io/agora-rtc-react/mobx/>
 

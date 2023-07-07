@@ -1,6 +1,6 @@
 ### usePublish
 
-用于发布本地轨道的 Hook。本地轨道将在组件准备好时发布，在组件卸载时取消发布。
+用于发布本地轨道。当组件准备好时发布，当组件卸载时取消发布。
 
 #### 参数
 
@@ -12,16 +12,20 @@
 
 #### 返回值
 
-无。
+返回一个包含以下属性的对象：
+| 属性 | 类型 | 描述 |
+| ----------------------| ---------------------- | ------------------------ |
+| `isLoading` | `boolean` |<li>`true`：正在执行发布相关操作。</li><li>`false`：已经执行发布相关操作，但不代表成功发布。</li> |
+| `error` | `AgoraRtcReactError` &VerticalLine; `null` | 发布成功则返回 `null`，发布失败则抛出错误。错误详见 [AgoraRtcReactError](./interfaces#agorartcreacterror)。 |
 
 #### 使用示例
 
 ```jsx
-import { useLocalAudioTrack, useLocalCameraTrack, usePublish } from "agora-rtc-react";
+import { useLocalMicrophoneTrack, useLocalCameraTrack, usePublish } from "agora-rtc-react";
 
 function App() {
   //get audioTrack and videoTrack before publish
-  const audioTrack = useLocalAudioTrack();
+  const audioTrack = useLocalMicrophoneTrack();
   const videoTrack = useLocalCameraTrack();
   usePublish([audioTrack, videoTrack]);
 

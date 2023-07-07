@@ -2,24 +2,25 @@ import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import type { HTMLProps } from "react";
 import { useState } from "react";
 
-import type { Nullable } from "../utils";
+import { VideoTrackStyle, useMergedStyle } from "../assets/styles";
+import type { Nullable } from "../misc/utils";
 
 import { useAutoPlayVideoTrack } from "./TrackBoundary";
-import { VideoTrackStyle, useMergedStyle } from "./styles";
 
 export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**
-   * A remote video track.
+   * 远端视频轨道对象。详见 [IRemoteVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iremotevideotrack.html)。
    */
   readonly track?: Nullable<IRemoteVideoTrack>;
+
   /**
-   * Whether to play the track.
+   * `true`：播放该轨道。`false`：停止播放该轨道。
    */
   readonly play?: boolean;
 }
 
 /**
- * A component which renders a remote video track.
+ * 该组件用于播放远端用户的视频轨道，并且不支持指定播放设备。
  */
 export function RemoteVideoTrack({ track, play, style, ...props }: RemoteVideoTrackProps) {
   const mergedStyle = useMergedStyle(VideoTrackStyle, style);

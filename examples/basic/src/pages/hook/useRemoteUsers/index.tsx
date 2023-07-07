@@ -1,5 +1,4 @@
 import {
-  LocalMicrophoneAndCameraUser,
   RemoteUser,
   useCurrentUID,
   useIsConnected,
@@ -9,6 +8,7 @@ import {
   usePublish,
   useRemoteUsers,
 } from "agora-rtc-react";
+import { LocalMicrophoneAndCameraUser } from "agora-rtc-react-ui";
 import { useMemo, useState } from "react";
 
 import { AutoLayout, Container, Label, MediaControl, UsersInfo } from "../../../components";

@@ -4,9 +4,9 @@ import { FakeLocalAudioTrack } from "fake-agora-rtc";
 import { describe, expect, test, vi } from "vitest";
 
 import { LocalUser } from "../../src/components";
-import * as stories from "../../src/components/LocalUser.stories";
-const { Overview } = composeStories(stories);
 import * as clientHook from "../../src/hooks/tools";
+import * as stories from "../../src/stories/LocalUser.stories";
+const { Overview } = composeStories(stories);
 
 describe("LocalUser component", () => {
   test("renders without crashing", () => {

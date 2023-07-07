@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 
-import { FloatBoxStyle } from "./styles";
+import { FloatBoxStyle } from "../assets/styles";
 
 const CoverBlurStyle: CSSProperties = {
   width: "100%",

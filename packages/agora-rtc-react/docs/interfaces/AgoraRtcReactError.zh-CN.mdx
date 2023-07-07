@@ -1,0 +1,35 @@
+### AgoraRtcReactError
+
+抛出的错误。
+
+```typescript
+export class AgoraRtcReactError extends Error {
+  public readonly rtcMethod: string;
+  public readonly rtcError: AgoraRTCError | string;
+  public override readonly name: string = "AgoraRTCReactException";
+
+  public constructor(rtcMethod: string, rtcError: AgoraRTCError | string) {
+    if (typeof rtcError === "string") {
+      super(rtcError);
+    } else {
+      super(rtcError.message);
+    }
+    this.rtcMethod = rtcMethod;
+    this.rtcError = rtcError;
+  }
+
+  public print(type: printType) {
+    if (typeof this.rtcError === "string") {
+      console[type](this.rtcError);
+    } else {
+      console[type](this.rtcError.message);
+    }
+  }
+}
+```
+
+| 属性        | 类型                                    | 是否必选 | 描述                       |
+| ----------- | --------------------------------------- | -------- | -------------------------- |
+| `rtcMethod` | `string`                                | 必选     | 报错的 JavaScript 方法。   |
+| `rtcError`  | `AgoraRTCError` &VerticalLine; `string` | 必选     | web 的 class AgoraRTCError |
+| `name`      | `AgoraRTCError` &VerticalLine; `string` | 必选     |                            |

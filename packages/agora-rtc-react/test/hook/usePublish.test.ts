@@ -2,8 +2,8 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { FakeCameraVideoTrack, FakeMicrophoneAudioTrack, FakeRTCClient } from "fake-agora-rtc";
 import { expect, vi } from "vitest";
 
-import * as clientHook from "../../src/hooks/client";
-import { usePublish } from "../../src/hooks/index";
+import * as clientHook from "../../src/hooks/useIsConnected";
+import { usePublish } from "../../src/hooks/usePublish";
 import { errorMessage } from "../setup/agora";
 import { createWrapper } from "../setup/wrapper";
 

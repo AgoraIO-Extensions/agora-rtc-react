@@ -23,26 +23,15 @@
     "guoxianzhe"
   ],
   "sideEffects": false,
-  "main": "src/index.ts",
-  "publishConfig": {
-    "main": "dist/agora-rtc-react.js",
-    "module": "dist/agora-rtc-react.mjs",
-    "types": "dist/agora-rtc-react.d.ts"
-  },
   "source": "src/index.ts",
   "files": [
-    "src",
     "dist",
-    "!src/stories",
-    "!src/**/*.stories.*",
-    "!src/vite-env.d.ts",
-    "!dist/*.v_*.js"
+    "LICENSE"
   ],
   "engines": {
     "node": ">=10"
   },
   "scripts": {
-    "prepublishOnly": "pnpm run build",
     "build": "tsup",
     "release": "release-it",
     "start": "pnpm run -F example-overview start",
@@ -52,14 +41,16 @@
     "build-storybook-docs": "storybook build --docs",
     "test": "vitest run --coverage",
     "test:watch": "vitest --ui",
-    "gene-stories": "esbuild-dev ../../scripts/generate-storybook-mdx.ts",
-    "gene-md": "esbuild-dev ../../scripts/generate-docs.ts",
-    "gene-docs": "pnpm run gene-md && pnpm run gene-stories"
+    "gene-stories": "esbuild-dev ../../scripts/docs/generate-storybook-mdx.ts",
+    "gene-md": "esbuild-dev ../../scripts/docs/generate-docs.ts",
+    "gene-comment": "esbuild-dev ../../scripts/docs/api.ts && esbuild-dev ../../scripts/docs/component.ts && esbuild-dev ../../scripts/docs/interface.ts",
+    "gene-docs": "pnpm run gene-md && pnpm run gene-stories && pnpm run gene-comment"
   },
   "peerDependencies": {
-    "agora-rtc-sdk-ng": ">=4.18.0",
+    "agora-rtc-sdk-ng": ">=4.18.1",
     "react": ">=16.8"
   },
+  "main": "src/index.ts",
   "devDependencies": {
     "@ngneat/falso": "^6.4.0",
     "@storybook/addon-actions": "7.0.0-beta.43",
@@ -80,7 +71,7 @@
     "@vitest/coverage-c8": "^0.29.2",
     "@vitest/ui": "^0.30.1",
     "agora-rtc-react-ui": "workspace:*",
-    "agora-rtc-sdk-ng": "4.18.0",
+    "agora-rtc-sdk-ng": "4.18.1",
     "fake-agora-rtc": "workspace:*",
     "jsdom": "^21.1.0",
     "react": "^18.2.0",
@@ -99,7 +90,36 @@
       "tagName": "v${version}"
     },
     "npm": {
-      "publish": true
+      "publish": true,
+      "allowSameVersion": true
+    },
+    "github": {
+      "release": true
+    },
+    "hooks": {
+      "before:npm:release": "pnpm esbuild-dev ../../scripts/release/clean.ts source:./package.json @./package.json && pnpm eslint --fix package.json && cp ../../LICENSE . && pnpm tsup"
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": {
+          "name": "conventionalcommits",
+          "types": [
+            {
+              "type": "feat",
+              "section": "Features"
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes"
+            },
+            {
+              "type": "docs",
+              "section": "Documentation"
+            }
+          ]
+        },
+        "infile": ""
+      }
     }
   }
 }

@@ -1,0 +1,41 @@
+.github-corner {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+.github-corner:hover .github-corner-svg-arm {
+  animation: github-corner-svg-wave 560ms ease-in-out;
+}
+.github-corner-svg {
+  fill: #151513;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  border: 0;
+  right: 0;
+  &-arm {
+    transform-origin: 130px 106px;
+  }
+}
+@keyframes github-corner-svg-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  60% {
+    transform: rotate(-25deg);
+  }
+  40%,
+  80% {
+    transform: rotate(10deg);
+  }
+}
+@media (max-width: 500px) {
+  .github-corner:hover .github-corner-svg-arm {
+    animation: none;
+  }
+  .github-corner .github-corner-svg-arm {
+    animation: github-corner-svg-wave 560ms ease-in-out;
+  }
+}

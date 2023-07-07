@@ -1,6 +1,10 @@
 import AgoraRTC from "agora-rtc-sdk-ng";
 
-class AgoraRTCReact {
+interface IAgoraRTCReact {
+  readonly appType: number;
+}
+
+class AgoraRTCReact implements IAgoraRTCReact {
   readonly appType = 1001;
 
   public constructor() {

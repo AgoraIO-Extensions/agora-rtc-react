@@ -1,65 +1,65 @@
+import type { IAgoraRTCError } from "agora-rtc-sdk-ng";
 import { vi } from "vitest";
 
-import type { AgoraRTCError } from "../src";
-import { AgoraRtcReactError } from "../src/error";
+import { AgoraRTCReactError } from "../src/error";
 
-describe("AgoraRtcReactError", () => {
+describe("AgoraRTCReactError", () => {
   it("should create an instance with rtcMethod and rtcError", () => {
     const rtcMethod = "testMethod";
     const rtcError = "testError";
-    const agoraRtcReactError = new AgoraRtcReactError(rtcMethod, rtcError);
-    expect(agoraRtcReactError).toBeInstanceOf(AgoraRtcReactError);
-    expect(agoraRtcReactError.rtcMethod).toEqual(rtcMethod);
-    expect(agoraRtcReactError.rtcError).toEqual(rtcError);
-    expect(agoraRtcReactError.name).toEqual("AgoraRTCReactException");
+    const agoraRTCReactError = new AgoraRTCReactError(rtcMethod, rtcError);
+    expect(agoraRTCReactError).toBeInstanceOf(AgoraRTCReactError);
+    expect(agoraRTCReactError.rtcMethod).toEqual(rtcMethod);
+    expect(agoraRTCReactError.rtcError).toEqual(rtcError);
+    expect(agoraRTCReactError.name).toEqual("AgoraRTCReactException");
   });
 
-  it("should create an instance with rtcMethod and AgoraRTCError object", () => {
+  it("should create an instance with rtcMethod and IAgoraRTCError object", () => {
     const rtcMethod = "testMethod";
     const rtcError = { errorCode: "testErrorCode", message: "testErrorMessage" };
-    const agoraRtcReactError = new AgoraRtcReactError(
+    const agoraRTCReactError = new AgoraRTCReactError(
       rtcMethod,
-      rtcError as unknown as AgoraRTCError,
+      rtcError as unknown as IAgoraRTCError,
     );
-    expect(agoraRtcReactError).toBeInstanceOf(AgoraRtcReactError);
-    expect(agoraRtcReactError.rtcMethod).toEqual(rtcMethod);
-    expect(agoraRtcReactError.rtcError).toEqual(rtcError);
-    expect(agoraRtcReactError.name).toEqual("AgoraRTCReactException");
+    expect(agoraRTCReactError).toBeInstanceOf(AgoraRTCReactError);
+    expect(agoraRTCReactError.rtcMethod).toEqual(rtcMethod);
+    expect(agoraRTCReactError.rtcError).toEqual(rtcError);
+    expect(agoraRTCReactError.name).toEqual("AgoraRTCReactException");
   });
 
   it("should print the rtcError properly with console.log", () => {
     const rtcMethod = "testMethod";
     const rtcError = "testError";
-    const agoraRtcReactError = new AgoraRtcReactError(rtcMethod, rtcError);
+    const agoraRTCReactError = new AgoraRTCReactError(rtcMethod, rtcError);
     console.log = vi.fn();
-    agoraRtcReactError.print("log");
-    expect(console.log).toHaveBeenCalledWith(rtcError);
+    agoraRTCReactError.log("log");
+    expect(console.log).toHaveBeenCalledWith(agoraRTCReactError);
   });
 
   it("should print the rtcError properly with console.warn", () => {
     const rtcMethod = "testMethod";
     const rtcError = "testError";
-    const agoraRtcReactError = new AgoraRtcReactError(rtcMethod, rtcError);
+    const agoraRTCReactError = new AgoraRTCReactError(rtcMethod, rtcError);
     console.warn = vi.fn();
-    agoraRtcReactError.print("warn");
-    expect(console.warn).toHaveBeenCalledWith(rtcError);
+    agoraRTCReactError.log("warn");
+    expect(console.warn).toHaveBeenCalledWith(agoraRTCReactError);
   });
 
   it("should print the rtcError properly with console.error", () => {
     const rtcMethod = "testMethod";
     const rtcError = "testError";
-    const agoraRtcReactError = new AgoraRtcReactError(rtcMethod, rtcError);
+    const agoraRTCReactError = new AgoraRTCReactError(rtcMethod, rtcError);
     console.error = vi.fn();
-    agoraRtcReactError.print("error");
-    expect(console.error).toHaveBeenCalledWith(rtcError);
+    agoraRTCReactError.log("error");
+    expect(console.error).toHaveBeenCalledWith(agoraRTCReactError);
   });
 
   it("should print the rtcError properly with console.info", () => {
     const rtcMethod = "testMethod";
     const rtcError = "testError";
-    const agoraRtcReactError = new AgoraRtcReactError(rtcMethod, rtcError);
+    const agoraRTCReactError = new AgoraRTCReactError(rtcMethod, rtcError);
     console.info = vi.fn();
-    agoraRtcReactError.print("info");
-    expect(console.info).toHaveBeenCalledWith(rtcError);
+    agoraRTCReactError.log("info");
+    expect(console.info).toHaveBeenCalledWith(agoraRTCReactError);
   });
 });

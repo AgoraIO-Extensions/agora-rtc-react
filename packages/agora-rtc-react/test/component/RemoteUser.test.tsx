@@ -6,10 +6,10 @@ import { FakeRTCClient } from "fake-agora-rtc";
 import { describe, expect, test, vi } from "vitest";
 
 import { RemoteUser } from "../../src/components";
-import * as stories from "../../src/components/RemoteUser.stories";
 import { AgoraRTCProvider } from "../../src/hooks";
+import * as clientHook from "../../src/hooks";
+import * as stories from "../../src/stories/RemoteUser.stories";
 const { Overview, WithCover, WithControls } = composeStories(stories);
-import * as clientHook from "../../src/hooks/client";
 
 const mockAudioTrack: IRemoteAudioTrack = {
   setVolume: vi.fn(),

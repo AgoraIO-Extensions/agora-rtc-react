@@ -24,6 +24,7 @@ export const LocalVideoTrackComponent = () => {
       <div className="h-screen p-3">
         <Title>local video track</Title>
         <LocalVideoTrack
+          disabled={!cameraOn}
           play={cameraOn}
           style={{ width: "300px", height: "300px" }}
           track={localCameraTrack}

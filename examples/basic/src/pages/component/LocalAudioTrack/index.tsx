@@ -45,7 +45,7 @@ export const LocalAudioTrackComponent = () => {
             <Paragraph>{`enabled: ${audioTrackState?.enabled}`}</Paragraph>
           </>
         )}
-        <LocalAudioTrack play={micOn} track={localMicrophoneTrack} />
+        <LocalAudioTrack disabled={!micOn} track={localMicrophoneTrack} />
       </div>
       <MediaControl
         micOn={micOn}

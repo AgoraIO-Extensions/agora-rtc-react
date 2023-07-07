@@ -5,11 +5,11 @@ import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 
 import { LocalAudioTrack, useAutoPlayAudioTrack } from "../../src/components";
-import * as stories from "../../src/components/LocalAudioTrack.stories";
+import { useAwaited } from "../../src/hooks/tools";
+import * as stories from "../../src/stories/LocalAudioTrack.stories";
 const { Enabled } = composeStories(stories);
-import { useAwaited } from "../../src/hooks";
 
-vi.mock("../../src/hooks", () => ({
+vi.mock("../../src/hooks/tools", () => ({
   useAwaited: vi.fn(),
 }));
 vi.mock("../../src/components/TrackBoundary", () => ({
