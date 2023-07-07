@@ -8,7 +8,7 @@ import { joinDisposers } from "../misc/utils";
 /**
  * 用于获取远端用户列表。
  *
- * @param `client` {IAgoraRTCClient | null} [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。
+ * @param `client` {IAgoraRTCClient | null} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
  * @return IAgoraRTCRemoteUser[] 远端用户列表。
  */
 export function useRemoteUsers(client?: IAgoraRTCClient | null): IAgoraRTCRemoteUser[] {

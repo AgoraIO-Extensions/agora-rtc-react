@@ -19,10 +19,10 @@ import { useIsConnected } from "./useIsConnected";
  * 用于自动订阅和获取远端用户视频轨道。
  *
  * @param `users` {IAgoraRTCRemoteUser[] | undefined} 远端用户列表。
- * @param `client` {IAgoraRTCClient | null} [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。
+ * @param `client` {IAgoraRTCClient | null} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
  * @return videoTracks IRemoteVideoTrack[]
  * @return isLoading boolean
- * @return error AgoraRtcReactError | null
+ * @return error AgoraRTCReactError | null
  */
 export function useRemoteVideoTracks(
   users: IAgoraRTCRemoteUser[] | undefined,

@@ -11,10 +11,10 @@ import { useIsConnected } from "./useIsConnected";
  * 用于创建本地摄像头视频轨道。
  *
  * @param `ready` {boolean} 是否准备好创建轨道，默认为 `true`。
- * @param `client` {IAgoraRTCClient} [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。
+ * @param `client` {IAgoraRTCClient} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
  * @return localCameraTrack ICameraVideoTrack | null
  * @return isLoading boolean
- * @return error AgoraRtcReactError | null
+ * @return error AgoraRTCReactError | null
  */
 export function useLocalCameraTrack(
   ready = true,
