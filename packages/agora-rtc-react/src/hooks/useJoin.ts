@@ -9,11 +9,15 @@ import { useAsyncEffect, useIsUnmounted } from "./tools";
 import { useIsConnected } from "./useIsConnected";
 
 /**
- * a hook to join rtc channel
- * unmount will leave channel and close all tracks
- * @param fetchArgs
- * @param ready
- * @param client
+ * 用于加入频道。当组件准备好时加入频道，当组件卸载时自动离开频道。
+ *
+ * @param `fetchArgs` {joinOptions | (() => Promise<joinOptions>)} 加入频道所需参数或异步函数。详见 [joinOptions](./interfaces#joinoptions)。
+ * @param `ready` {boolean} 是否准备好加入频道。默认为 `true`。
+ * @param `client` {IAgoraRTCClient} [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。
+ * @return data UID
+ * @return isLoading boolean
+ * @return isConnected boolean
+ * @return error AgoraRtcReactError | null
  */
 export function useJoin(
   fetchArgs: FetchArgs,

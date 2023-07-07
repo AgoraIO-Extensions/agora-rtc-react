@@ -10,42 +10,43 @@ import { UserCover } from "./UserCover";
 
 export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
   /**
-   * A remote user
+   * 远端用户对象。详见 [IAgoraRTCRemoteUser](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcremoteuser.html)。
    */
   readonly user?: IAgoraRTCRemoteUser;
+
   /**
-   * Whether to play the remote user's video track. Default follows `user.hasVideo`.
+   * `true`：播放远端用户的视频轨道。`false`：停止播放远端用户的视频轨道。
    */
   readonly playVideo?: boolean;
+
   /**
-   * Whether to play the remote user's audio track. Default follows `user.hasAudio`.
+   * `true`：播放远端用户的音频轨道。`false`：停止播放远端用户的音频轨道。
    */
   readonly playAudio?: boolean;
+
   /**
-   * Device ID, which can be retrieved by calling `getPlaybackDevices`.
-   *
-   * Changes of the ID will invoke `setPlaybackDevice` which sets the audio playback device, for example, the speaker.
-   *
-   * > `setPlaybackDevice` supports Chrome on desktop devices only. Other browsers throw a `NOT_SUPPORTED` error when calling the method.
+   * 要使用的播放设备 ID，例如扬声器。设备 ID 通过 [getPlaybackDevices](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getplaybackdevices) 获取。该属性仅支持桌面端的 Chrome 浏览器，在其它浏览器上修改该属性的值将会抛出 `NOT_SUPPORTED` 错误。
    */
   readonly playbackDeviceId?: string;
+
   /**
-   * The volume. The value ranges from 0 (mute) to 1000 (maximum). A value of 100 is the current volume.
+   * 音量大小。取值范围 [0, 100]，0 代表静音，100 代表原始音量。
    */
   readonly volume?: number;
+
   /**
-   * Render cover image if playVideo is off.
+   * 当 `playVideo` 为 `false`时要渲染的封面图片或自定义组件，用于替代视频画面显示。
    */
   readonly cover?: string | (() => ReactNode);
+
   /**
-   * Children is rendered on top of the video canvas.
+   * 需要展示的 React 节点。
    */
   readonly children?: ReactNode;
 }
 
 /**
- * Subscribe and play remote user video and audio track.
- * An `IAgoraRTCRemoteUser` can only be own by one `RemoteUser`.
+ * 该组件用于播放远端用户的视频和音频轨道，并且仅支持指定使用的音频设备、不支持指定使用的视频设备。
  */
 export function RemoteUser({
   user,

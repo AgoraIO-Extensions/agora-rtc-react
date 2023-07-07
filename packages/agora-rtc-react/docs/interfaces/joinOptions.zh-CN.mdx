@@ -1,9 +1,9 @@
-### JoinOptions
+### joinOptions
 
 加入频道所需参数。
 
 ```typescript
-export interface JoinOptions {
+export interface joinOptions {
   appid: string;
   channel: string;
   token: string | null;
@@ -11,7 +11,7 @@ export interface JoinOptions {
 }
 ```
 
-| 参数名    | 类型                           | 是否必选 | 描述                                                                                                                                                                                                                                                                |
+| 属性      | 类型                           | 是否必选 | 描述                                                                                                                                                                                                                                                                |
 | --------- | ------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `appid`   | `string`                       | 必选     | 声网项目的 App ID。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。                                                                                               |
 | `channel` | `string`                       | 必选     | 要加入的频道名称。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。                                                                                                |

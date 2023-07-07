@@ -10,30 +10,28 @@ import { useAutoPlayVideoTrack } from "./TrackBoundary";
 
 export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**
-   * A local video track which can be created by `createCameraVideoTrack()` or `createScreenVideoTrack()`.
+   * 要播放的本地视频轨道。通过 [createScreenVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createcameravideotrack">createCameraVideoTrack</a> 或 <a href="https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack) 创建。
    */
   readonly track?: MaybePromiseOrNull<ILocalVideoTrack>;
+
   /**
-   * Whether to play the track.
+   * `true`：播放该轨道。`false`：停止播放该轨道。
    */
   readonly play?: boolean;
+
   /**
-   * Enable or disable the track.
-   *
-   * If a track is disabled, the SDK stops playing and publishing the track.
+   * `true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。`false`：启用该轨道。
    */
   readonly disabled?: boolean;
+
   /**
-   * Sends or stops sending the media data of the track.
-   *
-   * - Setting `muted` does not stop capturing video and takes shorter time to take effect than `disabled`. For details, see [What are the differences between setEnabled and setMuted?](https://docs.agora.io/en/Interactive%20Broadcast/faq/differences_between_setenabled_and_setmuted).
-   * - Do not use `disabled` and `muted` together.
+   * `true`：暂停发送该轨道的媒体数据。`false`：恢复发送该轨道的媒体数据。
    */
   readonly muted?: boolean;
 }
 
 /**
- * A component which renders a local video track.
+ * 该组件用于播放本地视频轨道（不支持指定使用的媒体设备）。
  */
 export function LocalVideoTrack({
   track: maybeTrack,

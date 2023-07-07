@@ -12,9 +12,10 @@ const initQuality = (): NetworkQuality => ({
 });
 
 /**
- * Reports the network quality of the local user.
+ * 用于获取本地用户网络质量。
  *
- * After the local user joins the channel, the SDK triggers this callback to report the uplink and downlink network conditions of the local user once every two second.
+ * @param `client` {IAgoraRTCClient | null} [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。
+ * @return NetworkQuality 本地用户的网络质量信息。详见 NetworkQuality。
  */
 export function useNetworkQuality(client?: IAgoraRTCClient | null): NetworkQuality {
   const resolvedClient = useRTCClient(client);

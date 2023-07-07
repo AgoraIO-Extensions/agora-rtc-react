@@ -13,9 +13,14 @@ import { useAsyncEffect, useIsUnmounted } from "./tools";
 import { useIsConnected } from "./useIsConnected";
 
 /**
- * a hook can create a local audio track, this track will only be created once until Component is destroyed.
- * when you ready to create track, set ready to true.
- * close track on unmount.
+ * 用于创建本地麦克风音频轨道。
+ *
+ * @param `ready` {boolean} 是否准备好创建轨道，默认为 `true`。
+ * @param `audioTrackConfig` {MicrophoneAudioTrackInitConfig} 麦克风音频轨道的初始化配置，默认为 `{ ANS: true, AEC: true }`。详见 [MicrophoneAudioTrackInitConfig](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/microphoneaudiotrackinitconfig.html)。
+ * @param `client` {IAgoraRTCClient} [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。
+ * @return localMicrophoneTrack IMicrophoneAudioTrack | null
+ * @return isLoading boolean
+ * @return error AgoraRtcReactError | null
  */
 export function useLocalMicrophoneTrack(
   ready = true,

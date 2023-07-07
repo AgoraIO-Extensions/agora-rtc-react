@@ -6,26 +6,10 @@ import { listen } from "../misc/listen";
 import { joinDisposers } from "../misc/utils";
 
 /**
- * Occurs when a remote user becomes online or offline. (client `user-join`, `user-left`, `user-published` and `user-unpublished` events)
+ * 用于获取远端用户列表。
  *
- * Updated when one of the following situations occurs:
- * - In a communication channel:
- *   - A remote user joins or leaves the channel.
- *   - A remote user published or unpublished the channel.
- *   - A remote user has dropped offline or rejoins the channel after a network interruption.
- * - In a live-broadcast channel:
- *   - A remote host joins or leaves the channel.
- *   - A remote host published or unpublished the channel.
- *   - A remote host has dropped offline or rejoins the channel after a network interruption.
- *   - A remote host/user switches the client role between host and audience.
- *
- * ```jsx
- * const remoteUsers = useRemoteUsers(client)
- * const publishedUsers = remoteUsers.filter(user => user.hasAudio || user.hasVideo);
- * return remoteUsers.map(user => (
- *   <li key={user.uid}>{getUserName(user.uid)}</li>
- * ))
- * ```
+ * @param `client` {IAgoraRTCClient | null} [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。
+ * @return IAgoraRTCRemoteUser[] 远端用户列表。
  */
 export function useRemoteUsers(client?: IAgoraRTCClient | null): IAgoraRTCRemoteUser[] {
   const resolvedClient = useRTCClient(client);

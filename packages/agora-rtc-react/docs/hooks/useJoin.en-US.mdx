@@ -1,18 +1,26 @@
 ### useJoin
 
-用于加入频道和管理本地音视频轨道的 Hook。支持在加入频道前执行异步操作,如获取 token 等。
+用于加入频道。当组件准备好时加入频道，当组件卸载时自动离开频道。
+
+你可以通过 `fetchArgs` 自定义加入频道所需的条件，例如在加入频道前执行获取 Token 等异步操作。
 
 #### 参数
 
-| 参数名      | 类型                                            | 是否必选 | 描述                                                                                                                                          |
-| ----------- | ----------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fetchArgs` | `FetchArgs` &VerticalLine; `() => Promise<any>` | 必选     | 获取加入频道所需参数的函数或对象。                                                                                                            |
-| `ready`     | `boolean`                                       | 可选     | 是否准备好加入频道。默认为 `true`。                                                                                                           |
-| `client`    | `IAgoraRTCClient`                               | 可选     | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
+| 参数名      | 类型                                                        | 是否必选 | 描述                                                                                                                                          |
+| ----------- | ----------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fetchArgs` | `joinOptions` &VerticalLine; `(() => Promise<joinOptions>)` | 必选     | 加入频道所需参数或异步函数。详见 [joinOptions](./interfaces#joinoptions)。                                                                    |
+| `ready`     | `boolean`                                                   | 可选     | 是否准备好加入频道。默认为 `true`。                                                                                                           |
+| `client`    | `IAgoraRTCClient`                                           | 可选     | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
 
 #### 返回值
 
-无。
+返回一个包含以下属性的对象：
+| 属性 | 类型 | 描述 |
+| ----------------------| ---------------------- | ------------------------ |
+| `data` | `UID` | 成功加入频道的用户 ID。如果你在传入 `  fetchArgs` 时没有指定 `uid`，则返回默认值 `0`。|
+| `isLoading` | `boolean` |<li>`true`：正在执行加入频道相关操作。</li><li>`false`：已经执行加入频道相关操作，但不代表成功加入频道。</li> |
+| `isConnected` | `boolean` | <li>`true`：客户端已连接到服务器。即加入频道成功。</li><li>`false`：客户端没有连接到服务器。</li> |
+| `error` | `AgoraRtcReactError` &VerticalLine; `null` | 加入频道成功则返回 `null`，加入频道失败则抛出错误。错误详见 [AgoraRtcReactError](./interfaces#agorartcreacterror)。 |
 
 #### 使用示例
 
@@ -22,7 +30,7 @@ import { useJoin } from "agora-rtc-react";
 function App() {
   // you can use useJoin like this by passing a function as first argument.
   // useJoin(async () => {
-  //   //you can do some actions like fetching token before calling join.
+  //   you can do some actions like fetching token before calling join.
   //   const getData = await getToken();
   //   return getData;  The data type of getData must be fetchArgs
   // }, calling);

@@ -8,9 +8,13 @@ import { useAsyncEffect, useIsUnmounted } from "./tools";
 import { useIsConnected } from "./useIsConnected";
 
 /**
- * a hook can create a local video track, this track will only be created once until Component is destroyed.
- * when you ready to create track, set ready to true.
- * unpublish track on unmount.
+ * 用于创建本地摄像头视频轨道。
+ *
+ * @param `ready` {boolean} 是否准备好创建轨道，默认为 `true`。
+ * @param `client` {IAgoraRTCClient} [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。
+ * @return localCameraTrack ICameraVideoTrack | null
+ * @return isLoading boolean
+ * @return error AgoraRtcReactError | null
  */
 export function useLocalCameraTrack(
   ready = true,

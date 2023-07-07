@@ -16,18 +16,21 @@ import { createAsyncTaskRunner, joinDisposers } from "../misc/utils";
 import { useIsConnected } from "./useIsConnected";
 
 /**
- * Auto-subscribe and get remote user video track.
- * Unsubscribe track on unmount.
+ * 用于获取远端用户音视频轨道。
+ *
+ * @param `user` {IAgoraRTCRemoteUser | undefined} 远端用户对象。
+ * @param `mediaType` {"video" | "audio"} 媒体类型，支持 `"video"` 和 `"audio"`。
+ * @param `client` {IAgoraRTCClient | null} [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。
+ * @return track IRemoteVideoTrack | IRemoteAudioTrack | undefined
+ * @return isLoading boolean
+ * @return error AgoraRtcReactError | null
  */
 export function useRemoteUserTrack(
   user: IAgoraRTCRemoteUser | undefined,
   mediaType: "video",
   client?: IAgoraRTCClient | null,
 ): { track: IRemoteVideoTrack | undefined; isLoading: boolean; error: AgoraRTCReactError | null };
-/**
- * Auto-subscribe and get remote user audio track.
- * Unsubscribe track on unmount.
- */
+
 export function useRemoteUserTrack(
   user: IAgoraRTCRemoteUser | undefined,
   mediaType: "audio",
