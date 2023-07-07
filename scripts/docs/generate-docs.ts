@@ -16,7 +16,8 @@ for (let j = 0; j < docType.length; j++) {
         let title = "";
         for (let i = 0; i < lines.length; i++) {
           const line = lines[i];
-          if (line.startsWith("## ")) {
+          const pattern = "## ";
+          if (line.startsWith(pattern)) {
             if (content && title) {
               writeFile(
                 title,
@@ -25,7 +26,7 @@ for (let j = 0; j < docType.length; j++) {
               );
             }
             content = "";
-            title = line.slice(4).trim();
+            title = line.slice(pattern.length).trim();
           } else {
             content += line + "\n";
           }
