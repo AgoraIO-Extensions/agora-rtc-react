@@ -3,7 +3,7 @@ import fs from "node:fs";
 import jsdom from "jsdom";
 import MarkdownIt from "markdown-it";
 
-import { docsPath, interfacesPathList, languagesFormat, packagePath } from "../const";
+import { dataTypesPathList, docsPath, languagesFormat, packagePath } from "../const";
 
 import { readDirRecursively, tableToJson } from "./utils";
 
@@ -12,7 +12,7 @@ const md = new MarkdownIt();
 async function writeComment(markdownPath: string) {
   const markdown = fs.readFileSync(markdownPath, "utf-8");
   const result = md.render(markdown, "utf-8");
-  const dom: HTMLElement = new jsdom.JSDOM(result).window.document;
+  const dom: Document = new jsdom.JSDOM(result).window.document;
 
   const target = dom.querySelector("h3")?.innerHTML.replace(/<code>(.*?)<\/code>/g, "$1");
   const targetDescription = dom
@@ -20,7 +20,7 @@ async function writeComment(markdownPath: string) {
     ?.innerHTML.replace(/<code>(.*?)<\/code>/g, "$1");
   const targetRequireParameterList = tableToJson(dom.querySelectorAll("table")[0]);
 
-  interfacesPathList.forEach(key => {
+  dataTypesPathList.forEach(key => {
     let content = fs.readFileSync(key, "utf-8");
 
     if (content.includes(`export interface ${target}`)) {
@@ -77,12 +77,12 @@ async function cleanComment(filePath) {
   fs.writeFileSync(filePath, content);
 }
 
-//interfaces clean
+//data-types clean
 await cleanComment(`${packagePath}/src/types.ts`);
 await cleanComment(`${packagePath}/src/error.ts`);
 await cleanComment(`${packagePath}/src/rtc.ts`);
-//interfaces inject
-await readDirRecursively(`${docsPath}/interfaces`, async (filePath: string) => {
+//data-types inject
+await readDirRecursively(`${docsPath}/data-types`, async (filePath: string) => {
   if (filePath.includes(languagesFormat[1])) {
     await writeComment(filePath);
   }
