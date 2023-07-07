@@ -10,45 +10,53 @@ import { UserCover } from "./UserCover";
 
 export interface LocalUserProps extends HTMLProps<HTMLDivElement> {
   /**
-   * Whether to turn on the local user's microphone. Default false.
+   * `true`：打开本地用户的麦克风。`false`：关闭本地用户的麦克风。
    */
   readonly micOn?: boolean;
+
   /**
-   * Whether to turn on the local user's camera. Default false.
+   * `true`：打开本地用户的摄像头。`false`：关闭本地用户的摄像头。
    */
   readonly cameraOn?: boolean;
+
   /**
-   * A microphone audio track which can be created by `createMicrophoneAudioTrack()`.
+   * 要播放的麦克风音频轨道。通过 [createMicrophoneAudioTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createmicrophoneaudiotrack) 创建。
    */
   readonly audioTrack?: MaybePromiseOrNull<ILocalAudioTrack>;
+
   /**
-   * A camera video track which can be created by `createCameraVideoTrack()`.
+   * 要播放的摄像头视频轨道。通过 [createCameraVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createcameravideotrack) 创建。
    */
   readonly videoTrack?: MaybePromiseOrNull<ILocalVideoTrack>;
+
   /**
-   * Whether to play the local user's audio track. Default follows `micOn`.
+   * `true`：播放本地用户的音频轨道。`false`：停止播放本地用户的音频轨道。
    */
   readonly playAudio?: boolean;
+
   /**
-   * Whether to play the local user's video track. Default follows `cameraOn`.
+   * `true`：播放本地用户的视频轨道。`false`：停止播放本地用户的视频轨道。
    */
   readonly playVideo?: boolean;
+
   /**
-   * The volume. The value ranges from 0 (mute) to 1000 (maximum). A value of 100 is the current volume.
+   * 音量大小。取值范围 [0, 1000]，0 代表静音，100 代表原始音量。100 以上会使用 [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) 进行音量增益。
    */
   readonly volume?: number;
+
   /**
-   * Render cover image if playVideo is off.
+   * 当 `playVideo` 为 `false`时要渲染的封面图片，用于替代视频画面显示。
    */
   readonly cover?: string;
+
   /**
-   * Children is rendered on top of the video canvas.
+   * 需要展示的 React 节点。
    */
   readonly children?: ReactNode;
 }
 
 /**
- * Play/Stop local user camera and microphone track.
+ * 该组件用于播放本地用户的摄像头视频轨道和麦克风音频轨道（不支持指定使用的媒体设备）。
  */
 export function LocalUser({
   micOn,

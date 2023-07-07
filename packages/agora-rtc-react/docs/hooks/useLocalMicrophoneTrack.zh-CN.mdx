@@ -1,9 +1,9 @@
-### useLocalAudioTrack
+### useLocalMicrophoneTrack
 
-用于创建本地麦克风音频轨道的 Hook。
+用于创建本地麦克风音频轨道。
 
 - 在组件被销毁之前，该 Hook 只会创建一次音频轨道。
-- 组件卸载后，创建的轨道会停止发布。
+- 组件卸载后，该 Hook 创建的音频轨道会停止发布。
 
 #### 参数
 
@@ -15,17 +15,20 @@
 
 #### 返回值
 
-| 类型                                          | 描述                     |
-| --------------------------------------------- | ------------------------ |
-| `IMicrophoneAudioTrack` &VerticalLine; `null` | 本地麦克风音频轨道对象。 |
+返回一个包含以下属性的对象：
+| 属性 | 类型 | 描述 |
+| ----------------------| ---------------------- | ------------------------ |
+| `localMicrophoneTrack` | `IMicrophoneAudioTrack` &VerticalLine; `null` | 创建的本地麦克风音频轨道对象。 |
+| `isLoading` | `boolean` |<li>`true`：正在执行创建轨道相关操作。</li><li>`false`：已经执行创建轨道相关操作，但不代表成功创建轨道。</li> |
+| `error` | `AgoraRtcReactError` &VerticalLine; `null` | 创建轨道成功则返回 `null`，创建轨道失败则抛出错误。错误详见 [AgoraRtcReactError](./interfaces#agorartcreacterror)。 |
 
 #### 使用示例
 
 ```jsx
-import { useLocalAudioTrack } from "agora-rtc-react";
+import { useLocalMicrophoneTrack } from "agora-rtc-react";
 
 function App() {
-  const audioTrack = useLocalAudioTrack(true, { ANS: true, AEC: true });
+  const audioTrack = useLocalMicrophoneTrack(true, { ANS: true, AEC: true });
 
   return <></>;
 }

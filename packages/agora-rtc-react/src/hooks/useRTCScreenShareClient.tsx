@@ -20,10 +20,6 @@ export function AgoraRTCScreenShareProvider({
   );
 }
 
-/**
- * Get a screen share client from context.
- * @param client If a client is provided, it will be used instead.
- */
 export function useRTCScreenShareClient(client?: IAgoraRTCClient | null): IAgoraRTCClient | null {
   const clientFromContext = useContext(AgoraRTCScreenShareContext);
   return client || clientFromContext;

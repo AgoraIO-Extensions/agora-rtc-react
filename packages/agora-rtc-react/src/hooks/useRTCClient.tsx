@@ -17,8 +17,10 @@ function useOptionalRTCClient(client?: IAgoraRTCClient | null): IAgoraRTCClient 
 }
 
 /**
- * Get a Agora RTC client from context. Throws error if client not found.
- * @param client If a client is provided, it will be used instead.
+ * 用于获取 IAgoraRTCClient 对象。
+ *
+ * @param `client` {IAgoraRTCClient | null} 如果传入该参数，则使用传入的 `IAgoraRTCClient` 对象；如果不传入该参数，则使用从[父组件的 Context](./components#agorartcprovider)中获取的 `IAgoraRTCClient` 对象。
+ * @return IAgoraRTCClient IAgoraRTCClient 对象。
  */
 export function useRTCClient(client?: IAgoraRTCClient | null): IAgoraRTCClient {
   const resolvedClient = useOptionalRTCClient(client);

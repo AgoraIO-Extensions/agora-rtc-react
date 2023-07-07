@@ -16,8 +16,13 @@ import type { massUserProps } from "./types";
 import { useIsConnected } from "./useIsConnected";
 
 /**
- * Auto-subscribe and get remote user video track.
- * Unsubscribe track on unmount.
+ * 用于自动订阅和获取远端用户视频轨道。
+ *
+ * @param `users` {IAgoraRTCRemoteUser[] | undefined} 远端用户列表。
+ * @param `client` {IAgoraRTCClient | null} [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。
+ * @return videoTracks IRemoteVideoTrack[]
+ * @return isLoading boolean
+ * @return error AgoraRtcReactError | null
  */
 export function useRemoteVideoTracks(
   users: IAgoraRTCRemoteUser[] | undefined,

@@ -5,6 +5,12 @@ import { useRTCClient } from "../hooks/useRTCClient";
 import { listen } from "../misc/listen";
 import { joinDisposers, timeout } from "../misc/utils";
 
+/**
+ * 用于获取客户端是否连接到服务器。
+ *
+ * @param `client` {IAgoraRTCClient | null} `IAgoraRTCClient` 对象。
+ * @return boolean <li>true：客户端已连接到服务器。</li><li>false：客户端没有连接到服务器。</li>
+ */
 export function useIsConnected(client?: IAgoraRTCClient | null): boolean {
   const resolvedClient = useRTCClient(client);
 

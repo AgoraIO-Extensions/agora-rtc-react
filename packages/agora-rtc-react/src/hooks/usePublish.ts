@@ -9,8 +9,13 @@ import { compareVersion, useAsyncEffect, useIsUnmounted } from "./tools";
 import { useIsConnected } from "./useIsConnected";
 
 /**
- * publish tacks when readyToPublish is true
- * unpublish on unmount.
+ * 用于发布本地轨道。当组件准备好时发布，当组件卸载时取消发布。
+ *
+ * @param `tracks` {(ILocalTrack | null)[]} 本地轨道列表。
+ * @param `readyToPublish` {boolean} 是否准备好进行发布。默认为 `true`。
+ * @param `client` {IAgoraRTCClient} [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。
+ * @return isLoading boolean
+ * @return error AgoraRtcReactError | null
  */
 export function usePublish(
   tracks: (ILocalTrack | null)[],
