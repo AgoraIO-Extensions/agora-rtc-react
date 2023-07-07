@@ -16,7 +16,7 @@ for (let j = 0; j < docType.length; j++) {
         let title = "";
         for (let i = 0; i < lines.length; i++) {
           const line = lines[i];
-          if (line.startsWith("### ")) {
+          if (line.startsWith("## ")) {
             if (content && title) {
               writeFile(
                 title,
