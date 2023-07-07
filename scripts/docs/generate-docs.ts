@@ -3,6 +3,8 @@ import fs from "node:fs";
 import { docType, docsPath, languages, languagesFormat } from "../const";
 import { emptyDirectory } from "../utils";
 
+const prefix = "## ";
+
 for (let j = 0; j < docType.length; j++) {
   emptyDirectory(`${docsPath}/${docType[j]}`);
   for (let m = 0; m < languages.length; m++) {
@@ -10,14 +12,23 @@ for (let j = 0; j < docType.length; j++) {
       if (err) {
         console.error(err);
       } else {
+        data = data.replace(/<h2[^>]*>([\s\S]*?)<\/h2>/g, match => {
+          return (
+            prefix +
+            match
+              .replace(/\n/g, "")
+              .replace(/<h2[^>]*>([\s\S]*?)<\/h2>/g, "$1")
+              .slice()
+              .trim()
+          );
+        });
         const lines = data.split("\n");
 
         let content = "";
         let title = "";
         for (let i = 0; i < lines.length; i++) {
           const line = lines[i];
-          const pattern = "## ";
-          if (line.startsWith(pattern)) {
+          if (line.startsWith(prefix)) {
             if (content && title) {
               writeFile(
                 title,
@@ -26,7 +37,7 @@ for (let j = 0; j < docType.length; j++) {
               );
             }
             content = "";
-            title = line.slice(pattern.length).trim();
+            title = line.slice(prefix.length).trim();
           } else {
             content += line + "\n";
           }
@@ -40,8 +51,8 @@ for (let j = 0; j < docType.length; j++) {
   }
 }
 const writeFile = (title, content, filePath) => {
-  //add \n after ### title
-  content = "### " + title + "\n" + content;
+  //add \n after ## title
+  content = prefix + title + "\n" + content;
   //remove \n last line
   content = content.slice(0, content.length - 1);
   fs.writeFile(filePath, content, err => {
