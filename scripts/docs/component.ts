@@ -17,9 +17,9 @@ function isTargetFile(filePath: string) {
 async function writeComment(markdownPath: string) {
   const markdown = fs.readFileSync(markdownPath, "utf-8");
   const result = md.render(markdown, "utf-8");
-  const dom: HTMLElement = new jsdom.JSDOM(result).window.document;
+  const dom: Document = new jsdom.JSDOM(result).window.document;
 
-  const target = dom.querySelector("h3")?.innerHTML.replace(/<code>(.*?)<\/code>/g, "$1");
+  const target = dom.querySelector("h2")?.innerHTML.replace(/<code>(.*?)<\/code>/g, "$1");
   const targetDescription = dom
     .querySelectorAll("p")[0]
     ?.innerHTML.replace(/<code>(.*?)<\/code>/g, "$1");

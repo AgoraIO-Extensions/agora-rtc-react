@@ -44,7 +44,7 @@ export default defineConfig([
     },
     outExtension: () => {
       return {
-        js: `.iife.${pkg.version}.js`,
+        js: `.iife.js`,
       };
     },
     format: ["iife"],

@@ -43,7 +43,7 @@
     "test:watch": "vitest --ui",
     "gene-stories": "esbuild-dev ../../scripts/docs/generate-storybook-mdx.ts",
     "gene-md": "esbuild-dev ../../scripts/docs/generate-docs.ts",
-    "gene-comment": "esbuild-dev ../../scripts/docs/api.ts && esbuild-dev ../../scripts/docs/component.ts && esbuild-dev ../../scripts/docs/interface.ts",
+    "gene-comment": "esbuild-dev ../../scripts/docs/api.ts && esbuild-dev ../../scripts/docs/component.ts && esbuild-dev ../../scripts/docs/data-types.ts",
     "gene-docs": "pnpm run gene-md && pnpm run gene-stories && pnpm run gene-comment"
   },
   "peerDependencies": {

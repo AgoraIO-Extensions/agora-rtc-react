@@ -1,8 +1,12 @@
 ---
-title: Interfaces
+title: 类型定义
 ---
 
-## NetworkQuality
+本页面提供 Interface 和 Class 的描述。
+
+<h2 className="anchor index-interface-networkquality" id="networkquality">
+  NetworkQuality
+</h2>
 
 上下行 last mile 网络质量。
 
@@ -20,12 +24,14 @@ export interface NetworkQuality {
 | `downlink` | `0 &VerticalLine; 1 &VerticalLine; 2 &VerticalLine; 3 &VerticalLine; 4 &VerticalLine; 5 &VerticalLine; 6` | 必选     | 下行网络质量。基于下行发送码率、下行丢包率、平均往返时延和网络抖动计算。<ul><li>0: 质量未知。</li><li>1: 质量极好。</li><li>2: 用户主观感觉和极好差不多，但码率可能略低于极好。</li><li>3: 用户主观感受有瑕疵但不影响沟通。</li><li>4: 勉强能沟通但不顺畅。</li><li>5: 网络质量非常差，基本不能沟通。</li><li>6: 网络连接断开，完全无法沟通。</li></ul> |
 | `delay`    | `number`                                                                                                  | 必选     | SDK 到声网边缘服务器的平均往返时延（Round-Trip Time)，单位 ms。                                                                                                                                                                                                                                                                                         |
 
-## joinOptions
+<h2 className="anchor index-interface-joinoptions" id="joinoptions">
+  JoinOptions
+</h2>
 
 加入频道所需参数。
 
 ```typescript
-export interface joinOptions {
+export interface JoinOptions {
   appid: string;
   channel: string;
   token: string | null;
@@ -40,56 +46,23 @@ export interface joinOptions {
 | `token`   | `string` &VerticalLine; `null` | 必选     | 用于鉴权的 Token，如果频道启用了 Token 鉴权机制，则需要提供有效的 Token；如果没有启用 Token 鉴权，则传入 `null`。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。 |
 | `uid`     | `UID` &VerticalLine;`null`     | 可选     | 用户 ID，如果不提供则由服务器自动生成。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。                                                                           |
 
-## AgoraRtcReactError
+<h2 className="anchor index-class-agorartcreacterror" id="agorartcreacterror">
+  AgoraRTCReactError
+</h2>
 
 抛出的错误。
 
-```typescript
-export class AgoraRtcReactError extends Error {
-  public readonly rtcMethod: string;
-  public readonly rtcError: AgoraRTCError | string;
-  public override readonly name: string = "AgoraRTCReactException";
+`AgoraRTCReactError` 继承自浏览器的 [Error 对象](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)。直接打印 `AgoraRTCReactError` 对象可以看到错误信息。
 
-  public constructor(rtcMethod: string, rtcError: AgoraRTCError | string) {
-    if (typeof rtcError === "string") {
-      super(rtcError);
-    } else {
-      super(rtcError.message);
-    }
-    this.rtcMethod = rtcMethod;
-    this.rtcError = rtcError;
-  }
+| 属性        | 类型     | 是否必选 | 描述                                                                                      |
+| ----------- | -------- | -------- | ----------------------------------------------------------------------------------------- |
+| `rtcMethod` | `string` | 必选     | 发生错误的 Web SDK 方法名。根据 Web SDK 的方法名可以定位发生错误的 Hook，对应关系见下表。 |
 
-  public print(type: printType) {
-    if (typeof this.rtcError === "string") {
-      console[type](this.rtcError);
-    } else {
-      console[type](this.rtcError.message);
-    }
-  }
-}
-```
-
-| 属性        | 类型                                    | 是否必选 | 描述                       |
-| ----------- | --------------------------------------- | -------- | -------------------------- |
-| `rtcMethod` | `string`                                | 必选     | 报错的 JavaScript 方法。   |
-| `rtcError`  | `AgoraRTCError` &VerticalLine; `string` | 必选     | web 的 class AgoraRTCError |
-| `name`      | `AgoraRTCError` &VerticalLine; `string` | 必选     |                            |
-
-## IAgoraRtcReactError
-
-抛出的错误。
-
-```typescript
-export interface IAgoraRtcReactError extends AgoraRTCError {
-  readonly rtcMethod: string;
-  readonly rtcError: AgoraRTCError | string;
-}
-```
-
-rtcmethod: 报错的 web 方法是什么；rtcerror 是完全对齐 web 的 AgoraRTCError
-
-| 属性        | 类型                                    | 是否必选 | 描述                       |
-| ----------- | --------------------------------------- | -------- | -------------------------- |
-| `rtcMethod` | `string`                                | 必选     | 报错的 JavaScript 方法。   |
-| `rtcError`  | `AgoraRTCError` &VerticalLine; `string` | 必选     | web 的 class AgoraRTCError |
+| `rtcMethod`                                                                                             | 发生错误的 Hook           |
+| ------------------------------------------------------------------------------------------------------- | ------------------------- |
+| `"IAgoraRTCClient.join"`                                                                                | `useJoin`                 |
+| `"IAgoraRTC.createCameraVideoTrack" `                                                                   | `useLocalCameraTrack`     |
+| `"IAgoraRTC.createMicrophoneAudioTrack"`                                                                | `useLocalMicrophoneTrack` |
+| `"IAgoraRTCClient.publish"`                                                                             | `usePublish`              |
+| `"IAgoraRTCClient.unsubscribe"` 或 `"IAgoraRTCClient.subscribe"`                                        | `useRemoteUserTrack`      |
+| `"IAgoraRTCClient.unsubscribe"` 或 `"IAgoraRTCClient.subscribe"` 或 `"IAgoraRTCClient.massUnsubscribe"` | `useRemoteVideoTracks `   |

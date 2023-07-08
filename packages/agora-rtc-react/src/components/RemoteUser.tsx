@@ -35,7 +35,7 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
   readonly volume?: number;
 
   /**
-   * 当 `playVideo` 为 `false`时要渲染的封面图片或自定义组件，用于替代视频画面显示。
+   * 当 `playVideo` 为 `false`时要渲染的封面图片或自定义组件，用于替代视频画面显示。支持传入在线图片的 URL 或本地图片的相对路径。
    */
   readonly cover?: string | (() => ReactNode);
 

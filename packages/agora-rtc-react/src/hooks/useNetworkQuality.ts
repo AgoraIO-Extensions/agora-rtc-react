@@ -14,7 +14,7 @@ const initQuality = (): NetworkQuality => ({
 /**
  * 用于获取本地用户网络质量。
  *
- * @param `client` {IAgoraRTCClient | null} [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。
+ * @param `client` {IAgoraRTCClient | null} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
  * @return NetworkQuality 本地用户的网络质量信息。详见 NetworkQuality。
  */
 export function useNetworkQuality(client?: IAgoraRTCClient | null): NetworkQuality {

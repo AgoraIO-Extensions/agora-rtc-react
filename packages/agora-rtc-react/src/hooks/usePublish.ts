@@ -13,9 +13,9 @@ import { useIsConnected } from "./useIsConnected";
  *
  * @param `tracks` {(ILocalTrack | null)[]} 本地轨道列表。
  * @param `readyToPublish` {boolean} 是否准备好进行发布。默认为 `true`。
- * @param `client` {IAgoraRTCClient} [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。
+ * @param `client` {IAgoraRTCClient} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
  * @return isLoading boolean
- * @return error AgoraRtcReactError | null
+ * @return error AgoraRTCReactError | null
  */
 export function usePublish(
   tracks: (ILocalTrack | null)[],

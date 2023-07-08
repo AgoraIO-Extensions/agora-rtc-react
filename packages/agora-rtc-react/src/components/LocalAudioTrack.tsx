@@ -9,7 +9,7 @@ import { useAutoPlayAudioTrack } from "./TrackBoundary";
 
 export interface LocalAudioTrackProps {
   /**
-   * 要播放的本地音频轨道。通过 [createMicrophoneAudioTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createmicrophoneaudiotrack) 创建。
+   * 要播放的本地音频轨道。通过 [useLocalMicrophoneTrack](./hooks#uselocalmicrophonetrack) 创建。
    */
   readonly track?: MaybePromiseOrNull<ILocalAudioTrack>;
 
@@ -40,7 +40,7 @@ export interface LocalAudioTrackProps {
 }
 
 /**
- * 该组件用于播放本地音频轨道（不支持指定使用的媒体设备）。
+ * 该组件用于播放本地音频轨道，播放设备为用户在浏览器中选择的设备。
  */
 export function LocalAudioTrack({
   track: maybeTrack,

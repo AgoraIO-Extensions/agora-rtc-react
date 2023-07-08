@@ -20,12 +20,12 @@ export interface LocalUserProps extends HTMLProps<HTMLDivElement> {
   readonly cameraOn?: boolean;
 
   /**
-   * 要播放的麦克风音频轨道。通过 [createMicrophoneAudioTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createmicrophoneaudiotrack) 创建。
+   * 要播放的麦克风音频轨道。通过 [useLocalMicrophoneTrack](./hooks#uselocalmicrophonetrack) 创建。
    */
   readonly audioTrack?: MaybePromiseOrNull<ILocalAudioTrack>;
 
   /**
-   * 要播放的摄像头视频轨道。通过 [createCameraVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createcameravideotrack) 创建。
+   * 要播放的摄像头视频轨道。通过 [useLocalCameraTrack](./hooks#uselocalcameratrack) 创建。
    */
   readonly videoTrack?: MaybePromiseOrNull<ILocalVideoTrack>;
 
@@ -45,7 +45,7 @@ export interface LocalUserProps extends HTMLProps<HTMLDivElement> {
   readonly volume?: number;
 
   /**
-   * 当 `playVideo` 为 `false`时要渲染的封面图片，用于替代视频画面显示。
+   * 当 `playVideo` 为 `false`时要渲染的封面图片，用于替代视频画面显示。支持传入在线图片的 URL 或本地图片的相对路径。
    */
   readonly cover?: string;
 
