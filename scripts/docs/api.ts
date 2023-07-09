@@ -59,7 +59,6 @@ async function writeComment(markdownPath: string) {
 
   await readDirRecursively(`${hooksPath}`, async (filePath: string) => {
     if (isNotTargetFile(filePath)) return;
-    console.log(filePath);
     let content = fs.readFileSync(filePath, "utf-8");
 
     if (content.includes(`export function ${target}`)) {

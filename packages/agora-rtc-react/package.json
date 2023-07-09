@@ -26,7 +26,8 @@
   "source": "src/index.ts",
   "files": [
     "dist",
-    "LICENSE"
+    "LICENSE",
+    "README.md"
   ],
   "engines": {
     "node": ">=10"
@@ -43,8 +44,9 @@
     "test:watch": "vitest --ui",
     "gene-stories": "esbuild-dev ../../scripts/docs/generate-storybook-mdx.ts",
     "gene-md": "esbuild-dev ../../scripts/docs/generate-docs.ts",
+    "update-readme": "pnpm esbuild-dev ../../scripts/docs/update-readme.ts",
     "gene-comment": "esbuild-dev ../../scripts/docs/api.ts && esbuild-dev ../../scripts/docs/component.ts && esbuild-dev ../../scripts/docs/data-types.ts",
-    "gene-docs": "pnpm run gene-md && pnpm run gene-stories && pnpm run gene-comment"
+    "gene-docs": "pnpm run gene-md && pnpm run gene-stories && pnpm run gene-comment && pnpm run update-readme"
   },
   "peerDependencies": {
     "agora-rtc-sdk-ng": ">=4.18.1",
@@ -97,7 +99,7 @@
       "release": true
     },
     "hooks": {
-      "before:npm:release": "pnpm esbuild-dev ../../scripts/release/clean.ts source:./package.json @./package.json && pnpm eslint --fix package.json && cp ../../LICENSE . && pnpm tsup"
+      "before:npm:release": "pnpm esbuild-dev ../../scripts/release/clean.ts source:./package.json @./package.json && pnpm eslint --fix package.json && cp ../../LICENSE ../../README.md . && pnpm tsup"
     },
     "plugins": {
       "@release-it/conventional-changelog": {

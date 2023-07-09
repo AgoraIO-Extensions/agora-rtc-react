@@ -5,6 +5,17 @@ import { emptyDirectory } from "../utils";
 
 const prefix = "## ";
 
+const writeFile = (title, content, filePath) => {
+  //add \n after ## title
+  content = prefix + title + "\n" + content;
+  //remove \n last line
+  content = content.slice(0, content.length - 1);
+  fs.writeFile(filePath, content, err => {
+    if (err) throw err;
+    console.log(`${filePath} generated`);
+  });
+};
+
 for (let j = 0; j < docType.length; j++) {
   emptyDirectory(`${docsPath}/${docType[j]}`);
   for (let m = 0; m < languages.length; m++) {
@@ -50,13 +61,3 @@ for (let j = 0; j < docType.length; j++) {
     });
   }
 }
-const writeFile = (title, content, filePath) => {
-  //add \n after ## title
-  content = prefix + title + "\n" + content;
-  //remove \n last line
-  content = content.slice(0, content.length - 1);
-  fs.writeFile(filePath, content, err => {
-    if (err) throw err;
-    console.log(`${filePath} generated`);
-  });
-};
