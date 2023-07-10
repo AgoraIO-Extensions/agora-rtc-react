@@ -15,12 +15,12 @@ jobs:
       - name: Mirror repo
         uses: Yikun/hub-mirror-action@v1.2
         with:
-          src: github/guoxianzhe
-          dst: gitee/guoxianzhe
+          src: github/AgoraIO-Extensions
+          dst: gitee/agoraio-community
           white_list: "agora-rtc-react"
           static_list: "agora-rtc-react"
           cache_path: "./cache"
           dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
           dst_token: ${{ secrets.GITEE_TOKEN }}
           force_update: true
-          account_type: user
+          account_type: org
