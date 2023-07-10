@@ -1,0 +1,26 @@
+name: Mirror
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Mirror
+    runs-on: ubuntu-latest
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Mirror repo
+        uses: Yikun/hub-mirror-action@v1.2
+        with:
+          src: github/AgoraIO-Extensions
+          dst: gitee/agoraio-community
+          white_list: "agora-rtc-react"
+          static_list: "agora-rtc-react"
+          cache_path: "./cache"
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
+          force_update: true
+          account_type: org
