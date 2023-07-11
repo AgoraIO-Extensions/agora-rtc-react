@@ -1,5 +1,5 @@
 name: "Questions and Help"
-description: Looking for help with your app? Please refer to the React Native community's support resources.
+description: Looking for help with your app?
 labels: ["help wanted"]
 body:
   - type: textarea
