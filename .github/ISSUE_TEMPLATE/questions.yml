@@ -1,0 +1,12 @@
+name: "Questions and Help"
+description: Looking for help with your app? Please refer to the React Native community's support resources.
+labels: ["help wanted"]
+body:
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: What kind of problem do you need help?
+      description: |
+        Describe your problem in as much detail as possible so that we can help you better.
+    validations:
+      required: true
