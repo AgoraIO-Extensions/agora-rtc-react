@@ -23,7 +23,7 @@
     "@release-it/conventional-changelog": "^5.1.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@types/minimist": "^1.2.2",
-    "@types/node": "^18.16.19",
+    "@types/node": "^20.4.1",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "agora-token": "^2.0.3",
