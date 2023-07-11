@@ -44,11 +44,11 @@ export function usePublish(
 
     const filterTracks = tracks.filter(Boolean);
     const baseCheck = (_track: ILocalTrack): boolean => {
-      const isSupport = compareVersion(AgoraRTC.VERSION, "4.18.1") >= 0;
+      const isSupport = compareVersion(AgoraRTC.VERSION, "4.18.2") >= 0;
       if (!isSupport) {
         const agoraRTCReactError = new AgoraRTCReactError(
           "usePublish",
-          "please check your agora-rtc-sdk-ng version in package.json, it's recommend upgrade to >= 4.18.1",
+          "please check your agora-rtc-sdk-ng version in package.json, it's recommend upgrade to >= 4.18.2",
         );
         agoraRTCReactError.log("warn");
       }

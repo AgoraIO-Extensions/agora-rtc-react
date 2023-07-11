@@ -49,7 +49,7 @@
     "gene-docs": "pnpm run gene-md && pnpm run gene-stories && pnpm run gene-comment && pnpm run update-readme"
   },
   "peerDependencies": {
-    "agora-rtc-sdk-ng": ">=4.18.1",
+    "agora-rtc-sdk-ng": ">=4.18.2",
     "react": ">=16.8"
   },
   "main": "src/index.ts",
