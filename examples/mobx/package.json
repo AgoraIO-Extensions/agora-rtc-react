@@ -15,7 +15,7 @@
     "agora-rtc-sdk-ng": "4.18.1",
     "clsx": "^1.2.1",
     "crypto-js": "^4.1.1",
-    "mobx": "^6.8.0",
+    "mobx": "^6.9.0",
     "mobx-react-lite": "^3.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,14 +23,14 @@
     "side-effect-manager": "^1.2.2"
   },
   "devDependencies": {
-    "@iconify-json/mdi": "^1.1.50",
+    "@iconify-json/mdi": "^1.1.53",
     "@types/crypto-js": "^4.1.1",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
     "@vitejs/plugin-react": "^3.1.0",
     "typescript": "^4.9.5",
-    "unocss": "^0.50.4",
-    "vite": "^4.1.4",
+    "unocss": "^0.50.8",
+    "vite": "^4.4.2",
     "vite-plugin-externals": "^0.6.2"
   }
 }
