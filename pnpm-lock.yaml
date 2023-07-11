@@ -265,8 +265,8 @@ importers:
         specifier: ^7.0.26
         version: 7.0.26(typescript@4.9.5)(vite@4.4.2)
       '@storybook/preview-api':
-        specifier: 7.0.0-beta.40
-        version: 7.0.0-beta.40
+        specifier: 7.0.26
+        version: 7.0.26
       '@storybook/react':
         specifier: ^7.0.26
         version: 7.0.26(react-dom@18.2.0)(react@18.2.0)(typescript@4.9.5)
@@ -358,8 +358,8 @@ importers:
         specifier: ^7.0.26
         version: 7.0.26(typescript@4.9.5)(vite@4.4.2)
       '@storybook/preview-api':
-        specifier: 7.0.0-beta.40
-        version: 7.0.0-beta.40
+        specifier: 7.0.26
+        version: 7.0.26
       '@storybook/react':
         specifier: ^7.0.26
         version: 7.0.26(react-dom@18.2.0)(react@18.2.0)(typescript@4.9.5)
@@ -4578,17 +4578,6 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/channel-postmessage@7.0.0-beta.40:
-    resolution: {integrity: sha512-RUjYUmLtZWgwXEE4MuvvkPlhU68PGVC8XhduHkDsIZyask7uumuuXjojsxgnRYTpyIrkOMpf2iuM5VeE0O0D3w==}
-    dependencies:
-      '@storybook/channels': 7.0.0-beta.40
-      '@storybook/client-logger': 7.0.0-beta.40
-      '@storybook/core-events': 7.0.0-beta.40
-      '@storybook/global': 5.0.0
-      qs: 6.11.2
-      telejson: 7.1.0
-    dev: true
-
   /@storybook/channel-postmessage@7.0.26:
     resolution: {integrity: sha512-ZvFLr/tUD9dWIjQtIn1JXHjqrbOP/uEEOqzwpKSVj0Cl4Vgc12s8hecbzBufkOF7fwLsFvfieSi7ENOmjoncdQ==}
     dependencies:
@@ -4607,10 +4596,6 @@ packages:
       '@storybook/client-logger': 7.0.26
       '@storybook/global': 5.0.0
       telejson: 7.1.0
-    dev: true
-
-  /@storybook/channels@7.0.0-beta.40:
-    resolution: {integrity: sha512-07DBzWVaKzsgzxveLgS0R9pMLr48yfSE+6DqM1Dc4on48k7sL3JHoQf6EwbLRqTIu6OKAyTMJWG0KRpz0ILdCw==}
     dev: true
 
   /@storybook/channels@7.0.26:
@@ -4664,12 +4649,6 @@ packages:
       - encoding
       - supports-color
       - utf-8-validate
-    dev: true
-
-  /@storybook/client-logger@7.0.0-beta.40:
-    resolution: {integrity: sha512-RNL6cu5aPfRmtCJUDNCfK+WIiUY9L7aiwjRJwbOlSgPD6IuSxKc2Q+sGhqXc0n6SDSYn2Y4vOMSU3SqihkkyHg==}
-    dependencies:
-      '@storybook/global': 5.0.0
     dev: true
 
   /@storybook/client-logger@7.0.26:
@@ -4750,10 +4729,6 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
-    dev: true
-
-  /@storybook/core-events@7.0.0-beta.40:
-    resolution: {integrity: sha512-nor/o24aQiwgCnn4OoXVPG+/UxhlkmzteICmE4SE4dRVC4qky97/aDwysiL2wHPb/Wwj3BNespVHFPtoUaq7vg==}
     dev: true
 
   /@storybook/core-events@7.0.26:
@@ -4842,12 +4817,6 @@ packages:
       type-fest: 2.19.0
     dev: true
 
-  /@storybook/csf@0.1.1-next.0:
-    resolution: {integrity: sha512-2M8E4CZOVW77P9lrgZZc2rcwxhNKVVykpzbcAauc3bots7xvDJMG60EasMRB/Y+cfqnSu6aaSUEVmKHTKsVJ3A==}
-    dependencies:
-      type-fest: 2.19.0
-    dev: true
-
   /@storybook/docs-mdx@0.1.0:
     resolution: {integrity: sha512-JDaBR9lwVY4eSH5W8EGHrhODjygPd6QImRbwjAuJNEnY0Vw4ie3bPkeGfnacB3OBW6u/agqPv2aRlR46JcAQLg==}
     dev: true
@@ -4925,29 +4894,6 @@ packages:
 
   /@storybook/postinstall@7.0.26:
     resolution: {integrity: sha512-NhJBpQ+49RWF63UkdwrEwBLJBjAZeTlruPWfXGUb343iaGNNTsD3jajbToFHncibewH83yk6MeGfiyUva60oJw==}
-    dev: true
-
-  /@storybook/preview-api@7.0.0-beta.40:
-    resolution: {integrity: sha512-nyoxXe5a+1e/6bEsG9w3oxk5YGw9RIRGRi6uJixAxgVwiLBASZED4fIf2H2E52s60oRMewJ+0AiUPXJmgozCOw==}
-    dependencies:
-      '@storybook/channel-postmessage': 7.0.0-beta.40
-      '@storybook/channels': 7.0.0-beta.40
-      '@storybook/client-logger': 7.0.0-beta.40
-      '@storybook/core-events': 7.0.0-beta.40
-      '@storybook/csf': 0.1.1-next.0
-      '@storybook/global': 5.0.0
-      '@storybook/types': 7.0.0-beta.40
-      '@types/qs': 6.9.7
-      dequal: 2.0.3
-      lodash: 4.17.21
-      memoizerific: 1.11.3
-      qs: 6.11.2
-      slash: 3.0.0
-      synchronous-promise: 2.0.17
-      ts-dedent: 2.2.0
-      util-deprecate: 1.0.2
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /@storybook/preview-api@7.0.26:
@@ -5093,19 +5039,6 @@ packages:
       memoizerific: 1.11.3
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-    dev: true
-
-  /@storybook/types@7.0.0-beta.40:
-    resolution: {integrity: sha512-sOoFS5ieUiWD44A797i7XOoWh65+KPzsaKuYQeVWIM4T3XaAuMLTI1XwjOuLh49PlLtWzWbQP/2PJ1tz/3pHBw==}
-    dependencies:
-      '@babel/core': 7.22.8
-      '@storybook/channels': 7.0.0-beta.40
-      '@types/babel__core': 7.20.1
-      '@types/express': 4.17.17
-      express: 4.18.2
-      file-system-cache: 2.4.2
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /@storybook/types@7.0.26:
@@ -5435,12 +5368,6 @@ packages:
 
   /@types/qs@6.9.7:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
-    dev: true
-
-  /@types/ramda@0.29.3:
-    resolution: {integrity: sha512-Yh/RHkjN0ru6LVhSQtTkCRo6HXkfL9trot/2elzM/yXLJmbLm2v6kJc8yftTnwv1zvUob6TEtqI2cYjdqG3U0Q==}
-    dependencies:
-      types-ramda: 0.29.4
     dev: true
 
   /@types/range-parser@1.2.4:
@@ -8681,14 +8608,6 @@ packages:
   /file-system-cache@2.3.0:
     resolution: {integrity: sha512-l4DMNdsIPsVnKrgEXbJwDJsA5mB8rGwHYERMgqQx/xAUtChPJMre1bXBzDEqqVbWv9AIbFezXMxeEkZDSrXUOQ==}
     dependencies:
-      fs-extra: 11.1.1
-      ramda: 0.29.0
-    dev: true
-
-  /file-system-cache@2.4.2:
-    resolution: {integrity: sha512-33ALMyc8nFwrb7p5+Dl0rmYUY48hHoYvFQhH7zpr08DJ68xR41PONJaYQ5XRj61CFq/hvoj680Ej/P9hoOU4eQ==}
-    dependencies:
-      '@types/ramda': 0.29.3
       fs-extra: 11.1.1
       ramda: 0.29.0
     dev: true
@@ -13884,10 +13803,6 @@ packages:
       yn: 3.1.1
     dev: true
 
-  /ts-toolbelt@9.6.0:
-    resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
-    dev: true
-
   /tsconfig-paths@3.14.2:
     resolution: {integrity: sha512-o/9iXgCYc5L/JxCHPe3Hvh8Q/2xm5Z+p18PESBU6Ff33695QnCHBEjcytY2q19ua7Mbl/DavtBOLq+oG0RCL+g==}
     dependencies:
@@ -14034,12 +13949,6 @@ packages:
 
   /typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
-    dev: true
-
-  /types-ramda@0.29.4:
-    resolution: {integrity: sha512-XO/820iRsCDwqLjE8XE+b57cVGPyk1h+U9lBGpDWvbEky+NQChvHVwaKM05WnW1c5z3EVQh8NhXFmh2E/1YazQ==}
-    dependencies:
-      ts-toolbelt: 9.6.0
     dev: true
 
   /typescript@4.9.5:
