@@ -81,7 +81,7 @@
     "react-test-renderer": "^18.2.0",
     "storybook": "^7.0.26",
     "tsup": "^7.1.0",
-    "typescript": "^4.9.5",
+    "typescript": "^5.1.6",
     "vite": "^4.4.2",
     "vitest": "^0.33.0"
   },
