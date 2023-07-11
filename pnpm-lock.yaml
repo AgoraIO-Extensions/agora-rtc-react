@@ -20,8 +20,8 @@ importers:
         specifier: ^17.6.6
         version: 17.6.6
       '@hyrious/esbuild-dev':
-        specifier: ^0.9.1
-        version: 0.9.1
+        specifier: ^0.10.3
+        version: 0.10.3
       '@release-it/conventional-changelog':
         specifier: ^5.1.1
         version: 5.1.1(release-it@15.11.0)
@@ -3641,12 +3641,12 @@ packages:
     engines: {node: '>=6.9.0'}
     dev: true
 
-  /@hyrious/esbuild-dev@0.9.1:
-    resolution: {integrity: sha512-FjF9Ofuk32fZvn1pDoeCKeusZbVwhrQDx+hlVhBdj3bplWD25ccZ/W3HnTbdFIy8Nqxwjpvv8lgHPd63/tqHsQ==}
-    engines: {node: ^14.18.0 || >=16.0.0}
+  /@hyrious/esbuild-dev@0.10.3:
+    resolution: {integrity: sha512-GQDI7NBUoT6DIn5PzG023THDvEGmo+v7J3c2OK+lyYAEDTE2IUo0HLA3itsukHWQfrkU3rY3eV4a8AP3Yh3OSw==}
+    engines: {node: ^14.18 || >=16}
     hasBin: true
     peerDependencies:
-      esbuild: <=0.16
+      esbuild: '>=0.17'
     peerDependenciesMeta:
       esbuild:
         optional: true
