@@ -1,0 +1,2 @@
+var a=Object.defineProperty;var d=(r,e,t)=>e in r?a(r,e,{enumerable:!0,configurable:!0,writable:!0,value:t}):r[e]=t;var s=(r,e,t)=>(d(r,typeof e!="symbol"?e+"":e,t),t);import{d as n,h as u,A as h}from"./TrackBoundary-b755f9d3.js";class i extends n{constructor({uid:t=h(),...o}={}){super(o);s(this,"_uid");this._uid=t,u(this,"_uid")}static create(t){return new i(t)}getUserId(){return this._uid}getStats(){throw new Error("Method not implemented.")}}export{i as F};
+//# sourceMappingURL=remote-track-f5a27496.js.map

@@ -7,10 +7,10 @@
   <title>Storybook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link rel="preload" href="./sb-common-assets/nunito-sans-regular.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="./sb-common-assets/nunito-sans-italic.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="./sb-common-assets/nunito-sans-bold.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="./sb-common-assets/nunito-sans-bold-italic.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="prefetch" href="./sb-common-assets/nunito-sans-regular.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="prefetch" href="./sb-common-assets/nunito-sans-italic.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="prefetch" href="./sb-common-assets/nunito-sans-bold.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="prefetch" href="./sb-common-assets/nunito-sans-bold-italic.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="./sb-common-assets/fonts.css" />
 
   <script>
@@ -18,14 +18,14 @@
     window.LOGLEVEL = 'info';
     window.FRAMEWORK_OPTIONS = {};
     window.CHANNEL_OPTIONS = {};
-    window.FEATURES = {"warnOnLegacyHierarchySeparator":true,"buildStoriesJson":false,"storyStoreV7":true,"breakingChangesV7":true,"argTypeTargetsV7":true,"legacyDecoratorFileOrder":false};
+    window.FEATURES = {"warnOnLegacyHierarchySeparator":true,"buildStoriesJson":false,"storyStoreV7":true,"argTypeTargetsV7":true,"legacyDecoratorFileOrder":false};
     window.STORIES = [{"titlePrefix":"","directory":"./src","files":"**/*.mdx","importPathMatcher":"^\\.[\\\\/](?:src(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.mdx)$"},{"titlePrefix":"","directory":"./src","files":"**/*.stories.@(js|jsx|ts|tsx)","importPathMatcher":"^\\.[\\\\/](?:src(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.(js|jsx|ts|tsx))$"}];
     window.DOCS_OPTIONS = {"defaultName":"Docs","autodocs":"tag"};
-    window.SERVER_CHANNEL_URL = undefined;
 
     // We do this so that "module && module.hot" etc. in Storybook source code
     // doesn't fail (it will simply be disabled)
     window.module = undefined;
+    window.global = window;
   </script>
   <base target="_parent" />
 
@@ -360,7 +360,7 @@
   window.global = window;
 </script>
 
-  <script type="module" crossorigin src="./assets/iframe-23ceae64.js"></script>
+  <script type="module" crossorigin src="./assets/iframe-2e78a2bf.js"></script>
 </head>
 
 <body>
