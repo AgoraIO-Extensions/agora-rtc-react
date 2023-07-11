@@ -18,7 +18,7 @@
     "release": "release-it"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^17.6.1",
+    "@commitlint/config-conventional": "^17.6.6",
     "@hyrious/esbuild-dev": "^0.9.1",
     "@release-it/conventional-changelog": "^5.1.1",
     "@testing-library/jest-dom": "^5.16.5",
