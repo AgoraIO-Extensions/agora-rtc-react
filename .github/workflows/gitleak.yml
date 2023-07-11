@@ -1,7 +1,6 @@
 name: gitleaks
 on:
   pull_request:
-    condition: ${{ github.actor != 'dependabot[bot]' }}
   push:
   workflow_dispatch:
 
