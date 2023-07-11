@@ -63,7 +63,7 @@
     "@storybook/builder-vite": "^7.0.0-rc.3",
     "@storybook/preview-api": "7.0.0-beta.40",
     "@storybook/react": "^7.0.0-rc.3",
-    "@storybook/react-vite": "^7.0.0-rc.3",
+    "@storybook/react-vite": "^7.0.26",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.4.0",
     "@types/testing-library__jest-dom": "^5.14.5",
