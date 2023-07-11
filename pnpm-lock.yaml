@@ -107,8 +107,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/agora-rtc-react-ui
       agora-rtc-sdk-ng:
-        specifier: 4.18.1
-        version: 4.18.1
+        specifier: 4.18.2
+        version: 4.18.2
       antd:
         specifier: ^5.6.4
         version: 5.6.4(react-dom@18.2.0)(react@18.2.0)
@@ -186,8 +186,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/agora-rtc-react-ui
       agora-rtc-sdk-ng:
-        specifier: 4.18.1
-        version: 4.18.1
+        specifier: 4.18.2
+        version: 4.18.2
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
@@ -301,8 +301,8 @@ importers:
         specifier: workspace:*
         version: link:../agora-rtc-react-ui
       agora-rtc-sdk-ng:
-        specifier: 4.18.1
-        version: 4.18.1
+        specifier: 4.18.2
+        version: 4.18.2
       fake-agora-rtc:
         specifier: workspace:*
         version: link:../fake-agora-rtc
@@ -391,8 +391,8 @@ importers:
         specifier: workspace:*
         version: link:../agora-rtc-react
       agora-rtc-sdk-ng:
-        specifier: 4.18.1
-        version: 4.18.1
+        specifier: 4.18.2
+        version: 4.18.2
       fake-agora-rtc:
         specifier: workspace:*
         version: link:../fake-agora-rtc
@@ -430,8 +430,8 @@ importers:
         specifier: ^6.4.0
         version: 6.4.0
       agora-rtc-sdk-ng:
-        specifier: 4.18.1
-        version: 4.18.1
+        specifier: 4.18.2
+        version: 4.18.2
       side-effect-manager:
         specifier: ^1.2.2
         version: 1.2.2
@@ -6102,8 +6102,8 @@ packages:
       indent-string: 4.0.0
     dev: true
 
-  /agora-rtc-sdk-ng@4.18.1:
-    resolution: {integrity: sha512-OZ4Bu6Y1DspfACwljJGYuBglwsyJpAyILqROUY40GXTnzy5ZUcjAljOqoPoQfrT8D6R7okk+sfTXr4vyHu8GLw==}
+  /agora-rtc-sdk-ng@4.18.2:
+    resolution: {integrity: sha512-tvyuXHVL15Eo0lK3wwM3rGPKGPeGYuarAwCs5oyveht1HZO9z3w6vra3d/q3eOCYpvQscCW7P0QNfUIAQTs4RQ==}
     dependencies:
       agora-rte-extension: 1.2.3
 

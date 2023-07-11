@@ -73,7 +73,7 @@
     "@vitest/coverage-c8": "^0.33.0",
     "@vitest/ui": "^0.33.0",
     "agora-rtc-react-ui": "workspace:*",
-    "agora-rtc-sdk-ng": "4.18.1",
+    "agora-rtc-sdk-ng": "4.18.2",
     "fake-agora-rtc": "workspace:*",
     "jsdom": "^22.1.0",
     "react": "^18.2.0",
