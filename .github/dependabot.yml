@@ -5,7 +5,7 @@
 
 version: 2
 updates:
-  - package-ecosystem: pnpm
+  - package-ecosystem: npm
     directory: "/"
     schedule:
       interval: daily
@@ -14,7 +14,7 @@ updates:
     labels:
       - mono dependency update
 
-  - package-ecosystem: pnpm
+  - package-ecosystem: npm
     directory: "/packages/agora-rtc-react"
     schedule:
     interval: daily
@@ -23,7 +23,7 @@ updates:
     labels:
       - agora-rtc-react dependency update
 
-  - package-ecosystem: pnpm
+  - package-ecosystem: npm
     directory: "/packages/agora-rtc-react-ui"
     schedule:
     interval: daily
@@ -32,7 +32,7 @@ updates:
     labels:
       - agora-rtc-react-ui dependency update
 
-  - package-ecosystem: pnpm
+  - package-ecosystem: npm
     directory: "/examples/basic"
     schedule:
       interval: daily
@@ -41,7 +41,7 @@ updates:
     labels:
       - example basic dependency update
 
-  - package-ecosystem: pnpm
+  - package-ecosystem: npm
     directory: "/examples/mobx"
     schedule:
       interval: daily
