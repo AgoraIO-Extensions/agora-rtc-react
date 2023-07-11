@@ -48,7 +48,7 @@
     "test:watch": "vitest --ui"
   },
   "peerDependencies": {
-    "agora-rtc-react": ">=0.0.1",
+    "agora-rtc-react": ">=2",
     "react": ">=16.8"
   },
   "devDependencies": {
