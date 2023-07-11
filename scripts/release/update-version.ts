@@ -18,7 +18,7 @@ if (args.length < 2 || !args[0].startsWith("target:") || !args[1].includes("@"))
 const targetName = args[0].substring(7);
 const newVersion = args[1].substring(args[1].lastIndexOf("@") + 1);
 
-const targetPath = path.join(__dirname, "..", "packages", targetName, "src", "rtc.ts");
+const targetPath = path.join(__dirname, "..", "..", "packages", targetName, "src", "rtc.ts");
 
 fs.readFile(targetPath, "utf8", (err, data) => {
   if (err) {
