@@ -30,7 +30,7 @@
     "@vitejs/plugin-react": "^4.0.3",
     "typescript": "^5.1.6",
     "unocss": "^0.53.5",
-    "vite": "^4.4.2",
+    "vite": "^4.4.3",
     "vite-plugin-externals": "^0.6.2"
   }
 }
