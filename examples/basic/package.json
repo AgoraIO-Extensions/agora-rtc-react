@@ -10,32 +10,32 @@
     "renew": "esbuild-dev ../../scripts/renew.ts --write"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.0.1",
+    "@ant-design/icons": "^5.1.4",
     "agora-rtc-react": "workspace:*",
     "agora-rtc-react-ui": "workspace:*",
     "agora-rtc-sdk-ng": "4.18.1",
-    "antd": "^5.4.7",
+    "antd": "^5.6.4",
     "clsx": "^1.2.1",
     "crypto-js": "^4.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.11.1",
-    "react-select": "^5.7.2",
+    "react-router-dom": "^6.14.1",
+    "react-select": "^5.7.3",
     "sanitize.css": "^13.0.0",
-    "zustand": "^4.3.6"
+    "zustand": "^4.3.9"
   },
   "devDependencies": {
-    "@iconify-json/lucide": "^1.1.70",
-    "@iconify-json/mdi": "^1.1.50",
+    "@iconify-json/lucide": "^1.1.109",
+    "@iconify-json/mdi": "^1.1.53",
     "@ngneat/falso": "^6.4.0",
     "@types/crypto-js": "^4.1.1",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
     "@vitejs/plugin-react": "^3.1.0",
-    "sass": "^1.62.1",
-    "sass-loader": "^13.2.2",
+    "sass": "^1.63.6",
+    "sass-loader": "^13.3.2",
     "typescript": "^4.9.5",
-    "unocss": "^0.50.4",
-    "vite": "^4.1.4"
+    "unocss": "^0.50.8",
+    "vite": "^4.4.2"
   }
 }
