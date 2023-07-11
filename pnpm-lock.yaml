@@ -292,8 +292,8 @@ importers:
         specifier: ^4.0.3
         version: 4.0.3(vite@4.4.2)
       '@vitest/coverage-c8':
-        specifier: ^0.29.8
-        version: 0.29.8(vitest@0.33.0)
+        specifier: ^0.33.0
+        version: 0.33.0(vitest@0.33.0)
       '@vitest/ui':
         specifier: ^0.33.0
         version: 0.33.0(vitest@0.33.0)
@@ -385,8 +385,8 @@ importers:
         specifier: ^4.0.3
         version: 4.0.3(vite@4.4.2)
       '@vitest/coverage-c8':
-        specifier: ^0.29.8
-        version: 0.29.8(vitest@0.33.0)
+        specifier: ^0.33.0
+        version: 0.33.0(vitest@0.33.0)
       agora-rtc-react:
         specifier: workspace:*
         version: link:../agora-rtc-react
@@ -5803,12 +5803,14 @@ packages:
       - supports-color
     dev: true
 
-  /@vitest/coverage-c8@0.29.8(vitest@0.33.0):
-    resolution: {integrity: sha512-y+sEMQMctWokjnSqm3FCQEYFkjLrYaznsxEZHxcx8z2aftpYg3A5tvI1S5himfdEFo7o+OeHzh40bPSWZHW4oQ==}
+  /@vitest/coverage-c8@0.33.0(vitest@0.33.0):
+    resolution: {integrity: sha512-DaF1zJz4dcOZS4k/neiQJokmOWqsGXwhthfmUdPGorXIQHjdPvV6JQSYhQDI41MyI8c+IieQUdIDs5XAMHtDDw==}
     peerDependencies:
-      vitest: '>=0.29.0 <1'
+      vitest: '>=0.30.0 <1'
     dependencies:
+      '@ampproject/remapping': 2.2.1
       c8: 7.14.0
+      magic-string: 0.30.1
       picocolors: 1.0.0
       std-env: 3.3.3
       vitest: 0.33.0(@vitest/ui@0.33.0)(jsdom@21.1.2)
