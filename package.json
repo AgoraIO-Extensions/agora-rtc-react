@@ -20,7 +20,7 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^17.6.6",
     "@hyrious/esbuild-dev": "^0.10.3",
-    "@release-it/conventional-changelog": "^6.0.0",
+    "@release-it/conventional-changelog": "^7.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@types/minimist": "^1.2.2",
     "@types/node": "^20.4.1",
@@ -42,7 +42,7 @@
     "markdown-it": "^13.0.1",
     "minimist": "^1.2.8",
     "prettier": "^3.0.0",
-    "release-it": "^15.11.0",
+    "release-it": "^16.1.0",
     "typescript": "^5.1.6"
   },
   "lint-staged": {
