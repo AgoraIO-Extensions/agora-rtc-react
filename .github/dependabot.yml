@@ -1,0 +1,51 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: pnpm
+    directory: "/"
+    schedule:
+      interval: daily
+    reviewers:
+      - guoxianzhe
+    labels:
+      - mono dependency update
+
+  - package-ecosystem: pnpm
+    directory: "/packages/agora-rtc-react"
+    schedule:
+    interval: daily
+    reviewers:
+      - guoxianzhe
+    labels:
+      - agora-rtc-react dependency update
+
+  - package-ecosystem: pnpm
+    directory: "/packages/agora-rtc-react-ui"
+    schedule:
+    interval: daily
+    reviewers:
+      - guoxianzhe
+    labels:
+      - agora-rtc-react-ui dependency update
+
+  - package-ecosystem: pnpm
+    directory: "/examples/basic"
+    schedule:
+      interval: daily
+    reviewers:
+      - guoxianzhe
+    labels:
+      - example basic dependency update
+
+  - package-ecosystem: pnpm
+    directory: "/examples/mobx"
+    schedule:
+      interval: daily
+    reviewers:
+      - guoxianzhe
+    labels:
+      - example mobx dependency update

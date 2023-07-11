@@ -1,0 +1,43 @@
+name: "🐛 Bug report"
+description: Create a report to help us improve
+assignees: "guoxianzhe"
+body:
+  - type: input
+    id: version
+    attributes:
+      label: agora-rtc-react version
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: agora-rtc-sdk-ng version
+    validations:
+      required: true
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: |
+        What do we need to do to make the bug happen? Clear and concise reproduction instructions are important for us to be able to triage your issue in a timely manner. Note that you can use [Markdown](https://guides.github.com/features/mastering-markdown/) to format lists and code.
+      placeholder: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What is your expected?
+    validations:
+      required: true
+  - type: textarea
+    id: system-info
+    attributes:
+      label: System Info
+      description: Output of `npx envinfo --system --binaries --browsers`
+      render: shell
+      placeholder: e.g. System, Binaries, Browsers
+  - type: textarea
+    id: additional-comments
+    attributes:
+      label: Any additional comments?
+      description: e.g. some background/context of how you ran into this bug.
