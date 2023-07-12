@@ -18,6 +18,30 @@ import { useIsConnected } from "./useIsConnected";
  * @return isLoading boolean
  * @return isConnected boolean
  * @return error AgoraRTCReactError | null
+ * @example
+ * ```jsx
+ * import { useJoin } from "agora-rtc-react";
+ *
+ * function App() {
+ *   // you can use useJoin like this by passing a function as first argument.
+ *   // useJoin(async () => {
+ *   //   you can do some actions like fetching token before calling join.
+ *   //   const getData = await getToken();
+ *   //   return getData;  The data type of getData must be fetchArgs
+ *   // }, calling);
+ *
+ *   useJoin(
+ *     {
+ *       appid: YOUR_APPID,
+ *       channel: YOUR_CHANNEL,
+ *       token: YOUR_TOKEN,
+ *     },
+ *     ready,
+ *   );
+ *
+ *   return <></>;
+ * }
+ * ```
  */
 export function useJoin(
   fetchArgs: FetchArgs,

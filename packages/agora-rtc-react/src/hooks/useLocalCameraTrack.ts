@@ -15,6 +15,16 @@ import { useIsConnected } from "./useIsConnected";
  * @return localCameraTrack ICameraVideoTrack | null
  * @return isLoading boolean
  * @return error AgoraRTCReactError | null
+ * @example
+ * ```jsx
+ * import { useLocalCameraTrack } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const audioTrack = useLocalCameraTrack();
+ *
+ *   return <></>;
+ * }
+ * ```
  */
 export function useLocalCameraTrack(
   ready = true,

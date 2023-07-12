@@ -24,6 +24,7 @@ async function writeComment(markdownPath: string) {
     .querySelectorAll("p")[0]
     ?.innerHTML.replace(/<code>(.*?)<\/code>/g, "$1");
   const targetRequireParameterList = tableToJson(dom.querySelectorAll("table")[0]);
+  const targetDemoCode = dom.querySelectorAll("pre")[0].textContent;
 
   const files = fs.readdirSync(componentsPath);
   files.forEach(file => {
@@ -36,6 +37,12 @@ async function writeComment(markdownPath: string) {
 /**
  * ${targetDescription}
 `;
+      comment = comment.concat(` * @example\n`);
+      if (targetDemoCode) {
+        comment = comment.concat(
+          ` * \`\`\`jsx\n * ${targetDemoCode.replace(/\n/g, `\n * `)}\`\`\`\n`,
+        );
+      }
       comment = comment.concat(`*/`);
       const position = content.indexOf(`export function ${target}`);
       content = content.slice(0, position - 1) + comment + content.slice(position - 1);

@@ -21,6 +21,16 @@ import { useIsConnected } from "./useIsConnected";
  * @return localMicrophoneTrack IMicrophoneAudioTrack | null
  * @return isLoading boolean
  * @return error AgoraRTCReactError | null
+ * @example
+ * ```jsx
+ * import { useLocalMicrophoneTrack } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const audioTrack = useLocalMicrophoneTrack(true, { ANS: true, AEC: true });
+ *
+ *   return <></>;
+ * }
+ * ```
  */
 export function useLocalMicrophoneTrack(
   ready = true,

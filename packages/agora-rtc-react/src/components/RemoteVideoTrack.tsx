@@ -21,6 +21,23 @@ export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
 
 /**
  * 该组件用于播放远端用户的视频轨道，并且不支持指定播放设备。
+ * @example
+ * ```jsx
+ * import { RemoteAudioTrack, useJoin, useRemoteAudioTracks, useRemoteUsers } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const remoteUsers = useRemoteUsers();
+ *   const audioTracks = useRemoteAudioTracks(remoteUsers);
+ *
+ *   return (
+ *     <>
+ *       {audioTracks.map(track => (
+ *         <RemoteAudioTrack key={track.getUserId()} play track={track} />
+ *       ))}
+ *     </>
+ *   );
+ * }
+ * ```
  */
 export function RemoteVideoTrack({ track, play, style, ...props }: RemoteVideoTrackProps) {
   const mergedStyle = useMergedStyle(VideoTrackStyle, style);

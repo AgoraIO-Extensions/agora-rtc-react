@@ -23,6 +23,17 @@ import { useIsConnected } from "./useIsConnected";
  * @return videoTracks IRemoteVideoTrack[]
  * @return isLoading boolean
  * @return error AgoraRTCReactError | null
+ * @example
+ * ```jsx
+ * import { useRemoteUsers, useRemoteVideoTracks } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const remoteUsers = useRemoteUsers();
+ *   const videoTracks = useRemoteVideoTracks(remoteUsers);
+ *
+ *   return <></>;
+ * }
+ * ```
  */
 export function useRemoteVideoTracks(
   users: IAgoraRTCRemoteUser[] | undefined,

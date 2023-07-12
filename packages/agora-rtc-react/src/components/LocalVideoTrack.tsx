@@ -32,6 +32,15 @@ export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
 
 /**
  * 该组件用于播放本地视频轨道，播放设备为用户在浏览器中选择的设备。
+ * @example
+ * ```jsx
+ * import { LocalVideoTrack, useLocalCameraTrack } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const videoTrack = useLocalCameraTrack();
+ *   return <LocalVideoTrack track={videoTrack} play />;
+ * }
+ * ```
  */
 export function LocalVideoTrack({
   track: maybeTrack,

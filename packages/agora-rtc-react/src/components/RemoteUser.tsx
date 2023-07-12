@@ -47,6 +47,22 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
 
 /**
  * 该组件用于播放远端用户的视频和音频轨道，并且仅支持指定使用的音频设备、不支持指定使用的视频设备。
+ * @example
+ * ```jsx
+ * import { RemoteUser, useRemoteUsers } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const remoteUsers = useRemoteUsers();
+ *
+ *   return (
+ *     <>
+ *       {remoteUsers.map(user => (
+ *         <RemoteUser key={user.uid} user={user} />
+ *       ))}
+ *     </>
+ *   );
+ * }
+ * ```
  */
 export function RemoteUser({
   user,

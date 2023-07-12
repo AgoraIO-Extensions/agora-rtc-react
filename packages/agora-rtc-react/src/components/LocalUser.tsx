@@ -57,6 +57,27 @@ export interface LocalUserProps extends HTMLProps<HTMLDivElement> {
 
 /**
  * 该组件用于播放本地用户的摄像头视频轨道和麦克风音频轨道（不支持指定使用的媒体设备）。
+ * @example
+ * ```jsx
+ * import { LocalUser, useLocalAudioTrack, useLocalCameraTrack } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const audioTrack = useLocalAudioTrack();
+ *   const videoTrack = useLocalCameraTrack();
+ *
+ *   return (
+ *     <LocalUser
+ *       audioTrack={audioTrack}
+ *       cameraOn
+ *       cover={COVER_IMAGE_URL}
+ *       micOn
+ *       playAudio
+ *       playVideo
+ *       videoTrack={videoTrack}
+ *     />
+ *   );
+ * }
+ * ```
  */
 export function LocalUser({
   micOn,

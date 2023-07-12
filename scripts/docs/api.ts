@@ -57,6 +57,8 @@ async function writeComment(markdownPath: string) {
     targetReturnParameterInsertList.push(targetReturnParameterContent);
   }
 
+  const targetDemoCode = dom.querySelectorAll("pre")[0].textContent;
+
   await readDirRecursively(`${hooksPath}`, async (filePath: string) => {
     if (isNotTargetFile(filePath)) return;
     let content = fs.readFileSync(filePath, "utf-8");
@@ -74,7 +76,13 @@ async function writeComment(markdownPath: string) {
         comment = comment.concat(`\n`);
         comment = comment.concat(targetReturnParameterInsertList.join("\n"));
       }
-      comment = comment.concat(`\n */`);
+      comment = comment.concat(`\n * @example\n`);
+      if (targetDemoCode) {
+        comment = comment.concat(
+          ` * \`\`\`jsx\n * ${targetDemoCode.replace(/\n/g, `\n * `)}\`\`\`\n`,
+        );
+      }
+      comment = comment.concat(` */`);
       const position = content.indexOf(`export function ${target}`);
       content = content.slice(0, position - 1) + comment + content.slice(position - 1);
       fs.writeFileSync(filePath, content);

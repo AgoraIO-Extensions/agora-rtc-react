@@ -16,6 +16,19 @@ import { useIsConnected } from "./useIsConnected";
  * @param `client` {IAgoraRTCClient} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
  * @return isLoading boolean
  * @return error AgoraRTCReactError | null
+ * @example
+ * ```jsx
+ * import { useLocalMicrophoneTrack, useLocalCameraTrack, usePublish } from "agora-rtc-react";
+ *
+ * function App() {
+ *   //get audioTrack and videoTrack before publish
+ *   const audioTrack = useLocalMicrophoneTrack();
+ *   const videoTrack = useLocalCameraTrack();
+ *   usePublish([audioTrack, videoTrack]);
+ *
+ *   return <></>;
+ * }
+ * ```
  */
 export function usePublish(
   tracks: (ILocalTrack | null)[],

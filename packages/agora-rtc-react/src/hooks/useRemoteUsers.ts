@@ -10,6 +10,16 @@ import { joinDisposers } from "../misc/utils";
  *
  * @param `client` {IAgoraRTCClient | null} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
  * @return IAgoraRTCRemoteUser[] 远端用户列表。
+ * @example
+ * ```jsx
+ * import { useRemoteUsers } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const remoteUsers = useRemoteUsers();
+ *
+ *   return <></>;
+ * }
+ * ```
  */
 export function useRemoteUsers(client?: IAgoraRTCClient | null): IAgoraRTCRemoteUser[] {
   const resolvedClient = useRTCClient(client);

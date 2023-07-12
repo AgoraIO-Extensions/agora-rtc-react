@@ -6,7 +6,6 @@ export const languagesFormat = [".zh-CN", ".en-US"];
 
 export const packagePath = path.join(__dirname, "..", "packages", "agora-rtc-react");
 export const docsPath = path.join(packagePath, "docs");
-export const readmePath = path.join(__dirname, "..", "README.md");
 
 export const storiesPath = path.join(packagePath, "src", "stories");
 export const hooksPath = path.join(packagePath, "src", "hooks");

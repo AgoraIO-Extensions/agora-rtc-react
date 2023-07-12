@@ -41,6 +41,15 @@ export interface LocalAudioTrackProps {
 
 /**
  * 该组件用于播放本地音频轨道，播放设备为用户在浏览器中选择的设备。
+ * @example
+ * ```jsx
+ * import { LocalAudioTrack, useLocalAudioTrack } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const audioTrack = useLocalAudioTrack();
+ *   return <LocalAudioTrack track={audioTrack} play />;
+ * }
+ * ```
  */
 export function LocalAudioTrack({
   track: maybeTrack,

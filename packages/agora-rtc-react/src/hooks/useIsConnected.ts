@@ -10,6 +10,16 @@ import { joinDisposers, timeout } from "../misc/utils";
  *
  * @param `client` {IAgoraRTCClient | null} `IAgoraRTCClient` 对象。
  * @return boolean <li>true：客户端已连接到服务器。</li><li>false：客户端没有连接到服务器。</li>
+ * @example
+ * ```jsx
+ * import { useIsConnected } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const isConnected = useIsConnected();
+ *
+ *   return <div>{isConnected}</div>;
+ * }
+ * ```
  */
 export function useIsConnected(client?: IAgoraRTCClient | null): boolean {
   const resolvedClient = useRTCClient(client);

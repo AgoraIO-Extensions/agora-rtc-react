@@ -10,6 +10,16 @@ import { joinDisposers, timeout } from "../misc/utils";
  *
  * @param `client` {IAgoraRTCClient | null} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
  * @return ConnectionState 客户端与服务器的连接状态。详见 ConnectionState。
+ * @example
+ * ```jsx
+ * import { useConnectionState } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const connectionState = useConnectionState();
+ *
+ *   return <div>{connectionState}</div>;
+ * }
+ * ```
  */
 export function useConnectionState(client?: IAgoraRTCClient | null): ConnectionState {
   const resolvedClient = useRTCClient(client);

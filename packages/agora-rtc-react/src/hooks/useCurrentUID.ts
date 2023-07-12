@@ -10,6 +10,16 @@ import { timeout } from "../misc/utils";
  *
  * @param `client` {IAgoraRTCClient | null} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
  * @return UID | undefined 当前用户的 UID。如果当前用户没有加入任何频道，则返回 undefined。
+ * @example
+ * ```jsx
+ * import { useCurrentUID } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const uid = useCurrentUID();
+ *
+ *   return <div>{uid}</div>;
+ * }
+ * ```
  */
 export function useCurrentUID(client?: IAgoraRTCClient | null): UID | undefined {
   const resolvedClient = useRTCClient(client);
