@@ -195,11 +195,11 @@ importers:
         specifier: ^4.1.1
         version: 4.1.1
       mobx:
-        specifier: ^6.9.0
-        version: 6.9.0
+        specifier: ^6.9.1
+        version: 6.9.1
       mobx-react-lite:
         specifier: ^3.4.3
-        version: 3.4.3(mobx@6.9.0)(react-dom@18.2.0)(react@18.2.0)
+        version: 3.4.3(mobx@6.9.1)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -10816,7 +10816,7 @@ packages:
       ufo: 1.1.2
     dev: true
 
-  /mobx-react-lite@3.4.3(mobx@6.9.0)(react-dom@18.2.0)(react@18.2.0):
+  /mobx-react-lite@3.4.3(mobx@6.9.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-NkJREyFTSUXR772Qaai51BnE1voWx56LOL80xG7qkZr6vo8vEaLF3sz1JNUVh+rxmUzxYaqOhfuxTfqUh0FXUg==}
     peerDependencies:
       mobx: ^6.1.0
@@ -10829,13 +10829,13 @@ packages:
       react-native:
         optional: true
     dependencies:
-      mobx: 6.9.0
+      mobx: 6.9.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /mobx@6.9.0:
-    resolution: {integrity: sha512-HdKewQEREEJgsWnErClfbFoVebze6rGazxFLU/XUyrII8dORfVszN1V0BMRnQSzcgsNNtkX8DHj3nC6cdWE9YQ==}
+  /mobx@6.9.1:
+    resolution: {integrity: sha512-7V41hvBmzCQg5n/xoZi2qkhREbnF3wHbzbIdR1sLJhVt6yWq2Zq0FlNahEt/RccOmEIjipvBqeQ4mlOEyMhaaA==}
     dev: false
 
   /modify-values@1.0.1:
