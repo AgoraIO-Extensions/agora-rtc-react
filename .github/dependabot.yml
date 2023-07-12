@@ -6,6 +6,7 @@
 version: 2
 updates:
   - package-ecosystem: npm
+    registries: "*"
     directory: "/"
     schedule:
       interval: daily
