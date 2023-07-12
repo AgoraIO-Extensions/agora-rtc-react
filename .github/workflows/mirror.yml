@@ -11,6 +11,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
+    if: github.actor != 'dependabot[bot]'
     steps:
       - name: Mirror repo
         uses: Yikun/hub-mirror-action@v1.2
