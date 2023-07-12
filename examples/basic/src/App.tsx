@@ -54,10 +54,10 @@ const items: items[] = [
       label: page.label,
     })),
   },
-  // {
-  //   label: rootItemKeys[3],
-  //   key: `/${rootItemKeys[3].toLowerCase()}`,
-  // },
+  {
+    label: "settings",
+    key: `/setting`,
+  },
 ];
 
 export default function App() {
