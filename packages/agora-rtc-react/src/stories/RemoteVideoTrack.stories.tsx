@@ -8,7 +8,6 @@ import { RemoteVideoTrack } from "../components";
 const meta: Meta<RemoteVideoTrackProps> = {
   title: "Track/RemoteVideoTrack",
   component: RemoteVideoTrack,
-  tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },

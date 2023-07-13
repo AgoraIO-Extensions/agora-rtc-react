@@ -2,18 +2,9 @@
 
 加入频道所需参数。
 
-```typescript
-export interface JoinOptions {
-  appid: string;
-  channel: string;
-  token: string | null;
-  uid?: UID | null;
-}
-```
-
-| 属性      | 类型                           | 是否必选 | 描述                                                                                                                                                                                                                                                                |
-| --------- | ------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `appid`   | `string`                       | 必选     | 声网项目的 App ID。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。                                                                                               |
-| `channel` | `string`                       | 必选     | 要加入的频道名称。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。                                                                                                |
-| `token`   | `string` &VerticalLine; `null` | 必选     | 用于鉴权的 Token，如果频道启用了 Token 鉴权机制，则需要提供有效的 Token；如果没有启用 Token 鉴权，则传入 `null`。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。 |
-| `uid`     | `UID` &VerticalLine;`null`     | 可选     | 用户 ID，如果不提供则由服务器自动生成。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。                                                                           |
+| 属性      | 类型                           | 是否必选 | 描述                                                                                                                                                                                                                                                                                          |
+| --------- | ------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `appid`   | `string`                       | 必选     | 声网项目的 App ID。                                                                                                                                                                                                                                                                           |
+| `channel` | `string`                       | Yes      | 要加入的频道名称。详见 [`IAgoraRTCClient.join`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。                                                                                                        |
+| `token`   | `string` &VerticalLine; `null` | Yes      | 用于鉴权的 Token，如果你的声网项目启用了 Token 鉴权机制，则需要提供有效的 Token；如果没有启用 Token 鉴权，则传入 `null`。详见 [`IAgoraRTCClient.join`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。 |
+| `uid`     | `UID` &VerticalLine;`null`     | No       | 用户 ID，如果不提供则由服务器自动生成一个 number 型的 `uid`。详见 [`IAgoraRTCClient.join`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。                                                             |

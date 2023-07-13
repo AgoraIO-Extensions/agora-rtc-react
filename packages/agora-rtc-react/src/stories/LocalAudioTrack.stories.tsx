@@ -7,7 +7,6 @@ import { LocalAudioTrack } from "../components";
 const meta: Meta<LocalAudioTrackProps> = {
   title: "Track/LocalAudioTrack",
   component: LocalAudioTrack,
-  tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },

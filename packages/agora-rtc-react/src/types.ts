@@ -3,46 +3,46 @@ import type { UID } from "agora-rtc-sdk-ng";
 export type FetchArgs = (() => Promise<JoinOptions>) | JoinOptions;
 
 /**
- * 加入频道所需参数。
+ * Parameters used to join a channel.
  */
 export interface JoinOptions {
   /**
-   * 声网项目的 App ID。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。
+   * The App ID of your Agora project.
    */
   appid: string;
 
   /**
-   * 要加入的频道名称。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。
+   * The name of the channel to join. See [`IAgoraRTCClient.join`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) for details.
    */
   channel: string;
 
   /**
-   * 用于鉴权的 Token，如果频道启用了 Token 鉴权机制，则需要提供有效的 Token；如果没有启用 Token 鉴权，则传入 `null`。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。
+   * The token used for authentication. If token-based authentication is enabled for your project, a valid token must be provided. If token-based authentication is not enabled, you can pass `null`. See [`IAgoraRTCClient.join`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) for details.
    */
   token: string | null;
 
   /**
-   * 用户 ID，如果不提供则由服务器自动生成。详见 [join](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) 的参数说明。
+   * The user ID. If not provided, the Agora server assigns a number `uid` for you. See [`IAgoraRTCClient.join`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) for details.
    */
   uid?: UID | null;
 }
 
 /**
- * 上下行 last mile 网络质量。
+ * The last-mile network quality.
  */
 export interface NetworkQuality {
   /**
-   * 上行网络质量。基于上行发送码率、上行丢包率、平均往返时延和网络抖动计算。0: 质量未知。1: 质量极好。2: 用户主观感觉和极好差不多，但码率可能略低于极好。3: 用户主观感受有瑕疵但不影响沟通。4: 勉强能沟通但不顺畅。5: 网络质量非常差，基本不能沟通。6: 网络连接断开，完全无法沟通。
+   * The uplink network quality. It is calculated based on the uplink transmission bitrate, uplink packet loss rate, RTT (round-trip time) and jitter.0: The quality is unknown.1: The quality is excellent.2: The quality is good, but the bitrate is less than optimal.3: Users experience slightly impaired communication.4: Users can communicate with each other, but not very smoothly.5: The quality is so poor that users can barely communicate.6: The network is disconnected and users cannot communicate.
    */
   uplink: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
   /**
-   * 下行网络质量。基于下行发送码率、下行丢包率、平均往返时延和网络抖动计算。0: 质量未知。1: 质量极好。2: 用户主观感觉和极好差不多，但码率可能略低于极好。3: 用户主观感受有瑕疵但不影响沟通。4: 勉强能沟通但不顺畅。5: 网络质量非常差，基本不能沟通。6: 网络连接断开，完全无法沟通。
+   * The downlink network quality. It is calculated based on the uplink transmission bitrate, uplink packet loss rate, RTT (round-trip time) and jitter.0: The quality is unknown.1: The quality is excellent.2: The quality is good, but the bitrate is less than optimal.3: Users experience slightly impaired communication.4: Users can communicate with each other, but not very smoothly.5: The quality is so poor that users can barely communicate.6: The network is disconnected and users cannot communicate.
    */
   downlink: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
   /**
-   * SDK 到声网边缘服务器的平均往返时延（Round-Trip Time)，单位 ms。
+   * The average Round-Trip Time (RTT) from the SDK to the Agora edge server, measured in milliseconds (ms).
    */
   delay: number;
 }

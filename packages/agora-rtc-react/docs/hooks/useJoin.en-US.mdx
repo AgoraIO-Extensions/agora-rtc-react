@@ -1,28 +1,29 @@
 ## useJoin
 
-用于加入频道。当组件准备好时加入频道，当组件卸载时自动离开频道。
+This hook lets a user automatically join a channel when the component is ready and automatically leaves the channel when the component is unmounted.
 
-你可以通过 `fetchArgs` 自定义加入频道所需的条件，例如在加入频道前执行获取 Token 等异步操作。
+You can customize the conditions required to join a channel using `fetchArgs`. For example, generating a token and other asynchronous operations can be performed before joining the channel.
 
-#### 参数
+#### Parameters
 
-| 参数名      | 类型                                                        | 是否必选 | 描述                                                                                                                                                            |
-| ----------- | ----------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fetchArgs` | `JoinOptions` &VerticalLine; `(() => Promise<JoinOptions>)` | 必选     | 加入频道所需参数或异步函数。详见 [JoinOptions](./data-types#joinoptions)。                                                                                      |
-| `ready`     | `boolean`                                                   | 可选     | 是否准备好加入频道。默认为 `true`。                                                                                                                             |
-| `client`    | `IAgoraRTCClient`                                           | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter   | Type                                                                                                                                     | Required | Description                                                                                                                                                                         |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fetchArgs` | `JoinOptions` &VerticalLine; `(() => Promise<JoinOptions>)`                                                                              | Required | The parameters or asynchronous function required to join the channel. See [`JoinOptions`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/data-types#joinoptions) for details. |
+| `ready`     | `boolean`                                                                                                                                | Optional | Whether the user is ready to join the channel. The default value is `true`.                                                                                                         |
+| `client`    | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.      |
 
-#### 返回值
+#### Returns
 
-返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `data` | `UID` | 成功加入频道的用户 ID。如果你在传入 `  fetchArgs` 时没有指定 `uid`，则返回默认值 `0`。|
-| `isLoading` | `boolean` |<li>`true`：正在执行加入频道相关操作。</li><li>`false`：已经执行加入频道相关操作，但不代表成功加入频道。</li> |
-| `isConnected` | `boolean` | <li>`true`：客户端已连接到服务器。即加入频道成功。</li><li>`false`：客户端没有连接到服务器。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 加入频道成功则返回 `null`，加入频道失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+Returns an object containing the following properties:
 
-#### 使用示例
+| Property      | Type                                       | Description                                                                                                                                                                                                       |
+| ------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data`        | `UID`                                      | The user ID if the user successfully joins the channel. If you does not specify a `uid` when passing `fetchArgs`, the default value `0` is returned.                                                              |
+| `isLoading`   | `boolean` 、                               | <li>`true`: The hook is performing operations related to joining the channel.</li><li>`false`: The hook completes operations related to joining the channel, but it does not indicate a successful result.</li>   |
+| `isConnected` | `boolean`                                  | <li>`true`: The SDK is connected to the server, indicating that the user successfully joins the channel.</li><li>`false`: The SDK is not connected to the server.</li>                                            |
+| `error`       | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the user successfully joins the channel, otherwise throws an error. See [`AgoraRTCReactError`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/data-types#agorartcreacterror) for details. |
+
+#### Sample code
 
 ```jsx
 import { useJoin } from "agora-rtc-react";

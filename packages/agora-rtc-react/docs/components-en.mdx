@@ -2,24 +2,22 @@
 title: Components
 ---
 
-TODO:
-
-- 根据新 h2 h3 改所有 api 链接
+TODO: cn 链接替换
 
 <h2 className="anchor index-auto-group index-component-agorartcprovider" id="agorartcprovider">
   AgoraRTCProvider
 </h2>
 
-该组件用于将传入的 `client` 对象提供给 `children` 内的各个组件，即向子组件提供 [Context](https://react.dev/learn/passing-data-deeply-with-context)。
+This component is a [context provider](https://react.dev/learn/passing-data-deeply-with-context), which lets all of the components inside `children` read the `client` prop you pass.
 
 #### Props
 
-| 属性名     | 类型              | 默认值 | 描述                                                                                                                                          |
-| ---------- | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client`   | `IAgoraRTCClient` | 无     | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
-| `children` | `ReactNode`       | 无     | 需要展示的 React 节点。                                                                                                                       |
+| Prop       | Type                                                                                                                                     | Default value | Description                                                                                                                                                                    |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`   | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | None          | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| `children` | `ReactNode`                                                                                                                              | None          | The React nodes to be rendered.                                                                                                                                                |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { AgoraRTCProvider } from "agora-rtc-react";
@@ -38,20 +36,20 @@ function App({ children }) {
   AgoraRTCScreenShareProvider
 </h2>
 
-该组件用于将传入的屏幕共享 `client` 对象提供给 `children` 内的各个组件。
+This component is a [context provider](https://react.dev/learn/passing-data-deeply-with-context), which lets all of the components inside `children` read the `client` prop you pass for screen sharing.
 
 #### Props
 
-| 属性名     | 类型              | 默认值 | 描述                                                                                                                                          |
-| ---------- | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client`   | `IAgoraRTCClient` | 无     | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
-| `children` | `ReactNode`       | 无     | 需要展示的 React 节点。                                                                                                                       |
+| Prop       | Type                                                                                                                                     | Default value | Description                                                                                                                                                                    |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`   | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | None          | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| `children` | `ReactNode`                                                                                                                              | None          | The React nodes to be rendered.                                                                                                                                                |
 
-#### 注意事项
+#### Caveats
 
-你可以同时使用 `AgoraRTCScreenShareProvider` 和 `AgoraRTCProvider` ，但二者不会共享 `client` 属性。
+You can use `AgoraRTCScreenShareProvider` and `AgoraRTCProvider` together, but they do not share the `client` prop.
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { AgoraRTCScreenShareProvider } from "agora-rtc-react";
@@ -67,29 +65,29 @@ function App({ children }) {
   LocalAudioTrack
 </h2>
 
-该组件用于播放本地音频轨道，播放设备为用户在浏览器中选择的设备。
+This component plays the local audio track using the playback device selected by the user in the browser.
 
-如果你需要自行设置麦克风设备，可使用 Web SDK 的 [IMicrophoneAudioTrack.setDevice](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/imicrophoneaudiotrack.html#setdevice) 方法。
+If you need the capability to set the microphone device, use the Web SDK's [`IMicrophoneAudioTrack.setDevice`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/imicrophoneaudiotrack.html#setdevice) method.
 
 #### Props
 
-| 属性名     | 类型               | 默认值  | 描述                                                                                                                                                                      |
-| ---------- | ------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `track`    | `ILocalAudioTrack` | 无      | 要播放的本地音频轨道。通过 [useLocalMicrophoneTrack](./hooks#uselocalmicrophonetrack) 创建。                                                                              |
-| `play`     | `boolean`          | `false` | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                           |
-| `volume`   | `number`           | 无      | 音量大小。取值范围 [0, 1000]，0 代表静音，100 代表原始音量。100 以上会使用 [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) 进行音量增益。 |
-| `disabled` | `boolean`          | `false` | <li>`true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。</li><li>`false`：启用该轨道。</li>                                                                           |
-| `muted`    | `boolean`          | `false` | <li>`true`：暂停发送该轨道的媒体数据。</li><li>`false`：恢复发送该轨道的媒体数据。</li>                                                                                   |
-| `children` | `ReactNode`        | 无      | 需要展示的 React 节点。                                                                                                                                                   |
+| Prop       | Type               | Default value | Description                                                                                                                                                                                                                                                 |
+| ---------- | ------------------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `track`    | `ILocalAudioTrack` | None          | The local audio track to be played. Call [`useLocalMicrophoneTrack`](./hooks#uselocalmicrophonetrack) to create a local audio track.                                                                                                                        |
+| `play`     | `boolean`          | `false`       | <li>`true`: Play the track.</li><li>`false`: Stop playing the track.</li>                                                                                                                                                                                   |
+| `volume`   | `number`           | None          | The volume. The value ranges from 0 (mute) to 1000 (maximum). A value of 100 is the original volume. When set to above 100, the SDK applies volume amplification using the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API). |
+| `disabled` | `boolean`          | `false`       | <li>`true`: Disable the track. When disabled, the SDK stops playing and publishing the track.</li><li>`false`: Enable the track.</li>                                                                                                                       |
+| `muted`    | `boolean`          | `false`       | <li>`true`: Pause sending media data of the track.</li><li>`false`: Resume sending media data of the track.</li>                                                                                                                                            |
+| `children` | `ReactNode`        | None          | The React nodes to be rendered.                                                                                                                                                                                                                             |
 
-#### 注意事项
+#### Caveats
 
-设置 `disabled` 和 `muted` 属性时其实是调用了 JavaScript SDK 的 [setEnabled](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setenabled) 方法和 [setMuted](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setmuted) 方法，因此：
+Setting the `disabled` and `muted` prop invokes the Web SDK's [`setEnabled`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setenabled) method and [`setMuted`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setmuted) method, respectively. Therefore:
 
-- 与设置 `disabled` 属性相比，设置 `muted` 属性的响应速度更快且不影响音频采集状态。
-- 不能同时设置 `muted` 属性和 `disabled` 属性。
+- Compared to setting the `disabled` prop, setting the `muted` prop has faster response time and does not affect the audio capture state.
+- Do not set `muted` and `disabled` together.
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { LocalAudioTrack, useLocalAudioTrack } from "agora-rtc-react";
@@ -104,27 +102,27 @@ function App() {
   LocalVideoTrack
 </h2>
 
-该组件用于播放本地视频轨道，播放设备为用户在浏览器中选择的设备。
+This component plays the local video track using the playback device selected by the user in the browser.
 
-如果你需要自行设置摄像头设备，可使用 Web SDK 的 [ICameraVideoTrack.setDevice](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/icameravideotrack.html#setdevice) 方法。
+If you need the capability to set the camera device, use the Web SDK's [`ICameraVideoTrack.setDevice`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/icameravideotrack.html#setdevice) method.
 
 #### Props
 
-| 属性名     | 类型               | 默认值  | 描述                                                                                                                                                                                                                                                                        |
-| ---------- | ------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `track`    | `ILocalVideoTrack` | 无      | 要播放的本地视频轨道。通过 [useLocalCameraTrack](./hooks#uselocalcameratrack) 或 Web SDK 的 [IAgoraRTC.createScreenVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack) 创建。 |
-| `play`     | `boolean`          | `false` | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                                                                                                                             |
-| `disabled` | `boolean`          | `false` | <li>`true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。</li><li>`false`：启用该轨道。</li>                                                                                                                                                                             |
-| `muted`    | `boolean`          | `false` | <li>`true`：暂停发送该轨道的媒体数据。</li><li>`false`：恢复发送该轨道的媒体数据。</li>                                                                                                                                                                                     |
+| Prop       | Type               | Default value | Description                                                                                                                                                                                                                                                                                                                     |
+| ---------- | ------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `track`    | `ILocalVideoTrack` | None          | The local video track to be played. Call [`useLocalCameraTrack`](./hooks#uselocalcameratrack) or the Web SDK's [`IAgoraRTC.createScreenVideoTrack`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack) method to create a local video track. |
+| `play`     | `boolean`          | `false`       | <li>`true`: Play the track.</li><li>`false`: Stop playing the track.</li>                                                                                                                                                                                                                                                       |
+| `disabled` | `boolean`          | `false`       | <li>`true`: Disable the track. When disabled, the SDK will stop playing and publishing the track.</li><li>`false`: Enable the track.</li>                                                                                                                                                                                       |
+| `muted`    | `boolean`          | `false`       | <li>`true`: Pause sending media data of the track.</li><li>`false`: Resume sending media data of the track.</li>                                                                                                                                                                                                                |
 
-#### 注意事项
+#### Caveats
 
-设置 `disabled` 和 `muted` 属性时其实是调用了 JavaScript SDK 的 [setEnabled](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setenabled) 方法和 [setMuted](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setmuted) 方法，因此：
+Setting the `disabled` and `muted` prop invokes the Web SDK's [`setEnabled`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setenabled) method and [`setMuted`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setmuted) method, respectively. Therefore:
 
-- 与设置 `disabled` 属性相比，设置 `muted` 属性的响应速度更快且不影响视频采集状态。
-- 不能同时设置 `muted` 属性和 `disabled` 属性。
+- Compared to setting the `disabled` prop, setting the `muted` prop has faster response time and does not affect the audio capture state.
+- Do not set `muted` and `disabled` together.
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { LocalVideoTrack, useLocalCameraTrack } from "agora-rtc-react";
@@ -139,27 +137,27 @@ function App() {
   LocalUser
 </h2>
 
-该组件用于播放本地用户的摄像头视频轨道和麦克风音频轨道（不支持指定使用的媒体设备）。
+This component plays the camera video track and the microphone audio track of the local user using the playback devices selected by the user in the browser.
 
-当视频轨道停止播放时，该组件会展示封面图片。
+When the video track stops playing, this component shows a cover image.
 
-如果你需要自行设置麦克风或摄像头设备，可使用 Web SDK 的 [IMicrophoneAudioTrack.setDevice](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/imicrophoneaudiotrack.html#setdevice) 或 [ICameraVideoTrack.setDevice](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/icameravideotrack.html#setdevice) 方法。
+If you need the capability to set the microphone or camera device, use the Web SDK's [`IMicrophoneAudioTrack.setDevice`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/imicrophoneaudiotrack.html#setdevice) or [`ICameraVideoTrack.setDevice`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/icameravideotrack.html#setdevice) method.
 
 #### Props
 
-| 属性名       | 类型                    | 默认值  | 描述                                                                                                                                                                      |
-| ------------ | ----------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `micOn`      | `boolean`               | `false` | <li>`true`：打开本地用户的麦克风。</li><li>`false`：关闭本地用户的麦克风。</li>                                                                                           |
-| `cameraOn`   | `boolean`               | `false` | <li>`true`：打开本地用户的摄像头。</li><li>`false`：关闭本地用户的摄像头。</li>                                                                                           |
-| `audioTrack` | `IMicrophoneAudioTrack` | 无      | 要播放的麦克风音频轨道。通过 [useLocalMicrophoneTrack](./hooks#uselocalmicrophonetrack) 创建。                                                                            |
-| `videoTrack` | `ICameraVideoTrack`     | 无      | 要播放的摄像头视频轨道。通过 [useLocalCameraTrack](./hooks#uselocalcameratrack) 创建。                                                                                    |
-| `playAudio`  | `boolean`               | `false` | <li>`true`：播放本地用户的音频轨道。</li><li>`false`：停止播放本地用户的音频轨道。</li>                                                                                   |
-| `playVideo`  | `boolean`               | `false` | <li>`true`：播放本地用户的视频轨道。</li><li>`false`：停止播放本地用户的视频轨道。</li>                                                                                   |
-| `volume`     | `number`                | 无      | 音量大小。取值范围 [0, 1000]，0 代表静音，100 代表原始音量。100 以上会使用 [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) 进行音量增益。 |
-| `cover`      | `string`                | 无      | 当 `playVideo` 为 `false`时要渲染的封面图片，用于替代视频画面显示。支持传入在线图片的 URL 或本地图片的相对路径。                                                          |
-| `children`   | `ReactNode`             | 无      | 需要展示的 React 节点。                                                                                                                                                   |
+| Prop         | Type                    | Default value | Description                                                                                                                                                                                                                                                 |
+| ------------ | ----------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `micOn`      | `boolean`               | `false`       | <li>`true`: Enable the local user's microphone.</li><li>`false`: Disable the local user's microphone.</li>                                                                                                                                                  |
+| `cameraOn`   | `boolean`               | `false`       | <li>`true`: Enable the local user's camera.</li><li>`false`: Disable the local user's camera.</li>                                                                                                                                                          |
+| `audioTrack` | `IMicrophoneAudioTrack` | None          | The microphone audio track to be played, which can be created by calling [`useLocalMicrophoneTrack`](./hooks#uselocalmicrophonetrack).                                                                                                                      |
+| `videoTrack` | `ICameraVideoTrack`     | None          | The camera video track to be played, which can be created by calling [`useLocalCameraTrack`](./hooks#uselocalcameratrack).                                                                                                                                  |
+| `playAudio`  | `boolean`               | `false`       | <li>`true`: Play the local user's audio track.</li><li>`false`: Stop playing the local user's audio track.</li>                                                                                                                                             |
+| `playVideo`  | `boolean`               | `false`       | <li>`true`: Play the local user's video track.</li><li>`false`: Stop playing the local user's video track.</li>                                                                                                                                             |
+| `volume`     | `number`                | None          | The volume. The value ranges from 0 (mute) to 1000 (maximum). A value of 100 is the original volume. When set to above 100, the SDK applies volume amplification using the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API). |
+| `cover`      | `string`                | None          | The cover image to be displayed when `playVideo` is `false`, replacing the video frame. You can pass the URL of an online image or the relative path of a local image.                                                                                      |
+| `children`   | `ReactNode`             | None          | The React nodes to be rendered.                                                                                                                                                                                                                             |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { LocalUser, useLocalAudioTrack, useLocalCameraTrack } from "agora-rtc-react";
@@ -186,19 +184,19 @@ function App() {
   RemoteAudioTrack
 </h2>
 
-该组件用于播放远端用户的音频轨道，并且支持指定播放设备。
+This component plays the audio track of a remote user with the playback device you specify.
 
 #### Props
 
-| 属性名             | 类型                | 默认值 | 描述                                                                                                                                                                                                                                                                                                       |
-| ------------------ | ------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `track`            | `IRemoteAudioTrack` | 无     | 要播放的远端音频轨道。详见 [IRemoteAudioTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iremoteaudiotrack.html)。                                                                                                                                    |
-| `play`             | `boolean`           | 无     | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                                                                                                                                                            |
-| `playbackDeviceId` | `string`            | 无     | 要使用的播放设备 ID，例如扬声器。设备 ID 通过 [getPlaybackDevices](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getplaybackdevices) 获取。该属性仅支持桌面端的 Chrome 浏览器，在其它浏览器上修改该属性的值将会抛出 `NOT_SUPPORTED` 错误。 |
-| `volume`           | `number`            | 无     | 音量大小。取值范围 [0, 100]，0 代表静音，100 代表原始音量。                                                                                                                                                                                                                                                |
-| `children`         | `ReactNode`         | 无     | 需要展示的 React 节点。                                                                                                                                                                                                                                                                                    |
+| Prop               | Type                                                                                                                                         | Default value | Description                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `track`            | [`IRemoteAudioTrack`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iremoteaudiotrack.html) | None          | The remote audio track to be played.                                                                                                                                                                                                                                                                                                                                                                                       |
+| `play`             | `boolean`                                                                                                                                    | None          | <li>`true`: Play the track.</li><li>`false`: Stop playing the track.</li>                                                                                                                                                                                                                                                                                                                                                  |
+| `playbackDeviceId` | `string`                                                                                                                                     | None          | The ID of the playback device, such as a speaker. The device ID can be obtained using [`IAgoraRTC.getPlaybackDevices`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getplaybackdevices). This property is only supported in the desktop version of Chrome browser. Modifying the value of this property in other browsers throws a `NOT_SUPPORTED` error. |
+| `volume`           | `number`                                                                                                                                     | None          | The volume. The value ranges from 0 (mute) to 100 (the original volume).                                                                                                                                                                                                                                                                                                                                                   |
+| `children`         | `ReactNode`                                                                                                                                  | None          | The React nodes to be rendered.                                                                                                                                                                                                                                                                                                                                                                                            |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { RemoteAudioTrack, useJoin, useRemoteAudioTracks, useRemoteUsers } from "agora-rtc-react";
@@ -221,16 +219,16 @@ function App() {
   RemoteVideoTrack
 </h2>
 
-该组件用于播放远端用户的视频轨道，并且不支持指定播放设备。
+This component plays the video track of a remote user and does not support specifying the playback device.
 
 #### Props
 
-| 属性名  | 类型                | 默认值 | 描述                                                                                                                                                                |
-| ------- | ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `track` | `IRemoteVideoTrack` | 无     | 远端视频轨道对象。详见 [IRemoteVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iremotevideotrack.html)。 |
-| `play`  | `boolean`           | 无     | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                     |
+| Prop    | Type                                                                                                                                         | Default value | Description                                                               |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------------------------------------------------------------------- |
+| `track` | [`IRemoteVideoTrack`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iremotevideotrack.html) | None          | The remote video track object.                                            |
+| `play`  | `boolean`                                                                                                                                    | None          | <li>`true`: Play the track.</li><li>`false`: Stop playing the track.</li> |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { RemoteAudioTrack, useJoin, useRemoteAudioTracks, useRemoteUsers } from "agora-rtc-react";
@@ -253,21 +251,21 @@ function App() {
   RemoteUser
 </h2>
 
-该组件用于播放远端用户的视频和音频轨道，并且仅支持指定使用的音频设备、不支持指定使用的视频设备。
+This component plays the video and audio tracks of a remote user and supports specifying the audio device to use. Specifying the video playback device is not supported.
 
 #### Props
 
-| 属性名             | 类型                                      | 默认值                                                                                                                                                     | 描述                                                                                                                                                                                                                                                                                                       |
-| ------------------ | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `user`             | `IAgoraRTCRemoteUser`                     | 无                                                                                                                                                         | 远端用户对象。详见 [IAgoraRTCRemoteUser](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcremoteuser.html)。                                                                                                                                        |
-| `playVideo`        | `boolean`                                 | [user.hasVideo](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcremoteuser.html#hasvideo) 属性的值 | <li>`true`：播放远端用户的视频轨道。</li><li>`false`：停止播放远端用户的视频轨道。</li>                                                                                                                                                                                                                    |
-| `playAudio`        | `boolean`                                 | [user.hasAudio](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcremoteuser.html#hasaudio) 属性的值 | <li>`true`：播放远端用户的音频轨道。</li><li>`false`：停止播放远端用户的音频轨道。</li>                                                                                                                                                                                                                    |
-| `playbackDeviceId` | `string`                                  | 无                                                                                                                                                         | 要使用的播放设备 ID，例如扬声器。设备 ID 通过 [getPlaybackDevices](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getplaybackdevices) 获取。该属性仅支持桌面端的 Chrome 浏览器，在其它浏览器上修改该属性的值将会抛出 `NOT_SUPPORTED` 错误。 |
-| `volume`           | `number`                                  | 无                                                                                                                                                         | 音量大小。取值范围 [0, 100]，0 代表静音，100 代表原始音量。                                                                                                                                                                                                                                                |
-| `cover`            | `string` &VerticalLine; `() => ReactNode` | 无                                                                                                                                                         | 当 `playVideo` 为 `false`时要渲染的封面图片或自定义组件，用于替代视频画面显示。支持传入在线图片的 URL 或本地图片的相对路径。                                                                                                                                                                               |
-| `children`         | `ReactNode`                               | 无                                                                                                                                                         | 需要展示的 React 节点。                                                                                                                                                                                                                                                                                    |
+| Prop               | Type                                                                                                                                             | Default value                                                                                                                                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `user`             | [`IAgoraRTCRemoteUser`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcremoteuser.html) | None                                                                                                                                                           | The remote user object.                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `playVideo`        | `boolean`                                                                                                                                        | The value of [user.hasVideo](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcremoteuser.html#hasvideo) | <li>`true`: Play the video track of the remote user.</li><li>`false`: Stop playing the video track of the remote user.</li>                                                                                                                                                                                                                                                                                                    |
+| `playAudio`        | `boolean`                                                                                                                                        | The value of [user.hasAudio](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcremoteuser.html#hasaudio) | <li>`true`: Play the audio track of the remote user.</li><li>`false`: Stop playing the audio track of the remote user.</li>                                                                                                                                                                                                                                                                                                    |
+| `playbackDeviceId` | `string`                                                                                                                                         | None                                                                                                                                                           | The ID of the playback device, such as a speaker. The device ID can be obtained using [`IAgoraRTC.getPlaybackDevices`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getplaybackdevices). This property is only supported in the desktop version of the Chrome browser. Modifying the value of this property in other browsers throws a `NOT_SUPPORTED` error. |
+| `volume`           | `number`                                                                                                                                         | None                                                                                                                                                           | The volume. The value ranges from 0 (mute) to 100 (the original volume).                                                                                                                                                                                                                                                                                                                                                       |
+| `cover`            | `string` &VerticalLine; `() => ReactNode`                                                                                                        | None                                                                                                                                                           | The cover image or custom component to be displayed when `playVideo` is `false`, replacing the video frame. You can pass the URL of an online image or the relative path of a local image.                                                                                                                                                                                                                                     |
+| `children`         | `ReactNode`                                                                                                                                      | None                                                                                                                                                           | The React nodes to be rendered.                                                                                                                                                                                                                                                                                                                                                                                                |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { RemoteUser, useRemoteUsers } from "agora-rtc-react";

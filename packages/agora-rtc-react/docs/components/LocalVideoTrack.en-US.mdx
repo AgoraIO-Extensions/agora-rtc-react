@@ -1,26 +1,26 @@
 ## LocalVideoTrack
 
-该组件用于播放本地视频轨道，播放设备为用户在浏览器中选择的设备。
+This component plays the local video track using the playback device selected by the user in the browser.
 
-如果你需要自行设置摄像头设备，可使用 Web SDK 的 [ICameraVideoTrack.setDevice](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/icameravideotrack.html#setdevice) 方法。
+If you need the capability to set the camera device, use the Web SDK's [`ICameraVideoTrack.setDevice`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/icameravideotrack.html#setdevice) method.
 
 #### Props
 
-| 属性名     | 类型               | 默认值  | 描述                                                                                                                                                                                                                                                                        |
-| ---------- | ------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `track`    | `ILocalVideoTrack` | 无      | 要播放的本地视频轨道。通过 [useLocalCameraTrack](./hooks#uselocalcameratrack) 或 Web SDK 的 [IAgoraRTC.createScreenVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack) 创建。 |
-| `play`     | `boolean`          | `false` | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                                                                                                                             |
-| `disabled` | `boolean`          | `false` | <li>`true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。</li><li>`false`：启用该轨道。</li>                                                                                                                                                                             |
-| `muted`    | `boolean`          | `false` | <li>`true`：暂停发送该轨道的媒体数据。</li><li>`false`：恢复发送该轨道的媒体数据。</li>                                                                                                                                                                                     |
+| Prop       | Type               | Default value | Description                                                                                                                                                                                                                                                                                                                                                                        |
+| ---------- | ------------------ | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `track`    | `ILocalVideoTrack` | None          | The local video track to be played. Call [`useLocalCameraTrack`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/hooks#uselocalcameratrack) or the Web SDK's [`IAgoraRTC.createScreenVideoTrack`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack) method to create a local video track. |
+| `play`     | `boolean`          | `false`       | <li>`true`: Play the track.</li><li>`false`: Stop playing the track.</li>                                                                                                                                                                                                                                                                                                          |
+| `disabled` | `boolean`          | `false`       | <li>`true`: Disable the track. When disabled, the SDK will stop playing and publishing the track.</li><li>`false`: Enable the track.</li>                                                                                                                                                                                                                                          |
+| `muted`    | `boolean`          | `false`       | <li>`true`: Pause sending media data of the track.</li><li>`false`: Resume sending media data of the track.</li>                                                                                                                                                                                                                                                                   |
 
-#### 注意事项
+#### Caveats
 
-设置 `disabled` 和 `muted` 属性时其实是调用了 JavaScript SDK 的 [setEnabled](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setenabled) 方法和 [setMuted](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setmuted) 方法，因此：
+Setting the `disabled` and `muted` prop invokes the Web SDK's [`setEnabled`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setenabled) method and [`setMuted`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setmuted) method, respectively. Therefore:
 
-- 与设置 `disabled` 属性相比，设置 `muted` 属性的响应速度更快且不影响视频采集状态。
-- 不能同时设置 `muted` 属性和 `disabled` 属性。
+- Compared to setting the `disabled` prop, setting the `muted` prop has faster response time and does not affect the audio capture state.
+- Do not set `muted` and `disabled` together.
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { LocalVideoTrack, useLocalCameraTrack } from "agora-rtc-react";

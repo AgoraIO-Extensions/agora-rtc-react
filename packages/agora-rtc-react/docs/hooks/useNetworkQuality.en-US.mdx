@@ -1,20 +1,20 @@
 ## useNetworkQuality
 
-用于获取本地用户网络质量。
+Returns the network quality of the local user.
 
-#### 参数
+#### Parameters
 
-| 参数名   | 类型                                    | 是否必选 | 描述                                                                                                                                                            |
-| -------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter | Type                                                                                                                                                           | Required | Description                                                                                                                                                                    |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-| 类型             | 描述                                                                         |
-| ---------------- | ---------------------------------------------------------------------------- |
-| `NetworkQuality` | 本地用户的网络质量信息。详见 [NetworkQuality](./data-types#networkquality)。 |
+| Type             | Description                                                                                                                                                |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NetworkQuality` | The network quality of the local user. See [`NetworkQuality`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/data-types#networkquality) for details. |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { useNetworkQuality } from "agora-rtc-react";

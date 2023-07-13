@@ -9,13 +9,26 @@ import { compareVersion, useAsyncEffect, useIsUnmounted } from "./tools";
 import { useIsConnected } from "./useIsConnected";
 
 /**
- * 用于发布本地轨道。当组件准备好时发布，当组件卸载时取消发布。
+ * This hook lets you publish the local tracks when the component is ready and unpublish them when the component is unmounted.
  *
- * @param `tracks` {(ILocalTrack | null)[]} 本地轨道列表。
- * @param `readyToPublish` {boolean} 是否准备好进行发布。默认为 `true`。
- * @param `client` {IAgoraRTCClient} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
+ * @param `tracks` {(ILocalTrack | null)[]} The list of local tracks.
+ * @param `readyToPublish` {boolean} Whether the local tracks are ready to publish. The default value is `true`.
+ * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.
  * @return isLoading boolean
  * @return error AgoraRTCReactError | null
+ * @example
+ * ```jsx
+ * import { useLocalMicrophoneTrack, useLocalCameraTrack, usePublish } from "agora-rtc-react";
+ *
+ * function App() {
+ *   // get audioTrack and videoTrack before publish
+ *   const audioTrack = useLocalMicrophoneTrack();
+ *   const videoTrack = useLocalCameraTrack();
+ *   usePublish([audioTrack, videoTrack]);
+ *
+ *   return <></>;
+ * }
+ * ```
  */
 export function usePublish(
   tracks: (ILocalTrack | null)[],

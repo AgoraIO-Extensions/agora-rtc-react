@@ -6,7 +6,10 @@ export const languagesFormat = [".zh-CN", ".en-US"];
 
 export const packagePath = path.join(__dirname, "..", "packages", "agora-rtc-react");
 export const docsPath = path.join(packagePath, "docs");
-export const readmePath = path.join(__dirname, "..", "README.md");
+export const urlPrefix = [
+  "https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/",
+  "https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/",
+];
 
 export const storiesPath = path.join(packagePath, "src", "stories");
 export const hooksPath = path.join(packagePath, "src", "hooks");

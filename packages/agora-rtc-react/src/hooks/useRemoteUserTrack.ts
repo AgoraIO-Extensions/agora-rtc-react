@@ -16,14 +16,27 @@ import { createAsyncTaskRunner, joinDisposers } from "../misc/utils";
 import { useIsConnected } from "./useIsConnected";
 
 /**
- * 用于获取远端用户音视频轨道。
+ * This hook lets you retrieve the audio or video track of a remote user.
  *
- * @param `user` {IAgoraRTCRemoteUser | undefined} 远端用户对象。
- * @param `mediaType` {"video" | "audio"} 媒体类型，支持传入 `"video"` 或 `"audio"`。
- * @param `client` {IAgoraRTCClient | null} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
+ * @param `user` {IAgoraRTCRemoteUser | undefined} The remote user.
+ * @param `mediaType` {"video" | "audio"} The media type. Pass `"video"` or `"audio"`.
+ * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.
  * @return track IRemoteVideoTrack | IRemoteAudioTrack | undefined
  * @return isLoading boolean
  * @return error AgoraRTCReactError | null
+ * @example
+ * ```jsx
+ * import { useRemoteUsers, useRemoteUserTrack } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const remoteUsers = useRemoteUsers();
+ *
+ *   const videoTrack = useRemoteUserTrack(remoteUsers[0], "video");
+ *   const audioTrack = useRemoteUserTrack(remoteUsers[0], "audio");
+ *
+ *   return <></>;
+ * }
+ * ```
  */
 export function useRemoteUserTrack(
   user: IAgoraRTCRemoteUser | undefined,

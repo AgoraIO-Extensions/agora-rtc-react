@@ -15,7 +15,6 @@ interface Controls {
 
 const meta: Meta = {
   title: "Tools/TrackBoundary",
-  tags: ["autodocs"],
   component: TrackBoundary,
   argTypes: {
     direction: {

@@ -8,7 +8,6 @@ import { LocalVideoTrack } from "../components";
 const meta: Meta<LocalVideoTrackProps> = {
   title: "Track/LocalVideoTrack",
   component: LocalVideoTrack,
-  tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },

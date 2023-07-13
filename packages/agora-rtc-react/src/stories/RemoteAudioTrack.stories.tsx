@@ -7,7 +7,6 @@ import { RemoteAudioTrack } from "../components";
 const meta: Meta<RemoteAudioTrackProps> = {
   title: "Track/RemoteAudioTrack",
   component: RemoteAudioTrack,
-  tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },

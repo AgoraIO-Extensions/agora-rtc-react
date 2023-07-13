@@ -1,30 +1,31 @@
 ## usePublish
 
-用于发布本地轨道。当组件准备好时发布，当组件卸载时取消发布。
+This hook lets you publish the local tracks when the component is ready and unpublish them when the component is unmounted.
 
-#### 参数
+#### Parameters
 
-| 参数名           | 类型                                    | 是否必选 | 描述                                                                                                                                                            |
-| ---------------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tracks`         | `(ILocalTrack` &VerticalLine; `null)[]` | 必选     | 本地轨道列表。                                                                                                                                                  |
-| `readyToPublish` | `boolean`                               | 可选     | 是否准备好进行发布。默认为 `true`。                                                                                                                             |
-| `client`         | `IAgoraRTCClient`                       | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter        | Type                                                                                                                                                           | Required | Description                                                                                                                                                                    |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tracks`         | `(ILocalTrack` &VerticalLine; `null)[]`                                                                                                                        | Yes      | The list of local tracks.                                                                                                                                                      |
+| `readyToPublish` | `boolean`                                                                                                                                                      | No       | Whether the local tracks are ready to publish. The default value is `true`.                                                                                                    |
+| `client`         | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `isLoading` | `boolean` |<li>`true`：正在执行发布相关操作。</li><li>`false`：已经执行发布相关操作，但不代表成功发布。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 发布成功则返回 `null`，发布失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+Returns an object containing the following properties:
 
-#### 使用示例
+| Property    | Type                                       | Description                                                                                                                                                                                                         |
+| ----------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `isLoading` | `boolean`                                  | <li>`true`: The hook is performing operations related to publishing the tracks.</li><li>`false`: The hook completes operations related to publishing the tracks, but it does not indicate a successful result.</li> |
+| `error`     | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks are successfully published, otherwise throws an error. See [`AgoraRTCReactError`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/data-types#agorartcreacterror) for details.     |
+
+#### Sample code
 
 ```jsx
 import { useLocalMicrophoneTrack, useLocalCameraTrack, usePublish } from "agora-rtc-react";
 
 function App() {
-  //get audioTrack and videoTrack before publish
+  // get audioTrack and videoTrack before publish
   const audioTrack = useLocalMicrophoneTrack();
   const videoTrack = useLocalCameraTrack();
   usePublish([audioTrack, videoTrack]);

@@ -1,20 +1,20 @@
 ## useIsConnected
 
-用于获取客户端是否连接到服务器。
+Returns whether the SDK is connected to Agora's server.
 
-#### 参数
+#### Parameters
 
-| 参数名   | 类型                                    | 是否必选 | 描述                     |
-| -------- | --------------------------------------- | -------- | ------------------------ |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | `IAgoraRTCClient` 对象。 |
+| Parameter | Type                                                                                                                                                           | Required | Description                                                                                                                                                                    |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-| 类型      | 描述                                                                              |
-| --------- | --------------------------------------------------------------------------------- |
-| `boolean` | <li>`true`：客户端已连接到服务器。</li><li>`false`：客户端没有连接到服务器。</li> |
+| Type      | Description                                                                                                   |
+| --------- | ------------------------------------------------------------------------------------------------------------- |
+| `boolean` | <li>`true`: The SDK is connected to the server.</li><li>`false`: The SDK is not connected to the server.</li> |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { useIsConnected } from "agora-rtc-react";

@@ -10,28 +10,37 @@ import { useAutoPlayVideoTrack } from "./TrackBoundary";
 
 export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**
-   * 要播放的本地视频轨道。通过 [IAgoraRTC.createScreenVideoTrack](./hooks#uselocalcameratrack">useLocalCameraTrack</a> 或 Web SDK 的 <a href="https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack) 创建。
+   * The local video track to be played. Call [`IAgoraRTC.createScreenVideoTrack`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/hooks#uselocalcameratrack">`useLocalCameraTrack`</a> or the Web SDK's <a href="https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack) method to create a local video track.
    */
   readonly track?: MaybePromiseOrNull<ILocalVideoTrack>;
 
   /**
-   * `true`：播放该轨道。`false`：停止播放该轨道。
+   * `true`: Play the track.`false`: Stop playing the track.
    */
   readonly play?: boolean;
 
   /**
-   * `true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。`false`：启用该轨道。
+   * `true`: Disable the track. When disabled, the SDK will stop playing and publishing the track.`false`: Enable the track.
    */
   readonly disabled?: boolean;
 
   /**
-   * `true`：暂停发送该轨道的媒体数据。`false`：恢复发送该轨道的媒体数据。
+   * `true`: Pause sending media data of the track.`false`: Resume sending media data of the track.
    */
   readonly muted?: boolean;
 }
 
 /**
- * 该组件用于播放本地视频轨道，播放设备为用户在浏览器中选择的设备。
+ * This component plays the local video track using the playback device selected by the user in the browser.
+ * @example
+ * ```jsx
+ * import { LocalVideoTrack, useLocalCameraTrack } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const videoTrack = useLocalCameraTrack();
+ *   return <LocalVideoTrack track={videoTrack} play />;
+ * }
+ * ```
  */
 export function LocalVideoTrack({
   track: maybeTrack,

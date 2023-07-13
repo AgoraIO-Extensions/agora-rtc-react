@@ -16,13 +16,25 @@ import type { massUserProps } from "./types";
 import { useIsConnected } from "./useIsConnected";
 
 /**
- * 用于自动订阅和获取远端用户音频轨道。
+ * This hook lets you automatically subscribe to and retrieve remote users' audio tracks.
  *
- * @param `users` {IAgoraRTCRemoteUser[] | undefined} 远端用户列表。
- * @param `client` {IAgoraRTCClient | null} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
+ * @param `users` {IAgoraRTCRemoteUser[] | undefined} The list of remote users.
+ * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.
  * @return audioTracks IRemoteAudioTrack[]
  * @return isLoading boolean
  * @return error AgoraRTCReactError | null
+ * @example
+ * ```jsx
+ * import { useRemoteUsers, useRemoteVideoTracks } from "agora-rtc-react";
+ *
+ * function App() {
+ *   //get remote user list
+ *   const remoteUsers = useRemoteUsers();
+ *   const videoTracks = useRemoteVideoTracks(remoteUsers);
+ *
+ *   return <></>;
+ * }
+ * ```
  */
 export function useRemoteAudioTracks(
   users: IAgoraRTCRemoteUser[] | undefined,

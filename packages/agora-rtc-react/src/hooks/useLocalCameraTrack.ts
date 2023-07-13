@@ -8,13 +8,23 @@ import { useAsyncEffect, useIsUnmounted } from "./tools";
 import { useIsConnected } from "./useIsConnected";
 
 /**
- * 用于创建本地摄像头视频轨道。
+ * This hook lets you create a local camera video track.
  *
- * @param `ready` {boolean} 是否准备好创建轨道，默认为 `true`。
- * @param `client` {IAgoraRTCClient} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
+ * @param `ready` {boolean} Whether it is ready to create the track. The default value is `true`.
+ * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.
  * @return localCameraTrack ICameraVideoTrack | null
  * @return isLoading boolean
  * @return error AgoraRTCReactError | null
+ * @example
+ * ```jsx
+ * import { useLocalCameraTrack } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const audioTrack = useLocalCameraTrack();
+ *
+ *   return <></>;
+ * }
+ * ```
  */
 export function useLocalCameraTrack(
   ready = true,
