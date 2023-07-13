@@ -128,8 +128,8 @@ importers:
         specifier: ^6.14.1
         version: 6.14.1(react-dom@18.2.0)(react@18.2.0)
       react-select:
-        specifier: ^5.7.3
-        version: 5.7.3(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^5.7.4
+        version: 5.7.4(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
       sanitize.css:
         specifier: ^13.0.0
         version: 13.0.0
@@ -12438,8 +12438,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-select@5.7.3(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-z8i3NCuFFWL3w27xq92rBkVI2onT0jzIIPe480HlBjXJ3b5o6Q+Clp4ydyeKrj9DZZ3lrjawwLC5NGl0FSvUDg==}
+  /react-select@5.7.4(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-NhuE56X+p9QDFh4BgeygHFIvJJszO1i1KSkg/JPcIJrbovyRtI+GuOEa4XzFCEpZRAEoEI8u/cAHK+jG/PgUzQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
