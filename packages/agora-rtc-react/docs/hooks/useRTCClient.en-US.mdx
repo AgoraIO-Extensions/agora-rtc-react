@@ -1,20 +1,20 @@
 ## useRTCClient
 
-用于获取 `IAgoraRTCClient` 对象。
+Returns the `IAgoraRTCClient` object.
 
-#### 参数
+#### Parameters
 
-| 参数名   | 类型                                    | 是否必选 | 描述                                                                                                                                                              |
-| -------- | --------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | 如果传入该参数，则使用传入的 `IAgoraRTCClient` 对象；如果不传入该参数，则使用从[父组件的 Context](./components#agorartcprovider)中获取的 `IAgoraRTCClient` 对象。 |
+| Parameter | Type                                                                                                                                                   | Required | Description                                                                                                                                                                                            |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | If provided, the passed `IAgoraRTCClient` object is returned. If not provided, the `IAgoraRTCClient` object obtained from the [parent component's context](./components#agorartcprovider) is returned. |
 
-#### 返回值
+#### Returns
 
-| 类型              | 描述                     |
-| ----------------- | ------------------------ |
-| `IAgoraRTCClient` | `IAgoraRTCClient` 对象。 |
+| Type                                                                                                                                     | Description                   |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | The `IAgoraRTCClient` client. |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { useRTCClient } from "agora-rtc-react";

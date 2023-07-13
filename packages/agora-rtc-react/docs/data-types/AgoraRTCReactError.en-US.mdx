@@ -1,18 +1,20 @@
 ## AgoraRTCReactError
 
-抛出的错误。
+Thrown errors.
 
-`AgoraRTCReactError` 继承自浏览器的 [Error 对象](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)。直接打印 `AgoraRTCReactError` 对象可以看到错误信息。
+`AgoraRTCReactError` extends the browser's [Error object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error). When you directly print the `AgoraRTCReactError` object, you can see the error message.
 
-| 属性        | 类型     | 是否必选 | 描述                                                                                      |
-| ----------- | -------- | -------- | ----------------------------------------------------------------------------------------- |
-| `rtcMethod` | `string` | 必选     | 发生错误的 Web SDK 方法名。根据 Web SDK 的方法名可以定位发生错误的 Hook，对应关系见下表。 |
+| Property    | Type     | Required | Description                                                                                                                               |
+| ----------- | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `rtcMethod` | `string` | Yes      | The Web SDK method that throws the error, which helps you determine the corresponding Hook where the error occurred. See the table below. |
 
-| `rtcMethod`                                                                                             | 发生错误的 Hook           |
+**Mapping of `rtcMethod` to Hooks**
+
+| `rtcMethod`                                                                                             | Corresponding Hook        |
 | ------------------------------------------------------------------------------------------------------- | ------------------------- |
 | `"IAgoraRTCClient.join"`                                                                                | `useJoin`                 |
 | `"IAgoraRTC.createCameraVideoTrack" `                                                                   | `useLocalCameraTrack`     |
 | `"IAgoraRTC.createMicrophoneAudioTrack"`                                                                | `useLocalMicrophoneTrack` |
 | `"IAgoraRTCClient.publish"`                                                                             | `usePublish`              |
-| `"IAgoraRTCClient.unsubscribe"` 或 `"IAgoraRTCClient.subscribe"`                                        | `useRemoteUserTrack`      |
-| `"IAgoraRTCClient.unsubscribe"` 或 `"IAgoraRTCClient.subscribe"` 或 `"IAgoraRTCClient.massUnsubscribe"` | `useRemoteVideoTracks `   |
+| `"IAgoraRTCClient.unsubscribe"` or `"IAgoraRTCClient.subscribe"`                                        | `useRemoteUserTrack`      |
+| `"IAgoraRTCClient.unsubscribe"` or `"IAgoraRTCClient.subscribe"` or `"IAgoraRTCClient.massUnsubscribe"` | `useRemoteVideoTracks `   |

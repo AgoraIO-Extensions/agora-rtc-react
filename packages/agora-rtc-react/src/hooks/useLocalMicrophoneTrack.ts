@@ -13,11 +13,11 @@ import { useAsyncEffect, useIsUnmounted } from "./tools";
 import { useIsConnected } from "./useIsConnected";
 
 /**
- * 用于创建本地麦克风音频轨道。
+ * This hook lets you create a local microphone audio track.
  *
- * @param `ready` {boolean} 是否准备好创建轨道，默认为 `true`。
- * @param `audioTrackConfig` {MicrophoneAudioTrackInitConfig} 麦克风音频轨道的初始化配置，默认为 `{ ANS: true, AEC: true }`。详见 [MicrophoneAudioTrackInitConfig](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/microphoneaudiotrackinitconfig.html)。
- * @param `client` {IAgoraRTCClient} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
+ * @param `ready` {boolean} Whether it is ready to create the track. The default value is `true`.
+ * @param `audioTrackConfig` {MicrophoneAudioTrackInitConfig} Configurations for initializing the microphone audio track. The default is `{ ANS: true, AEC: true }`. See [`MicrophoneAudioTrackInitConfig`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/microphoneaudiotrackinitconfig.html) for details.
+ * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.
  * @return localMicrophoneTrack IMicrophoneAudioTrack | null
  * @return isLoading boolean
  * @return error AgoraRTCReactError | null

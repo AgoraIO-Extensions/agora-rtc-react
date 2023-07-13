@@ -59,13 +59,13 @@ This example will render Agora Client into a container on the page.
 
 - [`LocalVideoTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/LocalVideoTrack.zh-CN.mdx) &mdash; 该组件用于播放本地视频轨道，播放设备为用户在浏览器中选择的设备。
 
-- [`LocalUser`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/LocalUser.zh-CN.mdx) &mdash; 该组件用于播放本地用户的摄像头视频轨道和麦克风音频轨道（不支持指定使用的媒体设备）。
+- [`LocalUser`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/LocalUser.zh-CN.mdx) &mdash; 该组件用于播放本地用户的摄像头视频轨道和麦克风音频轨道，播放设备为用户在浏览器中选择的设备。
 
 - [`LocalAudioTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/LocalAudioTrack.zh-CN.mdx) &mdash; 该组件用于播放本地音频轨道，播放设备为用户在浏览器中选择的设备。
 
-- [`AgoraRTCScreenShareProvider`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/AgoraRTCScreenShareProvider.zh-CN.mdx) &mdash; 该组件用于将传入的屏幕共享 client 对象提供给 children 内的各个组件。
+- [`AgoraRTCScreenShareProvider`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/AgoraRTCScreenShareProvider.zh-CN.mdx) &mdash; 该组件向子组件<a href="https://react.dev/learn/passing-data-deeply-with-context">提供 Context</a>，让 children 内的各个组件都能读取你传入的用于屏幕共享的 client 属性。
 
-- [`AgoraRTCProvider`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/AgoraRTCProvider.zh-CN.mdx) &mdash; 该组件用于将传入的 client 对象提供给 children 内的各个组件，即向子组件提供 <a href="https://react.dev/learn/passing-data-deeply-with-context">Context</a>。
+- [`AgoraRTCProvider`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/AgoraRTCProvider.zh-CN.mdx) &mdash; 该组件向子组件<a href="https://react.dev/learn/passing-data-deeply-with-context">提供 Context</a>，让 children 内的各个组件都能读取你传入的 client 属性。
 
 # Hooks
 
@@ -91,15 +91,15 @@ This example will render Agora Client into a container on the page.
 
 - [`useJoin`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useJoin.zh-CN.mdx) &mdash; 用于加入频道。当组件准备好时加入频道，当组件卸载时自动离开频道。
 
-- [`useIsConnected`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useIsConnected.zh-CN.mdx) &mdash; 用于获取客户端是否连接到服务器。
+- [`useIsConnected`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useIsConnected.zh-CN.mdx) &mdash; 用于获取 SDK 是否连接到服务器。
 
 - [`useCurrentUID`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useCurrentUID.zh-CN.mdx) &mdash; 用于获取当前用户 UID 。
 
-- [`useConnectionState`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useConnectionState.zh-CN.mdx) &mdash; 用于获取详细的客户端连接状态，包括与服务器连接断开、正在连接中、已连接、正在重连中、正在断开连接。
+- [`useConnectionState`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useConnectionState.zh-CN.mdx) &mdash; 用于获取详细的 SDK 连接状态。
 
-- [`useAutoPlayVideoTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useAutoPlayVideoTrack.zh-CN.mdx) &mdash; 用于控制本地或远端视频轨道。
+- [`useAutoPlayVideoTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useAutoPlayVideoTrack.zh-CN.mdx) &mdash; 用于自动播放本地或远端视频轨道。
 
-- [`useAutoPlayAudioTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useAutoPlayAudioTrack.zh-CN.mdx) &mdash; 用于控制本地或远端音频轨道。
+- [`useAutoPlayAudioTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useAutoPlayAudioTrack.zh-CN.mdx) &mdash; 用于自动播放本地或远端音频轨道。
 
 # License
 

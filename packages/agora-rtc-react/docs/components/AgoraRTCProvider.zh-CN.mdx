@@ -1,13 +1,13 @@
 ## AgoraRTCProvider
 
-该组件用于将传入的 `client` 对象提供给 `children` 内的各个组件，即向子组件提供 [Context](https://react.dev/learn/passing-data-deeply-with-context)。
+该组件向子组件[提供 Context](https://react.dev/learn/passing-data-deeply-with-context)，让 `children` 内的各个组件都能读取你传入的 `client` 属性。
 
 #### Props
 
-| 属性名     | 类型              | 默认值 | 描述                                                                                                                                          |
-| ---------- | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client`   | `IAgoraRTCClient` | 无     | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
-| `children` | `ReactNode`       | 无     | 需要展示的 React 节点。                                                                                                                       |
+| 属性名     | 类型                                                                                                                                     | 默认值 | 描述                                                                                                                                                              |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client`   | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | 无     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| `children` | `ReactNode`                                                                                                                              | 无     | 需要展示的 React 节点。                                                                                                                                           |
 
 #### 使用示例
 

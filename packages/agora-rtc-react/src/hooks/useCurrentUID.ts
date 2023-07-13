@@ -6,10 +6,10 @@ import { listen } from "../misc/listen";
 import { timeout } from "../misc/utils";
 
 /**
- * 用于获取当前用户 UID 。
+ * Returns the current user ID.
  *
- * @param `client` {IAgoraRTCClient | null} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
- * @return UID | undefined 当前用户的 UID。如果当前用户没有加入任何频道，则返回 undefined。
+ * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.
+ * @return UID | undefined The user ID of the current user. If the current user has not joined any channel, undefined is returned.
  * @example
  * ```jsx
  * import { useCurrentUID } from "agora-rtc-react";

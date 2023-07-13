@@ -1,19 +1,19 @@
 ## AgoraRTCScreenShareProvider
 
-该组件用于将传入的屏幕共享 `client` 对象提供给 `children` 内的各个组件。
+This component is a [context provider](https://react.dev/learn/passing-data-deeply-with-context), which lets all of the components inside `children` read the `client` prop you pass for screen sharing.
 
 #### Props
 
-| 属性名     | 类型              | 默认值 | 描述                                                                                                                                          |
-| ---------- | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client`   | `IAgoraRTCClient` | 无     | [IAgoraRTCClient](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) 对象。 |
-| `children` | `ReactNode`       | 无     | 需要展示的 React 节点。                                                                                                                       |
+| Prop       | Type                                                                                                                                     | Default value | Description                                                                                                                                                                    |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`   | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | None          | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| `children` | `ReactNode`                                                                                                                              | None          | The React nodes to be rendered.                                                                                                                                                |
 
-#### 注意事项
+#### Caveats
 
-你可以同时使用 `AgoraRTCScreenShareProvider` 和 `AgoraRTCProvider` ，但二者不会共享 `client` 属性。
+You can use `AgoraRTCScreenShareProvider` and `AgoraRTCProvider` together, but they do not share the `client` prop.
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { AgoraRTCScreenShareProvider } from "agora-rtc-react";

@@ -9,38 +9,38 @@ import { useAutoPlayAudioTrack } from "./TrackBoundary";
 
 export interface LocalAudioTrackProps {
   /**
-   * 要播放的本地音频轨道。通过 [useLocalMicrophoneTrack](./hooks#uselocalmicrophonetrack) 创建。
+   * The local audio track to be played. Call [`useLocalMicrophoneTrack`](./hooks#uselocalmicrophonetrack) to create a local audio track.
    */
   readonly track?: MaybePromiseOrNull<ILocalAudioTrack>;
 
   /**
-   * `true`：播放该轨道。`false`：停止播放该轨道。
+   * `true`: Play the track.`false`: Stop playing the track.
    */
   readonly play?: boolean;
 
   /**
-   * 音量大小。取值范围 [0, 1000]，0 代表静音，100 代表原始音量。100 以上会使用 [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) 进行音量增益。
+   * The volume. The value ranges from 0 (mute) to 1000 (maximum). A value of 100 is the original volume. When set to above 100, the SDK applies volume amplification using the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
    */
   readonly volume?: number;
 
   /**
-   * `true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。`false`：启用该轨道。
+   * `true`: Disable the track. When disabled, the SDK stops playing and publishing the track.`false`: Enable the track.
    */
   readonly disabled?: boolean;
 
   /**
-   * `true`：暂停发送该轨道的媒体数据。`false`：恢复发送该轨道的媒体数据。
+   * `true`: Pause sending media data of the track.`false`: Resume sending media data of the track.
    */
   readonly muted?: boolean;
 
   /**
-   * 需要展示的 React 节点。
+   * The React nodes to be rendered.
    */
   readonly children?: ReactNode;
 }
 
 /**
- * 该组件用于播放本地音频轨道，播放设备为用户在浏览器中选择的设备。
+ * This component plays the local audio track using the playback device selected by the user in the browser.
  * @example
  * ```jsx
  * import { LocalAudioTrack, useLocalAudioTrack } from "agora-rtc-react";

@@ -6,21 +6,21 @@ title: Hooks
   useConnectionState
 </h2>
 
-用于获取详细的客户端连接状态，包括与服务器连接断开、正在连接中、已连接、正在重连中、正在断开连接。
+Returns the detailed connection state of the SDK.
 
-#### 参数
+#### Parameters
 
-| 参数名   | 类型                                    | 是否必选 | 描述                                                                                                                                                            |
-| -------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter | Type                                                                                                                                                   | Required | Description                                                                                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-| 类型              | 描述                                                                                                                                                                 |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ConnectionState` | 客户端与服务器的连接状态。详见 [ConnectionState](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/globals.html#connectionstate)。 |
+| Type              | Description                                                                                                                                                                                                          |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ConnectionState` | The connection state between the SDK and Agora's edge server. See [`ConnectionState`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/globals.html#connectionstate) for details. |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { useConnectionState } from "agora-rtc-react";
@@ -36,21 +36,21 @@ function App() {
   useIsConnected
 </h2>
 
-用于获取客户端是否连接到服务器。
+Returns whether the SDK is connected to Agora's server.
 
-#### 参数
+#### Parameters
 
-| 参数名   | 类型                                    | 是否必选 | 描述                     |
-| -------- | --------------------------------------- | -------- | ------------------------ |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | `IAgoraRTCClient` 对象。 |
+| Parameter | Type                                                                                                                                                   | Required | Description                                                                                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-| 类型      | 描述                                                                              |
-| --------- | --------------------------------------------------------------------------------- |
-| `boolean` | <li>`true`：客户端已连接到服务器。</li><li>`false`：客户端没有连接到服务器。</li> |
+| Type      | Description                                                                                                   |
+| --------- | ------------------------------------------------------------------------------------------------------------- |
+| `boolean` | <li>`true`: The SDK is connected to the server.</li><li>`false`: The SDK is not connected to the server.</li> |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { useIsConnected } from "agora-rtc-react";
@@ -66,21 +66,21 @@ function App() {
   useCurrentUID
 </h2>
 
-用于获取当前用户 UID 。
+Returns the current user ID.
 
-#### 参数
+#### Parameters
 
-| 参数名   | 类型                                    | 是否必选 | 描述                                                                                                                                                            |
-| -------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter | Type                                                                                                                                                   | Required | Description                                                                                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-| 类型                             | 描述                                                               |
-| -------------------------------- | ------------------------------------------------------------------ |
-| `UID` &VerticalLine; `undefined` | 当前用户的 UID。如果当前用户没有加入任何频道，则返回 `undefined`。 |
+| Type                     | Description                                                                                               |
+| ------------------------ | --------------------------------------------------------------------------------------------------------- |
+| `UID` &#124; `undefined` | The user ID of the current user. If the current user has not joined any channel, `undefined` is returned. |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { useCurrentUID } from "agora-rtc-react";
@@ -96,21 +96,21 @@ function App() {
   useNetworkQuality
 </h2>
 
-用于获取本地用户网络质量。
+Returns the network quality of the local user.
 
-#### 参数
+#### Parameters
 
-| 参数名   | 类型                                    | 是否必选 | 描述                                                                                                                                                            |
-| -------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter | Type                                                                                                                                                   | Required | Description                                                                                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-| 类型             | 描述                                                                         |
-| ---------------- | ---------------------------------------------------------------------------- |
-| `NetworkQuality` | 本地用户的网络质量信息。详见 [NetworkQuality](./data-types#networkquality)。 |
+| Type             | Description                                                                                             |
+| ---------------- | ------------------------------------------------------------------------------------------------------- |
+| `NetworkQuality` | The network quality of the local user. See [`NetworkQuality`](./data-types#networkquality) for details. |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { useNetworkQuality } from "agora-rtc-react";
@@ -126,21 +126,21 @@ function App() {
   useVolumeLevel
 </h2>
 
-用于自动获取音频轨道音量级别，自动获取的频率为每秒一次。
+Returns the volume level of an audio track at a frequency of once per second.
 
-#### 参数
+#### Parameters
 
-| 参数名       | 类型                                                                             | 是否必选 | 描述                                                                                                                            |
-| ------------ | -------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `audioTrack` | `IRemoteAudioTrack` &VerticalLine; `ILocalAudioTrack` &VerticalLine; `undefined` | 可选     | 本地或远端音频轨道，其中本地音频轨道通过 [useLocalMicrophoneTrack](#uselocalmicrophonetrack) 创建。如果未定义，则音量级别为 0。 |
+| Parameter    | Type                                                                             | Required | Description                                                                                                                                                                  |
+| ------------ | -------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `audioTrack` | `IRemoteAudioTrack` &VerticalLine; `ILocalAudioTrack` &VerticalLine; `undefined` | No       | The local or remote audio track. The local audio track can be created by calling [`useLocalMicrophoneTrack`](#uselocalmicrophonetrack). If undefined, the volume level is 0. |
 
-#### 返回值
+#### Returns
 
-| 类型     | 描述                                                                                           |                                                      |
-| -------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| `number` | 音频轨道的音量级别。取值范围 [0, 1]，1 代表理论最大音量。通常该值大于 0.6 代表用户在持续说话。 | TODO: 是指设备的最大音量，还是说发送信号的最大音量？ |
+| Type     | Description                                                                                                                                 |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `number` | The volume level. The value range is [0,1]. 1 is the highest volume level. Usually a user with a volume level above 0.6 is a speaking user. |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { useVolumeLevel, useLocalMicrophoneTrack } from "agora-rtc-react";
@@ -157,21 +157,21 @@ function App() {
   useRTCClient
 </h2>
 
-用于获取 `IAgoraRTCClient` 对象。
+Returns the `IAgoraRTCClient` object.
 
-#### 参数
+#### Parameters
 
-| 参数名   | 类型                                    | 是否必选 | 描述                                                                                                                                                              |
-| -------- | --------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | 如果传入该参数，则使用传入的 `IAgoraRTCClient` 对象；如果不传入该参数，则使用从[父组件的 Context](./components#agorartcprovider)中获取的 `IAgoraRTCClient` 对象。 |
+| Parameter | Type                                                                                                                                                   | Required | Description                                                                                                                                                                                            |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | If provided, the passed `IAgoraRTCClient` object is returned. If not provided, the `IAgoraRTCClient` object obtained from the [parent component's context](./components#agorartcprovider) is returned. |
 
-#### 返回值
+#### Returns
 
-| 类型              | 描述                     |
-| ----------------- | ------------------------ |
-| `IAgoraRTCClient` | `IAgoraRTCClient` 对象。 |
+| Type                                                                                                                                     | Description                   |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | The `IAgoraRTCClient` client. |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { useRTCClient } from "agora-rtc-react";
@@ -187,29 +187,30 @@ function App() {
   useJoin
 </h2>
 
-用于加入频道。当组件准备好时加入频道，当组件卸载时自动离开频道。
+This hook lets a user automatically join a channel when the component is ready and automatically leaves the channel when the component is unmounted.
 
-你可以通过 `fetchArgs` 自定义加入频道所需的条件，例如在加入频道前执行获取 Token 等异步操作。
+You can customize the conditions required to join a channel using `fetchArgs`. For example, generating a token and other asynchronous operations can be performed before joining the channel.
 
-#### 参数
+#### Parameters
 
-| 参数名      | 类型                                                        | 是否必选 | 描述                                                                                                                                                            |
-| ----------- | ----------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fetchArgs` | `JoinOptions` &VerticalLine; `(() => Promise<JoinOptions>)` | 必选     | 加入频道所需参数或异步函数。详见 [JoinOptions](./data-types#joinoptions)。                                                                                      |
-| `ready`     | `boolean`                                                   | 可选     | 是否准备好加入频道。默认为 `true`。                                                                                                                             |
-| `client`    | `IAgoraRTCClient`                                           | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter   | Type                                                                                                                                     | Required | Description                                                                                                                                                                    |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `fetchArgs` | `JoinOptions` &#124; `(() => Promise<JoinOptions>)`                                                                                      | Required | The parameters or asynchronous function required to join the channel. See [`JoinOptions`](./data-types#joinoptions) for details.                                               |
+| `ready`     | `boolean`                                                                                                                                | Optional | Whether the user is ready to join the channel. The default value is `true`.                                                                                                    |
+| `client`    | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `data` | `UID` | 成功加入频道的用户 ID。如果你在传入 `  fetchArgs` 时没有指定 `uid`，则返回默认值 `0`。|
-| `isLoading` | `boolean` |<li>`true`：正在执行加入频道相关操作。</li><li>`false`：已经执行加入频道相关操作，但不代表成功加入频道。</li> |
-| `isConnected` | `boolean` | <li>`true`：客户端已连接到服务器。即加入频道成功。</li><li>`false`：客户端没有连接到服务器。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 加入频道成功则返回 `null`，加入频道失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+Returns an object containing the following properties:
 
-#### 使用示例
+| Property      | Type                               | Description                                                                                                                                                                                                     |
+| ------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data`        | `UID`                              | The user ID if the user successfully joins the channel. If you does not specify a `uid` when passing `fetchArgs`, the default value `0` is returned.                                                            |
+| `isLoading`   | `boolean` 、                       | <li>`true`: The hook is performing operations related to joining the channel.</li><li>`false`: The hook completes operations related to joining the channel, but it does not indicate a successful result.</li> |
+| `isConnected` | `boolean`                          | <li>`true`: The SDK is connected to the server, indicating that the user successfully joins the channel.</li><li>`false`: The SDK is not connected to the server.</li>                                          |
+| `error`       | `AgoraRTCReactError` &#124; `null` | Returns `null` if the user successfully joins the channel, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                  |
+
+#### Sample code
 
 ```jsx
 import { useJoin } from "agora-rtc-react";
@@ -239,31 +240,32 @@ function App() {
   usePublish
 </h2>
 
-用于发布本地轨道。当组件准备好时发布，当组件卸载时取消发布。
+This hook lets you publish the local tracks when the component is ready and unpublish them when the component is unmounted.
 
-#### 参数
+#### Parameters
 
-| 参数名           | 类型                                    | 是否必选 | 描述                                                                                                                                                            |
-| ---------------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tracks`         | `(ILocalTrack` &VerticalLine; `null)[]` | 必选     | 本地轨道列表。                                                                                                                                                  |
-| `readyToPublish` | `boolean`                               | 可选     | 是否准备好进行发布。默认为 `true`。                                                                                                                             |
-| `client`         | `IAgoraRTCClient`                       | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter        | Type                                                                                                                                                   | Required | Description                                                                                                                                                                    |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tracks`         | `(ILocalTrack` &VerticalLine; `null)[]`                                                                                                                | Yes      | The list of local tracks.                                                                                                                                                      |
+| `readyToPublish` | `boolean`                                                                                                                                              | No       | Whether the local tracks are ready to publish. The default value is `true`.                                                                                                    |
+| `client`         | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `isLoading` | `boolean` |<li>`true`：正在执行发布相关操作。</li><li>`false`：已经执行发布相关操作，但不代表成功发布。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 发布成功则返回 `null`，发布失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+Returns an object containing the following properties:
 
-#### 使用示例
+| Property    | Type                                       | Description                                                                                                                                                                                                         |
+| ----------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `isLoading` | `boolean`                                  | <li>`true`: The hook is performing operations related to publishing the tracks.</li><li>`false`: The hook completes operations related to publishing the tracks, but it does not indicate a successful result.</li> |
+| `error`     | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks are successfully published, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                        |
+
+#### Sample code
 
 ```jsx
 import { useLocalMicrophoneTrack, useLocalCameraTrack, usePublish } from "agora-rtc-react";
 
 function App() {
-  //get audioTrack and videoTrack before publish
+  // get audioTrack and videoTrack before publish
   const audioTrack = useLocalMicrophoneTrack();
   const videoTrack = useLocalCameraTrack();
   usePublish([audioTrack, videoTrack]);
@@ -279,29 +281,30 @@ function App() {
   useLocalMicrophoneTrack
 </h2>
 
-用于创建本地麦克风音频轨道。
+This hook lets you create a local microphone audio track.
 
-- 在组件被销毁之前，该 Hook 只会创建一次音频轨道。
-- 组件卸载后，该 Hook 创建的音频轨道会停止发布。
+- The hook can only create the audio track once before the component is destroyed.
+- After the component is unmounted, the audio track created by the hook stops publishing.
 
-#### 参数
+#### Parameters
 
-| 参数名             | 类型                             | 是否必选 | 描述                                                                                                                                                                                                                                       |
-| ------------------ | -------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ready`            | `boolean`                        | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                                                                                                                                        |
-| `audioTrackConfig` | `MicrophoneAudioTrackInitConfig` | 可选     | 麦克风音频轨道的初始化配置，默认为 `{ ANS: true, AEC: true }`。详见 [MicrophoneAudioTrackInitConfig](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/microphoneaudiotrackinitconfig.html)。 |
-| `client`           | `IAgoraRTCClient`                | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。                                                                            |
+| Parameter          | Type                                                                                                                                                   | Required | Description                                                                                                                                                                                                                                                                                    |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ready`            | `boolean`                                                                                                                                              | No       | Whether it is ready to create the track. The default value is `true`.                                                                                                                                                                                                                          |
+| `audioTrackConfig` | `MicrophoneAudioTrackInitConfig`                                                                                                                       | No       | Configurations for initializing the microphone audio track. The default is `{ ANS: true, AEC: true }`. See [`MicrophoneAudioTrackInitConfig`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/microphoneaudiotrackinitconfig.html) for details. |
+| `client`           | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.                                                                                                                 |
 
-#### 返回值
+#### Returns
 
-返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `localMicrophoneTrack` | `IMicrophoneAudioTrack` &VerticalLine; `null` | 创建的本地麦克风音频轨道对象。 |
-| `isLoading` | `boolean` |<li>`true`：正在执行创建轨道相关操作。</li><li>`false`：已经执行创建轨道相关操作，但不代表成功创建轨道。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 创建轨道成功则返回 `null`，创建轨道失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+Returns an object containing the following properties:
 
-#### 使用示例
+| Property               | Type                                          | Description                                                                                                                                                                                                           |
+| ---------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `localMicrophoneTrack` | `IMicrophoneAudioTrack` &VerticalLine; `null` | The created microphone audio track.                                                                                                                                                                                   |
+| `isLoading`            | `boolean`                                     | <li>`true`: The hook is performing operations related to publishing the tracks.</li><li>`false`: The hook completes operations related to publishing the tracks, but it does not indicate a successfully result.</li> |
+| `error`                | `AgoraRTCReactError` &VerticalLine; `null`    | Returns `null` if the track is successfully created, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                              |
+
+#### Sample code
 
 ```jsx
 import { useLocalMicrophoneTrack } from "agora-rtc-react";
@@ -317,28 +320,29 @@ function App() {
   useLocalCameraTrack
 </h2>
 
-用于创建本地摄像头视频轨道。
+This hook lets you create a local camera video track.
 
-- 在组件被销毁之前，该 Hook 只会创建一次视频轨道。
-- 组件卸载后，该 Hook 创建的视频轨道会停止发布。
+- The hook can only create the video track once before the component is destroyed.
+- After the component is unmounted, the video track created by the hook stops publishing.
 
-#### 参数
+#### Parameters
 
-| 参数名   | 类型              | 是否必选 | 描述                                                                                                                                                            |
-| -------- | ----------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ready`  | `boolean`         | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                                                             |
-| `client` | `IAgoraRTCClient` | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter | Type                                                                                                                                                   | Required | Description                                                                                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ready`   | `boolean`                                                                                                                                              | No       | Whether it is ready to create the track. The default value is `true`.                                                                                                          |
+| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `localCameraTrack` | `ICameraVideoTrack` &VerticalLine; `null` | 创建的摄像头视频轨道对象。 |
-| `isLoading` | `boolean` |<li>`true`：正在执行创建轨道相关操作。</li><li>`false`：已经执行创建轨道相关操作，但不代表成功创建轨道。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 创建轨道成功则返回 `null`，创建轨道失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+Returns an object containing the following properties:
 
-#### 使用示例
+| Property           | Type                                       | Description                                                                                                                                                                                                           |
+| ------------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `localCameraTrack` | `ICameraVideoTrack` &VerticalLine; `null`  | The created camera video track.                                                                                                                                                                                       |
+| `isLoading`        | `boolean`                                  | <li>`true`: The hook is performing operations related to publishing the tracks.</li><li>`false`: The hook completes operations related to publishing the tracks, but it does not indicate a successfully result.</li> |
+| `error`            | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks is successfully created, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                             |
+
+#### Sample code
 
 ```jsx
 import { useLocalCameraTrack } from "agora-rtc-react";
@@ -354,28 +358,29 @@ function App() {
   useRemoteVideoTracks
 </h2>
 
-用于自动订阅和获取远端用户视频轨道。
+This hook lets you automatically subscribe to and retrieve remote users' video tracks.
 
-- 当组件卸载时，该 Hook 会停止订阅 `users` 参数对应的远端用户视频轨道。
-- 当传入的 `users` 发生改变时，该 Hook 会更新订阅的视频轨道。
+- When the component is unmounted, the hook stops subscribing to the video tracks of the specified `users`.
+- The hook updates the subscribed video tracks when the `users` parameter changes.
 
-#### 参数
+#### Parameters
 
-| 参数名   | 类型                                               | 是否必选 | 描述                                                                                                                                                            |
-| -------- | -------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `users`  | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined` | 必选     | 远端用户列表。                                                                                                                                                  |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null`            | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter | Type                                                                                                                                                   | Required | Description                                                                                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `users`   | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined`                                                                                                     | Yes      | The list of remote users.                                                                                                                                                      |
+| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `videoTracks` | `IRemoteVideoTrack[]` | 已订阅的远端用户视频轨道列表。 |
-| `isLoading` | `boolean` |<li>`true`：正在执行订阅相关操作。</li><li>`false`：已经执行订阅相关操作，但不代表成功订阅。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 订阅成功则返回 `null`，订阅失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+Returns an object containing the following properties:
 
-#### 使用示例
+| Property      | Type                                       | Description                                                                                                                                                                                                             |
+| ------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `videoTracks` | `IRemoteVideoTrack[]`                      | The list of subscribed video tracks from remote users.                                                                                                                                                                  |
+| `isLoading`   | `boolean`                                  | <li>`true`: The hook is performing operations related to subscribing the tracks.</li><li>`false`: The hook completes operations related to subscribing the tracks, but it does not indicate a successfully result.</li> |
+| `error`       | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks are successfully subscribed, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                           |
+
+#### Sample code
 
 ```jsx
 import { useRemoteUsers, useRemoteVideoTracks } from "agora-rtc-react";
@@ -392,28 +397,29 @@ function App() {
   useRemoteAudioTracks
 </h2>
 
-用于自动订阅和获取远端用户音频轨道。
+This hook lets you automatically subscribe to and retrieve remote users' audio tracks.
 
-- 当组件卸载时，该 Hook 会停止订阅 `users` 参数对应的远端用户音频轨道。
-- 当传入的 `users` 发生改变时，该 Hook 会更新订阅的音频轨道。
+- When the component is unmounted, the hook stops subscribing to the audio tracks of the specified `users`.
+- The hook updates the subscribed audio tracks when the `users` parameter changes.
 
-#### 参数
+#### Parameters
 
-| 参数名   | 类型                                               | 是否必选 | 描述                                                                                                                                                            |
-| -------- | -------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `users`  | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined` | 必选     | 远端用户列表。                                                                                                                                                  |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null`            | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter | Type                                                                                                                                                   | Required | Description                                                                                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `users`   | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined`                                                                                                     | Yes      | The list of remote users.                                                                                                                                                      |
+| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `audioTracks` | `IRemoteAudioTrack[]` | 已订阅的远端用户音频轨道列表。 |
-| `isLoading` | `boolean` |<li>`true`：正在执行订阅相关操作。</li><li>`false`：已经执行订阅相关操作，但不代表成功订阅。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 订阅成功则返回 `null`，订阅失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+Returns an object containing the following properties:
 
-#### 使用示例
+| Property      | Type                                       | Description                                                                                                                                                                                                             |
+| ------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `audioTracks` | `IRemoteAudioTrack[]`                      | The list of subscribed audio tracks from remote users.                                                                                                                                                                  |
+| `isLoading`   | `boolean`                                  | <li>`true`: The hook is performing operations related to subscribing the tracks.</li><li>`false`: The hook completes operations related to subscribing the tracks, but it does not indicate a successfully result.</li> |
+| `error`       | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks are successfully subscribed, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                           |
+
+#### Sample code
 
 ```jsx
 import { useRemoteUsers, useRemoteVideoTracks } from "agora-rtc-react";
@@ -431,26 +437,27 @@ function App() {
   useRemoteUserTrack
 </h2>
 
-用于获取远端用户音视频轨道。
+This hook lets you retrieve the audio or video track of a remote user.
 
-#### 参数
+#### Parameters
 
-| 参数名      | 类型                                             | 是否必选 | 描述                                                                                                                                                            |
-| ----------- | ------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `user`      | `IAgoraRTCRemoteUser` &VerticalLine; `undefined` | 必选     | 远端用户对象。                                                                                                                                                  |
-| `mediaType` | `"video"` &VerticalLine; `"audio"`               | 必选     | 媒体类型，支持传入 `"video"` 或 `"audio"`。                                                                                                                     |
-| `client`    | `IAgoraRTCClient` &VerticalLine; `null`          | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter   | Type                                                                                                                                                   | Required | Description                                                                                                                                                                    |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `user`      | `IAgoraRTCRemoteUser` &VerticalLine; `undefined`                                                                                                       | Yes      | The remote user.                                                                                                                                                               |
+| `mediaType` | `"video"` &VerticalLine; `"audio"`                                                                                                                     | Yes      | The media type. Pass `"video"` or `"audio"`.                                                                                                                                   |
+| `client`    | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `track` | `IRemoteVideoTrack` &VerticalLine; `IRemoteAudioTrack` &VerticalLine; `undefined` | 远端用户的音频或视频轨道（取决于传入的 `mediaType`）。如果远端用户或音频、视频轨道不存在，则返回 `undefined`。 |
-| `isLoading` | `boolean` |<li>`true`：正在执行获取轨道相关操作。</li><li>`false`：已经执行获取轨道相关操作，但不代表成功获取轨道。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 获取轨道成功则返回 `null`，获取轨道失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。|
+Returns an object containing the following properties:
 
-#### 使用示例
+| Property    | Type                                                                              | Description                                                                                                                                                                                                         |
+| ----------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `track`     | `IRemoteVideoTrack` &VerticalLine; `IRemoteAudioTrack` &VerticalLine; `undefined` | The audio or video track of the remote user (depending on the `mediaType` you specify). If the remote user or track does not exist, `undefined` is returned.                                                        |
+| `isLoading` | `boolean`                                                                         | <li>`true`: The hook is performing operations related to retrieving the tracks.</li><li>`false`: The hook completes operations related to retrieving the tracks, but it does not indicate a successful result.</li> |
+| `error`     | `AgoraRTCReactError` &VerticalLine; `null`                                        | Returns `null` if the track is successfully retrieved, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                          |
+
+#### Sample code
 
 ```jsx
 import { useRemoteUsers, useRemoteUserTrack } from "agora-rtc-react";
@@ -469,27 +476,27 @@ function App() {
   useRemoteUsers
 </h2>
 
-用于获取远端用户列表。
+This hook lets you retrieve the list of remote users.
 
-发生以下情况时，该 Hook 的返回值会更新：
+The return value of this hook is updated in the following cases:
 
-- 远端用户加入或离开频道。
-- 远端用户的角色改变（比如从主播变为观众）。
-- 远端用户发布或取消发布音频或视频轨道。
+- When a remote user joins or leaves the channel.
+- When the role of a remote user changes (for example, from broadcaster to audience).
+- When a remote user publishes or unpublishes the audio or video track.
 
-#### 参数
+#### Parameters
 
-| 参数名   | 类型                                    | 是否必选 | 描述                                                                                                                                                            |
-| -------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter | Type                                                                                                                                                   | Required | Description                                                                                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-| 类型                    | 描述           |
-| ----------------------- | -------------- |
-| `IAgoraRTCRemoteUser[]` | 远端用户列表。 |
+| Type                    | Description               |
+| ----------------------- | ------------------------- |
+| `IAgoraRTCRemoteUser[]` | The list of remote users. |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { useRemoteUsers } from "agora-rtc-react";
@@ -505,24 +512,24 @@ function App() {
   useAutoPlayVideoTrack
 </h2>
 
-用于控制本地或远端视频轨道。
+This hook lets you automatically play a local or remote video track.
 
-- 当组件挂载时，该 Hook 会根据传入的 `play` 判断是否自动播放。
-- 当组件卸载时，该 Hook 会停止播放 `track` 对应的视频轨道。
+- When the component is mounted, the hook determines whether to automatically play the track according to the `play` parameter.
+- When the component is unmounted, the hook stops playing the `track`.
 
-#### 参数
+#### Parameters
 
-| 参数名  | 类型                                                  | 是否必选 | 描述                                                                                                   |
-| ------- | ----------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------- |
-| `track` | `IRemoteVideoTrack` &VerticalLine; `ILocalVideoTrack` | 必选     | 远端视频轨道对象或本地视频轨道对象。                                                                   |
-| `play`  | `boolean`                                             | 可选     | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                        |
-| `div`   | `HTMLElement` &VerticalLine; `null`                   | 可选     | 用于渲染视频的 HTML 元素。如果提供了该参数，视频将在该元素中自动播放。如果未提供，则不会自动播放视频。 | TODO: 如果 play 为 true，div 不传，是否播放？ |
+| Parameter | Type                                                  | Required | Description                                                                                                                                                                                          |
+| --------- | ----------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `track`   | `IRemoteVideoTrack` &VerticalLine; `ILocalVideoTrack` | Yes      | The local or remote video track.                                                                                                                                                                     |
+| `play`    | `boolean`                                             | No       | <li>`true`: Play the track.</li><li>`false`: Stop playing the track.</li>                                                                                                                            |
+| `div`     | `HTMLElement` &VerticalLine; `null`                   | No       | The HTML element used to render the video track. The video automatically plays within this element only if `play` is `true` and `div` is provided. Otherwise, the video does not play automatically. |
 
-#### 返回值
+#### Returns
 
-无。
+None.
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { useAutoPlayVideoTrack, useLocalCameraTrack } from "agora-rtc-react";
@@ -539,23 +546,23 @@ function App() {
   useAutoPlayAudioTrack
 </h2>
 
-用于控制本地或远端音频轨道。
+This hook lets you automatically play a local or remote audio track.
 
-- 当组件挂载时，该 Hook 会根据传入的 `play` 判断是否自动播放。
-- 当组件卸载时，该 Hook 会停止播放 `track` 对应的音频轨道。
+- When the component is mounted, the hook determines whether to automatically play the track according to the `play` parameter.
+- When the component is unmounted, the hook stops playing the `track`.
 
-#### 参数
+#### Parameters
 
-| 参数名  | 类型                                                   | 是否必选 | 描述                                                            |
-| ------- | ------------------------------------------------------ | -------- | --------------------------------------------------------------- |
-| `track` | `IRemoteAudioTrack` &VerticalLine; `ILocalAudioTrack>` | 必选     | 远端音频轨道对象或本地音频轨道对象。                            |
-| `play`  | `boolean`                                              | 可选     | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li> |
+| Parameter | Type                                                   | Required | Description                                                               |
+| --------- | ------------------------------------------------------ | -------- | ------------------------------------------------------------------------- |
+| `track`   | `IRemoteAudioTrack` &VerticalLine; `ILocalAudioTrack>` | Yes      | The local or remote audio track.                                          |
+| `play`    | `boolean`                                              | No       | <li>`true`: Play the track.</li><li>`false`: Stop playing the track.</li> |
 
-#### 返回值
+#### Returns
 
 无。
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { useAutoPlayAudioTrack, useLocalMicrophoneTrack } from "agora-rtc-react";
