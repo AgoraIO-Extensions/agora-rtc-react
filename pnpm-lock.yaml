@@ -198,8 +198,8 @@ importers:
         specifier: ^6.9.1
         version: 6.9.1
       mobx-react-lite:
-        specifier: ^3.4.3
-        version: 3.4.3(mobx@6.9.1)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^4.0.3
+        version: 4.0.3(mobx@6.9.1)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -10816,10 +10816,10 @@ packages:
       ufo: 1.1.2
     dev: true
 
-  /mobx-react-lite@3.4.3(mobx@6.9.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-NkJREyFTSUXR772Qaai51BnE1voWx56LOL80xG7qkZr6vo8vEaLF3sz1JNUVh+rxmUzxYaqOhfuxTfqUh0FXUg==}
+  /mobx-react-lite@4.0.3(mobx@6.9.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-wEE1oT5zvDdvplG4HnRrFgPwg5GFVVrEtl42Er85k23zeu3om8H8wbDPgdbQP88zAihVsik6xJfw6VnzUl8fQw==}
     peerDependencies:
-      mobx: ^6.1.0
+      mobx: ^6.9.0
       react: ^16.8.0 || ^17 || ^18
       react-dom: '*'
       react-native: '*'
@@ -10832,6 +10832,7 @@ packages:
       mobx: 6.9.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+      use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
   /mobx@6.9.1:
