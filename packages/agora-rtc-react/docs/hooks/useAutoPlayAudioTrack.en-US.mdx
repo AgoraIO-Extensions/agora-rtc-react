@@ -1,22 +1,22 @@
 ## useAutoPlayAudioTrack
 
-用于控制本地或远端音频轨道。
+This hook lets you automatically play a local or remote audio track.
 
-- 当组件挂载时，该 Hook 会根据传入的 `play` 判断是否自动播放。
-- 当组件卸载时，该 Hook 会停止播放 `track` 对应的音频轨道。
+- When the component is mounted, the hook determines whether to automatically play the track according to the `play` parameter.
+- When the component is unmounted, the hook stops playing the `track`.
 
-#### 参数
+#### Parameters
 
-| 参数名  | 类型                                                   | 是否必选 | 描述                                                            |
-| ------- | ------------------------------------------------------ | -------- | --------------------------------------------------------------- |
-| `track` | `IRemoteAudioTrack` &VerticalLine; `ILocalAudioTrack>` | 必选     | 远端音频轨道对象或本地音频轨道对象。                            |
-| `play`  | `boolean`                                              | 可选     | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li> |
+| Parameter | Type                                                   | Required | Description                                                               |
+| --------- | ------------------------------------------------------ | -------- | ------------------------------------------------------------------------- |
+| `track`   | `IRemoteAudioTrack` &VerticalLine; `ILocalAudioTrack>` | Yes      | The local or remote audio track.                                          |
+| `play`    | `boolean`                                              | No       | <li>`true`: Play the track.</li><li>`false`: Stop playing the track.</li> |
 
-#### 返回值
+#### Returns
 
 无。
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { useAutoPlayAudioTrack, useLocalMicrophoneTrack } from "agora-rtc-react";

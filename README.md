@@ -51,55 +51,55 @@ This example will render Agora Client into a container on the page.
 
 # Components
 
-- [`RemoteVideoTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/RemoteVideoTrack.en-US.mdx) &mdash; 该组件用于播放远端用户的视频轨道，并且不支持指定播放设备。
+- [`RemoteVideoTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/RemoteVideoTrack.en-US.mdx) &mdash; This component plays the video track of a remote user and does not support specifying the playback device.
 
-- [`RemoteUser`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/RemoteUser.en-US.mdx) &mdash; 该组件用于播放远端用户的视频和音频轨道，并且仅支持指定使用的音频设备、不支持指定使用的视频设备。
+- [`RemoteUser`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/RemoteUser.en-US.mdx) &mdash; This component plays the video and audio tracks of a remote user and supports specifying the audio device to use. Specifying the video playback device is not supported.
 
-- [`RemoteAudioTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/RemoteAudioTrack.en-US.mdx) &mdash; 该组件用于播放远端用户的音频轨道，并且支持指定播放设备。
+- [`RemoteAudioTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/RemoteAudioTrack.en-US.mdx) &mdash; This component plays the audio track of a remote user with the playback device you specify.
 
-- [`LocalVideoTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/LocalVideoTrack.en-US.mdx) &mdash; 该组件用于播放本地视频轨道，播放设备为用户在浏览器中选择的设备。
+- [`LocalVideoTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/LocalVideoTrack.en-US.mdx) &mdash; This component plays the local video track using the playback device selected by the user in the browser.
 
-- [`LocalUser`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/LocalUser.en-US.mdx) &mdash; 该组件用于播放本地用户的摄像头视频轨道和麦克风音频轨道（不支持指定使用的媒体设备）。
+- [`LocalUser`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/LocalUser.en-US.mdx) &mdash; This component plays the camera video track and the microphone audio track of the local user using the playback devices selected by the user in the browser.
 
-- [`LocalAudioTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/LocalAudioTrack.en-US.mdx) &mdash; 该组件用于播放本地音频轨道，播放设备为用户在浏览器中选择的设备。
+- [`LocalAudioTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/LocalAudioTrack.en-US.mdx) &mdash; This component plays the local audio track using the playback device selected by the user in the browser.
 
-- [`AgoraRTCScreenShareProvider`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/AgoraRTCScreenShareProvider.en-US.mdx) &mdash; 该组件用于将传入的屏幕共享 client 对象提供给 children 内的各个组件。
+- [`AgoraRTCScreenShareProvider`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/AgoraRTCScreenShareProvider.en-US.mdx) &mdash; This component is a <a href="https://react.dev/learn/passing-data-deeply-with-context">context provider</a>, which lets all of the components inside children read the client prop you pass for screen sharing.
 
-- [`AgoraRTCProvider`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/AgoraRTCProvider.en-US.mdx) &mdash; 该组件用于将传入的 client 对象提供给 children 内的各个组件，即向子组件提供 <a href="https://react.dev/learn/passing-data-deeply-with-context">Context</a>。
+- [`AgoraRTCProvider`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/components/AgoraRTCProvider.en-US.mdx) &mdash; This component is a <a href="https://react.dev/learn/passing-data-deeply-with-context">context provider</a>, which lets all of the components inside children read the client prop you pass.
 
 # Hooks
 
-- [`useVolumeLevel`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useVolumeLevel.en-US.mdx) &mdash; 用于自动获取音频轨道音量级别，自动获取的频率为每秒一次。
+- [`useVolumeLevel`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useVolumeLevel.en-US.mdx) &mdash; Returns the volume level of an audio track at a frequency of once per second.
 
-- [`useRemoteVideoTracks`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useRemoteVideoTracks.en-US.mdx) &mdash; 用于自动订阅和获取远端用户视频轨道。
+- [`useRemoteVideoTracks`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useRemoteVideoTracks.en-US.mdx) &mdash; This hook lets you automatically subscribe to and retrieve remote users' video tracks.
 
-- [`useRemoteUsers`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useRemoteUsers.en-US.mdx) &mdash; 用于获取远端用户列表。
+- [`useRemoteUsers`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useRemoteUsers.en-US.mdx) &mdash; This hook lets you retrieve the list of remote users.
 
-- [`useRemoteUserTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useRemoteUserTrack.en-US.mdx) &mdash; 用于获取远端用户音视频轨道。
+- [`useRemoteUserTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useRemoteUserTrack.en-US.mdx) &mdash; This hook lets you retrieve the audio or video track of a remote user.
 
-- [`useRemoteAudioTracks`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useRemoteAudioTracks.en-US.mdx) &mdash; 用于自动订阅和获取远端用户音频轨道。
+- [`useRemoteAudioTracks`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useRemoteAudioTracks.en-US.mdx) &mdash; This hook lets you automatically subscribe to and retrieve remote users' audio tracks.
 
-- [`useRTCClient`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useRTCClient.en-US.mdx) &mdash; 用于获取 IAgoraRTCClient 对象。
+- [`useRTCClient`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useRTCClient.en-US.mdx) &mdash; Returns the IAgoraRTCClient object.
 
-- [`usePublish`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/usePublish.en-US.mdx) &mdash; 用于发布本地轨道。当组件准备好时发布，当组件卸载时取消发布。
+- [`usePublish`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/usePublish.en-US.mdx) &mdash; This hook lets you publish the local tracks when the component is ready and unpublish them when the component is unmounted.
 
-- [`useNetworkQuality`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useNetworkQuality.en-US.mdx) &mdash; 用于获取本地用户网络质量。
+- [`useNetworkQuality`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useNetworkQuality.en-US.mdx) &mdash; Returns the network quality of the local user.
 
-- [`useLocalMicrophoneTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalMicrophoneTrack.en-US.mdx) &mdash; 用于创建本地麦克风音频轨道。
+- [`useLocalMicrophoneTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalMicrophoneTrack.en-US.mdx) &mdash; This hook lets you create a local microphone audio track.
 
-- [`useLocalCameraTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalCameraTrack.en-US.mdx) &mdash; 用于创建本地摄像头视频轨道。
+- [`useLocalCameraTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalCameraTrack.en-US.mdx) &mdash; This hook lets you create a local camera video track.
 
-- [`useJoin`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useJoin.en-US.mdx) &mdash; 用于加入频道。当组件准备好时加入频道，当组件卸载时自动离开频道。
+- [`useJoin`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useJoin.en-US.mdx) &mdash; This hook lets a user automatically join a channel when the component is ready and automatically leaves the channel when the component is unmounted.
 
-- [`useIsConnected`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useIsConnected.en-US.mdx) &mdash; 用于获取客户端是否连接到服务器。
+- [`useIsConnected`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useIsConnected.en-US.mdx) &mdash; Returns whether the SDK is connected to Agora's server.
 
-- [`useCurrentUID`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useCurrentUID.en-US.mdx) &mdash; 用于获取当前用户 UID 。
+- [`useCurrentUID`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useCurrentUID.en-US.mdx) &mdash; Returns the current user ID.
 
-- [`useConnectionState`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useConnectionState.en-US.mdx) &mdash; 用于获取详细的客户端连接状态，包括与服务器连接断开、正在连接中、已连接、正在重连中、正在断开连接。
+- [`useConnectionState`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useConnectionState.en-US.mdx) &mdash; Returns the detailed connection state of the SDK.
 
-- [`useAutoPlayVideoTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useAutoPlayVideoTrack.en-US.mdx) &mdash; 用于控制本地或远端视频轨道。
+- [`useAutoPlayVideoTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useAutoPlayVideoTrack.en-US.mdx) &mdash; This hook lets you automatically play a local or remote video track.
 
-- [`useAutoPlayAudioTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useAutoPlayAudioTrack.en-US.mdx) &mdash; 用于控制本地或远端音频轨道。
+- [`useAutoPlayAudioTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useAutoPlayAudioTrack.en-US.mdx) &mdash; This hook lets you automatically play a local or remote audio track.
 
 # License
 

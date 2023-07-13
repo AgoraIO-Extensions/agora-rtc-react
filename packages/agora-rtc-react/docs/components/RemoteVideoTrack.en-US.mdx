@@ -1,15 +1,15 @@
 ## RemoteVideoTrack
 
-该组件用于播放远端用户的视频轨道，并且不支持指定播放设备。
+This component plays the video track of a remote user and does not support specifying the playback device.
 
 #### Props
 
-| 属性名  | 类型                | 默认值 | 描述                                                                                                                                                                |
-| ------- | ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `track` | `IRemoteVideoTrack` | 无     | 远端视频轨道对象。详见 [IRemoteVideoTrack](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iremotevideotrack.html)。 |
-| `play`  | `boolean`           | 无     | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                     |
+| Prop    | Type                                                                                                                                         | Default value | Description                                                               |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------------------------------------------------------------------- |
+| `track` | [`IRemoteVideoTrack`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iremotevideotrack.html) | None          | The remote video track object.                                            |
+| `play`  | `boolean`                                                                                                                                    | None          | <li>`true`: Play the track.</li><li>`false`: Stop playing the track.</li> |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { RemoteAudioTrack, useJoin, useRemoteAudioTracks, useRemoteUsers } from "agora-rtc-react";

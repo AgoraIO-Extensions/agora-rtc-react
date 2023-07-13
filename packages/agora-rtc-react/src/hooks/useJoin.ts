@@ -9,13 +9,13 @@ import { useAsyncEffect, useIsUnmounted } from "./tools";
 import { useIsConnected } from "./useIsConnected";
 
 /**
- * 用于加入频道。当组件准备好时加入频道，当组件卸载时自动离开频道。
+ * This hook lets a user automatically join a channel when the component is ready and automatically leaves the channel when the component is unmounted.
  *
- * @param `fetchArgs` {JoinOptions | (() => Promise<JoinOptions>)} 加入频道所需参数或异步函数。详见 [JoinOptions](./data-types#joinoptions)。
- * @param `ready` {boolean} 是否准备好加入频道。默认为 `true`。
- * @param `client` {IAgoraRTCClient} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
+ * @param `fetchArgs` {JoinOptions | (() => Promise<JoinOptions>)} The parameters or asynchronous function required to join the channel. See [`JoinOptions`](./data-types#joinoptions) for details.
+ * @param `ready` {boolean} Whether the user is ready to join the channel. The default value is `true`.
+ * @param `client` {IAgoraRTCClient} Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.
  * @return data UID
- * @return isLoading boolean
+ * @return isLoading boolean 、
  * @return isConnected boolean
  * @return error AgoraRTCReactError | null
  * @example
@@ -36,7 +36,7 @@ import { useIsConnected } from "./useIsConnected";
  *       channel: YOUR_CHANNEL,
  *       token: YOUR_TOKEN,
  *     },
- *     ready,
+ *     ready
  *   );
  *
  *   return <></>;

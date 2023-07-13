@@ -10,43 +10,43 @@ import { UserCover } from "./UserCover";
 
 export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
   /**
-   * 远端用户对象。详见 [IAgoraRTCRemoteUser](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcremoteuser.html)。
+   * The remote user object.
    */
   readonly user?: IAgoraRTCRemoteUser;
 
   /**
-   * `true`：播放远端用户的视频轨道。`false`：停止播放远端用户的视频轨道。
+   * `true`: Play the video track of the remote user.`false`: Stop playing the video track of the remote user.
    */
   readonly playVideo?: boolean;
 
   /**
-   * `true`：播放远端用户的音频轨道。`false`：停止播放远端用户的音频轨道。
+   * `true`: Play the audio track of the remote user.`false`: Stop playing the audio track of the remote user.
    */
   readonly playAudio?: boolean;
 
   /**
-   * 要使用的播放设备 ID，例如扬声器。设备 ID 通过 [getPlaybackDevices](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getplaybackdevices) 获取。该属性仅支持桌面端的 Chrome 浏览器，在其它浏览器上修改该属性的值将会抛出 `NOT_SUPPORTED` 错误。
+   * The ID of the playback device, such as a speaker. The device ID can be obtained using [`IAgoraRTC.getPlaybackDevices`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#getplaybackdevices). This property is only supported in the desktop version of the Chrome browser. Modifying the value of this property in other browsers throws a `NOT_SUPPORTED` error.
    */
   readonly playbackDeviceId?: string;
 
   /**
-   * 音量大小。取值范围 [0, 100]，0 代表静音，100 代表原始音量。
+   * The volume. The value ranges from 0 (mute) to 100 (the original volume).
    */
   readonly volume?: number;
 
   /**
-   * 当 `playVideo` 为 `false`时要渲染的封面图片或自定义组件，用于替代视频画面显示。支持传入在线图片的 URL 或本地图片的相对路径。
+   * The cover image or custom component to be displayed when `playVideo` is `false`, replacing the video frame. You can pass the URL of an online image or the relative path of a local image.
    */
   readonly cover?: string | (() => ReactNode);
 
   /**
-   * 需要展示的 React 节点。
+   * The React nodes to be rendered.
    */
   readonly children?: ReactNode;
 }
 
 /**
- * 该组件用于播放远端用户的视频和音频轨道，并且仅支持指定使用的音频设备、不支持指定使用的视频设备。
+ * This component plays the video and audio tracks of a remote user and supports specifying the audio device to use. Specifying the video playback device is not supported.
  * @example
  * ```jsx
  * import { RemoteUser, useRemoteUsers } from "agora-rtc-react";
@@ -56,7 +56,7 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
  *
  *   return (
  *     <>
- *       {remoteUsers.map(user => (
+ *       {remoteUsers.map((user) => (
  *         <RemoteUser key={user.uid} user={user} />
  *       ))}
  *     </>

@@ -10,56 +10,60 @@ import { UserCover } from "./UserCover";
 
 export interface LocalUserProps extends HTMLProps<HTMLDivElement> {
   /**
-   * `true`：打开本地用户的麦克风。`false`：关闭本地用户的麦克风。
+   * `true`: Enable the local user's microphone.`false`: Disable the local user's microphone.
    */
   readonly micOn?: boolean;
 
   /**
-   * `true`：打开本地用户的摄像头。`false`：关闭本地用户的摄像头。
+   * `true`: Enable the local user's camera.`false`: Disable the local user's camera.
    */
   readonly cameraOn?: boolean;
 
   /**
-   * 要播放的麦克风音频轨道。通过 [useLocalMicrophoneTrack](./hooks#uselocalmicrophonetrack) 创建。
+   * The microphone audio track to be played, which can be created by calling [`useLocalMicrophoneTrack`](./hooks#uselocalmicrophonetrack).
    */
   readonly audioTrack?: MaybePromiseOrNull<ILocalAudioTrack>;
 
   /**
-   * 要播放的摄像头视频轨道。通过 [useLocalCameraTrack](./hooks#uselocalcameratrack) 创建。
+   * The camera video track to be played, which can be created by calling [`useLocalCameraTrack`](./hooks#uselocalcameratrack).
    */
   readonly videoTrack?: MaybePromiseOrNull<ILocalVideoTrack>;
 
   /**
-   * `true`：播放本地用户的音频轨道。`false`：停止播放本地用户的音频轨道。
+   * `true`: Play the local user's audio track.`false`: Stop playing the local user's audio track.
    */
   readonly playAudio?: boolean;
 
   /**
-   * `true`：播放本地用户的视频轨道。`false`：停止播放本地用户的视频轨道。
+   * `true`: Play the local user's video track.`false`: Stop playing the local user's video track.
    */
   readonly playVideo?: boolean;
 
   /**
-   * 音量大小。取值范围 [0, 1000]，0 代表静音，100 代表原始音量。100 以上会使用 [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) 进行音量增益。
+   * The volume. The value ranges from 0 (mute) to 1000 (maximum). A value of 100 is the original volume. When set to above 100, the SDK applies volume amplification using the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
    */
   readonly volume?: number;
 
   /**
-   * 当 `playVideo` 为 `false`时要渲染的封面图片，用于替代视频画面显示。支持传入在线图片的 URL 或本地图片的相对路径。
+   * The cover image to be displayed when `playVideo` is `false`, replacing the video frame. You can pass the URL of an online image or the relative path of a local image.
    */
   readonly cover?: string;
 
   /**
-   * 需要展示的 React 节点。
+   * The React nodes to be rendered.
    */
   readonly children?: ReactNode;
 }
 
 /**
- * 该组件用于播放本地用户的摄像头视频轨道和麦克风音频轨道（不支持指定使用的媒体设备）。
+ * This component plays the camera video track and the microphone audio track of the local user using the playback devices selected by the user in the browser.
  * @example
  * ```jsx
- * import { LocalUser, useLocalAudioTrack, useLocalCameraTrack } from "agora-rtc-react";
+ * import {
+ *   LocalUser,
+ *   useLocalAudioTrack,
+ *   useLocalCameraTrack,
+ * } from "agora-rtc-react";
  *
  * function App() {
  *   const audioTrack = useLocalAudioTrack();

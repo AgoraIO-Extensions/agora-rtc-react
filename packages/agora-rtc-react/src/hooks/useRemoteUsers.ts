@@ -6,10 +6,10 @@ import { listen } from "../misc/listen";
 import { joinDisposers } from "../misc/utils";
 
 /**
- * 用于获取远端用户列表。
+ * This hook lets you retrieve the list of remote users.
  *
- * @param `client` {IAgoraRTCClient | null} 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。
- * @return IAgoraRTCRemoteUser[] 远端用户列表。
+ * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.
+ * @return IAgoraRTCRemoteUser[] The list of remote users.
  * @example
  * ```jsx
  * import { useRemoteUsers } from "agora-rtc-react";

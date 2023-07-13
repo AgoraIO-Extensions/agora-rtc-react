@@ -1,26 +1,26 @@
 ## useRemoteUsers
 
-用于获取远端用户列表。
+This hook lets you retrieve the list of remote users.
 
-发生以下情况时，该 Hook 的返回值会更新：
+The return value of this hook is updated in the following cases:
 
-- 远端用户加入或离开频道。
-- 远端用户的角色改变（比如从主播变为观众）。
-- 远端用户发布或取消发布音频或视频轨道。
+- When a remote user joins or leaves the channel.
+- When the role of a remote user changes (for example, from broadcaster to audience).
+- When a remote user publishes or unpublishes the audio or video track.
 
-#### 参数
+#### Parameters
 
-| 参数名   | 类型                                    | 是否必选 | 描述                                                                                                                                                            |
-| -------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter | Type                                                                                                                                                   | Required | Description                                                                                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-| 类型                    | 描述           |
-| ----------------------- | -------------- |
-| `IAgoraRTCRemoteUser[]` | 远端用户列表。 |
+| Type                    | Description               |
+| ----------------------- | ------------------------- |
+| `IAgoraRTCRemoteUser[]` | The list of remote users. |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { useRemoteUsers } from "agora-rtc-react";

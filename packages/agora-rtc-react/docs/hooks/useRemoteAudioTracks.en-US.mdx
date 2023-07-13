@@ -1,27 +1,28 @@
 ## useRemoteAudioTracks
 
-用于自动订阅和获取远端用户音频轨道。
+This hook lets you automatically subscribe to and retrieve remote users' audio tracks.
 
-- 当组件卸载时，该 Hook 会停止订阅 `users` 参数对应的远端用户音频轨道。
-- 当传入的 `users` 发生改变时，该 Hook 会更新订阅的音频轨道。
+- When the component is unmounted, the hook stops subscribing to the audio tracks of the specified `users`.
+- The hook updates the subscribed audio tracks when the `users` parameter changes.
 
-#### 参数
+#### Parameters
 
-| 参数名   | 类型                                               | 是否必选 | 描述                                                                                                                                                            |
-| -------- | -------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `users`  | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined` | 必选     | 远端用户列表。                                                                                                                                                  |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null`            | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter | Type                                                                                                                                                   | Required | Description                                                                                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `users`   | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined`                                                                                                     | Yes      | The list of remote users.                                                                                                                                                      |
+| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `audioTracks` | `IRemoteAudioTrack[]` | 已订阅的远端用户音频轨道列表。 |
-| `isLoading` | `boolean` |<li>`true`：正在执行订阅相关操作。</li><li>`false`：已经执行订阅相关操作，但不代表成功订阅。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 订阅成功则返回 `null`，订阅失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+Returns an object containing the following properties:
 
-#### 使用示例
+| Property      | Type                                       | Description                                                                                                                                                                                                             |
+| ------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `audioTracks` | `IRemoteAudioTrack[]`                      | The list of subscribed audio tracks from remote users.                                                                                                                                                                  |
+| `isLoading`   | `boolean`                                  | <li>`true`: The hook is performing operations related to subscribing the tracks.</li><li>`false`: The hook completes operations related to subscribing the tracks, but it does not indicate a successfully result.</li> |
+| `error`       | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks are successfully subscribed, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                           |
+
+#### Sample code
 
 ```jsx
 import { useRemoteUsers, useRemoteVideoTracks } from "agora-rtc-react";

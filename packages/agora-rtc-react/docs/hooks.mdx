@@ -6,19 +6,19 @@ title: Hooks
   useConnectionState
 </h2>
 
-用于获取详细的客户端连接状态，包括与服务器连接断开、正在连接中、已连接、正在重连中、正在断开连接。
+用于获取详细的 SDK 连接状态。
 
 #### 参数
 
-| 参数名   | 类型                                    | 是否必选 | 描述                                                                                                                                                            |
-| -------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| 参数名   | 类型                                                                                                                                                           | 是否必选 | 描述                                                                                                                                                              |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client` | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
 
 #### 返回值
 
 | 类型              | 描述                                                                                                                                                                 |
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ConnectionState` | 客户端与服务器的连接状态。详见 [ConnectionState](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/globals.html#connectionstate)。 |
+| `ConnectionState` | SDK 与服务器的连接状态。详见 [`ConnectionState`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/globals.html#connectionstate)。 |
 
 #### 使用示例
 
@@ -36,19 +36,19 @@ function App() {
   useIsConnected
 </h2>
 
-用于获取客户端是否连接到服务器。
+用于获取 SDK 是否连接到服务器。
 
 #### 参数
 
-| 参数名   | 类型                                    | 是否必选 | 描述                     |
-| -------- | --------------------------------------- | -------- | ------------------------ |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | `IAgoraRTCClient` 对象。 |
+| 参数名   | 类型                                                                                                                                                           | 是否必选 | 描述                                                                                                                                                              |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client` | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
 
 #### 返回值
 
-| 类型      | 描述                                                                              |
-| --------- | --------------------------------------------------------------------------------- |
-| `boolean` | <li>`true`：客户端已连接到服务器。</li><li>`false`：客户端没有连接到服务器。</li> |
+| 类型      | 描述                                                                          |
+| --------- | ----------------------------------------------------------------------------- |
+| `boolean` | <li>`true`：SDK 已连接到服务器。</li><li>`false`：SDK 没有连接到服务器。</li> |
 
 #### 使用示例
 
@@ -70,9 +70,9 @@ function App() {
 
 #### 参数
 
-| 参数名   | 类型                                    | 是否必选 | 描述                                                                                                                                                            |
-| -------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| 参数名   | 类型                                                                                                                                                           | 是否必选 | 描述                                                                                                                                                              |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client` | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
 
 #### 返回值
 
@@ -100,15 +100,15 @@ function App() {
 
 #### 参数
 
-| 参数名   | 类型                                    | 是否必选 | 描述                                                                                                                                                            |
-| -------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| 参数名   | 类型                                                                                                                                                           | 是否必选 | 描述                                                                                                                                                              |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client` | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
 
 #### 返回值
 
-| 类型             | 描述                                                                         |
-| ---------------- | ---------------------------------------------------------------------------- |
-| `NetworkQuality` | 本地用户的网络质量信息。详见 [NetworkQuality](./data-types#networkquality)。 |
+| 类型             | 描述                                                                           |
+| ---------------- | ------------------------------------------------------------------------------ |
+| `NetworkQuality` | 本地用户的网络质量信息。详见 [`NetworkQuality`](./data-types#networkquality)。 |
 
 #### 使用示例
 
@@ -130,15 +130,15 @@ function App() {
 
 #### 参数
 
-| 参数名       | 类型                                                                             | 是否必选 | 描述                                                                                                                            |
-| ------------ | -------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `audioTrack` | `IRemoteAudioTrack` &VerticalLine; `ILocalAudioTrack` &VerticalLine; `undefined` | 可选     | 本地或远端音频轨道，其中本地音频轨道通过 [useLocalMicrophoneTrack](#uselocalmicrophonetrack) 创建。如果未定义，则音量级别为 0。 |
+| 参数名       | 类型                                                                             | 是否必选 | 描述                                                                                                                              |
+| ------------ | -------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `audioTrack` | `IRemoteAudioTrack` &VerticalLine; `ILocalAudioTrack` &VerticalLine; `undefined` | 可选     | 本地或远端音频轨道，其中本地音频轨道通过 [`useLocalMicrophoneTrack`](#uselocalmicrophonetrack) 创建。如果未定义，则音量级别为 0。 |
 
 #### 返回值
 
-| 类型     | 描述                                                                                           |                                                      |
-| -------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| `number` | 音频轨道的音量级别。取值范围 [0, 1]，1 代表理论最大音量。通常该值大于 0.6 代表用户在持续说话。 | TODO: 是指设备的最大音量，还是说发送信号的最大音量？ |
+| 类型     | 描述                                                                                           |
+| -------- | ---------------------------------------------------------------------------------------------- |
+| `number` | 音频轨道的音量级别。取值范围 [0, 1]，1 代表理论最大音量。通常该值大于 0.6 代表用户在持续说话。 |
 
 #### 使用示例
 
@@ -161,15 +161,15 @@ function App() {
 
 #### 参数
 
-| 参数名   | 类型                                    | 是否必选 | 描述                                                                                                                                                              |
-| -------- | --------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | 如果传入该参数，则使用传入的 `IAgoraRTCClient` 对象；如果不传入该参数，则使用从[父组件的 Context](./components#agorartcprovider)中获取的 `IAgoraRTCClient` 对象。 |
+| 参数名   | 类型                                                                                                                                                           | 是否必选 | 描述                                                                                                                                                              |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client` | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | 可选     | 如果传入该参数，则使用传入的 `IAgoraRTCClient` 对象；如果不传入该参数，则使用从[父组件的 Context](./components#agorartcprovider)中获取的 `IAgoraRTCClient` 对象。 |
 
 #### 返回值
 
-| 类型              | 描述                     |
-| ----------------- | ------------------------ |
-| `IAgoraRTCClient` | `IAgoraRTCClient` 对象。 |
+| 类型                                                                                                                                     | 描述                     |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | `IAgoraRTCClient` 对象。 |
 
 #### 使用示例
 
@@ -193,21 +193,22 @@ function App() {
 
 #### 参数
 
-| 参数名      | 类型                                                        | 是否必选 | 描述                                                                                                                                                            |
-| ----------- | ----------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fetchArgs` | `JoinOptions` &VerticalLine; `(() => Promise<JoinOptions>)` | 必选     | 加入频道所需参数或异步函数。详见 [JoinOptions](./data-types#joinoptions)。                                                                                      |
-| `ready`     | `boolean`                                                   | 可选     | 是否准备好加入频道。默认为 `true`。                                                                                                                             |
-| `client`    | `IAgoraRTCClient`                                           | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| 参数名      | 类型                                                                                                                                     | 是否必选 | 描述                                                                                                                                                              |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fetchArgs` | `JoinOptions` &VerticalLine; `(() => Promise<JoinOptions>)`                                                                              | 必选     | 加入频道所需参数或异步函数。详见 [`JoinOptions`](./data-types#joinoptions)。                                                                                      |
+| `ready`     | `boolean`                                                                                                                                | 可选     | 是否准备好加入频道。默认为 `true`。                                                                                                                               |
+| `client`    | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
 
 #### 返回值
 
 返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `data` | `UID` | 成功加入频道的用户 ID。如果你在传入 `  fetchArgs` 时没有指定 `uid`，则返回默认值 `0`。|
-| `isLoading` | `boolean` |<li>`true`：正在执行加入频道相关操作。</li><li>`false`：已经执行加入频道相关操作，但不代表成功加入频道。</li> |
-| `isConnected` | `boolean` | <li>`true`：客户端已连接到服务器。即加入频道成功。</li><li>`false`：客户端没有连接到服务器。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 加入频道成功则返回 `null`，加入频道失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+
+| 属性          | 类型                                       | 描述                                                                                                                  |
+| ------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| `data`        | `UID`                                      | 成功加入频道的用户 ID。如果你在传入 `  fetchArgs` 时没有指定 `uid`，则返回默认值 `0`。                                |
+| `isLoading`   | `boolean`                                  | <li>`true`：正在执行加入频道相关操作。</li><li>`false`：已经执行加入频道相关操作，但不代表成功加入频道。</li>         |
+| `isConnected` | `boolean`                                  | <li>`true`：SDK 已连接到服务器。即加入频道成功。</li><li>`false`：SDK 没有连接到服务器。</li>                         |
+| `error`       | `AgoraRTCReactError` &VerticalLine; `null` | 加入频道成功则返回 `null`，加入频道失败则抛出错误。错误详见 [`AgoraRTCReactError`](./data-types#agorartcreacterror)。 |
 
 #### 使用示例
 
@@ -243,19 +244,20 @@ function App() {
 
 #### 参数
 
-| 参数名           | 类型                                    | 是否必选 | 描述                                                                                                                                                            |
-| ---------------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tracks`         | `(ILocalTrack` &VerticalLine; `null)[]` | 必选     | 本地轨道列表。                                                                                                                                                  |
-| `readyToPublish` | `boolean`                               | 可选     | 是否准备好进行发布。默认为 `true`。                                                                                                                             |
-| `client`         | `IAgoraRTCClient`                       | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| 参数名           | 类型                                                                                                                                     | 是否必选 | 描述                                                                                                                                                              |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tracks`         | `(ILocalTrack` &VerticalLine; `null)[]`                                                                                                  | 必选     | 本地轨道列表。                                                                                                                                                    |
+| `readyToPublish` | `boolean`                                                                                                                                | 可选     | 是否准备好进行发布。默认为 `true`。                                                                                                                               |
+| `client`         | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
 
 #### 返回值
 
 返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `isLoading` | `boolean` |<li>`true`：正在执行发布相关操作。</li><li>`false`：已经执行发布相关操作，但不代表成功发布。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 发布成功则返回 `null`，发布失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+
+| 属性        | 类型                                       | 描述                                                                                                          |
+| ----------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `isLoading` | `boolean`                                  | <li>`true`：正在执行发布相关操作。</li><li>`false`：已经执行发布相关操作，但不代表成功发布。</li>             |
+| `error`     | `AgoraRTCReactError` &VerticalLine; `null` | 发布成功则返回 `null`，发布失败则抛出错误。错误详见 [`AgoraRTCReactError`](./data-types#agorartcreacterror)。 |
 
 #### 使用示例
 
@@ -263,7 +265,7 @@ function App() {
 import { useLocalMicrophoneTrack, useLocalCameraTrack, usePublish } from "agora-rtc-react";
 
 function App() {
-  //get audioTrack and videoTrack before publish
+  // get audioTrack and videoTrack before publish
   const audioTrack = useLocalMicrophoneTrack();
   const videoTrack = useLocalCameraTrack();
   usePublish([audioTrack, videoTrack]);
@@ -286,20 +288,21 @@ function App() {
 
 #### 参数
 
-| 参数名             | 类型                             | 是否必选 | 描述                                                                                                                                                                                                                                       |
-| ------------------ | -------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ready`            | `boolean`                        | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                                                                                                                                        |
-| `audioTrackConfig` | `MicrophoneAudioTrackInitConfig` | 可选     | 麦克风音频轨道的初始化配置，默认为 `{ ANS: true, AEC: true }`。详见 [MicrophoneAudioTrackInitConfig](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/microphoneaudiotrackinitconfig.html)。 |
-| `client`           | `IAgoraRTCClient`                | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。                                                                            |
+| 参数名             | 类型                                                                                                                                     | 是否必选 | 描述                                                                                                                                                                                                                                         |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ready`            | `boolean`                                                                                                                                | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                                                                                                                                          |
+| `audioTrackConfig` | `MicrophoneAudioTrackInitConfig`                                                                                                         | 可选     | 麦克风音频轨道的初始化配置，默认为 `{ ANS: true, AEC: true }`。详见 [`MicrophoneAudioTrackInitConfig`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/microphoneaudiotrackinitconfig.html)。 |
+| `client`           | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。                                                                            |
 
 #### 返回值
 
 返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `localMicrophoneTrack` | `IMicrophoneAudioTrack` &VerticalLine; `null` | 创建的本地麦克风音频轨道对象。 |
-| `isLoading` | `boolean` |<li>`true`：正在执行创建轨道相关操作。</li><li>`false`：已经执行创建轨道相关操作，但不代表成功创建轨道。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 创建轨道成功则返回 `null`，创建轨道失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+
+| 属性                   | 类型                                          | 描述                                                                                                                  |
+| ---------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `localMicrophoneTrack` | `IMicrophoneAudioTrack` &VerticalLine; `null` | 创建的本地麦克风音频轨道对象。                                                                                        |
+| `isLoading`            | `boolean`                                     | <li>`true`：正在执行创建轨道相关操作。</li><li>`false`：已经执行创建轨道相关操作，但不代表成功创建轨道。</li>         |
+| `error`                | `AgoraRTCReactError` &VerticalLine; `null`    | 创建轨道成功则返回 `null`，创建轨道失败则抛出错误。错误详见 [`AgoraRTCReactError`](./data-types#agorartcreacterror)。 |
 
 #### 使用示例
 
@@ -324,19 +327,20 @@ function App() {
 
 #### 参数
 
-| 参数名   | 类型              | 是否必选 | 描述                                                                                                                                                            |
-| -------- | ----------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ready`  | `boolean`         | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                                                             |
-| `client` | `IAgoraRTCClient` | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| 参数名   | 类型                                                                                                                                     | 是否必选 | 描述                                                                                                                                                              |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ready`  | `boolean`                                                                                                                                | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                                                               |
+| `client` | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
 
 #### 返回值
 
 返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `localCameraTrack` | `ICameraVideoTrack` &VerticalLine; `null` | 创建的摄像头视频轨道对象。 |
-| `isLoading` | `boolean` |<li>`true`：正在执行创建轨道相关操作。</li><li>`false`：已经执行创建轨道相关操作，但不代表成功创建轨道。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 创建轨道成功则返回 `null`，创建轨道失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+
+| 属性               | 类型                                       | 描述                                                                                                                  |
+| ------------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| `localCameraTrack` | `ICameraVideoTrack` &VerticalLine; `null`  | 创建的摄像头视频轨道对象。                                                                                            |
+| `isLoading`        | `boolean`                                  | <li>`true`：正在执行创建轨道相关操作。</li><li>`false`：已经执行创建轨道相关操作，但不代表成功创建轨道。</li>         |
+| `error`            | `AgoraRTCReactError` &VerticalLine; `null` | 创建轨道成功则返回 `null`，创建轨道失败则抛出错误。错误详见 [`AgoraRTCReactError`](./data-types#agorartcreacterror)。 |
 
 #### 使用示例
 
@@ -361,19 +365,20 @@ function App() {
 
 #### 参数
 
-| 参数名   | 类型                                               | 是否必选 | 描述                                                                                                                                                            |
-| -------- | -------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `users`  | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined` | 必选     | 远端用户列表。                                                                                                                                                  |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null`            | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| 参数名   | 类型                                                                                                                                                           | 是否必选 | 描述                                                                                                                                                              |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `users`  | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined`                                                                                                             | 必选     | 远端用户列表。                                                                                                                                                    |
+| `client` | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
 
 #### 返回值
 
 返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `videoTracks` | `IRemoteVideoTrack[]` | 已订阅的远端用户视频轨道列表。 |
-| `isLoading` | `boolean` |<li>`true`：正在执行订阅相关操作。</li><li>`false`：已经执行订阅相关操作，但不代表成功订阅。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 订阅成功则返回 `null`，订阅失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+
+| 属性          | 类型                                       | 描述                                                                                                          |
+| ------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `videoTracks` | `IRemoteVideoTrack[]`                      | 已订阅的远端用户视频轨道列表。                                                                                |
+| `isLoading`   | `boolean`                                  | <li>`true`：正在执行订阅相关操作。</li><li>`false`：已经执行订阅相关操作，但不代表成功订阅。</li>             |
+| `error`       | `AgoraRTCReactError` &VerticalLine; `null` | 订阅成功则返回 `null`，订阅失败则抛出错误。错误详见 [`AgoraRTCReactError`](./data-types#agorartcreacterror)。 |
 
 #### 使用示例
 
@@ -399,19 +404,20 @@ function App() {
 
 #### 参数
 
-| 参数名   | 类型                                               | 是否必选 | 描述                                                                                                                                                            |
-| -------- | -------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `users`  | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined` | 必选     | 远端用户列表。                                                                                                                                                  |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null`            | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| 参数名   | 类型                                                                                                                                                           | 是否必选 | 描述                                                                                                                                                              |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `users`  | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined`                                                                                                             | 必选     | 远端用户列表。                                                                                                                                                    |
+| `client` | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
 
 #### 返回值
 
 返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `audioTracks` | `IRemoteAudioTrack[]` | 已订阅的远端用户音频轨道列表。 |
-| `isLoading` | `boolean` |<li>`true`：正在执行订阅相关操作。</li><li>`false`：已经执行订阅相关操作，但不代表成功订阅。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 订阅成功则返回 `null`，订阅失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+
+| 属性          | 类型                                       | 描述                                                                                                          |
+| ------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `audioTracks` | `IRemoteAudioTrack[]`                      | 已订阅的远端用户音频轨道列表。                                                                                |
+| `isLoading`   | `boolean`                                  | <li>`true`：正在执行订阅相关操作。</li><li>`false`：已经执行订阅相关操作，但不代表成功订阅。</li>             |
+| `error`       | `AgoraRTCReactError` &VerticalLine; `null` | 订阅成功则返回 `null`，订阅失败则抛出错误。错误详见 [`AgoraRTCReactError`](./data-types#agorartcreacterror)。 |
 
 #### 使用示例
 
@@ -435,20 +441,21 @@ function App() {
 
 #### 参数
 
-| 参数名      | 类型                                             | 是否必选 | 描述                                                                                                                                                            |
-| ----------- | ------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `user`      | `IAgoraRTCRemoteUser` &VerticalLine; `undefined` | 必选     | 远端用户对象。                                                                                                                                                  |
-| `mediaType` | `"video"` &VerticalLine; `"audio"`               | 必选     | 媒体类型，支持传入 `"video"` 或 `"audio"`。                                                                                                                     |
-| `client`    | `IAgoraRTCClient` &VerticalLine; `null`          | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| 参数名      | 类型                                                                                                                                                           | 是否必选 | 描述                                                                                                                                                              |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `user`      | `IAgoraRTCRemoteUser` &VerticalLine; `undefined`                                                                                                               | 必选     | 远端用户对象。                                                                                                                                                    |
+| `mediaType` | `"video"` &VerticalLine; `"audio"`                                                                                                                             | 必选     | 媒体类型，支持传入 `"video"` 或 `"audio"`。                                                                                                                       |
+| `client`    | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
 
 #### 返回值
 
 返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `track` | `IRemoteVideoTrack` &VerticalLine; `IRemoteAudioTrack` &VerticalLine; `undefined` | 远端用户的音频或视频轨道（取决于传入的 `mediaType`）。如果远端用户或音频、视频轨道不存在，则返回 `undefined`。 |
-| `isLoading` | `boolean` |<li>`true`：正在执行获取轨道相关操作。</li><li>`false`：已经执行获取轨道相关操作，但不代表成功获取轨道。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 获取轨道成功则返回 `null`，获取轨道失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。|
+
+| 属性        | 类型                                                                              | 描述                                                                                                                  |
+| ----------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `track`     | `IRemoteVideoTrack` &VerticalLine; `IRemoteAudioTrack` &VerticalLine; `undefined` | 远端用户的音频或视频轨道（取决于传入的 `mediaType`）。如果远端用户或音频、视频轨道不存在，则返回 `undefined`。        |
+| `isLoading` | `boolean`                                                                         | <li>`true`：正在执行获取轨道相关操作。</li><li>`false`：已经执行获取轨道相关操作，但不代表成功获取轨道。</li>         |
+| `error`     | `AgoraRTCReactError` &VerticalLine; `null`                                        | 获取轨道成功则返回 `null`，获取轨道失败则抛出错误。错误详见 [`AgoraRTCReactError`](./data-types#agorartcreacterror)。 |
 
 #### 使用示例
 
@@ -479,9 +486,9 @@ function App() {
 
 #### 参数
 
-| 参数名   | 类型                                    | 是否必选 | 描述                                                                                                                                                            |
-| -------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| 参数名   | 类型                                                                                                                                                           | 是否必选 | 描述                                                                                                                                                              |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client` | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
 
 #### 返回值
 
@@ -505,18 +512,18 @@ function App() {
   useAutoPlayVideoTrack
 </h2>
 
-用于控制本地或远端视频轨道。
+用于自动播放本地或远端视频轨道。
 
 - 当组件挂载时，该 Hook 会根据传入的 `play` 判断是否自动播放。
 - 当组件卸载时，该 Hook 会停止播放 `track` 对应的视频轨道。
 
 #### 参数
 
-| 参数名  | 类型                                                  | 是否必选 | 描述                                                                                                   |
-| ------- | ----------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------- |
-| `track` | `IRemoteVideoTrack` &VerticalLine; `ILocalVideoTrack` | 必选     | 远端视频轨道对象或本地视频轨道对象。                                                                   |
-| `play`  | `boolean`                                             | 可选     | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                        |
-| `div`   | `HTMLElement` &VerticalLine; `null`                   | 可选     | 用于渲染视频的 HTML 元素。如果提供了该参数，视频将在该元素中自动播放。如果未提供，则不会自动播放视频。 | TODO: 如果 play 为 true，div 不传，是否播放？ |
+| 参数名  | 类型                                                  | 是否必选 | 描述                                                                                                                                        |
+| ------- | ----------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `track` | `IRemoteVideoTrack` &VerticalLine; `ILocalVideoTrack` | 必选     | 远端视频轨道对象或本地视频轨道对象。                                                                                                        |
+| `play`  | `boolean`                                             | 可选     | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                             |
+| `div`   | `HTMLElement` &VerticalLine; `null`                   | 可选     | 用于渲染视频轨道的 HTML 元素。只有在 `play` 为 `true` 并且传入 `div` 参数的情况下，视频才会在该元素中自动播放。其它情况则不会自动播放视频。 |
 
 #### 返回值
 
@@ -539,7 +546,7 @@ function App() {
   useAutoPlayAudioTrack
 </h2>
 
-用于控制本地或远端音频轨道。
+用于自动播放本地或远端音频轨道。
 
 - 当组件挂载时，该 Hook 会根据传入的 `play` 判断是否自动播放。
 - 当组件卸载时，该 Hook 会停止播放 `track` 对应的音频轨道。

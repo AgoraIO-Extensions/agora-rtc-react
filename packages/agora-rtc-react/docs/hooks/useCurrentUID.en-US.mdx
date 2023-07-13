@@ -1,20 +1,20 @@
 ## useCurrentUID
 
-用于获取当前用户 UID 。
+Returns the current user ID.
 
-#### 参数
+#### Parameters
 
-| 参数名   | 类型                                    | 是否必选 | 描述                                                                                                                                                            |
-| -------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client` | `IAgoraRTCClient` &VerticalLine; `null` | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| Parameter | Type                                                                                                                                                   | Required | Description                                                                                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &#124; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
 
-#### 返回值
+#### Returns
 
-| 类型                             | 描述                                                               |
-| -------------------------------- | ------------------------------------------------------------------ |
-| `UID` &VerticalLine; `undefined` | 当前用户的 UID。如果当前用户没有加入任何频道，则返回 `undefined`。 |
+| Type                     | Description                                                                                               |
+| ------------------------ | --------------------------------------------------------------------------------------------------------- |
+| `UID` &#124; `undefined` | The user ID of the current user. If the current user has not joined any channel, `undefined` is returned. |
 
-#### 使用示例
+#### Sample code
 
 ```jsx
 import { useCurrentUID } from "agora-rtc-react";

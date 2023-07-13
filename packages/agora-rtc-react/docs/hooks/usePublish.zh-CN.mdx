@@ -4,19 +4,20 @@
 
 #### 参数
 
-| 参数名           | 类型                                    | 是否必选 | 描述                                                                                                                                                            |
-| ---------------- | --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tracks`         | `(ILocalTrack` &VerticalLine; `null)[]` | 必选     | 本地轨道列表。                                                                                                                                                  |
-| `readyToPublish` | `boolean`                               | 可选     | 是否准备好进行发布。默认为 `true`。                                                                                                                             |
-| `client`         | `IAgoraRTCClient`                       | 可选     | 通过 Web SDK 的 [IAgoraRTC.createClient](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| 参数名           | 类型                                                                                                                                     | 是否必选 | 描述                                                                                                                                                              |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tracks`         | `(ILocalTrack` &VerticalLine; `null)[]`                                                                                                  | 必选     | 本地轨道列表。                                                                                                                                                    |
+| `readyToPublish` | `boolean`                                                                                                                                | 可选     | 是否准备好进行发布。默认为 `true`。                                                                                                                               |
+| `client`         | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
 
 #### 返回值
 
 返回一个包含以下属性的对象：
-| 属性 | 类型 | 描述 |
-| ----------------------| ---------------------- | ------------------------ |
-| `isLoading` | `boolean` |<li>`true`：正在执行发布相关操作。</li><li>`false`：已经执行发布相关操作，但不代表成功发布。</li> |
-| `error` | `AgoraRTCReactError` &VerticalLine; `null` | 发布成功则返回 `null`，发布失败则抛出错误。错误详见 [AgoraRTCReactError](./data-types#agorartcreacterror)。 |
+
+| 属性        | 类型                                       | 描述                                                                                                          |
+| ----------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `isLoading` | `boolean`                                  | <li>`true`：正在执行发布相关操作。</li><li>`false`：已经执行发布相关操作，但不代表成功发布。</li>             |
+| `error`     | `AgoraRTCReactError` &VerticalLine; `null` | 发布成功则返回 `null`，发布失败则抛出错误。错误详见 [`AgoraRTCReactError`](./data-types#agorartcreacterror)。 |
 
 #### 使用示例
 
@@ -24,7 +25,7 @@
 import { useLocalMicrophoneTrack, useLocalCameraTrack, usePublish } from "agora-rtc-react";
 
 function App() {
-  //get audioTrack and videoTrack before publish
+  // get audioTrack and videoTrack before publish
   const audioTrack = useLocalMicrophoneTrack();
   const videoTrack = useLocalCameraTrack();
   usePublish([audioTrack, videoTrack]);
