@@ -14,7 +14,6 @@ import { interval } from "../misc/utils";
 const meta: Meta<RemoteUserProps> = {
   title: "User/RemoteUser",
   component: RemoteUser,
-  tags: ["autodocs"],
   argTypes: {
     user: {
       control: {

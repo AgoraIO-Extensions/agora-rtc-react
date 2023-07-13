@@ -34,7 +34,6 @@ for (let j = 0; j < docType.length; j++) {
               .trim()
           );
         });
-        console.log(data);
         const lines = data.split("\n");
 
         let content = "";
