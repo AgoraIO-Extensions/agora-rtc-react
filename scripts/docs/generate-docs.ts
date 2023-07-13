@@ -1,6 +1,6 @@
 import fs from "node:fs";
 
-import { docType, docsPath, languages, languagesFormat } from "../const";
+import { docType, docsPath, languages, languagesFormat, urlPrefix } from "../const";
 import { emptyDirectory } from "../utils";
 
 const prefix = "## ";
@@ -23,6 +23,7 @@ for (let j = 0; j < docType.length; j++) {
       if (err) {
         console.error(err);
       } else {
+        data = data.replace(/\.\/+/g, urlPrefix[m]);
         data = data.replace(/<h2[^>]*>([\s\S]*?)<\/h2>/g, match => {
           return (
             prefix +
@@ -33,6 +34,7 @@ for (let j = 0; j < docType.length; j++) {
               .trim()
           );
         });
+        console.log(data);
         const lines = data.split("\n");
 
         let content = "";

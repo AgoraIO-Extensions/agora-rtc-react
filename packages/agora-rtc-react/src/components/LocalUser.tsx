@@ -20,12 +20,12 @@ export interface LocalUserProps extends HTMLProps<HTMLDivElement> {
   readonly cameraOn?: boolean;
 
   /**
-   * The microphone audio track to be played, which can be created by calling [`useLocalMicrophoneTrack`](./hooks#uselocalmicrophonetrack).
+   * The microphone audio track to be played, which can be created by calling [`useLocalMicrophoneTrack`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/hooks#uselocalmicrophonetrack).
    */
   readonly audioTrack?: MaybePromiseOrNull<ILocalAudioTrack>;
 
   /**
-   * The camera video track to be played, which can be created by calling [`useLocalCameraTrack`](./hooks#uselocalcameratrack).
+   * The camera video track to be played, which can be created by calling [`useLocalCameraTrack`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/hooks#uselocalcameratrack).
    */
   readonly videoTrack?: MaybePromiseOrNull<ILocalVideoTrack>;
 
@@ -59,11 +59,7 @@ export interface LocalUserProps extends HTMLProps<HTMLDivElement> {
  * This component plays the camera video track and the microphone audio track of the local user using the playback devices selected by the user in the browser.
  * @example
  * ```jsx
- * import {
- *   LocalUser,
- *   useLocalAudioTrack,
- *   useLocalCameraTrack,
- * } from "agora-rtc-react";
+ * import { LocalUser, useLocalAudioTrack, useLocalCameraTrack } from "agora-rtc-react";
  *
  * function App() {
  *   const audioTrack = useLocalAudioTrack();

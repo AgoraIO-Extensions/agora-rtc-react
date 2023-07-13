@@ -19,7 +19,7 @@ function useOptionalRTCClient(client?: IAgoraRTCClient | null): IAgoraRTCClient 
 /**
  * Returns the IAgoraRTCClient object.
  *
- * @param `client` {IAgoraRTCClient | null} If provided, the passed `IAgoraRTCClient` object is returned. If not provided, the `IAgoraRTCClient` object obtained from the [parent component's context](./components#agorartcprovider) is returned.
+ * @param `client` {IAgoraRTCClient | null} If provided, the passed `IAgoraRTCClient` object is returned. If not provided, the `IAgoraRTCClient` object obtained from the [parent component's context](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/components#agorartcprovider) is returned.
  * @return IAgoraRTCClient The IAgoraRTCClient client.
  * @example
  * ```jsx

@@ -14,11 +14,11 @@
 
 返回一个包含以下属性的对象：
 
-| 属性        | 类型                                                                              | 描述                                                                                                                  |
-| ----------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `track`     | `IRemoteVideoTrack` &VerticalLine; `IRemoteAudioTrack` &VerticalLine; `undefined` | 远端用户的音频或视频轨道（取决于传入的 `mediaType`）。如果远端用户或音频、视频轨道不存在，则返回 `undefined`。        |
-| `isLoading` | `boolean`                                                                         | <li>`true`：正在执行获取轨道相关操作。</li><li>`false`：已经执行获取轨道相关操作，但不代表成功获取轨道。</li>         |
-| `error`     | `AgoraRTCReactError` &VerticalLine; `null`                                        | 获取轨道成功则返回 `null`，获取轨道失败则抛出错误。错误详见 [`AgoraRTCReactError`](./data-types#agorartcreacterror)。 |
+| 属性        | 类型                                                                              | 描述                                                                                                                                                                     |
+| ----------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `track`     | `IRemoteVideoTrack` &VerticalLine; `IRemoteAudioTrack` &VerticalLine; `undefined` | 远端用户的音频或视频轨道（取决于传入的 `mediaType`）。如果远端用户或音频、视频轨道不存在，则返回 `undefined`。                                                           |
+| `isLoading` | `boolean`                                                                         | <li>`true`：正在执行获取轨道相关操作。</li><li>`false`：已经执行获取轨道相关操作，但不代表成功获取轨道。</li>                                                            |
+| `error`     | `AgoraRTCReactError` &VerticalLine; `null`                                        | 获取轨道成功则返回 `null`，获取轨道失败则抛出错误。错误详见 [`AgoraRTCReactError`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/data-types#agorartcreacterror)。 |
 
 #### 使用示例
 

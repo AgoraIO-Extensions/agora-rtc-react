@@ -12,8 +12,8 @@
 | ------------ | ----------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `micOn`      | `boolean`               | `false` | <li>`true`：打开本地用户的麦克风。</li><li>`false`：关闭本地用户的麦克风。</li>                                                                                           |
 | `cameraOn`   | `boolean`               | `false` | <li>`true`：打开本地用户的摄像头。</li><li>`false`：关闭本地用户的摄像头。</li>                                                                                           |
-| `audioTrack` | `IMicrophoneAudioTrack` | 无      | 要播放的麦克风音频轨道。通过 [`useLocalMicrophoneTrack`](./hooks#uselocalmicrophonetrack) 创建。                                                                          |
-| `videoTrack` | `ICameraVideoTrack`     | 无      | 要播放的摄像头视频轨道。通过 [`useLocalCameraTrack`](./hooks#uselocalcameratrack) 创建。                                                                                  |
+| `audioTrack` | `IMicrophoneAudioTrack` | 无      | 要播放的麦克风音频轨道。通过 [`useLocalMicrophoneTrack`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/hooks#uselocalmicrophonetrack) 创建。                       |
+| `videoTrack` | `ICameraVideoTrack`     | 无      | 要播放的摄像头视频轨道。通过 [`useLocalCameraTrack`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/hooks#uselocalcameratrack) 创建。                               |
 | `playAudio`  | `boolean`               | `false` | <li>`true`：播放本地用户的音频轨道。</li><li>`false`：停止播放本地用户的音频轨道。</li>                                                                                   |
 | `playVideo`  | `boolean`               | `false` | <li>`true`：播放本地用户的视频轨道。</li><li>`false`：停止播放本地用户的视频轨道。</li>                                                                                   |
 | `volume`     | `number`                | 无      | 音量大小。取值范围 [0, 1000]，0 代表静音，100 代表原始音量。100 以上会使用 [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) 进行音量增益。 |
