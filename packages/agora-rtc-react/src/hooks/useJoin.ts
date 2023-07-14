@@ -36,7 +36,7 @@ import { useIsConnected } from "./useIsConnected";
  *       channel: YOUR_CHANNEL,
  *       token: YOUR_TOKEN,
  *     },
- *     ready,
+ *     ready
  *   );
  *
  *   return <></>;

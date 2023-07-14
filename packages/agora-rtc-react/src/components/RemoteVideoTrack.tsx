@@ -23,7 +23,12 @@ export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
  * This component plays the video track of a remote user and does not support specifying the playback device.
  * @example
  * ```jsx
- * import { RemoteAudioTrack, useJoin, useRemoteAudioTracks, useRemoteUsers } from "agora-rtc-react";
+ * import {
+ *   RemoteAudioTrack,
+ *   useJoin,
+ *   useRemoteAudioTracks,
+ *   useRemoteUsers,
+ * } from "agora-rtc-react";
  *
  * function App() {
  *   const remoteUsers = useRemoteUsers();
@@ -31,7 +36,7 @@ export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
  *
  *   return (
  *     <>
- *       {audioTracks.map(track => (
+ *       {audioTracks.map((track) => (
  *         <RemoteAudioTrack key={track.getUserId()} play track={track} />
  *       ))}
  *     </>
