@@ -59,11 +59,7 @@ export interface LocalUserProps extends HTMLProps<HTMLDivElement> {
  * This component plays the camera video track and the microphone audio track of the local user using the playback devices selected by the user in the browser.
  * @example
  * ```jsx
- * import {
- *   LocalUser,
- *   useLocalAudioTrack,
- *   useLocalCameraTrack,
- * } from "agora-rtc-react";
+ * import { LocalUser, useLocalAudioTrack, useLocalCameraTrack } from "agora-rtc-react";
  *
  * function App() {
  *   const audioTrack = useLocalAudioTrack();

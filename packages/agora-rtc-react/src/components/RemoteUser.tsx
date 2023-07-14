@@ -56,7 +56,7 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
  *
  *   return (
  *     <>
- *       {remoteUsers.map((user) => (
+ *       {remoteUsers.map(user => (
  *         <RemoteUser key={user.uid} user={user} />
  *       ))}
  *     </>
