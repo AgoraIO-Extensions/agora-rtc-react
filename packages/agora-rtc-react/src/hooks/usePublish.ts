@@ -18,7 +18,11 @@ import { useIsConnected } from "./useIsConnected";
  * @return error AgoraRTCReactError | null
  * @example
  * ```jsx
- * import { useLocalMicrophoneTrack, useLocalCameraTrack, usePublish } from "agora-rtc-react";
+ * import {
+ *   useLocalMicrophoneTrack,
+ *   useLocalCameraTrack,
+ *   usePublish,
+ * } from "agora-rtc-react";
  *
  * function App() {
  *   // get audioTrack and videoTrack before publish
