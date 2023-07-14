@@ -1,3 +1,5 @@
+import "../../shared/assets/storybook/global.scss";
+
 export const parameters = {
   backgrounds: {
     default: "white",

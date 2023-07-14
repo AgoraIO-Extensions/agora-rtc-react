@@ -29,7 +29,17 @@ import { useIsomorphicLayoutEffect } from "./tools";
 /**
  * Occurs when the state of the connection between the SDK and the server changes.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "connection-state-change", listener: Nullable<(curState: ConnectionState, revState: ConnectionState, reason?: ConnectionDisconnectedReason) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "connection-state-change",
+  listener: Nullable<
+    (
+      curState: ConnectionState,
+      revState: ConnectionState,
+      reason?: ConnectionDisconnectedReason,
+    ) => void
+  >,
+): void;
 
 /**
  * Occurs when a remote user or host joins the channel.
@@ -42,7 +52,11 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "connec
  * - A remote audience switches the user role to host by calling {@link setClientRole} after joining the channel.
  * - A remote user or host rejoins the channel after a network interruption.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "user-joined", listener: Nullable<(user: IAgoraRTCRemoteUser) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "user-joined",
+  listener: Nullable<(user: IAgoraRTCRemoteUser) => void>,
+): void;
 
 /**
  * Occurs when a remote user becomes offline.
@@ -54,7 +68,13 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "user-j
  *
  * > In live-broadcast channels, the SDK triggers this callback only when a host goes offline.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "user-left", listener: Nullable<(user: IAgoraRTCRemoteUser, reason: "Quit" | "ServerTimeOut" | "BecomeAudience") => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "user-left",
+  listener: Nullable<
+    (user: IAgoraRTCRemoteUser, reason: "Quit" | "ServerTimeOut" | "BecomeAudience") => void
+  >,
+): void;
 
 /**
  * Occurs when a remote user publishes an audio or video track.
@@ -77,12 +97,20 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "user-l
  * })
  * ```
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "user-published", listener: Nullable<(user: IAgoraRTCRemoteUser, mediaType: "audio" | "video") => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "user-published",
+  listener: Nullable<(user: IAgoraRTCRemoteUser, mediaType: "audio" | "video") => void>,
+): void;
 
 /**
  * Occurs when a remote user unpublishes an audio or video track.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "user-unpublished", listener: Nullable<(user: IAgoraRTCRemoteUser, mediaType: "audio" | "video") => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "user-unpublished",
+  listener: Nullable<(user: IAgoraRTCRemoteUser, mediaType: "audio" | "video") => void>,
+): void;
 
 /**
  * Reports the state change of users.
@@ -91,29 +119,54 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "user-u
  *
  * > This event indicating the media stream of a remote user is active does not necessarily mean that the local user can subscribe to this remote user. The local user can subscribe to a remote user only when receiving the [user-published]{@link IAgoraRTCClient.event_user_published} event.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "user-info-updated", listener: Nullable<(uid: UID, msg: `${"mute" | "unmute"}-${"audio" | "video"}` | `${"enable" | "disable"}-local-video`) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "user-info-updated",
+  listener: Nullable<
+    (
+      uid: UID,
+      msg: `${"mute" | "unmute"}-${"audio" | "video"}` | `${"enable" | "disable"}-local-video`,
+    ) => void
+  >,
+): void;
 
 /**
  * Occurs when the SDK starts to reestablish the media connection for publishing and subscribing.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "media-reconnect-start", listener: Nullable<(uid: UID) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "media-reconnect-start",
+  listener: Nullable<(uid: UID) => void>,
+): void;
 
 /**
  * Occurs when the SDK ends reestablishing the media connection for publishing and subscribing.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "media-reconnect-end", listener: Nullable<(uid: UID) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "media-reconnect-end",
+  listener: Nullable<(uid: UID) => void>,
+): void;
 
 /**
  * Occurs when the type of a remote video stream changes.
  *
  * The SDK triggers this callback when a high-quality video stream changes to a low-quality video stream, or vice versa.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "stream-type-changed", listener: Nullable<(uid: UID, streamType: RemoteStreamType) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "stream-type-changed",
+  listener: Nullable<(uid: UID, streamType: RemoteStreamType) => void>,
+): void;
 
 /**
  * Occurs when a remote video stream falls back to an audio stream due to unreliable network conditions or switches back to video after the network conditions improve.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "stream-fallback", listener: Nullable<(uid: UID, isFallbackOrRecover: "fallback" | "recover") => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "stream-fallback",
+  listener: Nullable<(uid: UID, isFallbackOrRecover: "fallback" | "recover") => void>,
+): void;
 
 /**
  * Occurs when the state of the media stream relay changes.
@@ -122,12 +175,20 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "stream
  *
  * If the media relay is in an abnormal state, you can find the error code in {@link ChannelMediaRelayError} (for example if the token has expired, or repeated reconnection attempts fail.)
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "channel-media-relay-state", listener: Nullable<(state: ChannelMediaRelayState, code: ChannelMediaRelayError) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "channel-media-relay-state",
+  listener: Nullable<(state: ChannelMediaRelayState, code: ChannelMediaRelayError) => void>,
+): void;
 
 /**
  * Reports events during a media stream relay.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "channel-media-relay-event", listener: Nullable<(event: ChannelMediaRelayEvent) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "channel-media-relay-event",
+  listener: Nullable<(event: ChannelMediaRelayEvent) => void>,
+): void;
 
 /**
  * Reports all the speaking remote users and their volumes.
@@ -145,14 +206,22 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "channe
  * });
  * ```
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "volume-indicator", listener: Nullable<(result: { uid: UID; level: number }[]) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "volume-indicator",
+  listener: Nullable<(result: { uid: UID; level: number }[]) => void>,
+): void;
 
 /**
  * Occurs when decryption fails.
  *
  * The SDK triggers this callback when the decryption fails during the process of subscribing to a stream. The failure is usually caused by incorrect encryption settings. See {@link setEncryptionConfig} for details.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "crypt-error", listener: Nullable<() => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "crypt-error",
+  listener: Nullable<() => void>,
+): void;
 
 /**
  * Occurs 30 seconds before a token expires.
@@ -166,7 +235,11 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "crypt-
  * });
  * ```
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "token-privilege-will-expire", listener: Nullable<() => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "token-privilege-will-expire",
+  listener: Nullable<() => void>,
+): void;
 
 /**
  * Occurs when the token expires.
@@ -180,7 +253,11 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "token-
  * });
  * ```
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "token-privilege-did-expire", listener: Nullable<() => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "token-privilege-did-expire",
+  listener: Nullable<() => void>,
+): void;
 
 /**
  * Reports the network quality of the local user.
@@ -189,7 +266,11 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "token-
  *
  * > Agora recommends listening for this event and displaying the network quality.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "network-quality", listener: Nullable<(stats: NetworkQuality) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "network-quality",
+  listener: Nullable<(stats: NetworkQuality) => void>,
+): void;
 
 /**
  * Occurs when an error occurs in CDN live streaming.
@@ -204,7 +285,11 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "networ
  * - `LIVE_STREAMING_CDN_ERROR`: An error occurs in the CDN.
  * - `LIVE_STREAMING_INVALID_RAW_STREAM`: Timeout for the CDN live streaming. Please check your media stream.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "live-streaming-error", listener: Nullable<(url: string, err: IAgoraRTCError) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "live-streaming-error",
+  listener: Nullable<(url: string, err: IAgoraRTCError) => void>,
+): void;
 
 /**
  * Occurs when a warning occurs in CDN live streaming.
@@ -216,7 +301,11 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "live-s
  * - `LIVE_STREAMING_WARN_FAILED_LOAD_IMAGE`: Fails to load the background image or watermark image.
  * - `LIVE_STREAMING_WARN_FREQUENT_REQUEST`: Pushes stremas to the CDN too frequently.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "live-streaming-warning", listener: Nullable<(url: string, err: IAgoraRTCError) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "live-streaming-warning",
+  listener: Nullable<(url: string, err: IAgoraRTCError) => void>,
+): void;
 
 /**
  * Reports exceptions in the channel.
@@ -253,7 +342,11 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "live-s
  * |4003   | SEND_AUDIO_BITRATE_TOO_LOW_RECOVER | Sent audio bitrate recovers |
  * |4005   | RECV_AUDIO_DECODE_FAILED_RECOVER   | Decoding received audio recovers |
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "exception", listener: Nullable<(event: { code: number, msg: string, uid: UID }) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "exception",
+  listener: Nullable<(event: { code: number; msg: string; uid: UID }) => void>,
+): void;
 
 /**
  * **Since**
@@ -263,7 +356,11 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "except
  * - Earlier than v4.10.0: The callback is triggered after the method call of [[publish]] succeeds.
  * - v4.10.0 and later: The callback is triggered after the method call of [[join]] succeeds.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "is-using-cloud-proxy", listener: Nullable<(isUsingProxy: boolean) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "is-using-cloud-proxy",
+  listener: Nullable<(isUsingProxy: boolean) => void>,
+): void;
 
 /**
  * **Since**
@@ -274,7 +371,11 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "is-usi
  * As of v4.11.0, if the SDK fails in the attempt to directly connect to Agora SD-RTN™ after you call [[join]],
  * the SDK automatically switches to TCP/TLS 443 in order to ensure connectivity.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "join-fallback-to-proxy", listener: Nullable<(proxyServer: string) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "join-fallback-to-proxy",
+  listener: Nullable<(proxyServer: string) => void>,
+): void;
 
 /**
  * **Since**
@@ -289,18 +390,34 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "join-f
  * >   - If you listen for the `published-user-list` event, users reported by the `published-user-list` callback are not reported by `user-joined` and `user-published`.
  * >   - If you do not listen for the `published-user-list` event, the `user-joined` and `user-published` callbacks are not affected.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "published-user-list", listener: Nullable<(user: IAgoraRTCRemoteUser) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "published-user-list",
+  listener: Nullable<(user: IAgoraRTCRemoteUser) => void>,
+): void;
 
 /**
  * Occurs when the state of the connection between the SDK and the server changes.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "content-inspect-connection-state-change", listener: Nullable<(preState: `${InspectState}`, newState: `${InspectState}`) => void>): void
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "content-inspect-connection-state-change",
+  listener: Nullable<(preState: `${InspectState}`, newState: `${InspectState}`) => void>,
+): void;
 
 /**
  * Occurs when the state of the connection between the SDK and the server changes.
  */
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: "content-inspect-error", listener: Nullable<(error?: IAgoraRTCError) => void>): void
-export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: string, listener: Nullable<Fn>) {
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "content-inspect-error",
+  listener: Nullable<(error?: IAgoraRTCError) => void>,
+): void;
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: string,
+  listener: Nullable<Fn>,
+) {
   const listenerRef = useRef<Nullable<Fn>>(listener);
 
   useIsomorphicLayoutEffect(() => {
@@ -329,12 +446,20 @@ export function useClientEvent(client: Nullable<IAgoraRTCClient>, event: string,
  * - A local media device malfunctions.
  * - The device permission is revoked.
  */
-export function useTrackEvent(track: Nullable<ILocalTrack>, event: "track-ended", listener: Nullable<() => void>): void;
+export function useTrackEvent(
+  track: Nullable<ILocalTrack>,
+  event: "track-ended",
+  listener: Nullable<() => void>,
+): void;
 
 /**
  * Occurs when the state of processing the audio buffer in [BufferSourceAudioTrack]{@link IBufferSourceAudioTrack} changes.
  */
-export function useTrackEvent(track: Nullable<IBufferSourceAudioTrack>, event: "source-state-change", listener: Nullable<(currentState: AudioSourceState) => void>): void;
+export function useTrackEvent(
+  track: Nullable<IBufferSourceAudioTrack>,
+  event: "source-state-change",
+  listener: Nullable<(currentState: AudioSourceState) => void>,
+): void;
 
 /**
  * Occurs when the device is overloaded after you call [setBeautyEffect]{@link ILocalVideoTrack.setBeautyEffect} to enable image enhancement.
@@ -348,7 +473,11 @@ export function useTrackEvent(track: Nullable<IBufferSourceAudioTrack>, event: "
  * });
  * ```
  */
-export function useTrackEvent(track: Nullable<ILocalVideoTrack>, event: "beauty-effect-overload", listener: Nullable<() => void>): void;
+export function useTrackEvent(
+  track: Nullable<ILocalVideoTrack>,
+  event: "beauty-effect-overload",
+  listener: Nullable<() => void>,
+): void;
 
 /**
  * Occurs when a audio or video track ends.
@@ -361,7 +490,11 @@ export function useTrackEvent(track: Nullable<ILocalVideoTrack>, event: "beauty-
  * - A local media device malfunctions.
  * - The device permission is revoked.
  */
-export function useTrackEvent(track: Nullable<ILocalVideoTrack>, event: "track-ended", listener: Nullable<() => void>): void;
+export function useTrackEvent(
+  track: Nullable<ILocalVideoTrack>,
+  event: "track-ended",
+  listener: Nullable<() => void>,
+): void;
 
 /**
  * **Since**
@@ -373,12 +506,20 @@ export function useTrackEvent(track: Nullable<ILocalVideoTrack>, event: "track-e
  *
  * After you call `localVideoTrack.play`, the SDK creates an [`<video>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video) tag for playing video tracks. When `localVideoTrack.isPlaying` is `true` but you cannot see any video, this event helps you check whether the `<video>` tag is visible or not and learn the reason when the `<video>` tag is invisible.
  */
-export function useTrackEvent(track: Nullable<ILocalVideoTrack>, event: "video-element-visible-status", listener: Nullable<() => void>): void;
+export function useTrackEvent(
+  track: Nullable<ILocalVideoTrack>,
+  event: "video-element-visible-status",
+  listener: Nullable<() => void>,
+): void;
 
 /**
  * Occurs when the first remote audio or video frame is decoded.
  */
-export function useTrackEvent(track: Nullable<IRemoteTrack>, event: "first-frame-decoded", listener: Nullable<() => void>): void;
+export function useTrackEvent(
+  track: Nullable<IRemoteTrack>,
+  event: "first-frame-decoded",
+  listener: Nullable<() => void>,
+): void;
 
 /**
  * **Since**
@@ -390,7 +531,11 @@ export function useTrackEvent(track: Nullable<IRemoteTrack>, event: "first-frame
  *
  * After you call `localVideoTrack.play`, the SDK creates an [`<video>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video) tag for playing video tracks. When `localVideoTrack.isPlaying` is `true` but you cannot see any video, this event helps you check whether the `<video>` tag is visible or not and learn the reason when the `<video>` tag is invisible.
  */
-export function useTrackEvent(track: Nullable<IRemoteVideoTrack>, event: "video-element-visible-status", listener: Nullable<(data?: CheckVideoVisibleResult) => void>): void;
+export function useTrackEvent(
+  track: Nullable<IRemoteVideoTrack>,
+  event: "video-element-visible-status",
+  listener: Nullable<(data?: CheckVideoVisibleResult) => void>,
+): void;
 export function useTrackEvent(track: Nullable<ITrack>, event: string, listener: Nullable<Fn>) {
   const listenerRef = useRef(listener);
 
