@@ -68,13 +68,6 @@
         "ignoreDeclarationSort": true,
         "ignoreMemberSort": false
       }
-    ],
-    "prettier/prettier": [
-      "error",
-      {},
-      {
-        "usePrettierrc": true
-      }
     ]
   }
 }
