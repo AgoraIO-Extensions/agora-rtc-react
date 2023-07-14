@@ -37,7 +37,12 @@ export interface RemoteAudioTrackProps {
  * This component plays the audio track of a remote user with the playback device you specify.
  * @example
  * ```jsx
- * import { RemoteAudioTrack, useJoin, useRemoteAudioTracks, useRemoteUsers } from "agora-rtc-react";
+ * import {
+ *   RemoteAudioTrack,
+ *   useJoin,
+ *   useRemoteAudioTracks,
+ *   useRemoteUsers,
+ * } from "agora-rtc-react";
  *
  * function App() {
  *   const remoteUsers = useRemoteUsers();
@@ -45,7 +50,7 @@ export interface RemoteAudioTrackProps {
  *
  *   return (
  *     <>
- *       {audioTracks.map(track => (
+ *       {audioTracks.map((track) => (
  *         <RemoteAudioTrack key={track.getUserId()} play track={track} />
  *       ))}
  *     </>
