@@ -51,7 +51,7 @@ jobs:
           cp ../remote-repo/docs-api-reference/rtc/react-sdk/components-en.react.mdx packages/agora-rtc-react/docs/components-en.mdx
           cp ../remote-repo/docs-api-reference/rtc/react-sdk/data-types.react.mdx packages/agora-rtc-react/docs/data-types.mdx
           cp ../remote-repo/docs-api-reference/rtc/react-sdk/data-types-en.react.mdx packages/agora-rtc-react/docs/data-types-en.mdx
-
+          rm -rf ../remote-repo
 
           pnpm install
           pnpm gene-docs
