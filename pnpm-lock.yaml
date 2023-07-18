@@ -138,8 +138,8 @@ importers:
         version: 4.3.9(react@18.2.0)
     devDependencies:
       '@iconify-json/lucide':
-        specifier: ^1.1.110
-        version: 1.1.110
+        specifier: ^1.1.111
+        version: 1.1.111
       '@iconify-json/mdi':
         specifier: ^1.1.53
         version: 1.1.53
@@ -3656,8 +3656,8 @@ packages:
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
     dev: true
 
-  /@iconify-json/lucide@1.1.110:
-    resolution: {integrity: sha512-pMRw4QJfSh7QlPggc2BGhfaFUs5pu4F7okNjIg9XcXHfTxtTc56voV9RtOkqEjpbJ02xhzfFSiylAFEAFwDKmA==}
+  /@iconify-json/lucide@1.1.111:
+    resolution: {integrity: sha512-+Cjf8vwNOjRVUCDSLM95HSDSL68LZranFehR5tGVWq56NnwSjcZGdH3x3ih/qBS7y7riYdHYchY0s3hY15tAZA==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
