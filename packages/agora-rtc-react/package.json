@@ -54,7 +54,7 @@
   },
   "main": "src/index.ts",
   "devDependencies": {
-    "@ngneat/falso": "^6.4.0",
+    "@ngneat/falso": "^7.0.1",
     "@storybook/addon-actions": "7.0.26",
     "@storybook/addon-essentials": "^7.0.26",
     "@storybook/addon-interactions": "^7.0.26",

@@ -17,7 +17,7 @@
     "release": "release-it"
   },
   "devDependencies": {
-    "@ngneat/falso": "^6.4.0",
+    "@ngneat/falso": "^7.0.1",
     "agora-rtc-sdk-ng": "4.18.2",
     "side-effect-manager": "^1.2.2",
     "typescript": "^5.1.6",

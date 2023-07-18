@@ -144,8 +144,8 @@ importers:
         specifier: ^1.1.53
         version: 1.1.53
       '@ngneat/falso':
-        specifier: ^6.4.0
-        version: 6.4.0
+        specifier: ^7.0.1
+        version: 7.0.1
       '@types/crypto-js':
         specifier: ^4.1.1
         version: 4.1.1
@@ -177,8 +177,8 @@ importers:
   examples/mobx:
     dependencies:
       '@ngneat/falso':
-        specifier: ^6.4.0
-        version: 6.4.0
+        specifier: ^7.0.1
+        version: 7.0.1
       agora-rtc-react:
         specifier: workspace:*
         version: link:../../packages/agora-rtc-react
@@ -244,8 +244,8 @@ importers:
   packages/agora-rtc-react:
     devDependencies:
       '@ngneat/falso':
-        specifier: ^6.4.0
-        version: 6.4.0
+        specifier: ^7.0.1
+        version: 7.0.1
       '@storybook/addon-actions':
         specifier: 7.0.26
         version: 7.0.26(react-dom@18.2.0)(react@18.2.0)
@@ -337,8 +337,8 @@ importers:
   packages/agora-rtc-react-ui:
     devDependencies:
       '@ngneat/falso':
-        specifier: ^6.4.0
-        version: 6.4.0
+        specifier: ^7.0.1
+        version: 7.0.1
       '@storybook/addon-actions':
         specifier: 7.0.26
         version: 7.0.26(react-dom@18.2.0)(react@18.2.0)
@@ -427,8 +427,8 @@ importers:
   packages/fake-agora-rtc:
     devDependencies:
       '@ngneat/falso':
-        specifier: ^6.4.0
-        version: 6.4.0
+        specifier: ^7.0.1
+        version: 7.0.1
       agora-rtc-sdk-ng:
         specifier: 4.18.2
         version: 4.18.2
@@ -3853,8 +3853,8 @@ packages:
       tar-fs: 2.1.1
     dev: true
 
-  /@ngneat/falso@6.4.0:
-    resolution: {integrity: sha512-f6r036h2fX/AoHw1eV2t8+qWQwrbSrozs3zXMhhwoO7SJBc+DGMxRWEhFeYIinfwx0uhUH8ggx5+PDLzYESLOA==}
+  /@ngneat/falso@7.0.1:
+    resolution: {integrity: sha512-ngiUBnDQfohetsGz7fkgokQJKdbJBezi6fWMiBMyB7AUEgKGo4TfPzn1EGswyVtMW69NNMuxKdEXbLbF8af3oA==}
     dependencies:
       seedrandom: 3.0.5(patch_hash=hrvea3ysnhtmjgu7pcuhw34beu)
       uuid: 8.3.2
