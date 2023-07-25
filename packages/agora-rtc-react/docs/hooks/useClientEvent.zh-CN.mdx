@@ -1,0 +1,31 @@
+## useClientEvent
+
+用于监听 `IAgoraRTCClient` 对象的指定事件。
+
+- 当组件挂载时，该 Hook 会注册对应的事件监听器。
+- 当组件卸载时，该 Hook 会销毁对应的事件监听器。
+
+#### 参数
+
+| 参数名     | 类型                                                                                                                                     | 是否必选 | 描述                                                                                                                                                                                                                      |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client`   | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | 必选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。                                                         |
+| `event`    | `string`                                                                                                                                 | 必选     | 事件名称。支持的事件详见[`IAgoraRTCClient.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html?platform=All%20Platforms#on)。                                     |
+| `listener` | `Function`                                                                                                                               | 必选     | 回调函数。当传入的事件触发时，该函数会被调用。支持的回调详见[`IAgoraRTCClient.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html?platform=All%20Platforms#on)。 |
+
+#### 返回值
+
+无。
+
+#### 使用示例
+
+```jsx
+import { useRTCClient, useClientEvent } from "agora-rtc-react";
+
+function App() {
+  const client = useRTCClient();
+  useClientEvent(client, "connection-state-change", () => {});
+
+  return <></>;
+}
+```
