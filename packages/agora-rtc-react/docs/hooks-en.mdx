@@ -574,3 +574,80 @@ function App() {
   return <></>;
 }
 ```
+
+<h2 className="anchor index-auto-group index-hook-useclientevent" id="useclientevent">
+  useClientEvent
+</h2>
+
+This hook lets you listen to specific events of the `IAgoraRTCClient` object.
+
+- When the component is mounted, the hook registers the corresponding event listener.
+- When the component is unmounted, the hook destroys the corresponding event listener.
+
+#### Parameters
+
+| Parameter  | Type                                                                                                                                     | Required | Description                                                                                                                                                                                                                                             |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client`   | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | Yes      | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.                                                                          |
+| `event`    | `string`                                                                                                                                 | Yes      | The event name. Supported values can be found in [`IAgoraRTCClient.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html?platform=All%20Platforms#on).                                           |
+| `listener` | `Function`                                                                                                                               | Yes      | The callback function to run when the event is triggered. Supported values can be found in [`IAgoraRTCClient.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html?platform=All%20Platforms#on). |
+
+#### Returns
+
+None.
+
+#### Sample code
+
+```jsx
+import { useRTCClient, useClientEvent } from "agora-rtc-react";
+
+function App() {
+  const client = useRTCClient();
+  useClientEvent(client, "connection-state-change", () => {});
+
+  return <></>;
+}
+```
+
+<h2 className="anchor index-auto-group index-hook-usetrackevent" id="usetrackevent">
+  useTrackEvent
+</h2>
+
+This hook lets you listen to specific events of the local or remote track.
+
+- When the component is mounted, the hook registers the corresponding event listener.
+- When the component is unmounted, the hook destroys the corresponding event listener.
+
+#### Parameters
+
+| Parameter  | Type       | Required | Description                                               |
+| ---------- | ---------- | -------- | --------------------------------------------------------- |
+| `track`    | `ITrack`   | Yes      | The local or remote track object.                         |
+| `event`    | `string`   | Yes      | The event name.                                           |
+| `listener` | `Function` | Yes      | The callback function to run when the event is triggered. |
+
+Different `track` objects support different `event` and `listener` combinations. The supported combinations are as follows:
+
+| `track`                                                               | `event` and `listener`                                                                                                                                   |
+| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ILocalTrack` &VerticalLine; `ILocalVideoTrack` &VerticalLine; `null` | See [`ILocalTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#on).                          |
+| `IBufferSourceAudioTrack` &VerticalLine; `null`                       | See [`IBufferSourceAudioTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/ibuffersourceaudiotrack.html#on).  |
+| `ILocalVideoTrack` &VerticalLine; `null`                              | See [`ILocalVideoTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/ilocalvideotrack.html#on).                |
+| `IRemoteTrack` &VerticalLine; `null`                                  | See [`IRemoteTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iremotetrack.html#event_first_frame_decoded). |
+
+#### Returns
+
+None.
+
+#### Sample code
+
+```jsx
+import { useRTCClient, useLocalCameraTrack, useTrackEvent } from "agora-rtc-react";
+
+function App() {
+  const videoTrack = useLocalCameraTrack();
+  useTrackEvent(client, "video-element-visible-status", () => {});
+
+  return <></>;
+}
+```

@@ -71,6 +71,8 @@ This example will render Agora Client into a container on the page.
 
 - [`useVolumeLevel`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useVolumeLevel.en-US.mdx) &mdash; Returns the volume level of an audio track at a frequency of once per second.
 
+- [`useTrackEvent`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useTrackEvent.en-US.mdx) &mdash; This hook lets you listen to specific events of the local or remote track.
+
 - [`useRemoteVideoTracks`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useRemoteVideoTracks.en-US.mdx) &mdash; This hook lets you automatically subscribe to and retrieve remote users' video tracks.
 
 - [`useRemoteUsers`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useRemoteUsers.en-US.mdx) &mdash; This hook lets you retrieve the list of remote users.
@@ -96,6 +98,8 @@ This example will render Agora Client into a container on the page.
 - [`useCurrentUID`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useCurrentUID.en-US.mdx) &mdash; Returns the current user ID.
 
 - [`useConnectionState`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useConnectionState.en-US.mdx) &mdash; Returns the detailed connection state of the SDK.
+
+- [`useClientEvent`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useClientEvent.en-US.mdx) &mdash; This hook lets you listen to specific events of the IAgoraRTCClient object.
 
 - [`useAutoPlayVideoTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useAutoPlayVideoTrack.en-US.mdx) &mdash; This hook lets you automatically play a local or remote video track.
 
