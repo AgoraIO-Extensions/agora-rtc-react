@@ -35,14 +35,14 @@ jobs:
       - name: Update Docs 📖
         working-directory: "./main"
         run: |
-          git config --global user.email "${{ secrets.GIT_EMAIL }}"
-          git config --global user.name "${{ secrets.GIT_USERNAME }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
           git fetch
-          if git rev-parse --verify origin/doc/update-doc >/dev/null 2>&1
+          if git rev-parse --verify origin/doc/${{ github.ref_name }}-update-doc >/dev/null 2>&1
           then
-            git switch doc/update-doc
+            git switch doc/${{ github.ref_name }}-update-doc
           else
-            git switch -c doc/update-doc
+            git switch -c doc/${{ github.ref_name }}-update-doc
             echo "CREATE_PR=1" >> "$GITHUB_ENV"
           fi
           cp ../remote-repo/docs-api-reference/rtc/react-sdk/hooks.react.mdx packages/agora-rtc-react/docs/hooks.mdx
@@ -62,12 +62,12 @@ jobs:
           else
             git add .
             git commit -m "docs: update doc"
-            git push origin doc/update-doc
+            git push origin doc/${{ github.ref_name }}-update-doc
           fi
       - name: Create Pull Request 📝
         working-directory: "./main"
         if: env.CREATE_PR == 1
         run: |
-          gh pr create -B ${{ github.ref_name }} -H doc/update-doc --title '[AUTO] 📖update docs' --body 'Created by Github action' --label 'ci:doc-update'
+          gh pr create -B ${{ github.ref_name }} -H doc/${{ github.ref_name }}-update-doc --title '[AUTO] 📖update docs' --body 'Created by Github action' --label 'ci:doc-update'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
