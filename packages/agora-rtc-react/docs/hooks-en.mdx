@@ -130,9 +130,9 @@ Returns the volume level of an audio track at a frequency of once per second.
 
 #### Parameters
 
-| Parameter    | Type                                                                             | Required | Description                                                                                                                                                                  |
-| ------------ | -------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `audioTrack` | `IRemoteAudioTrack` &VerticalLine; `ILocalAudioTrack` &VerticalLine; `undefined` | No       | The local or remote audio track. The local audio track can be created by calling [`useLocalMicrophoneTrack`](#uselocalmicrophonetrack). If undefined, the volume level is 0. |
+| Parameter    | Type                                                                             | Required | Description                                                                                                                                                                         |
+| ------------ | -------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `audioTrack` | `IRemoteAudioTrack` &VerticalLine; `ILocalAudioTrack` &VerticalLine; `undefined` | No       | The local or remote audio track. The local audio track can be created by calling [`useLocalMicrophoneTrack`](./hooks#uselocalmicrophonetrack). If undefined, the volume level is 0. |
 
 #### Returns
 
@@ -206,7 +206,7 @@ Returns an object containing the following properties:
 | Property      | Type                                       | Description                                                                                                                                                                                                     |
 | ------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `data`        | `UID`                                      | The user ID if the user successfully joins the channel. If you does not specify a `uid` when passing `fetchArgs`, the default value `0` is returned.                                                            |
-| `isLoading`   | `boolean` 、                               | <li>`true`: The hook is performing operations related to joining the channel.</li><li>`false`: The hook completes operations related to joining the channel, but it does not indicate a successful result.</li> |
+| `isLoading`   | `boolean`                                  | <li>`true`: The hook is performing operations related to joining the channel.</li><li>`false`: The hook completes operations related to joining the channel, but it does not indicate a successful result.</li> |
 | `isConnected` | `boolean`                                  | <li>`true`: The SDK is connected to the server, indicating that the user successfully joins the channel.</li><li>`false`: The SDK is not connected to the server.</li>                                          |
 | `error`       | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the user successfully joins the channel, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                  |
 
@@ -216,11 +216,11 @@ Returns an object containing the following properties:
 import { useJoin } from "agora-rtc-react";
 
 function App() {
-  // you can use useJoin like this by passing a function as first argument.
+  // Example: passing a function as first argument
   // useJoin(async () => {
-  //   you can do some actions like fetching token before calling join.
+  //   Fetch the token before joining the channel. Note that the data type of getData must be fetchArgs
   //   const getData = await getToken();
-  //   return getData;  The data type of getData must be fetchArgs
+  //   return getData;
   // }, calling);
 
   useJoin(
@@ -560,7 +560,7 @@ This hook lets you automatically play a local or remote audio track.
 
 #### Returns
 
-无。
+None.
 
 #### Sample code
 

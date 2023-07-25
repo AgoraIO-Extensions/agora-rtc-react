@@ -1,0 +1,40 @@
+## useTrackEvent
+
+用于监听本地轨道对象或远端轨道对象的特定事件。
+
+- 当组件挂载时，该 Hook 会注册对应的事件监听器。
+- 当组件卸载时，该 Hook 会销毁对应的事件监听器。
+
+#### 参数
+
+| 参数名     | 类型       | 是否必选 | 描述                                           |
+| ---------- | ---------- | -------- | ---------------------------------------------- |
+| `track`    | `ITrack`   | 必选     | 轨道对象。                                     |
+| `event`    | `string`   | 必选     | 事件名称。                                     |
+| `listener` | `Function` | 必选     | 回调函数。当传入的事件触发时，该函数会被调用。 |
+
+不同的 `track` 对应的 `event` 和 `listener` 也不同。支持传入的参数组合如下：
+
+| `track`                                                               | `event` 和 `listener`                                                                                                                                      |
+| --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ILocalTrack` &VerticalLine; `ILocalVideoTrack` &VerticalLine; `null` | 详见 [`ILocalTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#on)。                          |
+| `IBufferSourceAudioTrack` &VerticalLine; `null`                       | 详见 [`IBufferSourceAudioTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/ibuffersourceaudiotrack.html#on)。  |
+| `ILocalVideoTrack` &VerticalLine; `null`                              | 详见 [`ILocalVideoTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/ilocalvideotrack.html#on)。                |
+| `IRemoteTrack` &VerticalLine; `null`                                  | 详见 [`IRemoteTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iremotetrack.html#event_first_frame_decoded)。 |
+
+#### 返回值
+
+无。
+
+#### 使用示例
+
+```jsx
+import { useRTCClient, useLocalCameraTrack, useTrackEvent } from "agora-rtc-react";
+
+function App() {
+  const videoTrack = useLocalCameraTrack();
+  useTrackEvent(client, "video-element-visible-status", () => {});
+
+  return <></>;
+}
+```

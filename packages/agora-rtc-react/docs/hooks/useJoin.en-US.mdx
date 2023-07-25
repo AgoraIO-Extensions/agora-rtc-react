@@ -19,7 +19,7 @@ Returns an object containing the following properties:
 | Property      | Type                                       | Description                                                                                                                                                                                                       |
 | ------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `data`        | `UID`                                      | The user ID if the user successfully joins the channel. If you does not specify a `uid` when passing `fetchArgs`, the default value `0` is returned.                                                              |
-| `isLoading`   | `boolean` 、                               | <li>`true`: The hook is performing operations related to joining the channel.</li><li>`false`: The hook completes operations related to joining the channel, but it does not indicate a successful result.</li>   |
+| `isLoading`   | `boolean`                                  | <li>`true`: The hook is performing operations related to joining the channel.</li><li>`false`: The hook completes operations related to joining the channel, but it does not indicate a successful result.</li>   |
 | `isConnected` | `boolean`                                  | <li>`true`: The SDK is connected to the server, indicating that the user successfully joins the channel.</li><li>`false`: The SDK is not connected to the server.</li>                                            |
 | `error`       | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the user successfully joins the channel, otherwise throws an error. See [`AgoraRTCReactError`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/data-types#agorartcreacterror) for details. |
 
@@ -29,11 +29,11 @@ Returns an object containing the following properties:
 import { useJoin } from "agora-rtc-react";
 
 function App() {
-  // you can use useJoin like this by passing a function as first argument.
+  // Example: passing a function as first argument
   // useJoin(async () => {
-  //   you can do some actions like fetching token before calling join.
+  //   Fetch the token before joining the channel. Note that the data type of getData must be fetchArgs
   //   const getData = await getToken();
-  //   return getData;  The data type of getData must be fetchArgs
+  //   return getData;
   // }, calling);
 
   useJoin(

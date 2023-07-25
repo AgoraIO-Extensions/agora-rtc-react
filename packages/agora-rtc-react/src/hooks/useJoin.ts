@@ -15,7 +15,7 @@ import { useIsConnected } from "./useIsConnected";
  * @param `ready` {boolean} Whether the user is ready to join the channel. The default value is `true`.
  * @param `client` {IAgoraRTCClient} Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.
  * @return data UID
- * @return isLoading boolean 、
+ * @return isLoading boolean
  * @return isConnected boolean
  * @return error AgoraRTCReactError | null
  * @example
@@ -23,11 +23,11 @@ import { useIsConnected } from "./useIsConnected";
  * import { useJoin } from "agora-rtc-react";
  *
  * function App() {
- *   // you can use useJoin like this by passing a function as first argument.
+ *   // Example: passing a function as first argument
  *   // useJoin(async () => {
- *   //   you can do some actions like fetching token before calling join.
+ *   //   Fetch the token before joining the channel. Note that the data type of getData must be fetchArgs
  *   //   const getData = await getToken();
- *   //   return getData;  The data type of getData must be fetchArgs
+ *   //   return getData;
  *   // }, calling);
  *
  *   useJoin(

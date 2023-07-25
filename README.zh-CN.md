@@ -71,6 +71,8 @@ This example will render Agora Client into a container on the page.
 
 - [`useVolumeLevel`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useVolumeLevel.zh-CN.mdx) &mdash; 用于自动获取音频轨道音量级别，自动获取的频率为每秒一次。
 
+- [`useTrackEvent`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useTrackEvent.zh-CN.mdx) &mdash; 用于监听本地轨道对象或远端轨道对象的特定事件。
+
 - [`useRemoteVideoTracks`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useRemoteVideoTracks.zh-CN.mdx) &mdash; 用于自动订阅和获取远端用户视频轨道。
 
 - [`useRemoteUsers`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useRemoteUsers.zh-CN.mdx) &mdash; 用于获取远端用户列表。
@@ -96,6 +98,8 @@ This example will render Agora Client into a container on the page.
 - [`useCurrentUID`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useCurrentUID.zh-CN.mdx) &mdash; 用于获取当前用户 UID 。
 
 - [`useConnectionState`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useConnectionState.zh-CN.mdx) &mdash; 用于获取详细的 SDK 连接状态。
+
+- [`useClientEvent`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useClientEvent.zh-CN.mdx) &mdash; 用于监听 IAgoraRTCClient 对象的指定事件。
 
 - [`useAutoPlayVideoTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useAutoPlayVideoTrack.zh-CN.mdx) &mdash; 用于自动播放本地或远端视频轨道。
 

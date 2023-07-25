@@ -29,11 +29,11 @@
 import { useJoin } from "agora-rtc-react";
 
 function App() {
-  // you can use useJoin like this by passing a function as first argument.
+  // 传入异步函数示例
   // useJoin(async () => {
-  //   you can do some actions like fetching token before calling join.
+  //   在加入频道前执行获取 Token 的操作，注意 getData 类型必须为 fetchArgs
   //   const getData = await getToken();
-  //   return getData;  The data type of getData must be fetchArgs
+  //   return getData;
   // }, calling);
 
   useJoin(
