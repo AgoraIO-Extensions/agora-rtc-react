@@ -462,24 +462,6 @@ export function useTrackEvent(
 ): void;
 
 /**
- * Occurs when the device is overloaded after you call [setBeautyEffect]{@link ILocalVideoTrack.setBeautyEffect} to enable image enhancement.
- *
- * You can listen for this event to notify users of the device overload and disable image enhancement.
- *
- * ```javascript
- * localVideoTrack.on("beauty-effect-overload", () => {
- *   console.log("beauty effect overload, disable beauty effect");
- *   localVideoTrack.setBeautyEffect(false);
- * });
- * ```
- */
-export function useTrackEvent(
-  track: Nullable<ILocalVideoTrack>,
-  event: "beauty-effect-overload",
-  listener: Nullable<() => void>,
-): void;
-
-/**
  * Occurs when a audio or video track ends.
  *
  * Reasons may include:
