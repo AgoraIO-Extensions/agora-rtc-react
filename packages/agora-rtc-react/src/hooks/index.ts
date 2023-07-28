@@ -14,3 +14,4 @@ export * from "./useRemoteAudioTracks";
 export * from "./useRemoteVideoTracks";
 export * from "./useRemoteUserTrack";
 export * from "./useRemoteUsers";
+export * from "./useLocalScreenTrack";
