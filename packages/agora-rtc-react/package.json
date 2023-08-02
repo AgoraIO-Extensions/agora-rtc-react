@@ -47,7 +47,7 @@
     "update-readme": "pnpm esbuild-dev ../../scripts/docs/update-readme.ts",
     "gene-comment": "esbuild-dev ../../scripts/docs/api.ts && esbuild-dev ../../scripts/docs/component.ts && esbuild-dev ../../scripts/docs/data-types.ts",
     "gene-docs": "pnpm run gene-md && pnpm run gene-stories && pnpm run gene-comment && pnpm run update-readme",
-    "typedoc": "typedoc src --out ../../typedoc"
+    "typedoc": "typedoc src --out ../../typedoc --name 'Video SDK for React' --includeVersion"
   },
   "peerDependencies": {
     "agora-rtc-sdk-ng": ">=4.18.2",
