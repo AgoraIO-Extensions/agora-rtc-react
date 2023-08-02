@@ -46,7 +46,8 @@
     "gene-md": "esbuild-dev ../../scripts/docs/generate-docs.ts",
     "update-readme": "pnpm esbuild-dev ../../scripts/docs/update-readme.ts",
     "gene-comment": "esbuild-dev ../../scripts/docs/api.ts && esbuild-dev ../../scripts/docs/component.ts && esbuild-dev ../../scripts/docs/data-types.ts",
-    "gene-docs": "pnpm run gene-md && pnpm run gene-stories && pnpm run gene-comment && pnpm run update-readme"
+    "gene-docs": "pnpm run gene-md && pnpm run gene-stories && pnpm run gene-comment && pnpm run update-readme",
+    "typedoc": "typedoc src --out ../../typedoc"
   },
   "peerDependencies": {
     "agora-rtc-sdk-ng": ">=4.18.2",
@@ -81,6 +82,7 @@
     "react-test-renderer": "^18.2.0",
     "storybook": "^7.0.26",
     "tsup": "^7.1.0",
+    "typedoc": "^0.24.8",
     "typescript": "^5.1.6",
     "vite": "^4.4.2",
     "vitest": "^0.33.0"
