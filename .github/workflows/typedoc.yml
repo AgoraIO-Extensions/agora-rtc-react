@@ -1,0 +1,41 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: TypeDoc
+
+on:
+  # Runs on new releases
+  release:
+    types: [published]
+  push:
+    branches: [main]
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+      - name: Build TypeDoc
+        run: |
+          npm i -g pnpm && pnpm install && pnpm typedoc
+      - name: Zip It Up 🤐
+        run: |
+          zip -r agora-rtc-react-docs.zip typedoc
+      - name: Upload Artifact ⬆️
+        uses: actions/upload-artifact@v3
+        with:
+          name: agora-rtc-react-docs.zip
+          path: agora-rtc-react-docs.zip
+      - name: Upload Doc Archive to GitHub release ⬆️
+        if: github.event.release
+        uses: svenstaro/upload-release-action@2.6.0
+        with:
+          file: agora-rtc-react-docs.zip
+          asset_name: agora-rtc-react-docs.zip
+          tag: ${{ github.ref_name }}
