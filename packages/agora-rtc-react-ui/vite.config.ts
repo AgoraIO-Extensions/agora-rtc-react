@@ -19,7 +19,7 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     coverage: {
-      provider: "c8",
+      provider: "v8",
       reporter: ["text", "json", "html", "lcov", "json-summary"],
       exclude: ["test/**", "src/stories/*", "src/**/index.ts"],
     },
