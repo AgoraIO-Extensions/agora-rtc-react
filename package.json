@@ -15,6 +15,7 @@
     "renew": "pnpm -r run renew",
     "copy-docs": "esbuild-dev ./scripts/copy-docs.ts",
     "gene-docs": "pnpm -r run gene-docs",
+    "typedoc": "pnpm -r run typedoc",
     "release": "release-it"
   },
   "devDependencies": {
