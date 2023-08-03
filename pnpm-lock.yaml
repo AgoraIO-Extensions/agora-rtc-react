@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 overrides:
   nodeunit: npm:noop-package@1.0.0
 
@@ -291,8 +295,8 @@ importers:
         specifier: ^0.34.1
         version: 0.34.1(vitest@0.34.1)
       '@vitest/ui':
-        specifier: ^0.33.0
-        version: 0.33.0(vitest@0.34.1)
+        specifier: ^0.34.1
+        version: 0.34.1(vitest@0.34.1)
       agora-rtc-react-ui:
         specifier: workspace:*
         version: link:../agora-rtc-react-ui
@@ -328,7 +332,7 @@ importers:
         version: 4.4.2(@types/node@20.4.1)(sass@1.64.0)
       vitest:
         specifier: ^0.34.1
-        version: 0.34.1(@vitest/ui@0.33.0)(jsdom@22.1.0)
+        version: 0.34.1(@vitest/ui@0.34.1)(jsdom@22.1.0)
 
   packages/agora-rtc-react-ui:
     devDependencies:
@@ -418,7 +422,7 @@ importers:
         version: 4.4.2(@types/node@20.4.1)(sass@1.64.0)
       vitest:
         specifier: ^0.34.1
-        version: 0.34.1(@vitest/ui@0.33.0)(jsdom@22.1.0)
+        version: 0.34.1(@vitest/ui@0.34.1)(jsdom@22.1.0)
 
   packages/fake-agora-rtc:
     devDependencies:
@@ -5804,7 +5808,7 @@ packages:
       std-env: 3.3.3
       test-exclude: 6.0.0
       v8-to-istanbul: 9.1.0
-      vitest: 0.34.1(@vitest/ui@0.33.0)(jsdom@22.1.0)
+      vitest: 0.34.1(@vitest/ui@0.34.1)(jsdom@22.1.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5839,27 +5843,19 @@ packages:
       tinyspy: 2.1.1
     dev: true
 
-  /@vitest/ui@0.33.0(vitest@0.34.1):
-    resolution: {integrity: sha512-7gbAjLqt30R4bodkJAutdpy4ncv+u5IKTHYTow1c2q+FOxZUC9cKOSqMUxjwaaTwLN+EnDnmXYPtg3CoahaUzQ==}
+  /@vitest/ui@0.34.1(vitest@0.34.1):
+    resolution: {integrity: sha512-bwmkgMjDcMr3pg0UXLwfwZ/WI1fq2N+5DUisqHkY9bvnNRnpT6QiewtSS/VhmN61ixgNpSKbEGVboml2GLuxfA==}
     peerDependencies:
       vitest: '>=0.30.1 <1'
     dependencies:
-      '@vitest/utils': 0.33.0
+      '@vitest/utils': 0.34.1
       fast-glob: 3.3.0
       fflate: 0.8.0
       flatted: 3.2.7
       pathe: 1.1.1
       picocolors: 1.0.0
       sirv: 2.0.3
-      vitest: 0.34.1(@vitest/ui@0.33.0)(jsdom@22.1.0)
-    dev: true
-
-  /@vitest/utils@0.33.0:
-    resolution: {integrity: sha512-pF1w22ic965sv+EN6uoePkAOTkAPWM03Ri/jXNyMIKBb/XHLDPfhLvf/Fa9g0YECevAIz56oVYXhodLvLQ/awA==}
-    dependencies:
-      diff-sequences: 29.4.3
-      loupe: 2.3.6
-      pretty-format: 29.6.1
+      vitest: 0.34.1(@vitest/ui@0.34.1)(jsdom@22.1.0)
     dev: true
 
   /@vitest/utils@0.34.1:
@@ -14348,7 +14344,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest@0.34.1(@vitest/ui@0.33.0)(jsdom@22.1.0):
+  /vitest@0.34.1(@vitest/ui@0.34.1)(jsdom@22.1.0):
     resolution: {integrity: sha512-G1PzuBEq9A75XSU88yO5G4vPT20UovbC/2osB2KEuV/FisSIIsw7m5y2xMdB7RsAGHAfg2lPmp2qKr3KWliVlQ==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -14386,7 +14382,7 @@ packages:
       '@vitest/runner': 0.34.1
       '@vitest/snapshot': 0.34.1
       '@vitest/spy': 0.34.1
-      '@vitest/ui': 0.33.0(vitest@0.34.1)
+      '@vitest/ui': 0.34.1(vitest@0.34.1)
       '@vitest/utils': 0.34.1
       acorn: 8.10.0
       acorn-walk: 8.2.0
@@ -14833,7 +14829,3 @@ packages:
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
