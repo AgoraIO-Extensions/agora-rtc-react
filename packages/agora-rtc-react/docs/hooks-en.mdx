@@ -10,15 +10,15 @@ Returns the detailed connection state of the SDK.
 
 #### Parameters
 
-| Parameter | Type                                                                                                                                                           | Required | Description                                                                                                                                                                    |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| Parameter | Type                                                                                                                     | Required | Description                                                                                                                                          |
+| --------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client`  | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method. |
 
 #### Returns
 
-| Type              | Description                                                                                                                                                                                                          |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ConnectionState` | The connection state between the SDK and Agora's edge server. See [`ConnectionState`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/globals.html#connectionstate) for details. |
+| Type              | Description                                                                                                                                                                    |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ConnectionState` | The connection state between the SDK and Agora's edge server. See [`ConnectionState`](https://api-ref.agora.io/en/video-sdk/web/4.x/globals.html#connectionstate) for details. |
 
 #### Sample code
 
@@ -40,9 +40,9 @@ Returns whether the SDK is connected to Agora's server.
 
 #### Parameters
 
-| Parameter | Type                                                                                                                                                           | Required | Description                                                                                                                                                                    |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| Parameter | Type                                                                                                                     | Required | Description                                                                                                                                          |
+| --------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client`  | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method. |
 
 #### Returns
 
@@ -70,9 +70,9 @@ Returns the current user ID.
 
 #### Parameters
 
-| Parameter | Type                                                                                                                                                           | Required | Description                                                                                                                                                                    |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| Parameter | Type                                                                                                                     | Required | Description                                                                                                                                          |
+| --------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client`  | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method. |
 
 #### Returns
 
@@ -100,9 +100,9 @@ Returns the network quality of the local user.
 
 #### Parameters
 
-| Parameter | Type                                                                                                                                                           | Required | Description                                                                                                                                                                    |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| Parameter | Type                                                                                                                     | Required | Description                                                                                                                                          |
+| --------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client`  | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method. |
 
 #### Returns
 
@@ -161,15 +161,15 @@ Returns the `IAgoraRTCClient` object.
 
 #### Parameters
 
-| Parameter | Type                                                                                                                                                           | Required | Description                                                                                                                                                                                            |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | If provided, the passed `IAgoraRTCClient` object is returned. If not provided, the `IAgoraRTCClient` object obtained from the [parent component's context](./components#agorartcprovider) is returned. |
+| Parameter | Type                                                                                                                     | Required | Description                                                                                                                                                                                            |
+| --------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `client`  | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | If provided, the passed `IAgoraRTCClient` object is returned. If not provided, the `IAgoraRTCClient` object obtained from the [parent component's context](./components#agorartcprovider) is returned. |
 
 #### Returns
 
-| Type                                                                                                                                     | Description                   |
-| ---------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | The `IAgoraRTCClient` client. |
+| Type                                                                                               | Description                   |
+| -------------------------------------------------------------------------------------------------- | ----------------------------- |
+| [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) | The `IAgoraRTCClient` client. |
 
 #### Sample code
 
@@ -193,11 +193,11 @@ You can customize the conditions required to join a channel using `fetchArgs`. F
 
 #### Parameters
 
-| Parameter   | Type                                                                                                                                     | Required | Description                                                                                                                                                                    |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `fetchArgs` | `JoinOptions` &VerticalLine; `(() => Promise<JoinOptions>)`                                                                              | Required | The parameters or asynchronous function required to join the channel. See [`JoinOptions`](./data-types#joinoptions) for details.                                               |
-| `ready`     | `boolean`                                                                                                                                | Optional | Whether the user is ready to join the channel. The default value is `true`.                                                                                                    |
-| `client`    | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| Parameter   | Type                                                                                               | Required | Description                                                                                                                                          |
+| ----------- | -------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fetchArgs` | `JoinOptions` &VerticalLine; `(() => Promise<JoinOptions>)`                                        | Required | The parameters or asynchronous function required to join the channel. See [`JoinOptions`](./data-types#joinoptions) for details.                     |
+| `ready`     | `boolean`                                                                                          | No       | Whether the user is ready to join the channel. The default value is `true`.                                                                          |
+| `client`    | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method. |
 
 #### Returns
 
@@ -244,11 +244,11 @@ This hook lets you publish the local tracks when the component is ready and unpu
 
 #### Parameters
 
-| Parameter        | Type                                                                                                                                                           | Required | Description                                                                                                                                                                    |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `tracks`         | `(ILocalTrack` &VerticalLine; `null)[]`                                                                                                                        | Yes      | The list of local tracks.                                                                                                                                                      |
-| `readyToPublish` | `boolean`                                                                                                                                                      | No       | Whether the local tracks are ready to publish. The default value is `true`.                                                                                                    |
-| `client`         | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| Parameter        | Type                                                                                                                     | Required | Description                                                                                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tracks`         | `(ILocalTrack` &VerticalLine; `null)[]`                                                                                  | Yes      | The list of local tracks.                                                                                                                            |
+| `readyToPublish` | `boolean`                                                                                                                | No       | Whether the local tracks are ready to publish. The default value is `true`.                                                                          |
+| `client`         | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method. |
 
 #### Returns
 
@@ -283,26 +283,26 @@ function App() {
 
 This hook lets you create a local microphone audio track.
 
-- The hook can only create the audio track once before the component is destroyed.
-- After the component is unmounted, the audio track created by the hook stops publishing.
+- This hook can only create the audio track once before the component is destroyed.
+- After the component is unmounted, the audio track created by this hook stops publishing.
 
 #### Parameters
 
-| Parameter          | Type                                                                                                                                                           | Required | Description                                                                                                                                                                                                                                                                                    |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ready`            | `boolean`                                                                                                                                                      | No       | Whether it is ready to create the track. The default value is `true`.                                                                                                                                                                                                                          |
-| `audioTrackConfig` | `MicrophoneAudioTrackInitConfig`                                                                                                                               | No       | Configurations for initializing the microphone audio track. The default is `{ ANS: true, AEC: true }`. See [`MicrophoneAudioTrackInitConfig`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/microphoneaudiotrackinitconfig.html) for details. |
-| `client`           | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.                                                                                                                 |
+| Parameter          | Type                                                                                                                     | Required | Description                                                                                                                                                                                                                                              |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ready`            | `boolean`                                                                                                                | No       | Whether it is ready to create the track. The default value is `true`.                                                                                                                                                                                    |
+| `audioTrackConfig` | `MicrophoneAudioTrackInitConfig`                                                                                         | No       | Configurations for initializing the microphone audio track. The default is `{ ANS: true, AEC: true }`. See [`MicrophoneAudioTrackInitConfig`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/microphoneaudiotrackinitconfig.html) for details. |
+| `client`           | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.                                                                                                     |
 
 #### Returns
 
 Returns an object containing the following properties:
 
-| Property               | Type                                          | Description                                                                                                                                                                                                           |
-| ---------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `localMicrophoneTrack` | `IMicrophoneAudioTrack` &VerticalLine; `null` | The created microphone audio track.                                                                                                                                                                                   |
-| `isLoading`            | `boolean`                                     | <li>`true`: The hook is performing operations related to publishing the tracks.</li><li>`false`: The hook completes operations related to publishing the tracks, but it does not indicate a successfully result.</li> |
-| `error`                | `AgoraRTCReactError` &VerticalLine; `null`    | Returns `null` if the track is successfully created, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                              |
+| Property               | Type                                          | Description                                                                                                                                                                                                         |
+| ---------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `localMicrophoneTrack` | `IMicrophoneAudioTrack` &VerticalLine; `null` | The created microphone audio track.                                                                                                                                                                                 |
+| `isLoading`            | `boolean`                                     | <li>`true`: The hook is performing operations related to publishing the tracks.</li><li>`false`: The hook completes operations related to publishing the tracks, but it does not indicate a successful result.</li> |
+| `error`                | `AgoraRTCReactError` &VerticalLine; `null`    | Returns `null` if the track is successfully created, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                            |
 
 #### Sample code
 
@@ -322,25 +322,25 @@ function App() {
 
 This hook lets you create a local camera video track.
 
-- The hook can only create the video track once before the component is destroyed.
-- After the component is unmounted, the video track created by the hook stops publishing.
+- This hook can only create the video track once before the component is destroyed.
+- After the component is unmounted, the video track created by this hook stops publishing.
 
 #### Parameters
 
-| Parameter | Type                                                                                                                                                           | Required | Description                                                                                                                                                                    |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ready`   | `boolean`                                                                                                                                                      | No       | Whether it is ready to create the track. The default value is `true`.                                                                                                          |
-| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| Parameter | Type                                                                                                                     | Required | Description                                                                                                                                          |
+| --------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ready`   | `boolean`                                                                                                                | No       | Whether it is ready to create the track. The default value is `true`.                                                                                |
+| `client`  | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method. |
 
 #### Returns
 
 Returns an object containing the following properties:
 
-| Property           | Type                                       | Description                                                                                                                                                                                                           |
-| ------------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `localCameraTrack` | `ICameraVideoTrack` &VerticalLine; `null`  | The created camera video track.                                                                                                                                                                                       |
-| `isLoading`        | `boolean`                                  | <li>`true`: The hook is performing operations related to publishing the tracks.</li><li>`false`: The hook completes operations related to publishing the tracks, but it does not indicate a successfully result.</li> |
-| `error`            | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks is successfully created, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                             |
+| Property           | Type                                       | Description                                                                                                                                                                                                         |
+| ------------------ | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `localCameraTrack` | `ICameraVideoTrack` &VerticalLine; `null`  | The created camera video track.                                                                                                                                                                                     |
+| `isLoading`        | `boolean`                                  | <li>`true`: The hook is performing operations related to publishing the tracks.</li><li>`false`: The hook completes operations related to publishing the tracks, but it does not indicate a successful result.</li> |
+| `error`            | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks is successfully created, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                           |
 
 #### Sample code
 
@@ -354,31 +354,103 @@ function App() {
 }
 ```
 
+<h2 className="anchor index-auto-group index-hook-uselocalscreentrack" id="uselocalscreentrack">
+  useLocalScreenTrack
+</h2>
+
+This hook lets you create a local video track for screen-sharing.
+
+- This hook can only create the video track once before the component is destroyed.
+- After the component is unmounted, the video track created by this hook stops publishing.
+
+#### Parameters
+
+| Parameter                    | Type                                                                                                                                                           | Required | Description                                                                                                                                                                                                                                                                                                                                          |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ready`                      | `boolean`                                                                                                                                                      | No       | Whether it is ready to create the track. The default value is `true`.                                                                                                                                                                                                                                                                                |
+| `screenVideoTrackInitConfig` | [`screenVideoTrackInitConfig`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/screenvideotrackinitconfig.html) | Yes      | Screen-sharing video configuration, including encoding and capturing configurations.                                                                                                                                                                                                                                                                 |
+| `withAudio`                  | `string`                                                                                                                                                       | Yes      | Whether to share the audio of the screen-sharing input source during screen sharing. Supported values are `"enable"`, `"disable"`, and `"auto"`. See the parameters of [`createScreenVideoTrack`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack) for details. |
+| `client`                     | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html)                       | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.                                                                                                                                                                       |
+
+#### Returns
+
+Returns an object containing the following properties:
+
+| Property      | Type                                                                                           | Description                                                                                                                                                                                                                                                                                                                                                  |
+| ------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `screenTrack` | `[ILocalVideoTrack, ILocalAudioTrack]` &VerticalLine; `ILocalVideoTrack` &VerticalLine; `null` | Depending on the passed `withAudio` value, it returns either the created screen-sharing video track or both the screen-sharing video track and audio track. See the returns of [`createScreenVideoTrack`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack) for details. |
+| `isLoading`   | `boolean`                                                                                      | <li>`true`: The hook is performing operations related to publishing the tracks.</li><li>`false`: The hook completes operations related to publishing the tracks, but it does not indicate a successful result.</li>                                                                                                                                          |
+| `error`       | `AgoraRTCReactError` &VerticalLine; `null`                                                     | Returns `null` if the track is successfully created, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                                                                                                                                                                     |
+
+#### Caveats
+
+- Agora recommends wrapping the returned video track object in [`AgoraRTCScreenShareProvider`](/components#agorartcscreenshareprovider).
+- If you get the video track and audio track objects from the return value but only publish one track, you need to manually close the unpublished track using the Web SDK's [`ILocalTrack.close`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#close) method before stopping screen sharing. The other published track will be closed automatically.
+- Subscribing to the local screen-sharing track will incur duplicate billing. Agora recommends that you add checks for local tracks when subscribing to video tracks.
+
+#### Sample code
+
+**Example 1: Wrap the screen-sharing video track in AgoraRTCScreenShareProvider**
+
+```jsx
+import { AgoraRTCScreenShareProvider, LocalVideoTrack, useLocalScreenTrack } from "agora-rtc-react";
+
+function App() {
+  const { screenTrack, error } = useLocalScreenTrack(screenShareOn, {}, "disable");
+
+  return (
+    <AgoraRTCScreenShareProvider client={client}>
+      <LocalVideoTrack play style={{ width: "300px", height: "300px" }} track={screenTrack} />
+    </AgoraRTCScreenShareProvider>
+  );
+}
+```
+
+**Example 2: Avoid subscribing to the local screen-sharing track**
+
+```jsx
+import { useRemoteUsers, useRemoteVideoTracks, useRemoteAudioTracks } from "agora-rtc-react";
+
+function App() {
+  const remoteUsers = useRemoteUsers();
+  const { videoTracks } = useRemoteVideoTracks(
+    // Remove the local user's screen-sharing video track from the subscription list
+    remoteUsers.filter(user => user.uid !== appConfig.ShareScreenUID),
+  );
+  const { audioTracks } = useRemoteAudioTracks(
+    // Remove the local user's screen-sharing audio track from the subscription list
+    remoteUsers.filter(user => user.uid !== appConfig.ShareScreenUID),
+  );
+
+  return <></>;
+}
+```
+
 <h2 className="anchor index-auto-group index-hook-useremotevideotracks" id="useremotevideotracks">
   useRemoteVideoTracks
 </h2>
 
 This hook lets you automatically subscribe to and retrieve remote users' video tracks.
 
-- When the component is unmounted, the hook stops subscribing to the video tracks of the specified `users`.
-- The hook updates the subscribed video tracks when the `users` parameter changes.
+- When the component is unmounted, this hook stops subscribing to the video tracks of the specified `users`.
+- This hook updates the subscribed video tracks when the `users` parameter changes.
 
 #### Parameters
 
-| Parameter | Type                                                                                                                                                           | Required | Description                                                                                                                                                                    |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `users`   | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined`                                                                                                             | Yes      | The list of remote users.                                                                                                                                                      |
-| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| Parameter | Type                                                                                                                     | Required | Description                                                                                                                                          |
+| --------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `users`   | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined`                                                                       | Yes      | The list of remote users.                                                                                                                            |
+| `client`  | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method. |
 
 #### Returns
 
 Returns an object containing the following properties:
 
-| Property      | Type                                       | Description                                                                                                                                                                                                             |
-| ------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `videoTracks` | `IRemoteVideoTrack[]`                      | The list of subscribed video tracks from remote users.                                                                                                                                                                  |
-| `isLoading`   | `boolean`                                  | <li>`true`: The hook is performing operations related to subscribing the tracks.</li><li>`false`: The hook completes operations related to subscribing the tracks, but it does not indicate a successfully result.</li> |
-| `error`       | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks are successfully subscribed, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                           |
+| Property      | Type                                       | Description                                                                                                                                                                                                           |
+| ------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `videoTracks` | `IRemoteVideoTrack[]`                      | The list of subscribed video tracks from remote users.                                                                                                                                                                |
+| `isLoading`   | `boolean`                                  | <li>`true`: The hook is performing operations related to subscribing the tracks.</li><li>`false`: The hook completes operations related to subscribing the tracks, but it does not indicate a successful result.</li> |
+| `error`       | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks are successfully subscribed, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                         |
 
 #### Sample code
 
@@ -399,25 +471,25 @@ function App() {
 
 This hook lets you automatically subscribe to and retrieve remote users' audio tracks.
 
-- When the component is unmounted, the hook stops subscribing to the audio tracks of the specified `users`.
-- The hook updates the subscribed audio tracks when the `users` parameter changes.
+- When the component is unmounted, this hook stops subscribing to the audio tracks of the specified `users`.
+- This hook updates the subscribed audio tracks when the `users` parameter changes.
 
 #### Parameters
 
-| Parameter | Type                                                                                                                                                           | Required | Description                                                                                                                                                                    |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `users`   | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined`                                                                                                             | Yes      | The list of remote users.                                                                                                                                                      |
-| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| Parameter | Type                                                                                                                     | Required | Description                                                                                                                                          |
+| --------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `users`   | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined`                                                                       | Yes      | The list of remote users.                                                                                                                            |
+| `client`  | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method. |
 
 #### Returns
 
 Returns an object containing the following properties:
 
-| Property      | Type                                       | Description                                                                                                                                                                                                             |
-| ------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `audioTracks` | `IRemoteAudioTrack[]`                      | The list of subscribed audio tracks from remote users.                                                                                                                                                                  |
-| `isLoading`   | `boolean`                                  | <li>`true`: The hook is performing operations related to subscribing the tracks.</li><li>`false`: The hook completes operations related to subscribing the tracks, but it does not indicate a successfully result.</li> |
-| `error`       | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks are successfully subscribed, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                           |
+| Property      | Type                                       | Description                                                                                                                                                                                                           |
+| ------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `audioTracks` | `IRemoteAudioTrack[]`                      | The list of subscribed audio tracks from remote users.                                                                                                                                                                |
+| `isLoading`   | `boolean`                                  | <li>`true`: The hook is performing operations related to subscribing the tracks.</li><li>`false`: The hook completes operations related to subscribing the tracks, but it does not indicate a successful result.</li> |
+| `error`       | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks are successfully subscribed, otherwise throws an error. See [`AgoraRTCReactError`](./data-types#agorartcreacterror) for details.                                                         |
 
 #### Sample code
 
@@ -441,11 +513,11 @@ This hook lets you retrieve the audio or video track of a remote user.
 
 #### Parameters
 
-| Parameter   | Type                                                                                                                                                           | Required | Description                                                                                                                                                                    |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `user`      | `IAgoraRTCRemoteUser` &VerticalLine; `undefined`                                                                                                               | Yes      | The remote user.                                                                                                                                                               |
-| `mediaType` | `"video"` &VerticalLine; `"audio"`                                                                                                                             | Yes      | The media type. Pass `"video"` or `"audio"`.                                                                                                                                   |
-| `client`    | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| Parameter   | Type                                                                                                                     | Required | Description                                                                                                                                          |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `user`      | `IAgoraRTCRemoteUser` &VerticalLine; `undefined`                                                                         | Yes      | The remote user.                                                                                                                                     |
+| `mediaType` | `"video"` &VerticalLine; `"audio"`                                                                                       | Yes      | The media type. Pass `"video"` or `"audio"`.                                                                                                         |
+| `client`    | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method. |
 
 #### Returns
 
@@ -486,9 +558,9 @@ The return value of this hook is updated in the following cases:
 
 #### Parameters
 
-| Parameter | Type                                                                                                                                                           | Required | Description                                                                                                                                                                    |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| Parameter | Type                                                                                                                     | Required | Description                                                                                                                                          |
+| --------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client`  | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method. |
 
 #### Returns
 
@@ -514,8 +586,8 @@ function App() {
 
 This hook lets you automatically play a local or remote video track.
 
-- When the component is mounted, the hook determines whether to automatically play the track according to the `play` parameter.
-- When the component is unmounted, the hook stops playing the `track`.
+- When the component is mounted, this hook determines whether to automatically play the track according to the `play` parameter.
+- When the component is unmounted, this hook stops playing the `track`.
 
 #### Parameters
 
@@ -548,8 +620,8 @@ function App() {
 
 This hook lets you automatically play a local or remote audio track.
 
-- When the component is mounted, the hook determines whether to automatically play the track according to the `play` parameter.
-- When the component is unmounted, the hook stops playing the `track`.
+- When the component is mounted, this hook determines whether to automatically play the track according to the `play` parameter.
+- When the component is unmounted, this hook stops playing the `track`.
 
 #### Parameters
 
@@ -581,16 +653,16 @@ function App() {
 
 This hook lets you listen to specific events of the `IAgoraRTCClient` object.
 
-- When the component is mounted, the hook registers the corresponding event listener.
-- When the component is unmounted, the hook destroys the corresponding event listener.
+- When the component is mounted, this hook registers the corresponding event listener.
+- When the component is unmounted, this hook destroys the corresponding event listener.
 
 #### Parameters
 
-| Parameter  | Type                                                                                                                                     | Required | Description                                                                                                                                                                                                                                             |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client`   | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | Yes      | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.                                                                          |
-| `event`    | `string`                                                                                                                                 | Yes      | The event name. Supported values can be found in [`IAgoraRTCClient.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html?platform=All%20Platforms#on).                                           |
-| `listener` | `Function`                                                                                                                               | Yes      | The callback function to run when the event is triggered. Supported values can be found in [`IAgoraRTCClient.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html?platform=All%20Platforms#on). |
+| Parameter  | Type                                                                                               | Required | Description                                                                                                                                                                                          |
+| ---------- | -------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client`   | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) | Yes      | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.                                                 |
+| `event`    | `string`                                                                                           | Yes      | The event name. Supported values can be found in [`IAgoraRTCClient.on`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html#on).                                           |
+| `listener` | `Function`                                                                                         | Yes      | The callback function to run when the event is triggered. Supported values can be found in [`IAgoraRTCClient.on`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html#on). |
 
 #### Returns
 
@@ -615,8 +687,8 @@ function App() {
 
 This hook lets you listen to specific events of the local or remote track.
 
-- When the component is mounted, the hook registers the corresponding event listener.
-- When the component is unmounted, the hook destroys the corresponding event listener.
+- When the component is mounted, this hook registers the corresponding event listener.
+- When the component is unmounted, this hook destroys the corresponding event listener.
 
 #### Parameters
 
@@ -628,12 +700,12 @@ This hook lets you listen to specific events of the local or remote track.
 
 Different `track` objects support different `event` and `listener` combinations. The supported combinations are as follows:
 
-| `track`                                                               | `event` and `listener`                                                                                                                                   |
-| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ILocalTrack` &VerticalLine; `ILocalVideoTrack` &VerticalLine; `null` | See [`ILocalTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#on).                          |
-| `IBufferSourceAudioTrack` &VerticalLine; `null`                       | See [`IBufferSourceAudioTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/ibuffersourceaudiotrack.html#on).  |
-| `ILocalVideoTrack` &VerticalLine; `null`                              | See [`ILocalVideoTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/ilocalvideotrack.html#on).                |
-| `IRemoteTrack` &VerticalLine; `null`                                  | See [`IRemoteTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iremotetrack.html#event_first_frame_decoded). |
+| `track`                                                               | `event` and `listener`                                                                                                         |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `ILocalTrack` &VerticalLine; `ILocalVideoTrack` &VerticalLine; `null` | See [`ILocalTrack.on`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/ilocaltrack.html#on).                          |
+| `IBufferSourceAudioTrack` &VerticalLine; `null`                       | See [`IBufferSourceAudioTrack.on`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/ibuffersourceaudiotrack.html#on).  |
+| `ILocalVideoTrack` &VerticalLine; `null`                              | See [`ILocalVideoTrack.on`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/ilocalvideotrack.html#on).                |
+| `IRemoteTrack` &VerticalLine; `null`                                  | See [`IRemoteTrack.on`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iremotetrack.html#event_first_frame_decoded). |
 
 #### Returns
 

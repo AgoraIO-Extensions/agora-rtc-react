@@ -11,9 +11,9 @@ import { useIsConnected } from "./useIsConnected";
 /**
  * This hook lets a user automatically join a channel when the component is ready and automatically leaves the channel when the component is unmounted.
  *
- * @param `fetchArgs` {JoinOptions | (() => Promise<JoinOptions>)} The parameters or asynchronous function required to join the channel. See [`JoinOptions`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/data-types#joinoptions) for details.
+ * @param `fetchArgs` {JoinOptions | (() => Promise<JoinOptions>)} The parameters or asynchronous function required to join the channel. See [`JoinOptions`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x/interface/JoinOptions.html) for details.
  * @param `ready` {boolean} Whether the user is ready to join the channel. The default value is `true`.
- * @param `client` {IAgoraRTCClient} Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.
+ * @param `client` {IAgoraRTCClient} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IAgoraRTC.createClient.html) method.
  * @return data UID
  * @return isLoading boolean
  * @return isConnected boolean

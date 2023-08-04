@@ -11,7 +11,7 @@ import { useIsConnected } from "./useIsConnected";
  * This hook lets you create a local camera video track.
  *
  * @param `ready` {boolean} Whether it is ready to create the track. The default value is `true`.
- * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.
+ * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IAgoraRTC.createClient.html) method.
  * @return localCameraTrack ICameraVideoTrack | null
  * @return isLoading boolean
  * @return error AgoraRTCReactError | null

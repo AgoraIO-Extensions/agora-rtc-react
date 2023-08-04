@@ -2,25 +2,25 @@
 
 This hook lets you automatically subscribe to and retrieve remote users' video tracks.
 
-- When the component is unmounted, the hook stops subscribing to the video tracks of the specified `users`.
-- The hook updates the subscribed video tracks when the `users` parameter changes.
+- When the component is unmounted, this hook stops subscribing to the video tracks of the specified `users`.
+- This hook updates the subscribed video tracks when the `users` parameter changes.
 
 #### Parameters
 
-| Parameter | Type                                                                                                                                                           | Required | Description                                                                                                                                                                    |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `users`   | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined`                                                                                                             | Yes      | The list of remote users.                                                                                                                                                      |
-| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| Parameter | Type                                                                                                               | Required | Description                                                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `users`   | `IAgoraRTCRemoteUser[]` &VerticalLine; `undefined`                                                                 | Yes      | The list of remote users.                                                                                                                      |
+| `client`  | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IAgoraRTCClient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IAgoraRTC.createClient.html) method. |
 
 #### Returns
 
 Returns an object containing the following properties:
 
-| Property      | Type                                       | Description                                                                                                                                                                                                             |
-| ------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `videoTracks` | `IRemoteVideoTrack[]`                      | The list of subscribed video tracks from remote users.                                                                                                                                                                  |
-| `isLoading`   | `boolean`                                  | <li>`true`: The hook is performing operations related to subscribing the tracks.</li><li>`false`: The hook completes operations related to subscribing the tracks, but it does not indicate a successfully result.</li> |
-| `error`       | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks are successfully subscribed, otherwise throws an error. See [`AgoraRTCReactError`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/data-types#agorartcreacterror) for details.        |
+| Property      | Type                                       | Description                                                                                                                                                                                                           |
+| ------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `videoTracks` | `IRemoteVideoTrack[]`                      | The list of subscribed video tracks from remote users.                                                                                                                                                                |
+| `isLoading`   | `boolean`                                  | <li>`true`: The hook is performing operations related to subscribing the tracks.</li><li>`false`: The hook completes operations related to subscribing the tracks, but it does not indicate a successful result.</li> |
+| `error`       | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks are successfully subscribed, otherwise throws an error. See [`AgoraRTCReactError`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x/classes/AgoraRTCReactError.html) for details.       |
 
 #### Sample code
 

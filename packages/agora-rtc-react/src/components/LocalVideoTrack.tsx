@@ -10,7 +10,7 @@ import { useAutoPlayVideoTrack } from "./TrackBoundary";
 
 export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
   /**
-   * The local video track to be played. Call [`IAgoraRTC.createScreenVideoTrack`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/hooks#uselocalcameratrack">`useLocalCameraTrack`</a> or the Web SDK's <a href="https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack) method to create a local video track.
+   * The local video track to be played. Call [`IAgoraRTC.createScreenVideoTrack`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x/functions/useLocalCameraTrack.html">`useLocalCameraTrack`</a> or the Web SDK's <a href="https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IAgoraRTC.createScreenVideoTrack.html) method to create a local video track.
    */
   readonly track?: MaybePromiseOrNull<ILocalVideoTrack>;
 

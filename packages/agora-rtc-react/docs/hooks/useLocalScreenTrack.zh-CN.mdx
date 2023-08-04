@@ -1,0 +1,69 @@
+## useLocalScreenTrack
+
+用于创建本地屏幕共享的视频轨道。
+
+- 在组件被销毁之前，该 Hook 只会创建一次视频轨道。
+- 组件卸载后，该 Hook 创建的视频轨道会停止发布。
+
+#### 参数
+
+| 参数名                       | 类型                                                                                                                                                           | 是否必选 | 描述                                                                                                                                                                                                                                                                       |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ready`                      | `boolean`                                                                                                                                                      | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                                                                                                                                                                        |
+| `screenVideoTrackInitConfig` | [`screenVideoTrackInitConfig`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/screenvideotrackinitconfig.html) | 必选     | 屏幕共享的视频配置，包括编码配置、采集配置等。                                                                                                                                                                                                                             |
+| `withAudio`                  | `string`                                                                                                                                                       | 必选     | 屏幕共享时是否同时分享屏幕共享输入源的音频。支持传入 `"enable"`、`"disable"` 或 `"auto"`。详见[`createScreenVideoTrack`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack)的参数解释。 |
+| `client`                     | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html)                       | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。                                                                                                          |
+
+#### 返回值
+
+返回一个包含以下属性的对象：
+
+| 属性          | 类型                                                                                           | 描述                                                                                                                                                                                                                                                              |
+| ------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `screenTrack` | `[ILocalVideoTrack, ILocalAudioTrack]` &VerticalLine; `ILocalVideoTrack` &VerticalLine; `null` | 根据传入的 `withAudio`，返回创建的屏幕共享视频轨道或者屏幕共享视频轨道和音频轨道。详见 [`createScreenVideoTrack`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createscreenvideotrack)的返回值。 |
+| `isLoading`   | `boolean`                                                                                      | <li>`true`：正在执行创建轨道相关操作。</li><li>`false`：已经执行创建轨道相关操作，但不代表成功创建轨道。</li>                                                                                                                                                     |
+| `error`       | `AgoraRTCReactError` &VerticalLine; `null`                                                     | 创建轨道成功则返回 `null`，创建轨道失败则抛出错误。错误详见 [`AgoraRTCReactError`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/data-types#agorartcreacterror)。                                                                                          |
+
+#### 注意事项
+
+- 推荐把返回值中的视频轨道对象包裹在 [`AgoraRTCScreenShareProvider`](/components#agorartcscreenshareprovider) 中。
+- 如果你从返回值中获取了视频轨道对象和音频轨道对象，但只发布了其中一个轨道，在停止屏幕共享之前还需要调用 Web SDK 的 [`ILocalTrack.close`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#close) 方法手动关闭未发布的轨道。已发布的轨道会自动关闭。
+- 由于订阅本地的屏幕共享轨道会造成重复计费，推荐你在订阅视频轨道时增加是否为本地轨道的判断。
+
+#### 使用示例
+
+**示例 1: 把屏幕共享视频轨道包裹在 AgoraRTCScreenShareProvider 中**
+
+```jsx
+import { AgoraRTCScreenShareProvider, LocalVideoTrack, useLocalScreenTrack } from "agora-rtc-react";
+
+function App() {
+  const { screenTrack, error } = useLocalScreenTrack(screenShareOn, {}, "disable");
+
+  return (
+    <AgoraRTCScreenShareProvider client={client}>
+      <LocalVideoTrack play style={{ width: "300px", height: "300px" }} track={screenTrack} />
+    </AgoraRTCScreenShareProvider>
+  );
+}
+```
+
+**示例 2: 避免订阅本地屏幕共享轨道**
+
+```jsx
+import { useRemoteUsers, useRemoteVideoTracks, useRemoteAudioTracks } from "agora-rtc-react";
+
+function App() {
+  const remoteUsers = useRemoteUsers();
+  const { videoTracks } = useRemoteVideoTracks(
+    // 在订阅列表中移除本地用户的屏幕共享视频轨道
+    remoteUsers.filter(user => user.uid !== appConfig.ShareScreenUID),
+  );
+  const { audioTracks } = useRemoteAudioTracks(
+    // 在订阅列表中移除本地用户的屏幕共享音频轨道
+    remoteUsers.filter(user => user.uid !== appConfig.ShareScreenUID),
+  );
+
+  return <></>;
+}
+```

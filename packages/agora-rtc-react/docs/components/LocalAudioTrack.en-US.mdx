@@ -2,13 +2,13 @@
 
 This component plays the local audio track using the playback device selected by the user in the browser.
 
-If you need the capability to set the microphone device, use the Web SDK's [`IMicrophoneAudioTrack.setDevice`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/imicrophoneaudiotrack.html#setdevice) method.
+If you need the capability to set the microphone device, use the Web SDK's [`IMicrophoneAudioTrack.setDevice`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IMicrophoneAudioTrack.setDevice.html) method.
 
 #### Props
 
 | Prop       | Type               | Default value | Description                                                                                                                                                                                                                                                 |
 | ---------- | ------------------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `track`    | `ILocalAudioTrack` | None          | The local audio track to be played. Call [`useLocalMicrophoneTrack`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/hooks#uselocalmicrophonetrack) to create a local audio track.                                                                     |
+| `track`    | `ILocalAudioTrack` | None          | The local audio track to be played. Call [`useLocalMicrophoneTrack`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x/functions/useLocalMicrophoneTrack.html) to create a local audio track.                                                               |
 | `play`     | `boolean`          | `false`       | <li>`true`: Play the track.</li><li>`false`: Stop playing the track.</li>                                                                                                                                                                                   |
 | `volume`   | `number`           | None          | The volume. The value ranges from 0 (mute) to 1000 (maximum). A value of 100 is the original volume. When set to above 100, the SDK applies volume amplification using the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API). |
 | `disabled` | `boolean`          | `false`       | <li>`true`: Disable the track. When disabled, the SDK stops playing and publishing the track.</li><li>`false`: Enable the track.</li>                                                                                                                       |
@@ -17,7 +17,7 @@ If you need the capability to set the microphone device, use the Web SDK's [`IMi
 
 #### Caveats
 
-Setting the `disabled` and `muted` prop invokes the Web SDK's [`setEnabled`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setenabled) method and [`setMuted`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setmuted) method, respectively. Therefore:
+Setting the `disabled` and `muted` prop invokes the Web SDK's [`setEnabled`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//setEnabled.html) method and [`setMuted`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//setMuted.html) method, respectively. Therefore:
 
 - Compared to setting the `disabled` prop, setting the `muted` prop has faster response time and does not affect the audio capture state.
 - Do not set `muted` and `disabled` together.
