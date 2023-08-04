@@ -43,7 +43,6 @@ export function useRemoteUserTrack(
   mediaType: "video",
   client?: IAgoraRTCClient | null,
 ): { track: IRemoteVideoTrack | undefined; isLoading: boolean; error: AgoraRTCReactError | null };
-
 export function useRemoteUserTrack(
   user: IAgoraRTCRemoteUser | undefined,
   mediaType: "audio",

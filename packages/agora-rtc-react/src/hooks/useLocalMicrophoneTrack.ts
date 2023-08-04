@@ -48,6 +48,11 @@ export function useLocalMicrophoneTrack(
   const isUnmountRef = useIsUnmounted();
 
   useAsyncEffect(async () => {
+    if (!isUnmountRef.current) {
+      setIsLoading(false);
+      setError(null);
+    }
+
     if (isConnected && ready && !track) {
       try {
         if (!isUnmountRef.current) {
