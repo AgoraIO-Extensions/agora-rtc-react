@@ -1,4 +1,5 @@
 import MultiChannel from "./multi-channel";
+import ShareScreen from "./share-screen";
 import SwitchLayout from "./switch-layout";
 
 const Advanced = [
@@ -9,6 +10,10 @@ const Advanced = [
   {
     label: "multi-channel",
     component: MultiChannel,
+  },
+  {
+    label: "share-screen",
+    component: ShareScreen,
   },
 ];
 

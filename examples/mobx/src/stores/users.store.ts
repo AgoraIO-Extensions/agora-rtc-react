@@ -1,4 +1,4 @@
-import { listen } from "agora-rtc-react";
+import { listen } from "agora-rtc-react/src/misc/listen";
 import type { IAgoraRTCClient, IAgoraRTCRemoteUser, UID } from "agora-rtc-sdk-ng";
 import { makeAutoObservable, observable } from "mobx";
 import { SideEffectManager } from "side-effect-manager";

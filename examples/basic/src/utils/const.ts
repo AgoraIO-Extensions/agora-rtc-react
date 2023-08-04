@@ -1,6 +1,9 @@
+import type { UID } from "agora-rtc-sdk-ng";
 import CryptoJS from "crypto-js";
 
 let appId = import.meta.env.AGORA_APPID;
+const ShareScreenUID: UID = 10;
+
 if (import.meta.env.AGORA_AES_SALT) {
   // only for github-pages demo
   const bytes = CryptoJS.AES.decrypt(import.meta.env.AGORA_APPID, import.meta.env.AGORA_AES_SALT);
@@ -11,6 +14,7 @@ const appConfig = {
   appId: appId,
   channel: import.meta.env.AGORA_CHANNEL || "test",
   token: import.meta.env.AGORA_TOKEN ? import.meta.env.AGORA_TOKEN : null,
+  ShareScreenUID: ShareScreenUID,
 };
 
 function getAgoraTokens() {

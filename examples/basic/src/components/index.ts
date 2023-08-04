@@ -7,3 +7,4 @@ export * from "./Room";
 export * from "./Client";
 export * from "./MediaControl";
 export * from "./ToolBox";
+export * from "./ScreenShare";

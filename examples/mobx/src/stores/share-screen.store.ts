@@ -1,4 +1,4 @@
-import { listen } from "agora-rtc-react";
+import { listen } from "agora-rtc-react/src/misc/listen";
 import type {
   IAgoraRTCClient,
   ILocalAudioTrack,

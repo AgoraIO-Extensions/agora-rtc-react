@@ -4,6 +4,7 @@ import UseConnectionState from "./useConnectionState";
 import UseCurrentUID from "./useCurrentUID";
 import UseIsConnected from "./useIsConnected";
 import UseJoin from "./useJoin";
+import UseLocalScreenTrack from "./useLocalScreenTrack";
 import UseNetworkQuality from "./useNetworkQuality";
 import UsePublish from "./usePublish";
 import UseRemoteUsers from "./useRemoteUsers";
@@ -43,6 +44,10 @@ const Hooks = [
   {
     label: "useNetworkQuality",
     component: UseNetworkQuality,
+  },
+  {
+    label: "useLocalScreenTrack",
+    component: UseLocalScreenTrack,
   },
 ];
 
