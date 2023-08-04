@@ -13,6 +13,31 @@ import { AgoraRTCReactError } from "../error";
 import { useAsyncEffect, useIsUnmounted } from "./tools";
 import { useIsConnected } from "./useIsConnected";
 
+/**
+ * This hook lets you create a local video track for screen-sharing.
+ *
+ * @param `ready` {boolean} Whether it is ready to create the track. The default value is `true`.
+ * @param `screenVideoTrackInitConfig` {screenVideoTrackInitConfig} Screen-sharing video configuration, including encoding and capturing configurations.
+ * @param `withAudio` {string} Whether to share the audio of the screen-sharing input source during screen sharing. Supported values are `"enable"`, `"disable"`, and `"auto"`. See the parameters of [`createScreenVideoTrack`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//createScreenVideoTrack.html) for details.
+ * @param `client` {IAgoraRTCClient} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IAgoraRTC.createClient.html) method.
+ * @return screenTrack [ILocalVideoTrack, ILocalAudioTrack] | ILocalVideoTrack | null
+ * @return isLoading boolean
+ * @return error AgoraRTCReactError | null
+ * @example
+ * ```jsx
+ * import { AgoraRTCScreenShareProvider, LocalVideoTrack, useLocalScreenTrack } from "agora-rtc-react";
+ *
+ * function App() {
+ *   const { screenTrack, error } = useLocalScreenTrack(screenShareOn, {}, "disable");
+ *
+ *   return (
+ *     <AgoraRTCScreenShareProvider client={client}>
+ *       <LocalVideoTrack play style={{ width: "300px", height: "300px" }} track={screenTrack} />
+ *     </AgoraRTCScreenShareProvider>
+ *   );
+ * }
+ * ```
+ */
 export function useLocalScreenTrack(
   ready: boolean,
   screenVideoTrackInitConfig: ScreenVideoTrackInitConfig,
