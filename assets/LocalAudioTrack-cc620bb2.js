@@ -1,0 +1,11 @@
+import{j as i}from"./jsx-runtime-94f6e698.js";import{r as t}from"./index-8db94870.js";import{u as c,a as u}from"./TrackBoundary-2c41e911.js";function d({track:s,play:l=!1,volume:a,disabled:n,muted:o,children:r}){const e=c(s);return u(e,l),t.useEffect(()=>{e&&a!=null&&e.setVolume(a)},[e,a]),t.useEffect(()=>{e&&n!=null&&e.setEnabled(!n).catch(console.warn)},[n,e]),t.useEffect(()=>{e&&o!=null&&e.setMuted(o).catch(console.warn)},[o,e]),r?i.jsx(i.Fragment,{children:r}):null}d.__docgenInfo={description:`This component plays the local audio track using the playback device selected by the user in the browser.
+@example
+\`\`\`jsx
+import { LocalAudioTrack, useLocalAudioTrack } from "agora-rtc-react";
+
+function App() {
+  const audioTrack = useLocalAudioTrack();
+  return <LocalAudioTrack track={audioTrack} play />;
+}
+\`\`\``,methods:[],displayName:"LocalAudioTrack",props:{play:{defaultValue:{value:"false",computed:!1},required:!1,tsType:{name:"boolean"},description:"`true`: Play the track.`false`: Stop playing the track."},track:{required:!1,tsType:{name:"union",raw:"T | PromiseLike<T>",elements:[{name:"union",raw:"T | null | undefined",elements:[{name:"T"},{name:"null"},{name:"undefined"}]},{name:"PromiseLike",elements:[{name:"union",raw:"T | null | undefined",elements:[{name:"T"},{name:"null"},{name:"undefined"}]}],raw:"PromiseLike<T>"}]},description:"The local audio track to be played. Call [`useLocalMicrophoneTrack`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x/functions/useLocalMicrophoneTrack.html) to create a local audio track."},volume:{required:!1,tsType:{name:"number"},description:"The volume. The value ranges from 0 (mute) to 1000 (maximum). A value of 100 is the original volume. When set to above 100, the SDK applies volume amplification using the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)."},disabled:{required:!1,tsType:{name:"boolean"},description:"`true`: Disable the track. When disabled, the SDK stops playing and publishing the track.`false`: Enable the track."},muted:{required:!1,tsType:{name:"boolean"},description:"`true`: Pause sending media data of the track.`false`: Resume sending media data of the track."},children:{required:!1,tsType:{name:"ReactNode"},description:"The React nodes to be rendered."}}};export{d as L};
+//# sourceMappingURL=LocalAudioTrack-cc620bb2.js.map
