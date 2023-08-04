@@ -24,6 +24,39 @@ for (let j = 0; j < docType.length; j++) {
         console.error(err);
       } else {
         data = data.replace(/\.\/+/g, urlPrefix[m]);
+        //do not replace urlPrefix[0], it means chinese.
+        if (languages[m] !== "") {
+          data = data.replace(/\[`(.+?)`\]\((.+?)\)/g, match => {
+            //if not chinese site, replace urlPrefix[1]
+            if (match.indexOf("https://docportal.shengwang.cn/cn") === -1) {
+              let suffix = "";
+              //special case list
+              if (match.indexOf("data-types#agorartcreacterror") !== -1) {
+                suffix = "classes";
+                //interface case
+              } else if (match.indexOf("data-types#") !== -1) {
+                suffix = "interface";
+                //components case
+              } else if (match.indexOf("components#") !== -1) {
+                console.log(match);
+                suffix = "functions";
+                //hooks case
+              } else if (match.indexOf("hooks#") !== -1) {
+                suffix = "functions";
+              }
+              return match.replace(
+                /\[`(.+?)`\]\((.+?)\)/g,
+                "[`$1`](" + `${urlPrefix[m]}${suffix}/$1.html)`,
+              );
+            } else {
+              return match;
+            }
+          });
+          data = data.replace(
+            /.\/components#agorartcprovider+/g,
+            `${urlPrefix[m]}functions/AgoraRTCProvider.html`,
+          );
+        }
         data = data.replace(/<h2[^>]*>([\s\S]*?)<\/h2>/g, match => {
           return (
             prefix +
