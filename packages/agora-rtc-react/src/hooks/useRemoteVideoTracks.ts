@@ -19,7 +19,7 @@ import { useIsConnected } from "./useIsConnected";
  * This hook lets you automatically subscribe to and retrieve remote users' video tracks.
  *
  * @param `users` {IAgoraRTCRemoteUser[] | undefined} The list of remote users.
- * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IAgoraRTC.createClient.html) method.
+ * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
  * @return videoTracks IRemoteVideoTrack[]
  * @return isLoading boolean
  * @return error AgoraRTCReactError | null

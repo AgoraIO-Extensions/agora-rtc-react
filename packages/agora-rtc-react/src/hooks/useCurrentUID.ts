@@ -8,7 +8,7 @@ import { timeout } from "../misc/utils";
 /**
  * Returns the current user ID.
  *
- * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IAgoraRTC.createClient.html) method.
+ * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
  * @return UID | undefined The user ID of the current user. If the current user has not joined any channel, undefined is returned.
  * @example
  * ```jsx

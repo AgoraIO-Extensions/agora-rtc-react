@@ -13,7 +13,7 @@ import { useIsConnected } from "./useIsConnected";
  *
  * @param `fetchArgs` {JoinOptions | (() => Promise<JoinOptions>)} The parameters or asynchronous function required to join the channel. See [`JoinOptions`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x/interface/JoinOptions.html) for details.
  * @param `ready` {boolean} Whether the user is ready to join the channel. The default value is `true`.
- * @param `client` {IAgoraRTCClient} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IAgoraRTC.createClient.html) method.
+ * @param `client` {IAgoraRTCClient} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
  * @return data UID
  * @return isLoading boolean
  * @return isConnected boolean

@@ -28,7 +28,10 @@ for (let j = 0; j < docType.length; j++) {
         if (languages[m] !== "") {
           data = data.replace(/\[`(.+?)`\]\((.+?)\)/g, match => {
             //if not chinese site, replace urlPrefix[1]
-            if (match.indexOf("https://docportal.shengwang.cn/cn") === -1) {
+            if (
+              match.indexOf("https://docportal.shengwang.cn/cn") === -1 &&
+              match.indexOf("https://api-ref.agora.io/en/video-sdk/web/4.x/") === -1
+            ) {
               let suffix = "";
               //special case list
               if (match.indexOf("data-types#agorartcreacterror") !== -1) {

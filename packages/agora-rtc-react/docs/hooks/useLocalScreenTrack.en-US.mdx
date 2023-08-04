@@ -12,7 +12,7 @@ This hook lets you create a local video track for screen-sharing.
 | `ready`                      | `boolean`                                                                                                          | No       | Whether it is ready to create the track. The default value is `true`.                                                                                                                                                                                                                          |
 | `screenVideoTrackInitConfig` | [`screenVideoTrackInitConfig`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//screenVideoTrackInitConfig.html) | Yes      | Screen-sharing video configuration, including encoding and capturing configurations.                                                                                                                                                                                                           |
 | `withAudio`                  | `string`                                                                                                           | Yes      | Whether to share the audio of the screen-sharing input source during screen sharing. Supported values are `"enable"`, `"disable"`, and `"auto"`. See the parameters of [`createScreenVideoTrack`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//createScreenVideoTrack.html) for details. |
-| `client`                     | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IAgoraRTCClient.html)                       | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IAgoraRTC.createClient.html) method.                                                                                                                                                 |
+| `client`                     | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html)                 | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.                                                                                                                                           |
 
 #### Returns
 
@@ -27,7 +27,7 @@ Returns an object containing the following properties:
 #### Caveats
 
 - Agora recommends wrapping the returned video track object in [`AgoraRTCScreenShareProvider`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x/functions/AgoraRTCScreenShareProvider.html).
-- If you get the video track and audio track objects from the return value but only publish one track, you need to manually close the unpublished track using the Web SDK's [`ILocalTrack.close`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//ILocalTrack.close.html) method before stopping screen sharing. The other published track will be closed automatically.
+- If you get the video track and audio track objects from the return value but only publish one track, you need to manually close the unpublished track using the Web SDK's [`ILocalTrack.close`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/ilocaltrack.html#close) method before stopping screen sharing. The other published track will be closed automatically.
 - Subscribing to the local screen-sharing track will incur duplicate billing. Agora recommends that you add checks for local tracks when subscribing to video tracks.
 
 #### Sample code

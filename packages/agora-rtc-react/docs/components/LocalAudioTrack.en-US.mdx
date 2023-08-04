@@ -2,7 +2,7 @@
 
 This component plays the local audio track using the playback device selected by the user in the browser.
 
-If you need the capability to set the microphone device, use the Web SDK's [`IMicrophoneAudioTrack.setDevice`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IMicrophoneAudioTrack.setDevice.html) method.
+If you need the capability to set the microphone device, use the Web SDK's [`IMicrophoneAudioTrack.setDevice`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/imicrophoneaudiotrack.html#setdevice) method.
 
 #### Props
 
@@ -17,7 +17,7 @@ If you need the capability to set the microphone device, use the Web SDK's [`IMi
 
 #### Caveats
 
-Setting the `disabled` and `muted` prop invokes the Web SDK's [`setEnabled`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//setEnabled.html) method and [`setMuted`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//setMuted.html) method, respectively. Therefore:
+Setting the `disabled` and `muted` prop invokes the Web SDK's [`setEnabled`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/ilocaltrack.html#setenabled) method and [`setMuted`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/ilocaltrack.html#setmuted) method, respectively. Therefore:
 
 - Compared to setting the `disabled` prop, setting the `muted` prop has faster response time and does not affect the audio capture state.
 - Do not set `muted` and `disabled` together.

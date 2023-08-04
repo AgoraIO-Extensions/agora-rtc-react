@@ -8,7 +8,7 @@ import { joinDisposers, timeout } from "../misc/utils";
 /**
  * Returns whether the SDK is connected to Agora's server.
  *
- * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IAgoraRTC.createClient.html) method.
+ * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
  * @return boolean <li>true: The SDK is connected to the server.</li><li>false: The SDK is not connected to the server.</li>
  * @example
  * ```jsx

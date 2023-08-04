@@ -14,7 +14,7 @@ const initQuality = (): NetworkQuality => ({
 /**
  * Returns the network quality of the local user.
  *
- * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IAgoraRTC.createClient.html) method.
+ * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
  * @return NetworkQuality The network quality of the local user. See NetworkQuality for details.
  * @example
  * ```jsx
