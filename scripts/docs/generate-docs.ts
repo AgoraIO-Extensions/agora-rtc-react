@@ -38,7 +38,7 @@ for (let j = 0; j < docType.length; j++) {
                 suffix = "classes";
                 //interface case
               } else if (match.indexOf("data-types#") !== -1) {
-                suffix = "interface";
+                suffix = "interfaces";
                 //components case
               } else if (match.indexOf("components#") !== -1) {
                 console.log(match);
