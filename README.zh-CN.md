@@ -87,6 +87,8 @@ This example will render Agora Client into a container on the page.
 
 - [`useNetworkQuality`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useNetworkQuality.zh-CN.mdx) &mdash; 用于获取本地用户网络质量。
 
+- [`useLocalScreenTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalScreenTrack.zh-CN.mdx) &mdash; 用于创建本地屏幕共享的视频轨道。
+
 - [`useLocalMicrophoneTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalMicrophoneTrack.zh-CN.mdx) &mdash; 用于创建本地麦克风音频轨道。
 
 - [`useLocalCameraTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalCameraTrack.zh-CN.mdx) &mdash; 用于创建本地摄像头视频轨道。

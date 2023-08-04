@@ -6,22 +6,22 @@ You can customize the conditions required to join a channel using `fetchArgs`. F
 
 #### Parameters
 
-| Parameter   | Type                                                                                                                                     | Required | Description                                                                                                                                                                         |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fetchArgs` | `JoinOptions` &VerticalLine; `(() => Promise<JoinOptions>)`                                                                              | Required | The parameters or asynchronous function required to join the channel. See [`JoinOptions`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/data-types#joinoptions) for details. |
-| `ready`     | `boolean`                                                                                                                                | Optional | Whether the user is ready to join the channel. The default value is `true`.                                                                                                         |
-| `client`    | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.      |
+| Parameter   | Type                                                                                         | Required | Description                                                                                                                                                                          |
+| ----------- | -------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `fetchArgs` | `JoinOptions` &VerticalLine; `(() => Promise<JoinOptions>)`                                  | Required | The parameters or asynchronous function required to join the channel. See [`JoinOptions`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x/interface/JoinOptions.html) for details. |
+| `ready`     | `boolean`                                                                                    | No       | Whether the user is ready to join the channel. The default value is `true`.                                                                                                          |
+| `client`    | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IAgoraRTCClient.html) | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//IAgoraRTC.createClient.html) method.                                       |
 
 #### Returns
 
 Returns an object containing the following properties:
 
-| Property      | Type                                       | Description                                                                                                                                                                                                       |
-| ------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data`        | `UID`                                      | The user ID if the user successfully joins the channel. If you does not specify a `uid` when passing `fetchArgs`, the default value `0` is returned.                                                              |
-| `isLoading`   | `boolean`                                  | <li>`true`: The hook is performing operations related to joining the channel.</li><li>`false`: The hook completes operations related to joining the channel, but it does not indicate a successful result.</li>   |
-| `isConnected` | `boolean`                                  | <li>`true`: The SDK is connected to the server, indicating that the user successfully joins the channel.</li><li>`false`: The SDK is not connected to the server.</li>                                            |
-| `error`       | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the user successfully joins the channel, otherwise throws an error. See [`AgoraRTCReactError`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/data-types#agorartcreacterror) for details. |
+| Property      | Type                                       | Description                                                                                                                                                                                                      |
+| ------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data`        | `UID`                                      | The user ID if the user successfully joins the channel. If you does not specify a `uid` when passing `fetchArgs`, the default value `0` is returned.                                                             |
+| `isLoading`   | `boolean`                                  | <li>`true`: The hook is performing operations related to joining the channel.</li><li>`false`: The hook completes operations related to joining the channel, but it does not indicate a successful result.</li>  |
+| `isConnected` | `boolean`                                  | <li>`true`: The SDK is connected to the server, indicating that the user successfully joins the channel.</li><li>`false`: The SDK is not connected to the server.</li>                                           |
+| `error`       | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the user successfully joins the channel, otherwise throws an error. See [`AgoraRTCReactError`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x/classes/AgoraRTCReactError.html) for details. |
 
 #### Sample code
 
