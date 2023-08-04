@@ -9,7 +9,7 @@ import { useAutoPlayAudioTrack } from "./TrackBoundary";
 
 export interface LocalAudioTrackProps {
   /**
-   * The local audio track to be played. Call [`useLocalMicrophoneTrack`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/hooks#uselocalmicrophonetrack) to create a local audio track.
+   * The local audio track to be played. Call [`useLocalMicrophoneTrack`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x/functions/useLocalMicrophoneTrack.html) to create a local audio track.
    */
   readonly track?: MaybePromiseOrNull<ILocalAudioTrack>;
 

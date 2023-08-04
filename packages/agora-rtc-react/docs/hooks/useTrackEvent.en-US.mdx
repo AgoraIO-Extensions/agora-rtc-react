@@ -2,8 +2,8 @@
 
 This hook lets you listen to specific events of the local or remote track.
 
-- When the component is mounted, the hook registers the corresponding event listener.
-- When the component is unmounted, the hook destroys the corresponding event listener.
+- When the component is mounted, this hook registers the corresponding event listener.
+- When the component is unmounted, this hook destroys the corresponding event listener.
 
 #### Parameters
 
@@ -15,12 +15,12 @@ This hook lets you listen to specific events of the local or remote track.
 
 Different `track` objects support different `event` and `listener` combinations. The supported combinations are as follows:
 
-| `track`                                                               | `event` and `listener`                                                                                                                                   |
-| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ILocalTrack` &VerticalLine; `ILocalVideoTrack` &VerticalLine; `null` | See [`ILocalTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#on).                          |
-| `IBufferSourceAudioTrack` &VerticalLine; `null`                       | See [`IBufferSourceAudioTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/ibuffersourceaudiotrack.html#on).  |
-| `ILocalVideoTrack` &VerticalLine; `null`                              | See [`ILocalVideoTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/ilocalvideotrack.html#on).                |
-| `IRemoteTrack` &VerticalLine; `null`                                  | See [`IRemoteTrack.on`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iremotetrack.html#event_first_frame_decoded). |
+| `track`                                                               | `event` and `listener`                                                                                                         |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `ILocalTrack` &VerticalLine; `ILocalVideoTrack` &VerticalLine; `null` | See [`ILocalTrack.on`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/ilocaltrack.html#on).                          |
+| `IBufferSourceAudioTrack` &VerticalLine; `null`                       | See [`IBufferSourceAudioTrack.on`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/ibuffersourceaudiotrack.html#on).  |
+| `ILocalVideoTrack` &VerticalLine; `null`                              | See [`ILocalVideoTrack.on`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/ilocalvideotrack.html#on).                |
+| `IRemoteTrack` &VerticalLine; `null`                                  | See [`IRemoteTrack.on`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iremotetrack.html#event_first_frame_decoded). |
 
 #### Returns
 

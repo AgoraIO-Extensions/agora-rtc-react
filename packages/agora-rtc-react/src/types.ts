@@ -12,17 +12,17 @@ export interface JoinOptions {
   appid: string;
 
   /**
-   * The name of the channel to join. See [`IAgoraRTCClient.join`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) for details.
+   * The name of the channel to join. See [`IAgoraRTCClient.join`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html#join) for details.
    */
   channel: string;
 
   /**
-   * The token used for authentication. If token-based authentication is enabled for your project, a valid token must be provided. If token-based authentication is not enabled, you can pass `null`. See [`IAgoraRTCClient.join`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) for details.
+   * The token used for authentication. If token-based authentication is enabled for your project, a valid token must be provided. If token-based authentication is not enabled, you can pass `null`. See [`IAgoraRTCClient.join`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html#join) for details.
    */
   token: string | null;
 
   /**
-   * The user ID. If not provided, the Agora server assigns a number `uid` for you. See [`IAgoraRTCClient.join`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html#join) for details.
+   * The user ID. If not provided, the Agora server assigns a number `uid` for you. See [`IAgoraRTCClient.join`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html#join) for details.
    */
   uid?: UID | null;
 }

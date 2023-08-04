@@ -87,6 +87,8 @@ This example will render Agora Client into a container on the page.
 
 - [`useNetworkQuality`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useNetworkQuality.en-US.mdx) &mdash; Returns the network quality of the local user.
 
+- [`useLocalScreenTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalScreenTrack.en-US.mdx) &mdash; This hook lets you create a local video track for screen-sharing.
+
 - [`useLocalMicrophoneTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalMicrophoneTrack.en-US.mdx) &mdash; This hook lets you create a local microphone audio track.
 
 - [`useLocalCameraTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalCameraTrack.en-US.mdx) &mdash; This hook lets you create a local camera video track.

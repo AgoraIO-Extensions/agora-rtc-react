@@ -13,7 +13,7 @@ import { useIsConnected } from "./useIsConnected";
  *
  * @param `tracks` {(ILocalTrack | null)[]} The list of local tracks.
  * @param `readyToPublish` {boolean} Whether the local tracks are ready to publish. The default value is `true`.
- * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.
+ * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
  * @return isLoading boolean
  * @return error AgoraRTCReactError | null
  * @example

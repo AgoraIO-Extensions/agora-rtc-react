@@ -2,25 +2,25 @@
 
 This hook lets you create a local camera video track.
 
-- The hook can only create the video track once before the component is destroyed.
-- After the component is unmounted, the video track created by the hook stops publishing.
+- This hook can only create the video track once before the component is destroyed.
+- After the component is unmounted, the video track created by this hook stops publishing.
 
 #### Parameters
 
-| Parameter | Type                                                                                                                                                           | Required | Description                                                                                                                                                                    |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ready`   | `boolean`                                                                                                                                                      | No       | Whether it is ready to create the track. The default value is `true`.                                                                                                          |
-| `client`  | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method. |
+| Parameter | Type                                                                                                                     | Required | Description                                                                                                                                          |
+| --------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ready`   | `boolean`                                                                                                                | No       | Whether it is ready to create the track. The default value is `true`.                                                                                |
+| `client`  | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method. |
 
 #### Returns
 
 Returns an object containing the following properties:
 
-| Property           | Type                                       | Description                                                                                                                                                                                                           |
-| ------------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `localCameraTrack` | `ICameraVideoTrack` &VerticalLine; `null`  | The created camera video track.                                                                                                                                                                                       |
-| `isLoading`        | `boolean`                                  | <li>`true`: The hook is performing operations related to publishing the tracks.</li><li>`false`: The hook completes operations related to publishing the tracks, but it does not indicate a successfully result.</li> |
-| `error`            | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks is successfully created, otherwise throws an error. See [`AgoraRTCReactError`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/data-types#agorartcreacterror) for details.          |
+| Property           | Type                                       | Description                                                                                                                                                                                                         |
+| ------------------ | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `localCameraTrack` | `ICameraVideoTrack` &VerticalLine; `null`  | The created camera video track.                                                                                                                                                                                     |
+| `isLoading`        | `boolean`                                  | <li>`true`: The hook is performing operations related to publishing the tracks.</li><li>`false`: The hook completes operations related to publishing the tracks, but it does not indicate a successful result.</li> |
+| `error`            | `AgoraRTCReactError` &VerticalLine; `null` | Returns `null` if the tracks is successfully created, otherwise throws an error. See [`AgoraRTCReactError`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x/classes/AgoraRTCReactError.html) for details.         |
 
 #### Sample code
 

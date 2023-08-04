@@ -8,7 +8,7 @@ export const packagePath = path.join(__dirname, "..", "packages", "agora-rtc-rea
 export const docsPath = path.join(packagePath, "docs");
 export const urlPrefix = [
   "https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/",
-  "https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/",
+  "https://api-ref.agora.io/en/video-sdk/reactjs/2.x/",
 ];
 
 export const storiesPath = path.join(packagePath, "src", "stories");

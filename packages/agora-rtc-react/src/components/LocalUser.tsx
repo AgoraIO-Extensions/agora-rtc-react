@@ -20,12 +20,12 @@ export interface LocalUserProps extends HTMLProps<HTMLDivElement> {
   readonly cameraOn?: boolean;
 
   /**
-   * The microphone audio track to be played, which can be created by calling [`useLocalMicrophoneTrack`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/hooks#uselocalmicrophonetrack).
+   * The microphone audio track to be played, which can be created by calling [`useLocalMicrophoneTrack`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x/functions/useLocalMicrophoneTrack.html).
    */
   readonly audioTrack?: MaybePromiseOrNull<ILocalAudioTrack>;
 
   /**
-   * The camera video track to be played, which can be created by calling [`useLocalCameraTrack`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/hooks#uselocalcameratrack).
+   * The camera video track to be played, which can be created by calling [`useLocalCameraTrack`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x/functions/useLocalCameraTrack.html).
    */
   readonly videoTrack?: MaybePromiseOrNull<ILocalVideoTrack>;
 

@@ -8,7 +8,7 @@ import { joinDisposers } from "../misc/utils";
 /**
  * This hook lets you retrieve the list of remote users.
  *
- * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) method.
+ * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
  * @return IAgoraRTCRemoteUser[] The list of remote users.
  * @example
  * ```jsx
