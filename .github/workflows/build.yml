@@ -27,6 +27,7 @@ jobs:
 
       - name: Build Docs 📖
         run: |
+          pnpm run typedoc
           pnpm run build-storybook
           pnpm run copy-docs
 
