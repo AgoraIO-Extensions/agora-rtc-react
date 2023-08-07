@@ -55,10 +55,7 @@ for (let j = 0; j < docType.length; j++) {
               return match;
             }
           });
-          data = data.replace(
-            /.\/components#agorartcprovider+/g,
-            `${urlPrefix[m]}functions/AgoraRTCProvider.html`,
-          );
+          data = data.replace(/components#agorartcprovider+/g, `functions/AgoraRTCProvider.html`);
         }
         data = data.replace(/<h2[^>]*>([\s\S]*?)<\/h2>/g, match => {
           return (

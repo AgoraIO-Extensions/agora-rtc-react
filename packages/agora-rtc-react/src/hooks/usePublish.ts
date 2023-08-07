@@ -11,11 +11,9 @@ import { useIsConnected } from "./useIsConnected";
 /**
  * This hook lets you publish the local tracks when the component is ready and unpublish them when the component is unmounted.
  *
- * @param `tracks` {(ILocalTrack | null)[]} The list of local tracks.
- * @param `readyToPublish` {boolean} Whether the local tracks are ready to publish. The default value is `true`.
- * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
- * @return isLoading boolean
- * @return error AgoraRTCReactError | null
+ * @param tracks - The list of local tracks.
+ * @param readyToPublish - Whether the local tracks are ready to publish. The default value is `true`.
+ * @param client - Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
  * @example
  * ```jsx
  * import { useLocalMicrophoneTrack, useLocalCameraTrack, usePublish } from "agora-rtc-react";
