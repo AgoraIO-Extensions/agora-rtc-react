@@ -22,3 +22,7 @@ for (const exampleName of fs.readdirSync("examples")) {
     fs.cpSync(examplePath, path.join(docsPath, exampleName), { recursive: true });
   }
 }
+
+// copy typedoc
+const typedocPath = path.join(__dirname, "..", "typedoc");
+fs.cpSync(typedocPath, path.join(docsPath, "api-ref"), { recursive: true });
