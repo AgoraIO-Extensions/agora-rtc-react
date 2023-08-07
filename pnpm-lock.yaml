@@ -141,8 +141,8 @@ importers:
         specifier: ^1.1.110
         version: 1.1.110
       '@iconify-json/mdi':
-        specifier: ^1.1.53
-        version: 1.1.53
+        specifier: ^1.1.54
+        version: 1.1.54
       '@ngneat/falso':
         specifier: ^6.4.0
         version: 6.4.0
@@ -214,8 +214,8 @@ importers:
         version: 1.2.2
     devDependencies:
       '@iconify-json/mdi':
-        specifier: ^1.1.53
-        version: 1.1.53
+        specifier: ^1.1.54
+        version: 1.1.54
       '@types/crypto-js':
         specifier: ^4.1.1
         version: 4.1.1
@@ -3666,8 +3666,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
-  /@iconify-json/mdi@1.1.53:
-    resolution: {integrity: sha512-qG72Tc9Bd4w7fha+kMEySVTbH4Obgb9xA1mQl+WReFhtZ3PjcVpIWLgZGTewuIfZY8RAbd8zfAqhZ7qEYZWrhg==}
+  /@iconify-json/mdi@1.1.54:
+    resolution: {integrity: sha512-3QAsxte90EalbN2e8J30OqSSZz9qN2x+kmykQwsPahoW2dOtSvj+BR9YdiUd9A5XKk2nuU4UH5Gj/cq6WZ6CzQ==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
