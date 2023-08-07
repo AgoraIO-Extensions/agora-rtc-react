@@ -18,15 +18,35 @@ function isNotTargetFile(filePath: string) {
   );
 }
 
+function getElementsBetween(start: HTMLElement | null, end: HTMLElement) {
+  const elementsBetween: Element[] = [];
+  let nextElement = start && start.nextElementSibling;
+
+  while (nextElement && nextElement !== end) {
+    elementsBetween.push(nextElement);
+    nextElement = nextElement.nextElementSibling;
+  }
+  return elementsBetween;
+}
+
 async function writeComment(markdownPath: string) {
   const markdown = fs.readFileSync(markdownPath, "utf-8");
   const result = md.render(markdown, "utf-8");
   const dom: Document = new jsdom.JSDOM(result).window.document;
 
   const target = dom.querySelector("h2")?.innerHTML.replace(/<code>(.*?)<\/code>/g, "$1");
-  const targetDescription = dom
-    .querySelectorAll("p")[0]
-    ?.innerHTML.replace(/<code>(.*?)<\/code>/g, "$1");
+  const targetDescriptionDOMList = getElementsBetween(
+    dom.querySelector("h2"),
+    dom.querySelectorAll("h4")[0],
+  );
+
+  let targetDescription = "";
+  for (let i = 0; i < targetDescriptionDOMList.length; i++) {
+    targetDescription =
+      targetDescription +
+      targetDescriptionDOMList[i]?.textContent?.trim().replace(/\n/g, `\n * `) +
+      "\n * ";
+  }
   const targetRequireParameterList = tableToJson(dom.querySelectorAll("table")[0]);
   const targetRequireParameterInsertList: string[] = [];
   for (const row of targetRequireParameterList) {
@@ -35,26 +55,12 @@ async function writeComment(markdownPath: string) {
       if ((i == 0 || i == 3) && row[i]?.textContent) {
         const replacedStr = row[i].innerHTML
           .replace(/<a href="(.*)">(.*)<\/a>/, "[$2]($1)")
-          .replace(/<code>(.*?)<\/code>/g, "`$1`");
-        targetRequireParameterContent = targetRequireParameterContent + " " + replacedStr;
-      }
-      if (i == 1 && row[i]?.textContent) {
-        targetRequireParameterContent =
-          targetRequireParameterContent + " " + "{" + row[i].textContent + "}";
+          .replace(/<code>(.*?)<\/code>/g, i === 0 ? "$1" : "`$1`");
+        const suffix = i === 0 ? " -" : "";
+        targetRequireParameterContent = targetRequireParameterContent + " " + replacedStr + suffix;
       }
     }
     targetRequireParameterInsertList.push(targetRequireParameterContent);
-  }
-  const targetReturnParameterList = tableToJson(dom.querySelectorAll("table")[1]);
-  const targetReturnParameterInsertList: string[] = [];
-  for (const row of targetReturnParameterList) {
-    let targetReturnParameterContent = " * @return";
-    for (let i = 0; i < row.length; i++) {
-      if ((i == 0 || i == 1) && row[i]?.textContent) {
-        targetReturnParameterContent = targetReturnParameterContent + " " + row[i].textContent;
-      }
-    }
-    targetReturnParameterInsertList.push(targetReturnParameterContent);
   }
 
   const targetDemoCode = dom.querySelectorAll("pre")[0].textContent;
@@ -67,14 +73,9 @@ async function writeComment(markdownPath: string) {
       let comment = `
 /**
  * ${targetDescription}
- *
 `;
       if (targetRequireParameterInsertList.length > 0) {
         comment = comment.concat(targetRequireParameterInsertList.join("\n"));
-      }
-      if (targetReturnParameterInsertList.length > 0) {
-        comment = comment.concat(`\n`);
-        comment = comment.concat(targetReturnParameterInsertList.join("\n"));
       }
       comment = comment.concat(`\n * @example\n`);
       if (targetDemoCode) {

@@ -1,0 +1,7 @@
+{
+  "out": "../../typedoc",
+  "name": "Video SDK for React",
+  "includeVersion": true,
+  "hideGenerator": true,
+  "githubPages": false
+}

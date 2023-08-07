@@ -8,8 +8,7 @@ import { joinDisposers, timeout } from "../misc/utils";
 /**
  * Returns the detailed connection state of the SDK.
  *
- * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
- * @return ConnectionState The connection state between the SDK and Agora's edge server. See ConnectionState for details.
+ * @param client - Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
  * @example
  * ```jsx
  * import { useConnectionState } from "agora-rtc-react";

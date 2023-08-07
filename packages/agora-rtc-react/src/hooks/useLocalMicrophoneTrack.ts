@@ -14,13 +14,12 @@ import { useIsConnected } from "./useIsConnected";
 
 /**
  * This hook lets you create a local microphone audio track.
+ * This hook can only create the audio track once before the component is destroyed.
+ * After the component is unmounted, the audio track created by this hook stops publishing.
  *
- * @param `ready` {boolean} Whether it is ready to create the track. The default value is `true`.
- * @param `audioTrackConfig` {MicrophoneAudioTrackInitConfig} Configurations for initializing the microphone audio track. The default is `{ ANS: true, AEC: true }`. See [`MicrophoneAudioTrackInitConfig`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/microphoneaudiotrackinitconfig.html) for details.
- * @param `client` {IAgoraRTCClient | null} Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
- * @return localMicrophoneTrack IMicrophoneAudioTrack | null
- * @return isLoading boolean
- * @return error AgoraRTCReactError | null
+ * @param ready - Whether it is ready to create the track. The default value is `true`.
+ * @param audioTrackConfig - Configurations for initializing the microphone audio track. The default is `{ ANS: true, AEC: true }`. See [`MicrophoneAudioTrackInitConfig`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/microphoneaudiotrackinitconfig.html) for details.
+ * @param client - Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
  * @example
  * ```jsx
  * import { useLocalMicrophoneTrack } from "agora-rtc-react";
