@@ -1,6 +1,6 @@
 {
   "name": "agora-rtc-react",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-beta.0",
   "private": false,
   "description": "Agora RTC React SDK",
   "license": "MIT",

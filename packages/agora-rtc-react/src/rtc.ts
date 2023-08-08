@@ -14,4 +14,4 @@ class AgoraRTCReact implements IAgoraRTCReact {
 
 new AgoraRTCReact();
 
-export const VERSION = "2.0.0-alpha.1";
+export const VERSION = "2.0.0-beta.0";
