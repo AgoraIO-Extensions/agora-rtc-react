@@ -1,5 +1,15 @@
 # agora-rtc-react
 
+# [2.0.0-beta.0](https://github.com/AgoraIO-Extensions/agora-rtc-react/compare/v2.0.0-alpha.1...v2.0.0-beta.0) (2023-08-08)
+
+### Bug Fixes
+
+- typedoc parameters issue ([#127](https://github.com/AgoraIO-Extensions/agora-rtc-react/issues/127)) ([32dcedc](https://github.com/AgoraIO-Extensions/agora-rtc-react/commit/32dcedcfbd0889a4bb9bbfb6cb79e43e0b7d9d3d))
+
+### Features
+
+- publish typedoc to github-pages ([#128](https://github.com/AgoraIO-Extensions/agora-rtc-react/issues/128)) ([108d807](https://github.com/AgoraIO-Extensions/agora-rtc-react/commit/108d807da33ff80f395957ebe6cb4eebc56c1fff))
+
 # [2.0.0-alpha.1](https://github.com/AgoraIO-Extensions/agora-rtc-react/compare/v2.0.0-alpha.0...v2.0.0-alpha.1) (2023-08-04)
 
 ### Bug Fixes
