@@ -27,7 +27,7 @@ importers:
         version: 7.0.0(release-it@16.1.3)
       '@testing-library/jest-dom':
         specifier: ^6.0.0
-        version: 6.0.0
+        version: 6.0.0(@types/jest@29.5.3)(vitest@0.34.1)
       '@types/minimist':
         specifier: ^1.2.2
         version: 1.2.2
@@ -286,8 +286,8 @@ importers:
         specifier: ^18.2.7
         version: 18.2.7
       '@types/testing-library__jest-dom':
-        specifier: ^5.14.8
-        version: 5.14.8
+        specifier: ^6.0.0
+        version: 6.0.0(@types/jest@29.5.3)(vitest@0.34.1)
       '@vitejs/plugin-react':
         specifier: ^4.0.3
         version: 4.0.3(vite@4.4.2)
@@ -382,8 +382,8 @@ importers:
         specifier: ^18.2.7
         version: 18.2.7
       '@types/testing-library__jest-dom':
-        specifier: ^5.14.8
-        version: 5.14.8
+        specifier: ^6.0.0
+        version: 6.0.0(@types/jest@29.5.3)(vitest@0.34.1)
       '@vitejs/plugin-react':
         specifier: ^4.0.3
         version: 4.0.3(vite@4.4.2)
@@ -5075,7 +5075,7 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
-  /@testing-library/jest-dom@6.0.0:
+  /@testing-library/jest-dom@6.0.0(@types/jest@29.5.3)(vitest@0.34.1):
     resolution: {integrity: sha512-Ye2R3+/oM27jir8CzYPmuWdavTaKwNZcu0d22L9pO/vnOYE0wmrtpw79TQJa8H6gV8/i7yd+pLaqeLlA0rTMfg==}
     engines: {node: '>=14', npm: '>=6', yarn: '>=1'}
     peerDependencies:
@@ -5095,12 +5095,14 @@ packages:
     dependencies:
       '@adobe/css-tools': 4.2.0
       '@babel/runtime': 7.22.6
+      '@types/jest': 29.5.3
       aria-query: 5.3.0
       chalk: 3.0.0
       css.escape: 1.5.1
       dom-accessibility-api: 0.5.16
       lodash: 4.17.21
       redent: 3.0.0
+      vitest: 0.34.1(@vitest/ui@0.34.1)(jsdom@22.1.0)
     dev: true
 
   /@testing-library/react@14.0.0(react-dom@18.2.0)(react@18.2.0):
@@ -5440,10 +5442,16 @@ packages:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
     dev: true
 
-  /@types/testing-library__jest-dom@5.14.8:
-    resolution: {integrity: sha512-NRfJE9Cgpmu4fx716q9SYmU4jxxhYRU1BQo239Txt/9N3EC745XZX1Yl7h/SBIDlo1ANVOCRB4YDXjaQdoKCHQ==}
+  /@types/testing-library__jest-dom@6.0.0(@types/jest@29.5.3)(vitest@0.34.1):
+    resolution: {integrity: sha512-bnreXCgus6IIadyHNlN/oI5FfX4dWgvGhOPvpr7zzCYDGAPIfvyIoAozMBINmhmsVuqV0cncejF2y5KC7ScqOg==}
+    deprecated: This is a stub types definition. @testing-library/jest-dom provides its own type definitions, so you do not need this installed.
     dependencies:
-      '@types/jest': 29.5.3
+      '@testing-library/jest-dom': 6.0.0(@types/jest@29.5.3)(vitest@0.34.1)
+    transitivePeerDependencies:
+      - '@jest/globals'
+      - '@types/jest'
+      - jest
+      - vitest
     dev: true
 
   /@types/unist@2.0.6:
