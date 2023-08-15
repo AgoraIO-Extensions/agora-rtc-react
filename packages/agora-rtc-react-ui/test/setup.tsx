@@ -1,5 +1,4 @@
 import "@testing-library/jest-dom";
-import "@testing-library/jest-dom/extend-expect";
 import matchers from "@testing-library/jest-dom/matchers";
 import type { ReactNode } from "react";
 import { expect, vi } from "vitest";
