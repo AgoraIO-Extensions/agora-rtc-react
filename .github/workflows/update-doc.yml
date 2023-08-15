@@ -46,11 +46,11 @@ jobs:
             echo "CREATE_PR=1" >> "$GITHUB_ENV"
           fi
           cp ../remote-repo/docs-api-reference/rtc/react-sdk/hooks.react.mdx packages/agora-rtc-react/docs/hooks.mdx
-          cp ../remote-repo/docs-api-reference/rtc/react-sdk/hooks-en.react.mdx packages/agora-rtc-react/docs/hooks-en.mdx
+          cp ../remote-repo/docs-api-reference/rtc/react-sdk/_hooks-en.react.mdx packages/agora-rtc-react/docs/hooks-en.mdx
           cp ../remote-repo/docs-api-reference/rtc/react-sdk/components.react.mdx packages/agora-rtc-react/docs/components.mdx
-          cp ../remote-repo/docs-api-reference/rtc/react-sdk/components-en.react.mdx packages/agora-rtc-react/docs/components-en.mdx
+          cp ../remote-repo/docs-api-reference/rtc/react-sdk/_components-en.react.mdx packages/agora-rtc-react/docs/components-en.mdx
           cp ../remote-repo/docs-api-reference/rtc/react-sdk/data-types.react.mdx packages/agora-rtc-react/docs/data-types.mdx
-          cp ../remote-repo/docs-api-reference/rtc/react-sdk/data-types-en.react.mdx packages/agora-rtc-react/docs/data-types-en.mdx
+          cp ../remote-repo/docs-api-reference/rtc/react-sdk/_data-types-en.react.mdx packages/agora-rtc-react/docs/data-types-en.mdx
           rm -rf ../remote-repo
 
           pnpm install
