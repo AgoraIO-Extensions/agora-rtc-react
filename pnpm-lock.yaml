@@ -292,8 +292,8 @@ importers:
         specifier: ^4.0.3
         version: 4.0.3(vite@4.4.2)
       '@vitest/coverage-v8':
-        specifier: ^0.34.1
-        version: 0.34.1(vitest@0.34.1)
+        specifier: ^0.34.2
+        version: 0.34.2(vitest@0.34.1)
       '@vitest/ui':
         specifier: ^0.34.1
         version: 0.34.1(vitest@0.34.1)
@@ -388,8 +388,8 @@ importers:
         specifier: ^4.0.3
         version: 4.0.3(vite@4.4.2)
       '@vitest/coverage-v8':
-        specifier: ^0.34.1
-        version: 0.34.1(vitest@0.34.1)
+        specifier: ^0.34.2
+        version: 0.34.2(vitest@0.34.1)
       agora-rtc-react:
         specifier: workspace:*
         version: link:../agora-rtc-react
@@ -5816,8 +5816,8 @@ packages:
       - supports-color
     dev: true
 
-  /@vitest/coverage-v8@0.34.1(vitest@0.34.1):
-    resolution: {integrity: sha512-lRgUwjTMr8idXEbUPSNH4jjRZJXJCVY3BqUa+LDXyJVe3pldxYMn/r0HMqatKUGTp0Kyf1j5LfFoY6kRqRp7jw==}
+  /@vitest/coverage-v8@0.34.2(vitest@0.34.1):
+    resolution: {integrity: sha512-3VuDZPeGGd1zWtc0Tdj9cHSbFc8IQ0ffnWp9MlhItOkziN6HEf219meZ9cZheg/hJXrXb+Fi2bMu7GeCAfL4yA==}
     peerDependencies:
       vitest: '>=0.32.0 <1'
     dependencies:
