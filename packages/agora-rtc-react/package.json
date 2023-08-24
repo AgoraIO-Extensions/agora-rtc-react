@@ -83,7 +83,7 @@
     "storybook": "^7.0.26",
     "tsup": "^7.1.0",
     "typedoc": "^0.24.8",
-    "typescript": "^5.1.6",
+    "typescript": "^5.2.2",
     "vite": "^4.4.2",
     "vitest": "^0.34.1"
   },
