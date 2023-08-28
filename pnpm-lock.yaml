@@ -198,8 +198,8 @@ importers:
         specifier: ^6.10.0
         version: 6.10.0
       mobx-react-lite:
-        specifier: ^4.0.3
-        version: 4.0.3(mobx@6.10.0)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^4.0.4
+        version: 4.0.4(mobx@6.10.0)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -10869,8 +10869,8 @@ packages:
       ufo: 1.1.2
     dev: true
 
-  /mobx-react-lite@4.0.3(mobx@6.10.0)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-wEE1oT5zvDdvplG4HnRrFgPwg5GFVVrEtl42Er85k23zeu3om8H8wbDPgdbQP88zAihVsik6xJfw6VnzUl8fQw==}
+  /mobx-react-lite@4.0.4(mobx@6.10.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-68uNYvQC/5Dazs3sIBv+bnpzRwcWde8y4ujHiLizhq8yeQtJ2tlNUGSh4r40gyE5M0utACIofBDsAj2hplcovQ==}
     peerDependencies:
       mobx: ^6.9.0
       react: ^16.8.0 || ^17 || ^18
