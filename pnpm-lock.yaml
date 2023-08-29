@@ -195,11 +195,11 @@ importers:
         specifier: ^4.1.1
         version: 4.1.1
       mobx:
-        specifier: ^6.10.0
-        version: 6.10.0
+        specifier: ^6.10.1
+        version: 6.10.1
       mobx-react-lite:
         specifier: ^4.0.3
-        version: 4.0.3(mobx@6.10.0)(react-dom@18.2.0)(react@18.2.0)
+        version: 4.0.3(mobx@6.10.1)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -10869,7 +10869,7 @@ packages:
       ufo: 1.1.2
     dev: true
 
-  /mobx-react-lite@4.0.3(mobx@6.10.0)(react-dom@18.2.0)(react@18.2.0):
+  /mobx-react-lite@4.0.3(mobx@6.10.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-wEE1oT5zvDdvplG4HnRrFgPwg5GFVVrEtl42Er85k23zeu3om8H8wbDPgdbQP88zAihVsik6xJfw6VnzUl8fQw==}
     peerDependencies:
       mobx: ^6.9.0
@@ -10882,14 +10882,14 @@ packages:
       react-native:
         optional: true
     dependencies:
-      mobx: 6.10.0
+      mobx: 6.10.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
-  /mobx@6.10.0:
-    resolution: {integrity: sha512-WMbVpCMFtolbB8swQ5E2YRrU+Yu8iLozCVx3CdGjbBKlP7dFiCSuiG06uea3JCFN5DnvtAX7+G5Bp82e2xu0ww==}
+  /mobx@6.10.1:
+    resolution: {integrity: sha512-oKibSy1GDJI+KfCKbqgFbxYt7DcpZ6jkq9byTzr9AYDGWOg4snI9Ux21U3hpFqhK4Ouw78CJQomRDbfXo1R6pg==}
     dev: false
 
   /modify-values@1.0.1:
