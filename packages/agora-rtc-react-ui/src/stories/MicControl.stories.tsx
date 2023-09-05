@@ -1,6 +1,6 @@
 import { randNumber } from "@ngneat/falso";
 import type { Meta, StoryObj } from "@storybook/react";
-import { FakeLocalAudioTrack, FakeRemoteAudioTrack } from "fake-agora-rtc";
+import { FakeLocalAudioTrack, FakeRemoteAudioTrack } from "agora-rtc-sdk-ng-fake";
 import { useEffect } from "react";
 
 import type { MicControlProps } from "../components";

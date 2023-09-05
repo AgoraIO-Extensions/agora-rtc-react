@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FakeMicrophoneAudioTrack } from "fake-agora-rtc";
+import { FakeMicrophoneAudioTrack } from "agora-rtc-sdk-ng-fake";
 
 import type { MicrophoneAudioTrackProps } from "../components";
 import { MicrophoneAudioTrack } from "../components";

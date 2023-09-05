@@ -1,6 +1,6 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import AgoraRTC from "agora-rtc-sdk-ng";
-import { FakeMicrophoneAudioTrack, FakeRTCClient } from "fake-agora-rtc";
+import { FakeMicrophoneAudioTrack, FakeRTCClient } from "agora-rtc-sdk-ng-fake";
 import { expect, vi } from "vitest";
 
 import { useLocalMicrophoneTrack } from "../../src/hooks/index";

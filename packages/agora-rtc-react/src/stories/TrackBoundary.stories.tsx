@@ -2,7 +2,7 @@ import { randUuid } from "@ngneat/falso";
 import { action } from "@storybook/addon-actions";
 import type { Meta, StoryObj } from "@storybook/react";
 import type { IAgoraRTCRemoteUser, ITrack } from "agora-rtc-sdk-ng";
-import { FakeRTCClient } from "fake-agora-rtc";
+import { FakeRTCClient } from "agora-rtc-sdk-ng-fake";
 import { useState } from "react";
 
 import { RemoteUser, TrackBoundary } from "../components";

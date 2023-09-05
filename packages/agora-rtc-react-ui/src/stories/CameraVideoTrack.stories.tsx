@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FakeCameraVideoTrack } from "fake-agora-rtc";
+import { FakeCameraVideoTrack } from "agora-rtc-sdk-ng-fake";
 import { useState } from "react";
 
 import type { CameraVideoTrackProps } from "../components";

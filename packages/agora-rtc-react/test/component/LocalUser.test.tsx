@@ -1,6 +1,6 @@
 import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
-import { FakeLocalAudioTrack } from "fake-agora-rtc";
+import { FakeLocalAudioTrack } from "agora-rtc-sdk-ng-fake";
 import { describe, expect, test, vi } from "vitest";
 
 import { LocalUser } from "../../src/components";

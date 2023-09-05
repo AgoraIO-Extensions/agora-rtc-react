@@ -1,6 +1,6 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
-import { FakeRTCClient, dispatchRTCEvent } from "fake-agora-rtc";
+import { FakeRTCClient, dispatchRTCEvent } from "agora-rtc-sdk-ng-fake";
 import { vi } from "vitest";
 
 import * as clientHook from "../../src/hooks/useIsConnected";

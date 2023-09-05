@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 import type { IAgoraRTCClient } from "agora-rtc-sdk-ng";
-import { FakeRTCClient, dispatchRTCEvent } from "fake-agora-rtc";
+import { FakeRTCClient, dispatchRTCEvent } from "agora-rtc-sdk-ng-fake";
 import { expect, vi } from "vitest";
 
 import { useNetworkQuality } from "../../src/hooks/index";

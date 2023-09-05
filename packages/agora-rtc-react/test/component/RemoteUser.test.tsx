@@ -2,7 +2,7 @@ import { randUuid } from "@ngneat/falso";
 import { composeStories } from "@storybook/react";
 import { render, waitFor } from "@testing-library/react";
 import type { IRemoteAudioTrack, IRemoteVideoTrack } from "agora-rtc-sdk-ng";
-import { FakeRTCClient } from "fake-agora-rtc";
+import { FakeRTCClient } from "agora-rtc-sdk-ng-fake";
 import { describe, expect, test, vi } from "vitest";
 
 import { RemoteUser } from "../../src/components";

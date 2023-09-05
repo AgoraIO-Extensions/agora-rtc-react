@@ -1,6 +1,6 @@
 import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
-import { FakeRTCClient } from "fake-agora-rtc";
+import { FakeRTCClient } from "agora-rtc-sdk-ng-fake";
 import { describe, expect, test, vi } from "vitest";
 
 import { RemoteVideoPlayer } from "../src/components";
