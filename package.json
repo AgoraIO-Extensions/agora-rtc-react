@@ -21,7 +21,7 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^17.6.7",
     "@hyrious/esbuild-dev": "^0.10.4",
-    "@release-it/conventional-changelog": "^7.0.0",
+    "@release-it/conventional-changelog": "^7.0.1",
     "@testing-library/jest-dom": "^6.0.0",
     "@types/minimist": "^1.2.2",
     "@types/node": "^20.5.0",
