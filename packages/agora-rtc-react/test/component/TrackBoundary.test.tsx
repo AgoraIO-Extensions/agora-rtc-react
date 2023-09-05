@@ -1,7 +1,7 @@
 import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
 import type { ITrack } from "agora-rtc-sdk-ng";
-import { FakeRTCClient } from "fake-agora-rtc";
+import { FakeRTCClient } from "agora-rtc-sdk-ng-fake";
 import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 

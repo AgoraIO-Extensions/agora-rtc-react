@@ -1,6 +1,6 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import type { ILocalTrack, ILocalVideoTrack } from "agora-rtc-sdk-ng";
-import { FakeRTCClient } from "fake-agora-rtc";
+import { FakeRTCClient } from "agora-rtc-sdk-ng-fake";
 import { expect, vi } from "vitest";
 
 import * as clientHook from "../../src/hooks";

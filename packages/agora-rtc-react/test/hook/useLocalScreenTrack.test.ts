@@ -5,7 +5,7 @@ import {
   FakeLocalAudioTrack,
   FakeLocalVideoTrack,
   FakeRTCClient,
-} from "fake-agora-rtc";
+} from "agora-rtc-sdk-ng-fake";
 import { expect, vi } from "vitest";
 
 import { useLocalScreenTrack } from "../../src/hooks/index";

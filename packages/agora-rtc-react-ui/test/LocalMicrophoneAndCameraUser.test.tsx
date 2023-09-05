@@ -1,7 +1,7 @@
 import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
 import * as clientHook from "agora-rtc-react/src/hooks/tools";
-import { FakeMicrophoneAudioTrack } from "fake-agora-rtc";
+import { FakeMicrophoneAudioTrack } from "agora-rtc-sdk-ng-fake";
 import { describe, expect, test, vi } from "vitest";
 
 import { LocalMicrophoneAndCameraUser } from "../src/components";

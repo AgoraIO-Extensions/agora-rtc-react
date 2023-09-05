@@ -1,6 +1,6 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import AgoraRTC from "agora-rtc-sdk-ng";
-import { FakeCameraVideoTrack, FakeRTCClient } from "fake-agora-rtc";
+import { FakeCameraVideoTrack, FakeRTCClient } from "agora-rtc-sdk-ng-fake";
 import { expect, vi } from "vitest";
 
 import { useLocalCameraTrack } from "../../src/hooks/index";

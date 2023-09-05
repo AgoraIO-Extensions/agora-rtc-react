@@ -3,7 +3,7 @@ import { useArgs } from "@storybook/preview-api";
 import type { Meta, StoryObj } from "@storybook/react";
 import { CameraControl, MicControl } from "agora-rtc-react-ui";
 import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
-import { FakeRTCClient } from "fake-agora-rtc";
+import { FakeRTCClient } from "agora-rtc-sdk-ng-fake";
 import { useCallback, useEffect, useState } from "react";
 
 import type { RemoteUserProps } from "../components";

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FakeLocalAudioTrack } from "fake-agora-rtc";
+import { FakeLocalAudioTrack } from "agora-rtc-sdk-ng-fake";
 
 import type { LocalAudioTrackProps } from "../components";
 import { LocalAudioTrack } from "../components";

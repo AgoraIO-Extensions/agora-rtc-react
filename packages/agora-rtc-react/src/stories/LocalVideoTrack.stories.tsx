@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FakeLocalVideoTrack } from "fake-agora-rtc";
+import { FakeLocalVideoTrack } from "agora-rtc-sdk-ng-fake";
 import { useState } from "react";
 
 import type { LocalVideoTrackProps } from "../components";

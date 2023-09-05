@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import type { IAgoraRTCClient } from "agora-rtc-sdk-ng";
-import { FakeRTCClient } from "fake-agora-rtc";
+import { FakeRTCClient } from "agora-rtc-sdk-ng-fake";
 import { expect } from "vitest";
 
 import { useRTCClient } from "../../src/hooks/index";

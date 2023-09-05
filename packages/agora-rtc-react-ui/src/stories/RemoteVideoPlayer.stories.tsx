@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { AgoraRTCProvider } from "agora-rtc-react/src/hooks";
-import { FakeRTCClient, FakeRemoteVideoTrack } from "fake-agora-rtc";
+import { FakeRTCClient, FakeRemoteVideoTrack } from "agora-rtc-sdk-ng-fake";
 import { useState } from "react";
 
 import type { RemoteVideoPlayerProps } from "../components";
