@@ -75,7 +75,7 @@
     "@vitest/ui": "^0.34.1",
     "agora-rtc-react-ui": "workspace:*",
     "agora-rtc-sdk-ng": "4.18.2",
-    "agora-rtc-sdk-ng-fake": "https://github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/tarball/v1.0.0",
+    "agora-rtc-sdk-ng-fake": "github:AgoraIO-Extensions/agora-rtc-sdk-ng-fake#semver:^1.0.0",
     "jsdom": "^22.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
