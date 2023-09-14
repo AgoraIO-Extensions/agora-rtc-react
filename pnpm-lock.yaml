@@ -304,7 +304,7 @@ importers:
         specifier: 4.18.2
         version: 4.18.2
       agora-rtc-sdk-ng-fake:
-        specifier: git+https://github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake#v1.0.0
+        specifier: https://github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/tarball/v1.0.0
         version: git@github.com+AgoraIO-Extensions/agora-rtc-sdk-ng-fake/47f32309fec61037c83de13f215dc38c4f1d3858
       jsdom:
         specifier: ^22.1.0
@@ -397,7 +397,7 @@ importers:
         specifier: 4.18.2
         version: 4.18.2
       agora-rtc-sdk-ng-fake:
-        specifier: git+https://github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake#v1.0.0
+        specifier: https://github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/tarball/v1.0.0
         version: git@github.com+AgoraIO-Extensions/agora-rtc-sdk-ng-fake/47f32309fec61037c83de13f215dc38c4f1d3858
       jsdom:
         specifier: ^22.1.0
