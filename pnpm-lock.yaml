@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 overrides:
   nodeunit: npm:noop-package@1.0.0
 
@@ -103,8 +107,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/agora-rtc-react-ui
       agora-rtc-sdk-ng:
-        specifier: 4.18.2
-        version: 4.18.2
+        specifier: 4.19.0
+        version: 4.19.0
       antd:
         specifier: ^5.6.4
         version: 5.6.4(react-dom@18.2.0)(react@18.2.0)
@@ -182,8 +186,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/agora-rtc-react-ui
       agora-rtc-sdk-ng:
-        specifier: 4.18.2
-        version: 4.18.2
+        specifier: 4.19.0
+        version: 4.19.0
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
@@ -297,11 +301,11 @@ importers:
         specifier: workspace:*
         version: link:../agora-rtc-react-ui
       agora-rtc-sdk-ng:
-        specifier: 4.18.2
-        version: 4.18.2
+        specifier: 4.19.0
+        version: 4.19.0
       agora-rtc-sdk-ng-fake:
         specifier: github:AgoraIO-Extensions/agora-rtc-sdk-ng-fake#semver:^1.0.0
-        version: github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/47f32309fec61037c83de13f215dc38c4f1d3858
+        version: git@github.com+AgoraIO-Extensions/agora-rtc-sdk-ng-fake/47f32309fec61037c83de13f215dc38c4f1d3858
       jsdom:
         specifier: ^22.1.0
         version: 22.1.0
@@ -390,11 +394,11 @@ importers:
         specifier: workspace:*
         version: link:../agora-rtc-react
       agora-rtc-sdk-ng:
-        specifier: 4.18.2
-        version: 4.18.2
+        specifier: 4.19.0
+        version: 4.19.0
       agora-rtc-sdk-ng-fake:
         specifier: github:AgoraIO-Extensions/agora-rtc-sdk-ng-fake#semver:^1.0.0
-        version: github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/47f32309fec61037c83de13f215dc38c4f1d3858
+        version: git@github.com+AgoraIO-Extensions/agora-rtc-sdk-ng-fake/47f32309fec61037c83de13f215dc38c4f1d3858
       jsdom:
         specifier: ^22.1.0
         version: 22.1.0
@@ -433,6 +437,34 @@ packages:
   /@adobe/css-tools@4.2.0:
     resolution: {integrity: sha512-E09FiIft46CmH5Qnjb0wsW54/YQd69LsxeKUOWawmws1XWvyFGURnAChH0mlr7YPFR1ofwvUQfcL0J3lMxXqPA==}
     dev: true
+
+  /@agora-js/media@4.19.0:
+    resolution: {integrity: sha512-P4IaDTb97ty1jEa1VV5bFem3iI54wxtgOYbkOMDdwGBP83/ZsLROTMNMjBt3bqoimu6eSoxppRSOFrAnrPdk+Q==}
+    dependencies:
+      '@agora-js/report': 4.19.0
+      '@agora-js/shared': 4.19.0
+      agora-rte-extension: 1.2.3
+      axios: 0.27.2
+      pako: 2.1.0
+      webrtc-adapter: 8.2.0
+    transitivePeerDependencies:
+      - debug
+
+  /@agora-js/report@4.19.0:
+    resolution: {integrity: sha512-pLn1J2R7fcToxizN1EE1OrJtgUIrSf+XIaHmLVvoST2L0GvtUFzc2GxyQU29wVdz8SiK88nfgPuKRXuD4nk9EA==}
+    dependencies:
+      '@agora-js/shared': 4.19.0
+      axios: 0.27.2
+    transitivePeerDependencies:
+      - debug
+
+  /@agora-js/shared@4.19.0:
+    resolution: {integrity: sha512-yhbPnrNzI1sgaKztaZ1r5bHn7G7dKzTtp2gCzSORXZdOCPhZrewsdKZEGhFTuFJwrEs1QvXsgo7u5sXGECF5wQ==}
+    dependencies:
+      axios: 0.27.2
+      ua-parser-js: 0.7.36
+    transitivePeerDependencies:
+      - debug
 
   /@ampproject/remapping@2.2.1:
     resolution: {integrity: sha512-lFMjJTrFL3j7L9yBxwYfCq2k6qqwHyzuUl/XBnif78PWTJYyL/dfowQHWE3sp6U6ZzqWiiIZnpTMO96zhkjwtg==}
@@ -6101,10 +6133,19 @@ packages:
       indent-string: 4.0.0
     dev: true
 
-  /agora-rtc-sdk-ng@4.18.2:
-    resolution: {integrity: sha512-tvyuXHVL15Eo0lK3wwM3rGPKGPeGYuarAwCs5oyveht1HZO9z3w6vra3d/q3eOCYpvQscCW7P0QNfUIAQTs4RQ==}
+  /agora-rtc-sdk-ng@4.19.0:
+    resolution: {integrity: sha512-uVljhNooPWnJQGOvGWLPtjHuTET15pLz1lEPA1NFNoe94/yl6Ib5Ayl253+Y0gSzQwrQswRuRIITNNec/eXpSw==}
     dependencies:
+      '@agora-js/media': 4.19.0
+      '@agora-js/report': 4.19.0
+      '@agora-js/shared': 4.19.0
       agora-rte-extension: 1.2.3
+      axios: 0.27.2
+      formdata-polyfill: 4.0.10
+      ua-parser-js: 0.7.36
+      webrtc-adapter: 8.2.0
+    transitivePeerDependencies:
+      - debug
 
   /agora-rte-extension@1.2.3:
     resolution: {integrity: sha512-k3yNrYVyzJRoQJjaJUktKUI1XRtf8J1XsW8OzYKFqGlS8WQRMsES1+Phj2rfuEriiLObfuyuCimG6KHQCt5tiw==}
@@ -6458,12 +6499,19 @@ packages:
 
   /asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
-    dev: true
 
   /available-typed-arrays@1.0.5:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
     engines: {node: '>= 0.4'}
     dev: true
+
+  /axios@0.27.2:
+    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
+    dependencies:
+      follow-redirects: 1.15.3
+      form-data: 4.0.0
+    transitivePeerDependencies:
+      - debug
 
   /babel-core@7.0.0-bridge.0(@babel/core@7.22.8):
     resolution: {integrity: sha512-poPX9mZH/5CSanm50Q+1toVci6pv5KSRv/5TWCwtzQS5XEwn40BcCrgIeMFWP9CKKIniKXNxoIOnOq4VVlGXhg==}
@@ -7045,7 +7093,6 @@ packages:
     engines: {node: '>= 0.8'}
     dependencies:
       delayed-stream: 1.0.0
-    dev: true
 
   /commander@11.0.0:
     resolution: {integrity: sha512-9HMlXtt/BNoYr8ooyjjNRdIilOTkVJXB+GhxMTtOKwk0R4j4lS4NpjuqmRxroBfnfTSHQIHQB7wryHhXarNjmQ==}
@@ -7689,7 +7736,6 @@ packages:
   /delayed-stream@1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
     engines: {node: '>=0.4.0'}
-    dev: true
 
   /delegates@1.0.0:
     resolution: {integrity: sha512-bd2L678uiWATM6m5Z1VzNCErI3jiGzt6HGY8OVICs40JQq/HALfbyNJmp0UDakEY4pMMaN0Ly5om/B1VI/+xfQ==}
@@ -8563,7 +8609,6 @@ packages:
     dependencies:
       node-domexception: 1.0.0
       web-streams-polyfill: 3.2.1
-    dev: true
 
   /fetch-retry@5.0.6:
     resolution: {integrity: sha512-3yurQZ2hD9VISAhJJP9bpYFNQrHHBXE2JxxjY5aLEcDi46RmAzJE2OC9FAde0yis5ElW0jTTzs0zfg/Cca4XqQ==}
@@ -8693,6 +8738,15 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
+  /follow-redirects@1.15.3:
+    resolution: {integrity: sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+
   /for-each@0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
     dependencies:
@@ -8728,14 +8782,12 @@ packages:
       asynckit: 0.4.0
       combined-stream: 1.0.8
       mime-types: 2.1.35
-    dev: true
 
   /formdata-polyfill@4.0.10:
     resolution: {integrity: sha512-buewHzMvYL29jdeQTVILecSaZKnt/RJWjoZCF5OW60Z67/GmSLBkOFM7qh1PI3zFNtJbaZL5eQu1vLfazOwj4g==}
     engines: {node: '>=12.20.0'}
     dependencies:
       fetch-blob: 3.2.0
-    dev: true
 
   /forwarded@0.2.0:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
@@ -10724,14 +10776,12 @@ packages:
   /mime-db@1.52.0:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
     engines: {node: '>= 0.6'}
-    dev: true
 
   /mime-types@2.1.35:
     resolution: {integrity: sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==}
     engines: {node: '>= 0.6'}
     dependencies:
       mime-db: 1.52.0
-    dev: true
 
   /mime@1.6.0:
     resolution: {integrity: sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==}
@@ -10956,7 +11006,6 @@ packages:
   /node-domexception@1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
     engines: {node: '>=10.5.0'}
-    dev: true
 
   /node-fetch-native@1.2.0:
     resolution: {integrity: sha512-5IAMBTl9p6PaAjYCnMv5FmqIF6GcZnawAVnzaCG0rX2aYZJ4CxEkZNtVPuTRug7fL7wyM5BQYTlAzcyMPi6oTQ==}
@@ -11348,6 +11397,9 @@ packages:
   /pako@0.2.9:
     resolution: {integrity: sha512-NUcwaKxUxWrZLpDG+z/xZaCgQITkA/Dv4V/T6bw7VON6l1Xz/VnrBqrYjZQ12TamKHzITTfOEIYUj48y2KXImA==}
     dev: true
+
+  /pako@2.1.0:
+    resolution: {integrity: sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==}
 
   /parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
@@ -12963,6 +13015,9 @@ packages:
       compute-scroll-into-view: 3.0.3
     dev: false
 
+  /sdp@3.2.0:
+    resolution: {integrity: sha512-d7wDPgDV3DDiqulJjKiV2865wKsJ34YI+NDREbm+FySq6WuKOikwyNQcm+doLAZ1O6ltdO0SeKle2xMpN3Brgw==}
+
   /seedrandom@3.0.5(patch_hash=hrvea3ysnhtmjgu7pcuhw34beu):
     resolution: {integrity: sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg==}
     patched: true
@@ -13958,6 +14013,9 @@ packages:
     hasBin: true
     dev: true
 
+  /ua-parser-js@0.7.36:
+    resolution: {integrity: sha512-CPPLoCts2p7D8VbybttE3P2ylv0OBZEAy7a12DsulIEcAiMtWJy+PBgMXgWDI80D5UwqE8oQPHYnk13tm38M2Q==}
+
   /uc.micro@1.0.6:
     resolution: {integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==}
     dev: true
@@ -14269,7 +14327,7 @@ packages:
       mlly: 1.4.0
       pathe: 1.1.1
       picocolors: 1.0.0
-      vite: 4.4.2(@types/node@20.5.0)(sass@1.64.0)
+      vite: 4.4.2(@types/node@20.4.1)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -14292,6 +14350,42 @@ packages:
       fs-extra: 10.1.0
       magic-string: 0.25.9
       vite: 4.4.2(@types/node@20.5.0)(sass@1.64.0)
+    dev: true
+
+  /vite@4.4.2(@types/node@20.4.1):
+    resolution: {integrity: sha512-zUcsJN+UvdSyHhYa277UHhiJ3iq4hUBwHavOpsNUGsTgjBeoBlK8eDt+iT09pBq0h9/knhG/SPrZiM7cGmg7NA==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': '>= 14'
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
+      '@types/node': 20.4.1
+      esbuild: 0.18.11
+      postcss: 8.4.25
+      rollup: 3.26.2
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /vite@4.4.2(@types/node@20.5.0)(sass@1.64.0):
@@ -14385,7 +14479,7 @@ packages:
       strip-literal: 1.0.1
       tinybench: 2.5.0
       tinypool: 0.7.0
-      vite: 4.4.2(@types/node@20.5.0)(sass@1.64.0)
+      vite: 4.4.2(@types/node@20.4.1)
       vite-node: 0.34.1(@types/node@20.4.1)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
@@ -14436,7 +14530,6 @@ packages:
   /web-streams-polyfill@3.2.1:
     resolution: {integrity: sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==}
     engines: {node: '>= 8'}
-    dev: true
 
   /webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
@@ -14499,6 +14592,12 @@ packages:
       - esbuild
       - uglify-js
     dev: true
+
+  /webrtc-adapter@8.2.0:
+    resolution: {integrity: sha512-umxCMgedPAVq4Pe/jl3xmelLXLn4XZWFEMR5Iipb5wJ+k1xMX0yC4ZY9CueZUU1MjapFxai1tFGE7R/kotH6Ww==}
+    engines: {node: '>=6.0.0', npm: '>=3.10.0'}
+    dependencies:
+      sdp: 3.2.0
 
   /whatwg-encoding@2.0.0:
     resolution: {integrity: sha512-p41ogyeMUrw3jWclHWTQg1k05DSVXPLcVxRTYsXUk+ZooOCZLcoYgPZ/HL/D/N+uQPOtcp1me1WhBEaX02mhWg==}
@@ -14810,14 +14909,10 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
-  github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/47f32309fec61037c83de13f215dc38c4f1d3858:
-    resolution: {tarball: https://codeload.github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/tar.gz/47f32309fec61037c83de13f215dc38c4f1d3858}
+  git@github.com+AgoraIO-Extensions/agora-rtc-sdk-ng-fake/47f32309fec61037c83de13f215dc38c4f1d3858:
+    resolution: {commit: 47f32309fec61037c83de13f215dc38c4f1d3858, repo: git@github.com:AgoraIO-Extensions/agora-rtc-sdk-ng-fake.git, type: git}
     name: agora-rtc-sdk-ng-fake
     version: 1.0.0
     prepare: true
     requiresBuild: true
     dev: true
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

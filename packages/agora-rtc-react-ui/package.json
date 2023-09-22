@@ -70,7 +70,7 @@
     "@vitejs/plugin-react": "^4.0.3",
     "@vitest/coverage-v8": "^0.34.1",
     "agora-rtc-react": "workspace:*",
-    "agora-rtc-sdk-ng": "4.18.2",
+    "agora-rtc-sdk-ng": "4.19.0",
     "agora-rtc-sdk-ng-fake": "github:AgoraIO-Extensions/agora-rtc-sdk-ng-fake#semver:^1.0.0",
     "jsdom": "^22.1.0",
     "react": "^18.2.0",
