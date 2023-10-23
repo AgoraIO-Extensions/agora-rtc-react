@@ -1,4 +1,9 @@
-import type { IAgoraRTCClient, IAgoraRTCError, ICameraVideoTrack } from "agora-rtc-sdk-ng";
+import type {
+  CameraVideoTrackInitConfig,
+  IAgoraRTCClient,
+  IAgoraRTCError,
+  ICameraVideoTrack,
+} from "agora-rtc-sdk-ng";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { useState } from "react";
 
@@ -13,6 +18,7 @@ import { useIsConnected } from "./useIsConnected";
  * After the component is unmounted, the video track created by this hook stops publishing.
  *
  * @param ready - Whether it is ready to create the track. The default value is `true`.
+ * @param cameraVideoTrackConfig - Configurations for initializing the camera video track. See [`CameraVideoTrackInitConfig`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/cameravideotrackinitconfig.html) for details.
  * @param client - Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
  * @example
  * ```jsx
@@ -27,6 +33,7 @@ import { useIsConnected } from "./useIsConnected";
  */
 export function useLocalCameraTrack(
   ready = true,
+  cameraVideoTrackConfig?: CameraVideoTrackInitConfig,
   client?: IAgoraRTCClient,
 ): {
   localCameraTrack: ICameraVideoTrack | null;
@@ -50,7 +57,7 @@ export function useLocalCameraTrack(
         if (!isUnmountRef.current) {
           setIsLoading(true);
         }
-        const result = await AgoraRTC.createCameraVideoTrack();
+        const result = await AgoraRTC.createCameraVideoTrack(cameraVideoTrackConfig);
         if (!isUnmountRef.current) {
           setTrack(result);
         }

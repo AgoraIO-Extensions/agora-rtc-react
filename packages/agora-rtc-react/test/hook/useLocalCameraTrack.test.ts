@@ -13,7 +13,7 @@ describe("useLocalCameraTrack", () => {
     const client = FakeRTCClient.create();
     const spy = vi.spyOn(clientHook, "useIsConnected");
     spy.mockReturnValue(true);
-    const { result } = renderHook(() => useLocalCameraTrack(false, client), {
+    const { result } = renderHook(() => useLocalCameraTrack(false), {
       wrapper: createWrapper(client),
     });
     waitFor(() => {
@@ -32,7 +32,7 @@ describe("useLocalCameraTrack", () => {
     vi.spyOn(AgoraRTC, "createCameraVideoTrack").mockReturnValue(
       Promise.resolve(FakeCameraVideoTrack.create()),
     );
-    const { result } = renderHook(() => useLocalCameraTrack(true, client), {
+    const { result } = renderHook(() => useLocalCameraTrack(true), {
       wrapper: createWrapper(client),
     });
     await waitFor(() => {
@@ -52,7 +52,7 @@ describe("useLocalCameraTrack", () => {
     vi.spyOn(AgoraRTC, "createCameraVideoTrack").mockReturnValue(
       Promise.resolve(FakeCameraVideoTrack.create()),
     );
-    const { result, rerender } = renderHook(() => useLocalCameraTrack(true, client), {
+    const { result, rerender } = renderHook(() => useLocalCameraTrack(true), {
       wrapper: createWrapper(client),
     });
 
@@ -77,7 +77,7 @@ describe("useLocalCameraTrack", () => {
       .mockRejectedValue(new Error(errorMessage));
     const spy3 = vi.spyOn(console, "error");
 
-    const { result } = renderHook(() => useLocalCameraTrack(true, client), {
+    const { result } = renderHook(() => useLocalCameraTrack(true), {
       wrapper: createWrapper(client),
     });
 
