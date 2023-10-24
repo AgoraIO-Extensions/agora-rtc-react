@@ -7,7 +7,7 @@ import ReactDOM from "react-dom/client";
 import { HashRouter as Router } from "react-router-dom";
 
 import App from "./src/App";
-AgoraRTC.setLogLevel(/* warning */ 2);
+AgoraRTC.setLogLevel(/* DEBUG */ 0);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <StrictMode>
