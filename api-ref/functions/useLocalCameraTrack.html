@@ -17,7 +17,7 @@
 <h1>Function useLocalCameraTrack</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="useLocalCameraTrack"><span class="tsd-kind-call-signature">use<wbr/>Local<wbr/>Camera<wbr/>Track</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">ready</span><span class="tsd-signature-symbol">?</span>, <span class="tsd-kind-parameter">client</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">error</span><span class="tsd-signature-symbol">: </span><a href="../classes/AgoraRTCReactError.html" class="tsd-signature-type tsd-kind-class">AgoraRTCReactError</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">isLoading</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">localCameraTrack</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">ICameraVideoTrack</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><a href="#useLocalCameraTrack" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><g stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" id="icon-anchor"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></g></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="useLocalCameraTrack"><span class="tsd-kind-call-signature">use<wbr/>Local<wbr/>Camera<wbr/>Track</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">ready</span><span class="tsd-signature-symbol">?</span>, <span class="tsd-kind-parameter">cameraVideoTrackConfig</span><span class="tsd-signature-symbol">?</span>, <span class="tsd-kind-parameter">client</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">error</span><span class="tsd-signature-symbol">: </span><a href="../classes/AgoraRTCReactError.html" class="tsd-signature-type tsd-kind-class">AgoraRTCReactError</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">isLoading</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">localCameraTrack</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">ICameraVideoTrack</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><a href="#useLocalCameraTrack" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><g stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" id="icon-anchor"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></g></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>This hook lets you create a local camera video track.
 This hook can only create the video track once before the component is destroyed.
@@ -29,6 +29,11 @@ After the component is unmounted, the video track created by this hook stops pub
 <li>
 <h5><span class="tsd-kind-parameter">ready</span>: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5>
 <div class="tsd-comment tsd-typography"><p>Whether it is ready to create the track. The default value is <code>true</code>.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">cameraVideoTrackConfig</span>: <span class="tsd-signature-type ">CameraVideoTrackInitConfig</span></h5>
+<div class="tsd-comment tsd-typography"><p>Configurations for initializing the camera video track. See <a href="https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/cameravideotrackinitconfig.html"><code>CameraVideoTrackInitConfig</code></a> for details.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li>
 <li>
@@ -49,7 +54,7 @@ After the component is unmounted, the video track created by this hook stops pub
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-rtc-react/blob/3c9de73/packages/agora-rtc-react/src/hooks/useLocalCameraTrack.ts#L28">packages/agora-rtc-react/src/hooks/useLocalCameraTrack.ts:28</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/AgoraIO-Extensions/agora-rtc-react/blob/a583aeb/packages/agora-rtc-react/src/hooks/useLocalCameraTrack.ts#L34">packages/agora-rtc-react/src/hooks/useLocalCameraTrack.ts:34</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
