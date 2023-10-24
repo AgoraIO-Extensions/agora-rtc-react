@@ -73,9 +73,6 @@ export function useLocalMicrophoneTrack(
         setIsLoading(false);
       }
     }
-    if (!isConnected && !isUnmountRef.current) {
-      setTrack(null);
-    }
   }, [isConnected, ready]);
   return { localMicrophoneTrack: track, isLoading: isLoading, error: error };
 }

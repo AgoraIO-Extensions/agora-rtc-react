@@ -300,8 +300,8 @@ importers:
         specifier: 4.18.2
         version: 4.18.2
       agora-rtc-sdk-ng-fake:
-        specifier: github:AgoraIO-Extensions/agora-rtc-sdk-ng-fake#semver:^1.0.0
-        version: github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/47f32309fec61037c83de13f215dc38c4f1d3858
+        specifier: github:AgoraIO-Extensions/agora-rtc-sdk-ng-fake#semver:^1.0.4
+        version: github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/0a75c0c8fe4748e6063e188dbeee5ead2e698735
       jsdom:
         specifier: ^22.1.0
         version: 22.1.0
@@ -393,8 +393,8 @@ importers:
         specifier: 4.18.2
         version: 4.18.2
       agora-rtc-sdk-ng-fake:
-        specifier: github:AgoraIO-Extensions/agora-rtc-sdk-ng-fake#semver:^1.0.0
-        version: github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/47f32309fec61037c83de13f215dc38c4f1d3858
+        specifier: github:AgoraIO-Extensions/agora-rtc-sdk-ng-fake#semver:^1.0.4
+        version: github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/0a75c0c8fe4748e6063e188dbeee5ead2e698735
       jsdom:
         specifier: ^22.1.0
         version: 22.1.0
@@ -14810,10 +14810,10 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
-  github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/47f32309fec61037c83de13f215dc38c4f1d3858:
-    resolution: {tarball: https://codeload.github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/tar.gz/47f32309fec61037c83de13f215dc38c4f1d3858}
-    name: agora-rtc-sdk-ng-fake
-    version: 1.0.0
+  github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/0a75c0c8fe4748e6063e188dbeee5ead2e698735:
+    resolution: {tarball: https://codeload.github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/tar.gz/0a75c0c8fe4748e6063e188dbeee5ead2e698735}
+    name: '@agoraio-extensions/agora-rtc-sdk-ng-fake'
+    version: 1.0.4
     prepare: true
     requiresBuild: true
     dev: true

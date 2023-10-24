@@ -68,7 +68,7 @@ export function useLocalScreenTrack(
   error: AgoraRTCReactError | null;
 };
 export function useLocalScreenTrack(
-  ready: boolean,
+  ready = true,
   screenVideoTrackInitConfig: ScreenVideoTrackInitConfig,
   withAudio: "enable" | "disable" | "auto",
   client?: IAgoraRTCClient,
@@ -111,7 +111,7 @@ export function useLocalScreenTrack(
         setIsLoading(false);
       }
     }
-    if ((!isConnected || !ready) && !isUnmountRef.current) {
+    if (!ready && !isUnmountRef.current) {
       setTrack(null);
     }
   }, [isConnected, ready]);
