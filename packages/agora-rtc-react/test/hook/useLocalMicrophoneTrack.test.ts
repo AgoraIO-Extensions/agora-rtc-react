@@ -25,7 +25,7 @@ describe("useLocalMicrophoneTrack", () => {
     vi.resetAllMocks();
   });
 
-  test("should return ICameraVideoTrack when ready is true", async () => {
+  test("should return IMicrophoneAudioTrack when ready is true", async () => {
     const client = FakeRTCClient.create();
     const spy = vi.spyOn(clientHook, "useIsConnected");
     spy.mockReturnValue(true);
