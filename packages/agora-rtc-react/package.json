@@ -50,11 +50,11 @@
     "typedoc": "typedoc src"
   },
   "peerDependencies": {
-    "agora-rtc-sdk-ng": ">=4.19.2",
     "react": ">=16.8"
   },
   "main": "src/index.ts",
   "devDependencies": {
+    "agora-rtc-sdk-ng": "^4.19.2",
     "agora-rtc-react-ui": "workspace:*"
   },
   "release-it": {

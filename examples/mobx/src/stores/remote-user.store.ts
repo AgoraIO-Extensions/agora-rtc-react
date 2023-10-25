@@ -3,7 +3,7 @@ import type {
   IRemoteAudioTrack,
   IRemoteVideoTrack,
   UID,
-} from "agora-rtc-sdk-ng";
+} from "agora-rtc-react";
 import { makeAutoObservable } from "mobx";
 
 import { fakeAvatar, fakeName } from "../utils";

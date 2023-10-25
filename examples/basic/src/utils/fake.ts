@@ -1,5 +1,5 @@
 import { randFirstName, seed } from "@ngneat/falso";
-import type { UID } from "agora-rtc-sdk-ng";
+import type { UID } from "agora-rtc-react";
 
 import { appConfig } from "./const";
 

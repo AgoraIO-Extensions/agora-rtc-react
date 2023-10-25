@@ -1,3 +1,4 @@
+import type { ILocalAudioTrack, ILocalTrack, ILocalVideoTrack } from "agora-rtc-react";
 import {
   LocalVideoTrack,
   useJoin,
@@ -5,7 +6,6 @@ import {
   usePublish,
   useTrackEvent,
 } from "agora-rtc-react";
-import type { ILocalAudioTrack, ILocalTrack, ILocalVideoTrack } from "agora-rtc-sdk-ng";
 import { Button, Typography } from "antd";
 import { useEffect, useState } from "react";
 

@@ -1,5 +1,5 @@
+import type { ICameraVideoTrack, IMicrophoneAudioTrack, UID } from "agora-rtc-react";
 import { CameraVideoTrack, MicrophoneAudioTrack } from "agora-rtc-react-ui";
-import type { ICameraVideoTrack, IMicrophoneAudioTrack, UID } from "agora-rtc-sdk-ng";
 
 export interface LocalTracksProps {
   uid: UID;

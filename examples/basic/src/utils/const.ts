@@ -1,4 +1,4 @@
-import type { UID } from "agora-rtc-sdk-ng";
+import type { UID } from "agora-rtc-react";
 import CryptoJS from "crypto-js";
 
 let appId = import.meta.env.AGORA_APPID;

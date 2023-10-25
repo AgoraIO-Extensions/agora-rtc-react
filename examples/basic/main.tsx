@@ -1,6 +1,6 @@
 import "sanitize.css";
 import "uno.css";
-import AgoraRTC from "agora-rtc-sdk-ng";
+import AgoraRTC from "agora-rtc-react";
 import { StrictMode } from "react";
 import React from "react";
 import ReactDOM from "react-dom/client";

@@ -1,4 +1,5 @@
-import {
+import type { ILocalAudioTrack, ILocalTrack, ILocalVideoTrack } from "agora-rtc-react";
+import AgoraRTC, {
   AgoraRTCScreenShareProvider,
   LocalAudioTrack,
   LocalVideoTrack,
@@ -6,8 +7,6 @@ import {
   usePublish,
   useTrackEvent,
 } from "agora-rtc-react";
-import type { ILocalAudioTrack, ILocalTrack, ILocalVideoTrack } from "agora-rtc-sdk-ng";
-import AgoraRTC from "agora-rtc-sdk-ng";
 import { useEffect, useState } from "react";
 
 import { appConfig } from "../utils";
