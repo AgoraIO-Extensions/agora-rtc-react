@@ -8,10 +8,10 @@ import {
 } from "agora-rtc-sdk-ng-fake";
 import { expect, vi } from "vitest";
 
+import { errorMessage } from "../../../shared/test/setup/agora";
+import { createWrapper } from "../../../shared/test/setup/wrapper";
 import { useLocalScreenTrack } from "../../src/hooks/index";
 import * as clientHook from "../../src/hooks/useIsConnected";
-import { errorMessage } from "../setup/agora";
-import { createWrapper } from "../setup/wrapper";
 
 describe("useLocalScreenTrack", () => {
   test("should return null when ready is false", async () => {

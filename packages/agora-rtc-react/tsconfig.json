@@ -15,5 +15,5 @@
     "skipLibCheck": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "test"]
+  "include": ["src", "test", "../shared/test/setup.tsx", "../shared/test/setup"]
 }

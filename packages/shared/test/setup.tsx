@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import matchers from "@testing-library/jest-dom/matchers";
 import type { ReactNode } from "react";
 import { expect, vi } from "vitest";
+import "vitest-canvas-mock";
 
 expect.extend(matchers);
 
@@ -38,3 +39,6 @@ Object.defineProperty(global.navigator, "mediaDevices", {
 export interface Props {
   children: ReactNode;
 }
+
+window.MediaStreamTrack = jest.fn();
+window.RTCIceCandidate = jest.fn();

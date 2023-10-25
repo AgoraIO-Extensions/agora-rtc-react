@@ -4,10 +4,10 @@ import { FakeRTCClient, dispatchRTCEvent } from "agora-rtc-sdk-ng-fake";
 import { act } from "react-dom/test-utils";
 import { vi } from "vitest";
 
+import { errorMessage } from "../../../shared/test/setup/agora";
+import { createWrapper } from "../../../shared/test/setup/wrapper";
 import * as clientHook from "../../src/hooks/useIsConnected";
 import { useRemoteUserTrack } from "../../src/hooks/useRemoteUserTrack";
-import { errorMessage } from "../setup/agora";
-import { createWrapper } from "../setup/wrapper";
 
 const user = {
   uid: "1",
