@@ -3,10 +3,10 @@ import AgoraRTC from "agora-rtc-sdk-ng";
 import { FakeMicrophoneAudioTrack, FakeRTCClient } from "agora-rtc-sdk-ng-fake";
 import { expect, vi } from "vitest";
 
+import { errorMessage } from "../../../shared/test/setup/agora";
+import { createWrapper } from "../../../shared/test/setup/wrapper";
 import { useLocalMicrophoneTrack } from "../../src/hooks/index";
 import * as clientHook from "../../src/hooks/useIsConnected";
-import { errorMessage } from "../setup/agora";
-import { createWrapper } from "../setup/wrapper";
 
 describe("useLocalMicrophoneTrack", () => {
   test("should return null when ready is false", async () => {

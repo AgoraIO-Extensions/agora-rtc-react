@@ -3,10 +3,10 @@ import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import { FakeRTCClient, dispatchRTCEvent } from "agora-rtc-sdk-ng-fake";
 import { vi } from "vitest";
 
+import { errorMessage } from "../../../shared/test/setup/agora";
+import { createWrapper } from "../../../shared/test/setup/wrapper";
 import * as clientHook from "../../src/hooks/useIsConnected";
 import { useRemoteVideoTracks } from "../../src/hooks/useRemoteVideoTracks";
-import { errorMessage } from "../setup/agora";
-import { createWrapper } from "../setup/wrapper";
 
 describe("useRemoteVideoTracks", () => {
   test("should return video tracks", async () => {

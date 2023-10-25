@@ -11,16 +11,16 @@ const setUp = (audioTrack?: IRemoteAudioTrack | ILocalAudioTrack) =>
 describe("useVolumeLevel", () => {
   test("should return volumeLevel by getVolumeLevel", async () => {
     const audioTrack = FakeLocalAudioTrack.create();
-    audioTrack.getVolumeLevel = vi.fn().mockReturnValue(1);
+    vi.spyOn(audioTrack, "getVolumeLevel");
     vi.useFakeTimers();
     const { result } = setUp(audioTrack);
     act(() => {
       vi.advanceTimersByTime(1000);
     });
-    waitFor(() => {
+    await waitFor(() => {
       expect(audioTrack.getVolumeLevel).toHaveBeenCalled();
-      expect(audioTrack.getVolumeLevel).toHaveBeenCalledWith(1);
-      expect(result.current).toEqual(1);
+      expect(result.current).toEqual(audioTrack.getVolumeLevel());
     });
+    jest.useRealTimers();
   });
 });

@@ -43,6 +43,8 @@ export const Overview: StoryObj<OverviewArgs> = {
   render: function RenderLocalUser({ micOn, cameraOn, ...args }: OverviewArgs) {
     const [client] = useState(() =>
       FakeRTCClient.create({
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         publish: async () => {
           action("IAgoraRTCClient.publish()")();
         },

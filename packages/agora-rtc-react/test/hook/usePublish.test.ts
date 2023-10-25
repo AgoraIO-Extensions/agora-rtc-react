@@ -6,10 +6,10 @@ import {
 } from "agora-rtc-sdk-ng-fake";
 import { expect, vi } from "vitest";
 
+import { errorMessage } from "../../../shared/test/setup/agora";
+import { createWrapper } from "../../../shared/test/setup/wrapper";
 import * as clientHook from "../../src/hooks/useIsConnected";
 import { usePublish } from "../../src/hooks/usePublish";
-import { errorMessage } from "../setup/agora";
-import { createWrapper } from "../setup/wrapper";
 
 describe("usePublish", () => {
   const spy = vi.spyOn(clientHook, "useIsConnected");

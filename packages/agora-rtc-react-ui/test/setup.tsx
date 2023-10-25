@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import matchers from "@testing-library/jest-dom/matchers";
 import type { ReactNode } from "react";
 import { expect, vi } from "vitest";
+import "vitest-canvas-mock";
 
 expect.extend(matchers);
 

@@ -32,6 +32,9 @@ export default defineConfig({
       ],
     },
     exclude: ["**/node_modules/**"],
-    setupFiles: ["./test/setup.tsx"],
+    deps: {
+      inline: ["vitest-canvas-mock"],
+    },
+    setupFiles: ["../shared/test/setup.tsx"],
   },
 });
