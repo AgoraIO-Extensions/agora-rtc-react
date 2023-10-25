@@ -1,2 +1,0 @@
-import{F as i,h,W as l}from"./TrackBoundary-09ed2e35.js";class e extends i{constructor({label:t=l(),enabled:s=!0,muted:a=!1,...r}={}){super(r),this._label=t,this.enabled=s,this.muted=a,h(this,"_label")}static create(t){return new e(t)}async setEnabled(t){t!==this.enabled&&(this.enabled=t,t?this.play():this.stop())}getStats(){throw new Error("Method not implemented.")}getTrackLabel(){return this._label}async setMuted(t){this.muted=t}close(){this.stop()}}export{e as F};
-//# sourceMappingURL=local-track-79ab083b.js.map
