@@ -1,4 +1,4 @@
-name: PublishCDN
+name: Github Releases Artifact/CDN
 
 on:
   workflow_dispatch:
