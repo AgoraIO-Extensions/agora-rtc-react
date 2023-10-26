@@ -1,0 +1,69 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        type: choice
+        description: "choose package"
+        default: "agora-rtc-react"
+        required: true
+        options:
+          - agora-rtc-react
+          - agora-rtc-react-ui
+      cdn:
+        description: "upload to cdn"
+        default: true
+        type: boolean
+      release_type:
+        description: "The release type of CDN, staging or sdk"
+        default: "staging"
+        type: string
+
+jobs:
+  release-it:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Setup Dependencies and Build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        run: |
+          pnpm install
+          pnpm run build
+
+      - name: Get Package Info
+        run: |
+          version=$(node -p "require('./packages/${{ inputs.package }}/package.json').version")
+          echo "version=${version}" >> $GITHUB_ENV
+
+      - name: upload iife to github release
+        run: |
+          gh release upload v${{ env.version }} ./packages/${{ inputs.package }}/dist/${{ inputs.package }}.iife.js --clobber
+
+      - name: Prepare CDN Publish agora-rtc-react
+        if: ${{ inputs.cdn }}
+        run: |
+          GITHUB_RELEASE_DOWNLOAD_PREFIX=https://github.com/AgoraIO-Extensions/agora-rtc-react/releases/download
+          GITHUB_RELEASE_AGORA_RTC_REACT_PACKAGE_DOWNLOAD_URL="${GITHUB_RELEASE_DOWNLOAD_PREFIX}/v${{ env.version }}/${{ inputs.package }}.iife.js"
+          echo "GITHUB_RELEASE_AGORA_RTC_REACT_PACKAGE_DOWNLOAD_URL=${GITHUB_RELEASE_AGORA_RTC_REACT_PACKAGE_DOWNLOAD_URL}" >> $GITHUB_ENV
+
+      - name: CDN Publish agora-rtc-react
+        if: ${{ inputs.cdn }}
+        env:
+          UPLOAD_CDN_INTERNAL_JENKINS_HOOK: ${{ secrets.UPLOAD_CDN_INTERNAL_JENKINS_HOOK }}
+        uses: AgoraIO-Extensions/actions/.github/actions/upload_cdn_internal@main
+        with:
+          upload_cdn_internal_jenkins_hook: ${{ env.UPLOAD_CDN_INTERNAL_JENKINS_HOOK }}
+          url: ${{ env.GITHUB_RELEASE_AGORA_RTC_REACT_PACKAGE_DOWNLOAD_URL }}
+          release_type: ${{ inputs.release_type }}
