@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 overrides:
   nodeunit: npm:noop-package@1.0.0
 
@@ -196,8 +200,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       crypto-js:
-        specifier: ^4.1.1
-        version: 4.1.1
+        specifier: ^4.2.0
+        version: 4.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -254,8 +258,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       crypto-js:
-        specifier: ^4.1.1
-        version: 4.1.1
+        specifier: ^4.2.0
+        version: 4.2.0
       mobx:
         specifier: ^6.10.0
         version: 6.10.0
@@ -7349,8 +7353,8 @@ packages:
     resolution: {integrity: sha512-mCxBlsHFYh9C+HVpiEacem8FEBnMXgU9gy4zmNC+SXAZNB/1idgp/aulFJ4FgCi7GPEVbfyng092GqL2k2rmow==}
     dev: true
 
-  /crypto-js@4.1.1:
-    resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
+  /crypto-js@4.2.0:
+    resolution: {integrity: sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==}
     dev: false
 
   /crypto-random-string@2.0.0:
@@ -14813,6 +14817,5 @@ packages:
     resolution: {tarball: https://codeload.github.com/AgoraIO-Extensions/agora-rtc-sdk-ng-fake/tar.gz/ab8f42f2b5c11d530b680c4da70f24eeead999ab}
     name: '@agoraio-extensions/agora-rtc-sdk-ng-fake'
     version: 1.0.6
-    prepare: true
     requiresBuild: true
     dev: true
