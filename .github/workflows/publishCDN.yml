@@ -1,4 +1,4 @@
-name: Publish
+name: Github Releases Artifact/CDN
 
 on:
   workflow_dispatch:
@@ -15,6 +15,10 @@ on:
         description: "upload to cdn"
         default: true
         type: boolean
+      tag:
+        description: "Github TAG, eg: 1.0.0 (no 'v')"
+        required: false
+        type: string
       release_type:
         description: "The release type of CDN, staging or sdk"
         default: "staging"
@@ -43,8 +47,15 @@ jobs:
           pnpm run build
 
       - name: Get Package Info
+        if: ${{ !inputs.tag }}
         run: |
           version=$(node -p "require('./packages/${{ inputs.package }}/package.json').version")
+          echo "version=${version}" >> $GITHUB_ENV
+
+      - name: Get Package Info
+        if: ${{ inputs.tag }}
+        run: |
+          version=${{ inputs.tag }}
           echo "version=${version}" >> $GITHUB_ENV
 
       - name: upload iife to github release
