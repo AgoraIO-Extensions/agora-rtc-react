@@ -16,7 +16,9 @@
     "copy-docs": "esbuild-dev ./scripts/copy-docs.ts",
     "gene-docs": "pnpm -r run gene-docs",
     "typedoc": "pnpm -r run typedoc",
-    "release": "release-it"
+    "release": "release-it",
+    "rtc-version": "pnpm -F agora-rtc-react run version",
+    "rtc-ui-version": "pnpm -F agora-rtc-react-ui run version"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.6.7",

@@ -31,7 +31,6 @@ export default defineConfig([
     clean: true,
     treeshake: true,
     dts: {
-      entry: "src/index.ts",
       resolve: ["agora-rtc-sdk-ng"],
     },
     minify: true,
