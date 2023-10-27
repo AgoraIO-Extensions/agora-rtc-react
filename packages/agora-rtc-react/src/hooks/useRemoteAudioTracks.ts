@@ -50,9 +50,6 @@ export function useRemoteAudioTracks(
   useAsyncEffect(async () => {
     if (!isUnmountRef.current) {
       setError(null);
-      if (!isConnected) {
-        setTracks([]);
-      }
     }
 
     if (!Array.isArray(users) || !isConnected) return;

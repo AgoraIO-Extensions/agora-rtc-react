@@ -80,6 +80,11 @@ export function usePublish(
       const track = filterTracks[i];
       if (track) {
         if (canPublish(track)) {
+          await resolvedClient.unpublish(
+            pubTracks.current.filter(
+              pubTrack => pubTrack?.trackMediaType === track.trackMediaType,
+            ) as ILocalTrack[],
+          );
           try {
             if (!isUnmountRef.current) {
               setIsLoading(true);
