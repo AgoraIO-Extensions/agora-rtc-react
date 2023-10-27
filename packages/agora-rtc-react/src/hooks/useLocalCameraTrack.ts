@@ -73,6 +73,9 @@ export function useLocalCameraTrack(
         setIsLoading(false);
       }
     }
+    if (!isConnected && !isUnmountRef.current) {
+      setTrack(null);
+    }
   }, [isConnected, ready]);
   return { localCameraTrack: track, isLoading: isLoading, error: error };
 }
