@@ -49,6 +49,9 @@ export function useRemoteVideoTracks(
   useAsyncEffect(async () => {
     if (!isUnmountRef.current) {
       setError(null);
+      if (!isConnected) {
+        setTracks([]);
+      }
     }
 
     if (!Array.isArray(users) || !isConnected) return;
@@ -128,9 +131,9 @@ export function useRemoteVideoTracks(
             user,
             mediaType: "video",
           });
-          nextTracks.current.splice(i, 1);
-          i--;
         }
+        nextTracks.current.splice(i, 1);
+        i--;
       }
     }
     if (unsubscribeList.length > 0) {

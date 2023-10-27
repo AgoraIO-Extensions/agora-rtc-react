@@ -50,6 +50,9 @@ export function useRemoteAudioTracks(
   useAsyncEffect(async () => {
     if (!isUnmountRef.current) {
       setError(null);
+      if (!isConnected) {
+        setTracks([]);
+      }
     }
 
     if (!Array.isArray(users) || !isConnected) return;
@@ -130,9 +133,9 @@ export function useRemoteAudioTracks(
             user,
             mediaType: "audio",
           });
-          nextTracks.current.splice(i, 1);
-          i--;
         }
+        nextTracks.current.splice(i, 1);
+        i--;
       }
     }
     if (unsubscribeList.length > 0) {
