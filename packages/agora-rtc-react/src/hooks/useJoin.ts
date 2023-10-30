@@ -1,8 +1,10 @@
 import type { IAgoraRTCClient, IAgoraRTCError, UID } from "agora-rtc-sdk-ng";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { AgoraRTCReactError } from "../error";
 import { useRTCClient } from "../hooks/useRTCClient";
+import type { AsyncTaskRunner } from "../misc/utils";
+import { createAsyncTaskRunner, joinDisposers } from "../misc/utils";
 import type { FetchArgs } from "../types";
 
 import { useAsyncEffect, useIsUnmounted } from "./tools";
@@ -47,6 +49,7 @@ export function useJoin(
 ): { data: UID; isLoading: boolean; isConnected: boolean; error: AgoraRTCReactError | null } {
   const resolvedClient = useRTCClient(client);
   const isConnected = useIsConnected(client);
+  const runnerRef = useRef<AsyncTaskRunner | undefined>();
 
   const [isLoading, setIsLoading] = useState(false);
   const [joinResult, setJoinResult] = useState<UID>(0);
@@ -80,15 +83,26 @@ export function useJoin(
       if (!isUnmountRef.current) {
         setIsLoading(false);
       }
-      return () => {
-        for (const track of resolvedClient.localTracks) {
-          if (track.isPlaying) {
-            track.stop();
+
+      const runner = (runnerRef.current ||= createAsyncTaskRunner());
+
+      return joinDisposers([
+        () => {
+          runner.dispose();
+        },
+        () => {
+          runner.run(() => resolvedClient.unpublish(resolvedClient.localTracks));
+        },
+        () => {
+          for (const track of resolvedClient.localTracks) {
+            if (track.isPlaying) {
+              track.stop();
+            }
+            track.close();
           }
-          track.close();
-        }
-        return resolvedClient.leave();
-      };
+          runner.run(() => resolvedClient.leave());
+        },
+      ]);
     }
   }, [ready, client]);
   return {

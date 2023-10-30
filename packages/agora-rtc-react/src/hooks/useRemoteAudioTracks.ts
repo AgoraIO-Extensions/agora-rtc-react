@@ -130,9 +130,9 @@ export function useRemoteAudioTracks(
             user,
             mediaType: "audio",
           });
-          nextTracks.current.splice(i, 1);
-          i--;
         }
+        nextTracks.current.splice(i, 1);
+        i--;
       }
     }
     if (unsubscribeList.length > 0) {

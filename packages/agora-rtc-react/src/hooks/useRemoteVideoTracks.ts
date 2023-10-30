@@ -128,9 +128,9 @@ export function useRemoteVideoTracks(
             user,
             mediaType: "video",
           });
-          nextTracks.current.splice(i, 1);
-          i--;
         }
+        nextTracks.current.splice(i, 1);
+        i--;
       }
     }
     if (unsubscribeList.length > 0) {
