@@ -111,7 +111,7 @@ export function useLocalScreenTrack(
         setIsLoading(false);
       }
     }
-    if (!ready && !isUnmountRef.current) {
+    if ((!isConnected || !ready) && !isUnmountRef.current) {
       setTrack(null);
     }
   }, [isConnected, ready]);
