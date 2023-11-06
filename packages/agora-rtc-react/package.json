@@ -55,7 +55,7 @@
   },
   "main": "src/index.ts",
   "devDependencies": {
-    "agora-rtc-sdk-ng": "^4.19.2",
+    "agora-rtc-sdk-ng": "4.19.3",
     "agora-rtc-react-ui": "workspace:*"
   },
   "release-it": {
