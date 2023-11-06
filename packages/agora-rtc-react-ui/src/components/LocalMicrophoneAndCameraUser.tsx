@@ -1,3 +1,4 @@
+import type { ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-react";
 import {
   FloatBoxStyle,
   VideoTrackWrapperStyle,
@@ -5,7 +6,6 @@ import {
 } from "agora-rtc-react/src/assets/styles";
 import { UserCover } from "agora-rtc-react/src/components/UserCover";
 import type { MaybePromiseOrNull } from "agora-rtc-react/src/misc/utils";
-import type { ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
 import type { HTMLProps, ReactNode } from "react";
 
 import { CameraVideoTrack } from "./CameraVideoTrack";

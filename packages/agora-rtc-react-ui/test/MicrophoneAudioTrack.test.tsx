@@ -1,7 +1,7 @@
 import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
+import type { IMicrophoneAudioTrack } from "agora-rtc-react";
 import { useAwaited } from "agora-rtc-react/src/hooks/tools";
-import type { IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
 import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 
