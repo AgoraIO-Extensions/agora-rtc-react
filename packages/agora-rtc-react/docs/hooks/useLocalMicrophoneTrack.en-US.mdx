@@ -1,6 +1,6 @@
 ## useLocalMicrophoneTrack
 
-This hook lets you create a local microphone audio track.
+This hook lets you create a local microphone audio track. You can call this method multiple times to create multiple tracks. If you need to access the same track in multiple components, you can pass the same track object to multiple components.
 
 - This hook can only create the audio track once before the component is destroyed.
 - After the component is unmounted, the audio track created by this hook stops publishing.
