@@ -1,5 +1,5 @@
+import type { IRemoteAudioTrack } from "agora-rtc-react";
 import { RemoteAudioTrack, useJoin, useRemoteAudioTracks, useRemoteUsers } from "agora-rtc-react";
-import type { IRemoteAudioTrack } from "agora-rtc-sdk-ng";
 import { Button, Typography } from "antd";
 import { useEffect, useState } from "react";
 

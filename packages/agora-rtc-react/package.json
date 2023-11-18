@@ -1,6 +1,6 @@
 {
   "name": "agora-rtc-react",
-  "version": "2.0.0-beta.0",
+  "version": "2.0.0",
   "private": false,
   "description": "Agora RTC React SDK",
   "license": "MIT",
@@ -47,14 +47,15 @@
     "update-readme": "pnpm esbuild-dev ../../scripts/docs/update-readme.ts",
     "gene-comment": "esbuild-dev ../../scripts/docs/api.ts && esbuild-dev ../../scripts/docs/component.ts && esbuild-dev ../../scripts/docs/data-types.ts",
     "gene-docs": "pnpm run gene-md && pnpm run gene-stories && pnpm run gene-comment && pnpm run update-readme",
-    "typedoc": "typedoc src"
+    "typedoc": "typedoc src",
+    "version": "esbuild-dev ../../scripts/release/update-version.ts agora-rtc-react"
   },
   "peerDependencies": {
-    "agora-rtc-sdk-ng": ">=4.19.2",
     "react": ">=16.8"
   },
   "main": "src/index.ts",
   "devDependencies": {
+    "agora-rtc-sdk-ng": "4.19.3",
     "agora-rtc-react-ui": "workspace:*"
   },
   "release-it": {

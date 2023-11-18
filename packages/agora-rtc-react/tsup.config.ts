@@ -30,8 +30,10 @@ export default defineConfig([
     sourcemap: false,
     clean: true,
     treeshake: true,
-    dts: true,
-    minify: false,
+    dts: {
+      resolve: ["agora-rtc-sdk-ng"],
+    },
+    minify: true,
   },
   {
     entry: {
@@ -56,12 +58,11 @@ export default defineConfig([
     define: {
       "process.env.NODE_ENV": JSON.stringify("production"),
     },
-    globalName: "AgoraRTCReact",
+    globalName: "AgoraRTC",
     esbuildPlugins: [
       setGlobals({
         "react": "React",
         "react-dom": "ReactDOM",
-        "agora-rtc-sdk-ng": "AgoraRTC",
       }),
     ],
     platform: "browser",

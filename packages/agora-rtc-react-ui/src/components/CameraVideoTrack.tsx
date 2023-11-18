@@ -1,8 +1,8 @@
 import type { LocalVideoTrackProps } from "agora-rtc-react";
+import type { ICameraVideoTrack } from "agora-rtc-react";
 import { LocalVideoTrack } from "agora-rtc-react";
 import { useAwaited } from "agora-rtc-react/src/hooks/tools";
 import type { MaybePromiseOrNull } from "agora-rtc-react/src/misc/utils";
-import type { ICameraVideoTrack } from "agora-rtc-sdk-ng";
 import { useEffect } from "react";
 
 export interface CameraVideoTrackProps extends LocalVideoTrackProps {

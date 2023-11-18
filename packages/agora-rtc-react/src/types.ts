@@ -1,4 +1,4 @@
-import type { UID } from "agora-rtc-sdk-ng";
+import type { NetworkQuality, UID } from "agora-rtc-sdk-ng";
 
 export type FetchArgs = (() => Promise<JoinOptions>) | JoinOptions;
 
@@ -30,17 +30,7 @@ export interface JoinOptions {
 /**
  * The last-mile network quality.
  */
-export interface NetworkQuality {
-  /**
-   * The uplink network quality. It is calculated based on the uplink transmission bitrate, uplink packet loss rate, RTT (round-trip time) and jitter.0: The quality is unknown.1: The quality is excellent.2: The quality is good, but the bitrate is less than optimal.3: Users experience slightly impaired communication.4: Users can communicate with each other, but not very smoothly.5: The quality is so poor that users can barely communicate.6: The network is disconnected and users cannot communicate.
-   */
-  uplink: 0 | 1 | 2 | 3 | 4 | 5 | 6;
-
-  /**
-   * The downlink network quality. It is calculated based on the uplink transmission bitrate, uplink packet loss rate, RTT (round-trip time) and jitter.0: The quality is unknown.1: The quality is excellent.2: The quality is good, but the bitrate is less than optimal.3: Users experience slightly impaired communication.4: Users can communicate with each other, but not very smoothly.5: The quality is so poor that users can barely communicate.6: The network is disconnected and users cannot communicate.
-   */
-  downlink: 0 | 1 | 2 | 3 | 4 | 5 | 6;
-
+export interface NetworkQualityEx extends NetworkQuality {
   /**
    * The average Round-Trip Time (RTT) from the SDK to the Agora edge server, measured in milliseconds (ms).
    */

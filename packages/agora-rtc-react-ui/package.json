@@ -45,7 +45,8 @@
     "storybook-docs": "storybook dev --docs",
     "build-storybook-docs": "storybook build --docs",
     "test": "vitest run --coverage",
-    "test:watch": "vitest --ui"
+    "test:watch": "vitest --ui",
+    "version": "esbuild-dev ../../scripts/release/update-version.ts agora-rtc-react-ui"
   },
   "peerDependencies": {
     "agora-rtc-react": ">=2",

@@ -1,6 +1,5 @@
-import { AgoraRTCProvider } from "agora-rtc-react";
-import type { ClientConfig } from "agora-rtc-sdk-ng";
-import AgoraRTC from "agora-rtc-sdk-ng";
+import type { ClientConfig } from "agora-rtc-react";
+import AgoraRTC, { AgoraRTCProvider } from "agora-rtc-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
 

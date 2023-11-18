@@ -1,5 +1,5 @@
+import type { IAgoraRTCRemoteUser, UID } from "agora-rtc-react";
 import { RemoteUser, useJoin, useRemoteUsers } from "agora-rtc-react";
-import type { IAgoraRTCRemoteUser, UID } from "agora-rtc-sdk-ng";
 import { Button, Typography } from "antd";
 import { useEffect, useMemo, useState } from "react";
 

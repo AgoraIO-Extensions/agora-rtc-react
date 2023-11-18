@@ -1,7 +1,7 @@
 import "../assets/UserControl.css";
 
+import type { ILocalAudioTrack, IRemoteAudioTrack } from "agora-rtc-react";
 import { useVolumeLevel } from "agora-rtc-react";
-import type { ILocalAudioTrack, IRemoteAudioTrack } from "agora-rtc-sdk-ng";
 import type { ButtonHTMLAttributes, MouseEvent } from "react";
 import { useCallback } from "react";
 

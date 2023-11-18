@@ -1,4 +1,3 @@
-import { listen } from "agora-rtc-react/src/misc/listen";
 import type {
   IAgoraRTCClient,
   ILocalAudioTrack,
@@ -8,8 +7,9 @@ import type {
   IRemoteTrack,
   IRemoteVideoTrack,
   UID,
-} from "agora-rtc-sdk-ng";
-import AgoraRTC from "agora-rtc-sdk-ng";
+} from "agora-rtc-react";
+import AgoraRTC from "agora-rtc-react";
+import { listen } from "agora-rtc-react/src/misc/listen";
 import { makeAutoObservable } from "mobx";
 import { SideEffectManager } from "side-effect-manager";
 
@@ -43,7 +43,7 @@ export class ShareScreen {
         return [
           listen(client, "user-published", async (user, mediaType) => {
             if (user.uid !== this.uid || this.enabled) return;
-            const track = await client.subscribe(user, mediaType);
+            const track = (await client.subscribe(user, mediaType)) as IRemoteTrack;
             this.setRemoteTrack(track, mediaType);
           }),
           listen(client, "user-unpublished", (user, mediaType) => {

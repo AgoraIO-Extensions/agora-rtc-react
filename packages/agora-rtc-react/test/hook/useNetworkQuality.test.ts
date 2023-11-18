@@ -4,13 +4,14 @@ import { FakeRTCClient, dispatchRTCEvent } from "agora-rtc-sdk-ng-fake";
 import { expect, vi } from "vitest";
 
 import { useNetworkQuality } from "../../src/hooks/index";
+import type { NetworkQualityEx } from "../../src/types";
 const setUp = (client?: IAgoraRTCClient | null) => renderHook(() => useNetworkQuality(client));
 
 describe("useNetworkQuality", () => {
   test("default value", () => {
-    const initQuality = () => ({
-      uplink: 0,
-      downlink: 0,
+    const initQuality = (): NetworkQualityEx => ({
+      uplinkNetworkQuality: 0,
+      downlinkNetworkQuality: 0,
       delay: 0,
     });
 
@@ -26,6 +27,10 @@ describe("useNetworkQuality", () => {
     act(() => {
       dispatchRTCEvent(client, "network-quality", newQuality);
     });
-    expect(result.current).toStrictEqual({ uplink: 1, downlink: 2, delay: 3 });
+    expect(result.current).toStrictEqual({
+      uplinkNetworkQuality: 1,
+      downlinkNetworkQuality: 2,
+      delay: 3,
+    });
   });
 });

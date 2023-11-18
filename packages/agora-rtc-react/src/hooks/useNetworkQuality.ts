@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 
 import { useRTCClient } from "../hooks/useRTCClient";
 import { listen } from "../misc/listen";
-import type { NetworkQuality } from "../types";
+import type { NetworkQualityEx } from "../types";
 
-const initQuality = (): NetworkQuality => ({
-  uplink: 0,
-  downlink: 0,
+const initQuality = (): NetworkQualityEx => ({
+  uplinkNetworkQuality: 0,
+  downlinkNetworkQuality: 0,
   delay: 0,
 });
 
@@ -26,16 +26,16 @@ const initQuality = (): NetworkQuality => ({
  * }
  * ```
  */
-export function useNetworkQuality(client?: IAgoraRTCClient | null): NetworkQuality {
+export function useNetworkQuality(client?: IAgoraRTCClient | null): NetworkQualityEx {
   const resolvedClient = useRTCClient(client);
 
-  const [networkQuality, setNetworkQuality] = useState<NetworkQuality>(initQuality);
+  const [networkQuality, setNetworkQuality] = useState<NetworkQualityEx>(initQuality);
   useEffect(() => {
     if (resolvedClient) {
       return listen(resolvedClient, "network-quality", q =>
         setNetworkQuality({
-          uplink: q.uplinkNetworkQuality,
-          downlink: q.downlinkNetworkQuality,
+          uplinkNetworkQuality: q.uplinkNetworkQuality,
+          downlinkNetworkQuality: q.downlinkNetworkQuality,
           delay: resolvedClient.getRTCStats().RTT ?? 0,
         }),
       );

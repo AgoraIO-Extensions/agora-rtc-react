@@ -1,5 +1,5 @@
+import type { IRemoteVideoTrack } from "agora-rtc-react";
 import { RemoteVideoPlayer } from "agora-rtc-react-ui";
-import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 
 import { fakeAvatar, fakeName } from "../utils";
 
