@@ -25,7 +25,7 @@ on:
         type: string
 
 jobs:
-  release-it:
+  upload-artifact:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -58,16 +58,19 @@ jobs:
           version=${{ inputs.tag }}
           echo "version=${version}" >> $GITHUB_ENV
 
+      - name: Rename Package
+        run: |
+          mv ./packages/${{ inputs.package }}/dist/${{ inputs.package }}.iife.js ./packages/${{ inputs.package }}/dist/${{ inputs.package }}.${{ env.version }}.js
+
       - name: upload iife to github release
         run: |
-          gh release upload v${{ env.version }} ./packages/${{ inputs.package }}/dist/${{ inputs.package }}.iife.js --clobber
+          gh release upload v${{ env.version }} ./packages/${{ inputs.package }}/dist/${{ inputs.package }}.${{ env.version }}.js --clobber
 
       - name: Prepare CDN Publish agora-rtc-react
         if: ${{ inputs.cdn }}
         run: |
-          mv ./packages/${{ inputs.package }}/dist/${{ inputs.package }}.iife.js ./packages/${{ inputs.package }}/dist/${{ inputs.package }}.${{ env.version }}.js
           GITHUB_RELEASE_DOWNLOAD_PREFIX=https://github.com/AgoraIO-Extensions/agora-rtc-react/releases/download
-          GITHUB_RELEASE_AGORA_RTC_REACT_PACKAGE_DOWNLOAD_URL="${GITHUB_RELEASE_DOWNLOAD_PREFIX}/v${{ env.version }}/${{ inputs.package }}.iife.js"
+          GITHUB_RELEASE_AGORA_RTC_REACT_PACKAGE_DOWNLOAD_URL="${GITHUB_RELEASE_DOWNLOAD_PREFIX}/v${{ env.version }}/${{ inputs.package }}.${{ env.version }}.js"
           echo "GITHUB_RELEASE_AGORA_RTC_REACT_PACKAGE_DOWNLOAD_URL=${GITHUB_RELEASE_AGORA_RTC_REACT_PACKAGE_DOWNLOAD_URL}" >> $GITHUB_ENV
 
       - name: CDN Publish agora-rtc-react
