@@ -25,7 +25,7 @@ on:
         type: string
 
 jobs:
-  release-it:
+  upload-artifact:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
