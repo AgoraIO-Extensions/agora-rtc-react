@@ -1,16 +1,17 @@
 ## useLocalCameraTrack
 
-用于创建本地摄像头视频轨道。
+用于创建本地摄像头视频轨道。你可以在不同组件中调用该方法以创建多个轨道。如果要在多个组件中访问同一个轨道，请确保在多个组件中都传入同一个轨道对象。
 
 - 在组件被销毁之前，该 Hook 只会创建一次视频轨道。
 - 组件卸载后，该 Hook 创建的视频轨道会停止发布。
 
 #### 参数
 
-| 参数名   | 类型                                                                                                                                     | 是否必选 | 描述                                                                                                                                                              |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ready`  | `boolean`                                                                                                                                | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                                                               |
-| `client` | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| 参数名                   | 类型                                                                    | 是否必选 | 描述                                                                                                                             |
+| ------------------------ | ----------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `ready`                  | `boolean`                                                               | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                              |
+| `cameraVideoTrackConfig` | `CameraVideoTrackInitConfig`                                            | 可选     | 摄像头视频轨道的初始化配置。详见 [`CameraVideoTrackInitConfig`](/api-ref/rtc/react/interfaces/cameravideotrackinitconfig.html)。 |
+| `client`                 | [`IAgoraRTCClient`](/api-ref/rtc/react/interfaces/iagorartcclient.html) | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](/api-ref/rtc/react/interfaces/iagorartc.html#createclient) 创建。                     |
 
 #### 返回值
 
@@ -28,7 +29,7 @@
 import { useLocalCameraTrack } from "agora-rtc-react";
 
 function App() {
-  const audioTrack = useLocalCameraTrack();
+  const videoTrack = useLocalCameraTrack();
 
   return <></>;
 }

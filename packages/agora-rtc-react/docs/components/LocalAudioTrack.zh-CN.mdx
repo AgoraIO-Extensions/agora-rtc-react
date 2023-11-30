@@ -2,7 +2,7 @@
 
 该组件用于播放本地音频轨道，播放设备为用户在浏览器中选择的设备。
 
-如果你需要自行设置麦克风设备，可使用 Web SDK 的 [`IMicrophoneAudioTrack.setDevice`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/imicrophoneaudiotrack.html#setdevice) 方法。
+如果你需要自行设置麦克风设备，可使用 Web SDK 的 [`IMicrophoneAudioTrack.setDevice`](/api-ref/rtc/react/interfaces/imicrophoneaudiotrack.html#setdevice) 方法。
 
 #### Props
 
@@ -17,7 +17,7 @@
 
 #### 注意事项
 
-设置 `disabled` 和 `muted` 属性时其实是调用了 Web SDK 的 [`setEnabled`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setenabled) 方法和 [`setMuted`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/ilocaltrack.html#setmuted) 方法，因此：
+设置 `disabled` 和 `muted` 属性时其实是调用了 Web SDK 的 [`setEnabled`](/api-ref/rtc/react/interfaces/ilocaltrack.html#setenabled) 方法和 [`setMuted`](/api-ref/rtc/react/interfaces/ilocaltrack.html#setmuted) 方法，因此：
 
 - 与设置 `disabled` 属性相比，设置 `muted` 属性的响应速度更快且不影响音频采集状态。
 - 不能同时设置 `muted` 属性和 `disabled` 属性。

@@ -6,11 +6,11 @@
 
 #### 参数
 
-| 参数名      | 类型                                                                                                                                     | 是否必选 | 描述                                                                                                                                                              |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fetchArgs` | `JoinOptions` &VerticalLine; `(() => Promise<JoinOptions>)`                                                                              | 必选     | 加入频道所需参数或异步函数。详见 [`JoinOptions`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/data-types#joinoptions)。                                   |
-| `ready`     | `boolean`                                                                                                                                | 可选     | 是否准备好加入频道。默认为 `true`。                                                                                                                               |
-| `client`    | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
+| 参数名      | 类型                                                                    | 是否必选 | 描述                                                                                                                            |
+| ----------- | ----------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `fetchArgs` | `JoinOptions` &VerticalLine; `(() => Promise<JoinOptions>)`             | 必选     | 加入频道所需参数或异步函数。详见 [`JoinOptions`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/data-types#joinoptions)。 |
+| `ready`     | `boolean`                                                               | 可选     | 是否准备好加入频道。默认为 `true`。                                                                                             |
+| `client`    | [`IAgoraRTCClient`](/api-ref/rtc/react/interfaces/iagorartcclient.html) | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](/api-ref/rtc/react/interfaces/iagorartc.html#createclient) 创建。                    |
 
 #### 返回值
 
