@@ -4,9 +4,9 @@ title: Components
 
 TODO: cn 链接替换
 
-<h2 className="anchor index-auto-group index-component-agorartcprovider" id="agorartcprovider">
+<H2 className="anchor index-auto-group index-component-agorartcprovider" id="agorartcprovider">
   AgoraRTCProvider
-</h2>
+</H2>
 
 This component is a [context provider](https://react.dev/learn/passing-data-deeply-with-context), which lets all of the components inside `children` read the `client` prop you pass.
 
@@ -20,8 +20,7 @@ This component is a [context provider](https://react.dev/learn/passing-data-deep
 #### Sample code
 
 ```jsx
-import { AgoraRTCProvider } from "agora-rtc-react";
-import AgoraRTC from "agora-rtc-sdk-ng";
+import AgoraRTC, { AgoraRTCProvider } from "agora-rtc-react";
 
 function App({ children }) {
   const [client] = useState(() => AgoraRTC.createClient({ mode: "rtc", codec: "vp8" }));
@@ -29,12 +28,12 @@ function App({ children }) {
 }
 ```
 
-<h2
+<H2
   className="anchor index-auto-group index-component-agorartcscreenshareprovider"
   id="agorartcscreenshareprovider"
 >
   AgoraRTCScreenShareProvider
-</h2>
+</H2>
 
 This component is a [context provider](https://react.dev/learn/passing-data-deeply-with-context), which lets all of the components inside `children` read the `client` prop you pass for screen sharing.
 
@@ -52,8 +51,7 @@ You can use `AgoraRTCScreenShareProvider` and `AgoraRTCProvider` together, but t
 #### Sample code
 
 ```jsx
-import { AgoraRTCScreenShareProvider } from "agora-rtc-react";
-import AgoraRTC from "agora-rtc-sdk-ng";
+import AgoraRTC, { AgoraRTCScreenShareProvider } from "agora-rtc-react";
 
 function App({ children }) {
   const [client] = useState(() => AgoraRTC.createClient({ mode: "rtc", codec: "vp8" }));
@@ -61,9 +59,9 @@ function App({ children }) {
 }
 ```
 
-<h2 className="anchor index-auto-group index-component-localaudiotrack" id="localaudiotrack">
+<H2 className="anchor index-auto-group index-component-localaudiotrack" id="localaudiotrack">
   LocalAudioTrack
-</h2>
+</H2>
 
 This component plays the local audio track using the playback device selected by the user in the browser.
 
@@ -98,9 +96,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-component-localvideotrack" id="localvideotrack">
+<H2 className="anchor index-auto-group index-component-localvideotrack" id="localvideotrack">
   LocalVideoTrack
-</h2>
+</H2>
 
 This component plays the local video track using the playback device selected by the user in the browser.
 
@@ -133,9 +131,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-component-localuser" id="localuser">
+<H2 className="anchor index-auto-group index-component-localuser" id="localuser">
   LocalUser
-</h2>
+</H2>
 
 This component plays the camera video track and the microphone audio track of the local user using the playback devices selected by the user in the browser.
 
@@ -180,9 +178,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-component-remoteaudiotrack" id="remoteaudiotrack">
+<H2 className="anchor index-auto-group index-component-remoteaudiotrack" id="remoteaudiotrack">
   RemoteAudioTrack
-</h2>
+</H2>
 
 This component plays the audio track of a remote user with the playback device you specify.
 
@@ -215,9 +213,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-component-remotevideotrack" id="remotevideotrack">
+<H2 className="anchor index-auto-group index-component-remotevideotrack" id="remotevideotrack">
   RemoteVideoTrack
-</h2>
+</H2>
 
 This component plays the video track of a remote user and does not support specifying the playback device.
 
@@ -247,9 +245,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-component-remoteuser" id="remoteuser">
+<H2 className="anchor index-auto-group index-component-remoteuser" id="remoteuser">
   RemoteUser
-</h2>
+</H2>
 
 This component plays the video and audio tracks of a remote user and supports specifying the audio device to use. Specifying the video playback device is not supported.
 

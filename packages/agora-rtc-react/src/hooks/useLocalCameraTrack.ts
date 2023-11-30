@@ -13,10 +13,9 @@ import { useAsyncEffect, useIsUnmounted } from "./tools";
 import { useIsConnected } from "./useIsConnected";
 
 /**
- * This hook lets you create a local camera video track.
+ * This hook lets you create a local camera video track. You can call this method multiple times in different components to create multiple tracks. To access the same track in multiple components, pass the same track object to those components.
  * This hook can only create the video track once before the component is destroyed.
  * After the component is unmounted, the video track created by this hook stops publishing.
- * You can call this method multiple times in different components to create multiple tracks. If you need to access the same track in multiple components, you can pass the same track object to multiple components.
  *
  * @param ready - Whether it is ready to create the track. The default value is `true`.
  * @param cameraVideoTrackConfig - Configurations for initializing the camera video track. See [`CameraVideoTrackInitConfig`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/cameravideotrackinitconfig.html) for details.
@@ -26,7 +25,7 @@ import { useIsConnected } from "./useIsConnected";
  * import { useLocalCameraTrack } from "agora-rtc-react";
  *
  * function App() {
- *   const audioTrack = useLocalCameraTrack();
+ *   const videoTrack = useLocalCameraTrack();
  *
  *   return <></>;
  * }

@@ -4,10 +4,10 @@
 
 #### Props
 
-| 属性名     | 类型                                                                                                                                     | 默认值 | 描述                                                                                                                                                              |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client`   | [`IAgoraRTCClient`](https://docportal.shengwang.cn/cn/live-streaming-premium-4.x/API%20Reference/web_ng/interfaces/iagorartcclient.html) | 无     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](https://docportal.shengwang.cn/cn/video-call-4.x/API%20Reference/web_ng/interfaces/iagorartc.html#createclient) 创建。 |
-| `children` | `ReactNode`                                                                                                                              | 无     | 需要展示的 React 节点。                                                                                                                                           |
+| 属性名     | 类型                                                                    | 默认值 | 描述                                                                                                         |
+| ---------- | ----------------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------ |
+| `client`   | [`IAgoraRTCClient`](/api-ref/rtc/react/interfaces/iagorartcclient.html) | 无     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](/api-ref/rtc/react/interfaces/iagorartc.html#createclient) 创建。 |
+| `children` | `ReactNode`                                                             | 无     | 需要展示的 React 节点。                                                                                      |
 
 #### 注意事项
 
@@ -16,8 +16,7 @@
 #### 使用示例
 
 ```jsx
-import { AgoraRTCScreenShareProvider } from "agora-rtc-react";
-import AgoraRTC from "agora-rtc-sdk-ng";
+import AgoraRTC, { AgoraRTCScreenShareProvider } from "agora-rtc-react";
 
 function App({ children }) {
   const [client] = useState(() => AgoraRTC.createClient({ mode: "rtc", codec: "vp8" }));
