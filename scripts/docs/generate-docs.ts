@@ -28,10 +28,7 @@ for (let j = 0; j < docType.length; j++) {
         if (languages[m] !== "") {
           data = data.replace(/\[`(.+?)`\]\((.+?)\)/g, match => {
             //if not chinese site, replace urlPrefix[1]
-            if (
-              match.indexOf("https://docportal.shengwang.cn/cn") === -1 &&
-              match.indexOf("https://api-ref.agora.io/en/video-sdk/web/4.x/") === -1
-            ) {
+            if (match.indexOf("https://api-ref.agora.io/en/video-sdk/web/4.x/") === -1) {
               let suffix = "";
               //special case list
               if (match.indexOf("data-types#agorartcreacterror") !== -1) {
@@ -57,12 +54,12 @@ for (let j = 0; j < docType.length; j++) {
           });
           data = data.replace(/components#agorartcprovider+/g, `functions/AgoraRTCProvider.html`);
         }
-        data = data.replace(/<h2[^>]*>([\s\S]*?)<\/h2>/g, match => {
+        data = data.replace(/<H2[^>]*>([\s\S]*?)<\/H2>/g, match => {
           return (
             prefix +
             match
               .replace(/\n/g, "")
-              .replace(/<h2[^>]*>([\s\S]*?)<\/h2>/g, "$1")
+              .replace(/<H2[^>]*>([\s\S]*?)<\/H2>/g, "$1")
               .slice()
               .trim()
           );
