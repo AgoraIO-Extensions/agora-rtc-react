@@ -3,8 +3,7 @@ name: TypeDoc
 
 on:
   # Runs on new releases
-  release:
-    types: [published]
+  release: {}
   push:
     branches: [main]
 
