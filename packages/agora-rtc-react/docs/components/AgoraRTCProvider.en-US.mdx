@@ -12,8 +12,7 @@ This component is a [context provider](https://react.dev/learn/passing-data-deep
 #### Sample code
 
 ```jsx
-import { AgoraRTCProvider } from "agora-rtc-react";
-import AgoraRTC from "agora-rtc-sdk-ng";
+import AgoraRTC, { AgoraRTCProvider } from "agora-rtc-react";
 
 function App({ children }) {
   const [client] = useState(() => AgoraRTC.createClient({ mode: "rtc", codec: "vp8" }));

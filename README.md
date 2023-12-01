@@ -89,9 +89,9 @@ This example will render Agora Client into a container on the page.
 
 - [`useLocalScreenTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalScreenTrack.en-US.mdx) &mdash; This hook lets you create a local video track for screen-sharing.
 
-- [`useLocalMicrophoneTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalMicrophoneTrack.en-US.mdx) &mdash; This hook lets you create a local microphone audio track. You can call this method multiple times to create multiple tracks. If you need to access the same track in multiple components, you can pass the same track object to multiple components.
+- [`useLocalMicrophoneTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalMicrophoneTrack.en-US.mdx) &mdash; This hook lets you create a local microphone audio track. You can call this method multiple times in different components to create multiple tracks. To access the same track in multiple components, pass the same track object to those components.
 
-- [`useLocalCameraTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalCameraTrack.en-US.mdx) &mdash; This hook lets you create a local camera video track. You can call this method multiple times to create multiple tracks. If you need to access the same track in multiple components, you can pass the same track object to multiple components.
+- [`useLocalCameraTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalCameraTrack.en-US.mdx) &mdash; This hook lets you create a local camera video track. You can call this method multiple times in different components to create multiple tracks. To access the same track in multiple components, pass the same track object to those components.
 
 - [`useJoin`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useJoin.en-US.mdx) &mdash; This hook lets a user automatically join a channel when the component is ready and automatically leaves the channel when the component is unmounted.
 

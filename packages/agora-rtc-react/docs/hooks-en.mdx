@@ -2,9 +2,9 @@
 title: Hooks
 ---
 
-<h2 className="anchor index-auto-group index-hook-useconnectionstate" id="useconnectionstate">
+<H2 className="anchor index-auto-group index-hook-useconnectionstate" id="useconnectionstate">
   useConnectionState
-</h2>
+</H2>
 
 Returns the detailed connection state of the SDK.
 
@@ -32,9 +32,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-useisconnected" id="useisconnected">
+<H2 className="anchor index-auto-group index-hook-useisconnected" id="useisconnected">
   useIsConnected
-</h2>
+</H2>
 
 Returns whether the SDK is connected to Agora's server.
 
@@ -62,9 +62,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-usecurrentuid" id="usecurrentuid">
+<H2 className="anchor index-auto-group index-hook-usecurrentuid" id="usecurrentuid">
   useCurrentUID
-</h2>
+</H2>
 
 Returns the current user ID.
 
@@ -92,9 +92,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-usenetworkquality" id="usenetworkquality">
+<H2 className="anchor index-auto-group index-hook-usenetworkquality" id="usenetworkquality">
   useNetworkQuality
-</h2>
+</H2>
 
 Returns the network quality of the local user.
 
@@ -122,9 +122,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-usevolumelevel" id="usevolumelevel">
+<H2 className="anchor index-auto-group index-hook-usevolumelevel" id="usevolumelevel">
   useVolumeLevel
-</h2>
+</H2>
 
 Returns the volume level of an audio track at a frequency of once per second.
 
@@ -153,9 +153,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-usertcclient" id="usertcclient">
+<H2 className="anchor index-auto-group index-hook-usertcclient" id="usertcclient">
   useRTCClient
-</h2>
+</H2>
 
 Returns the `IAgoraRTCClient` object.
 
@@ -183,9 +183,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-usejoin" id="usejoin">
+<H2 className="anchor index-auto-group index-hook-usejoin" id="usejoin">
   useJoin
-</h2>
+</H2>
 
 This hook lets a user automatically join a channel when the component is ready and automatically leaves the channel when the component is unmounted.
 
@@ -236,9 +236,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-usepublish" id="usepublish">
+<H2 className="anchor index-auto-group index-hook-usepublish" id="usepublish">
   usePublish
-</h2>
+</H2>
 
 This hook lets you publish the local tracks when the component is ready and unpublish them when the component is unmounted.
 
@@ -274,14 +274,14 @@ function App() {
 }
 ```
 
-<h2
+<H2
   className="anchor index-auto-group index-hook-uselocalmicrophonetrack"
   id="uselocalmicrophonetrack"
 >
   useLocalMicrophoneTrack
-</h2>
+</H2>
 
-This hook lets you create a local microphone audio track. You can call this method multiple times to create multiple tracks. If you need to access the same track in multiple components, you can pass the same track object to multiple components.
+This hook lets you create a local microphone audio track. You can call this method multiple times in different components to create multiple tracks. To access the same track in multiple components, pass the same track object to those components.
 
 - This hook can only create the audio track once before the component is destroyed.
 - After the component is unmounted, the audio track created by this hook stops publishing.
@@ -316,21 +316,22 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-uselocalcameratrack" id="uselocalcameratrack">
+<H2 className="anchor index-auto-group index-hook-uselocalcameratrack" id="uselocalcameratrack">
   useLocalCameraTrack
-</h2>
+</H2>
 
-This hook lets you create a local camera video track. You can call this method multiple times to create multiple tracks. If you need to access the same track in multiple components, you can pass the same track object to multiple components.
+This hook lets you create a local camera video track. You can call this method multiple times in different components to create multiple tracks. To access the same track in multiple components, pass the same track object to those components.
 
 - This hook can only create the video track once before the component is destroyed.
 - After the component is unmounted, the video track created by this hook stops publishing.
 
 #### Parameters
 
-| Parameter | Type                                                                                                                     | Required | Description                                                                                                                                          |
-| --------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ready`   | `boolean`                                                                                                                | No       | Whether it is ready to create the track. The default value is `true`.                                                                                |
-| `client`  | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method. |
+| Parameter                | Type                                                                                                                     | Required | Description                                                                                                                                                                                       |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ready`                  | `boolean`                                                                                                                | No       | Whether it is ready to create the track. The default value is `true`.                                                                                                                             |
+| `cameraVideoTrackConfig` | `CameraVideoTrackInitConfig`                                                                                             | No       | Configurations for initializing the camera video track. See [`CameraVideoTrackInitConfig`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/cameravideotrackinitconfig.html) for details. |
+| `client`                 | [`IAgoraRTCClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html) &VerticalLine; `null` | No       | Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.                                              |
 
 #### Returns
 
@@ -348,15 +349,15 @@ Returns an object containing the following properties:
 import { useLocalCameraTrack } from "agora-rtc-react";
 
 function App() {
-  const audioTrack = useLocalCameraTrack();
+  const videoTrack = useLocalCameraTrack();
 
   return <></>;
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-uselocalscreentrack" id="uselocalscreentrack">
+<H2 className="anchor index-auto-group index-hook-uselocalscreentrack" id="uselocalscreentrack">
   useLocalScreenTrack
-</h2>
+</H2>
 
 This hook lets you create a local video track for screen-sharing.
 
@@ -426,9 +427,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-useremotevideotracks" id="useremotevideotracks">
+<H2 className="anchor index-auto-group index-hook-useremotevideotracks" id="useremotevideotracks">
   useRemoteVideoTracks
-</h2>
+</H2>
 
 This hook lets you automatically subscribe to and retrieve remote users' video tracks.
 
@@ -465,9 +466,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-useremoteaudiotracks" id="useremoteaudiotracks">
+<H2 className="anchor index-auto-group index-hook-useremoteaudiotracks" id="useremoteaudiotracks">
   useRemoteAudioTracks
-</h2>
+</H2>
 
 This hook lets you automatically subscribe to and retrieve remote users' audio tracks.
 
@@ -505,9 +506,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-useremoteusertrack" id="useremoteusertrack">
+<H2 className="anchor index-auto-group index-hook-useremoteusertrack" id="useremoteusertrack">
   useRemoteUserTrack
-</h2>
+</H2>
 
 This hook lets you retrieve the audio or video track of a remote user.
 
@@ -544,9 +545,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-useremoteusers" id="useremoteusers">
+<H2 className="anchor index-auto-group index-hook-useremoteusers" id="useremoteusers">
   useRemoteUsers
-</h2>
+</H2>
 
 This hook lets you retrieve the list of remote users.
 
@@ -580,9 +581,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-useautoplayvideotrack" id="useautoplayvideotrack">
+<H2 className="anchor index-auto-group index-hook-useautoplayvideotrack" id="useautoplayvideotrack">
   useAutoPlayVideoTrack
-</h2>
+</H2>
 
 This hook lets you automatically play a local or remote video track.
 
@@ -614,9 +615,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-useautoplayaudiotrack" id="useautoplayaudiotrack">
+<H2 className="anchor index-auto-group index-hook-useautoplayaudiotrack" id="useautoplayaudiotrack">
   useAutoPlayAudioTrack
-</h2>
+</H2>
 
 This hook lets you automatically play a local or remote audio track.
 
@@ -647,9 +648,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-useclientevent" id="useclientevent">
+<H2 className="anchor index-auto-group index-hook-useclientevent" id="useclientevent">
   useClientEvent
-</h2>
+</H2>
 
 This hook lets you listen to specific events of the `IAgoraRTCClient` object.
 
@@ -681,9 +682,9 @@ function App() {
 }
 ```
 
-<h2 className="anchor index-auto-group index-hook-usetrackevent" id="usetrackevent">
+<H2 className="anchor index-auto-group index-hook-usetrackevent" id="usetrackevent">
   useTrackEvent
-</h2>
+</H2>
 
 This hook lets you listen to specific events of the local or remote track.
 

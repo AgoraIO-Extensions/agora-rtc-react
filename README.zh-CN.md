@@ -89,9 +89,9 @@ This example will render Agora Client into a container on the page.
 
 - [`useLocalScreenTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalScreenTrack.zh-CN.mdx) &mdash; 用于创建本地屏幕共享的视频轨道。
 
-- [`useLocalMicrophoneTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalMicrophoneTrack.zh-CN.mdx) &mdash; 用于创建本地麦克风音频轨道。
+- [`useLocalMicrophoneTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalMicrophoneTrack.zh-CN.mdx) &mdash; 用于创建本地麦克风音频轨道。你可以在不同组件中调用该方法以创建多个轨道。如果要在多个组件中访问同一个轨道，请确保在多个组件中都传入同一个轨道对象。
 
-- [`useLocalCameraTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalCameraTrack.zh-CN.mdx) &mdash; 用于创建本地摄像头视频轨道。
+- [`useLocalCameraTrack`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useLocalCameraTrack.zh-CN.mdx) &mdash; 用于创建本地摄像头视频轨道。你可以在不同组件中调用该方法以创建多个轨道。如果要在多个组件中访问同一个轨道，请确保在多个组件中都传入同一个轨道对象。
 
 - [`useJoin`](https://github.com/AgoraIO-Extensions/agora-rtc-react/tree/main/packages/agora-rtc-react/docs/hooks/useJoin.zh-CN.mdx) &mdash; 用于加入频道。当组件准备好时加入频道，当组件卸载时自动离开频道。
 
