@@ -63,4 +63,4 @@ jobs:
       - name: NPM Publish
         if: ${{ !inputs.dry-run }}
         run: |
-          pnpm -F agora-rtc-react release ${{ inputs.increment }} --ci
+          pnpm -F agora-rtc-react release ${{ env.version }} --ci
