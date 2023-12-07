@@ -2,6 +2,10 @@
   "name": "agora-rtc-react-mono",
   "private": true,
   "description": "Agora RTC React SDK",
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
   "scripts": {
     "prepare": "husky install",
     "build": "pnpm -r run build",
