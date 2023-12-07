@@ -3,14 +3,15 @@ name: Publish to NPM
 on:
   workflow_dispatch:
     inputs:
-      package:
-        type: choice
-        description: "choose package"
-        default: "agora-rtc-react"
+      increment:
+        description: 'Increment "major", "minor", "patch", or "pre*" version; or specify version [default: "patch"]'
         required: true
-        options:
-          - agora-rtc-react
-          - agora-rtc-react-ui
+        default: "patch"
+        type: string
+      releases:
+        description: "create Releases, choose false if specify version"
+        default: true
+        type: boolean
       dry-run:
         description: "Do not touch or write anything, but show the commands"
         default: true
@@ -38,16 +39,11 @@ jobs:
         run: |
           npm set "//registry.npmjs.org/:_authToken" ${{ secrets.NPM_TOKEN }}
 
-      - name: Get Package Info
-        run: |
-          version=$(node -p "require('./packages/${{ inputs.package }}/package.json').version")
-          echo "version=${version}" >> $GITHUB_ENV
-
       - name: Dry Run Release
         if: ${{ inputs.dry-run }}
         run: |
           npm whoami
-          pnpm -F agora-rtc-react release ${{ env.version }} -d --ci
+          pnpm -F agora-rtc-react release ${{ inputs.increment }} -d --ci
 
       - name: Config Git
         if: ${{ !inputs.dry-run }}
@@ -58,9 +54,14 @@ jobs:
       - name: Update CHANGELOG.md
         if: ${{ !inputs.dry-run }}
         run: |
-          pnpm release ${{ env.version }} --ci --no-git.tag --no-github.release --npm.allowSameVersion
+          pnpm release ${{ inputs.increment }} --ci --no-git.tag --no-github.release --npm.allowSameVersion
+
+      - name: Update VERSION
+        if: ${{ !inputs.dry-run }}
+        run: |
+          pnpm -F agora-rtc-react exec esbuild-dev $PWD/scripts/release/update-version.ts target:agora-rtc-react @${{ inputs.increment }}
 
       - name: NPM Publish
         if: ${{ !inputs.dry-run }}
         run: |
-          pnpm -F agora-rtc-react release ${{ env.version }} --ci
+          pnpm -F agora-rtc-react release ${{ inputs.increment }} --ci --github.release=${{ inputs.releases }}
