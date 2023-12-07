@@ -4,7 +4,11 @@
 
 ### Features
 
-- allow cameraVideoTrackConfig in useLocalCameraTrack ([#159](https://github.com/AgoraIO-Extensions/agora-rtc-react/issues/159)) ([a583aeb](https://github.com/AgoraIO-Extensions/agora-rtc-react/commit/a583aebe99c9207359257ee23ea6785229a1e9a1))
+- allow cameraVideoTrackConfig in useLocalCameraTrack ([a583aeb](https://github.com/AgoraIO-Extensions/agora-rtc-react/commit/a583aebe99c9207359257ee23ea6785229a1e9a1))
+
+### Bug Fixes
+
+- get this error CAN_NOT_PUBLISH_MULTIPLE_VIDEO_TRACKS on vite react js with firefox only ([#159](https://github.com/AgoraIO-Extensions/agora-rtc-react/issues/159))
 
 # [2.0.0-beta.0](https://github.com/AgoraIO-Extensions/agora-rtc-react/compare/v2.0.0-alpha.1...v2.0.0-beta.0) (2023-08-08)
 
