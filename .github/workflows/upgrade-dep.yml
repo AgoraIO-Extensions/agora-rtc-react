@@ -42,5 +42,5 @@ jobs:
           target-branch: ${{ github.ref_name }}
           target-branch-name-surffix: dep-update
           pull-request-title: |
-            [Auto] Upgrade ${{inputs.package-name}} to ${{inputs.package-version}}
+            chore: upgrade ${{inputs.package-name}} to ${{inputs.package-version}}
           add-paths: .
