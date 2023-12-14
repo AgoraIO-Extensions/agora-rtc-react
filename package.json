@@ -71,7 +71,7 @@
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.7",
     "@types/testing-library__jest-dom": "^5.14.8",
-    "agora-rtc-sdk-ng": "4.19.3",
+    "agora-rtc-sdk-ng": "4.20.0",
     "agora-rtc-sdk-ng-fake": "github:AgoraIO-Extensions/agora-rtc-sdk-ng-fake#semver:^1.0.4",
     "react-test-renderer": "^18.2.0",
     "storybook": "^7.0.26",
