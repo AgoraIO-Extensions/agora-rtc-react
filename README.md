@@ -13,6 +13,8 @@ English | [简体中文](./README.zh-CN.md)
 
 agora-rtc-react makes it easier to integrate [agora-rtc-sdk-ng](https://www.npmjs.com/package/agora-rtc-sdk-ng) in React applications.
 
+Since 2.0.0, you no longer need to add agora-rtc-sdk-ng in your own package.json.
+
 # Installation
 
 ```bash

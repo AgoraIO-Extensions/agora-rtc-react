@@ -12,19 +12,16 @@ on:
         description: "upgrade package version: [eg: '*.*.*']"
         required: true
         type: string
-      create-branch-name:
-        description: "head branch name: [eg: 'dev/upgrade-dep']"
-        required: true
-        type: string
 
 jobs:
   upgrade-dep:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup 🛠️
         uses: ./.github/actions/setup
@@ -32,29 +29,18 @@ jobs:
       - name: Upgrade Dependencies 🚀
         run: |
           pnpm install
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          git config --global user.name "${{ github.actor }}"
-          git fetch
-          if git rev-parse --verify origin/${{ inputs.create-branch-name }} >/dev/null 2>&1
-          then
-            git switch ${{ inputs.create-branch-name }}
-          else
-            git switch -c ${{ inputs.create-branch-name }}
-            echo "CREATE_PR=1" >> "$GITHUB_ENV"
-          fi
           pnpm -r exec esbuild-dev $PWD/scripts/upgrade-deps.ts dep:${{ inputs.package-name }} @${{ inputs.package-version }}
           pnpm -w exec esbuild-dev $PWD/scripts/upgrade-deps.ts dep:${{ inputs.package-name }} @${{ inputs.package-version }}
           pnpm install --no-frozen-lockfile
-          # pnpm run test
-          if git diff --quiet;
-          then
-            echo "No changes, no need to update dependencies.";
-          else
-            git add .
-            git commit -m "chore: upgrade ${{inputs.package-name}} to ${{inputs.package-version}}"
-            git push origin ${{ inputs.create-branch-name }}
-          fi
-      - name: Create Pull Request 📝
-        if: env.CREATE_PR == 1
-        run: |
-          gh pr create -B ${{ github.ref_name }} -H ${{ inputs.create-branch-name }} --title '🤖chore: upgrade ${{inputs.package-name}} to ${{inputs.package-version}}' --body 'Created by Github action' --label 'ci:dep-upgrade'
+          pnpm run test
+
+      - name: Create pull request
+        uses: AgoraIO-Extensions/actions/.github/actions/pr@main
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          target-repo: ${{ github.workspace }}
+          target-branch: ${{ github.ref_name }}
+          target-branch-name-surffix: dep-update
+          pull-request-title: |
+            chore: upgrade ${{inputs.package-name}} to ${{inputs.package-version}}
+          add-paths: .
