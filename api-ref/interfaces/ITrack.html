@@ -25,7 +25,7 @@
 <li><a href="ILocalTrack.html" class="tsd-signature-type tsd-kind-interface">ILocalTrack</a></li>
 <li><a href="IRemoteTrack.html" class="tsd-signature-type tsd-kind-interface">IRemoteTrack</a></li></ul></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.19.3/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4182</li></ul></aside>
+<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.20.0/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4249</li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -62,7 +62,7 @@
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.19.3/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4194</li></ul></aside></section>
+<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.20.0/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4261</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-external"><a id="trackMediaType" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>track<wbr/>Media<wbr/>Type</span><a href="#trackMediaType" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">track<wbr/>Media<wbr/>Type</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;audio&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;video&quot;</span></div>
@@ -74,7 +74,7 @@
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.19.3/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4188</li></ul></aside></section></section>
+<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.20.0/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4255</li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="getListeners" class="tsd-anchor"></a>
@@ -96,7 +96,7 @@
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Inherited from EventEmitter.getListeners</p>
 <ul>
-<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.19.3/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:1659</li></ul></aside></li></ul></section>
+<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.20.0/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:1679</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external"><a id="getMediaStreamTrack" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Media<wbr/>Stream<wbr/>Track</span><a href="#getMediaStreamTrack" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -108,7 +108,7 @@
 
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.19.3/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4206</li></ul></aside></li></ul></section>
+<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.20.0/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4273</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external"><a id="getRTCRtpTransceiver" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>getRTCRtp<wbr/>Transceiver</span><a href="#getRTCRtpTransceiver" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -119,8 +119,8 @@
 <blockquote>
 <p>If the SDK experiences a reconnection, the <code>RTCRtpTransceiver</code> instance corresponding to the current track might change. You can obtain the new <code>RTCRtpTransceiver</code> instance through the following callbacks:</p>
 <ul>
-<li>For a local track: [&quot;transceiver-updated&quot;]ILocalTrack.event_transceiver_updated</li>
-<li>For a remote track: [&quot;transceiver-updated-2&quot;]IRemoteTrack.event_transceiver_updated_2</li>
+<li>For a local track: [ILocalTrack.transceiver-updated]__type</li>
+<li>For a remote track: [IRemoteTrack.transceiver-updated]__type</li>
 </ul>
 </blockquote>
 </div>
@@ -136,7 +136,7 @@
 
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.19.3/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4219</li></ul></aside></li></ul></section>
+<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.20.0/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4286</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external"><a id="getTrackId" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Track<wbr/>Id</span><a href="#getTrackId" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -148,7 +148,7 @@
 
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.19.3/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4200</li></ul></aside></li></ul></section>
+<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.20.0/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4267</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="off" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>off</span><a href="#off" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -173,7 +173,7 @@
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Inherited from EventEmitter.off</p>
 <ul>
-<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.19.3/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:1682</li></ul></aside></li></ul></section>
+<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.20.0/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:1702</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="on" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>on</span><a href="#on" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -199,7 +199,7 @@
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Inherited from EventEmitter.on</p>
 <ul>
-<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.19.3/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:1667</li></ul></aside></li></ul></section>
+<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.20.0/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:1687</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="once" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>once</span><a href="#once" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -225,7 +225,7 @@
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Inherited from EventEmitter.once</p>
 <ul>
-<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.19.3/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:1675</li></ul></aside></li></ul></section>
+<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.20.0/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:1695</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external"><a id="play" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>play</span><a href="#play" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -248,7 +248,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.19.3/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4227</li></ul></aside></li></ul></section>
+<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.20.0/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4294</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="removeAllListeners" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>remove<wbr/>All<wbr/>Listeners</span><a href="#removeAllListeners" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -268,7 +268,7 @@
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Inherited from EventEmitter.removeAllListeners</p>
 <ul>
-<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.19.3/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:1688</li></ul></aside></li></ul></section>
+<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.20.0/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:1708</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-external"><a id="stop" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>stop</span><a href="#stop" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-external">
@@ -279,7 +279,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.19.3/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4231</li></ul></aside></li></ul></section></section></div>
+<li>Defined in node_modules/.pnpm/agora-rtc-sdk-ng@4.20.0/node_modules/agora-rtc-sdk-ng/rtc-sdk_en.d.ts:4298</li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
