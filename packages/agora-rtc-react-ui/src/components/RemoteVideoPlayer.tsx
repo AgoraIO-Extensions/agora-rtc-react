@@ -1,4 +1,4 @@
-import type { IAgoraRTCClient, IRemoteVideoTrack } from "agora-rtc-react";
+import type { IAgoraRTCClient, IRemoteVideoTrack, VideoPlayerConfig } from "agora-rtc-react";
 import { RemoteVideoTrack, useRTCClient } from "agora-rtc-react";
 import {
   FloatBoxStyle,
@@ -29,6 +29,10 @@ export interface RemoteVideoPlayerProps extends HTMLProps<HTMLDivElement> {
    * client instance
    */
   readonly client?: IAgoraRTCClient | null;
+  /**
+   * Playback configurations for a video track. Set the playback configurations for a video track when calling [ILocalVideoTrack.play]{@link ILocalVideoTrack.play}.
+   */
+  readonly videoPlayerConfig?: VideoPlayerConfig;
 }
 
 /**
@@ -42,6 +46,7 @@ export function RemoteVideoPlayer({
   client,
   style,
   children,
+  videoPlayerConfig,
   ...props
 }: RemoteVideoPlayerProps) {
   const mergedStyle = useMergedStyle(VideoTrackWrapperStyle, style);
@@ -52,7 +57,7 @@ export function RemoteVideoPlayer({
   playVideo = playVideo ?? hasVideo;
   return (
     <div {...props} style={mergedStyle}>
-      <RemoteVideoTrack play={playVideo} track={track} />
+      <RemoteVideoTrack play={playVideo} track={track} videoPlayerConfig={videoPlayerConfig} />
       {cover && !playVideo && <UserCover cover={cover} />}
       <div style={FloatBoxStyle}>{children}</div>
     </div>

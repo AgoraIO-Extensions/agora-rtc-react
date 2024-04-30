@@ -1,4 +1,4 @@
-import type { IRemoteVideoTrack } from "agora-rtc-sdk-ng";
+import type { IRemoteVideoTrack, VideoPlayerConfig } from "agora-rtc-sdk-ng";
 import type { HTMLProps } from "react";
 import { useState } from "react";
 
@@ -17,6 +17,11 @@ export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
    * `true`: Play the track.`false`: Stop playing the track.
    */
   readonly play?: boolean;
+
+  /**
+   * Playback configurations for a video track. Set the playback configurations for a video track when calling [ILocalVideoTrack.play]{@link ILocalVideoTrack.play}.
+   */
+  readonly videoPlayerConfig?: VideoPlayerConfig;
 }
 
 /**
@@ -39,11 +44,17 @@ export interface RemoteVideoTrackProps extends HTMLProps<HTMLDivElement> {
  * }
  * ```
  */
-export function RemoteVideoTrack({ track, play, style, ...props }: RemoteVideoTrackProps) {
+export function RemoteVideoTrack({
+  track,
+  play,
+  style,
+  videoPlayerConfig,
+  ...props
+}: RemoteVideoTrackProps) {
   const mergedStyle = useMergedStyle(VideoTrackStyle, style);
   const [div, setDiv] = useState<HTMLDivElement | null>(null);
 
-  useAutoPlayVideoTrack(track, play, div);
+  useAutoPlayVideoTrack(track, play, videoPlayerConfig, div);
 
   return <div {...props} ref={setDiv} style={mergedStyle} />;
 }

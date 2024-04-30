@@ -4,6 +4,7 @@ import type {
   IRemoteAudioTrack,
   IRemoteVideoTrack,
   ITrack,
+  VideoPlayerConfig,
 } from "agora-rtc-sdk-ng";
 import type { PropsWithChildren } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -100,6 +101,7 @@ export function TrackBoundary({ children }: PropsWithChildren) {
 export function useAutoPlayVideoTrack(
   track: Nullable<IRemoteVideoTrack | ILocalVideoTrack>,
   play?: boolean,
+  videoPlayerConfig?: VideoPlayerConfig,
   div?: HTMLElement | null,
 ) {
   const controller = useContext(TrackBoundaryContext);
@@ -107,7 +109,7 @@ export function useAutoPlayVideoTrack(
   useEffect(() => {
     if (track) {
       if (div && play) {
-        track.play(div);
+        track.play(div, videoPlayerConfig || undefined);
       } else {
         track.stop();
       }
@@ -123,7 +125,7 @@ export function useAutoPlayVideoTrack(
         };
       }
     }
-  }, [track, div, play, controller]);
+  }, [track, div, play, controller, videoPlayerConfig]);
 }
 
 /**

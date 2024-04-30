@@ -1,4 +1,4 @@
-import type { ILocalVideoTrack } from "agora-rtc-sdk-ng";
+import type { ILocalVideoTrack, VideoPlayerConfig } from "agora-rtc-sdk-ng";
 import type { HTMLProps } from "react";
 import { useEffect, useState } from "react";
 
@@ -28,6 +28,11 @@ export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
    * `true`: Pause sending media data of the track.`false`: Resume sending media data of the track.
    */
   readonly muted?: boolean;
+
+  /**
+   * Playback configurations for a video track. Set the playback configurations for a video track when calling [ILocalVideoTrack.play]{@link ILocalVideoTrack.play}.
+   */
+  readonly videoPlayerConfig?: VideoPlayerConfig;
 }
 
 /**
@@ -48,6 +53,7 @@ export function LocalVideoTrack({
   disabled,
   muted,
   style,
+  videoPlayerConfig,
   ...props
 }: LocalVideoTrackProps) {
   const mergedStyle = useMergedStyle(VideoTrackStyle, style);
@@ -55,7 +61,7 @@ export function LocalVideoTrack({
 
   const track = useAwaited(maybeTrack);
 
-  useAutoPlayVideoTrack(track, play, div);
+  useAutoPlayVideoTrack(track, play, videoPlayerConfig, div);
 
   useEffect(() => {
     if (track && disabled != null) {

@@ -1,6 +1,8 @@
 import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
+import * as fun from "agora-rtc-react/src/components/TrackBoundary";
 import * as clientHook from "agora-rtc-react/src/hooks/tools";
+import type { VideoPlayerConfig } from "agora-rtc-sdk-ng";
 import { FakeMicrophoneAudioTrack } from "agora-rtc-sdk-ng-fake";
 import { describe, expect, test, vi } from "vitest";
 
@@ -34,6 +36,19 @@ describe("LocalMicrophoneAndCameraUser component", () => {
     const cover = "test";
     const { container } = render(<LocalMicrophoneAndCameraUser cameraOn cover={cover} />);
     expect(container.querySelector("img")?.getAttribute("src")).toBeUndefined();
+  });
+
+  test("config videoPlayerConfig on LocalMicrophoneAndCameraUser", () => {
+    vi.spyOn(fun, "useAutoPlayVideoTrack");
+    const videoPlayerConfig: VideoPlayerConfig = { mirror: false, fit: "cover" };
+    render(<LocalMicrophoneAndCameraUser videoPlayerConfig={videoPlayerConfig} />);
+    expect(fun.useAutoPlayVideoTrack).toBeCalledWith(
+      expect.anything(),
+      false,
+      videoPlayerConfig,
+      expect.anything(),
+    );
+    vi.clearAllMocks();
   });
 });
 
