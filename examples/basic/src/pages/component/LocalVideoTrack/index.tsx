@@ -28,6 +28,7 @@ export const LocalVideoTrackComponent = () => {
           play={cameraOn}
           style={{ width: "300px", height: "300px" }}
           track={localCameraTrack}
+          videoPlayerConfig={{ mirror: true, fit: "contain" }}
         />
       </div>
       <MediaControl
