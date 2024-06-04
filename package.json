@@ -54,7 +54,7 @@
     "minimist": "^1.2.8",
     "prettier": "^2.8.8",
     "release-it": "^16.1.3",
-    "vite": "^4.5.2",
+    "vite": "^4.5.3",
     "vitest": "^0.34.6",
     "vitest-canvas-mock": "^0.3.3",
     "@ngneat/falso": "^6.4.0",
@@ -76,7 +76,7 @@
     "react-test-renderer": "^18.2.0",
     "storybook": "^7.0.26",
     "tsup": "^7.1.0",
-    "typedoc": "^0.24.8",
+    "typedoc": "^0.25.13",
     "typescript": "^5.1.6"
   },
   "lint-staged": {
