@@ -20,6 +20,8 @@ import type {
   UID,
 } from "agora-rtc-sdk-ng";
 
+import type { ImageModerationConnectionState } from "../hooks";
+
 import type { Disposer, Fn } from "./utils";
 
 export declare enum InspectState {
@@ -540,6 +542,27 @@ export function listen(
     /** The current connection state. */
     error?: IAgoraRTCError,
   ) => void,
+): Disposer;
+
+/**
+ * @ignore
+ */
+export function listen(
+  client: IAgoraRTCClient,
+  event: "image-moderation-connection-state-change",
+  listener: (
+    newState: ImageModerationConnectionState,
+    preState: ImageModerationConnectionState,
+  ) => void,
+): Disposer;
+
+/**
+ * Callback for receiving the DataStream message.
+ */
+export function listen(
+  client: IAgoraRTCClient,
+  event: "stream-message",
+  listener: (uid: UID, payload: Uint8Array) => void,
 ): Disposer;
 
 /**

@@ -27,6 +27,28 @@ import type { Fn, Nullable } from "../misc/utils";
 import { useIsomorphicLayoutEffect } from "./tools";
 
 /**
+ * Connection state between the SDK and the third-party video moderation service.
+ */
+export declare enum ImageModerationConnectionState {
+  /**
+   * The SDK is connecting to the third-party service.
+   */
+  CONNECTING = "CONNECTING",
+  /**
+   * The SDK is reconnecting to the third-party service.
+   */
+  RECONNECTING = "RECONNECTING",
+  /**
+   * The SDK is connected to the third-party service.
+   */
+  CONNECTED = "CONNECTED",
+  /**
+   * The SDK has disconnected from the third-party service.
+   */
+  CLOSED = "CLOSED",
+}
+
+/**
  * Occurs when the state of the connection between the SDK and the server changes.
  */
 export function useClientEvent(
@@ -413,6 +435,27 @@ export function useClientEvent(
   event: "content-inspect-error",
   listener: Nullable<(error?: IAgoraRTCError) => void>,
 ): void;
+
+/**
+ * @ignore
+ */
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "image-moderation-connection-state-change",
+  listener: Nullable<
+    (newState: ImageModerationConnectionState, preState: ImageModerationConnectionState) => void
+  >,
+): void;
+
+/**
+ * Callback for receiving the DataStream message.
+ */
+export function useClientEvent(
+  client: Nullable<IAgoraRTCClient>,
+  event: "stream-message",
+  listener: Nullable<(uid: UID, payload: Uint8Array) => void>,
+): void;
+
 export function useClientEvent(
   client: Nullable<IAgoraRTCClient>,
   event: string,
