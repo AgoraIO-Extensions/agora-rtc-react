@@ -5,7 +5,7 @@ import type { IRemoteAudioTrack, IRemoteVideoTrack, VideoPlayerConfig } from "ag
 import { FakeRTCClient } from "agora-rtc-sdk-ng-fake";
 import { describe, expect, test, vi } from "vitest";
 
-import { LocalVideoTrack, RemoteUser } from "../../src/components";
+import { RemoteUser } from "../../src/components";
 import * as fun from "../../src/components/TrackBoundary";
 import { AgoraRTCProvider } from "../../src/hooks";
 import * as clientHook from "../../src/hooks";

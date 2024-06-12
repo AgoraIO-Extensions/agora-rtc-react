@@ -1,7 +1,7 @@
 import type { ConnectionDisconnectedReason, ConnectionState } from "agora-rtc-react";
 import { useClientEvent, useJoin, useRTCClient } from "agora-rtc-react";
 import { List, Typography } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Container, MediaControl, Room } from "../../../components";
 import { appConfig } from "../../../utils";
