@@ -45,7 +45,7 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
   readonly children?: ReactNode;
 
   /**
-   * Playback configurations for a video track. Set the playback configurations for a video track when calling [ILocalVideoTrack.play]{@link ILocalVideoTrack.play}.
+   * Playback configurations for a video track including setting the mirror and display mode. The SDK enables mirror mode for the local video track by default. See [`VideoPlayerConfig`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//VideoPlayerConfig.html) for details.
    */
   readonly videoPlayerConfig?: VideoPlayerConfig;
 }

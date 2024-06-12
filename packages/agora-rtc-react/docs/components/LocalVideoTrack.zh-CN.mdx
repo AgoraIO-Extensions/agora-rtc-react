@@ -6,12 +6,13 @@
 
 #### Props
 
-| 属性名     | 类型               | 默认值  | 描述                                                                                                                                                                                                                                                              |
-| ---------- | ------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `track`    | `ILocalVideoTrack` | 无      | 要播放的本地视频轨道。通过 [`useLocalCameraTrack`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/hooks#uselocalcameratrack) 或 Web SDK 的 [`IAgoraRTC.createScreenVideoTrack`](/api-ref/rtc/react/interfaces/iagorartc.html#createscreenvideotrack) 创建。 |
-| `play`     | `boolean`          | `false` | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                                                                                                                   |
-| `disabled` | `boolean`          | `false` | <li>`true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。</li><li>`false`：启用该轨道。</li>                                                                                                                                                                   |
-| `muted`    | `boolean`          | `false` | <li>`true`：暂停发送该轨道的媒体数据。</li><li>`false`：恢复发送该轨道的媒体数据。</li>                                                                                                                                                                           |
+| 属性名              | 类型                | 默认值  | 描述                                                                                                                                                                                                                                                              |
+| ------------------- | ------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `track`             | `ILocalVideoTrack`  | 无      | 要播放的本地视频轨道。通过 [`useLocalCameraTrack`](https://doc.shengwang.cn/api-ref/rtc/react/react-sdk/hooks#uselocalcameratrack) 或 Web SDK 的 [`IAgoraRTC.createScreenVideoTrack`](/api-ref/rtc/react/interfaces/iagorartc.html#createscreenvideotrack) 创建。 |
+| `play`              | `boolean`           | `false` | <li>`true`：播放该轨道。</li><li>`false`：停止播放该轨道。</li>                                                                                                                                                                                                   |
+| `disabled`          | `boolean`           | `false` | <li>`true`：禁用该轨道。禁用后，SDK 将停止播放和发布该轨道。</li><li>`false`：启用该轨道。</li>                                                                                                                                                                   |
+| `muted`             | `boolean`           | `false` | <li>`true`：暂停发送该轨道的媒体数据。</li><li>`false`：恢复发送该轨道的媒体数据。</li>                                                                                                                                                                           |
+| `videoPlayerConfig` | `VideoPlayerConfig` | 无      | 视频轨道的播放配置。可以设置播放参数（镜像/显示模式），详见 [`VideoPlayerConfig`](/api-ref/rtc/react/interfaces/videoplayerconfig.html)。对于本地视频轨道，镜像模式默认开启。                                                                                     |
 
 #### 注意事项
 
