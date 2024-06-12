@@ -15,26 +15,6 @@ import { useAsyncEffect, useIsUnmounted } from "./tools";
 import type { massUserProps } from "./types";
 import { useIsConnected } from "./useIsConnected";
 
-/**
- * This hook lets you automatically subscribe to and retrieve remote users' audio tracks.
- * When the component is unmounted, this hook stops subscribing to the audio tracks of the specified users.
- * This hook updates the subscribed audio tracks when the users parameter changes.
- *
- * @param users - The list of remote users.
- * @param client - Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
- * @example
- * ```jsx
- * import { useRemoteUsers, useRemoteVideoTracks } from "agora-rtc-react";
- *
- * function App() {
- *   //get remote user list
- *   const remoteUsers = useRemoteUsers();
- *   const videoTracks = useRemoteVideoTracks(remoteUsers);
- *
- *   return <></>;
- * }
- * ```
- */
 export function useRemoteAudioTracks(
   users: IAgoraRTCRemoteUser[] | undefined,
   client?: IAgoraRTCClient | null,

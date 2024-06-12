@@ -11,21 +11,6 @@ const initQuality = (): NetworkQualityEx => ({
   delay: 0,
 });
 
-/**
- * Returns the network quality of the local user.
- *
- * @param client - Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
- * @example
- * ```jsx
- * import { useNetworkQuality } from "agora-rtc-react";
- *
- * function App() {
- *   const networkQuality = useNetworkQuality();
- *
- *   return <div>{networkQuality}</div>;
- * }
- * ```
- */
 export function useNetworkQuality(client?: IAgoraRTCClient | null): NetworkQualityEx {
   const resolvedClient = useRTCClient(client);
 

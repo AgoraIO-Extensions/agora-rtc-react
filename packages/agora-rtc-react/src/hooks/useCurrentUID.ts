@@ -5,21 +5,6 @@ import { useRTCClient } from "../hooks/useRTCClient";
 import { listen } from "../misc/listen";
 import { timeout } from "../misc/utils";
 
-/**
- * Returns the current user ID.
- *
- * @param client - Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
- * @example
- * ```jsx
- * import { useCurrentUID } from "agora-rtc-react";
- *
- * function App() {
- *   const uid = useCurrentUID();
- *
- *   return <div>{uid}</div>;
- * }
- * ```
- */
 export function useCurrentUID(client?: IAgoraRTCClient | null): UID | undefined {
   const resolvedClient = useRTCClient(client);
 

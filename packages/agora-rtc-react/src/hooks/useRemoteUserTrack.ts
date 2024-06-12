@@ -15,26 +15,6 @@ import { createAsyncTaskRunner, joinDisposers } from "../misc/utils";
 
 import { useIsConnected } from "./useIsConnected";
 
-/**
- * This hook lets you retrieve the audio or video track of a remote user.
- *
- * @param user - The remote user.
- * @param mediaType - The media type. Pass `"video"` or `"audio"`.
- * @param client - Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
- * @example
- * ```jsx
- * import { useRemoteUsers, useRemoteUserTrack } from "agora-rtc-react";
- *
- * function App() {
- *   const remoteUsers = useRemoteUsers();
- *
- *   const videoTrack = useRemoteUserTrack(remoteUsers[0], "video");
- *   const audioTrack = useRemoteUserTrack(remoteUsers[0], "audio");
- *
- *   return <></>;
- * }
- * ```
- */
 export function useRemoteUserTrack(
   user: IAgoraRTCRemoteUser | undefined,
   mediaType: "video",

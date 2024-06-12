@@ -10,38 +10,6 @@ import type { FetchArgs } from "../types";
 import { useAsyncEffect, useIsUnmounted } from "./tools";
 import { useIsConnected } from "./useIsConnected";
 
-/**
- * This hook lets a user automatically join a channel when the component is ready and automatically leaves the channel when the component is unmounted.
- * You can customize the conditions required to join a channel using fetchArgs. For example, generating a token and other asynchronous operations can be performed before joining the channel.
- *
- * @param fetchArgs - The parameters or asynchronous function required to join the channel. See [`JoinOptions`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x/interfaces/JoinOptions.html) for details.
- * @param ready - Whether the user is ready to join the channel. The default value is `true`.
- * @param client - Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
- * @example
- * ```jsx
- * import { useJoin } from "agora-rtc-react";
- *
- * function App() {
- *   // Example: passing a function as first argument
- *   // useJoin(async () => {
- *   //   Fetch the token before joining the channel. Note that the data type of getData must be fetchArgs
- *   //   const getData = await getToken();
- *   //   return getData;
- *   // }, calling);
- *
- *   useJoin(
- *     {
- *       appid: YOUR_APPID,
- *       channel: YOUR_CHANNEL,
- *       token: YOUR_TOKEN,
- *     },
- *     ready,
- *   );
- *
- *   return <></>;
- * }
- * ```
- */
 export function useJoin(
   fetchArgs: FetchArgs,
   ready = true,

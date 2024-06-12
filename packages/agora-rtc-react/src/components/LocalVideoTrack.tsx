@@ -9,44 +9,17 @@ import type { MaybePromiseOrNull } from "../misc/utils";
 import { useAutoPlayVideoTrack } from "./TrackBoundary";
 
 export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
-  /**
-   * The local video track to be played. Call [`IAgoraRTC.createScreenVideoTrack`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x/functions/useLocalCameraTrack.html">`useLocalCameraTrack`</a> or the Web SDK's <a href="https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createscreenvideotrack) method to create a local video track.
-   */
   readonly track?: MaybePromiseOrNull<ILocalVideoTrack>;
 
-  /**
-   * `true`: Play the track.`false`: Stop playing the track.
-   */
   readonly play?: boolean;
 
-  /**
-   * `true`: Disable the track. When disabled, the SDK will stop playing and publishing the track.`false`: Enable the track.
-   */
   readonly disabled?: boolean;
 
-  /**
-   * `true`: Pause sending media data of the track.`false`: Resume sending media data of the track.
-   */
   readonly muted?: boolean;
 
-  /**
-   * Playback configurations for a video track. Set the playback configurations for a video track when calling [ILocalVideoTrack.play]{@link ILocalVideoTrack.play}.
-   */
   readonly videoPlayerConfig?: VideoPlayerConfig;
 }
 
-/**
- * This component plays the local video track using the playback device selected by the user in the browser.
- * @example
- * ```jsx
- * import { LocalVideoTrack, useLocalCameraTrack } from "agora-rtc-react";
- *
- * function App() {
- *   const videoTrack = useLocalCameraTrack();
- *   return <LocalVideoTrack track={videoTrack} play />;
- * }
- * ```
- */
 export function LocalVideoTrack({
   track: maybeTrack,
   play,
