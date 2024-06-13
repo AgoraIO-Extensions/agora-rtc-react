@@ -30,7 +30,7 @@ export interface LocalVideoTrackProps extends HTMLProps<HTMLDivElement> {
   readonly muted?: boolean;
 
   /**
-   * Playback configurations for a video track including setting the mirror and display mode. The SDK enables mirror mode for the local video track by default. See [`VideoPlayerConfig`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//VideoPlayerConfig.html) for details.
+   * Playback configurations for a video track including setting the mirror and display mode. The SDK enables mirror mode for the local video track by default. See [`VideoPlayerConfig`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/videoplayerconfig.html) for details.
    */
   readonly videoPlayerConfig?: VideoPlayerConfig;
 }
