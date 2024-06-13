@@ -48,7 +48,7 @@ const meta: Meta = {
           const subscribe = client.subscribe.bind(client);
           return {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            subscribe: async (user, mediaType: any): Promise<any> => {
+            subscribe: async (user: IAgoraRTCRemoteUser, mediaType: any): Promise<any> => {
               const track = await subscribe(user, mediaType);
               logTrackStop(track, () =>
                 action(`${mediaType === "audio" ? "AudioTrack" : "VideoTrack"}.stop()`)(user.uid),
