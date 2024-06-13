@@ -1,10 +1,11 @@
 import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
-import type { ILocalVideoTrack } from "agora-rtc-sdk-ng";
+import type { ILocalVideoTrack, VideoPlayerConfig } from "agora-rtc-sdk-ng";
 import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 
 import { LocalVideoTrack, useAutoPlayVideoTrack } from "../../src/components";
+import * as fun from "../../src/components/TrackBoundary";
 import { useAwaited } from "../../src/hooks/tools";
 import * as stories from "../../src/stories/LocalVideoTrack.stories";
 const { Enabled, EmptyTrack } = composeStories(stories);
@@ -37,6 +38,19 @@ describe("LocalVideoTrack component", () => {
     render(<LocalVideoTrack disabled />);
     expect(mockTrack.setEnabled).toHaveBeenCalledTimes(1);
     expect(mockTrack.setEnabled).toHaveBeenCalledWith(false);
+    vi.clearAllMocks();
+  });
+
+  test("config videoPlayerConfig on video track", () => {
+    vi.spyOn(fun, "useAutoPlayVideoTrack");
+    const videoPlayerConfig: VideoPlayerConfig = { mirror: false, fit: "cover" };
+    render(<LocalVideoTrack play track={mockTrack} videoPlayerConfig={videoPlayerConfig} />);
+    expect(fun.useAutoPlayVideoTrack).toBeCalledWith(
+      undefined,
+      true,
+      videoPlayerConfig,
+      expect.anything(),
+    );
     vi.clearAllMocks();
   });
 

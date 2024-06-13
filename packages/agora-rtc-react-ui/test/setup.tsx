@@ -1,10 +1,7 @@
 import "@testing-library/jest-dom";
-import matchers from "@testing-library/jest-dom/matchers";
 import type { ReactNode } from "react";
-import { expect, vi } from "vitest";
+import { vi } from "vitest";
 import "vitest-canvas-mock";
-
-expect.extend(matchers);
 
 /**
  * started agora-rtc-sdk-ng@17.0.0, need mock RTCPeerConnection.

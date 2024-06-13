@@ -1,5 +1,6 @@
 import UseAutoPlayAudioTrack from "./useAutoPlayAudioTrack";
 import UseAutoPlayVideoTrack from "./useAutoPlayVideoTrack";
+import UseClientEvent from "./useClientEvent";
 import UseConnectionState from "./useConnectionState";
 import UseCurrentUID from "./useCurrentUID";
 import UseIsConnected from "./useIsConnected";
@@ -48,6 +49,10 @@ const Hooks = [
   {
     label: "useLocalScreenTrack",
     component: UseLocalScreenTrack,
+  },
+  {
+    label: "UseClientEvent",
+    component: UseClientEvent,
   },
 ];
 

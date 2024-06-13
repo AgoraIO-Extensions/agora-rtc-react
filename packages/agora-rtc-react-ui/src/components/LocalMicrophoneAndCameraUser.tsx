@@ -1,4 +1,4 @@
-import type { ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-react";
+import type { ICameraVideoTrack, IMicrophoneAudioTrack, VideoPlayerConfig } from "agora-rtc-react";
 import {
   FloatBoxStyle,
   VideoTrackWrapperStyle,
@@ -56,6 +56,10 @@ export interface LocalMicrophoneAndCameraUserProps extends HTMLProps<HTMLDivElem
    * Children is rendered on top of the video canvas.
    */
   readonly children?: ReactNode;
+  /**
+   * Playback configurations for a video track. Set the playback configurations for a video track when calling [ILocalVideoTrack.play]{@link ILocalVideoTrack.play}.
+   */
+  readonly videoPlayerConfig?: VideoPlayerConfig;
 }
 
 /**
@@ -73,6 +77,7 @@ export function LocalMicrophoneAndCameraUser({
   volume,
   cover,
   children,
+  videoPlayerConfig,
   style,
   ...props
 }: LocalMicrophoneAndCameraUserProps) {
@@ -86,6 +91,7 @@ export function LocalMicrophoneAndCameraUser({
         disabled={!cameraOn}
         play={playVideo}
         track={videoTrack}
+        videoPlayerConfig={videoPlayerConfig}
       />
       <MicrophoneAudioTrack
         deviceId={micDeviceId}

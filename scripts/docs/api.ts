@@ -33,10 +33,9 @@ async function writeComment(markdownPath: string) {
   const markdown = fs.readFileSync(markdownPath, "utf-8");
   const result = md.render(markdown, "utf-8");
   const dom: Document = new jsdom.JSDOM(result).window.document;
-
-  const target = dom.querySelector("H2")?.innerHTML.replace(/<code>(.*?)<\/code>/g, "$1");
+  const target = dom.querySelector("h2")?.innerHTML.replace(/<code>(.*?)<\/code>/g, "$1");
   const targetDescriptionDOMList = getElementsBetween(
-    dom.querySelector("H2"),
+    dom.querySelector("h2"),
     dom.querySelectorAll("h4")[0],
   );
 

@@ -71,12 +71,12 @@
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.7",
     "@types/testing-library__jest-dom": "^5.14.8",
-    "agora-rtc-sdk-ng": "4.20.0",
+    "agora-rtc-sdk-ng": "4.21.0",
     "agora-rtc-sdk-ng-fake": "github:AgoraIO-Extensions/agora-rtc-sdk-ng-fake#semver:^1.0.4",
     "react-test-renderer": "^18.2.0",
     "storybook": "^7.0.26",
     "tsup": "^7.1.0",
-    "typedoc": "^0.24.8",
+    "typedoc": "^0.25.13",
     "typescript": "^5.1.6"
   },
   "lint-staged": {

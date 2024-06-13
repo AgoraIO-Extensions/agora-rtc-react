@@ -1,4 +1,4 @@
-import type { IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
+import type { IAgoraRTCRemoteUser, VideoPlayerConfig } from "agora-rtc-sdk-ng";
 import type { HTMLProps, ReactNode } from "react";
 
 import { FloatBoxStyle, VideoTrackWrapperStyle, useMergedStyle } from "../assets/styles";
@@ -43,6 +43,11 @@ export interface RemoteUserProps extends HTMLProps<HTMLDivElement> {
    * The React nodes to be rendered.
    */
   readonly children?: ReactNode;
+
+  /**
+   * Playback configurations for a video track including setting the mirror and display mode. The SDK enables mirror mode for the local video track by default. See [`VideoPlayerConfig`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/videoplayerconfig.html) for details.
+   */
+  readonly videoPlayerConfig?: VideoPlayerConfig;
 }
 
 /**
@@ -73,6 +78,7 @@ export function RemoteUser({
   cover,
   style,
   children,
+  videoPlayerConfig,
   ...props
 }: RemoteUserProps) {
   const mergedStyle = useMergedStyle(VideoTrackWrapperStyle, style);
@@ -84,7 +90,7 @@ export function RemoteUser({
 
   return (
     <div {...props} style={mergedStyle}>
-      <RemoteVideoTrack play={playVideo} track={videoTrack} />
+      <RemoteVideoTrack play={playVideo} track={videoTrack} videoPlayerConfig={videoPlayerConfig} />
       <RemoteAudioTrack
         play={playAudio}
         playbackDeviceId={playbackDeviceId}

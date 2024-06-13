@@ -1,6 +1,7 @@
 import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
-import type { ICameraVideoTrack } from "agora-rtc-react";
+import type { ICameraVideoTrack, VideoPlayerConfig } from "agora-rtc-react";
+import * as fun from "agora-rtc-react/src/components/TrackBoundary";
 import { useAwaited } from "agora-rtc-react/src/hooks/tools";
 import type { Mock } from "vitest";
 import { describe, expect, test, vi } from "vitest";
@@ -30,6 +31,19 @@ describe("CameraVideoTrack component", () => {
     render(<CameraVideoTrack deviceId={"123"} />);
     expect(mockTrack.setDevice).toHaveBeenCalledTimes(1);
     expect(mockTrack.setDevice).toHaveBeenCalledWith("123");
+    vi.clearAllMocks();
+  });
+
+  test("config videoPlayerConfig on CameraVideoTrack", () => {
+    vi.spyOn(fun, "useAutoPlayVideoTrack");
+    const videoPlayerConfig: VideoPlayerConfig = { mirror: false, fit: "cover" };
+    render(<CameraVideoTrack play track={mockTrack} videoPlayerConfig={videoPlayerConfig} />);
+    expect(fun.useAutoPlayVideoTrack).toBeCalledWith(
+      undefined,
+      true,
+      videoPlayerConfig,
+      expect.anything(),
+    );
     vi.clearAllMocks();
   });
 });

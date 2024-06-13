@@ -1,6 +1,8 @@
 import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
-import { FakeRTCClient } from "agora-rtc-sdk-ng-fake";
+import * as fun from "agora-rtc-react/src/components/TrackBoundary";
+import type { VideoPlayerConfig } from "agora-rtc-sdk-ng";
+import { FakeRTCClient, FakeRemoteVideoTrack } from "agora-rtc-sdk-ng-fake";
 import { describe, expect, test, vi } from "vitest";
 
 import { RemoteVideoPlayer } from "../src/components";
@@ -18,6 +20,28 @@ describe("RemoteVideoPlayer component", () => {
     expect(container).toBeInTheDocument();
     vi.clearAllMocks();
     vi.resetAllMocks();
+  });
+
+  test("config videoPlayerConfig on RemoteVideoPlayer", () => {
+    const client = FakeRTCClient.create();
+    const track = FakeRemoteVideoTrack.create();
+    vi.spyOn(fun, "useAutoPlayVideoTrack");
+    const videoPlayerConfig: VideoPlayerConfig = { mirror: false, fit: "cover" };
+    render(
+      <RemoteVideoPlayer
+        client={client}
+        playVideo
+        track={track}
+        videoPlayerConfig={videoPlayerConfig}
+      />,
+    );
+    expect(fun.useAutoPlayVideoTrack).toBeCalledWith(
+      track,
+      true,
+      videoPlayerConfig,
+      expect.anything(),
+    );
+    vi.clearAllMocks();
   });
 });
 

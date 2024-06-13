@@ -20,6 +20,7 @@ interface RoomProps {
   renderRemoteUsers?: () => ReactNode;
   micOn: boolean;
   cameraOn: boolean;
+  showUserInfo?: boolean;
 }
 
 export function Room({
@@ -28,6 +29,7 @@ export function Room({
   renderAction,
   renderLocalUser,
   renderRemoteUsers,
+  showUserInfo = true,
 }: RoomProps) {
   const isConnected = useIsConnected();
 
@@ -46,10 +48,12 @@ export function Room({
   return (
     <>
       {renderAction ? renderAction() : undefined}
-      <UsersInfo
-        published={publishedUsers.length + (selfPublished ? 1 : 0)}
-        total={remoteUsers.length + 1}
-      />
+      {showUserInfo && (
+        <UsersInfo
+          published={publishedUsers.length + (selfPublished ? 1 : 0)}
+          total={remoteUsers.length + 1}
+        />
+      )}
       <AutoLayout>
         {isConnected &&
           (renderLocalUser ? (

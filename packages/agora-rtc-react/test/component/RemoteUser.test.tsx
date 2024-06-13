@@ -1,11 +1,12 @@
 import { randUuid } from "@ngneat/falso";
 import { composeStories } from "@storybook/react";
 import { render, waitFor } from "@testing-library/react";
-import type { IRemoteAudioTrack, IRemoteVideoTrack } from "agora-rtc-sdk-ng";
+import type { IRemoteAudioTrack, IRemoteVideoTrack, VideoPlayerConfig } from "agora-rtc-sdk-ng";
 import { FakeRTCClient } from "agora-rtc-sdk-ng-fake";
 import { describe, expect, test, vi } from "vitest";
 
 import { RemoteUser } from "../../src/components";
+import * as fun from "../../src/components/TrackBoundary";
 import { AgoraRTCProvider } from "../../src/hooks";
 import * as clientHook from "../../src/hooks";
 import * as stories from "../../src/stories/RemoteUser.stories";
@@ -67,6 +68,28 @@ describe("RemoteUser component", () => {
     );
     expect(container).toBeInTheDocument();
     expect(container.querySelector("img")?.getAttribute("src")).toBe("test");
+  });
+
+  test("config videoPlayerConfig on RemoteUser", () => {
+    const user = {
+      uid: randUuid(),
+      hasVideo: true,
+      hasAudio: true,
+    };
+    vi.spyOn(fun, "useAutoPlayVideoTrack");
+    const videoPlayerConfig: VideoPlayerConfig = { mirror: false, fit: "cover" };
+    render(
+      <AgoraRTCProvider client={FakeRTCClient.create()}>
+        <RemoteUser playVideo user={user} videoPlayerConfig={videoPlayerConfig} />
+      </AgoraRTCProvider>,
+    );
+    expect(fun.useAutoPlayVideoTrack).toBeCalledWith(
+      undefined,
+      true,
+      videoPlayerConfig,
+      expect.anything(),
+    );
+    vi.clearAllMocks();
   });
 });
 

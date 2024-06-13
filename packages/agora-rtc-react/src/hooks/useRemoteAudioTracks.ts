@@ -85,7 +85,7 @@ export function useRemoteAudioTracks(
         });
 
         if (!isUnmountRef.current) {
-          setTracks(nextTracks.current);
+          setTracks([...nextTracks.current]);
           setIsLoading(false);
         }
       }
@@ -95,7 +95,7 @@ export function useRemoteAudioTracks(
       if (users.some(({ uid }) => user.uid === uid)) {
         if (!isUnmountRef.current) {
           nextTracks.current = nextTracks.current.filter(track => track.getUserId() !== user.uid);
-          setTracks(nextTracks.current);
+          setTracks([...nextTracks.current]);
         }
         try {
           if (!isUnmountRef.current) {
