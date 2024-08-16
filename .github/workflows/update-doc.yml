@@ -21,7 +21,7 @@ jobs:
           # token: ${{ secrets.AGORAIO_ACCESS_TOKEN }}
 
       - name: Install pnpm 🤏🏻
-        uses: pnpm/action-setup@v2.2.4
+        uses: pnpm/action-setup@v4
         with:
           version: latest
 
