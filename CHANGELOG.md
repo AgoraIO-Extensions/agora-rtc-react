@@ -1,5 +1,11 @@
 # agora-rtc-react
 
+# [2.3.0](https://github.com/AgoraIO-Extensions/agora-rtc-react/compare/v2.2.0...v2.3.0) (2024-08-21)
+
+### Features
+
+- support 4.22.0 ([#204](https://github.com/AgoraIO-Extensions/agora-rtc-react/issues/204)) ([64c4831](https://github.com/AgoraIO-Extensions/agora-rtc-react/commit/64c4831a67cccbbe43a4eaa9f3a39b894e723781))
+
 # [2.2.0](https://github.com/AgoraIO-Extensions/agora-rtc-react/compare/v2.1.0...v2.2.0) (2024-06-13)
 
 ### Features
