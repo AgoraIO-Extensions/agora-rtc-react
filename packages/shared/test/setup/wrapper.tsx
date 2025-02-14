@@ -1,5 +1,6 @@
 import type { IAgoraRTCClient } from "agora-rtc-sdk-ng";
 import type { ReactNode } from "react";
+import React from "react";
 
 import { AgoraRTCProvider } from "../../../agora-rtc-react/src/hooks";
 import type { Props } from "../setup";
