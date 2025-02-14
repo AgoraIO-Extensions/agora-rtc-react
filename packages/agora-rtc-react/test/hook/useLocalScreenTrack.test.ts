@@ -18,7 +18,7 @@ describe("useLocalScreenTrack", () => {
     const client = FakeRTCClient.create();
     const spy = vi.spyOn(clientHook, "useIsConnected");
     spy.mockReturnValue(true);
-    const { result } = renderHook(() => useLocalScreenTrack(false, {}, "auto", client), {
+    const { result } = renderHook(() => useLocalScreenTrack(false, {}, "auto"), {
       wrapper: createWrapper(client),
     });
     waitFor(() => {
@@ -37,7 +37,7 @@ describe("useLocalScreenTrack", () => {
     vi.spyOn(AgoraRTC, "createScreenVideoTrack").mockReturnValue(
       Promise.resolve(FakeLocalVideoTrack.create()),
     );
-    const { result } = renderHook(() => useLocalScreenTrack(true, {}, "disable", client), {
+    const { result } = renderHook(() => useLocalScreenTrack(true, {}, "disable"), {
       wrapper: createWrapper(client),
     });
     await waitFor(() => {
@@ -59,7 +59,7 @@ describe("useLocalScreenTrack", () => {
     vi.spyOn(AgoraRTC, "createScreenVideoTrack").mockReturnValue(
       Promise.resolve([FakeLocalVideoTrack.create(), FakeLocalAudioTrack.create()]),
     );
-    const { result } = renderHook(() => useLocalScreenTrack(true, {}, "enable", client), {
+    const { result } = renderHook(() => useLocalScreenTrack(true, {}, "enable"), {
       wrapper: createWrapper(client),
     });
     await waitFor(() => {
@@ -83,7 +83,7 @@ describe("useLocalScreenTrack", () => {
     vi.spyOn(AgoraRTC, "createScreenVideoTrack").mockReturnValue(
       Promise.resolve([FakeLocalVideoTrack.create(), FakeLocalAudioTrack.create()]),
     );
-    const { result } = renderHook(() => useLocalScreenTrack(true, {}, "auto", client), {
+    const { result } = renderHook(() => useLocalScreenTrack(true, {}, "auto"), {
       wrapper: createWrapper(client),
     });
     await waitFor(() => {
@@ -111,7 +111,7 @@ describe("useLocalScreenTrack", () => {
     vi.spyOn(AgoraRTC, "createScreenVideoTrack").mockReturnValue(
       Promise.resolve(FakeCameraVideoTrack.create()),
     );
-    const { result, rerender } = renderHook(() => useLocalScreenTrack(true, {}, "auto", client), {
+    const { result, rerender } = renderHook(() => useLocalScreenTrack(true, {}, "auto"), {
       wrapper: createWrapper(client),
     });
 
@@ -136,7 +136,7 @@ describe("useLocalScreenTrack", () => {
       .mockRejectedValue(new Error(errorMessage));
     const spy3 = vi.spyOn(console, "error");
 
-    const { result } = renderHook(() => useLocalScreenTrack(true, {}, "auto", client), {
+    const { result } = renderHook(() => useLocalScreenTrack(true, {}, "auto"), {
       wrapper: createWrapper(client),
     });
 

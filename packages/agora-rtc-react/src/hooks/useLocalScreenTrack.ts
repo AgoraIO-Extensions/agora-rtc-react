@@ -1,5 +1,4 @@
 import type {
-  IAgoraRTCClient,
   IAgoraRTCError,
   ILocalAudioTrack,
   ILocalVideoTrack,
@@ -11,7 +10,6 @@ import { useState } from "react";
 import { AgoraRTCReactError } from "../error";
 
 import { useAsyncEffect, useIsUnmounted } from "./tools";
-import { useIsConnected } from "./useIsConnected";
 
 /**
  * This hook lets you create a local video track for screen-sharing.
@@ -41,7 +39,6 @@ export function useLocalScreenTrack(
   ready: boolean,
   screenVideoTrackInitConfig: ScreenVideoTrackInitConfig,
   withAudio: "enable",
-  client?: IAgoraRTCClient,
 ): {
   screenTrack: [ILocalVideoTrack, ILocalAudioTrack] | null;
   isLoading: boolean;
@@ -51,7 +48,6 @@ export function useLocalScreenTrack(
   ready: boolean,
   screenVideoTrackInitConfig: ScreenVideoTrackInitConfig,
   withAudio: "disable",
-  client?: IAgoraRTCClient,
 ): {
   screenTrack: ILocalVideoTrack | null;
   isLoading: boolean;
@@ -61,7 +57,6 @@ export function useLocalScreenTrack(
   ready: boolean,
   screenVideoTrackInitConfig: ScreenVideoTrackInitConfig,
   withAudio: "auto",
-  client?: IAgoraRTCClient,
 ): {
   screenTrack: [ILocalVideoTrack, ILocalAudioTrack] | ILocalVideoTrack | null;
   isLoading: boolean;
@@ -71,13 +66,11 @@ export function useLocalScreenTrack(
   ready = true,
   screenVideoTrackInitConfig: ScreenVideoTrackInitConfig,
   withAudio: "enable" | "disable" | "auto",
-  client?: IAgoraRTCClient,
 ): {
   screenTrack: [ILocalVideoTrack, ILocalAudioTrack] | ILocalVideoTrack | null;
   isLoading: boolean;
   error: AgoraRTCReactError | null;
 } {
-  const isConnected = useIsConnected(client);
   const [track, setTrack] = useState<
     [ILocalVideoTrack, ILocalAudioTrack] | ILocalVideoTrack | null
   >(null);
@@ -90,7 +83,7 @@ export function useLocalScreenTrack(
       setIsLoading(false);
       setError(null);
     }
-    if (isConnected && ready && !track) {
+    if (ready && !track) {
       try {
         if (!isUnmountRef.current) {
           setIsLoading(true);
@@ -111,9 +104,6 @@ export function useLocalScreenTrack(
         setIsLoading(false);
       }
     }
-    if ((!isConnected || !ready) && !isUnmountRef.current) {
-      setTrack(null);
-    }
-  }, [isConnected, ready]);
+  }, [ready]);
   return { screenTrack: track, isLoading: isLoading, error: error };
 }
