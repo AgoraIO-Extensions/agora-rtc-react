@@ -17,7 +17,6 @@ import { useAsyncEffect, useIsUnmounted } from "./tools";
  *
  * @param ready - Whether it is ready to create the track. The default value is `true`.
  * @param cameraVideoTrackConfig - Configurations for initializing the camera video track. See [`CameraVideoTrackInitConfig`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/cameravideotrackinitconfig.html) for details.
- * @param client - Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
  * @example
  * ```jsx
  * import { useLocalCameraTrack } from "agora-rtc-react";

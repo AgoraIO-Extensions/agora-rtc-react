@@ -17,7 +17,6 @@ import { useAsyncEffect, useIsUnmounted } from "./tools";
  *
  * @param ready - Whether it is ready to create the track. The default value is `true`.
  * @param audioTrackConfig - Configurations for initializing the microphone audio track. The default is `{ ANS: true, AEC: true }`. See [`MicrophoneAudioTrackInitConfig`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/microphoneaudiotrackinitconfig.html) for details.
- * @param client - Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
  * @example
  * ```jsx
  * import { useLocalMicrophoneTrack } from "agora-rtc-react";
