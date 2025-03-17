@@ -1,6 +1,5 @@
 import type {
   CameraVideoTrackInitConfig,
-  IAgoraRTCClient,
   IAgoraRTCError,
   ICameraVideoTrack,
 } from "agora-rtc-sdk-ng";
@@ -10,7 +9,6 @@ import { useState } from "react";
 import { AgoraRTCReactError } from "../error";
 
 import { useAsyncEffect, useIsUnmounted } from "./tools";
-import { useIsConnected } from "./useIsConnected";
 
 /**
  * This hook lets you create a local camera video track. You can call this method multiple times in different components to create multiple tracks. To access the same track in multiple components, pass the same track object to those components.
@@ -19,7 +17,6 @@ import { useIsConnected } from "./useIsConnected";
  *
  * @param ready - Whether it is ready to create the track. The default value is `true`.
  * @param cameraVideoTrackConfig - Configurations for initializing the camera video track. See [`CameraVideoTrackInitConfig`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/cameravideotrackinitconfig.html) for details.
- * @param client - Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
  * @example
  * ```jsx
  * import { useLocalCameraTrack } from "agora-rtc-react";
@@ -34,13 +31,11 @@ import { useIsConnected } from "./useIsConnected";
 export function useLocalCameraTrack(
   ready = true,
   cameraVideoTrackConfig?: CameraVideoTrackInitConfig,
-  client?: IAgoraRTCClient,
 ): {
   localCameraTrack: ICameraVideoTrack | null;
   isLoading: boolean;
   error: AgoraRTCReactError | null;
 } {
-  const isConnected = useIsConnected(client);
   const [track, setTrack] = useState<ICameraVideoTrack | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<AgoraRTCReactError | null>(null);
@@ -52,7 +47,7 @@ export function useLocalCameraTrack(
       setError(null);
     }
 
-    if (isConnected && ready && !track) {
+    if (ready && !track) {
       try {
         if (!isUnmountRef.current) {
           setIsLoading(true);
@@ -73,9 +68,6 @@ export function useLocalCameraTrack(
         setIsLoading(false);
       }
     }
-    if (!isConnected && !isUnmountRef.current) {
-      setTrack(null);
-    }
-  }, [isConnected, ready]);
+  }, [ready]);
   return { localCameraTrack: track, isLoading: isLoading, error: error };
 }

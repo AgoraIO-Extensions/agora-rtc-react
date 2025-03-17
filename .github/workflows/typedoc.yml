@@ -27,7 +27,7 @@ jobs:
         run: |
           zip -r agora-rtc-react-docs.zip typedoc
       - name: Upload Artifact ⬆️
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: agora-rtc-react-docs.zip
           path: agora-rtc-react-docs.zip

@@ -32,6 +32,6 @@ jobs:
 
       - name: Report Coverage for agora-rtc-react 🟢
         if: always() # Also generate the report if tests are failing
-        uses: davelosert/vitest-coverage-report-action@v1.4.0
+        uses: davelosert/vitest-coverage-report-action@v2
         with:
           working-directory: "./packages/agora-rtc-react"

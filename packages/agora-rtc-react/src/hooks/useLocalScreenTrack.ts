@@ -1,5 +1,4 @@
 import type {
-  IAgoraRTCClient,
   IAgoraRTCError,
   ILocalAudioTrack,
   ILocalVideoTrack,
@@ -11,7 +10,6 @@ import { useState } from "react";
 import { AgoraRTCReactError } from "../error";
 
 import { useAsyncEffect, useIsUnmounted } from "./tools";
-import { useIsConnected } from "./useIsConnected";
 
 /**
  * This hook lets you create a local video track for screen-sharing.
@@ -21,7 +19,6 @@ import { useIsConnected } from "./useIsConnected";
  * @param ready - Whether it is ready to create the track. The default value is `true`.
  * @param screenVideoTrackInitConfig - Screen-sharing video configuration, including encoding and capturing configurations.
  * @param withAudio - Whether to share the audio of the screen-sharing input source during screen sharing. Supported values are `"enable"`, `"disable"`, and `"auto"`. See the parameters of [`createScreenVideoTrack`](https://api-ref.agora.io/en/video-sdk/reactjs/2.x//createScreenVideoTrack.html) for details.
- * @param client - Created using the Web SDK's [`IAgoraRTC.createClient`](https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartc.html#createclient) method.
  * @example
  * ```jsx
  * import { AgoraRTCScreenShareProvider, LocalVideoTrack, useLocalScreenTrack } from "agora-rtc-react";
@@ -41,7 +38,6 @@ export function useLocalScreenTrack(
   ready: boolean,
   screenVideoTrackInitConfig: ScreenVideoTrackInitConfig,
   withAudio: "enable",
-  client?: IAgoraRTCClient,
 ): {
   screenTrack: [ILocalVideoTrack, ILocalAudioTrack] | null;
   isLoading: boolean;
@@ -51,7 +47,6 @@ export function useLocalScreenTrack(
   ready: boolean,
   screenVideoTrackInitConfig: ScreenVideoTrackInitConfig,
   withAudio: "disable",
-  client?: IAgoraRTCClient,
 ): {
   screenTrack: ILocalVideoTrack | null;
   isLoading: boolean;
@@ -61,7 +56,6 @@ export function useLocalScreenTrack(
   ready: boolean,
   screenVideoTrackInitConfig: ScreenVideoTrackInitConfig,
   withAudio: "auto",
-  client?: IAgoraRTCClient,
 ): {
   screenTrack: [ILocalVideoTrack, ILocalAudioTrack] | ILocalVideoTrack | null;
   isLoading: boolean;
@@ -71,13 +65,11 @@ export function useLocalScreenTrack(
   ready = true,
   screenVideoTrackInitConfig: ScreenVideoTrackInitConfig,
   withAudio: "enable" | "disable" | "auto",
-  client?: IAgoraRTCClient,
 ): {
   screenTrack: [ILocalVideoTrack, ILocalAudioTrack] | ILocalVideoTrack | null;
   isLoading: boolean;
   error: AgoraRTCReactError | null;
 } {
-  const isConnected = useIsConnected(client);
   const [track, setTrack] = useState<
     [ILocalVideoTrack, ILocalAudioTrack] | ILocalVideoTrack | null
   >(null);
@@ -90,7 +82,7 @@ export function useLocalScreenTrack(
       setIsLoading(false);
       setError(null);
     }
-    if (isConnected && ready && !track) {
+    if (ready && !track) {
       try {
         if (!isUnmountRef.current) {
           setIsLoading(true);
@@ -111,9 +103,6 @@ export function useLocalScreenTrack(
         setIsLoading(false);
       }
     }
-    if ((!isConnected || !ready) && !isUnmountRef.current) {
-      setTrack(null);
-    }
-  }, [isConnected, ready]);
+  }, [ready]);
   return { screenTrack: track, isLoading: isLoading, error: error };
 }
