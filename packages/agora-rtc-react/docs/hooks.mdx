@@ -288,11 +288,10 @@ function App() {
 
 #### 参数
 
-| 参数名             | 类型                                                                    | 是否必选 | 描述                                                                                                                                                                        |
-| ------------------ | ----------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ready`            | `boolean`                                                               | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                                                                         |
-| `audioTrackConfig` | `MicrophoneAudioTrackInitConfig`                                        | 可选     | 麦克风音频轨道的初始化配置，默认为 `{ ANS: true, AEC: true }`。详见 [`MicrophoneAudioTrackInitConfig`](/api-ref/rtc/react/interfaces/microphoneaudiotrackinitconfig.html)。 |
-| `client`           | [`IAgoraRTCClient`](/api-ref/rtc/react/interfaces/iagorartcclient.html) | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](/api-ref/rtc/react/interfaces/iagorartc.html#createclient) 创建。                                                                |
+| 参数名             | 类型                             | 是否必选 | 描述                                                                                                                                                                        |
+| ------------------ | -------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ready`            | `boolean`                        | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                                                                         |
+| `audioTrackConfig` | `MicrophoneAudioTrackInitConfig` | 可选     | 麦克风音频轨道的初始化配置，默认为 `{ ANS: true, AEC: true }`。详见 [`MicrophoneAudioTrackInitConfig`](/api-ref/rtc/react/interfaces/microphoneaudiotrackinitconfig.html)。 |
 
 #### 返回值
 
@@ -327,11 +326,10 @@ function App() {
 
 #### 参数
 
-| 参数名                   | 类型                                                                    | 是否必选 | 描述                                                                                                                             |
-| ------------------------ | ----------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `ready`                  | `boolean`                                                               | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                              |
-| `cameraVideoTrackConfig` | `CameraVideoTrackInitConfig`                                            | 可选     | 摄像头视频轨道的初始化配置。详见 [`CameraVideoTrackInitConfig`](/api-ref/rtc/react/interfaces/cameravideotrackinitconfig.html)。 |
-| `client`                 | [`IAgoraRTCClient`](/api-ref/rtc/react/interfaces/iagorartcclient.html) | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](/api-ref/rtc/react/interfaces/iagorartc.html#createclient) 创建。                     |
+| 参数名                   | 类型                         | 是否必选 | 描述                                                                                                                             |
+| ------------------------ | ---------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `ready`                  | `boolean`                    | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                              |
+| `cameraVideoTrackConfig` | `CameraVideoTrackInitConfig` | 可选     | 摄像头视频轨道的初始化配置。详见 [`CameraVideoTrackInitConfig`](/api-ref/rtc/react/interfaces/cameravideotrackinitconfig.html)。 |
 
 #### 返回值
 
@@ -371,7 +369,6 @@ function App() {
 | `ready`                      | `boolean`                                                                                     | 可选     | 是否准备好创建轨道，默认为 `true`。                                                                                                                                                                       |
 | `screenVideoTrackInitConfig` | [`screenVideoTrackInitConfig`](/api-ref/rtc/react/interfaces/screenvideotrackinitconfig.html) | 必选     | 屏幕共享的视频配置，包括编码配置、采集配置等。                                                                                                                                                            |
 | `withAudio`                  | `string`                                                                                      | 必选     | 屏幕共享时是否同时分享屏幕共享输入源的音频。支持传入 `"enable"`、`"disable"` 或 `"auto"`。详见[`createScreenVideoTrack`](/api-ref/rtc/react/interfaces/iagorartc.html#createscreenvideotrack)的参数解释。 |
-| `client`                     | [`IAgoraRTCClient`](/api-ref/rtc/react/interfaces/iagorartcclient.html)                       | 可选     | 通过 Web SDK 的 [`IAgoraRTC.createClient`](/api-ref/rtc/react/interfaces/iagorartc.html#createclient) 创建。                                                                                              |
 
 #### 返回值
 
@@ -385,7 +382,7 @@ function App() {
 
 #### 注意事项
 
-- 推荐把返回值中的视频轨道对象包裹在 [`AgoraRTCScreenShareProvider`](/components#agorartcscreenshareprovider) 中。
+- 推荐把返回值中的视频轨道对象包裹在 [`AgoraRTCScreenShareProvider`](./components#agorartcscreenshareprovider) 中。
 - 如果你从返回值中获取了视频轨道对象和音频轨道对象，但只发布了其中一个轨道，在停止屏幕共享之前还需要调用 Web SDK 的 [`ILocalTrack.close`](/api-ref/rtc/react/interfaces/ilocaltrack.html#close) 方法手动关闭未发布的轨道。已发布的轨道会自动关闭。
 - 由于订阅本地的屏幕共享轨道会造成重复计费，推荐你在订阅视频轨道时增加是否为本地轨道的判断。
 
