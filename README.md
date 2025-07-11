@@ -1,3 +1,5 @@
+> ⚠️ **Note**: To provide you with better and higher quality technical support services, we will no longer provide technical support through GitHub issues. If you need help, please contact us directly through [Agora Support](https://www.agora.io/en/customer-support/).
+
 # agora-rtc-react
 
 [![Build Status](https://github.com/agoraio-extensions/agora-rtc-react/actions/workflows/build.yml/badge.svg)](https://github.com/agoraio-extensions/agora-rtc-react/actions/workflows/build.yml)
