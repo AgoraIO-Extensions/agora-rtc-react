@@ -138,5 +138,6 @@
         "infile": "CHANGELOG.md"
       }
     }
-  }
+  },
+  "packageManager": "pnpm@9"
 }
