@@ -9,7 +9,7 @@ overrides:
 
 patchedDependencies:
   seedrandom@3.0.5:
-    hash: 101fb7e440454149f04f671ec3c51b51fd172107a9a6cf69ecea0f96de48ef80
+    hash: hrvea3ysnhtmjgu7pcuhw34beu
     path: patches/seedrandom@3.0.5.patch
 
 importers:
@@ -8797,7 +8797,7 @@ snapshots:
       '@types/node': 20.5.1
       chalk: 4.1.2
       cosmiconfig: 8.3.6(typescript@5.8.2)
-      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.8.2))(ts-node@10.9.2(@types/node@20.17.24)(typescript@5.8.2))(typescript@5.8.2)
+      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.8.2))(ts-node@10.9.2(@types/node@20.5.1)(typescript@5.8.2))(typescript@5.8.2)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -9266,7 +9266,7 @@ snapshots:
 
   '@ngneat/falso@6.4.0':
     dependencies:
-      seedrandom: 3.0.5(patch_hash=101fb7e440454149f04f671ec3c51b51fd172107a9a6cf69ecea0f96de48ef80)
+      seedrandom: 3.0.5(patch_hash=hrvea3ysnhtmjgu7pcuhw34beu)
       uuid: 8.3.2
 
   '@nodelib/fs.scandir@2.1.5':
@@ -12141,7 +12141,7 @@ snapshots:
 
   core-util-is@1.0.3: {}
 
-  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.8.2))(ts-node@10.9.2(@types/node@20.17.24)(typescript@5.8.2))(typescript@5.8.2):
+  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.8.2))(ts-node@10.9.2(@types/node@20.5.1)(typescript@5.8.2))(typescript@5.8.2):
     dependencies:
       '@types/node': 20.5.1
       cosmiconfig: 8.3.6(typescript@5.8.2)
@@ -15739,7 +15739,7 @@ snapshots:
 
   sdp@3.2.0: {}
 
-  seedrandom@3.0.5(patch_hash=101fb7e440454149f04f671ec3c51b51fd172107a9a6cf69ecea0f96de48ef80): {}
+  seedrandom@3.0.5(patch_hash=hrvea3ysnhtmjgu7pcuhw34beu): {}
 
   semver-diff@4.0.0:
     dependencies:
