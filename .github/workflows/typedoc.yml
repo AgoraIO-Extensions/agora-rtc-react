@@ -20,9 +20,12 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
+      - name: Setup 🛠️
+        uses: ./.github/actions/setup
       - name: Build TypeDoc
         run: |
-          npm i -g pnpm && pnpm install && pnpm typedoc
+          pnpm install
+          pnpm typedoc
       - name: Zip It Up 🤐
         run: |
           zip -r agora-rtc-react-docs.zip typedoc
