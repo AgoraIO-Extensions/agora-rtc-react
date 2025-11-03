@@ -21,6 +21,10 @@ on:
         default: true
         type: boolean
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   release-it:
     runs-on: ubuntu-latest
@@ -39,9 +43,14 @@ jobs:
         run: |
           pnpm install
 
-      - name: Setup NPM auth token
+      - name: Update Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 23.7.0
+
+      - name: Update NPM
         run: |
-          npm set "//registry.npmjs.org/:_authToken" ${{ secrets.NPM_TOKEN }}
+          npm install -g npm@11.5.1
 
       - name: Dry Run Release
         if: ${{ inputs.dry-run }}
