@@ -1,5 +1,11 @@
 # agora-rtc-react
 
+## [2.5.1](https://github.com/AgoraIO-Extensions/agora-rtc-react/compare/v2.5.0...v2.5.1) (2025-12-17)
+
+### Bug Fixes
+
+- pnpm issue ([#227](https://github.com/AgoraIO-Extensions/agora-rtc-react/issues/227)) ([24d5f49](https://github.com/AgoraIO-Extensions/agora-rtc-react/commit/24d5f49e3a1d00834755e31bfd4ac7907f73394f))
+
 # [2.5.0](https://github.com/AgoraIO-Extensions/agora-rtc-react/compare/v2.4.0...v2.5.0) (2025-08-12)
 
 ### Features
